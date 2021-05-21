@@ -61,6 +61,8 @@ class _VerifyAccountStatefulWidgetState
     var validateAccountResponse = await AccessAccountService.validateAccount(
         _accountMobileNumberTextFieldController.text);
 
-    if (validateAccountResponse.accountExists) {}
+    if (validateAccountResponse.accountExists) {
+
+    }
   }
 }
