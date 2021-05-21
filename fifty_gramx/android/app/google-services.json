@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "852895682356",
+    "firebase_url": "https://healthcare-analytics-197813.firebaseio.com",
+    "project_id": "healthcare-analytics-197813",
+    "storage_bucket": "healthcare-analytics-197813.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852895682356:android:d1034a5621d91da42f9f61",
+        "android_client_info": {
+          "package_name": "com.elint.iethos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7By-0D2CWb_RfmuVqU9vgGlX0HCs_AoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852895682356:android:9ee8ba785c6881132f9f61",
+        "android_client_info": {
+          "package_name": "com.example.fiftyGramx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7By-0D2CWb_RfmuVqU9vgGlX0HCs_AoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
