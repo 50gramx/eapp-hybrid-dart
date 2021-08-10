@@ -93,6 +93,28 @@ const GetInferredDomainsResponse$json = const {
 
 /// Descriptor for `GetInferredDomainsResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getInferredDomainsResponseDescriptor = $convert.base64Decode('ChpHZXRJbmZlcnJlZERvbWFpbnNSZXNwb25zZQ==');
+@$core.Deprecated('Use fileCountResponseDescriptor instead')
+const FileCountResponse$json = const {
+  '1': 'FileCountResponse',
+  '2': const [
+    const {'1': 'file_count', '3': 1, '4': 1, '5': 5, '10': 'fileCount'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `FileCountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List fileCountResponseDescriptor = $convert.base64Decode('ChFGaWxlQ291bnRSZXNwb25zZRIdCgpmaWxlX2NvdW50GAEgASgFUglmaWxlQ291bnQSPwoNcmVzcG9uc2VfbWV0YRgCIAEoCzIaLmVsaW50LmVudGl0eS5SZXNwb25zZU1ldGFSDHJlc3BvbnNlTWV0YQ==');
+@$core.Deprecated('Use pageCountResponseDescriptor instead')
+const PageCountResponse$json = const {
+  '1': 'PageCountResponse',
+  '2': const [
+    const {'1': 'page_count', '3': 1, '4': 1, '5': 5, '10': 'pageCount'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `PageCountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List pageCountResponseDescriptor = $convert.base64Decode('ChFQYWdlQ291bnRSZXNwb25zZRIdCgpwYWdlX2NvdW50GAEgASgFUglwYWdlQ291bnQSPwoNcmVzcG9uc2VfbWV0YRgCIAEoCzIaLmVsaW50LmVudGl0eS5SZXNwb25zZU1ldGFSDHJlc3BvbnNlTWV0YQ==');
 @$core.Deprecated('Use contextPageDescriptor instead')
 const ContextPage$json = const {
   '1': 'ContextPage',

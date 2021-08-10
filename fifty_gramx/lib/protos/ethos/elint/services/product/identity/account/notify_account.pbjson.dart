@@ -43,3 +43,14 @@ const AccountConnectedAccountNotificationRequest$json = const {
 
 /// Descriptor for `AccountConnectedAccountNotificationRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountConnectedAccountNotificationRequestDescriptor = $convert.base64Decode('CipBY2NvdW50Q29ubmVjdGVkQWNjb3VudE5vdGlmaWNhdGlvblJlcXVlc3QSLwoHYWNjb3VudBgBIAEoCzIVLmVsaW50LmVudGl0eS5BY2NvdW50UgdhY2NvdW50EnYKJGNvbm5lY3RpbmdfYWNjb3VudF9jb25uZWN0ZWRfYWNjb3VudBgCIAEoCzIlLmVsaW50LmVudGl0eS5BY2NvdW50Q29ubmVjdGVkQWNjb3VudFIhY29ubmVjdGluZ0FjY291bnRDb25uZWN0ZWRBY2NvdW50');
+@$core.Deprecated('Use updateAccountDeviceDetailsRequestDescriptor instead')
+const UpdateAccountDeviceDetailsRequest$json = const {
+  '1': 'UpdateAccountDeviceDetailsRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'account_device_details', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountDeviceDetails', '10': 'accountDeviceDetails'},
+  ],
+};
+
+/// Descriptor for `UpdateAccountDeviceDetailsRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateAccountDeviceDetailsRequestDescriptor = $convert.base64Decode('CiFVcGRhdGVBY2NvdW50RGV2aWNlRGV0YWlsc1JlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHMSWAoWYWNjb3VudF9kZXZpY2VfZGV0YWlscxgCIAEoCzIiLmVsaW50LmVudGl0eS5BY2NvdW50RGV2aWNlRGV0YWlsc1IUYWNjb3VudERldmljZURldGFpbHM=');

@@ -12,7 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../space_knowledge_domain_file/access_space_knowledge_domain_file.pb.dart' as $33;
 import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class SpaceKnowledgeDomainFilePageAccessTokenRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFilePageAccessTokenRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
@@ -221,7 +221,7 @@ class SpaceKnowledgeDomainFilePageServicesAccessAuthDetails extends $pb.Generate
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFilePageServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
     ..aOM<$40.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePage', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -229,7 +229,7 @@ class SpaceKnowledgeDomainFilePageServicesAccessAuthDetails extends $pb.Generate
   factory SpaceKnowledgeDomainFilePageServicesAccessAuthDetails({
     $40.SpaceKnowledgeDomainFilePage? spaceKnowledgeDomainFilePage,
     $2.PersistentSessionTokenDetails? spaceKnowledgeDomainFilePageServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFilePage != null) {
@@ -287,14 +287,14 @@ class SpaceKnowledgeDomainFilePageServicesAccessAuthDetails extends $pb.Generate
   $2.PersistentSessionTokenDetails ensureSpaceKnowledgeDomainFilePageServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

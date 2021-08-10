@@ -478,6 +478,132 @@ class GetInferredDomainsResponse extends $pb.GeneratedMessage {
   static GetInferredDomainsResponse? _defaultInstance;
 }
 
+class FileCountResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FileCountResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fileCount', $pb.PbFieldType.O3)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..hasRequiredFields = false
+  ;
+
+  FileCountResponse._() : super();
+  factory FileCountResponse({
+    $core.int? fileCount,
+    $2.ResponseMeta? responseMeta,
+  }) {
+    final _result = create();
+    if (fileCount != null) {
+      _result.fileCount = fileCount;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    return _result;
+  }
+  factory FileCountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory FileCountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  FileCountResponse clone() => FileCountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  FileCountResponse copyWith(void Function(FileCountResponse) updates) => super.copyWith((message) => updates(message as FileCountResponse)) as FileCountResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static FileCountResponse create() => FileCountResponse._();
+  FileCountResponse createEmptyInstance() => create();
+  static $pb.PbList<FileCountResponse> createRepeated() => $pb.PbList<FileCountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static FileCountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FileCountResponse>(create);
+  static FileCountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get fileCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set fileCount($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasFileCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearFileCount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
+}
+
+class PageCountResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'PageCountResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageCount', $pb.PbFieldType.O3)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..hasRequiredFields = false
+  ;
+
+  PageCountResponse._() : super();
+  factory PageCountResponse({
+    $core.int? pageCount,
+    $2.ResponseMeta? responseMeta,
+  }) {
+    final _result = create();
+    if (pageCount != null) {
+      _result.pageCount = pageCount;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    return _result;
+  }
+  factory PageCountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory PageCountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  PageCountResponse clone() => PageCountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  PageCountResponse copyWith(void Function(PageCountResponse) updates) => super.copyWith((message) => updates(message as PageCountResponse)) as PageCountResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static PageCountResponse create() => PageCountResponse._();
+  PageCountResponse createEmptyInstance() => create();
+  static $pb.PbList<PageCountResponse> createRepeated() => $pb.PbList<PageCountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static PageCountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<PageCountResponse>(create);
+  static PageCountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get pageCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pageCount($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPageCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPageCount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
+}
+
 class ContextPage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ContextPage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageRank', $pb.PbFieldType.O3)

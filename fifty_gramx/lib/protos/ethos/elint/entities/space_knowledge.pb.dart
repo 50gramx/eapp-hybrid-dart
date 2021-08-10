@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'space.pb.dart' as $57;
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import 'space.pb.dart' as $58;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 export '../../../google/protobuf/timestamp.pb.dart';
 export 'space_knowledge.pbenum.dart';
@@ -20,8 +20,8 @@ class SpaceKnowledge extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeName')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAdminAccountId')
-    ..aOM<$57.Space>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $57.Space.create)
-    ..aOM<$54.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$58.Space>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $58.Space.create)
+    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -30,8 +30,8 @@ class SpaceKnowledge extends $pb.GeneratedMessage {
     $core.String? spaceKnowledgeName,
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeAdminAccountId,
-    $57.Space? space,
-    $54.Timestamp? createdAt,
+    $58.Space? space,
+    $55.Timestamp? createdAt,
   }) {
     final _result = create();
     if (spaceKnowledgeName != null) {
@@ -100,26 +100,26 @@ class SpaceKnowledge extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeAdminAccountId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $57.Space get space => $_getN(3);
+  $58.Space get space => $_getN(3);
   @$pb.TagNumber(4)
-  set space($57.Space v) { setField(4, v); }
+  set space($58.Space v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasSpace() => $_has(3);
   @$pb.TagNumber(4)
   void clearSpace() => clearField(4);
   @$pb.TagNumber(4)
-  $57.Space ensureSpace() => $_ensure(3);
+  $58.Space ensureSpace() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $54.Timestamp get createdAt => $_getN(4);
+  $55.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($54.Timestamp v) { setField(5, v); }
+  set createdAt($55.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $54.Timestamp ensureCreatedAt() => $_ensure(4);
+  $55.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 class SpaceKnowledgeInferredDomain extends $pb.GeneratedMessage {
@@ -127,7 +127,7 @@ class SpaceKnowledgeInferredDomain extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferredDomainId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferredAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferredAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -136,7 +136,7 @@ class SpaceKnowledgeInferredDomain extends $pb.GeneratedMessage {
     $core.String? inferredDomainId,
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeDomainId,
-    $54.Timestamp? inferredAt,
+    $55.Timestamp? inferredAt,
   }) {
     final _result = create();
     if (inferredDomainId != null) {
@@ -202,14 +202,14 @@ class SpaceKnowledgeInferredDomain extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get inferredAt => $_getN(3);
+  $55.Timestamp get inferredAt => $_getN(3);
   @$pb.TagNumber(4)
-  set inferredAt($54.Timestamp v) { setField(4, v); }
+  set inferredAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasInferredAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearInferredAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureInferredAt() => $_ensure(3);
+  $55.Timestamp ensureInferredAt() => $_ensure(3);
 }
 

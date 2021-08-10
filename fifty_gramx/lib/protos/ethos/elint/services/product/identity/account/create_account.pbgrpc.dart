@@ -11,6 +11,8 @@ import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
 import 'create_account.pb.dart' as $3;
+import 'access_account.pb.dart' as $0;
+import '../../../../entities/generic.pb.dart' as $2;
 export 'create_account.pb.dart';
 
 class CreateAccountServiceClient extends $grpc.Client {
@@ -34,6 +36,16 @@ class CreateAccountServiceClient extends $grpc.Client {
       ($3.CaptureAccountMetaDetailsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $3.CaptureAccountMetaDetailsResponse.fromBuffer(value));
+  static final _$activateAccountBilling = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails, $2.ResponseMeta>(
+      '/elint.services.product.identity.account.CreateAccountService/ActivateAccountBilling',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
+  static final _$deactivateAccountBilling = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails, $2.ResponseMeta>(
+      '/elint.services.product.identity.account.CreateAccountService/DeactivateAccountBilling',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
 
   CreateAccountServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -57,6 +69,20 @@ class CreateAccountServiceClient extends $grpc.Client {
       captureAccountMetaDetails($3.CaptureAccountMetaDetailsRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$captureAccountMetaDetails, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ResponseMeta> activateAccountBilling(
+      $0.AccountServicesAccessAuthDetails request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$activateAccountBilling, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$2.ResponseMeta> deactivateAccountBilling(
+      $0.AccountServicesAccessAuthDetails request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deactivateAccountBilling, request,
         options: options);
   }
 }
@@ -93,6 +119,24 @@ abstract class CreateAccountServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $3.CaptureAccountMetaDetailsRequest.fromBuffer(value),
         ($3.CaptureAccountMetaDetailsResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $2.ResponseMeta>(
+        'ActivateAccountBilling',
+        activateAccountBilling_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($2.ResponseMeta value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $2.ResponseMeta>(
+        'DeactivateAccountBilling',
+        deactivateAccountBilling_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($2.ResponseMeta value) => value.writeToBuffer()));
   }
 
   $async.Future<$3.ValidateAccountWithMobileResponse>
@@ -113,10 +157,26 @@ abstract class CreateAccountServiceBase extends $grpc.Service {
     return captureAccountMetaDetails(call, await request);
   }
 
+  $async.Future<$2.ResponseMeta> activateAccountBilling_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return activateAccountBilling(call, await request);
+  }
+
+  $async.Future<$2.ResponseMeta> deactivateAccountBilling_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return deactivateAccountBilling(call, await request);
+  }
+
   $async.Future<$3.ValidateAccountWithMobileResponse> validateAccountWithMobile(
       $grpc.ServiceCall call, $3.ValidateAccountWithMobileRequest request);
   $async.Future<$3.VerificationAccountResponse> verificationAccount(
       $grpc.ServiceCall call, $3.VerificationAccountRequest request);
   $async.Future<$3.CaptureAccountMetaDetailsResponse> captureAccountMetaDetails(
       $grpc.ServiceCall call, $3.CaptureAccountMetaDetailsRequest request);
+  $async.Future<$2.ResponseMeta> activateAccountBilling(
+      $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Future<$2.ResponseMeta> deactivateAccountBilling(
+      $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
 }

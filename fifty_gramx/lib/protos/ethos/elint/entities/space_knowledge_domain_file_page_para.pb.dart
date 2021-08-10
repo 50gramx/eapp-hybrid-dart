@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'space_knowledge_domain_file_page.pb.dart' as $40;
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class SpaceKnowledgeDomainFilePagePara extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFilePagePara', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
@@ -18,9 +18,9 @@ class SpaceKnowledgeDomainFilePagePara extends $pb.GeneratedMessage {
     ..aOM<$40.SpaceKnowledgeDomainFilePage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePage', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
     ..aOM<PageContourDimensions>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageContourDimensions', subBuilder: PageContourDimensions.create)
     ..pc<ParaTag>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'paraTags', $pb.PbFieldType.PM, subBuilder: ParaTag.create)
-    ..aOM<$54.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -30,9 +30,9 @@ class SpaceKnowledgeDomainFilePagePara extends $pb.GeneratedMessage {
     $40.SpaceKnowledgeDomainFilePage? spaceKnowledgeDomainFilePage,
     PageContourDimensions? pageContourDimensions,
     $core.Iterable<ParaTag>? paraTags,
-    $54.Timestamp? createdAt,
-    $54.Timestamp? lastUpdatedAt,
-    $54.Timestamp? lastAccessedAt,
+    $55.Timestamp? createdAt,
+    $55.Timestamp? lastUpdatedAt,
+    $55.Timestamp? lastAccessedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFilePageParaId != null) {
@@ -114,37 +114,37 @@ class SpaceKnowledgeDomainFilePagePara extends $pb.GeneratedMessage {
   $core.List<ParaTag> get paraTags => $_getList(3);
 
   @$pb.TagNumber(5)
-  $54.Timestamp get createdAt => $_getN(4);
+  $55.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($54.Timestamp v) { setField(5, v); }
+  set createdAt($55.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $54.Timestamp ensureCreatedAt() => $_ensure(4);
+  $55.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $54.Timestamp get lastUpdatedAt => $_getN(5);
+  $55.Timestamp get lastUpdatedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set lastUpdatedAt($54.Timestamp v) { setField(6, v); }
+  set lastUpdatedAt($55.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasLastUpdatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearLastUpdatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $54.Timestamp ensureLastUpdatedAt() => $_ensure(5);
+  $55.Timestamp ensureLastUpdatedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $54.Timestamp get lastAccessedAt => $_getN(6);
+  $55.Timestamp get lastAccessedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set lastAccessedAt($54.Timestamp v) { setField(7, v); }
+  set lastAccessedAt($55.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasLastAccessedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearLastAccessedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $54.Timestamp ensureLastAccessedAt() => $_ensure(6);
+  $55.Timestamp ensureLastAccessedAt() => $_ensure(6);
 }
 
 class ParaText extends $pb.GeneratedMessage {

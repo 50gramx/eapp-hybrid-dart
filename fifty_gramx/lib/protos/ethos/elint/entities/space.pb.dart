@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'galaxy.pb.dart' as $56;
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import 'galaxy.pb.dart' as $57;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 import 'space.pbenum.dart';
 
@@ -18,25 +18,25 @@ export 'space.pbenum.dart';
 
 class Space extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Space', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
-    ..aOM<$56.Galaxy>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxy', subBuilder: $56.Galaxy.create)
+    ..aOM<$57.Galaxy>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxy', subBuilder: $57.Galaxy.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceId')
     ..e<SpaceAccessibilityType>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceAccessibilityType', $pb.PbFieldType.OE, defaultOrMaker: SpaceAccessibilityType.CLOSED, valueOf: SpaceAccessibilityType.valueOf, enumValues: SpaceAccessibilityType.values)
     ..e<SpaceIsolationType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIsolationType', $pb.PbFieldType.OE, defaultOrMaker: SpaceIsolationType.NOT_ISOLATED, valueOf: SpaceIsolationType.valueOf, enumValues: SpaceIsolationType.values)
     ..e<SpaceEntityType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceEntityType', $pb.PbFieldType.OE, defaultOrMaker: SpaceEntityType.ACCOUNT, valueOf: SpaceEntityType.valueOf, enumValues: SpaceEntityType.values)
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceAdminId')
-    ..aOM<$54.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceCreatedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceCreatedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   Space._() : super();
   factory Space({
-    $56.Galaxy? galaxy,
+    $57.Galaxy? galaxy,
     $core.String? spaceId,
     SpaceAccessibilityType? spaceAccessibilityType,
     SpaceIsolationType? spaceIsolationType,
     SpaceEntityType? spaceEntityType,
     $core.String? spaceAdminId,
-    $54.Timestamp? spaceCreatedAt,
+    $55.Timestamp? spaceCreatedAt,
   }) {
     final _result = create();
     if (galaxy != null) {
@@ -84,15 +84,15 @@ class Space extends $pb.GeneratedMessage {
   static Space? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $56.Galaxy get galaxy => $_getN(0);
+  $57.Galaxy get galaxy => $_getN(0);
   @$pb.TagNumber(1)
-  set galaxy($56.Galaxy v) { setField(1, v); }
+  set galaxy($57.Galaxy v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasGalaxy() => $_has(0);
   @$pb.TagNumber(1)
   void clearGalaxy() => clearField(1);
   @$pb.TagNumber(1)
-  $56.Galaxy ensureGalaxy() => $_ensure(0);
+  $57.Galaxy ensureGalaxy() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceId => $_getSZ(1);
@@ -140,14 +140,14 @@ class Space extends $pb.GeneratedMessage {
   void clearSpaceAdminId() => clearField(6);
 
   @$pb.TagNumber(7)
-  $54.Timestamp get spaceCreatedAt => $_getN(6);
+  $55.Timestamp get spaceCreatedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set spaceCreatedAt($54.Timestamp v) { setField(7, v); }
+  set spaceCreatedAt($55.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasSpaceCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearSpaceCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $54.Timestamp ensureSpaceCreatedAt() => $_ensure(6);
+  $55.Timestamp ensureSpaceCreatedAt() => $_ensure(6);
 }
 

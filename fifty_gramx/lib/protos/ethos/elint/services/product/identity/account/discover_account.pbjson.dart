@@ -29,6 +29,28 @@ const GetAccountByIdResponse$json = const {
 
 /// Descriptor for `GetAccountByIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountByIdResponseDescriptor = $convert.base64Decode('ChZHZXRBY2NvdW50QnlJZFJlc3BvbnNlEi8KB2FjY291bnQYASABKAsyFS5lbGludC5lbnRpdHkuQWNjb3VudFIHYWNjb3VudBI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
+@$core.Deprecated('Use getAccountMetaByAccountIdRequestDescriptor instead')
+const GetAccountMetaByAccountIdRequest$json = const {
+  '1': 'GetAccountMetaByAccountIdRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'account_id', '3': 2, '4': 1, '5': 9, '10': 'accountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountMetaByAccountIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountMetaByAccountIdRequestDescriptor = $convert.base64Decode('CiBHZXRBY2NvdW50TWV0YUJ5QWNjb3VudElkUmVxdWVzdBJ5ChNhY2Nlc3NfYXV0aF9kZXRhaWxzGAEgASgLMkkuZWxpbnQuc2VydmljZXMucHJvZHVjdC5pZGVudGl0eS5hY2NvdW50LkFjY291bnRTZXJ2aWNlc0FjY2Vzc0F1dGhEZXRhaWxzUhFhY2Nlc3NBdXRoRGV0YWlscxIdCgphY2NvdW50X2lkGAIgASgJUglhY2NvdW50SWQ=');
+@$core.Deprecated('Use getAccountMetaByAccountIdResponseDescriptor instead')
+const GetAccountMetaByAccountIdResponse$json = const {
+  '1': 'GetAccountMetaByAccountIdResponse',
+  '2': const [
+    const {'1': 'account_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.AccountMeta', '10': 'accountMeta'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `GetAccountMetaByAccountIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountMetaByAccountIdResponseDescriptor = $convert.base64Decode('CiFHZXRBY2NvdW50TWV0YUJ5QWNjb3VudElkUmVzcG9uc2USPAoMYWNjb3VudF9tZXRhGAEgASgLMhkuZWxpbnQuZW50aXR5LkFjY291bnRNZXRhUgthY2NvdW50TWV0YRI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
 @$core.Deprecated('Use getAccountProfilePictureRequestDescriptor instead')
 const GetAccountProfilePictureRequest$json = const {
   '1': 'GetAccountProfilePictureRequest',

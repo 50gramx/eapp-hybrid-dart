@@ -12,7 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
 import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $59;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
 
 class ReadPageQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReadPageQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.reader'), createEmptyInstance: create)
@@ -161,7 +161,7 @@ class ReadPageQuestionResponse extends $pb.GeneratedMessage {
 class ReadParaQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReadParaQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.reader'), createEmptyInstance: create)
     ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
-    ..aOM<$59.SpaceKnowledgeDomainFilePagePara>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $59.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'question')
     ..hasRequiredFields = false
   ;
@@ -169,7 +169,7 @@ class ReadParaQuestionRequest extends $pb.GeneratedMessage {
   ReadParaQuestionRequest._() : super();
   factory ReadParaQuestionRequest({
     $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
-    $59.SpaceKnowledgeDomainFilePagePara? para,
+    $60.SpaceKnowledgeDomainFilePagePara? para,
     $core.String? question,
   }) {
     final _result = create();
@@ -217,15 +217,15 @@ class ReadParaQuestionRequest extends $pb.GeneratedMessage {
   $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $59.SpaceKnowledgeDomainFilePagePara get para => $_getN(1);
+  $60.SpaceKnowledgeDomainFilePagePara get para => $_getN(1);
   @$pb.TagNumber(2)
-  set para($59.SpaceKnowledgeDomainFilePagePara v) { setField(2, v); }
+  set para($60.SpaceKnowledgeDomainFilePagePara v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPara() => $_has(1);
   @$pb.TagNumber(2)
   void clearPara() => clearField(2);
   @$pb.TagNumber(2)
-  $59.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(1);
+  $60.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get question => $_getSZ(2);

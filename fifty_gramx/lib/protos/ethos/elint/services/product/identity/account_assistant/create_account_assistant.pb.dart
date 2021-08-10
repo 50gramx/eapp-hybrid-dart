@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../account/access_account.pb.dart' as $0;
-import 'access_account_assistant.pb.dart' as $13;
+import 'access_account_assistant.pb.dart' as $8;
 import '../../../../entities/generic.pb.dart' as $2;
 
 class CreateAccountAssistantRequest extends $pb.GeneratedMessage {
@@ -78,14 +78,14 @@ class CreateAccountAssistantRequest extends $pb.GeneratedMessage {
 
 class CreateAccountAssistantResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountAssistantResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
-    ..aOM<$13.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantServicesAccessAuthDetails', subBuilder: $13.AccountAssistantServicesAccessAuthDetails.create)
+    ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantServicesAccessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   CreateAccountAssistantResponse._() : super();
   factory CreateAccountAssistantResponse({
-    $13.AccountAssistantServicesAccessAuthDetails? accountAssistantServicesAccessAuthDetails,
+    $8.AccountAssistantServicesAccessAuthDetails? accountAssistantServicesAccessAuthDetails,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -119,15 +119,15 @@ class CreateAccountAssistantResponse extends $pb.GeneratedMessage {
   static CreateAccountAssistantResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails get accountAssistantServicesAccessAuthDetails => $_getN(0);
+  $8.AccountAssistantServicesAccessAuthDetails get accountAssistantServicesAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accountAssistantServicesAccessAuthDetails($13.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
+  set accountAssistantServicesAccessAuthDetails($8.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccountAssistantServicesAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountAssistantServicesAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails ensureAccountAssistantServicesAccessAuthDetails() => $_ensure(0);
+  $8.AccountAssistantServicesAccessAuthDetails ensureAccountAssistantServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);

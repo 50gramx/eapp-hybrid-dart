@@ -31,6 +31,18 @@ const AccountDeviceOS$json = const {
 
 /// Descriptor for `AccountDeviceOS`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List accountDeviceOSDescriptor = $convert.base64Decode('Cg9BY2NvdW50RGV2aWNlT1MSBwoDSU9TEAASCwoHQU5EUk9JRBAB');
+@$core.Deprecated('Use messageEntityDescriptor instead')
+const MessageEntity$json = const {
+  '1': 'MessageEntity',
+  '2': const [
+    const {'1': 'ALL_ENTITY_MESSAGE', '2': 0},
+    const {'1': 'ENTITY_ACCOUNT', '2': 1},
+    const {'1': 'ENTITY_ACCOUNT_ASSISTANT', '2': 2},
+  ],
+};
+
+/// Descriptor for `MessageEntity`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List messageEntityDescriptor = $convert.base64Decode('Cg1NZXNzYWdlRW50aXR5EhYKEkFMTF9FTlRJVFlfTUVTU0FHRRAAEhIKDkVOVElUWV9BQ0NPVU5UEAESHAoYRU5USVRZX0FDQ09VTlRfQVNTSVNUQU5UEAI=');
 @$core.Deprecated('Use accountPayInMethodDescriptor instead')
 const AccountPayInMethod$json = const {
   '1': 'AccountPayInMethod',
@@ -57,12 +69,12 @@ const Account$json = const {
     const {'1': 'account_birth_at', '3': 10, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'accountBirthAt'},
     const {'1': 'account_gender', '3': 11, '4': 1, '5': 14, '6': '.elint.entity.AccountGender', '10': 'accountGender'},
     const {'1': 'created_at', '3': 12, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
-    const {'1': 'account_billing_active', '3': 13, '4': 1, '5': 9, '10': 'accountBillingActive'},
+    const {'1': 'account_billing_active', '3': 13, '4': 1, '5': 8, '10': 'accountBillingActive'},
   ],
 };
 
 /// Descriptor for `Account`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List accountDescriptor = $convert.base64Decode('CgdBY2NvdW50EjAKFGFjY291bnRfYW5hbHl0aWNzX2lkGAEgASgJUhJhY2NvdW50QW5hbHl0aWNzSWQSHQoKYWNjb3VudF9pZBgCIAEoCVIJYWNjb3VudElkEjkKGWFjY291bnRfcGVyc29uYWxfZW1haWxfaWQYAyABKAlSFmFjY291bnRQZXJzb25hbEVtYWlsSWQSMQoVYWNjb3VudF93b3JrX2VtYWlsX2lkGAQgASgJUhJhY2NvdW50V29ya0VtYWlsSWQSMAoUYWNjb3VudF9jb3VudHJ5X2NvZGUYBSABKAlSEmFjY291bnRDb3VudHJ5Q29kZRIyChVhY2NvdW50X21vYmlsZV9udW1iZXIYBiABKAlSE2FjY291bnRNb2JpbGVOdW1iZXISLAoSYWNjb3VudF9maXJzdF9uYW1lGAcgASgJUhBhY2NvdW50Rmlyc3ROYW1lEioKEWFjY291bnRfbGFzdF9uYW1lGAggASgJUg9hY2NvdW50TGFzdE5hbWUSKgoRYWNjb3VudF9nYWxheHlfaWQYCSABKAlSD2FjY291bnRHYWxheHlJZBJEChBhY2NvdW50X2JpcnRoX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIOYWNjb3VudEJpcnRoQXQSQgoOYWNjb3VudF9nZW5kZXIYCyABKA4yGy5lbGludC5lbnRpdHkuQWNjb3VudEdlbmRlclINYWNjb3VudEdlbmRlchI5CgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0EjQKFmFjY291bnRfYmlsbGluZ19hY3RpdmUYDSABKAlSFGFjY291bnRCaWxsaW5nQWN0aXZl');
+final $typed_data.Uint8List accountDescriptor = $convert.base64Decode('CgdBY2NvdW50EjAKFGFjY291bnRfYW5hbHl0aWNzX2lkGAEgASgJUhJhY2NvdW50QW5hbHl0aWNzSWQSHQoKYWNjb3VudF9pZBgCIAEoCVIJYWNjb3VudElkEjkKGWFjY291bnRfcGVyc29uYWxfZW1haWxfaWQYAyABKAlSFmFjY291bnRQZXJzb25hbEVtYWlsSWQSMQoVYWNjb3VudF93b3JrX2VtYWlsX2lkGAQgASgJUhJhY2NvdW50V29ya0VtYWlsSWQSMAoUYWNjb3VudF9jb3VudHJ5X2NvZGUYBSABKAlSEmFjY291bnRDb3VudHJ5Q29kZRIyChVhY2NvdW50X21vYmlsZV9udW1iZXIYBiABKAlSE2FjY291bnRNb2JpbGVOdW1iZXISLAoSYWNjb3VudF9maXJzdF9uYW1lGAcgASgJUhBhY2NvdW50Rmlyc3ROYW1lEioKEWFjY291bnRfbGFzdF9uYW1lGAggASgJUg9hY2NvdW50TGFzdE5hbWUSKgoRYWNjb3VudF9nYWxheHlfaWQYCSABKAlSD2FjY291bnRHYWxheHlJZBJEChBhY2NvdW50X2JpcnRoX2F0GAogASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIOYWNjb3VudEJpcnRoQXQSQgoOYWNjb3VudF9nZW5kZXIYCyABKA4yGy5lbGludC5lbnRpdHkuQWNjb3VudEdlbmRlclINYWNjb3VudEdlbmRlchI5CgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIJY3JlYXRlZEF0EjQKFmFjY291bnRfYmlsbGluZ19hY3RpdmUYDSABKAhSFGFjY291bnRCaWxsaW5nQWN0aXZl');
 @$core.Deprecated('Use accountSpaceKnowledgeAccessMetaDescriptor instead')
 const AccountSpaceKnowledgeAccessMeta$json = const {
   '1': 'AccountSpaceKnowledgeAccessMeta',
@@ -153,6 +165,32 @@ const AccountMobile$json = const {
 
 /// Descriptor for `AccountMobile`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountMobileDescriptor = $convert.base64Decode('Cg1BY2NvdW50TW9iaWxlEjAKFGFjY291bnRfY291bnRyeV9jb2RlGAEgASgJUhJhY2NvdW50Q291bnRyeUNvZGUSMgoVYWNjb3VudF9tb2JpbGVfbnVtYmVyGAIgASgJUhNhY2NvdW50TW9iaWxlTnVtYmVy');
+@$core.Deprecated('Use accountMetaDescriptor instead')
+const AccountMeta$json = const {
+  '1': 'AccountMeta',
+  '2': const [
+    const {'1': 'account_id', '3': 2, '4': 1, '5': 9, '10': 'accountId'},
+    const {'1': 'account_first_name', '3': 7, '4': 1, '5': 9, '10': 'accountFirstName'},
+    const {'1': 'account_last_name', '3': 8, '4': 1, '5': 9, '10': 'accountLastName'},
+    const {'1': 'account_galaxy_id', '3': 9, '4': 1, '5': 9, '10': 'accountGalaxyId'},
+    const {'1': 'account_gender', '3': 11, '4': 1, '5': 14, '6': '.elint.entity.AccountGender', '10': 'accountGender'},
+  ],
+};
+
+/// Descriptor for `AccountMeta`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountMetaDescriptor = $convert.base64Decode('CgtBY2NvdW50TWV0YRIdCgphY2NvdW50X2lkGAIgASgJUglhY2NvdW50SWQSLAoSYWNjb3VudF9maXJzdF9uYW1lGAcgASgJUhBhY2NvdW50Rmlyc3ROYW1lEioKEWFjY291bnRfbGFzdF9uYW1lGAggASgJUg9hY2NvdW50TGFzdE5hbWUSKgoRYWNjb3VudF9nYWxheHlfaWQYCSABKAlSD2FjY291bnRHYWxheHlJZBJCCg5hY2NvdW50X2dlbmRlchgLIAEoDjIbLmVsaW50LmVudGl0eS5BY2NvdW50R2VuZGVyUg1hY2NvdW50R2VuZGVy');
+@$core.Deprecated('Use messageInfoDescriptor instead')
+const MessageInfo$json = const {
+  '1': 'MessageInfo',
+  '2': const [
+    const {'1': 'is_urgent', '3': 1, '4': 1, '5': 8, '10': 'isUrgent'},
+    const {'1': 'is_important', '3': 2, '4': 1, '5': 8, '10': 'isImportant'},
+    const {'1': 'is_sensitive', '3': 3, '4': 1, '5': 8, '10': 'isSensitive'},
+  ],
+};
+
+/// Descriptor for `MessageInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List messageInfoDescriptor = $convert.base64Decode('CgtNZXNzYWdlSW5mbxIbCglpc191cmdlbnQYASABKAhSCGlzVXJnZW50EiEKDGlzX2ltcG9ydGFudBgCIAEoCFILaXNJbXBvcnRhbnQSIQoMaXNfc2Vuc2l0aXZlGAMgASgIUgtpc1NlbnNpdGl2ZQ==');
 @$core.Deprecated('Use accountPayInCardDetailsDescriptor instead')
 const AccountPayInCardDetails$json = const {
   '1': 'AccountPayInCardDetails',
@@ -170,3 +208,15 @@ const AccountPayInCardDetails$json = const {
 
 /// Descriptor for `AccountPayInCardDetails`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountPayInCardDetailsDescriptor = $convert.base64Decode('ChdBY2NvdW50UGF5SW5DYXJkRGV0YWlscxIXCgdjYXJkX2lkGAEgASgJUgZjYXJkSWQSFAoFYnJhbmQYAiABKAlSBWJyYW5kEhgKB2NvdW50cnkYAyABKAlSB2NvdW50cnkSIQoMZXhwaXJ5X21vbnRoGAQgASgFUgtleHBpcnlNb250aBIfCgtleHBpcnlfeWVhchgFIAEoBVIKZXhwaXJ5WWVhchIgCgtmaW5nZXJwcmludBgGIAEoCVILZmluZ2VycHJpbnQSGAoHZnVuZGluZxgHIAEoCVIHZnVuZGluZxIiCg1sYXN0XzRfZGlnaXRzGAggASgJUgtsYXN0NERpZ2l0cw==');
+@$core.Deprecated('Use accountTransactionDescriptor instead')
+const AccountTransaction$json = const {
+  '1': 'AccountTransaction',
+  '2': const [
+    const {'1': 'is_debited', '3': 3, '4': 1, '5': 8, '10': 'isDebited'},
+    const {'1': 'amount', '3': 4, '4': 1, '5': 1, '10': 'amount'},
+    const {'1': 'balance', '3': 5, '4': 1, '5': 1, '10': 'balance'},
+  ],
+};
+
+/// Descriptor for `AccountTransaction`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountTransactionDescriptor = $convert.base64Decode('ChJBY2NvdW50VHJhbnNhY3Rpb24SHQoKaXNfZGViaXRlZBgDIAEoCFIJaXNEZWJpdGVkEhYKBmFtb3VudBgEIAEoAVIGYW1vdW50EhgKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2U=');

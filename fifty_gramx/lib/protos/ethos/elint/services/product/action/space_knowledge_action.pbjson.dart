@@ -14,11 +14,13 @@ const AskQuestionRequest$json = const {
   '2': const [
     const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.assistant.AccountAssistantServicesAccessAuthDetails', '10': 'accessAuthDetails'},
     const {'1': 'message', '3': 2, '4': 1, '5': 9, '10': 'message'},
+    const {'1': 'ask_particular_domain', '3': 3, '4': 1, '5': 8, '10': 'askParticularDomain'},
+    const {'1': 'space_knowledge_domain', '3': 4, '4': 1, '5': 11, '6': '.elint.entity.SpaceKnowledgeDomain', '10': 'spaceKnowledgeDomain'},
   ],
 };
 
 /// Descriptor for `AskQuestionRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List askQuestionRequestDescriptor = $convert.base64Decode('ChJBc2tRdWVzdGlvblJlcXVlc3QSjAEKE2FjY2Vzc19hdXRoX2RldGFpbHMYASABKAsyXC5lbGludC5zZXJ2aWNlcy5wcm9kdWN0LmlkZW50aXR5LmFjY291bnQuYXNzaXN0YW50LkFjY291bnRBc3Npc3RhbnRTZXJ2aWNlc0FjY2Vzc0F1dGhEZXRhaWxzUhFhY2Nlc3NBdXRoRGV0YWlscxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdl');
+final $typed_data.Uint8List askQuestionRequestDescriptor = $convert.base64Decode('ChJBc2tRdWVzdGlvblJlcXVlc3QSjAEKE2FjY2Vzc19hdXRoX2RldGFpbHMYASABKAsyXC5lbGludC5zZXJ2aWNlcy5wcm9kdWN0LmlkZW50aXR5LmFjY291bnQuYXNzaXN0YW50LkFjY291bnRBc3Npc3RhbnRTZXJ2aWNlc0FjY2Vzc0F1dGhEZXRhaWxzUhFhY2Nlc3NBdXRoRGV0YWlscxIYCgdtZXNzYWdlGAIgASgJUgdtZXNzYWdlEjIKFWFza19wYXJ0aWN1bGFyX2RvbWFpbhgDIAEoCFITYXNrUGFydGljdWxhckRvbWFpbhJYChZzcGFjZV9rbm93bGVkZ2VfZG9tYWluGAQgASgLMiIuZWxpbnQuZW50aXR5LlNwYWNlS25vd2xlZGdlRG9tYWluUhRzcGFjZUtub3dsZWRnZURvbWFpbg==');
 @$core.Deprecated('Use askQuestionResponseDescriptor instead')
 const AskQuestionResponse$json = const {
   '1': 'AskQuestionResponse',

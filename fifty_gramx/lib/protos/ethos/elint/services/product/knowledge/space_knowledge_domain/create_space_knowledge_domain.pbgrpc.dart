@@ -10,7 +10,7 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import '../space_knowledge/access_space_knowledge.pb.dart' as $23;
+import '../space_knowledge/access_space_knowledge.pb.dart' as $10;
 import 'create_space_knowledge_domain.pb.dart' as $28;
 import 'access_space_knowledge_domain.pb.dart' as $27;
 import '../../../../entities/generic.pb.dart' as $2;
@@ -18,10 +18,10 @@ export 'create_space_knowledge_domain.pb.dart';
 
 class CreateSpaceKnowledgeDomainServiceClient extends $grpc.Client {
   static final _$createAccountWhiteSpaceKnowledgeDomain = $grpc.ClientMethod<
-          $23.SpaceKnowledgeServicesAccessAuthDetails,
+          $10.SpaceKnowledgeServicesAccessAuthDetails,
           $28.CreateAccountWhiteSpaceKnowledgeDomainResponse>(
       '/elint.services.product.knowledge.domain.CreateSpaceKnowledgeDomainService/CreateAccountWhiteSpaceKnowledgeDomain',
-      ($23.SpaceKnowledgeServicesAccessAuthDetails value) =>
+      ($10.SpaceKnowledgeServicesAccessAuthDetails value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $28.CreateAccountWhiteSpaceKnowledgeDomainResponse.fromBuffer(value));
@@ -46,7 +46,7 @@ class CreateSpaceKnowledgeDomainServiceClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$28.CreateAccountWhiteSpaceKnowledgeDomainResponse>
       createAccountWhiteSpaceKnowledgeDomain(
-          $23.SpaceKnowledgeServicesAccessAuthDetails request,
+          $10.SpaceKnowledgeServicesAccessAuthDetails request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createAccountWhiteSpaceKnowledgeDomain, request,
         options: options);
@@ -72,14 +72,14 @@ abstract class CreateSpaceKnowledgeDomainServiceBase extends $grpc.Service {
       'elint.services.product.knowledge.domain.CreateSpaceKnowledgeDomainService';
 
   CreateSpaceKnowledgeDomainServiceBase() {
-    $addMethod($grpc.ServiceMethod<$23.SpaceKnowledgeServicesAccessAuthDetails,
+    $addMethod($grpc.ServiceMethod<$10.SpaceKnowledgeServicesAccessAuthDetails,
             $28.CreateAccountWhiteSpaceKnowledgeDomainResponse>(
         'CreateAccountWhiteSpaceKnowledgeDomain',
         createAccountWhiteSpaceKnowledgeDomain_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $23.SpaceKnowledgeServicesAccessAuthDetails.fromBuffer(value),
+            $10.SpaceKnowledgeServicesAccessAuthDetails.fromBuffer(value),
         ($28.CreateAccountWhiteSpaceKnowledgeDomainResponse value) =>
             value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
@@ -106,7 +106,7 @@ abstract class CreateSpaceKnowledgeDomainServiceBase extends $grpc.Service {
   $async.Future<$28.CreateAccountWhiteSpaceKnowledgeDomainResponse>
       createAccountWhiteSpaceKnowledgeDomain_Pre(
           $grpc.ServiceCall call,
-          $async.Future<$23.SpaceKnowledgeServicesAccessAuthDetails>
+          $async.Future<$10.SpaceKnowledgeServicesAccessAuthDetails>
               request) async {
     return createAccountWhiteSpaceKnowledgeDomain(call, await request);
   }
@@ -126,7 +126,7 @@ abstract class CreateSpaceKnowledgeDomainServiceBase extends $grpc.Service {
 
   $async.Future<$28.CreateAccountWhiteSpaceKnowledgeDomainResponse>
       createAccountWhiteSpaceKnowledgeDomain($grpc.ServiceCall call,
-          $23.SpaceKnowledgeServicesAccessAuthDetails request);
+          $10.SpaceKnowledgeServicesAccessAuthDetails request);
   $async.Future<$2.ResponseMeta> createSpaceKnowledgeDomainTfIdf(
       $grpc.ServiceCall call,
       $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);

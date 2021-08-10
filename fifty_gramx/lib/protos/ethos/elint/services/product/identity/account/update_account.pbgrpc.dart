@@ -10,25 +10,26 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'update_account.pb.dart' as $9;
+import 'update_account.pb.dart' as $12;
 export 'update_account.pb.dart';
 
 class UpdateAccountServiceClient extends $grpc.Client {
   static final _$updateAccountProfilePicture = $grpc.ClientMethod<
-          $9.UpdateAccountProfilePictureRequest,
-          $9.UpdateAccountProfilePictureResponse>(
+          $12.UpdateAccountProfilePictureRequest,
+          $12.UpdateAccountProfilePictureResponse>(
       '/elint.services.product.identity.account.UpdateAccountService/UpdateAccountProfilePicture',
-      ($9.UpdateAccountProfilePictureRequest value) => value.writeToBuffer(),
+      ($12.UpdateAccountProfilePictureRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $9.UpdateAccountProfilePictureResponse.fromBuffer(value));
+          $12.UpdateAccountProfilePictureResponse.fromBuffer(value));
 
   UpdateAccountServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$9.UpdateAccountProfilePictureResponse>
-      updateAccountProfilePicture($9.UpdateAccountProfilePictureRequest request,
+  $grpc.ResponseFuture<$12.UpdateAccountProfilePictureResponse>
+      updateAccountProfilePicture(
+          $12.UpdateAccountProfilePictureRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateAccountProfilePicture, request,
         options: options);
@@ -40,25 +41,25 @@ abstract class UpdateAccountServiceBase extends $grpc.Service {
       'elint.services.product.identity.account.UpdateAccountService';
 
   UpdateAccountServiceBase() {
-    $addMethod($grpc.ServiceMethod<$9.UpdateAccountProfilePictureRequest,
-            $9.UpdateAccountProfilePictureResponse>(
+    $addMethod($grpc.ServiceMethod<$12.UpdateAccountProfilePictureRequest,
+            $12.UpdateAccountProfilePictureResponse>(
         'UpdateAccountProfilePicture',
         updateAccountProfilePicture_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $9.UpdateAccountProfilePictureRequest.fromBuffer(value),
-        ($9.UpdateAccountProfilePictureResponse value) =>
+            $12.UpdateAccountProfilePictureRequest.fromBuffer(value),
+        ($12.UpdateAccountProfilePictureResponse value) =>
             value.writeToBuffer()));
   }
 
-  $async.Future<$9.UpdateAccountProfilePictureResponse>
+  $async.Future<$12.UpdateAccountProfilePictureResponse>
       updateAccountProfilePicture_Pre($grpc.ServiceCall call,
-          $async.Future<$9.UpdateAccountProfilePictureRequest> request) async {
+          $async.Future<$12.UpdateAccountProfilePictureRequest> request) async {
     return updateAccountProfilePicture(call, await request);
   }
 
-  $async.Future<$9.UpdateAccountProfilePictureResponse>
+  $async.Future<$12.UpdateAccountProfilePictureResponse>
       updateAccountProfilePicture($grpc.ServiceCall call,
-          $9.UpdateAccountProfilePictureRequest request);
+          $12.UpdateAccountProfilePictureRequest request);
 }

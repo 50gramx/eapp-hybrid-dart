@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'access_space_knowledge_domain.pb.dart' as $27;
-import '../space_knowledge/access_space_knowledge.pb.dart' as $23;
+import '../space_knowledge/access_space_knowledge.pb.dart' as $10;
 import '../../../../entities/generic.pb.dart' as $2;
 
 import '../../../../entities/space_knowledge_domain.pbenum.dart' as $31;
@@ -95,7 +95,7 @@ class CreateAccountWhiteSpaceKnowledgeDomainResponse extends $pb.GeneratedMessag
 
 class CreateSpaceKnowledgeDomainRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateSpaceKnowledgeDomainRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..aOM<$23.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessAuthDetails', subBuilder: $23.SpaceKnowledgeServicesAccessAuthDetails.create)
+    ..aOM<$10.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessAuthDetails', subBuilder: $10.SpaceKnowledgeServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainName')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainDescription')
     ..e<$31.SpaceKnowledgeDomainCollarEnum>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainCollarEnum', $pb.PbFieldType.OE, defaultOrMaker: $31.SpaceKnowledgeDomainCollarEnum.WHITE_COLLAR, valueOf: $31.SpaceKnowledgeDomainCollarEnum.valueOf, enumValues: $31.SpaceKnowledgeDomainCollarEnum.values)
@@ -105,7 +105,7 @@ class CreateSpaceKnowledgeDomainRequest extends $pb.GeneratedMessage {
 
   CreateSpaceKnowledgeDomainRequest._() : super();
   factory CreateSpaceKnowledgeDomainRequest({
-    $23.SpaceKnowledgeServicesAccessAuthDetails? spaceKnowledgeServicesAccessAuthDetails,
+    $10.SpaceKnowledgeServicesAccessAuthDetails? spaceKnowledgeServicesAccessAuthDetails,
     $core.String? spaceKnowledgeDomainName,
     $core.String? spaceKnowledgeDomainDescription,
     $31.SpaceKnowledgeDomainCollarEnum? spaceKnowledgeDomainCollarEnum,
@@ -151,15 +151,15 @@ class CreateSpaceKnowledgeDomainRequest extends $pb.GeneratedMessage {
   static CreateSpaceKnowledgeDomainRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails get spaceKnowledgeServicesAccessAuthDetails => $_getN(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails get spaceKnowledgeServicesAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeServicesAccessAuthDetails($23.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
+  set spaceKnowledgeServicesAccessAuthDetails($10.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeServicesAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeServicesAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails ensureSpaceKnowledgeServicesAccessAuthDetails() => $_ensure(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails ensureSpaceKnowledgeServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainName => $_getSZ(1);

@@ -9,9 +9,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space.pb.dart' as $57;
+import '../../../../entities/space.pb.dart' as $58;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class SpaceAccessTokenResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceAccessTokenResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.space'), createEmptyInstance: create)
@@ -153,17 +153,17 @@ class ValidateSpaceServicesResponse extends $pb.GeneratedMessage {
 
 class SpaceServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.space'), createEmptyInstance: create)
-    ..aOM<$57.Space>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $57.Space.create)
+    ..aOM<$58.Space>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $58.Space.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   SpaceServicesAccessAuthDetails._() : super();
   factory SpaceServicesAccessAuthDetails({
-    $57.Space? space,
+    $58.Space? space,
     $2.PersistentSessionTokenDetails? spaceServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (space != null) {
@@ -199,15 +199,15 @@ class SpaceServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static SpaceServicesAccessAuthDetails? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $57.Space get space => $_getN(0);
+  $58.Space get space => $_getN(0);
   @$pb.TagNumber(1)
-  set space($57.Space v) { setField(1, v); }
+  set space($58.Space v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpace() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpace() => clearField(1);
   @$pb.TagNumber(1)
-  $57.Space ensureSpace() => $_ensure(0);
+  $58.Space ensureSpace() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.PersistentSessionTokenDetails get spaceServicesAccessSessionTokenDetails => $_getN(1);
@@ -221,14 +221,14 @@ class SpaceServicesAccessAuthDetails extends $pb.GeneratedMessage {
   $2.PersistentSessionTokenDetails ensureSpaceServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

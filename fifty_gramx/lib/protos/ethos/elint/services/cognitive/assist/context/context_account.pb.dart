@@ -9,20 +9,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../product/identity/account_assistant/access_account_assistant.pb.dart' as $13;
+import '../../../product/identity/account_assistant/access_account_assistant.pb.dart' as $8;
 
-import '../../../../entities/space_knowledge.pbenum.dart' as $58;
+import '../../../../entities/space_knowledge.pbenum.dart' as $59;
 
 class AccountMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMessage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
-    ..aOM<$13.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $13.AccountAssistantServicesAccessAuthDetails.create)
+    ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   AccountMessage._() : super();
   factory AccountMessage({
-    $13.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
+    $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
   }) {
     final _result = create();
@@ -56,15 +56,15 @@ class AccountMessage extends $pb.GeneratedMessage {
   static AccountMessage? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $8.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($13.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($8.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $8.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -78,13 +78,13 @@ class AccountMessage extends $pb.GeneratedMessage {
 
 class AccountMessageContext extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMessageContext', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
-    ..pc<$58.SpaceKnowledgeAction>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceActions', $pb.PbFieldType.PE, valueOf: $58.SpaceKnowledgeAction.valueOf, enumValues: $58.SpaceKnowledgeAction.values)
+    ..pc<$59.SpaceKnowledgeAction>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceActions', $pb.PbFieldType.PE, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
     ..hasRequiredFields = false
   ;
 
   AccountMessageContext._() : super();
   factory AccountMessageContext({
-    $core.Iterable<$58.SpaceKnowledgeAction>? knowledgeSpaceActions,
+    $core.Iterable<$59.SpaceKnowledgeAction>? knowledgeSpaceActions,
   }) {
     final _result = create();
     if (knowledgeSpaceActions != null) {
@@ -114,6 +114,6 @@ class AccountMessageContext extends $pb.GeneratedMessage {
   static AccountMessageContext? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$58.SpaceKnowledgeAction> get knowledgeSpaceActions => $_getList(0);
+  $core.List<$59.SpaceKnowledgeAction> get knowledgeSpaceActions => $_getList(0);
 }
 

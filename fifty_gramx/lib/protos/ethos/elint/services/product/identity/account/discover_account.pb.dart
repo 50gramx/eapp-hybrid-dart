@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/account.pb.dart' as $21;
+import '../../../../entities/account.pb.dart' as $22;
 import '../../../../entities/generic.pb.dart' as $2;
 import 'access_account.pb.dart' as $0;
 
@@ -64,14 +64,14 @@ class GetAccountByIdRequest extends $pb.GeneratedMessage {
 
 class GetAccountByIdResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
-    ..aOM<$21.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $21.Account.create)
+    ..aOM<$22.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $22.Account.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetAccountByIdResponse._() : super();
   factory GetAccountByIdResponse({
-    $21.Account? account,
+    $22.Account? account,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -105,15 +105,143 @@ class GetAccountByIdResponse extends $pb.GeneratedMessage {
   static GetAccountByIdResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Account get account => $_getN(0);
+  $22.Account get account => $_getN(0);
   @$pb.TagNumber(1)
-  set account($21.Account v) { setField(1, v); }
+  set account($22.Account v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccount() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccount() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Account ensureAccount() => $_ensure(0);
+  $22.Account ensureAccount() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
+}
+
+class GetAccountMetaByAccountIdRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountMetaByAccountIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountMetaByAccountIdRequest._() : super();
+  factory GetAccountMetaByAccountIdRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $core.String? accountId,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    return _result;
+  }
+  factory GetAccountMetaByAccountIdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountMetaByAccountIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountMetaByAccountIdRequest clone() => GetAccountMetaByAccountIdRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountMetaByAccountIdRequest copyWith(void Function(GetAccountMetaByAccountIdRequest) updates) => super.copyWith((message) => updates(message as GetAccountMetaByAccountIdRequest)) as GetAccountMetaByAccountIdRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountMetaByAccountIdRequest create() => GetAccountMetaByAccountIdRequest._();
+  GetAccountMetaByAccountIdRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAccountMetaByAccountIdRequest> createRepeated() => $pb.PbList<GetAccountMetaByAccountIdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountMetaByAccountIdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountMetaByAccountIdRequest>(create);
+  static GetAccountMetaByAccountIdRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get accountId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set accountId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccountId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccountId() => clearField(2);
+}
+
+class GetAccountMetaByAccountIdResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountMetaByAccountIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
+    ..aOM<$22.AccountMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountMeta', subBuilder: $22.AccountMeta.create)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountMetaByAccountIdResponse._() : super();
+  factory GetAccountMetaByAccountIdResponse({
+    $22.AccountMeta? accountMeta,
+    $2.ResponseMeta? responseMeta,
+  }) {
+    final _result = create();
+    if (accountMeta != null) {
+      _result.accountMeta = accountMeta;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    return _result;
+  }
+  factory GetAccountMetaByAccountIdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountMetaByAccountIdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountMetaByAccountIdResponse clone() => GetAccountMetaByAccountIdResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountMetaByAccountIdResponse copyWith(void Function(GetAccountMetaByAccountIdResponse) updates) => super.copyWith((message) => updates(message as GetAccountMetaByAccountIdResponse)) as GetAccountMetaByAccountIdResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountMetaByAccountIdResponse create() => GetAccountMetaByAccountIdResponse._();
+  GetAccountMetaByAccountIdResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAccountMetaByAccountIdResponse> createRepeated() => $pb.PbList<GetAccountMetaByAccountIdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountMetaByAccountIdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountMetaByAccountIdResponse>(create);
+  static GetAccountMetaByAccountIdResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $22.AccountMeta get accountMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set accountMeta($22.AccountMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccountMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $22.AccountMeta ensureAccountMeta() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -341,14 +469,14 @@ class IsAccountExistsWithMobileRequest extends $pb.GeneratedMessage {
 class AreAccountsExistingWithMobileRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AreAccountsExistingWithMobileRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..pc<$21.AccountMobile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountMobiles', $pb.PbFieldType.PM, subBuilder: $21.AccountMobile.create)
+    ..pc<$22.AccountMobile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountMobiles', $pb.PbFieldType.PM, subBuilder: $22.AccountMobile.create)
     ..hasRequiredFields = false
   ;
 
   AreAccountsExistingWithMobileRequest._() : super();
   factory AreAccountsExistingWithMobileRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $core.Iterable<$21.AccountMobile>? accountMobiles,
+    $core.Iterable<$22.AccountMobile>? accountMobiles,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -392,7 +520,7 @@ class AreAccountsExistingWithMobileRequest extends $pb.GeneratedMessage {
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$21.AccountMobile> get accountMobiles => $_getList(1);
+  $core.List<$22.AccountMobile> get accountMobiles => $_getList(1);
 }
 
 class AreAccountsExistingWithMobileResponse_AccountMobileExists extends $pb.GeneratedMessage {

@@ -14,11 +14,12 @@ const ValidateAccountRequest$json = const {
   '2': const [
     const {'1': 'account_mobile_number', '3': 1, '4': 1, '5': 9, '10': 'accountMobileNumber'},
     const {'1': 'requested_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'requestedAt'},
+    const {'1': 'account_mobile_country_code', '3': 3, '4': 1, '5': 9, '10': 'accountMobileCountryCode'},
   ],
 };
 
 /// Descriptor for `ValidateAccountRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List validateAccountRequestDescriptor = $convert.base64Decode('ChZWYWxpZGF0ZUFjY291bnRSZXF1ZXN0EjIKFWFjY291bnRfbW9iaWxlX251bWJlchgBIAEoCVITYWNjb3VudE1vYmlsZU51bWJlchI9CgxyZXF1ZXN0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgtyZXF1ZXN0ZWRBdA==');
+final $typed_data.Uint8List validateAccountRequestDescriptor = $convert.base64Decode('ChZWYWxpZGF0ZUFjY291bnRSZXF1ZXN0EjIKFWFjY291bnRfbW9iaWxlX251bWJlchgBIAEoCVITYWNjb3VudE1vYmlsZU51bWJlchI9CgxyZXF1ZXN0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgtyZXF1ZXN0ZWRBdBI9ChthY2NvdW50X21vYmlsZV9jb3VudHJ5X2NvZGUYAyABKAlSGGFjY291bnRNb2JpbGVDb3VudHJ5Q29kZQ==');
 @$core.Deprecated('Use validateAccountResponseDescriptor instead')
 const ValidateAccountResponse$json = const {
   '1': 'ValidateAccountResponse',

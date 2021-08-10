@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'space_knowledge_domain.pb.dart' as $31;
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 import 'space_knowledge_domain_file.pbenum.dart';
 
@@ -85,9 +85,9 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
     ..e<ExtentionType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileExtensionType', $pb.PbFieldType.OE, defaultOrMaker: ExtentionType.PNG, valueOf: ExtentionType.valueOf, enumValues: ExtentionType.values)
     ..aOM<$31.SpaceKnowledgeDomain>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
     ..pc<FileTag>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileTags', $pb.PbFieldType.PM, subBuilder: FileTag.create)
-    ..aOM<$54.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -99,9 +99,9 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
     ExtentionType? spaceKnowledgeDomainFileExtensionType,
     $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
     $core.Iterable<FileTag>? spaceKnowledgeDomainFileTags,
-    $54.Timestamp? createdAt,
-    $54.Timestamp? lastUpdatedAt,
-    $54.Timestamp? lastAccessedAt,
+    $55.Timestamp? createdAt,
+    $55.Timestamp? lastUpdatedAt,
+    $55.Timestamp? lastAccessedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFileName != null) {
@@ -205,36 +205,36 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
   $core.List<FileTag> get spaceKnowledgeDomainFileTags => $_getList(5);
 
   @$pb.TagNumber(7)
-  $54.Timestamp get createdAt => $_getN(6);
+  $55.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(7)
-  set createdAt($54.Timestamp v) { setField(7, v); }
+  set createdAt($55.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $54.Timestamp ensureCreatedAt() => $_ensure(6);
+  $55.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $54.Timestamp get lastUpdatedAt => $_getN(7);
+  $55.Timestamp get lastUpdatedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set lastUpdatedAt($54.Timestamp v) { setField(8, v); }
+  set lastUpdatedAt($55.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasLastUpdatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearLastUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $54.Timestamp ensureLastUpdatedAt() => $_ensure(7);
+  $55.Timestamp ensureLastUpdatedAt() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $54.Timestamp get lastAccessedAt => $_getN(8);
+  $55.Timestamp get lastAccessedAt => $_getN(8);
   @$pb.TagNumber(9)
-  set lastAccessedAt($54.Timestamp v) { setField(9, v); }
+  set lastAccessedAt($55.Timestamp v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasLastAccessedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearLastAccessedAt() => clearField(9);
   @$pb.TagNumber(9)
-  $54.Timestamp ensureLastAccessedAt() => $_ensure(8);
+  $55.Timestamp ensureLastAccessedAt() => $_ensure(8);
 }
 

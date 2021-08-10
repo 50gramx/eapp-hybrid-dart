@@ -11,7 +11,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/generic.pb.dart' as $2;
 import '../../../../entities/account_assistant.pb.dart' as $6;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class AccountAssistantAccessTokenResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantAccessTokenResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
@@ -267,7 +267,7 @@ class AccountAssistantServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
     ..aOM<$6.AccountAssistant>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistant', subBuilder: $6.AccountAssistant.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -275,7 +275,7 @@ class AccountAssistantServicesAccessAuthDetails extends $pb.GeneratedMessage {
   factory AccountAssistantServicesAccessAuthDetails({
     $6.AccountAssistant? accountAssistant,
     $2.PersistentSessionTokenDetails? accountAssistantServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (accountAssistant != null) {
@@ -333,14 +333,14 @@ class AccountAssistantServicesAccessAuthDetails extends $pb.GeneratedMessage {
   $2.PersistentSessionTokenDetails ensureAccountAssistantServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

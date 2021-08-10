@@ -59,6 +59,20 @@ class DiscoverSpaceKnowledgeDomainServiceClient extends $grpc.Client {
       ($30.IsMessageContextInDomainRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $30.IsMessageContextInDomainResponse.fromBuffer(value));
+  static final _$getFileCount = $grpc.ClientMethod<
+          $27.SpaceKnowledgeDomainServicesAccessAuthDetails,
+          $30.FileCountResponse>(
+      '/elint.services.product.knowledge.domain.DiscoverSpaceKnowledgeDomainService/GetFileCount',
+      ($27.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.FileCountResponse.fromBuffer(value));
+  static final _$getPageCount = $grpc.ClientMethod<
+          $27.SpaceKnowledgeDomainServicesAccessAuthDetails,
+          $30.PageCountResponse>(
+      '/elint.services.product.knowledge.domain.DiscoverSpaceKnowledgeDomainService/GetPageCount',
+      ($27.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) => $30.PageCountResponse.fromBuffer(value));
 
   DiscoverSpaceKnowledgeDomainServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -104,6 +118,18 @@ class DiscoverSpaceKnowledgeDomainServiceClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$isMessageContextInDomain, request,
         options: options);
+  }
+
+  $grpc.ResponseFuture<$30.FileCountResponse> getFileCount(
+      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getFileCount, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$30.PageCountResponse> getPageCount(
+      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getPageCount, request, options: options);
   }
 }
 
@@ -170,6 +196,26 @@ abstract class DiscoverSpaceKnowledgeDomainServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $30.IsMessageContextInDomainRequest.fromBuffer(value),
         ($30.IsMessageContextInDomainResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<
+            $27.SpaceKnowledgeDomainServicesAccessAuthDetails,
+            $30.FileCountResponse>(
+        'GetFileCount',
+        getFileCount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $27.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
+        ($30.FileCountResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<
+            $27.SpaceKnowledgeDomainServicesAccessAuthDetails,
+            $30.PageCountResponse>(
+        'GetPageCount',
+        getPageCount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $27.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
+        ($30.PageCountResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$30.GetAllDomainFilesResponse> getAllDomainFiles_Pre(
@@ -210,6 +256,20 @@ abstract class DiscoverSpaceKnowledgeDomainServiceBase extends $grpc.Service {
     return isMessageContextInDomain(call, await request);
   }
 
+  $async.Future<$30.FileCountResponse> getFileCount_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>
+          request) async {
+    return getFileCount(call, await request);
+  }
+
+  $async.Future<$30.PageCountResponse> getPageCount_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>
+          request) async {
+    return getPageCount(call, await request);
+  }
+
   $async.Future<$30.GetAllDomainFilesResponse> getAllDomainFiles(
       $grpc.ServiceCall call,
       $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
@@ -226,4 +286,8 @@ abstract class DiscoverSpaceKnowledgeDomainServiceBase extends $grpc.Service {
           $30.RetrieveMessageContextPagesRequest request);
   $async.Future<$30.IsMessageContextInDomainResponse> isMessageContextInDomain(
       $grpc.ServiceCall call, $30.IsMessageContextInDomainRequest request);
+  $async.Future<$30.FileCountResponse> getFileCount($grpc.ServiceCall call,
+      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
+  $async.Future<$30.PageCountResponse> getPageCount($grpc.ServiceCall call,
+      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
 }

@@ -9,12 +9,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/account.pb.dart' as $21;
+import '../../../../entities/account.pb.dart' as $22;
+import 'access_account.pb.dart' as $0;
 
 class NewReceivedMessageFromAccountAssistantRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'NewReceivedMessageFromAccountAssistantRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
-    ..aOM<$21.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $21.AccountConnectedAccountAssistant.create)
+    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantReceivedMessageId')
     ..hasRequiredFields = false
   ;
@@ -22,7 +23,7 @@ class NewReceivedMessageFromAccountAssistantRequest extends $pb.GeneratedMessage
   NewReceivedMessageFromAccountAssistantRequest._() : super();
   factory NewReceivedMessageFromAccountAssistantRequest({
     $core.String? accountId,
-    $21.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
     $core.String? accountAssistantReceivedMessageId,
   }) {
     final _result = create();
@@ -68,15 +69,15 @@ class NewReceivedMessageFromAccountAssistantRequest extends $pb.GeneratedMessage
   void clearAccountId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
+  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccountAssistant($21.AccountConnectedAccountAssistant v) { setField(2, v); }
+  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccountAssistant() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccountAssistant() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
+  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get accountAssistantReceivedMessageId => $_getSZ(2);
@@ -165,15 +166,15 @@ class NewReceivedMessageFromAccountRequest extends $pb.GeneratedMessage {
 
 class AccountConnectedAccountNotificationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountConnectedAccountNotificationRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
-    ..aOM<$21.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $21.Account.create)
-    ..aOM<$21.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectingAccountConnectedAccount', subBuilder: $21.AccountConnectedAccount.create)
+    ..aOM<$22.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $22.Account.create)
+    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectingAccountConnectedAccount', subBuilder: $22.AccountConnectedAccount.create)
     ..hasRequiredFields = false
   ;
 
   AccountConnectedAccountNotificationRequest._() : super();
   factory AccountConnectedAccountNotificationRequest({
-    $21.Account? account,
-    $21.AccountConnectedAccount? connectingAccountConnectedAccount,
+    $22.Account? account,
+    $22.AccountConnectedAccount? connectingAccountConnectedAccount,
   }) {
     final _result = create();
     if (account != null) {
@@ -206,25 +207,90 @@ class AccountConnectedAccountNotificationRequest extends $pb.GeneratedMessage {
   static AccountConnectedAccountNotificationRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Account get account => $_getN(0);
+  $22.Account get account => $_getN(0);
   @$pb.TagNumber(1)
-  set account($21.Account v) { setField(1, v); }
+  set account($22.Account v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccount() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccount() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Account ensureAccount() => $_ensure(0);
+  $22.Account ensureAccount() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount get connectingAccountConnectedAccount => $_getN(1);
+  $22.AccountConnectedAccount get connectingAccountConnectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectingAccountConnectedAccount($21.AccountConnectedAccount v) { setField(2, v); }
+  set connectingAccountConnectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectingAccountConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectingAccountConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount ensureConnectingAccountConnectedAccount() => $_ensure(1);
+  $22.AccountConnectedAccount ensureConnectingAccountConnectedAccount() => $_ensure(1);
+}
+
+class UpdateAccountDeviceDetailsRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateAccountDeviceDetailsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOM<$22.AccountDeviceDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountDeviceDetails', subBuilder: $22.AccountDeviceDetails.create)
+    ..hasRequiredFields = false
+  ;
+
+  UpdateAccountDeviceDetailsRequest._() : super();
+  factory UpdateAccountDeviceDetailsRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $22.AccountDeviceDetails? accountDeviceDetails,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (accountDeviceDetails != null) {
+      _result.accountDeviceDetails = accountDeviceDetails;
+    }
+    return _result;
+  }
+  factory UpdateAccountDeviceDetailsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateAccountDeviceDetailsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateAccountDeviceDetailsRequest clone() => UpdateAccountDeviceDetailsRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateAccountDeviceDetailsRequest copyWith(void Function(UpdateAccountDeviceDetailsRequest) updates) => super.copyWith((message) => updates(message as UpdateAccountDeviceDetailsRequest)) as UpdateAccountDeviceDetailsRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static UpdateAccountDeviceDetailsRequest create() => UpdateAccountDeviceDetailsRequest._();
+  UpdateAccountDeviceDetailsRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateAccountDeviceDetailsRequest> createRepeated() => $pb.PbList<UpdateAccountDeviceDetailsRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateAccountDeviceDetailsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateAccountDeviceDetailsRequest>(create);
+  static UpdateAccountDeviceDetailsRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $22.AccountDeviceDetails get accountDeviceDetails => $_getN(1);
+  @$pb.TagNumber(2)
+  set accountDeviceDetails($22.AccountDeviceDetails v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccountDeviceDetails() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccountDeviceDetails() => clearField(2);
+  @$pb.TagNumber(2)
+  $22.AccountDeviceDetails ensureAccountDeviceDetails() => $_ensure(1);
 }
 

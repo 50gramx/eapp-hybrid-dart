@@ -11,9 +11,11 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class MachineClassEnum extends $pb.ProtobufEnum {
   static const MachineClassEnum GENERAL = MachineClassEnum._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'GENERAL');
+  static const MachineClassEnum ACCELERATED = MachineClassEnum._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ACCELERATED');
 
   static const $core.List<MachineClassEnum> values = <MachineClassEnum> [
     GENERAL,
+    ACCELERATED,
   ];
 
   static final $core.Map<$core.int, MachineClassEnum> _byValue = $pb.ProtobufEnum.initByValue(values);
@@ -24,9 +26,13 @@ class MachineClassEnum extends $pb.ProtobufEnum {
 
 class MachineNameEnum extends $pb.ProtobufEnum {
   static const MachineNameEnum X2 = MachineNameEnum._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'X2');
+  static const MachineNameEnum M2N = MachineNameEnum._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'M2N');
+  static const MachineNameEnum M2 = MachineNameEnum._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'M2');
 
   static const $core.List<MachineNameEnum> values = <MachineNameEnum> [
     X2,
+    M2N,
+    M2,
   ];
 
   static final $core.Map<$core.int, MachineNameEnum> _byValue = $pb.ProtobufEnum.initByValue(values);

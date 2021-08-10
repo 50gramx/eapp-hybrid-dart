@@ -9,24 +9,24 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/account.pb.dart' as $21;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../entities/account.pb.dart' as $22;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class CreateOrganizationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateOrganizationRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.organization'), createEmptyInstance: create)
-    ..aOM<$21.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId', subBuilder: $21.Account.create)
+    ..aOM<$22.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId', subBuilder: $22.Account.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'organizationName')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'organizationDescription')
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   CreateOrganizationRequest._() : super();
   factory CreateOrganizationRequest({
-    $21.Account? accountId,
+    $22.Account? accountId,
     $core.String? organizationName,
     $core.String? organizationDescription,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -65,15 +65,15 @@ class CreateOrganizationRequest extends $pb.GeneratedMessage {
   static CreateOrganizationRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Account get accountId => $_getN(0);
+  $22.Account get accountId => $_getN(0);
   @$pb.TagNumber(1)
-  set accountId($21.Account v) { setField(1, v); }
+  set accountId($22.Account v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccountId() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountId() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Account ensureAccountId() => $_ensure(0);
+  $22.Account ensureAccountId() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get organizationName => $_getSZ(1);
@@ -94,15 +94,15 @@ class CreateOrganizationRequest extends $pb.GeneratedMessage {
   void clearOrganizationDescription() => clearField(3);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get requestedAt => $_getN(3);
+  $55.Timestamp get requestedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set requestedAt($54.Timestamp v) { setField(4, v); }
+  set requestedAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasRequestedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearRequestedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureRequestedAt() => $_ensure(3);
+  $55.Timestamp ensureRequestedAt() => $_ensure(3);
 }
 
 class CreateOrganizationResponse extends $pb.GeneratedMessage {

@@ -1,11 +1,11 @@
 {
-    "name": "fifty_gramx",
-    "short_name": "fifty_gramx",
+    "name": "50gramx",
+    "short_name": "50GMx",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Your. Unified. Simple. Secure. Internet.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

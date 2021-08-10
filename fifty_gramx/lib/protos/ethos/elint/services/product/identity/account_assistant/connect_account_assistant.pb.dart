@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/account_assistant.pb.dart' as $6;
-import 'access_account_assistant.pb.dart' as $13;
+import 'access_account_assistant.pb.dart' as $8;
 import '../../../../entities/generic.pb.dart' as $2;
 
 class IsAccountConnectedRequest extends $pb.GeneratedMessage {
@@ -78,14 +78,14 @@ class IsAccountConnectedRequest extends $pb.GeneratedMessage {
 
 class ConnectAccountRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ConnectAccountRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
-    ..aOM<$13.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $13.AccountAssistantServicesAccessAuthDetails.create)
+    ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectingAccountId')
     ..hasRequiredFields = false
   ;
 
   ConnectAccountRequest._() : super();
   factory ConnectAccountRequest({
-    $13.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
+    $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $core.String? connectingAccountId,
   }) {
     final _result = create();
@@ -119,15 +119,15 @@ class ConnectAccountRequest extends $pb.GeneratedMessage {
   static ConnectAccountRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $8.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($13.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($8.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $8.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get connectingAccountId => $_getSZ(1);

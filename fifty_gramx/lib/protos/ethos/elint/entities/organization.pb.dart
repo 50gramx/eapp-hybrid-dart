@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 export '../../../google/protobuf/timestamp.pb.dart';
 class Organization extends $pb.GeneratedMessage {
@@ -20,7 +20,7 @@ class Organization extends $pb.GeneratedMessage {
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'adminAccountId')
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'active')
     ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'billingActive')
-    ..aOM<$54.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -32,7 +32,7 @@ class Organization extends $pb.GeneratedMessage {
     $core.String? adminAccountId,
     $core.bool? active,
     $core.bool? billingActive,
-    $54.Timestamp? createdAt,
+    $55.Timestamp? createdAt,
   }) {
     final _result = create();
     if (organizationId != null) {
@@ -134,28 +134,28 @@ class Organization extends $pb.GeneratedMessage {
   void clearBillingActive() => clearField(6);
 
   @$pb.TagNumber(7)
-  $54.Timestamp get createdAt => $_getN(6);
+  $55.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(7)
-  set createdAt($54.Timestamp v) { setField(7, v); }
+  set createdAt($55.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $54.Timestamp ensureCreatedAt() => $_ensure(6);
+  $55.Timestamp ensureCreatedAt() => $_ensure(6);
 }
 
 class ReserveOrganizationRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReserveOrganizationRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'organizationSpace')
-    ..aOM<$54.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   ReserveOrganizationRequest._() : super();
   factory ReserveOrganizationRequest({
     $core.String? organizationSpace,
-    $54.Timestamp? createdAt,
+    $55.Timestamp? createdAt,
   }) {
     final _result = create();
     if (organizationSpace != null) {
@@ -197,15 +197,15 @@ class ReserveOrganizationRequest extends $pb.GeneratedMessage {
   void clearOrganizationSpace() => clearField(1);
 
   @$pb.TagNumber(2)
-  $54.Timestamp get createdAt => $_getN(1);
+  $55.Timestamp get createdAt => $_getN(1);
   @$pb.TagNumber(2)
-  set createdAt($54.Timestamp v) { setField(2, v); }
+  set createdAt($55.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasCreatedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearCreatedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $54.Timestamp ensureCreatedAt() => $_ensure(1);
+  $55.Timestamp ensureCreatedAt() => $_ensure(1);
 }
 
 class ReserveOrganizationResponse extends $pb.GeneratedMessage {

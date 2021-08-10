@@ -41,6 +41,23 @@ class AccountDeviceOS extends $pb.ProtobufEnum {
   const AccountDeviceOS._($core.int v, $core.String n) : super(v, n);
 }
 
+class MessageEntity extends $pb.ProtobufEnum {
+  static const MessageEntity ALL_ENTITY_MESSAGE = MessageEntity._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ALL_ENTITY_MESSAGE');
+  static const MessageEntity ENTITY_ACCOUNT = MessageEntity._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ENTITY_ACCOUNT');
+  static const MessageEntity ENTITY_ACCOUNT_ASSISTANT = MessageEntity._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ENTITY_ACCOUNT_ASSISTANT');
+
+  static const $core.List<MessageEntity> values = <MessageEntity> [
+    ALL_ENTITY_MESSAGE,
+    ENTITY_ACCOUNT,
+    ENTITY_ACCOUNT_ASSISTANT,
+  ];
+
+  static final $core.Map<$core.int, MessageEntity> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static MessageEntity? valueOf($core.int value) => _byValue[value];
+
+  const MessageEntity._($core.int v, $core.String n) : super(v, n);
+}
+
 class AccountPayInMethod extends $pb.ProtobufEnum {
   static const AccountPayInMethod CARD = AccountPayInMethod._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'CARD');
 

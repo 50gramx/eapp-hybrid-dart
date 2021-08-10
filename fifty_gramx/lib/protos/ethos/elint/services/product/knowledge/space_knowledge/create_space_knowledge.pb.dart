@@ -9,24 +9,24 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../identity/space/access_space.pb.dart' as $14;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
-import 'access_space_knowledge.pb.dart' as $23;
+import '../../identity/space/access_space.pb.dart' as $9;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'access_space_knowledge.pb.dart' as $10;
 
 export '../../../../../../google/protobuf/timestamp.pb.dart';
 class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountSpaceKnowledgeRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..aOM<$14.SpaceServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceServiceAccessAuthDetails', subBuilder: $14.SpaceServicesAccessAuthDetails.create)
+    ..aOM<$9.SpaceServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceServiceAccessAuthDetails', subBuilder: $9.SpaceServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeName')
-    ..aOM<$54.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   CreateAccountSpaceKnowledgeRequest._() : super();
   factory CreateAccountSpaceKnowledgeRequest({
-    $14.SpaceServicesAccessAuthDetails? spaceServiceAccessAuthDetails,
+    $9.SpaceServicesAccessAuthDetails? spaceServiceAccessAuthDetails,
     $core.String? spaceKnowledgeName,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceServiceAccessAuthDetails != null) {
@@ -62,15 +62,15 @@ class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   static CreateAccountSpaceKnowledgeRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $14.SpaceServicesAccessAuthDetails get spaceServiceAccessAuthDetails => $_getN(0);
+  $9.SpaceServicesAccessAuthDetails get spaceServiceAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceServiceAccessAuthDetails($14.SpaceServicesAccessAuthDetails v) { setField(1, v); }
+  set spaceServiceAccessAuthDetails($9.SpaceServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceServiceAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceServiceAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $14.SpaceServicesAccessAuthDetails ensureSpaceServiceAccessAuthDetails() => $_ensure(0);
+  $9.SpaceServicesAccessAuthDetails ensureSpaceServiceAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeName => $_getSZ(1);
@@ -82,20 +82,20 @@ class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeName() => clearField(2);
 
   @$pb.TagNumber(6)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(6)
-  set requestedAt($54.Timestamp v) { setField(6, v); }
+  set requestedAt($55.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(6)
   void clearRequestedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 
 class CreateAccountSpaceKnowledgeResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountSpaceKnowledgeResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..aOM<$23.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessAuthDetails', subBuilder: $23.SpaceKnowledgeServicesAccessAuthDetails.create)
+    ..aOM<$10.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessAuthDetails', subBuilder: $10.SpaceKnowledgeServicesAccessAuthDetails.create)
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createAccountSpaceKnowledgeDone')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createAccountSpaceKnowledgeMessage')
     ..hasRequiredFields = false
@@ -103,7 +103,7 @@ class CreateAccountSpaceKnowledgeResponse extends $pb.GeneratedMessage {
 
   CreateAccountSpaceKnowledgeResponse._() : super();
   factory CreateAccountSpaceKnowledgeResponse({
-    $23.SpaceKnowledgeServicesAccessAuthDetails? spaceKnowledgeServicesAccessAuthDetails,
+    $10.SpaceKnowledgeServicesAccessAuthDetails? spaceKnowledgeServicesAccessAuthDetails,
     $core.bool? createAccountSpaceKnowledgeDone,
     $core.String? createAccountSpaceKnowledgeMessage,
   }) {
@@ -141,15 +141,15 @@ class CreateAccountSpaceKnowledgeResponse extends $pb.GeneratedMessage {
   static CreateAccountSpaceKnowledgeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails get spaceKnowledgeServicesAccessAuthDetails => $_getN(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails get spaceKnowledgeServicesAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeServicesAccessAuthDetails($23.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
+  set spaceKnowledgeServicesAccessAuthDetails($10.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeServicesAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeServicesAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails ensureSpaceKnowledgeServicesAccessAuthDetails() => $_ensure(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails ensureSpaceKnowledgeServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.bool get createAccountSpaceKnowledgeDone => $_getBF(1);

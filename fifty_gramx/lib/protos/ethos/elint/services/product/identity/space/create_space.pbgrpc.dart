@@ -10,24 +10,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'create_space.pb.dart' as $15;
+import 'create_space.pb.dart' as $16;
 export 'create_space.pb.dart';
 
 class CreateSpaceServiceClient extends $grpc.Client {
   static final _$createAccountSpace = $grpc.ClientMethod<
-          $15.CreateAccountSpaceRequest, $15.CreateAccountSpaceResponse>(
+          $16.CreateAccountSpaceRequest, $16.CreateAccountSpaceResponse>(
       '/elint.services.product.identity.space.CreateSpaceService/CreateAccountSpace',
-      ($15.CreateAccountSpaceRequest value) => value.writeToBuffer(),
+      ($16.CreateAccountSpaceRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $15.CreateAccountSpaceResponse.fromBuffer(value));
+          $16.CreateAccountSpaceResponse.fromBuffer(value));
 
   CreateSpaceServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$15.CreateAccountSpaceResponse> createAccountSpace(
-      $15.CreateAccountSpaceRequest request,
+  $grpc.ResponseFuture<$16.CreateAccountSpaceResponse> createAccountSpace(
+      $16.CreateAccountSpaceRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createAccountSpace, request, options: options);
   }
@@ -38,23 +38,23 @@ abstract class CreateSpaceServiceBase extends $grpc.Service {
       'elint.services.product.identity.space.CreateSpaceService';
 
   CreateSpaceServiceBase() {
-    $addMethod($grpc.ServiceMethod<$15.CreateAccountSpaceRequest,
-            $15.CreateAccountSpaceResponse>(
+    $addMethod($grpc.ServiceMethod<$16.CreateAccountSpaceRequest,
+            $16.CreateAccountSpaceResponse>(
         'CreateAccountSpace',
         createAccountSpace_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $15.CreateAccountSpaceRequest.fromBuffer(value),
-        ($15.CreateAccountSpaceResponse value) => value.writeToBuffer()));
+            $16.CreateAccountSpaceRequest.fromBuffer(value),
+        ($16.CreateAccountSpaceResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$15.CreateAccountSpaceResponse> createAccountSpace_Pre(
+  $async.Future<$16.CreateAccountSpaceResponse> createAccountSpace_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$15.CreateAccountSpaceRequest> request) async {
+      $async.Future<$16.CreateAccountSpaceRequest> request) async {
     return createAccountSpace(call, await request);
   }
 
-  $async.Future<$15.CreateAccountSpaceResponse> createAccountSpace(
-      $grpc.ServiceCall call, $15.CreateAccountSpaceRequest request);
+  $async.Future<$16.CreateAccountSpaceResponse> createAccountSpace(
+      $grpc.ServiceCall call, $16.CreateAccountSpaceRequest request);
 }

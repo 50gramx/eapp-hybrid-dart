@@ -9,27 +9,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../identity/account_assistant/access_account_assistant.pb.dart' as $13;
+import '../../../identity/account_assistant/access_account_assistant.pb.dart' as $8;
 import '../../../../../entities/account_assistant.pb.dart' as $6;
-import '../../../../../../../google/protobuf/any.pb.dart' as $53;
-import '../../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../../google/protobuf/any.pb.dart' as $54;
+import '../../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 export '../../../../../../../google/protobuf/timestamp.pb.dart';
 class MessageForAccount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccount', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account.assistant'), createEmptyInstance: create)
-    ..aOM<$13.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $13.AccountAssistantServicesAccessAuthDetails.create)
+    ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOM<$6.AccountAssistantConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $6.AccountAssistantConnectedAccount.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..pc<$53.Any>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $53.Any.create)
+    ..pc<$54.Any>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $54.Any.create)
     ..hasRequiredFields = false
   ;
 
   MessageForAccount._() : super();
   factory MessageForAccount({
-    $13.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
+    $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $6.AccountAssistantConnectedAccount? connectedAccount,
     $core.String? message,
-    $core.Iterable<$53.Any>? messageSource,
+    $core.Iterable<$54.Any>? messageSource,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -68,15 +68,15 @@ class MessageForAccount extends $pb.GeneratedMessage {
   static MessageForAccount? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $8.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($13.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($8.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $8.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $6.AccountAssistantConnectedAccount get connectedAccount => $_getN(1);
@@ -99,15 +99,15 @@ class MessageForAccount extends $pb.GeneratedMessage {
   void clearMessage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$53.Any> get messageSource => $_getList(3);
+  $core.List<$54.Any> get messageSource => $_getList(3);
 }
 
 class MessageForAccountSent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccountSent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account.assistant'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountSentMessageId')
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSent')
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -115,8 +115,8 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   factory MessageForAccountSent({
     $core.String? accountSentMessageId,
     $core.bool? isSent,
-    $54.Timestamp? sentAt,
-    $54.Timestamp? receivedAt,
+    $55.Timestamp? sentAt,
+    $55.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountSentMessageId != null) {
@@ -173,25 +173,25 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   void clearIsSent() => clearField(2);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get sentAt => $_getN(2);
+  $55.Timestamp get sentAt => $_getN(2);
   @$pb.TagNumber(3)
-  set sentAt($54.Timestamp v) { setField(3, v); }
+  set sentAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSentAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearSentAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureSentAt() => $_ensure(2);
+  $55.Timestamp ensureSentAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get receivedAt => $_getN(3);
+  $55.Timestamp get receivedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set receivedAt($54.Timestamp v) { setField(4, v); }
+  set receivedAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasReceivedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearReceivedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureReceivedAt() => $_ensure(3);
+  $55.Timestamp ensureReceivedAt() => $_ensure(3);
 }
 

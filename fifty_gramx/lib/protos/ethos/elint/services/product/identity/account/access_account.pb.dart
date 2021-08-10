@@ -9,21 +9,23 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../entities/account.pb.dart' as $21;
+import '../../../../entities/account.pb.dart' as $22;
 
 class ValidateAccountRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ValidateAccountRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountMobileNumber')
-    ..aOM<$54.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountMobileCountryCode')
     ..hasRequiredFields = false
   ;
 
   ValidateAccountRequest._() : super();
   factory ValidateAccountRequest({
     $core.String? accountMobileNumber,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
+    $core.String? accountMobileCountryCode,
   }) {
     final _result = create();
     if (accountMobileNumber != null) {
@@ -31,6 +33,9 @@ class ValidateAccountRequest extends $pb.GeneratedMessage {
     }
     if (requestedAt != null) {
       _result.requestedAt = requestedAt;
+    }
+    if (accountMobileCountryCode != null) {
+      _result.accountMobileCountryCode = accountMobileCountryCode;
     }
     return _result;
   }
@@ -65,15 +70,24 @@ class ValidateAccountRequest extends $pb.GeneratedMessage {
   void clearAccountMobileNumber() => clearField(1);
 
   @$pb.TagNumber(2)
-  $54.Timestamp get requestedAt => $_getN(1);
+  $55.Timestamp get requestedAt => $_getN(1);
   @$pb.TagNumber(2)
-  set requestedAt($54.Timestamp v) { setField(2, v); }
+  set requestedAt($55.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasRequestedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearRequestedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $54.Timestamp ensureRequestedAt() => $_ensure(1);
+  $55.Timestamp ensureRequestedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.String get accountMobileCountryCode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set accountMobileCountryCode($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAccountMobileCountryCode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAccountMobileCountryCode() => clearField(3);
 }
 
 class ValidateAccountResponse extends $pb.GeneratedMessage {
@@ -81,7 +95,7 @@ class ValidateAccountResponse extends $pb.GeneratedMessage {
     ..aOM<AccountAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAccessAuthDetails', subBuilder: AccountAccessAuthDetails.create)
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountExists')
     ..aOM<$2.TemporaryTokenDetails>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'verificationCodeTokenDetails', subBuilder: $2.TemporaryTokenDetails.create)
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'codeSentAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'codeSentAt', subBuilder: $55.Timestamp.create)
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'validateAccountDone')
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'validateAccountMessage')
     ..hasRequiredFields = false
@@ -92,7 +106,7 @@ class ValidateAccountResponse extends $pb.GeneratedMessage {
     AccountAccessAuthDetails? accountAccessAuthDetails,
     $core.bool? accountExists,
     $2.TemporaryTokenDetails? verificationCodeTokenDetails,
-    $54.Timestamp? codeSentAt,
+    $55.Timestamp? codeSentAt,
     $core.bool? validateAccountDone,
     $core.String? validateAccountMessage,
   }) {
@@ -170,15 +184,15 @@ class ValidateAccountResponse extends $pb.GeneratedMessage {
   $2.TemporaryTokenDetails ensureVerificationCodeTokenDetails() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get codeSentAt => $_getN(3);
+  $55.Timestamp get codeSentAt => $_getN(3);
   @$pb.TagNumber(4)
-  set codeSentAt($54.Timestamp v) { setField(4, v); }
+  set codeSentAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCodeSentAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearCodeSentAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureCodeSentAt() => $_ensure(3);
+  $55.Timestamp ensureCodeSentAt() => $_ensure(3);
 
   @$pb.TagNumber(5)
   $core.bool get validateAccountDone => $_getBF(4);
@@ -205,8 +219,8 @@ class VerifyAccountRequest extends $pb.GeneratedMessage {
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'resendCode')
     ..aOM<$2.TemporaryTokenDetails>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'verificationCodeTokenDetails', subBuilder: $2.TemporaryTokenDetails.create)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'verificationCode')
-    ..aOM<$21.AccountDeviceDetails>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountDeviceDetails', subBuilder: $21.AccountDeviceDetails.create)
-    ..aOM<$54.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$22.AccountDeviceDetails>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountDeviceDetails', subBuilder: $22.AccountDeviceDetails.create)
+    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -216,8 +230,8 @@ class VerifyAccountRequest extends $pb.GeneratedMessage {
     $core.bool? resendCode,
     $2.TemporaryTokenDetails? verificationCodeTokenDetails,
     $core.String? verificationCode,
-    $21.AccountDeviceDetails? accountDeviceDetails,
-    $54.Timestamp? requestedAt,
+    $22.AccountDeviceDetails? accountDeviceDetails,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (accountAccessAuthDetails != null) {
@@ -302,26 +316,26 @@ class VerifyAccountRequest extends $pb.GeneratedMessage {
   void clearVerificationCode() => clearField(4);
 
   @$pb.TagNumber(5)
-  $21.AccountDeviceDetails get accountDeviceDetails => $_getN(4);
+  $22.AccountDeviceDetails get accountDeviceDetails => $_getN(4);
   @$pb.TagNumber(5)
-  set accountDeviceDetails($21.AccountDeviceDetails v) { setField(5, v); }
+  set accountDeviceDetails($22.AccountDeviceDetails v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAccountDeviceDetails() => $_has(4);
   @$pb.TagNumber(5)
   void clearAccountDeviceDetails() => clearField(5);
   @$pb.TagNumber(5)
-  $21.AccountDeviceDetails ensureAccountDeviceDetails() => $_ensure(4);
+  $22.AccountDeviceDetails ensureAccountDeviceDetails() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $54.Timestamp get requestedAt => $_getN(5);
+  $55.Timestamp get requestedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set requestedAt($54.Timestamp v) { setField(6, v); }
+  set requestedAt($55.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasRequestedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearRequestedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $54.Timestamp ensureRequestedAt() => $_ensure(5);
+  $55.Timestamp ensureRequestedAt() => $_ensure(5);
 }
 
 class VerifyAccountResponse extends $pb.GeneratedMessage {
@@ -641,17 +655,17 @@ class AccountAccessAuthDetails extends $pb.GeneratedMessage {
 
 class AccountServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
-    ..aOM<$21.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $21.Account.create)
+    ..aOM<$22.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $22.Account.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   AccountServicesAccessAuthDetails._() : super();
   factory AccountServicesAccessAuthDetails({
-    $21.Account? account,
+    $22.Account? account,
     $2.PersistentSessionTokenDetails? accountServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (account != null) {
@@ -687,15 +701,15 @@ class AccountServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static AccountServicesAccessAuthDetails? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Account get account => $_getN(0);
+  $22.Account get account => $_getN(0);
   @$pb.TagNumber(1)
-  set account($21.Account v) { setField(1, v); }
+  set account($22.Account v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccount() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccount() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Account ensureAccount() => $_ensure(0);
+  $22.Account ensureAccount() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.PersistentSessionTokenDetails get accountServicesAccessSessionTokenDetails => $_getN(1);
@@ -709,14 +723,14 @@ class AccountServicesAccessAuthDetails extends $pb.GeneratedMessage {
   $2.PersistentSessionTokenDetails ensureAccountServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

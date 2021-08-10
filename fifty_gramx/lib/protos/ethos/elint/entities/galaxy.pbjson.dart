@@ -8,6 +8,19 @@
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
 import 'dart:typed_data' as $typed_data;
+@$core.Deprecated('Use openGalaxyTierEnumDescriptor instead')
+const OpenGalaxyTierEnum$json = const {
+  '1': 'OpenGalaxyTierEnum',
+  '2': const [
+    const {'1': 'FREE_TIER', '2': 0},
+    const {'1': 'BASIC_TIER', '2': 1},
+    const {'1': 'STANDARD_TIER', '2': 2},
+    const {'1': 'PROFESSIONAL_TIER', '2': 3},
+  ],
+};
+
+/// Descriptor for `OpenGalaxyTierEnum`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List openGalaxyTierEnumDescriptor = $convert.base64Decode('ChJPcGVuR2FsYXh5VGllckVudW0SDQoJRlJFRV9USUVSEAASDgoKQkFTSUNfVElFUhABEhEKDVNUQU5EQVJEX1RJRVIQAhIVChFQUk9GRVNTSU9OQUxfVElFUhAD');
 @$core.Deprecated('Use galaxyDescriptor instead')
 const Galaxy$json = const {
   '1': 'Galaxy',

@@ -10,40 +10,40 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'create_account_assistant.pb.dart' as $19;
+import 'create_account_assistant.pb.dart' as $20;
 export 'create_account_assistant.pb.dart';
 
 class CreateAccountAssistantServiceClient extends $grpc.Client {
   static final _$createAccountAssistant = $grpc.ClientMethod<
-          $19.CreateAccountAssistantRequest,
-          $19.CreateAccountAssistantResponse>(
+          $20.CreateAccountAssistantRequest,
+          $20.CreateAccountAssistantResponse>(
       '/elint.services.product.identity.account.assistant.CreateAccountAssistantService/CreateAccountAssistant',
-      ($19.CreateAccountAssistantRequest value) => value.writeToBuffer(),
+      ($20.CreateAccountAssistantRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $19.CreateAccountAssistantResponse.fromBuffer(value));
+          $20.CreateAccountAssistantResponse.fromBuffer(value));
   static final _$getAccountAssistantNameCode = $grpc.ClientMethod<
-          $19.GetAccountAssistantNameCodeRequest,
-          $19.GetAccountAssistantNameCodeResponse>(
+          $20.GetAccountAssistantNameCodeRequest,
+          $20.GetAccountAssistantNameCodeResponse>(
       '/elint.services.product.identity.account.assistant.CreateAccountAssistantService/GetAccountAssistantNameCode',
-      ($19.GetAccountAssistantNameCodeRequest value) => value.writeToBuffer(),
+      ($20.GetAccountAssistantNameCodeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $19.GetAccountAssistantNameCodeResponse.fromBuffer(value));
+          $20.GetAccountAssistantNameCodeResponse.fromBuffer(value));
 
   CreateAccountAssistantServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$19.CreateAccountAssistantResponse>
-      createAccountAssistant($19.CreateAccountAssistantRequest request,
+  $grpc.ResponseFuture<$20.CreateAccountAssistantResponse>
+      createAccountAssistant($20.CreateAccountAssistantRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createAccountAssistant, request,
         options: options);
   }
 
-  $grpc.ResponseFuture<$19.GetAccountAssistantNameCodeResponse>
+  $grpc.ResponseFuture<$20.GetAccountAssistantNameCodeResponse>
       getAccountAssistantNameCode(
-          $19.GetAccountAssistantNameCodeRequest request,
+          $20.GetAccountAssistantNameCodeRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountAssistantNameCode, request,
         options: options);
@@ -55,42 +55,42 @@ abstract class CreateAccountAssistantServiceBase extends $grpc.Service {
       'elint.services.product.identity.account.assistant.CreateAccountAssistantService';
 
   CreateAccountAssistantServiceBase() {
-    $addMethod($grpc.ServiceMethod<$19.CreateAccountAssistantRequest,
-            $19.CreateAccountAssistantResponse>(
+    $addMethod($grpc.ServiceMethod<$20.CreateAccountAssistantRequest,
+            $20.CreateAccountAssistantResponse>(
         'CreateAccountAssistant',
         createAccountAssistant_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $19.CreateAccountAssistantRequest.fromBuffer(value),
-        ($19.CreateAccountAssistantResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$19.GetAccountAssistantNameCodeRequest,
-            $19.GetAccountAssistantNameCodeResponse>(
+            $20.CreateAccountAssistantRequest.fromBuffer(value),
+        ($20.CreateAccountAssistantResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$20.GetAccountAssistantNameCodeRequest,
+            $20.GetAccountAssistantNameCodeResponse>(
         'GetAccountAssistantNameCode',
         getAccountAssistantNameCode_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $19.GetAccountAssistantNameCodeRequest.fromBuffer(value),
-        ($19.GetAccountAssistantNameCodeResponse value) =>
+            $20.GetAccountAssistantNameCodeRequest.fromBuffer(value),
+        ($20.GetAccountAssistantNameCodeResponse value) =>
             value.writeToBuffer()));
   }
 
-  $async.Future<$19.CreateAccountAssistantResponse> createAccountAssistant_Pre(
+  $async.Future<$20.CreateAccountAssistantResponse> createAccountAssistant_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$19.CreateAccountAssistantRequest> request) async {
+      $async.Future<$20.CreateAccountAssistantRequest> request) async {
     return createAccountAssistant(call, await request);
   }
 
-  $async.Future<$19.GetAccountAssistantNameCodeResponse>
+  $async.Future<$20.GetAccountAssistantNameCodeResponse>
       getAccountAssistantNameCode_Pre($grpc.ServiceCall call,
-          $async.Future<$19.GetAccountAssistantNameCodeRequest> request) async {
+          $async.Future<$20.GetAccountAssistantNameCodeRequest> request) async {
     return getAccountAssistantNameCode(call, await request);
   }
 
-  $async.Future<$19.CreateAccountAssistantResponse> createAccountAssistant(
-      $grpc.ServiceCall call, $19.CreateAccountAssistantRequest request);
-  $async.Future<$19.GetAccountAssistantNameCodeResponse>
+  $async.Future<$20.CreateAccountAssistantResponse> createAccountAssistant(
+      $grpc.ServiceCall call, $20.CreateAccountAssistantRequest request);
+  $async.Future<$20.GetAccountAssistantNameCodeResponse>
       getAccountAssistantNameCode($grpc.ServiceCall call,
-          $19.GetAccountAssistantNameCodeRequest request);
+          $20.GetAccountAssistantNameCodeRequest request);
 }

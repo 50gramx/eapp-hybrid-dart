@@ -13,21 +13,24 @@ const MachineClassEnum$json = const {
   '1': 'MachineClassEnum',
   '2': const [
     const {'1': 'GENERAL', '2': 0},
+    const {'1': 'ACCELERATED', '2': 1},
   ],
 };
 
 /// Descriptor for `MachineClassEnum`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List machineClassEnumDescriptor = $convert.base64Decode('ChBNYWNoaW5lQ2xhc3NFbnVtEgsKB0dFTkVSQUwQAA==');
+final $typed_data.Uint8List machineClassEnumDescriptor = $convert.base64Decode('ChBNYWNoaW5lQ2xhc3NFbnVtEgsKB0dFTkVSQUwQABIPCgtBQ0NFTEVSQVRFRBAB');
 @$core.Deprecated('Use machineNameEnumDescriptor instead')
 const MachineNameEnum$json = const {
   '1': 'MachineNameEnum',
   '2': const [
     const {'1': 'X2', '2': 0},
+    const {'1': 'M2N', '2': 1},
+    const {'1': 'M2', '2': 2},
   ],
 };
 
 /// Descriptor for `MachineNameEnum`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List machineNameEnumDescriptor = $convert.base64Decode('Cg9NYWNoaW5lTmFtZUVudW0SBgoCWDIQAA==');
+final $typed_data.Uint8List machineNameEnumDescriptor = $convert.base64Decode('Cg9NYWNoaW5lTmFtZUVudW0SBgoCWDIQABIHCgNNMk4QARIGCgJNMhAC');
 @$core.Deprecated('Use machineTypeEnumDescriptor instead')
 const MachineTypeEnum$json = const {
   '1': 'MachineTypeEnum',

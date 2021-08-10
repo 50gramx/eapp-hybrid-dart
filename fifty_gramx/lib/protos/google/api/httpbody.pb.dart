@@ -9,13 +9,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../protobuf/any.pb.dart' as $53;
+import '../protobuf/any.pb.dart' as $54;
 
 class HttpBody extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'HttpBody', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'google.api'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'contentType')
     ..a<$core.List<$core.int>>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'data', $pb.PbFieldType.OY)
-    ..pc<$53.Any>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extensions', $pb.PbFieldType.PM, subBuilder: $53.Any.create)
+    ..pc<$54.Any>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'extensions', $pb.PbFieldType.PM, subBuilder: $54.Any.create)
     ..hasRequiredFields = false
   ;
 
@@ -23,7 +23,7 @@ class HttpBody extends $pb.GeneratedMessage {
   factory HttpBody({
     $core.String? contentType,
     $core.List<$core.int>? data,
-    $core.Iterable<$53.Any>? extensions,
+    $core.Iterable<$54.Any>? extensions,
   }) {
     final _result = create();
     if (contentType != null) {
@@ -77,6 +77,6 @@ class HttpBody extends $pb.GeneratedMessage {
   void clearData() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.List<$53.Any> get extensions => $_getList(2);
+  $core.List<$54.Any> get extensions => $_getList(2);
 }
 

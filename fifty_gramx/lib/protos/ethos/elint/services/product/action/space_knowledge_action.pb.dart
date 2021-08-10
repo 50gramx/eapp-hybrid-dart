@@ -9,21 +9,25 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../identity/account_assistant/access_account_assistant.pb.dart' as $13;
-import '../../../entities/generic.pb.dart' as $2;
+import '../identity/account_assistant/access_account_assistant.pb.dart' as $8;
 import '../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../entities/generic.pb.dart' as $2;
 
 class AskQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AskQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.action.space.knowledge'), createEmptyInstance: create)
-    ..aOM<$13.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $13.AccountAssistantServicesAccessAuthDetails.create)
+    ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'askParticularDomain')
+    ..aOM<$31.SpaceKnowledgeDomain>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
     ..hasRequiredFields = false
   ;
 
   AskQuestionRequest._() : super();
   factory AskQuestionRequest({
-    $13.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
+    $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
+    $core.bool? askParticularDomain,
+    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -31,6 +35,12 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
     }
     if (message != null) {
       _result.message = message;
+    }
+    if (askParticularDomain != null) {
+      _result.askParticularDomain = askParticularDomain;
+    }
+    if (spaceKnowledgeDomain != null) {
+      _result.spaceKnowledgeDomain = spaceKnowledgeDomain;
     }
     return _result;
   }
@@ -56,15 +66,15 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
   static AskQuestionRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $8.AccountAssistantServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($13.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($8.AccountAssistantServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $13.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $8.AccountAssistantServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -74,6 +84,26 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
   $core.bool hasMessage() => $_has(1);
   @$pb.TagNumber(2)
   void clearMessage() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get askParticularDomain => $_getBF(2);
+  @$pb.TagNumber(3)
+  set askParticularDomain($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasAskParticularDomain() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearAskParticularDomain() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(3);
+  @$pb.TagNumber(4)
+  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasSpaceKnowledgeDomain() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearSpaceKnowledgeDomain() => clearField(4);
+  @$pb.TagNumber(4)
+  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(3);
 }
 
 class AskQuestionResponse extends $pb.GeneratedMessage {

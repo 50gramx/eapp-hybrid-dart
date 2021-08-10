@@ -12,7 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
 import '../../../../entities/generic.pb.dart' as $2;
 import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $59;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
 
 class RetrieveClosestPagesReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RetrieveClosestPagesReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
@@ -347,14 +347,14 @@ class RankedPage extends $pb.GeneratedMessage {
 
 class RankedPara extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RankedPara', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
-    ..aOM<$59.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $59.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
     ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'paraRank', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
   RankedPara._() : super();
   factory RankedPara({
-    $59.SpaceKnowledgeDomainFilePagePara? para,
+    $60.SpaceKnowledgeDomainFilePagePara? para,
     $core.double? paraRank,
   }) {
     final _result = create();
@@ -388,15 +388,15 @@ class RankedPara extends $pb.GeneratedMessage {
   static RankedPara? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $59.SpaceKnowledgeDomainFilePagePara get para => $_getN(0);
+  $60.SpaceKnowledgeDomainFilePagePara get para => $_getN(0);
   @$pb.TagNumber(1)
-  set para($59.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
+  set para($60.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPara() => $_has(0);
   @$pb.TagNumber(1)
   void clearPara() => clearField(1);
   @$pb.TagNumber(1)
-  $59.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(0);
+  $60.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.double get paraRank => $_getN(1);

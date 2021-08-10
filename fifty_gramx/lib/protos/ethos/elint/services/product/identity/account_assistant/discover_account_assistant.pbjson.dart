@@ -52,3 +52,25 @@ const GetAccountAssistantMetaByAccountAssistantIdResponse$json = const {
 
 /// Descriptor for `GetAccountAssistantMetaByAccountAssistantIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountAssistantMetaByAccountAssistantIdResponseDescriptor = $convert.base64Decode('CjNHZXRBY2NvdW50QXNzaXN0YW50TWV0YUJ5QWNjb3VudEFzc2lzdGFudElkUmVzcG9uc2USWAoWYWNjb3VudF9hc3Npc3RhbnRfbWV0YRgBIAEoCzIiLmVsaW50LmVudGl0eS5BY2NvdW50QXNzaXN0YW50TWV0YVIUYWNjb3VudEFzc2lzdGFudE1ldGESPwoNcmVzcG9uc2VfbWV0YRgCIAEoCzIaLmVsaW50LmVudGl0eS5SZXNwb25zZU1ldGFSDHJlc3BvbnNlTWV0YQ==');
+@$core.Deprecated('Use getAccountAssistantByIdRequestDescriptor instead')
+const GetAccountAssistantByIdRequest$json = const {
+  '1': 'GetAccountAssistantByIdRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'account_assistant_id', '3': 2, '4': 1, '5': 9, '10': 'accountAssistantId'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantByIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantByIdRequestDescriptor = $convert.base64Decode('Ch5HZXRBY2NvdW50QXNzaXN0YW50QnlJZFJlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHMSMAoUYWNjb3VudF9hc3Npc3RhbnRfaWQYAiABKAlSEmFjY291bnRBc3Npc3RhbnRJZA==');
+@$core.Deprecated('Use getAccountAssistantByIdResponseDescriptor instead')
+const GetAccountAssistantByIdResponse$json = const {
+  '1': 'GetAccountAssistantByIdResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'account_assistant', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountAssistant', '10': 'accountAssistant'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantByIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantByIdResponseDescriptor = $convert.base64Decode('Ch9HZXRBY2NvdW50QXNzaXN0YW50QnlJZFJlc3BvbnNlEj8KDXJlc3BvbnNlX21ldGEYASABKAsyGi5lbGludC5lbnRpdHkuUmVzcG9uc2VNZXRhUgxyZXNwb25zZU1ldGESSwoRYWNjb3VudF9hc3Npc3RhbnQYAiABKAsyHi5lbGludC5lbnRpdHkuQWNjb3VudEFzc2lzdGFudFIQYWNjb3VudEFzc2lzdGFudA==');

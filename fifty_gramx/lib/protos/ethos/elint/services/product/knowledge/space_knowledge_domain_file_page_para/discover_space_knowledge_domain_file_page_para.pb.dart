@@ -11,7 +11,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/generic.pb.dart' as $2;
 import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $59;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
 
 class ListOfParaIds extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListOfParaIds', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
@@ -261,14 +261,14 @@ class GetParaByIdRequest extends $pb.GeneratedMessage {
 
 class GetParaByIdResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetParaByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
-    ..aOM<$59.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePagePara', subBuilder: $59.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePagePara', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetParaByIdResponse._() : super();
   factory GetParaByIdResponse({
-    $59.SpaceKnowledgeDomainFilePagePara? spaceKnowledgeDomainFilePagePara,
+    $60.SpaceKnowledgeDomainFilePagePara? spaceKnowledgeDomainFilePagePara,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -302,15 +302,15 @@ class GetParaByIdResponse extends $pb.GeneratedMessage {
   static GetParaByIdResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $59.SpaceKnowledgeDomainFilePagePara get spaceKnowledgeDomainFilePagePara => $_getN(0);
+  $60.SpaceKnowledgeDomainFilePagePara get spaceKnowledgeDomainFilePagePara => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainFilePagePara($59.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
+  set spaceKnowledgeDomainFilePagePara($60.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainFilePagePara() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainFilePagePara() => clearField(1);
   @$pb.TagNumber(1)
-  $59.SpaceKnowledgeDomainFilePagePara ensureSpaceKnowledgeDomainFilePagePara() => $_ensure(0);
+  $60.SpaceKnowledgeDomainFilePagePara ensureSpaceKnowledgeDomainFilePagePara() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);

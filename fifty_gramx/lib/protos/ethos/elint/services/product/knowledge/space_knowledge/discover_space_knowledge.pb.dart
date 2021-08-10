@@ -9,21 +9,21 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space_knowledge.pb.dart' as $58;
+import '../../../../entities/space_knowledge.pb.dart' as $59;
 import '../../../../entities/generic.pb.dart' as $2;
 import '../../../../entities/space_knowledge_domain.pb.dart' as $31;
-import 'access_space_knowledge.pb.dart' as $23;
+import 'access_space_knowledge.pb.dart' as $10;
 
 class GetInferredSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetInferredSpaceKnowledgeDomainsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..pc<$58.SpaceKnowledgeInferredDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeInferredDomain', $pb.PbFieldType.PM, subBuilder: $58.SpaceKnowledgeInferredDomain.create)
+    ..pc<$59.SpaceKnowledgeInferredDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeInferredDomain', $pb.PbFieldType.PM, subBuilder: $59.SpaceKnowledgeInferredDomain.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetInferredSpaceKnowledgeDomainsResponse._() : super();
   factory GetInferredSpaceKnowledgeDomainsResponse({
-    $core.Iterable<$58.SpaceKnowledgeInferredDomain>? spaceKnowledgeInferredDomain,
+    $core.Iterable<$59.SpaceKnowledgeInferredDomain>? spaceKnowledgeInferredDomain,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -57,7 +57,7 @@ class GetInferredSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static GetInferredSpaceKnowledgeDomainsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$58.SpaceKnowledgeInferredDomain> get spaceKnowledgeInferredDomain => $_getList(0);
+  $core.List<$59.SpaceKnowledgeInferredDomain> get spaceKnowledgeInferredDomain => $_getList(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -130,14 +130,14 @@ class GetSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
 
 class GetSpaceKnowledgeDomainByIdRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetSpaceKnowledgeDomainByIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..aOM<$23.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuth', subBuilder: $23.SpaceKnowledgeServicesAccessAuthDetails.create)
+    ..aOM<$10.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuth', subBuilder: $10.SpaceKnowledgeServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
     ..hasRequiredFields = false
   ;
 
   GetSpaceKnowledgeDomainByIdRequest._() : super();
   factory GetSpaceKnowledgeDomainByIdRequest({
-    $23.SpaceKnowledgeServicesAccessAuthDetails? accessAuth,
+    $10.SpaceKnowledgeServicesAccessAuthDetails? accessAuth,
     $core.String? spaceKnowledgeDomainId,
   }) {
     final _result = create();
@@ -171,15 +171,15 @@ class GetSpaceKnowledgeDomainByIdRequest extends $pb.GeneratedMessage {
   static GetSpaceKnowledgeDomainByIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails get accessAuth => $_getN(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails get accessAuth => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuth($23.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuth($10.SpaceKnowledgeServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuth() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuth() => clearField(1);
   @$pb.TagNumber(1)
-  $23.SpaceKnowledgeServicesAccessAuthDetails ensureAccessAuth() => $_ensure(0);
+  $10.SpaceKnowledgeServicesAccessAuthDetails ensureAccessAuth() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainId => $_getSZ(1);

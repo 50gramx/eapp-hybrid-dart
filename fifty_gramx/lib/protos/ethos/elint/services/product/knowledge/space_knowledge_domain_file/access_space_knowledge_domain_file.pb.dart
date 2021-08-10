@@ -12,7 +12,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
 import '../../../../entities/space_knowledge_domain_file.pb.dart' as $37;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class SpaceKnowledgeDomainFileAccessTokenRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFileAccessTokenRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
@@ -221,7 +221,7 @@ class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMes
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFileServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
     ..aOM<$37.SpaceKnowledgeDomainFile>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $37.SpaceKnowledgeDomainFile.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -229,7 +229,7 @@ class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMes
   factory SpaceKnowledgeDomainFileServicesAccessAuthDetails({
     $37.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
     $2.PersistentSessionTokenDetails? spaceKnowledgeDomainFileServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFile != null) {
@@ -287,14 +287,14 @@ class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMes
   $2.PersistentSessionTokenDetails ensureSpaceKnowledgeDomainFileServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

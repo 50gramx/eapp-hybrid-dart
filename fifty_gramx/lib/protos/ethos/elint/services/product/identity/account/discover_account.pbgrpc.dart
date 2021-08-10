@@ -23,6 +23,13 @@ class DiscoverAccountServiceClient extends $grpc.Client {
       ($5.GetAccountByIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $5.GetAccountByIdResponse.fromBuffer(value));
+  static final _$getAccountMetaByAccountId = $grpc.ClientMethod<
+          $5.GetAccountMetaByAccountIdRequest,
+          $5.GetAccountMetaByAccountIdResponse>(
+      '/elint.services.product.identity.account.DiscoverAccountService/GetAccountMetaByAccountId',
+      ($5.GetAccountMetaByAccountIdRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $5.GetAccountMetaByAccountIdResponse.fromBuffer(value));
   static final _$getAccountProfilePicture = $grpc.ClientMethod<
           $5.GetAccountProfilePictureRequest,
           $5.GetAccountProfilePictureResponse>(
@@ -47,6 +54,11 @@ class DiscoverAccountServiceClient extends $grpc.Client {
       ($5.AreAccountsExistingWithMobileRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $5.AreAccountsExistingWithMobileResponse.fromBuffer(value));
+  static final _$isAccountBillingActive = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails, $2.ResponseMeta>(
+      '/elint.services.product.identity.account.DiscoverAccountService/IsAccountBillingActive',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
 
   DiscoverAccountServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -57,6 +69,13 @@ class DiscoverAccountServiceClient extends $grpc.Client {
       $5.GetAccountByIdRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountById, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$5.GetAccountMetaByAccountIdResponse>
+      getAccountMetaByAccountId($5.GetAccountMetaByAccountIdRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountMetaByAccountId, request,
+        options: options);
   }
 
   $grpc.ResponseStream<$5.GetAccountProfilePictureResponse>
@@ -88,6 +107,13 @@ class DiscoverAccountServiceClient extends $grpc.Client {
         _$areAccountsExistingWithMobile, $async.Stream.fromIterable([request]),
         options: options);
   }
+
+  $grpc.ResponseFuture<$2.ResponseMeta> isAccountBillingActive(
+      $0.AccountServicesAccessAuthDetails request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$isAccountBillingActive, request,
+        options: options);
+  }
 }
 
 abstract class DiscoverAccountServiceBase extends $grpc.Service {
@@ -104,6 +130,15 @@ abstract class DiscoverAccountServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $5.GetAccountByIdRequest.fromBuffer(value),
         ($5.GetAccountByIdResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$5.GetAccountMetaByAccountIdRequest,
+            $5.GetAccountMetaByAccountIdResponse>(
+        'GetAccountMetaByAccountId',
+        getAccountMetaByAccountId_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $5.GetAccountMetaByAccountIdRequest.fromBuffer(value),
+        ($5.GetAccountMetaByAccountIdResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$5.GetAccountProfilePictureRequest,
             $5.GetAccountProfilePictureResponse>(
         'GetAccountProfilePicture',
@@ -141,12 +176,27 @@ abstract class DiscoverAccountServiceBase extends $grpc.Service {
             $5.AreAccountsExistingWithMobileRequest.fromBuffer(value),
         ($5.AreAccountsExistingWithMobileResponse value) =>
             value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $2.ResponseMeta>(
+        'IsAccountBillingActive',
+        isAccountBillingActive_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($2.ResponseMeta value) => value.writeToBuffer()));
   }
 
   $async.Future<$5.GetAccountByIdResponse> getAccountById_Pre(
       $grpc.ServiceCall call,
       $async.Future<$5.GetAccountByIdRequest> request) async {
     return getAccountById(call, await request);
+  }
+
+  $async.Future<$5.GetAccountMetaByAccountIdResponse>
+      getAccountMetaByAccountId_Pre($grpc.ServiceCall call,
+          $async.Future<$5.GetAccountMetaByAccountIdRequest> request) async {
+    return getAccountMetaByAccountId(call, await request);
   }
 
   $async.Stream<$5.GetAccountProfilePictureResponse>
@@ -175,8 +225,16 @@ abstract class DiscoverAccountServiceBase extends $grpc.Service {
     yield* areAccountsExistingWithMobile(call, await request);
   }
 
+  $async.Future<$2.ResponseMeta> isAccountBillingActive_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return isAccountBillingActive(call, await request);
+  }
+
   $async.Future<$5.GetAccountByIdResponse> getAccountById(
       $grpc.ServiceCall call, $5.GetAccountByIdRequest request);
+  $async.Future<$5.GetAccountMetaByAccountIdResponse> getAccountMetaByAccountId(
+      $grpc.ServiceCall call, $5.GetAccountMetaByAccountIdRequest request);
   $async.Stream<$5.GetAccountProfilePictureResponse> getAccountProfilePicture(
       $grpc.ServiceCall call, $5.GetAccountProfilePictureRequest request);
   $async.Future<$6.AccountAssistant> getAccountAssistant(
@@ -186,4 +244,6 @@ abstract class DiscoverAccountServiceBase extends $grpc.Service {
   $async.Stream<$5.AreAccountsExistingWithMobileResponse>
       areAccountsExistingWithMobile($grpc.ServiceCall call,
           $5.AreAccountsExistingWithMobileRequest request);
+  $async.Future<$2.ResponseMeta> isAccountBillingActive(
+      $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
 }

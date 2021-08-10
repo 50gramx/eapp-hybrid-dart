@@ -51,6 +51,17 @@ class ReceiveAccountMessageServiceClient extends $grpc.Client {
       ($core.List<$core.int> value) =>
           $44.SyncAccountConnectedAccountReceivedMessagesResponse.fromBuffer(
               value));
+  static final _$syncAccountConnectedAccountAssistantReceivedMessages =
+      $grpc.ClientMethod<
+              $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest,
+              $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse>(
+          '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/SyncAccountConnectedAccountAssistantReceivedMessages',
+          ($44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest
+                  value) =>
+              value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse
+                  .fromBuffer(value));
   static final _$listenForReceivedAccountAssistantMessages = $grpc.ClientMethod<
           $44.ListenForReceivedAccountAssistantMessagesRequest,
           $44.ListenForReceivedAccountAssistantMessagesResponse>(
@@ -75,6 +86,65 @@ class ReceiveAccountMessageServiceClient extends $grpc.Client {
       ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $44.ListenForReceivedAccountSpeedMessagesResponse.fromBuffer(value));
+  static final _$listenForReceivedAccountAssistantSpeedMessages =
+      $grpc.ClientMethod<$0.AccountServicesAccessAuthDetails,
+              $44.ListenForReceivedAccountAssistantSpeedMessagesResponse>(
+          '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/ListenForReceivedAccountAssistantSpeedMessages',
+          ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $44.ListenForReceivedAccountAssistantSpeedMessagesResponse
+                  .fromBuffer(value));
+  static final _$getLast24ProductNReceivedMessages = $grpc.ClientMethod<
+          $44.GetLast24ProductNReceivedMessagesRequest,
+          $44.GetLast24ProductNReceivedMessagesResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetLast24ProductNReceivedMessages',
+      ($44.GetLast24ProductNReceivedMessagesRequest value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.GetLast24ProductNReceivedMessagesResponse.fromBuffer(value));
+  static final _$getAccountReceivedMessagesCount = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails,
+          $44.AccountReceivedMessagesCountResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetAccountReceivedMessagesCount',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.AccountReceivedMessagesCountResponse.fromBuffer(value));
+  static final _$getAccountAssistantReceivedMessagesCount = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails,
+          $44.AccountAssistantReceivedMessagesCountResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetAccountAssistantReceivedMessagesCount',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.AccountAssistantReceivedMessagesCountResponse.fromBuffer(value));
+  static final _$getAccountLastReceivedMessage = $grpc.ClientMethod<
+          $44.GetAccountLastReceivedMessageRequest,
+          $44.GetAccountLastReceivedMessageResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetAccountLastReceivedMessage',
+      ($44.GetAccountLastReceivedMessageRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.GetAccountLastReceivedMessageResponse.fromBuffer(value));
+  static final _$getAccountAssistantLastReceivedMessage = $grpc.ClientMethod<
+          $44.GetAccountAssistantLastReceivedMessageRequest,
+          $44.GetAccountAssistantLastReceivedMessageResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetAccountAssistantLastReceivedMessage',
+      ($44.GetAccountAssistantLastReceivedMessageRequest value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.GetAccountAssistantLastReceivedMessageResponse.fromBuffer(value));
+  static final _$getReceivedMessagesAccounts = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails,
+          $44.GetReceivedMessagesAccountsResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetReceivedMessagesAccounts',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.GetReceivedMessagesAccountsResponse.fromBuffer(value));
+  static final _$getReceivedMessagesAccountAssistants = $grpc.ClientMethod<
+          $0.AccountServicesAccessAuthDetails,
+          $44.GetReceivedMessagesAccountAssistantsResponse>(
+      '/elint.services.product.conversation.message.account.ReceiveAccountMessageService/GetReceivedMessagesAccountAssistants',
+      ($0.AccountServicesAccessAuthDetails value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $44.GetReceivedMessagesAccountAssistantsResponse.fromBuffer(value));
 
   ReceiveAccountMessageServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -122,6 +192,18 @@ class ReceiveAccountMessageServiceClient extends $grpc.Client {
         options: options);
   }
 
+  $grpc.ResponseStream<
+          $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse>
+      syncAccountConnectedAccountAssistantReceivedMessages(
+          $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest
+              request,
+          {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$syncAccountConnectedAccountAssistantReceivedMessages,
+        $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
   $grpc.ResponseFuture<$44.ListenForReceivedAccountAssistantMessagesResponse>
       listenForReceivedAccountAssistantMessages(
           $44.ListenForReceivedAccountAssistantMessagesRequest request,
@@ -145,6 +227,72 @@ class ReceiveAccountMessageServiceClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createStreamingCall(_$listenForReceivedAccountSpeedMessages,
         $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseStream<
+          $44.ListenForReceivedAccountAssistantSpeedMessagesResponse>
+      listenForReceivedAccountAssistantSpeedMessages(
+          $0.AccountServicesAccessAuthDetails request,
+          {$grpc.CallOptions? options}) {
+    return $createStreamingCall(
+        _$listenForReceivedAccountAssistantSpeedMessages,
+        $async.Stream.fromIterable([request]),
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.GetLast24ProductNReceivedMessagesResponse>
+      getLast24ProductNReceivedMessages(
+          $44.GetLast24ProductNReceivedMessagesRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getLast24ProductNReceivedMessages, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.AccountReceivedMessagesCountResponse>
+      getAccountReceivedMessagesCount(
+          $0.AccountServicesAccessAuthDetails request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountReceivedMessagesCount, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.AccountAssistantReceivedMessagesCountResponse>
+      getAccountAssistantReceivedMessagesCount(
+          $0.AccountServicesAccessAuthDetails request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountAssistantReceivedMessagesCount, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.GetAccountLastReceivedMessageResponse>
+      getAccountLastReceivedMessage(
+          $44.GetAccountLastReceivedMessageRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountLastReceivedMessage, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.GetAccountAssistantLastReceivedMessageResponse>
+      getAccountAssistantLastReceivedMessage(
+          $44.GetAccountAssistantLastReceivedMessageRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountAssistantLastReceivedMessage, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.GetReceivedMessagesAccountsResponse>
+      getReceivedMessagesAccounts($0.AccountServicesAccessAuthDetails request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getReceivedMessagesAccounts, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$44.GetReceivedMessagesAccountAssistantsResponse>
+      getReceivedMessagesAccountAssistants(
+          $0.AccountServicesAccessAuthDetails request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getReceivedMessagesAccountAssistants, request,
         options: options);
   }
 }
@@ -205,6 +353,19 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
         ($44.SyncAccountConnectedAccountReceivedMessagesResponse value) =>
             value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
+            $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest,
+            $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse>(
+        'SyncAccountConnectedAccountAssistantReceivedMessages',
+        syncAccountConnectedAccountAssistantReceivedMessages_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest
+                .fromBuffer(value),
+        ($44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse
+                value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<
             $44.ListenForReceivedAccountAssistantMessagesRequest,
             $44.ListenForReceivedAccountAssistantMessagesResponse>(
         'ListenForReceivedAccountAssistantMessages',
@@ -235,6 +396,87 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.AccountServicesAccessAuthDetails.fromBuffer(value),
         ($44.ListenForReceivedAccountSpeedMessagesResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $44.ListenForReceivedAccountAssistantSpeedMessagesResponse>(
+        'ListenForReceivedAccountAssistantSpeedMessages',
+        listenForReceivedAccountAssistantSpeedMessages_Pre,
+        false,
+        true,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($44.ListenForReceivedAccountAssistantSpeedMessagesResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$44.GetLast24ProductNReceivedMessagesRequest,
+            $44.GetLast24ProductNReceivedMessagesResponse>(
+        'GetLast24ProductNReceivedMessages',
+        getLast24ProductNReceivedMessages_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $44.GetLast24ProductNReceivedMessagesRequest.fromBuffer(value),
+        ($44.GetLast24ProductNReceivedMessagesResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $44.AccountReceivedMessagesCountResponse>(
+        'GetAccountReceivedMessagesCount',
+        getAccountReceivedMessagesCount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($44.AccountReceivedMessagesCountResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $44.AccountAssistantReceivedMessagesCountResponse>(
+        'GetAccountAssistantReceivedMessagesCount',
+        getAccountAssistantReceivedMessagesCount_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($44.AccountAssistantReceivedMessagesCountResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$44.GetAccountLastReceivedMessageRequest,
+            $44.GetAccountLastReceivedMessageResponse>(
+        'GetAccountLastReceivedMessage',
+        getAccountLastReceivedMessage_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $44.GetAccountLastReceivedMessageRequest.fromBuffer(value),
+        ($44.GetAccountLastReceivedMessageResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<
+            $44.GetAccountAssistantLastReceivedMessageRequest,
+            $44.GetAccountAssistantLastReceivedMessageResponse>(
+        'GetAccountAssistantLastReceivedMessage',
+        getAccountAssistantLastReceivedMessage_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $44.GetAccountAssistantLastReceivedMessageRequest.fromBuffer(value),
+        ($44.GetAccountAssistantLastReceivedMessageResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $44.GetReceivedMessagesAccountsResponse>(
+        'GetReceivedMessagesAccounts',
+        getReceivedMessagesAccounts_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($44.GetReceivedMessagesAccountsResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.AccountServicesAccessAuthDetails,
+            $44.GetReceivedMessagesAccountAssistantsResponse>(
+        'GetReceivedMessagesAccountAssistants',
+        getReceivedMessagesAccountAssistants_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.AccountServicesAccessAuthDetails.fromBuffer(value),
+        ($44.GetReceivedMessagesAccountAssistantsResponse value) =>
             value.writeToBuffer()));
   }
 
@@ -270,6 +512,17 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
     yield* syncAccountConnectedAccountReceivedMessages(call, await request);
   }
 
+  $async.Stream<
+          $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse>
+      syncAccountConnectedAccountAssistantReceivedMessages_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<
+                  $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest>
+              request) async* {
+    yield* syncAccountConnectedAccountAssistantReceivedMessages(
+        call, await request);
+  }
+
   $async.Future<$44.ListenForReceivedAccountAssistantMessagesResponse>
       listenForReceivedAccountAssistantMessages_Pre(
           $grpc.ServiceCall call,
@@ -292,6 +545,60 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
     yield* listenForReceivedAccountSpeedMessages(call, await request);
   }
 
+  $async.Stream<$44.ListenForReceivedAccountAssistantSpeedMessagesResponse>
+      listenForReceivedAccountAssistantSpeedMessages_Pre($grpc.ServiceCall call,
+          $async.Future<$0.AccountServicesAccessAuthDetails> request) async* {
+    yield* listenForReceivedAccountAssistantSpeedMessages(call, await request);
+  }
+
+  $async.Future<$44.GetLast24ProductNReceivedMessagesResponse>
+      getLast24ProductNReceivedMessages_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$44.GetLast24ProductNReceivedMessagesRequest>
+              request) async {
+    return getLast24ProductNReceivedMessages(call, await request);
+  }
+
+  $async.Future<$44.AccountReceivedMessagesCountResponse>
+      getAccountReceivedMessagesCount_Pre($grpc.ServiceCall call,
+          $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return getAccountReceivedMessagesCount(call, await request);
+  }
+
+  $async.Future<$44.AccountAssistantReceivedMessagesCountResponse>
+      getAccountAssistantReceivedMessagesCount_Pre($grpc.ServiceCall call,
+          $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return getAccountAssistantReceivedMessagesCount(call, await request);
+  }
+
+  $async.Future<$44.GetAccountLastReceivedMessageResponse>
+      getAccountLastReceivedMessage_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$44.GetAccountLastReceivedMessageRequest>
+              request) async {
+    return getAccountLastReceivedMessage(call, await request);
+  }
+
+  $async.Future<$44.GetAccountAssistantLastReceivedMessageResponse>
+      getAccountAssistantLastReceivedMessage_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$44.GetAccountAssistantLastReceivedMessageRequest>
+              request) async {
+    return getAccountAssistantLastReceivedMessage(call, await request);
+  }
+
+  $async.Future<$44.GetReceivedMessagesAccountsResponse>
+      getReceivedMessagesAccounts_Pre($grpc.ServiceCall call,
+          $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return getReceivedMessagesAccounts(call, await request);
+  }
+
+  $async.Future<$44.GetReceivedMessagesAccountAssistantsResponse>
+      getReceivedMessagesAccountAssistants_Pre($grpc.ServiceCall call,
+          $async.Future<$0.AccountServicesAccessAuthDetails> request) async {
+    return getReceivedMessagesAccountAssistants(call, await request);
+  }
+
   $async.Future<$44.MessageFromAccountAssistantReceived>
       receiveMessageFromAccountAssistant(
           $grpc.ServiceCall call, $44.MessageFromAccountAssistant request);
@@ -306,6 +613,12 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
   $async.Stream<$44.SyncAccountConnectedAccountReceivedMessagesResponse>
       syncAccountConnectedAccountReceivedMessages($grpc.ServiceCall call,
           $44.SyncAccountConnectedAccountReceivedMessagesRequest request);
+  $async.Stream<
+          $44.SyncAccountConnectedAccountAssistantReceivedMessagesResponse>
+      syncAccountConnectedAccountAssistantReceivedMessages(
+          $grpc.ServiceCall call,
+          $44.SyncAccountConnectedAccountAssistantReceivedMessagesRequest
+              request);
   $async.Future<$44.ListenForReceivedAccountAssistantMessagesResponse>
       listenForReceivedAccountAssistantMessages($grpc.ServiceCall call,
           $44.ListenForReceivedAccountAssistantMessagesRequest request);
@@ -314,5 +627,29 @@ abstract class ReceiveAccountMessageServiceBase extends $grpc.Service {
           $44.ListenForReceivedAccountMessagesRequest request);
   $async.Stream<$44.ListenForReceivedAccountSpeedMessagesResponse>
       listenForReceivedAccountSpeedMessages(
+          $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Stream<$44.ListenForReceivedAccountAssistantSpeedMessagesResponse>
+      listenForReceivedAccountAssistantSpeedMessages(
+          $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Future<$44.GetLast24ProductNReceivedMessagesResponse>
+      getLast24ProductNReceivedMessages($grpc.ServiceCall call,
+          $44.GetLast24ProductNReceivedMessagesRequest request);
+  $async.Future<$44.AccountReceivedMessagesCountResponse>
+      getAccountReceivedMessagesCount(
+          $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Future<$44.AccountAssistantReceivedMessagesCountResponse>
+      getAccountAssistantReceivedMessagesCount(
+          $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Future<$44.GetAccountLastReceivedMessageResponse>
+      getAccountLastReceivedMessage($grpc.ServiceCall call,
+          $44.GetAccountLastReceivedMessageRequest request);
+  $async.Future<$44.GetAccountAssistantLastReceivedMessageResponse>
+      getAccountAssistantLastReceivedMessage($grpc.ServiceCall call,
+          $44.GetAccountAssistantLastReceivedMessageRequest request);
+  $async.Future<$44.GetReceivedMessagesAccountsResponse>
+      getReceivedMessagesAccounts(
+          $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
+  $async.Future<$44.GetReceivedMessagesAccountAssistantsResponse>
+      getReceivedMessagesAccountAssistants(
           $grpc.ServiceCall call, $0.AccountServicesAccessAuthDetails request);
 }

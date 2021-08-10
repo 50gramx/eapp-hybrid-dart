@@ -10,18 +10,20 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../identity/account/access_account.pb.dart' as $0;
-import '../../../../../entities/account.pb.dart' as $21;
-import '../../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../entities/account.pb.dart' as $22;
+import '../../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 import '../../../../../entities/generic.pb.dart' as $2;
+import '../../../../../entities/account_assistant.pb.dart' as $6;
 
-import '../../../../../entities/space_knowledge.pbenum.dart' as $58;
+import '../../../../../entities/space_knowledge.pbenum.dart' as $59;
+import '../../../../../entities/account.pbenum.dart' as $22;
 
 export '../../../../../../../google/protobuf/timestamp.pb.dart';
 class MessageForAccountAssistant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccountAssistant', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$21.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $21.AccountConnectedAccountAssistant.create)
-    ..e<$58.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $58.SpaceKnowledgeAction.valueOf, enumValues: $58.SpaceKnowledgeAction.values)
+    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
+    ..e<$59.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $59.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
@@ -29,8 +31,8 @@ class MessageForAccountAssistant extends $pb.GeneratedMessage {
   MessageForAccountAssistant._() : super();
   factory MessageForAccountAssistant({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $21.AccountConnectedAccountAssistant? connectedAccountAssistant,
-    $58.SpaceKnowledgeAction? spaceKnowledgeAction,
+    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $59.SpaceKnowledgeAction? spaceKnowledgeAction,
     $core.String? message,
   }) {
     final _result = create();
@@ -81,20 +83,20 @@ class MessageForAccountAssistant extends $pb.GeneratedMessage {
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
+  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccountAssistant($21.AccountConnectedAccountAssistant v) { setField(2, v); }
+  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccountAssistant() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccountAssistant() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
+  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $58.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
+  $59.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
   @$pb.TagNumber(3)
-  set spaceKnowledgeAction($58.SpaceKnowledgeAction v) { setField(3, v); }
+  set spaceKnowledgeAction($59.SpaceKnowledgeAction v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSpaceKnowledgeAction() => $_has(2);
   @$pb.TagNumber(3)
@@ -114,8 +116,8 @@ class MessageForAccountAssistantSent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccountAssistantSent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantSentMessageId')
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSent')
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -123,8 +125,8 @@ class MessageForAccountAssistantSent extends $pb.GeneratedMessage {
   factory MessageForAccountAssistantSent({
     $core.String? accountAssistantSentMessageId,
     $core.bool? isSent,
-    $54.Timestamp? sentAt,
-    $54.Timestamp? receivedAt,
+    $55.Timestamp? sentAt,
+    $55.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountAssistantSentMessageId != null) {
@@ -181,32 +183,32 @@ class MessageForAccountAssistantSent extends $pb.GeneratedMessage {
   void clearIsSent() => clearField(2);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get sentAt => $_getN(2);
+  $55.Timestamp get sentAt => $_getN(2);
   @$pb.TagNumber(3)
-  set sentAt($54.Timestamp v) { setField(3, v); }
+  set sentAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSentAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearSentAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureSentAt() => $_ensure(2);
+  $55.Timestamp ensureSentAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get receivedAt => $_getN(3);
+  $55.Timestamp get receivedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set receivedAt($54.Timestamp v) { setField(4, v); }
+  set receivedAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasReceivedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearReceivedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureReceivedAt() => $_ensure(3);
+  $55.Timestamp ensureReceivedAt() => $_ensure(3);
 }
 
 class MessageForAccount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccount', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$21.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $21.AccountConnectedAccount.create)
+    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
@@ -214,7 +216,7 @@ class MessageForAccount extends $pb.GeneratedMessage {
   MessageForAccount._() : super();
   factory MessageForAccount({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $21.AccountConnectedAccount? connectedAccount,
+    $22.AccountConnectedAccount? connectedAccount,
     $core.String? message,
   }) {
     final _result = create();
@@ -262,15 +264,15 @@ class MessageForAccount extends $pb.GeneratedMessage {
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount get connectedAccount => $_getN(1);
+  $22.AccountConnectedAccount get connectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccount($21.AccountConnectedAccount v) { setField(2, v); }
+  set connectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
+  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get message => $_getSZ(2);
@@ -286,8 +288,8 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccountSent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountSentMessageId')
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSent')
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -295,8 +297,8 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   factory MessageForAccountSent({
     $core.String? accountSentMessageId,
     $core.bool? isSent,
-    $54.Timestamp? sentAt,
-    $54.Timestamp? receivedAt,
+    $55.Timestamp? sentAt,
+    $55.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountSentMessageId != null) {
@@ -353,32 +355,32 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   void clearIsSent() => clearField(2);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get sentAt => $_getN(2);
+  $55.Timestamp get sentAt => $_getN(2);
   @$pb.TagNumber(3)
-  set sentAt($54.Timestamp v) { setField(3, v); }
+  set sentAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSentAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearSentAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureSentAt() => $_ensure(2);
+  $55.Timestamp ensureSentAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get receivedAt => $_getN(3);
+  $55.Timestamp get receivedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set receivedAt($54.Timestamp v) { setField(4, v); }
+  set receivedAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasReceivedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearReceivedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureReceivedAt() => $_ensure(3);
+  $55.Timestamp ensureReceivedAt() => $_ensure(3);
 }
 
 class FullMessageForAccountSent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FullMessageForAccountSent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<MessageForAccountSent>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageForAccountSent', subBuilder: MessageForAccountSent.create)
-    ..aOM<$21.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $21.AccountConnectedAccount.create)
+    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
@@ -386,7 +388,7 @@ class FullMessageForAccountSent extends $pb.GeneratedMessage {
   FullMessageForAccountSent._() : super();
   factory FullMessageForAccountSent({
     MessageForAccountSent? messageForAccountSent,
-    $21.AccountConnectedAccount? connectedAccount,
+    $22.AccountConnectedAccount? connectedAccount,
     $core.String? message,
   }) {
     final _result = create();
@@ -434,15 +436,15 @@ class FullMessageForAccountSent extends $pb.GeneratedMessage {
   MessageForAccountSent ensureMessageForAccountSent() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount get connectedAccount => $_getN(1);
+  $22.AccountConnectedAccount get connectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccount($21.AccountConnectedAccount v) { setField(2, v); }
+  set connectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
+  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get message => $_getSZ(2);
@@ -522,14 +524,14 @@ class SyncAccountSentMessagesResponse extends $pb.GeneratedMessage {
 class SyncAccountConnectedAccountSentMessagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SyncAccountConnectedAccountSentMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$21.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $21.AccountConnectedAccount.create)
+    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
     ..hasRequiredFields = false
   ;
 
   SyncAccountConnectedAccountSentMessagesRequest._() : super();
   factory SyncAccountConnectedAccountSentMessagesRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $21.AccountConnectedAccount? connectedAccount,
+    $22.AccountConnectedAccount? connectedAccount,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -573,15 +575,15 @@ class SyncAccountConnectedAccountSentMessagesRequest extends $pb.GeneratedMessag
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount get connectedAccount => $_getN(1);
+  $22.AccountConnectedAccount get connectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccount($21.AccountConnectedAccount v) { setField(2, v); }
+  set connectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $21.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
+  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
 }
 
 class SyncAccountConnectedAccountSentMessagesResponse extends $pb.GeneratedMessage {
@@ -663,6 +665,694 @@ class SyncAccountConnectedAccountSentMessagesResponse extends $pb.GeneratedMessa
   void clearSyncProgress() => clearField(3);
 }
 
+class SyncAccountConnectedAccountAssistantSentMessagesRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SyncAccountConnectedAccountAssistantSentMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
+    ..hasRequiredFields = false
+  ;
+
+  SyncAccountConnectedAccountAssistantSentMessagesRequest._() : super();
+  factory SyncAccountConnectedAccountAssistantSentMessagesRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (connectedAccountAssistant != null) {
+      _result.connectedAccountAssistant = connectedAccountAssistant;
+    }
+    return _result;
+  }
+  factory SyncAccountConnectedAccountAssistantSentMessagesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SyncAccountConnectedAccountAssistantSentMessagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SyncAccountConnectedAccountAssistantSentMessagesRequest clone() => SyncAccountConnectedAccountAssistantSentMessagesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SyncAccountConnectedAccountAssistantSentMessagesRequest copyWith(void Function(SyncAccountConnectedAccountAssistantSentMessagesRequest) updates) => super.copyWith((message) => updates(message as SyncAccountConnectedAccountAssistantSentMessagesRequest)) as SyncAccountConnectedAccountAssistantSentMessagesRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SyncAccountConnectedAccountAssistantSentMessagesRequest create() => SyncAccountConnectedAccountAssistantSentMessagesRequest._();
+  SyncAccountConnectedAccountAssistantSentMessagesRequest createEmptyInstance() => create();
+  static $pb.PbList<SyncAccountConnectedAccountAssistantSentMessagesRequest> createRepeated() => $pb.PbList<SyncAccountConnectedAccountAssistantSentMessagesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SyncAccountConnectedAccountAssistantSentMessagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncAccountConnectedAccountAssistantSentMessagesRequest>(create);
+  static SyncAccountConnectedAccountAssistantSentMessagesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
+  @$pb.TagNumber(2)
+  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConnectedAccountAssistant() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConnectedAccountAssistant() => clearField(2);
+  @$pb.TagNumber(2)
+  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
+}
+
+class SyncAccountConnectedAccountAssistantSentMessagesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SyncAccountConnectedAccountAssistantSentMessagesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<AccountAssistantSentMessage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantSentMessage', subBuilder: AccountAssistantSentMessage.create)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..a<$core.double>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'syncProgress', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  SyncAccountConnectedAccountAssistantSentMessagesResponse._() : super();
+  factory SyncAccountConnectedAccountAssistantSentMessagesResponse({
+    AccountAssistantSentMessage? accountAssistantSentMessage,
+    $2.ResponseMeta? responseMeta,
+    $core.double? syncProgress,
+  }) {
+    final _result = create();
+    if (accountAssistantSentMessage != null) {
+      _result.accountAssistantSentMessage = accountAssistantSentMessage;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (syncProgress != null) {
+      _result.syncProgress = syncProgress;
+    }
+    return _result;
+  }
+  factory SyncAccountConnectedAccountAssistantSentMessagesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SyncAccountConnectedAccountAssistantSentMessagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SyncAccountConnectedAccountAssistantSentMessagesResponse clone() => SyncAccountConnectedAccountAssistantSentMessagesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SyncAccountConnectedAccountAssistantSentMessagesResponse copyWith(void Function(SyncAccountConnectedAccountAssistantSentMessagesResponse) updates) => super.copyWith((message) => updates(message as SyncAccountConnectedAccountAssistantSentMessagesResponse)) as SyncAccountConnectedAccountAssistantSentMessagesResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SyncAccountConnectedAccountAssistantSentMessagesResponse create() => SyncAccountConnectedAccountAssistantSentMessagesResponse._();
+  SyncAccountConnectedAccountAssistantSentMessagesResponse createEmptyInstance() => create();
+  static $pb.PbList<SyncAccountConnectedAccountAssistantSentMessagesResponse> createRepeated() => $pb.PbList<SyncAccountConnectedAccountAssistantSentMessagesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SyncAccountConnectedAccountAssistantSentMessagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SyncAccountConnectedAccountAssistantSentMessagesResponse>(create);
+  static SyncAccountConnectedAccountAssistantSentMessagesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  AccountAssistantSentMessage get accountAssistantSentMessage => $_getN(0);
+  @$pb.TagNumber(1)
+  set accountAssistantSentMessage(AccountAssistantSentMessage v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccountAssistantSentMessage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountAssistantSentMessage() => clearField(1);
+  @$pb.TagNumber(1)
+  AccountAssistantSentMessage ensureAccountAssistantSentMessage() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $core.double get syncProgress => $_getN(2);
+  @$pb.TagNumber(3)
+  set syncProgress($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasSyncProgress() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearSyncProgress() => clearField(3);
+}
+
+class GetLast24ProductNSentMessagesRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetLast24ProductNSentMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'productN', $pb.PbFieldType.O3)
+    ..e<$22.MessageEntity>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageEntityEnum', $pb.PbFieldType.OE, defaultOrMaker: $22.MessageEntity.ALL_ENTITY_MESSAGE, valueOf: $22.MessageEntity.valueOf, enumValues: $22.MessageEntity.values)
+    ..aOM<$22.AccountConnectedAccountAssistant>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
+    ..aOM<$22.AccountConnectedAccount>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetLast24ProductNSentMessagesRequest._() : super();
+  factory GetLast24ProductNSentMessagesRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $core.int? productN,
+    $22.MessageEntity? messageEntityEnum,
+    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $22.AccountConnectedAccount? connectedAccount,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (productN != null) {
+      _result.productN = productN;
+    }
+    if (messageEntityEnum != null) {
+      _result.messageEntityEnum = messageEntityEnum;
+    }
+    if (connectedAccountAssistant != null) {
+      _result.connectedAccountAssistant = connectedAccountAssistant;
+    }
+    if (connectedAccount != null) {
+      _result.connectedAccount = connectedAccount;
+    }
+    return _result;
+  }
+  factory GetLast24ProductNSentMessagesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetLast24ProductNSentMessagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetLast24ProductNSentMessagesRequest clone() => GetLast24ProductNSentMessagesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetLast24ProductNSentMessagesRequest copyWith(void Function(GetLast24ProductNSentMessagesRequest) updates) => super.copyWith((message) => updates(message as GetLast24ProductNSentMessagesRequest)) as GetLast24ProductNSentMessagesRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetLast24ProductNSentMessagesRequest create() => GetLast24ProductNSentMessagesRequest._();
+  GetLast24ProductNSentMessagesRequest createEmptyInstance() => create();
+  static $pb.PbList<GetLast24ProductNSentMessagesRequest> createRepeated() => $pb.PbList<GetLast24ProductNSentMessagesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetLast24ProductNSentMessagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLast24ProductNSentMessagesRequest>(create);
+  static GetLast24ProductNSentMessagesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.int get productN => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set productN($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasProductN() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearProductN() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $22.MessageEntity get messageEntityEnum => $_getN(2);
+  @$pb.TagNumber(3)
+  set messageEntityEnum($22.MessageEntity v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasMessageEntityEnum() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessageEntityEnum() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(3);
+  @$pb.TagNumber(4)
+  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasConnectedAccountAssistant() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearConnectedAccountAssistant() => clearField(4);
+  @$pb.TagNumber(4)
+  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $22.AccountConnectedAccount get connectedAccount => $_getN(4);
+  @$pb.TagNumber(5)
+  set connectedAccount($22.AccountConnectedAccount v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasConnectedAccount() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearConnectedAccount() => clearField(5);
+  @$pb.TagNumber(5)
+  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(4);
+}
+
+class GetLast24ProductNSentMessagesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetLast24ProductNSentMessagesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..pc<AccountSentMessage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountSentMessages', $pb.PbFieldType.PM, subBuilder: AccountSentMessage.create)
+    ..pc<AccountAssistantSentMessage>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantSentMessages', $pb.PbFieldType.PM, subBuilder: AccountAssistantSentMessage.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetLast24ProductNSentMessagesResponse._() : super();
+  factory GetLast24ProductNSentMessagesResponse({
+    $2.ResponseMeta? responseMeta,
+    $core.Iterable<AccountSentMessage>? accountSentMessages,
+    $core.Iterable<AccountAssistantSentMessage>? accountAssistantSentMessages,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (accountSentMessages != null) {
+      _result.accountSentMessages.addAll(accountSentMessages);
+    }
+    if (accountAssistantSentMessages != null) {
+      _result.accountAssistantSentMessages.addAll(accountAssistantSentMessages);
+    }
+    return _result;
+  }
+  factory GetLast24ProductNSentMessagesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetLast24ProductNSentMessagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetLast24ProductNSentMessagesResponse clone() => GetLast24ProductNSentMessagesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetLast24ProductNSentMessagesResponse copyWith(void Function(GetLast24ProductNSentMessagesResponse) updates) => super.copyWith((message) => updates(message as GetLast24ProductNSentMessagesResponse)) as GetLast24ProductNSentMessagesResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetLast24ProductNSentMessagesResponse create() => GetLast24ProductNSentMessagesResponse._();
+  GetLast24ProductNSentMessagesResponse createEmptyInstance() => create();
+  static $pb.PbList<GetLast24ProductNSentMessagesResponse> createRepeated() => $pb.PbList<GetLast24ProductNSentMessagesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetLast24ProductNSentMessagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLast24ProductNSentMessagesResponse>(create);
+  static GetLast24ProductNSentMessagesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<AccountSentMessage> get accountSentMessages => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.List<AccountAssistantSentMessage> get accountAssistantSentMessages => $_getList(2);
+}
+
+class GetAccountLastSentMessageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountLastSentMessageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountId')
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountLastSentMessageRequest._() : super();
+  factory GetAccountLastSentMessageRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $core.String? connectedAccountId,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (connectedAccountId != null) {
+      _result.connectedAccountId = connectedAccountId;
+    }
+    return _result;
+  }
+  factory GetAccountLastSentMessageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountLastSentMessageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountLastSentMessageRequest clone() => GetAccountLastSentMessageRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountLastSentMessageRequest copyWith(void Function(GetAccountLastSentMessageRequest) updates) => super.copyWith((message) => updates(message as GetAccountLastSentMessageRequest)) as GetAccountLastSentMessageRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountLastSentMessageRequest create() => GetAccountLastSentMessageRequest._();
+  GetAccountLastSentMessageRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAccountLastSentMessageRequest> createRepeated() => $pb.PbList<GetAccountLastSentMessageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountLastSentMessageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountLastSentMessageRequest>(create);
+  static GetAccountLastSentMessageRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get connectedAccountId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set connectedAccountId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConnectedAccountId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConnectedAccountId() => clearField(2);
+}
+
+class GetAccountLastSentMessageResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountLastSentMessageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..aOM<AccountSentMessage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastSentMessage', subBuilder: AccountSentMessage.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountLastSentMessageResponse._() : super();
+  factory GetAccountLastSentMessageResponse({
+    $2.ResponseMeta? responseMeta,
+    AccountSentMessage? lastSentMessage,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (lastSentMessage != null) {
+      _result.lastSentMessage = lastSentMessage;
+    }
+    return _result;
+  }
+  factory GetAccountLastSentMessageResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountLastSentMessageResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountLastSentMessageResponse clone() => GetAccountLastSentMessageResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountLastSentMessageResponse copyWith(void Function(GetAccountLastSentMessageResponse) updates) => super.copyWith((message) => updates(message as GetAccountLastSentMessageResponse)) as GetAccountLastSentMessageResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountLastSentMessageResponse create() => GetAccountLastSentMessageResponse._();
+  GetAccountLastSentMessageResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAccountLastSentMessageResponse> createRepeated() => $pb.PbList<GetAccountLastSentMessageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountLastSentMessageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountLastSentMessageResponse>(create);
+  static GetAccountLastSentMessageResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  AccountSentMessage get lastSentMessage => $_getN(1);
+  @$pb.TagNumber(2)
+  set lastSentMessage(AccountSentMessage v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLastSentMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLastSentMessage() => clearField(2);
+  @$pb.TagNumber(2)
+  AccountSentMessage ensureLastSentMessage() => $_ensure(1);
+}
+
+class GetAccountAssistantLastSentMessageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountAssistantLastSentMessageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistantId')
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountAssistantLastSentMessageRequest._() : super();
+  factory GetAccountAssistantLastSentMessageRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $core.String? connectedAccountAssistantId,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (connectedAccountAssistantId != null) {
+      _result.connectedAccountAssistantId = connectedAccountAssistantId;
+    }
+    return _result;
+  }
+  factory GetAccountAssistantLastSentMessageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountAssistantLastSentMessageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantLastSentMessageRequest clone() => GetAccountAssistantLastSentMessageRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantLastSentMessageRequest copyWith(void Function(GetAccountAssistantLastSentMessageRequest) updates) => super.copyWith((message) => updates(message as GetAccountAssistantLastSentMessageRequest)) as GetAccountAssistantLastSentMessageRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantLastSentMessageRequest create() => GetAccountAssistantLastSentMessageRequest._();
+  GetAccountAssistantLastSentMessageRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAccountAssistantLastSentMessageRequest> createRepeated() => $pb.PbList<GetAccountAssistantLastSentMessageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantLastSentMessageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountAssistantLastSentMessageRequest>(create);
+  static GetAccountAssistantLastSentMessageRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get connectedAccountAssistantId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set connectedAccountAssistantId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasConnectedAccountAssistantId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearConnectedAccountAssistantId() => clearField(2);
+}
+
+class GetAccountAssistantLastSentMessageResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountAssistantLastSentMessageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..aOM<AccountAssistantSentMessage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastSentMessage', subBuilder: AccountAssistantSentMessage.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountAssistantLastSentMessageResponse._() : super();
+  factory GetAccountAssistantLastSentMessageResponse({
+    $2.ResponseMeta? responseMeta,
+    AccountAssistantSentMessage? lastSentMessage,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (lastSentMessage != null) {
+      _result.lastSentMessage = lastSentMessage;
+    }
+    return _result;
+  }
+  factory GetAccountAssistantLastSentMessageResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountAssistantLastSentMessageResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantLastSentMessageResponse clone() => GetAccountAssistantLastSentMessageResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantLastSentMessageResponse copyWith(void Function(GetAccountAssistantLastSentMessageResponse) updates) => super.copyWith((message) => updates(message as GetAccountAssistantLastSentMessageResponse)) as GetAccountAssistantLastSentMessageResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantLastSentMessageResponse create() => GetAccountAssistantLastSentMessageResponse._();
+  GetAccountAssistantLastSentMessageResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAccountAssistantLastSentMessageResponse> createRepeated() => $pb.PbList<GetAccountAssistantLastSentMessageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantLastSentMessageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountAssistantLastSentMessageResponse>(create);
+  static GetAccountAssistantLastSentMessageResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  AccountAssistantSentMessage get lastSentMessage => $_getN(1);
+  @$pb.TagNumber(2)
+  set lastSentMessage(AccountAssistantSentMessage v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLastSentMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLastSentMessage() => clearField(2);
+  @$pb.TagNumber(2)
+  AccountAssistantSentMessage ensureLastSentMessage() => $_ensure(1);
+}
+
+class GetSentMessagesAccountsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetSentMessagesAccountsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..pc<$22.Account>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentMessagesAccounts', $pb.PbFieldType.PM, subBuilder: $22.Account.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetSentMessagesAccountsResponse._() : super();
+  factory GetSentMessagesAccountsResponse({
+    $2.ResponseMeta? responseMeta,
+    $core.Iterable<$22.Account>? sentMessagesAccounts,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (sentMessagesAccounts != null) {
+      _result.sentMessagesAccounts.addAll(sentMessagesAccounts);
+    }
+    return _result;
+  }
+  factory GetSentMessagesAccountsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSentMessagesAccountsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSentMessagesAccountsResponse clone() => GetSentMessagesAccountsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSentMessagesAccountsResponse copyWith(void Function(GetSentMessagesAccountsResponse) updates) => super.copyWith((message) => updates(message as GetSentMessagesAccountsResponse)) as GetSentMessagesAccountsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetSentMessagesAccountsResponse create() => GetSentMessagesAccountsResponse._();
+  GetSentMessagesAccountsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSentMessagesAccountsResponse> createRepeated() => $pb.PbList<GetSentMessagesAccountsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSentMessagesAccountsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSentMessagesAccountsResponse>(create);
+  static GetSentMessagesAccountsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$22.Account> get sentMessagesAccounts => $_getList(1);
+}
+
+class GetSentMessagesAccountAssistantsResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetSentMessagesAccountAssistantsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..pc<$6.AccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentMessagesAccountAssistants', $pb.PbFieldType.PM, subBuilder: $6.AccountAssistant.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetSentMessagesAccountAssistantsResponse._() : super();
+  factory GetSentMessagesAccountAssistantsResponse({
+    $2.ResponseMeta? responseMeta,
+    $core.Iterable<$6.AccountAssistant>? sentMessagesAccountAssistants,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (sentMessagesAccountAssistants != null) {
+      _result.sentMessagesAccountAssistants.addAll(sentMessagesAccountAssistants);
+    }
+    return _result;
+  }
+  factory GetSentMessagesAccountAssistantsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetSentMessagesAccountAssistantsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetSentMessagesAccountAssistantsResponse clone() => GetSentMessagesAccountAssistantsResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetSentMessagesAccountAssistantsResponse copyWith(void Function(GetSentMessagesAccountAssistantsResponse) updates) => super.copyWith((message) => updates(message as GetSentMessagesAccountAssistantsResponse)) as GetSentMessagesAccountAssistantsResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetSentMessagesAccountAssistantsResponse create() => GetSentMessagesAccountAssistantsResponse._();
+  GetSentMessagesAccountAssistantsResponse createEmptyInstance() => create();
+  static $pb.PbList<GetSentMessagesAccountAssistantsResponse> createRepeated() => $pb.PbList<GetSentMessagesAccountAssistantsResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetSentMessagesAccountAssistantsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSentMessagesAccountAssistantsResponse>(create);
+  static GetSentMessagesAccountAssistantsResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$6.AccountAssistant> get sentMessagesAccountAssistants => $_getList(1);
+}
+
 class AccountAssistantSentMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantSentMessage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantSentMessageId')
@@ -671,8 +1361,9 @@ class AccountAssistantSentMessage extends $pb.GeneratedMessage {
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSpace', $pb.PbFieldType.O3)
     ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSpaceAction', $pb.PbFieldType.O3)
-    ..aOM<$54.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$22.MessageInfo>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageInfo', subBuilder: $22.MessageInfo.create)
     ..hasRequiredFields = false
   ;
 
@@ -684,8 +1375,9 @@ class AccountAssistantSentMessage extends $pb.GeneratedMessage {
     $core.String? message,
     $core.int? messageSpace,
     $core.int? messageSpaceAction,
-    $54.Timestamp? sentAt,
-    $54.Timestamp? receivedAt,
+    $55.Timestamp? sentAt,
+    $55.Timestamp? receivedAt,
+    $22.MessageInfo? messageInfo,
   }) {
     final _result = create();
     if (accountAssistantSentMessageId != null) {
@@ -711,6 +1403,9 @@ class AccountAssistantSentMessage extends $pb.GeneratedMessage {
     }
     if (receivedAt != null) {
       _result.receivedAt = receivedAt;
+    }
+    if (messageInfo != null) {
+      _result.messageInfo = messageInfo;
     }
     return _result;
   }
@@ -790,26 +1485,37 @@ class AccountAssistantSentMessage extends $pb.GeneratedMessage {
   void clearMessageSpaceAction() => clearField(6);
 
   @$pb.TagNumber(7)
-  $54.Timestamp get sentAt => $_getN(6);
+  $55.Timestamp get sentAt => $_getN(6);
   @$pb.TagNumber(7)
-  set sentAt($54.Timestamp v) { setField(7, v); }
+  set sentAt($55.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasSentAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearSentAt() => clearField(7);
   @$pb.TagNumber(7)
-  $54.Timestamp ensureSentAt() => $_ensure(6);
+  $55.Timestamp ensureSentAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $54.Timestamp get receivedAt => $_getN(7);
+  $55.Timestamp get receivedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set receivedAt($54.Timestamp v) { setField(8, v); }
+  set receivedAt($55.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasReceivedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearReceivedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $54.Timestamp ensureReceivedAt() => $_ensure(7);
+  $55.Timestamp ensureReceivedAt() => $_ensure(7);
+
+  @$pb.TagNumber(9)
+  $22.MessageInfo get messageInfo => $_getN(8);
+  @$pb.TagNumber(9)
+  set messageInfo($22.MessageInfo v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasMessageInfo() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearMessageInfo() => clearField(9);
+  @$pb.TagNumber(9)
+  $22.MessageInfo ensureMessageInfo() => $_ensure(8);
 }
 
 class AccountSentMessage extends $pb.GeneratedMessage {
@@ -818,8 +1524,9 @@ class AccountSentMessage extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountConnectionId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..aOM<$54.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $54.Timestamp.create)
-    ..aOM<$54.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$22.MessageInfo>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageInfo', subBuilder: $22.MessageInfo.create)
     ..hasRequiredFields = false
   ;
 
@@ -829,8 +1536,9 @@ class AccountSentMessage extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.String? accountConnectionId,
     $core.String? message,
-    $54.Timestamp? sentAt,
-    $54.Timestamp? receivedAt,
+    $55.Timestamp? sentAt,
+    $55.Timestamp? receivedAt,
+    $22.MessageInfo? messageInfo,
   }) {
     final _result = create();
     if (accountSentMessageId != null) {
@@ -850,6 +1558,9 @@ class AccountSentMessage extends $pb.GeneratedMessage {
     }
     if (receivedAt != null) {
       _result.receivedAt = receivedAt;
+    }
+    if (messageInfo != null) {
+      _result.messageInfo = messageInfo;
     }
     return _result;
   }
@@ -911,25 +1622,162 @@ class AccountSentMessage extends $pb.GeneratedMessage {
   void clearMessage() => clearField(4);
 
   @$pb.TagNumber(5)
-  $54.Timestamp get sentAt => $_getN(4);
+  $55.Timestamp get sentAt => $_getN(4);
   @$pb.TagNumber(5)
-  set sentAt($54.Timestamp v) { setField(5, v); }
+  set sentAt($55.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasSentAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearSentAt() => clearField(5);
   @$pb.TagNumber(5)
-  $54.Timestamp ensureSentAt() => $_ensure(4);
+  $55.Timestamp ensureSentAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $54.Timestamp get receivedAt => $_getN(5);
+  $55.Timestamp get receivedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set receivedAt($54.Timestamp v) { setField(6, v); }
+  set receivedAt($55.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasReceivedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearReceivedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $54.Timestamp ensureReceivedAt() => $_ensure(5);
+  $55.Timestamp ensureReceivedAt() => $_ensure(5);
+
+  @$pb.TagNumber(7)
+  $22.MessageInfo get messageInfo => $_getN(6);
+  @$pb.TagNumber(7)
+  set messageInfo($22.MessageInfo v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMessageInfo() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMessageInfo() => clearField(7);
+  @$pb.TagNumber(7)
+  $22.MessageInfo ensureMessageInfo() => $_ensure(6);
+}
+
+class AccountSentMessagesCountResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountSentMessagesCountResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountSentMessagesCount', $pb.PbFieldType.O3)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..hasRequiredFields = false
+  ;
+
+  AccountSentMessagesCountResponse._() : super();
+  factory AccountSentMessagesCountResponse({
+    $core.int? accountSentMessagesCount,
+    $2.ResponseMeta? responseMeta,
+  }) {
+    final _result = create();
+    if (accountSentMessagesCount != null) {
+      _result.accountSentMessagesCount = accountSentMessagesCount;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    return _result;
+  }
+  factory AccountSentMessagesCountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountSentMessagesCountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountSentMessagesCountResponse clone() => AccountSentMessagesCountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountSentMessagesCountResponse copyWith(void Function(AccountSentMessagesCountResponse) updates) => super.copyWith((message) => updates(message as AccountSentMessagesCountResponse)) as AccountSentMessagesCountResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountSentMessagesCountResponse create() => AccountSentMessagesCountResponse._();
+  AccountSentMessagesCountResponse createEmptyInstance() => create();
+  static $pb.PbList<AccountSentMessagesCountResponse> createRepeated() => $pb.PbList<AccountSentMessagesCountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AccountSentMessagesCountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountSentMessagesCountResponse>(create);
+  static AccountSentMessagesCountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get accountSentMessagesCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set accountSentMessagesCount($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccountSentMessagesCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountSentMessagesCount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
+}
+
+class AccountAssistantSentMessagesCountResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantSentMessagesCountResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantSentMessagesCount', $pb.PbFieldType.O3)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..hasRequiredFields = false
+  ;
+
+  AccountAssistantSentMessagesCountResponse._() : super();
+  factory AccountAssistantSentMessagesCountResponse({
+    $core.int? accountAssistantSentMessagesCount,
+    $2.ResponseMeta? responseMeta,
+  }) {
+    final _result = create();
+    if (accountAssistantSentMessagesCount != null) {
+      _result.accountAssistantSentMessagesCount = accountAssistantSentMessagesCount;
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    return _result;
+  }
+  factory AccountAssistantSentMessagesCountResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountAssistantSentMessagesCountResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountAssistantSentMessagesCountResponse clone() => AccountAssistantSentMessagesCountResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountAssistantSentMessagesCountResponse copyWith(void Function(AccountAssistantSentMessagesCountResponse) updates) => super.copyWith((message) => updates(message as AccountAssistantSentMessagesCountResponse)) as AccountAssistantSentMessagesCountResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountAssistantSentMessagesCountResponse create() => AccountAssistantSentMessagesCountResponse._();
+  AccountAssistantSentMessagesCountResponse createEmptyInstance() => create();
+  static $pb.PbList<AccountAssistantSentMessagesCountResponse> createRepeated() => $pb.PbList<AccountAssistantSentMessagesCountResponse>();
+  @$core.pragma('dart2js:noInline')
+  static AccountAssistantSentMessagesCountResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountAssistantSentMessagesCountResponse>(create);
+  static AccountAssistantSentMessagesCountResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get accountAssistantSentMessagesCount => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set accountAssistantSentMessagesCount($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccountAssistantSentMessagesCount() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccountAssistantSentMessagesCount() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
 }
 

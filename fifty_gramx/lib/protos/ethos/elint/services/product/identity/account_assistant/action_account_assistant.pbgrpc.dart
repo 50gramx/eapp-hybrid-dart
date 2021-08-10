@@ -10,15 +10,15 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'action_account_assistant.pb.dart' as $17;
+import 'action_account_assistant.pb.dart' as $18;
 import '../../../../entities/generic.pb.dart' as $2;
 export 'action_account_assistant.pb.dart';
 
 class ActionAccountAssistantServiceClient extends $grpc.Client {
   static final _$actOnAccountMessage = $grpc.ClientMethod<
-          $17.ActOnAccountMessageRequest, $2.ResponseMeta>(
+          $18.ActOnAccountMessageRequest, $2.ResponseMeta>(
       '/elint.services.product.identity.account.assistant.ActionAccountAssistantService/ActOnAccountMessage',
-      ($17.ActOnAccountMessageRequest value) => value.writeToBuffer(),
+      ($18.ActOnAccountMessageRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
 
   ActionAccountAssistantServiceClient($grpc.ClientChannel channel,
@@ -27,7 +27,7 @@ class ActionAccountAssistantServiceClient extends $grpc.Client {
       : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$2.ResponseMeta> actOnAccountMessage(
-      $17.ActOnAccountMessageRequest request,
+      $18.ActOnAccountMessageRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$actOnAccountMessage, request, options: options);
   }
@@ -39,21 +39,21 @@ abstract class ActionAccountAssistantServiceBase extends $grpc.Service {
 
   ActionAccountAssistantServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$17.ActOnAccountMessageRequest, $2.ResponseMeta>(
+        $grpc.ServiceMethod<$18.ActOnAccountMessageRequest, $2.ResponseMeta>(
             'ActOnAccountMessage',
             actOnAccountMessage_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $17.ActOnAccountMessageRequest.fromBuffer(value),
+                $18.ActOnAccountMessageRequest.fromBuffer(value),
             ($2.ResponseMeta value) => value.writeToBuffer()));
   }
 
   $async.Future<$2.ResponseMeta> actOnAccountMessage_Pre($grpc.ServiceCall call,
-      $async.Future<$17.ActOnAccountMessageRequest> request) async {
+      $async.Future<$18.ActOnAccountMessageRequest> request) async {
     return actOnAccountMessage(call, await request);
   }
 
   $async.Future<$2.ResponseMeta> actOnAccountMessage(
-      $grpc.ServiceCall call, $17.ActOnAccountMessageRequest request);
+      $grpc.ServiceCall call, $18.ActOnAccountMessageRequest request);
 }

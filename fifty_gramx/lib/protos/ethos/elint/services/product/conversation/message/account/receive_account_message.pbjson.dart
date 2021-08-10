@@ -91,6 +91,29 @@ const SyncAccountConnectedAccountReceivedMessagesResponse$json = const {
 
 /// Descriptor for `SyncAccountConnectedAccountReceivedMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List syncAccountConnectedAccountReceivedMessagesResponseDescriptor = $convert.base64Decode('CjNTeW5jQWNjb3VudENvbm5lY3RlZEFjY291bnRSZWNlaXZlZE1lc3NhZ2VzUmVzcG9uc2UShQEKGGFjY291bnRfcmVjZWl2ZWRfbWVzc2FnZRgBIAEoCzJLLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuY29udmVyc2F0aW9uLm1lc3NhZ2UuYWNjb3VudC5BY2NvdW50UmVjZWl2ZWRNZXNzYWdlUhZhY2NvdW50UmVjZWl2ZWRNZXNzYWdlEj8KDXJlc3BvbnNlX21ldGEYAiABKAsyGi5lbGludC5lbnRpdHkuUmVzcG9uc2VNZXRhUgxyZXNwb25zZU1ldGESIwoNc3luY19wcm9ncmVzcxgDIAEoAVIMc3luY1Byb2dyZXNz');
+@$core.Deprecated('Use syncAccountConnectedAccountAssistantReceivedMessagesRequestDescriptor instead')
+const SyncAccountConnectedAccountAssistantReceivedMessagesRequest$json = const {
+  '1': 'SyncAccountConnectedAccountAssistantReceivedMessagesRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'connected_account_assistant', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccountAssistant', '10': 'connectedAccountAssistant'},
+  ],
+};
+
+/// Descriptor for `SyncAccountConnectedAccountAssistantReceivedMessagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List syncAccountConnectedAccountAssistantReceivedMessagesRequestDescriptor = $convert.base64Decode('CjtTeW5jQWNjb3VudENvbm5lY3RlZEFjY291bnRBc3Npc3RhbnRSZWNlaXZlZE1lc3NhZ2VzUmVxdWVzdBJ5ChNhY2Nlc3NfYXV0aF9kZXRhaWxzGAEgASgLMkkuZWxpbnQuc2VydmljZXMucHJvZHVjdC5pZGVudGl0eS5hY2NvdW50LkFjY291bnRTZXJ2aWNlc0FjY2Vzc0F1dGhEZXRhaWxzUhFhY2Nlc3NBdXRoRGV0YWlscxJuChtjb25uZWN0ZWRfYWNjb3VudF9hc3Npc3RhbnQYAiABKAsyLi5lbGludC5lbnRpdHkuQWNjb3VudENvbm5lY3RlZEFjY291bnRBc3Npc3RhbnRSGWNvbm5lY3RlZEFjY291bnRBc3Npc3RhbnQ=');
+@$core.Deprecated('Use syncAccountConnectedAccountAssistantReceivedMessagesResponseDescriptor instead')
+const SyncAccountConnectedAccountAssistantReceivedMessagesResponse$json = const {
+  '1': 'SyncAccountConnectedAccountAssistantReceivedMessagesResponse',
+  '2': const [
+    const {'1': 'account_assistant_received_message', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.conversation.message.account.AccountAssistantReceivedMessage', '10': 'accountAssistantReceivedMessage'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'sync_progress', '3': 3, '4': 1, '5': 1, '10': 'syncProgress'},
+  ],
+};
+
+/// Descriptor for `SyncAccountConnectedAccountAssistantReceivedMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List syncAccountConnectedAccountAssistantReceivedMessagesResponseDescriptor = $convert.base64Decode('CjxTeW5jQWNjb3VudENvbm5lY3RlZEFjY291bnRBc3Npc3RhbnRSZWNlaXZlZE1lc3NhZ2VzUmVzcG9uc2USoQEKImFjY291bnRfYXNzaXN0YW50X3JlY2VpdmVkX21lc3NhZ2UYASABKAsyVC5lbGludC5zZXJ2aWNlcy5wcm9kdWN0LmNvbnZlcnNhdGlvbi5tZXNzYWdlLmFjY291bnQuQWNjb3VudEFzc2lzdGFudFJlY2VpdmVkTWVzc2FnZVIfYWNjb3VudEFzc2lzdGFudFJlY2VpdmVkTWVzc2FnZRI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRhEiMKDXN5bmNfcHJvZ3Jlc3MYAyABKAFSDHN5bmNQcm9ncmVzcw==');
 @$core.Deprecated('Use listenForReceivedAccountAssistantMessagesRequestDescriptor instead')
 const ListenForReceivedAccountAssistantMessagesRequest$json = const {
   '1': 'ListenForReceivedAccountAssistantMessagesRequest',
@@ -147,6 +170,109 @@ const ListenForReceivedAccountSpeedMessagesResponse$json = const {
 
 /// Descriptor for `ListenForReceivedAccountSpeedMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listenForReceivedAccountSpeedMessagesResponseDescriptor = $convert.base64Decode('Ci1MaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRTcGVlZE1lc3NhZ2VzUmVzcG9uc2USewoVbWVzc2FnZXNfZnJvbV9hY2NvdW50GAEgASgLMkcuZWxpbnQuc2VydmljZXMucHJvZHVjdC5jb252ZXJzYXRpb24ubWVzc2FnZS5hY2NvdW50Lk1lc3NhZ2VGcm9tQWNjb3VudFITbWVzc2FnZXNGcm9tQWNjb3VudBI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
+@$core.Deprecated('Use listenForReceivedAccountAssistantSpeedMessagesResponseDescriptor instead')
+const ListenForReceivedAccountAssistantSpeedMessagesResponse$json = const {
+  '1': 'ListenForReceivedAccountAssistantSpeedMessagesResponse',
+  '2': const [
+    const {'1': 'message_from_account_assistant', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.conversation.message.account.MessageFromAccountAssistant', '10': 'messageFromAccountAssistant'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `ListenForReceivedAccountAssistantSpeedMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listenForReceivedAccountAssistantSpeedMessagesResponseDescriptor = $convert.base64Decode('CjZMaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRBc3Npc3RhbnRTcGVlZE1lc3NhZ2VzUmVzcG9uc2USlQEKHm1lc3NhZ2VfZnJvbV9hY2NvdW50X2Fzc2lzdGFudBgBIAEoCzJQLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuY29udmVyc2F0aW9uLm1lc3NhZ2UuYWNjb3VudC5NZXNzYWdlRnJvbUFjY291bnRBc3Npc3RhbnRSG21lc3NhZ2VGcm9tQWNjb3VudEFzc2lzdGFudBI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
+@$core.Deprecated('Use getLast24ProductNReceivedMessagesRequestDescriptor instead')
+const GetLast24ProductNReceivedMessagesRequest$json = const {
+  '1': 'GetLast24ProductNReceivedMessagesRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'product_n', '3': 2, '4': 1, '5': 5, '10': 'productN'},
+    const {'1': 'message_entity_enum', '3': 3, '4': 1, '5': 14, '6': '.elint.entity.MessageEntity', '10': 'messageEntityEnum'},
+    const {'1': 'connected_account_assistant', '3': 4, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccountAssistant', '10': 'connectedAccountAssistant'},
+    const {'1': 'connected_account', '3': 5, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccount', '10': 'connectedAccount'},
+  ],
+};
+
+/// Descriptor for `GetLast24ProductNReceivedMessagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLast24ProductNReceivedMessagesRequestDescriptor = $convert.base64Decode('CihHZXRMYXN0MjRQcm9kdWN0TlJlY2VpdmVkTWVzc2FnZXNSZXF1ZXN0EnkKE2FjY2Vzc19hdXRoX2RldGFpbHMYASABKAsySS5lbGludC5zZXJ2aWNlcy5wcm9kdWN0LmlkZW50aXR5LmFjY291bnQuQWNjb3VudFNlcnZpY2VzQWNjZXNzQXV0aERldGFpbHNSEWFjY2Vzc0F1dGhEZXRhaWxzEhsKCXByb2R1Y3RfbhgCIAEoBVIIcHJvZHVjdE4SSwoTbWVzc2FnZV9lbnRpdHlfZW51bRgDIAEoDjIbLmVsaW50LmVudGl0eS5NZXNzYWdlRW50aXR5UhFtZXNzYWdlRW50aXR5RW51bRJuChtjb25uZWN0ZWRfYWNjb3VudF9hc3Npc3RhbnQYBCABKAsyLi5lbGludC5lbnRpdHkuQWNjb3VudENvbm5lY3RlZEFjY291bnRBc3Npc3RhbnRSGWNvbm5lY3RlZEFjY291bnRBc3Npc3RhbnQSUgoRY29ubmVjdGVkX2FjY291bnQYBSABKAsyJS5lbGludC5lbnRpdHkuQWNjb3VudENvbm5lY3RlZEFjY291bnRSEGNvbm5lY3RlZEFjY291bnQ=');
+@$core.Deprecated('Use getLast24ProductNReceivedMessagesResponseDescriptor instead')
+const GetLast24ProductNReceivedMessagesResponse$json = const {
+  '1': 'GetLast24ProductNReceivedMessagesResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'account_received_messages', '3': 2, '4': 3, '5': 11, '6': '.elint.services.product.conversation.message.account.AccountReceivedMessage', '10': 'accountReceivedMessages'},
+    const {'1': 'account_assistant_received_messages', '3': 3, '4': 3, '5': 11, '6': '.elint.services.product.conversation.message.account.AccountAssistantReceivedMessage', '10': 'accountAssistantReceivedMessages'},
+  ],
+};
+
+/// Descriptor for `GetLast24ProductNReceivedMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getLast24ProductNReceivedMessagesResponseDescriptor = $convert.base64Decode('CilHZXRMYXN0MjRQcm9kdWN0TlJlY2VpdmVkTWVzc2FnZXNSZXNwb25zZRI/Cg1yZXNwb25zZV9tZXRhGAEgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRhEocBChlhY2NvdW50X3JlY2VpdmVkX21lc3NhZ2VzGAIgAygLMksuZWxpbnQuc2VydmljZXMucHJvZHVjdC5jb252ZXJzYXRpb24ubWVzc2FnZS5hY2NvdW50LkFjY291bnRSZWNlaXZlZE1lc3NhZ2VSF2FjY291bnRSZWNlaXZlZE1lc3NhZ2VzEqMBCiNhY2NvdW50X2Fzc2lzdGFudF9yZWNlaXZlZF9tZXNzYWdlcxgDIAMoCzJULmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuY29udmVyc2F0aW9uLm1lc3NhZ2UuYWNjb3VudC5BY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlUiBhY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlcw==');
+@$core.Deprecated('Use getAccountLastReceivedMessageRequestDescriptor instead')
+const GetAccountLastReceivedMessageRequest$json = const {
+  '1': 'GetAccountLastReceivedMessageRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'connected_account_id', '3': 2, '4': 1, '5': 9, '10': 'connectedAccountId'},
+  ],
+};
+
+/// Descriptor for `GetAccountLastReceivedMessageRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountLastReceivedMessageRequestDescriptor = $convert.base64Decode('CiRHZXRBY2NvdW50TGFzdFJlY2VpdmVkTWVzc2FnZVJlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHMSMAoUY29ubmVjdGVkX2FjY291bnRfaWQYAiABKAlSEmNvbm5lY3RlZEFjY291bnRJZA==');
+@$core.Deprecated('Use getAccountLastReceivedMessageResponseDescriptor instead')
+const GetAccountLastReceivedMessageResponse$json = const {
+  '1': 'GetAccountLastReceivedMessageResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'last_received_message', '3': 2, '4': 1, '5': 11, '6': '.elint.services.product.conversation.message.account.AccountReceivedMessage', '10': 'lastReceivedMessage'},
+  ],
+};
+
+/// Descriptor for `GetAccountLastReceivedMessageResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountLastReceivedMessageResponseDescriptor = $convert.base64Decode('CiVHZXRBY2NvdW50TGFzdFJlY2VpdmVkTWVzc2FnZVJlc3BvbnNlEj8KDXJlc3BvbnNlX21ldGEYASABKAsyGi5lbGludC5lbnRpdHkuUmVzcG9uc2VNZXRhUgxyZXNwb25zZU1ldGESfwoVbGFzdF9yZWNlaXZlZF9tZXNzYWdlGAIgASgLMksuZWxpbnQuc2VydmljZXMucHJvZHVjdC5jb252ZXJzYXRpb24ubWVzc2FnZS5hY2NvdW50LkFjY291bnRSZWNlaXZlZE1lc3NhZ2VSE2xhc3RSZWNlaXZlZE1lc3NhZ2U=');
+@$core.Deprecated('Use getAccountAssistantLastReceivedMessageRequestDescriptor instead')
+const GetAccountAssistantLastReceivedMessageRequest$json = const {
+  '1': 'GetAccountAssistantLastReceivedMessageRequest',
+  '2': const [
+    const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
+    const {'1': 'connected_account_assistant_id', '3': 2, '4': 1, '5': 9, '10': 'connectedAccountAssistantId'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantLastReceivedMessageRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantLastReceivedMessageRequestDescriptor = $convert.base64Decode('Ci1HZXRBY2NvdW50QXNzaXN0YW50TGFzdFJlY2VpdmVkTWVzc2FnZVJlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHMSQwoeY29ubmVjdGVkX2FjY291bnRfYXNzaXN0YW50X2lkGAIgASgJUhtjb25uZWN0ZWRBY2NvdW50QXNzaXN0YW50SWQ=');
+@$core.Deprecated('Use getAccountAssistantLastReceivedMessageResponseDescriptor instead')
+const GetAccountAssistantLastReceivedMessageResponse$json = const {
+  '1': 'GetAccountAssistantLastReceivedMessageResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'last_received_message', '3': 2, '4': 1, '5': 11, '6': '.elint.services.product.conversation.message.account.AccountAssistantReceivedMessage', '10': 'lastReceivedMessage'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantLastReceivedMessageResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantLastReceivedMessageResponseDescriptor = $convert.base64Decode('Ci5HZXRBY2NvdW50QXNzaXN0YW50TGFzdFJlY2VpdmVkTWVzc2FnZVJlc3BvbnNlEj8KDXJlc3BvbnNlX21ldGEYASABKAsyGi5lbGludC5lbnRpdHkuUmVzcG9uc2VNZXRhUgxyZXNwb25zZU1ldGESiAEKFWxhc3RfcmVjZWl2ZWRfbWVzc2FnZRgCIAEoCzJULmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuY29udmVyc2F0aW9uLm1lc3NhZ2UuYWNjb3VudC5BY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlUhNsYXN0UmVjZWl2ZWRNZXNzYWdl');
+@$core.Deprecated('Use getReceivedMessagesAccountsResponseDescriptor instead')
+const GetReceivedMessagesAccountsResponse$json = const {
+  '1': 'GetReceivedMessagesAccountsResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'received_messages_accounts', '3': 2, '4': 3, '5': 11, '6': '.elint.entity.Account', '10': 'receivedMessagesAccounts'},
+  ],
+};
+
+/// Descriptor for `GetReceivedMessagesAccountsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getReceivedMessagesAccountsResponseDescriptor = $convert.base64Decode('CiNHZXRSZWNlaXZlZE1lc3NhZ2VzQWNjb3VudHNSZXNwb25zZRI/Cg1yZXNwb25zZV9tZXRhGAEgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRhElMKGnJlY2VpdmVkX21lc3NhZ2VzX2FjY291bnRzGAIgAygLMhUuZWxpbnQuZW50aXR5LkFjY291bnRSGHJlY2VpdmVkTWVzc2FnZXNBY2NvdW50cw==');
+@$core.Deprecated('Use getReceivedMessagesAccountAssistantsResponseDescriptor instead')
+const GetReceivedMessagesAccountAssistantsResponse$json = const {
+  '1': 'GetReceivedMessagesAccountAssistantsResponse',
+  '2': const [
+    const {'1': 'response_meta', '3': 1, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'received_messages_account_assistants', '3': 2, '4': 3, '5': 11, '6': '.elint.entity.AccountAssistant', '10': 'receivedMessagesAccountAssistants'},
+  ],
+};
+
+/// Descriptor for `GetReceivedMessagesAccountAssistantsResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getReceivedMessagesAccountAssistantsResponseDescriptor = $convert.base64Decode('CixHZXRSZWNlaXZlZE1lc3NhZ2VzQWNjb3VudEFzc2lzdGFudHNSZXNwb25zZRI/Cg1yZXNwb25zZV9tZXRhGAEgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRhEm8KJHJlY2VpdmVkX21lc3NhZ2VzX2FjY291bnRfYXNzaXN0YW50cxgCIAMoCzIeLmVsaW50LmVudGl0eS5BY2NvdW50QXNzaXN0YW50UiFyZWNlaXZlZE1lc3NhZ2VzQWNjb3VudEFzc2lzdGFudHM=');
 @$core.Deprecated('Use accountAssistantReceivedMessageDescriptor instead')
 const AccountAssistantReceivedMessage$json = const {
   '1': 'AccountAssistantReceivedMessage',
@@ -180,3 +306,25 @@ const AccountReceivedMessage$json = const {
 
 /// Descriptor for `AccountReceivedMessage`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountReceivedMessageDescriptor = $convert.base64Decode('ChZBY2NvdW50UmVjZWl2ZWRNZXNzYWdlEj0KG2FjY291bnRfcmVjZWl2ZWRfbWVzc2FnZV9pZBgBIAEoCVIYYWNjb3VudFJlY2VpdmVkTWVzc2FnZUlkEh0KCmFjY291bnRfaWQYAiABKAlSCWFjY291bnRJZBIyChVhY2NvdW50X2Nvbm5lY3Rpb25faWQYAyABKAlSE2FjY291bnRDb25uZWN0aW9uSWQSGAoHbWVzc2FnZRgEIAEoCVIHbWVzc2FnZRI7CgtyZWNlaXZlZF9hdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCnJlY2VpdmVkQXQ=');
+@$core.Deprecated('Use accountReceivedMessagesCountResponseDescriptor instead')
+const AccountReceivedMessagesCountResponse$json = const {
+  '1': 'AccountReceivedMessagesCountResponse',
+  '2': const [
+    const {'1': 'account_received_messages_count', '3': 1, '4': 1, '5': 5, '10': 'accountReceivedMessagesCount'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `AccountReceivedMessagesCountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountReceivedMessagesCountResponseDescriptor = $convert.base64Decode('CiRBY2NvdW50UmVjZWl2ZWRNZXNzYWdlc0NvdW50UmVzcG9uc2USRQofYWNjb3VudF9yZWNlaXZlZF9tZXNzYWdlc19jb3VudBgBIAEoBVIcYWNjb3VudFJlY2VpdmVkTWVzc2FnZXNDb3VudBI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
+@$core.Deprecated('Use accountAssistantReceivedMessagesCountResponseDescriptor instead')
+const AccountAssistantReceivedMessagesCountResponse$json = const {
+  '1': 'AccountAssistantReceivedMessagesCountResponse',
+  '2': const [
+    const {'1': 'account_assistant_received_messages_count', '3': 1, '4': 1, '5': 5, '10': 'accountAssistantReceivedMessagesCount'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+  ],
+};
+
+/// Descriptor for `AccountAssistantReceivedMessagesCountResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountAssistantReceivedMessagesCountResponseDescriptor = $convert.base64Decode('Ci1BY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlc0NvdW50UmVzcG9uc2USWAopYWNjb3VudF9hc3Npc3RhbnRfcmVjZWl2ZWRfbWVzc2FnZXNfY291bnQYASABKAVSJWFjY291bnRBc3Npc3RhbnRSZWNlaXZlZE1lc3NhZ2VzQ291bnQSPwoNcmVzcG9uc2VfbWV0YRgCIAEoCzIaLmVsaW50LmVudGl0eS5SZXNwb25zZU1ldGFSDHJlc3BvbnNlTWV0YQ==');

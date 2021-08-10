@@ -269,3 +269,131 @@ class GetAccountAssistantMetaByAccountAssistantIdResponse extends $pb.GeneratedM
   $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
 }
 
+class GetAccountAssistantByIdRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountAssistantByIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
+    ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountAssistantByIdRequest._() : super();
+  factory GetAccountAssistantByIdRequest({
+    $0.AccountServicesAccessAuthDetails? accessAuthDetails,
+    $core.String? accountAssistantId,
+  }) {
+    final _result = create();
+    if (accessAuthDetails != null) {
+      _result.accessAuthDetails = accessAuthDetails;
+    }
+    if (accountAssistantId != null) {
+      _result.accountAssistantId = accountAssistantId;
+    }
+    return _result;
+  }
+  factory GetAccountAssistantByIdRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountAssistantByIdRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantByIdRequest clone() => GetAccountAssistantByIdRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantByIdRequest copyWith(void Function(GetAccountAssistantByIdRequest) updates) => super.copyWith((message) => updates(message as GetAccountAssistantByIdRequest)) as GetAccountAssistantByIdRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantByIdRequest create() => GetAccountAssistantByIdRequest._();
+  GetAccountAssistantByIdRequest createEmptyInstance() => create();
+  static $pb.PbList<GetAccountAssistantByIdRequest> createRepeated() => $pb.PbList<GetAccountAssistantByIdRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantByIdRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountAssistantByIdRequest>(create);
+  static GetAccountAssistantByIdRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  @$pb.TagNumber(1)
+  set accessAuthDetails($0.AccountServicesAccessAuthDetails v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAccessAuthDetails() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAccessAuthDetails() => clearField(1);
+  @$pb.TagNumber(1)
+  $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.String get accountAssistantId => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set accountAssistantId($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccountAssistantId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccountAssistantId() => clearField(2);
+}
+
+class GetAccountAssistantByIdResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAccountAssistantByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
+    ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..aOM<$6.AccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistant', subBuilder: $6.AccountAssistant.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetAccountAssistantByIdResponse._() : super();
+  factory GetAccountAssistantByIdResponse({
+    $2.ResponseMeta? responseMeta,
+    $6.AccountAssistant? accountAssistant,
+  }) {
+    final _result = create();
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
+    }
+    if (accountAssistant != null) {
+      _result.accountAssistant = accountAssistant;
+    }
+    return _result;
+  }
+  factory GetAccountAssistantByIdResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetAccountAssistantByIdResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantByIdResponse clone() => GetAccountAssistantByIdResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetAccountAssistantByIdResponse copyWith(void Function(GetAccountAssistantByIdResponse) updates) => super.copyWith((message) => updates(message as GetAccountAssistantByIdResponse)) as GetAccountAssistantByIdResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantByIdResponse create() => GetAccountAssistantByIdResponse._();
+  GetAccountAssistantByIdResponse createEmptyInstance() => create();
+  static $pb.PbList<GetAccountAssistantByIdResponse> createRepeated() => $pb.PbList<GetAccountAssistantByIdResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetAccountAssistantByIdResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccountAssistantByIdResponse>(create);
+  static GetAccountAssistantByIdResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $2.ResponseMeta get responseMeta => $_getN(0);
+  @$pb.TagNumber(1)
+  set responseMeta($2.ResponseMeta v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasResponseMeta() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearResponseMeta() => clearField(1);
+  @$pb.TagNumber(1)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $6.AccountAssistant get accountAssistant => $_getN(1);
+  @$pb.TagNumber(2)
+  set accountAssistant($6.AccountAssistant v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccountAssistant() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearAccountAssistant() => clearField(2);
+  @$pb.TagNumber(2)
+  $6.AccountAssistant ensureAccountAssistant() => $_ensure(1);
+}
+

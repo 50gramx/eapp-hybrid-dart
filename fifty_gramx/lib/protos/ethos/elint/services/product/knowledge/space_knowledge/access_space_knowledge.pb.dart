@@ -9,9 +9,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space_knowledge.pb.dart' as $58;
+import '../../../../entities/space_knowledge.pb.dart' as $59;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
 
 class SpaceKnowledgeAccessTokenResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeAccessTokenResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
@@ -153,17 +153,17 @@ class ValidateSpaceKnowledgeServicesResponse extends $pb.GeneratedMessage {
 
 class SpaceKnowledgeServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..aOM<$58.SpaceKnowledge>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledge', subBuilder: $58.SpaceKnowledge.create)
+    ..aOM<$59.SpaceKnowledge>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledge', subBuilder: $59.SpaceKnowledge.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   SpaceKnowledgeServicesAccessAuthDetails._() : super();
   factory SpaceKnowledgeServicesAccessAuthDetails({
-    $58.SpaceKnowledge? spaceKnowledge,
+    $59.SpaceKnowledge? spaceKnowledge,
     $2.PersistentSessionTokenDetails? spaceKnowledgeServicesAccessSessionTokenDetails,
-    $54.Timestamp? requestedAt,
+    $55.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceKnowledge != null) {
@@ -199,15 +199,15 @@ class SpaceKnowledgeServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static SpaceKnowledgeServicesAccessAuthDetails? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $58.SpaceKnowledge get spaceKnowledge => $_getN(0);
+  $59.SpaceKnowledge get spaceKnowledge => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledge($58.SpaceKnowledge v) { setField(1, v); }
+  set spaceKnowledge($59.SpaceKnowledge v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledge() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledge() => clearField(1);
   @$pb.TagNumber(1)
-  $58.SpaceKnowledge ensureSpaceKnowledge() => $_ensure(0);
+  $59.SpaceKnowledge ensureSpaceKnowledge() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.PersistentSessionTokenDetails get spaceKnowledgeServicesAccessSessionTokenDetails => $_getN(1);
@@ -221,14 +221,14 @@ class SpaceKnowledgeServicesAccessAuthDetails extends $pb.GeneratedMessage {
   $2.PersistentSessionTokenDetails ensureSpaceKnowledgeServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get requestedAt => $_getN(2);
+  $55.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($54.Timestamp v) { setField(3, v); }
+  set requestedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureRequestedAt() => $_ensure(2);
+  $55.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

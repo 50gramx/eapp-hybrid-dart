@@ -9,7 +9,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $54;
+import '../../../google/protobuf/timestamp.pb.dart' as $55;
 
 import 'account.pbenum.dart';
 
@@ -27,10 +27,10 @@ class Account extends $pb.GeneratedMessage {
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFirstName')
     ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountLastName')
     ..aOS(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGalaxyId')
-    ..aOM<$54.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBirthAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBirthAt', subBuilder: $55.Timestamp.create)
     ..e<AccountGender>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGender', $pb.PbFieldType.OE, defaultOrMaker: AccountGender.UNKNOWN, valueOf: AccountGender.valueOf, enumValues: AccountGender.values)
-    ..aOM<$54.Timestamp>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $54.Timestamp.create)
-    ..aOS(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBillingActive')
+    ..aOM<$55.Timestamp>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
+    ..aOB(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBillingActive')
     ..hasRequiredFields = false
   ;
 
@@ -45,10 +45,10 @@ class Account extends $pb.GeneratedMessage {
     $core.String? accountFirstName,
     $core.String? accountLastName,
     $core.String? accountGalaxyId,
-    $54.Timestamp? accountBirthAt,
+    $55.Timestamp? accountBirthAt,
     AccountGender? accountGender,
-    $54.Timestamp? createdAt,
-    $core.String? accountBillingActive,
+    $55.Timestamp? createdAt,
+    $core.bool? accountBillingActive,
   }) {
     final _result = create();
     if (accountAnalyticsId != null) {
@@ -195,15 +195,15 @@ class Account extends $pb.GeneratedMessage {
   void clearAccountGalaxyId() => clearField(9);
 
   @$pb.TagNumber(10)
-  $54.Timestamp get accountBirthAt => $_getN(9);
+  $55.Timestamp get accountBirthAt => $_getN(9);
   @$pb.TagNumber(10)
-  set accountBirthAt($54.Timestamp v) { setField(10, v); }
+  set accountBirthAt($55.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasAccountBirthAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearAccountBirthAt() => clearField(10);
   @$pb.TagNumber(10)
-  $54.Timestamp ensureAccountBirthAt() => $_ensure(9);
+  $55.Timestamp ensureAccountBirthAt() => $_ensure(9);
 
   @$pb.TagNumber(11)
   AccountGender get accountGender => $_getN(10);
@@ -215,20 +215,20 @@ class Account extends $pb.GeneratedMessage {
   void clearAccountGender() => clearField(11);
 
   @$pb.TagNumber(12)
-  $54.Timestamp get createdAt => $_getN(11);
+  $55.Timestamp get createdAt => $_getN(11);
   @$pb.TagNumber(12)
-  set createdAt($54.Timestamp v) { setField(12, v); }
+  set createdAt($55.Timestamp v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasCreatedAt() => $_has(11);
   @$pb.TagNumber(12)
   void clearCreatedAt() => clearField(12);
   @$pb.TagNumber(12)
-  $54.Timestamp ensureCreatedAt() => $_ensure(11);
+  $55.Timestamp ensureCreatedAt() => $_ensure(11);
 
   @$pb.TagNumber(13)
-  $core.String get accountBillingActive => $_getSZ(12);
+  $core.bool get accountBillingActive => $_getBF(12);
   @$pb.TagNumber(13)
-  set accountBillingActive($core.String v) { $_setString(12, v); }
+  set accountBillingActive($core.bool v) { $_setBool(12, v); }
   @$pb.TagNumber(13)
   $core.bool hasAccountBillingActive() => $_has(12);
   @$pb.TagNumber(13)
@@ -240,7 +240,7 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAccessSessionToken')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
-    ..aOM<$54.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -249,7 +249,7 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.String? knowledgeSpaceAccessSessionToken,
     $core.String? spaceKnowledgeId,
-    $54.Timestamp? accessAt,
+    $55.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -315,15 +315,15 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $54.Timestamp get accessAt => $_getN(3);
+  $55.Timestamp get accessAt => $_getN(3);
   @$pb.TagNumber(4)
-  set accessAt($54.Timestamp v) { setField(4, v); }
+  set accessAt($55.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasAccessAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearAccessAt() => clearField(4);
   @$pb.TagNumber(4)
-  $54.Timestamp ensureAccessAt() => $_ensure(3);
+  $55.Timestamp ensureAccessAt() => $_ensure(3);
 }
 
 class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
@@ -332,7 +332,7 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAccessSessionToken')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
-    ..aOM<$54.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -342,7 +342,7 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
     $core.String? knowledgeSpaceAccessSessionToken,
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeDomainId,
-    $54.Timestamp? accessAt,
+    $55.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -420,15 +420,15 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $54.Timestamp get accessAt => $_getN(4);
+  $55.Timestamp get accessAt => $_getN(4);
   @$pb.TagNumber(5)
-  set accessAt($54.Timestamp v) { setField(5, v); }
+  set accessAt($55.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAccessAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearAccessAt() => clearField(5);
   @$pb.TagNumber(5)
-  $54.Timestamp ensureAccessAt() => $_ensure(4);
+  $55.Timestamp ensureAccessAt() => $_ensure(4);
 }
 
 class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
@@ -438,7 +438,7 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileId')
-    ..aOM<$54.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -449,7 +449,7 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeDomainId,
     $core.String? spaceKnowledgeDomainFileId,
-    $54.Timestamp? accessAt,
+    $55.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -539,15 +539,15 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainFileId() => clearField(5);
 
   @$pb.TagNumber(6)
-  $54.Timestamp get accessAt => $_getN(5);
+  $55.Timestamp get accessAt => $_getN(5);
   @$pb.TagNumber(6)
-  set accessAt($54.Timestamp v) { setField(6, v); }
+  set accessAt($55.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAccessAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearAccessAt() => clearField(6);
   @$pb.TagNumber(6)
-  $54.Timestamp ensureAccessAt() => $_ensure(5);
+  $55.Timestamp ensureAccessAt() => $_ensure(5);
 }
 
 class AccountConnectedAccount extends $pb.GeneratedMessage {
@@ -556,7 +556,7 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountInterestedInConnection')
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountInterestedInConnection')
-    ..aOM<$54.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -566,7 +566,7 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.bool? accountInterestedInConnection,
     $core.bool? connectedAccountInterestedInConnection,
-    $54.Timestamp? connectedAt,
+    $55.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountConnectionId != null) {
@@ -644,22 +644,22 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
   void clearConnectedAccountInterestedInConnection() => clearField(4);
 
   @$pb.TagNumber(5)
-  $54.Timestamp get connectedAt => $_getN(4);
+  $55.Timestamp get connectedAt => $_getN(4);
   @$pb.TagNumber(5)
-  set connectedAt($54.Timestamp v) { setField(5, v); }
+  set connectedAt($55.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasConnectedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearConnectedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $54.Timestamp ensureConnectedAt() => $_ensure(4);
+  $55.Timestamp ensureConnectedAt() => $_ensure(4);
 }
 
 class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountConnectedAccountAssistant', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantConnectionId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
-    ..aOM<$54.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $54.Timestamp.create)
+    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -667,7 +667,7 @@ class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   factory AccountConnectedAccountAssistant({
     $core.String? accountAssistantConnectionId,
     $core.String? accountAssistantId,
-    $54.Timestamp? connectedAt,
+    $55.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountAssistantConnectionId != null) {
@@ -721,15 +721,15 @@ class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   void clearAccountAssistantId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $54.Timestamp get connectedAt => $_getN(2);
+  $55.Timestamp get connectedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set connectedAt($54.Timestamp v) { setField(3, v); }
+  set connectedAt($55.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasConnectedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearConnectedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $54.Timestamp ensureConnectedAt() => $_ensure(2);
+  $55.Timestamp ensureConnectedAt() => $_ensure(2);
 }
 
 class AccountDeviceDetails extends $pb.GeneratedMessage {
@@ -852,6 +852,184 @@ class AccountMobile extends $pb.GeneratedMessage {
   $core.bool hasAccountMobileNumber() => $_has(1);
   @$pb.TagNumber(2)
   void clearAccountMobileNumber() => clearField(2);
+}
+
+class AccountMeta extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMeta', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFirstName')
+    ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountLastName')
+    ..aOS(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGalaxyId')
+    ..e<AccountGender>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGender', $pb.PbFieldType.OE, defaultOrMaker: AccountGender.UNKNOWN, valueOf: AccountGender.valueOf, enumValues: AccountGender.values)
+    ..hasRequiredFields = false
+  ;
+
+  AccountMeta._() : super();
+  factory AccountMeta({
+    $core.String? accountId,
+    $core.String? accountFirstName,
+    $core.String? accountLastName,
+    $core.String? accountGalaxyId,
+    AccountGender? accountGender,
+  }) {
+    final _result = create();
+    if (accountId != null) {
+      _result.accountId = accountId;
+    }
+    if (accountFirstName != null) {
+      _result.accountFirstName = accountFirstName;
+    }
+    if (accountLastName != null) {
+      _result.accountLastName = accountLastName;
+    }
+    if (accountGalaxyId != null) {
+      _result.accountGalaxyId = accountGalaxyId;
+    }
+    if (accountGender != null) {
+      _result.accountGender = accountGender;
+    }
+    return _result;
+  }
+  factory AccountMeta.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountMeta.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountMeta clone() => AccountMeta()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountMeta copyWith(void Function(AccountMeta) updates) => super.copyWith((message) => updates(message as AccountMeta)) as AccountMeta; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountMeta create() => AccountMeta._();
+  AccountMeta createEmptyInstance() => create();
+  static $pb.PbList<AccountMeta> createRepeated() => $pb.PbList<AccountMeta>();
+  @$core.pragma('dart2js:noInline')
+  static AccountMeta getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountMeta>(create);
+  static AccountMeta? _defaultInstance;
+
+  @$pb.TagNumber(2)
+  $core.String get accountId => $_getSZ(0);
+  @$pb.TagNumber(2)
+  set accountId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasAccountId() => $_has(0);
+  @$pb.TagNumber(2)
+  void clearAccountId() => clearField(2);
+
+  @$pb.TagNumber(7)
+  $core.String get accountFirstName => $_getSZ(1);
+  @$pb.TagNumber(7)
+  set accountFirstName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasAccountFirstName() => $_has(1);
+  @$pb.TagNumber(7)
+  void clearAccountFirstName() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get accountLastName => $_getSZ(2);
+  @$pb.TagNumber(8)
+  set accountLastName($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasAccountLastName() => $_has(2);
+  @$pb.TagNumber(8)
+  void clearAccountLastName() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.String get accountGalaxyId => $_getSZ(3);
+  @$pb.TagNumber(9)
+  set accountGalaxyId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasAccountGalaxyId() => $_has(3);
+  @$pb.TagNumber(9)
+  void clearAccountGalaxyId() => clearField(9);
+
+  @$pb.TagNumber(11)
+  AccountGender get accountGender => $_getN(4);
+  @$pb.TagNumber(11)
+  set accountGender(AccountGender v) { setField(11, v); }
+  @$pb.TagNumber(11)
+  $core.bool hasAccountGender() => $_has(4);
+  @$pb.TagNumber(11)
+  void clearAccountGender() => clearField(11);
+}
+
+class MessageInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isUrgent')
+    ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isImportant')
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSensitive')
+    ..hasRequiredFields = false
+  ;
+
+  MessageInfo._() : super();
+  factory MessageInfo({
+    $core.bool? isUrgent,
+    $core.bool? isImportant,
+    $core.bool? isSensitive,
+  }) {
+    final _result = create();
+    if (isUrgent != null) {
+      _result.isUrgent = isUrgent;
+    }
+    if (isImportant != null) {
+      _result.isImportant = isImportant;
+    }
+    if (isSensitive != null) {
+      _result.isSensitive = isSensitive;
+    }
+    return _result;
+  }
+  factory MessageInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory MessageInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  MessageInfo clone() => MessageInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  MessageInfo copyWith(void Function(MessageInfo) updates) => super.copyWith((message) => updates(message as MessageInfo)) as MessageInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static MessageInfo create() => MessageInfo._();
+  MessageInfo createEmptyInstance() => create();
+  static $pb.PbList<MessageInfo> createRepeated() => $pb.PbList<MessageInfo>();
+  @$core.pragma('dart2js:noInline')
+  static MessageInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MessageInfo>(create);
+  static MessageInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get isUrgent => $_getBF(0);
+  @$pb.TagNumber(1)
+  set isUrgent($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIsUrgent() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIsUrgent() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get isImportant => $_getBF(1);
+  @$pb.TagNumber(2)
+  set isImportant($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasIsImportant() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearIsImportant() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get isSensitive => $_getBF(2);
+  @$pb.TagNumber(3)
+  set isSensitive($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasIsSensitive() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIsSensitive() => clearField(3);
 }
 
 class AccountPayInCardDetails extends $pb.GeneratedMessage {
@@ -997,5 +1175,80 @@ class AccountPayInCardDetails extends $pb.GeneratedMessage {
   $core.bool hasLast4Digits() => $_has(7);
   @$pb.TagNumber(8)
   void clearLast4Digits() => clearField(8);
+}
+
+class AccountTransaction extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountTransaction', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isDebited')
+    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'amount', $pb.PbFieldType.OD)
+    ..a<$core.double>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'balance', $pb.PbFieldType.OD)
+    ..hasRequiredFields = false
+  ;
+
+  AccountTransaction._() : super();
+  factory AccountTransaction({
+    $core.bool? isDebited,
+    $core.double? amount,
+    $core.double? balance,
+  }) {
+    final _result = create();
+    if (isDebited != null) {
+      _result.isDebited = isDebited;
+    }
+    if (amount != null) {
+      _result.amount = amount;
+    }
+    if (balance != null) {
+      _result.balance = balance;
+    }
+    return _result;
+  }
+  factory AccountTransaction.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountTransaction.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountTransaction clone() => AccountTransaction()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountTransaction copyWith(void Function(AccountTransaction) updates) => super.copyWith((message) => updates(message as AccountTransaction)) as AccountTransaction; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountTransaction create() => AccountTransaction._();
+  AccountTransaction createEmptyInstance() => create();
+  static $pb.PbList<AccountTransaction> createRepeated() => $pb.PbList<AccountTransaction>();
+  @$core.pragma('dart2js:noInline')
+  static AccountTransaction getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountTransaction>(create);
+  static AccountTransaction? _defaultInstance;
+
+  @$pb.TagNumber(3)
+  $core.bool get isDebited => $_getBF(0);
+  @$pb.TagNumber(3)
+  set isDebited($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasIsDebited() => $_has(0);
+  @$pb.TagNumber(3)
+  void clearIsDebited() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get amount => $_getN(1);
+  @$pb.TagNumber(4)
+  set amount($core.double v) { $_setDouble(1, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAmount() => $_has(1);
+  @$pb.TagNumber(4)
+  void clearAmount() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.double get balance => $_getN(2);
+  @$pb.TagNumber(5)
+  set balance($core.double v) { $_setDouble(2, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBalance() => $_has(2);
+  @$pb.TagNumber(5)
+  void clearBalance() => clearField(5);
 }
 
