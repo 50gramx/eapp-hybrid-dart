@@ -1,11 +1,11 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/notification/local_notification_service.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/LocalConnectionsService.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
@@ -16,7 +16,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-
 // Import package
 import 'package:permission_handler/permission_handler.dart';
 
@@ -33,8 +32,12 @@ void main() async {
   }
 
   if (isLoggedIn) {
-    if (await Permission.contacts.request().isGranted) {
-      ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+    if (Platform.isAndroid || Platform.isIOS) {
+      if (await Permission.contacts.request().isGranted) {
+        ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+      }
+    } else if (Platform.isWindows) {
+      print("Detected Platform Windows");
     }
     await LocalServices().loadLocalServices();
   }

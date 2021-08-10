@@ -1,8 +1,6 @@
 import 'dart:ui';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/onboardingWidgets/freeTierBenefitsCardItem.dart';
 import 'package:fifty_gramx/widgets/onboardingWidgets/tierDropdownRichText.dart';
 import 'package:flutter/widgets.dart';
@@ -208,7 +206,7 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
                             AppColors.backgroundInverseSecondary(context),
                         value: _selectedTier.title
                             .substring(0, _selectedTier.title.length - 8),
-                        alignment: Alignment.center,
+                        // alignment: Alignment.center,
                         style: TextStyle(
                             color: AppColors.contentInversePrimary(context),
                             fontSize: 14,

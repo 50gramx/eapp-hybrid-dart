@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
@@ -18,10 +20,15 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-
   getStartedButtonOnPressed() async {
-    if (await Permission.contacts.request().isGranted) {
+    if (Platform.isAndroid || Platform.isIOS) {
+      if (await Permission.contacts.request().isGranted) {
+        pushToGetStartedWidget();
+      }
+    } else if (Platform.isWindows) {
       pushToGetStartedWidget();
+    } else if (Platform.isMacOS) {
+      print("Detected MacOS");
     }
   }
 
@@ -32,7 +39,6 @@ class _StartScreenState extends State<StartScreen> {
     "Simple",
     "Secure",
   ];
-
 
   List<IconData> ethosaiFeaturesParaIcons = [
     FeatherIcons.users,
@@ -48,8 +54,12 @@ class _StartScreenState extends State<StartScreen> {
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.backgroundPrimary(context),
-        statusBarBrightness: NeumorphicTheme.isUsingDark(context) ? Brightness.light : Brightness.dark,
-      statusBarIconBrightness: NeumorphicTheme.isUsingDark(context) ? Brightness.light : Brightness.dark,
+      statusBarBrightness: NeumorphicTheme.isUsingDark(context)
+          ? Brightness.light
+          : Brightness.dark,
+      statusBarIconBrightness: NeumorphicTheme.isUsingDark(context)
+          ? Brightness.light
+          : Brightness.dark,
     ));
     super.initState();
   }
@@ -63,15 +73,15 @@ class _StartScreenState extends State<StartScreen> {
   Widget build(BuildContext context) {
     ethosaiFeaturesParaRows = [];
     for (var paraIndex = 0;
-    paraIndex < ethosaiFeaturesParaTexts.length;
-    paraIndex++) {
+        paraIndex < ethosaiFeaturesParaTexts.length;
+        paraIndex++) {
       ethosaiFeaturesParaRows.add(Row(
         children: [
           Expanded(
             child: Container(
               child: Padding(
                 padding:
-                EdgeInsets.only(left: 8, right: 16, top: 16, bottom: 16),
+                    EdgeInsets.only(left: 8, right: 16, top: 16, bottom: 16),
                 child: Text(
                   '${ethosaiFeaturesParaTexts[paraIndex]}',
                   textAlign: TextAlign.center,
@@ -92,150 +102,157 @@ class _StartScreenState extends State<StartScreen> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
-          body: Container(
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: 40,
-                      height: 40,
-                    ),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.circular(24)),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
+            body: Container(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: 40,
+                        height: 40,
+                      ),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Neumorphic(
+                              style: NeumorphicStyle(
+                                lightSource:
+                                    NeumorphicTheme.isUsingDark(context)
+                                        ? LightSource.bottomRight
+                                        : LightSource.topLeft,
+                                shadowLightColor: NeumorphicTheme.isUsingDark(
+                                        context)
+                                    ? AppColors.gray600
+                                    : AppColors.backgroundSecondary(context),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                    BorderRadius.circular(24)),
                                 color: AppColors.backgroundPrimary(context),
-                                width: 2,
+                                border: NeumorphicBorder(
+                                  isEnabled: true,
+                                  color: AppColors.backgroundPrimary(context),
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-                            child: Container(
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 16,
-                                              left: 16,
-                                              right: 16,
-                                              bottom: 4),
-                                          child: RichText(
-                                            text: TextSpan(
-                                              text: "iEthos",
-                                              style: TextStyle(
-                                                  color: AppColors.contentPrimary(
-                                                      context),
-                                                  fontSize: 20,
-                                                  fontFamily: "Montserrat",
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.14285714),
+                              margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+                              child: Container(
+                                child: Column(children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 16,
+                                                left: 16,
+                                                right: 16,
+                                                bottom: 4),
+                                            child: RichText(
+                                              text: TextSpan(
+                                                text: "iEthos",
+                                                style: TextStyle(
+                                                    color: AppColors
+                                                        .contentPrimary(
+                                                            context),
+                                                    fontSize: 20,
+                                                    fontFamily: "Montserrat",
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.14285714),
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 16,
-                                              right: 16,
-                                              top: 4,
-                                              bottom: 16),
-                                          child: RichText(
-
-                                            text: TextSpan(
-                                              text:
-                                              "Allow iEthos to connect your contacts",
-                                              style: TextStyle(
-                                                  color: AppColors.contentSecondary(
-                                                      context),
-                                                  fontSize: 16,
-                                                  fontFamily: "Montserrat",
-                                                  fontWeight: FontWeight.w400,
-                                                  height: 1.14285714),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 4,
+                                                bottom: 16),
+                                            child: RichText(
+                                              text: TextSpan(
+                                                text:
+                                                    "Allow iEthos to connect your contacts",
+                                                style: TextStyle(
+                                                    color: AppColors
+                                                        .contentSecondary(
+                                                            context),
+                                                    fontSize: 16,
+                                                    fontFamily: "Montserrat",
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.14285714),
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: ethosaiFeaturesParaRows,
-                                ),
-                                Row(children: [
-                                  Expanded(
-                                    child: NeumorphicButton(
-                                        provideHapticFeedback: true,
-                                        onPressed: () {
-                                          getStartedButtonOnPressed();
-                                        },
-                                        style: NeumorphicStyle(
-                                          lightSource:
-                                          NeumorphicTheme.isUsingDark(context)
-                                              ? LightSource.bottomRight
-                                              : LightSource.topLeft,
-                                          shadowLightColor:
-                                          NeumorphicTheme.isUsingDark(context)
-                                              ? AppColors.gray600
-                                              : AppColors.backgroundSecondary(
-                                              context),
-                                          shape: NeumorphicShape.flat,
-                                          boxShape: NeumorphicBoxShape.roundRect(
-                                              BorderRadius.circular(24)),
-                                          color: AppColors.contentPrimary(context),
-                                          border: NeumorphicBorder(
-                                            isEnabled: true,
-                                            color:
-                                            AppColors.backgroundPrimary(context),
-                                            width: 2,
+                                    ],
+                                  ),
+                                  Column(
+                                    children: ethosaiFeaturesParaRows,
+                                  ),
+                                  Row(children: [
+                                    Expanded(
+                                      child: NeumorphicButton(
+                                          provideHapticFeedback: true,
+                                          onPressed: () {
+                                            getStartedButtonOnPressed();
+                                          },
+                                          style: NeumorphicStyle(
+                                            lightSource:
+                                                NeumorphicTheme.isUsingDark(
+                                                        context)
+                                                    ? LightSource.bottomRight
+                                                    : LightSource.topLeft,
+                                            shadowLightColor: NeumorphicTheme
+                                                    .isUsingDark(context)
+                                                ? AppColors.gray600
+                                                : AppColors.backgroundSecondary(
+                                                    context),
+                                            shape: NeumorphicShape.flat,
+                                            boxShape:
+                                                NeumorphicBoxShape.roundRect(
+                                                    BorderRadius.circular(24)),
+                                            color: AppColors.contentPrimary(
+                                                context),
+                                            border: NeumorphicBorder(
+                                              isEnabled: true,
+                                              color:
+                                                  AppColors.backgroundPrimary(
+                                                      context),
+                                              width: 2,
+                                            ),
                                           ),
-                                        ),
-                                        padding: const EdgeInsets.all(14.0),
-                                        margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-                                        child: Text(
-                                          "Get Started",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: AppColors.contentInversePrimary(
-                                                  context),
-                                              fontSize: 14,
-                                              fontFamily: "Montserrat",
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                  )
+                                          padding: const EdgeInsets.all(14.0),
+                                          margin: const EdgeInsets.fromLTRB(
+                                              6, 6, 6, 6),
+                                          child: Text(
+                                            "Get Started",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: AppColors
+                                                    .contentInversePrimary(
+                                                        context),
+                                                fontSize: 14,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w500),
+                                          )),
+                                    )
+                                  ]),
                                 ]),
-                              ]),
-                            ))),
-                    SizedBox(height: 32),
-                  ],
+                              ))),
+                      SizedBox(height: 32),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          )
-        );
+            ));
       },
     );
   }

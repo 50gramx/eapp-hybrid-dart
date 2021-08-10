@@ -1,37 +1,25 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/galaxy.pb.dart';
-import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
 import 'package:fifty_gramx/services/payments/spaceTierPayments.dart';
-import 'package:fifty_gramx/widgets/components/Cards/SpaceViewCard.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuIconButton.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormSubHeadingText.dart';
 import 'package:fifty_gramx/widgets/components/listItem/progress/progressContentListTile.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/addEthosCoinWidget.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/ethosCoinBalanceCard.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/freeTierBenefitsCardItem.dart';
 import 'package:fifty_gramx/widgets/onboardingWidgets/tierSelectionWidget.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-//import for GooglePlayProductDetails
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-
 //import for SkuDetailsWrapper
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
+//import for GooglePlayProductDetails
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class GettingStartedGalaxyColumnWidget extends StatefulWidget {
   const GettingStartedGalaxyColumnWidget(
@@ -255,16 +243,18 @@ class _GettingStartedGalaxyColumnWidgetState
     });
     checkBillingActive();
 
-    final Stream<List<PurchaseDetails>> purchaseUpdated =
-        InAppPurchase.instance.purchaseStream;
+    if (Platform.isAndroid) {
+      final Stream<List<PurchaseDetails>> purchaseUpdated =
+          InAppPurchase.instance.purchaseStream;
 
-    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      _subscription.cancel();
-    }, onError: (error) {
-      // handle error here.
-    });
+      _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+        _listenToPurchaseUpdated(purchaseDetailsList);
+      }, onDone: () {
+        _subscription.cancel();
+      }, onError: (error) {
+        // handle error here.
+      });
+    }
 
     getAccountDetails();
     super.initState();
