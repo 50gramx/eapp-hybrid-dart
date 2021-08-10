@@ -45,8 +45,13 @@ dependencies:
   file_picker: ^3.0.3
   in_app_purchase: ^1.0.6
   contacts_service: ^0.6.1
+
+  # manages all the device level permissions
   permission_handler: ^8.1.2
+
+  # A cross platform plugin for displaying local notifications.
   flutter_local_notifications: ^6.0.0
+
   speech_to_text: ^4.2.2
   msix: ^2.1.3
 

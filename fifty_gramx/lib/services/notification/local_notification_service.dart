@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
@@ -17,9 +15,11 @@ class LocalNotificationService {
   LocalNotificationService._internal();
 
   Future<void> init() async {
+    // +++ Initialising the settings for Android
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('launcher_icon');
 
+    // +++ Initialising the settings for iOS
     final IOSInitializationSettings initializationSettingsIOS =
         IOSInitializationSettings(
       requestSoundPermission: false,
@@ -28,27 +28,73 @@ class LocalNotificationService {
       // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
+    // +++ Initialising the settings for MacOS
+    final MacOSInitializationSettings initializationSettingsMacOS =
+        MacOSInitializationSettings(
+            requestAlertPermission: false,
+            requestBadgePermission: false,
+            requestSoundPermission: false);
+
+    // +++ Finalising the Initialized settings for Platforms supported
+    // by FCM and flutter_local_notifications
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
             iOS: initializationSettingsIOS,
-            macOS: null);
+            macOS: initializationSettingsMacOS);
 
+    // --> Wait till settings are initialized
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: selectNotification);
 
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails("com.fiftygramx.ethosai",
-            "notifications.local", "SMS Notifications",
-            importance: Importance.high,
-          priority: Priority.high,
-          playSound: true,
+    final bool? resultIOS = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
         );
+    print("resultIOS: ${resultIOS}");
 
-    if (Platform.isAndroid) {
-      platformChannelSpecifics =
-          NotificationDetails(android: androidPlatformChannelSpecifics);
-    }
+    final bool? resultMACOS = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            MacOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+    print("resultMACOS: ${resultMACOS}");
+
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      "com.fiftygramx.ethosai",
+      "notifications.local",
+      "SMS Notifications",
+      importance: Importance.high,
+      priority: Priority.high,
+      playSound: true,
+    );
+
+    const IOSNotificationDetails iosNotificationDetails =
+        IOSNotificationDetails(
+      presentSound: true,
+      presentAlert: true,
+    );
+
+    const MacOSNotificationDetails macOSNotificationDetails =
+        MacOSNotificationDetails(
+      presentSound: true,
+      presentAlert: true,
+    );
+
+    // Setting the platform channel specifics
+    platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: iosNotificationDetails,
+      macOS: macOSNotificationDetails,
+    );
   }
 
   showLocalNotification(
