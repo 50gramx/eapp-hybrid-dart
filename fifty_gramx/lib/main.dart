@@ -21,7 +21,9 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   print("executing main");
+  print("will ensureInitialized");
   WidgetsFlutterBinding.ensureInitialized();
+  print("ensureInitialized done..");
 
   var isLoggedIn = await checkLogin();
   print("isLoggedIn: $isLoggedIn");
