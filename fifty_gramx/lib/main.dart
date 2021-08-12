@@ -20,20 +20,28 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
+  print("executing main");
   WidgetsFlutterBinding.ensureInitialized();
 
   var isLoggedIn = await checkLogin();
+  print("isLoggedIn: $isLoggedIn");
   var isAccountTierActive = await checkTierActive();
+  print("isAccountTierActive: $isAccountTierActive");
   PushNotificationService.instance.start();
+  print("PushNotificationService.instance.start()");
   LocalNotificationService().init();
+  print("LocalNotificationService().init()");
 
   if (defaultTargetPlatform == TargetPlatform.android) {
     InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+    print("InAppPurchaseAndroidPlatformAddition.enablePendingPurchases()");
   }
 
   if (isLoggedIn) {
     if (Platform.isAndroid || Platform.isIOS) {
+      print("requesting contacts permission");
       if (await Permission.contacts.request().isGranted) {
+        print("Contacts permission granted");
         ContactService.syncAccountConnectionsWithExistingAccountMobiles();
       }
     } else if (Platform.isWindows) {
