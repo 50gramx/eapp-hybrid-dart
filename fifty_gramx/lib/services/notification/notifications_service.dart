@@ -28,11 +28,15 @@ class PushNotificationService {
   // YOU HAVE TO CALL THIS FROM SOMEWHERE (May be main widget)
   // ********************************************************* //
   Future<void> start() async {
+    print("start");
     // Verify this isSupported (Safari doesn't support PUSH API's)
     if (!_started && (await firebaseMessaging).isSupported()) {
+      print("firebase supported");
       await _start();
       _started = true;
       _refreshToken();
+    } else {
+      print("firebase is not supported");
     }
   }
 
@@ -65,10 +69,13 @@ class PushNotificationService {
   updateLastCheckedDeviceToken() async {
     NotificationSettings settings = await getSettings();
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print("notification settings authorized");
       isNotificationFailure = false;
       _lastCheckedDeviceToken = (await (await firebaseMessaging).getToken())!;
+      print("_lastCheckedDeviceToken: $_lastCheckedDeviceToken");
       return _lastCheckedDeviceToken;
     } else {
+      print("notification settings not authorized");
       isNotificationFailure = true;
     }
   }
@@ -79,10 +86,12 @@ class PushNotificationService {
   }
 
   String getLastCheckedDeviceToken() {
+    print("getLastCheckedDeviceToken: $_lastCheckedDeviceToken");
     return _lastCheckedDeviceToken;
   }
 
   void _tokenRefresh(String newToken) {
+    print("_tokenRefresh: $newToken");
     _lastCheckedDeviceToken = newToken;
   }
 
@@ -126,6 +135,11 @@ class PushNotificationService {
     } else if (Platform.isIOS) {
       accountDeviceDetails = AccountDeviceDetails()
         ..accountDeviceOs = AccountDeviceOS.IOS
+        ..deviceToken =
+            PushNotificationService.instance.getLastCheckedDeviceToken();
+    } else if (Platform.isMacOS) {
+      accountDeviceDetails = AccountDeviceDetails()
+        ..accountDeviceOs = AccountDeviceOS.MACOS
         ..deviceToken =
             PushNotificationService.instance.getLastCheckedDeviceToken();
     }

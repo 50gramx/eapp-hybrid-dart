@@ -27,7 +27,7 @@ class CupertinoBottomNavigationScaffold extends StatelessWidget {
         // the controller every time the widget is rebuilt.
         controller: CupertinoTabController(initialIndex: selectedIndex),
         tabBar: CupertinoTabBar(
-          backgroundColor: AppColors.lightNeuPrimary,
+          backgroundColor: AppColors.backgroundPrimary(context),
           items: navigationBarItems
               .map(
                 (item) => item.bottomNavigationBarItem,

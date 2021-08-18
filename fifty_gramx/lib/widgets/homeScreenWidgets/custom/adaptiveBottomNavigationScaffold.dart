@@ -69,7 +69,6 @@ class _AdaptiveBottomNavigationScaffoldState
     // the tab change.
     if (Platform.isAndroid) {
       setState(() {
-        print("onTabSelected:_currentlySelectedIndex: $newIndex");
         _currentlySelectedIndex = newIndex;
       });
     } else {

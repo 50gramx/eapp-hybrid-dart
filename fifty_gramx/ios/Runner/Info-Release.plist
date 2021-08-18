@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>App recognises your language to take action and assist you</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>App listen to your commands to take action and assist you</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App learns the files and photos content to assist you</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>com.fiftygramx.ethosai</string>
@@ -54,5 +60,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<true/>
 </dict>
 </plist>

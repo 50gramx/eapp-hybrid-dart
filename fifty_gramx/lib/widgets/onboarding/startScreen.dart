@@ -28,7 +28,7 @@ class _StartScreenState extends State<StartScreen> {
     } else if (Platform.isWindows) {
       pushToGetStartedWidget();
     } else if (Platform.isMacOS) {
-      print("Detected MacOS");
+      pushToGetStartedWidget();
     }
   }
 

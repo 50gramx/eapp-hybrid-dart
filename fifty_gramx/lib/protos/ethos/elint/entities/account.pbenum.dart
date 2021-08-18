@@ -29,10 +29,16 @@ class AccountGender extends $pb.ProtobufEnum {
 class AccountDeviceOS extends $pb.ProtobufEnum {
   static const AccountDeviceOS IOS = AccountDeviceOS._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'IOS');
   static const AccountDeviceOS ANDROID = AccountDeviceOS._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ANDROID');
+  static const AccountDeviceOS MACOS = AccountDeviceOS._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'MACOS');
+  static const AccountDeviceOS WINDOWS = AccountDeviceOS._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'WINDOWS');
+  static const AccountDeviceOS LINUX = AccountDeviceOS._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'LINUX');
 
   static const $core.List<AccountDeviceOS> values = <AccountDeviceOS> [
     IOS,
     ANDROID,
+    MACOS,
+    WINDOWS,
+    LINUX,
   ];
 
   static final $core.Map<$core.int, AccountDeviceOS> _byValue = $pb.ProtobufEnum.initByValue(values);

@@ -26,11 +26,14 @@ const AccountDeviceOS$json = const {
   '2': const [
     const {'1': 'IOS', '2': 0},
     const {'1': 'ANDROID', '2': 1},
+    const {'1': 'MACOS', '2': 2},
+    const {'1': 'WINDOWS', '2': 3},
+    const {'1': 'LINUX', '2': 4},
   ],
 };
 
 /// Descriptor for `AccountDeviceOS`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List accountDeviceOSDescriptor = $convert.base64Decode('Cg9BY2NvdW50RGV2aWNlT1MSBwoDSU9TEAASCwoHQU5EUk9JRBAB');
+final $typed_data.Uint8List accountDeviceOSDescriptor = $convert.base64Decode('Cg9BY2NvdW50RGV2aWNlT1MSBwoDSU9TEAASCwoHQU5EUk9JRBABEgkKBU1BQ09TEAISCwoHV0lORE9XUxADEgkKBUxJTlVYEAQ=');
 @$core.Deprecated('Use messageEntityDescriptor instead')
 const MessageEntity$json = const {
   '1': 'MessageEntity',

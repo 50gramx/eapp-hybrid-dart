@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/notification/local_notification_service.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
+import 'package:fifty_gramx/ui/base_widget.dart';
+import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
@@ -20,78 +25,287 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
-  print("executing main");
-  print("will ensureInitialized");
   WidgetsFlutterBinding.ensureInitialized();
-  print("ensureInitialized done..");
 
-  var isLoggedIn = await checkLogin();
-  print("isLoggedIn: $isLoggedIn");
-  var isAccountTierActive = await checkTierActive();
-  print("isAccountTierActive: $isAccountTierActive");
-  PushNotificationService.instance.start();
-  print("PushNotificationService.instance.start()");
-  LocalNotificationService().init();
-  print("LocalNotificationService().init()");
+  // var isLoggedIn = await checkLogin();  // handling in future
+  // var isAccountTierActive = await checkTierActive();  // handling in future
+  // PushNotificationService.instance.start();  // handling in future
+  // LocalNotificationService().init();  // handling in future
 
-  if (defaultTargetPlatform == TargetPlatform.android) {
-    InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-    print("InAppPurchaseAndroidPlatformAddition.enablePendingPurchases()");
-  }
+  // if (defaultTargetPlatform == TargetPlatform.android) {
+  //   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+  // } else {} // handling in future
 
-  if (isLoggedIn) {
-    if (Platform.isAndroid || Platform.isIOS) {
-      print("requesting contacts permission");
-      if (await Permission.contacts.request().isGranted) {
-        print("Contacts permission granted");
-        ContactService.syncAccountConnectionsWithExistingAccountMobiles();
-      }
-    } else if (Platform.isWindows) {
-      print("Detected Platform Windows");
-    }
-    await LocalServices().loadLocalServices();
-  }
+  // if (isLoggedIn) {
+  //   if (Platform.isAndroid || Platform.isIOS) {
+  //     print("requesting contacts permission");
+  //     if (await Permission.contacts.request().isGranted) {
+  //       print("Contacts permission granted");
+  //       ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+  //     }
+  //   } else if (Platform.isWindows) {
+  //     print("Detected Platform Windows");
+  //   }
+  //   await LocalServices().loadLocalServices();
+  // } // handling in future
+
+  var isLoggedInWidget = FutureBuilder<bool>(
+      future: checkLogin(),
+      builder: (BuildContext context, loggedInSnapshot) {
+        if (loggedInSnapshot.connectionState == ConnectionState.waiting) {
+          return getLoadingPage("Verifying your account access", context);
+        } else {
+          // warn: expecting that verifying access always returns a bool value
+          // warn: starting the push notifcations service and local notification service
+          PushNotificationService.instance.start();
+          LocalNotificationService().init();
+          // warn: based on platform enabling in-app purchases
+          if (defaultTargetPlatform == TargetPlatform.android) {
+            InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+          } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+            // todo: handle in-app payments for iOS
+          } else {
+            // todo: handle in-app payments for desktops
+          }
+          if (loggedInSnapshot.data!) {
+            // reflect the account is logged in
+            if (Platform.isIOS || Platform.isAndroid) {
+              // do something
+              if (Platform.isIOS) {
+                // do check notifications permission
+                return FutureBuilder<bool>(
+                  future: Permission.notification.request().isGranted,
+                  builder: (BuildContext notificationPermissionContext,
+                      notificationPermissionSnapshot) {
+                    if (notificationPermissionSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return getLoadingPage(
+                          "Verifying notifications permissions",
+                          notificationPermissionContext);
+                    } else {
+                      if (notificationPermissionSnapshot.data!) {
+                        // do check contacts permission
+                        return FutureBuilder<bool>(
+                          future: Permission.contacts.request().isGranted,
+                          builder: (BuildContext contactsPermissionContext,
+                              contactsPermissionSnapshot) {
+                            if (contactsPermissionSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return getLoadingPage(
+                                  "Verifying contacts permissions",
+                                  contactsPermissionContext);
+                            } else {
+                              if (contactsPermissionSnapshot.data!) {
+                                LocalServices()
+                                    .loadLocalServices(); // not waiting for connections to load
+                                // todo: handle independent connections service
+                                ContactService
+                                    .syncAccountConnectionsWithExistingAccountMobiles();
+                                return FutureBuilder<bool>(
+                                  future: checkTierActive(),
+                                  builder: (BuildContext tierContext,
+                                      tierActiveSnapshot) {
+                                    if (tierActiveSnapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return getLoadingPage(
+                                          "Verifying your tier access",
+                                          tierContext);
+                                    } else {
+                                      if (tierActiveSnapshot.data!) {
+                                        return HomeScreen();
+                                      } else {
+                                        return GetStartedWidget(
+                                          isAccountLoggedIn: true,
+                                        );
+                                      }
+                                    }
+                                  },
+                                );
+                              } else {
+                                return getExplicitPermissionAllocationPage(
+                                    "Contacts permissions is needed for connecting. Please restart the app to allow and continue.",
+                                    "Allow Contacts in Settings",
+                                    "CONTACTS",
+                                    contactsPermissionContext);
+                              }
+                            }
+                          },
+                        );
+                      } else {
+                        return getExplicitPermissionAllocationPage(
+                            "Notifications permissions is needed for conversing. After allowing permission please restart the app to continue.",
+                            "Allow Notifications in Settings",
+                            "NOTIFICATIONS",
+                            notificationPermissionContext);
+                      }
+                    }
+                  },
+                );
+              } else {
+                // do check for contacts permission
+                return FutureBuilder<bool>(
+                  future: Permission.contacts.request().isGranted,
+                  builder: (BuildContext contactsPermissionContext,
+                      contactsPermissionSnapshot) {
+                    if (contactsPermissionSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return getLoadingPage("Verifying contacts permissions",
+                          contactsPermissionContext);
+                    } else {
+                      if (contactsPermissionSnapshot.data!) {
+                        LocalServices()
+                            .loadLocalServices(); // not waiting for connections to load
+                        // todo: handle independent connections service
+                        ContactService
+                            .syncAccountConnectionsWithExistingAccountMobiles();
+                        return FutureBuilder<bool>(
+                          future: checkTierActive(),
+                          builder:
+                              (BuildContext tierContext, tierActiveSnapshot) {
+                            if (tierActiveSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return getLoadingPage(
+                                  "Verifying your tier access", tierContext);
+                            } else {
+                              if (tierActiveSnapshot.data!) {
+                                return HomeScreen();
+                              } else {
+                                return GetStartedWidget(
+                                  isAccountLoggedIn: true,
+                                );
+                              }
+                            }
+                          },
+                        );
+                      } else {
+                        return getExplicitPermissionAllocationPage(
+                            "Contacts permissions is needed for connecting. Please restart the app to allow and continue.",
+                            "Allow Contacts in Settings",
+                            "CONTACTS",
+                            contactsPermissionContext);
+                      }
+                    }
+                  },
+                );
+              }
+            } else {
+              // platform is web or desktop
+              // do something
+              return SizedBox();
+            }
+          } else {
+            // reflect the account is not logged in
+            return StartScreen();
+          }
+        }
+      });
 
   runApp(NeumorphicApp(
-    debugShowCheckedModeBanner: false,
-    title: '50gramx',
-    // themeMode: ThemeMode.dark, // comment to adapt on system theme
-    theme: NeumorphicThemeData(
-      intensity: 0.6,
-      baseColor: AppColors.lightPrimaryB,
-      lightSource: LightSource.topLeft,
-      depth: 5,
-      accentColor: AppColors.darkPrimaryA,
-    ),
-    darkTheme: NeumorphicThemeData(
-      intensity: 0.6,
-      baseColor: AppColors.darkPrimaryB,
-      lightSource: LightSource.top,
-      depth: 5,
-      accentColor: AppColors.lightPrimaryA,
-    ),
-    routes: {
-      '/connections': (context) => ConnectionsHomePage(index: 1),
-      '/conversations': (context) => ConversationsHomePage(
-            index: 1,
-            containingFlowTitle: '',
-          ),
-      '/spaces': (context) => SpacesHomePage(
-            index: 1,
-            containingFlowTitle: '',
-          ),
-    },
-    home: (isLoggedIn)
-        ? (isAccountTierActive)
-            ? HomeScreen()
-            : GetStartedWidget(
-                isAccountLoggedIn: true,
-              )
-        : StartScreen(),
-  ));
+      debugShowCheckedModeBanner: false,
+      title: '50gramx',
+      // themeMode: ThemeMode.dark, // comment to adapt on system theme
+      theme: NeumorphicThemeData(
+        intensity: 0.6,
+        baseColor: AppColors.lightPrimaryB,
+        lightSource: LightSource.topLeft,
+        depth: 5,
+        accentColor: AppColors.darkPrimaryA,
+      ),
+      darkTheme: NeumorphicThemeData(
+        intensity: 0.6,
+        baseColor: AppColors.darkPrimaryB,
+        lightSource: LightSource.top,
+        depth: 5,
+        accentColor: AppColors.lightPrimaryA,
+      ),
+      routes: {
+        '/connections': (context) => ConnectionsHomePage(index: 1),
+        '/conversations': (context) => ConversationsHomePage(
+              index: 1,
+              containingFlowTitle: '',
+            ),
+        '/spaces': (context) => SpacesHomePage(
+              index: 1,
+              containingFlowTitle: '',
+            ),
+      },
+      home: isLoggedInWidget));
 
-//(
+// (isLoggedIn)
+//         ? (isAccountTierActive)
 //             ? HomeScreen()
+//             : GetStartedWidget(
+//                 isAccountLoggedIn: true,
+//               )
+//         : StartScreen(),
+//   )
+}
+
+Widget getLoadingPage(String loadingText, BuildContext loadingContext) {
+  return BaseWidget(builder: (loadingContext, sizingInformation) {
+    return Scaffold(
+        backgroundColor: AppColors.backgroundPrimary(loadingContext),
+        body: Container(
+            child: Center(
+                child: Column(
+          children: [
+            Spacer(),
+            Center(
+              child: Text(loadingText,
+                  style: AppTextStyle.appTextStyle(
+                    loadingContext,
+                    AppColors.textColor(loadingContext),
+                  )),
+            ),
+            Center(
+              child: AppProgressIndeterminateWidget(),
+            ),
+            Spacer(),
+          ],
+        ))));
+  });
+}
+
+Widget getExplicitPermissionAllocationPage(String explicitText,
+    String buttonText, String permission, BuildContext explicitContext) {
+  return BaseWidget(builder: (loadingContext, sizingInformation) {
+    return Scaffold(
+        backgroundColor: AppColors.backgroundPrimary(explicitContext),
+        body: Container(
+            child: Center(
+                child: Column(
+          children: [
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: Text(explicitText,
+                    style: AppTextStyle.appTextStyle(
+                      explicitContext,
+                      AppColors.textColor(loadingContext),
+                    )),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Center(
+              child: ActionNeuButton(
+                buttonTitle: buttonText,
+                buttonActionOnPressed: () {
+                  if (permission == "NOTIFICATIONS") {
+                    AppSettings.openNotificationSettings();
+                  } else if (permission == "CONTACTS") {
+                    AppSettings.openAppSettings();
+                  }
+                },
+                isPrimaryButton: true,
+              ),
+            ),
+            Spacer(),
+          ],
+        ))));
+  });
 }
 
 Future<bool> checkLogin() async {
