@@ -2,18 +2,13 @@ import 'dart:async';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/widgets/components/TextField/messaging/AccountMessagingTextField.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesReceivedListItem.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesSentListItem.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -47,9 +42,12 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
   void initState() {
     // check if local conversations service has this account id mapped
     print("check if local conversations service has this account id mapped");
-    if (LocalConversationsService.entityIdConversationMessageMap[widget.account.accountId] == null) {
+    if (LocalConversationsService
+            .entityIdConversationMessageMap[widget.account.accountId] ==
+        null) {
       print("No conversations found for ${widget.account.accountFirstName}");
-      LocalConversationsService.entityIdConversationMessageMap[widget.account.accountId] = [];
+      LocalConversationsService
+          .entityIdConversationMessageMap[widget.account.accountId] = [];
     }
     addTextFieldListener();
     loadConversationsMessages();
@@ -177,6 +175,7 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
                   actionLabelText: "",
                   isBackEnabled: true,
                   trailingButtonCallback: () {},
+                  onStretchTriggerCallback: () {},
                   isActionEnabled: false,
                 ),
                 SliverAnimatedList(

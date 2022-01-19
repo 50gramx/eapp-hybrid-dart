@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
@@ -101,6 +102,7 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
   _handleInvalidPurchase(purchaseDetails) {}
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    print("AddEthosCoinWidget:_listenToPurchaseUpdated");
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         _showPendingUI();
@@ -130,14 +132,18 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
 
   @override
   void initState() {
+    print("AddEthosCoinWidget:initState");
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         InAppPurchase.instance.purchaseStream;
 
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      print("AddEthosCoinWidget:purchaseUpdated.listen");
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
+      print("AddEthosCoinWidget:purchaseUpdated.onDone");
       _subscription.cancel();
     }, onError: (error) {
+      print("AddEthosCoinWidget:purchaseUpdated.onError");
       // handle error here.
     });
 
@@ -170,10 +176,14 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
                   );
                 } else {
                   print("zz");
-                  var newBalance = ((snapshot.data!.balance) + _selectedCoinBalance.title.length > 0 ? int.parse(_selectedCoinBalance.title.substring(0, _selectedCoinBalance.title.length - 18)) : 0);
+                  var newBalance = ((snapshot.data!.balance) +
+                              _selectedCoinBalance.title.length >
+                          0
+                      ? int.parse(_selectedCoinBalance.title
+                          .substring(0, _selectedCoinBalance.title.length - 18))
+                      : 0);
                   return EthosCoinBalanceCard(
-                    addingXEthosCoin:
-                        "${newBalance.toStringAsFixed(2)}",
+                    addingXEthosCoin: "${newBalance.toStringAsFixed(2)}",
                     ethosCoinPrice: _selectedCoinBalance.price,
                   );
                 }
@@ -183,10 +193,11 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
           future: loadCoinDetails(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
+              print("loadCoinDetails:ConnectionState.waiting");
               return AppProgressIndeterminateWidget();
             } else {
+              print("loadCoinDetails:ConnectionState.notWaiting");
               widget.updateSelectedCoinBalance(_selectedCoinBalance);
-
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -199,7 +210,7 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
                       isPrimaryButton: false,
                       isPrimaryButtonDisabled: _selectedCoinBalanceIndex == 0,
                       buttonTitle:
-                      "Reduce ${_coinDetails[_selectedCoinBalanceIndex > 0 ? _selectedCoinBalanceIndex - 1 : 0].title.substring(0, _selectedCoinBalance.title.length - 19)}",
+                          "Reduce ${_coinDetails[_selectedCoinBalanceIndex > 0 ? _selectedCoinBalanceIndex - 1 : 0].title.substring(0, _selectedCoinBalance.title.length - 19)}",
                     ),
                   ),
                   Expanded(
@@ -209,9 +220,9 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
                         addEthosCoin();
                       },
                       isPrimaryButtonDisabled:
-                      _selectedCoinBalanceIndex == _coinDetails.length - 1,
+                          _selectedCoinBalanceIndex == _coinDetails.length - 1,
                       buttonTitle:
-                      "Add ${_coinDetails[_selectedCoinBalanceIndex != _coinDetails.length - 1 ? _selectedCoinBalanceIndex + 1 : _coinDetails.length - 1].title.substring(0, _selectedCoinBalance.title.length - 18)}",
+                          "Add ${_coinDetails[_selectedCoinBalanceIndex != _coinDetails.length - 1 ? _selectedCoinBalanceIndex + 1 : _coinDetails.length - 1].title.substring(0, _selectedCoinBalance.title.length - 18)}",
                       isSecondaryButton: true,
                     ),
                   ),
@@ -283,28 +294,43 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
   }
 
   loadCoinDetails() async {
-    Set<String> _kIds = <String>{
-      "50gramx.add.ethoscoin.100",
-      "50gramx.add.ethoscoin.200",
-      "50gramx.add.ethoscoin.400",
-      "50gramx.add.ethoscoin.800",
-      "50gramx.add.ethoscoin.1600",
-      "50gramx.add.ethoscoin.3200",
-      "50gramx.add.ethoscoin.6400",
-    }.toSet();
-    for (var _kId in _kIds) {
-      _coinDetails.addAll(
-          (await _inAppPurchase.queryProductDetails([_kId].toSet()))
-              .productDetails);
+    Set<String> _kIds = {};
+    if (Platform.isAndroid) {
+      _kIds = <String>{
+        "50gramx.add.ethoscoin.100",
+        "50gramx.add.ethoscoin.200",
+        "50gramx.add.ethoscoin.400",
+        "50gramx.add.ethoscoin.800",
+        "50gramx.add.ethoscoin.1600",
+        "50gramx.add.ethoscoin.3200",
+        "50gramx.add.ethoscoin.6400",
+      }.toSet();
+    } else if (Platform.isIOS) {
+      _kIds = <String>{
+        "50gramx.add.ethoscoin.84",
+        "50gramx.add.ethoscoin.164",
+        }.toSet();
     }
+
+    print("Will query product details");
+    for (var _kId in _kIds) {
+      print("query for product id: $_kId");
+      var fetchedProduct = (await _inAppPurchase.queryProductDetails([_kId].toSet()));
+      _coinDetails.addAll(fetchedProduct.productDetails);
+      print("fetchedProduct: $fetchedProduct");
+      print("fetchedProduct.error.message: ${fetchedProduct.error?.message}");
+      print("fetchedProduct.error.source: ${fetchedProduct.error?.source}");
+      print("fetchedProduct.error.details: ${fetchedProduct.error?.details}");
+      print("fetchedProduct.error.code: ${fetchedProduct.error?.code}");
+      print("fetchedProduct.notFoundIDs: ${fetchedProduct.notFoundIDs}");
+    }
+    print("query product details done");
     _selectedCoinBalance = _coinDetails[0];
   }
-
 
   refreshSelectedCoin() async {
     setState(() {
       _selectedCoinBalance = _coinDetails[0];
     });
   }
-
 }

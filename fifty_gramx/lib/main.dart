@@ -54,9 +54,9 @@ void main() async {
       builder: (BuildContext context, loggedInSnapshot) {
         if (loggedInSnapshot.connectionState == ConnectionState.waiting) {
           return getLoadingPage("Verifying your account access", context);
-        } else {
+        } else if (loggedInSnapshot.hasData) {
           // warn: expecting that verifying access always returns a bool value
-          // warn: starting the push notifcations service and local notification service
+          // warn: starting the push notifications service and local notification service
           PushNotificationService.instance.start();
           LocalNotificationService().init();
           // warn: based on platform enabling in-app purchases
@@ -67,6 +67,7 @@ void main() async {
           } else {
             // todo: handle in-app payments for desktops
           }
+          print("logged in snapshot.data: ${loggedInSnapshot.data}");
           if (loggedInSnapshot.data!) {
             // reflect the account is logged in
             if (Platform.isIOS || Platform.isAndroid) {
@@ -197,6 +198,27 @@ void main() async {
             // reflect the account is not logged in
             return StartScreen();
           }
+        } else {
+          return BaseWidget(builder: (loadingContext, sizingInformation) {
+            return Scaffold(
+                backgroundColor: AppColors.backgroundPrimary(loadingContext),
+                body: Container(
+                    child: Center(
+                        child: Column(
+                          children: [
+                            Spacer(),
+                            Center(
+                              child: Text("Cannot connect to 50gramx machines,"
+                                  " please try again in a few minutes.",
+                                  style: AppTextStyle.appTextStyle(
+                                    loadingContext,
+                                    AppColors.textColor(loadingContext),
+                                  )),
+                            ),
+                            Spacer(),
+                          ],
+                        ))));
+          });
         }
       });
 
@@ -309,8 +331,10 @@ Widget getExplicitPermissionAllocationPage(String explicitText,
 }
 
 Future<bool> checkLogin() async {
+  print("checkLogin invoked");
   var accountServicesAccessAuthDetails =
       await AccountData().readAccountServicesAccessAuthDetails();
+  print(accountServicesAccessAuthDetails);
   if (accountServicesAccessAuthDetails.account.accountId == "") {
     return false;
   } else {

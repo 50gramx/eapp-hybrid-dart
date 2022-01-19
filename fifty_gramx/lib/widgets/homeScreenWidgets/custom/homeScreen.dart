@@ -46,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<AppFlow> appFlows = [
     AppFlow(
       index: 0,
-      title: 'Connections',
-      iconData: FeatherIcons.user,
+      title: 'Conversations',
+      iconData: FeatherIcons.messageCircle,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
     ),
@@ -60,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     AppFlow(
       index: 2,
-      title: 'Conversations',
-      iconData: FeatherIcons.messageCircle,
+      title: 'Connections',
+      iconData: FeatherIcons.user,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
     ),
@@ -80,13 +80,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 initialPageBuilder: (context) {
                   setStatusBarTheme();
                   if (flow.index == 0) {
-                    return ConnectionsHomePage(index: 1);
+                    return ConversationsHomePage(
+                        index: 1, containingFlowTitle: flow.title);
                   } else if (flow.index == 1) {
                     return SpacesHomePage(
                         index: 1, containingFlowTitle: flow.title);
                   } else {
-                    return ConversationsHomePage(
-                        index: 1, containingFlowTitle: flow.title);
+                    return ConnectionsHomePage(index: 1);
                   }
                 },
               ),

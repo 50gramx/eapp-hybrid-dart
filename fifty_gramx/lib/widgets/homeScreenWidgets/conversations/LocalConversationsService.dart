@@ -1,8 +1,10 @@
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
+import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
+import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/discoverAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
@@ -24,6 +26,7 @@ class LocalConversationsService {
   void dispose() {}
 
   static getMyConversations() async {
+    print("getMyConversations:start");
     var getConversedAccountAndAssistantsResponse =
         await MessageConversationService.getConversedAccountAndAssistants();
     conversedEntityWithLastConversationMessages =
@@ -39,6 +42,7 @@ class LocalConversationsService {
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
+    print("getMyConversations:end");
   }
 
   static loadEntityConversations(
@@ -61,9 +65,44 @@ class LocalConversationsService {
     }
   }
 
+  static loadAccountAssistantConversations(
+      AccountAssistant accountAssistant) async {
+    AccountConnectedAccountAssistant connectedAccountAssistant =
+        AccountConnectedAccountAssistant.getDefault();
+    if (LocalConnectionsService.inverseConnectedAccountAssistantMap
+        .containsKey(accountAssistant)) {
+      connectedAccountAssistant = LocalConnectionsService
+          .inverseConnectedAccountAssistantMap[accountAssistant]!;
+    } else {
+      connectedAccountAssistant =
+          (await ConnectAccountService.getConnectedAccountAssistant(
+                  accountAssistant.accountAssistantId))
+              .connectedAccountAssistant;
+    }
+    var getLast24ProductNConversationMessagesResponse =
+        await MessageConversationService.getLast24ProductNConversationMessages(
+            1,
+            MessageEntity.ENTITY_ACCOUNT_ASSISTANT,
+            connectedAccountAssistant,
+            AccountConnectedAccount.getDefault());
+    entityIdConversationMessageMap[accountAssistant.accountAssistantId] =
+        getLast24ProductNConversationMessagesResponse
+            .conversationMessages.reversed
+            .toList();
+  }
+
   static loadAccountConversations(Account account) async {
     AccountConnectedAccount connectedAccount =
-        LocalConnectionsService.inverseConnectedAccountMap[account]!;
+        AccountConnectedAccount.getDefault();
+    if (LocalConnectionsService.inverseConnectedAccountMap
+        .containsKey(account)) {
+      connectedAccount =
+          LocalConnectionsService.inverseConnectedAccountMap[account]!;
+    } else {
+      connectedAccount =
+          (await ConnectAccountService.getConnectedAccount(account.accountId))
+              .connectedAccount;
+    }
     var getLast24ProductNConversationMessagesResponse =
         await MessageConversationService.getLast24ProductNConversationMessages(
             1,
@@ -74,12 +113,6 @@ class LocalConversationsService {
         getLast24ProductNConversationMessagesResponse
             .conversationMessages.reversed
             .toList();
-  }
-
-  static loadAccountAssistantConversations(
-      AccountAssistant accountAssistant) async {
-    // TODO: load account assistant conversations
-    // AccountConnectedAccountAssistant connectedAccountAssistant = LocalConnectionsService.inverseConnectedAccountAssistantMap[accountAssistant.accountAssistantId];
   }
 
   static handleListeningMessages(LocalNotification message) async {
@@ -158,6 +191,67 @@ class LocalConversationsService {
               conversationsMessagesIndex]
           .accountSentMessage
           .receivedAt = messageForAccountSent.receivedAt;
+    }
+  }
+
+  static sendActionableMessageToAccountAssistant(
+      AccountAssistant accountAssistant,
+      SpaceKnowledgeAction spaceKnowledgeAction,
+      String message) async {
+    var accountAssistantMeta = AccountAssistantMeta(
+        accountAssistantId: accountAssistant.accountAssistantId,
+        accountAssistantName: accountAssistant.accountAssistantName,
+        accountAssistantNameCode: accountAssistant.accountAssistantNameCode,
+        accountId: accountAssistant.account.accountId);
+
+    var connectedAccountAssistant = LocalConnectionsService
+        .inverseConnectedAccountAssistantMap[accountAssistantMeta]!;
+
+    var draftMessage = ConversationMessage(
+        isMessageEntityAccountAssistant: true,
+        isMessageSent: true,
+        accountAssistantSentMessage: AccountAssistantSentMessage(
+          accountAssistantId:
+              connectedAccountAssistant.accountAssistantConnectionId,
+          accountAssistantConnectionId:
+              connectedAccountAssistant.accountAssistantConnectionId,
+          accountAssistantSentMessageId: "",
+          message: message,
+          sentAt: Timestamp.fromDateTime(DateTime.now()),
+        ));
+
+    // warn: need to check if conversations doesn't exists
+    var conversationsMessagesIndex = entityIdConversationMessageMap[
+            connectedAccountAssistant.accountAssistantId]!
+        .length;
+
+    entityIdConversationMessageMap[
+            connectedAccountAssistant.accountAssistantId]!
+        .insert(conversationsMessagesIndex, draftMessage);
+    notifyAddedAccountAssistantSentMessage(
+        connectedAccountAssistant.accountAssistantId,
+        entityIdConversationMessageMap[
+                    connectedAccountAssistant.accountAssistantId]!
+                .length -
+            1);
+
+    var messageForAccountAssistantSent =
+        await SendAccountMessageService.sendMessageToAccountAssistant(
+            connectedAccountAssistant, spaceKnowledgeAction, message);
+    if (messageForAccountAssistantSent.isSent) {
+      entityIdConversationMessageMap[connectedAccountAssistant
+                  .accountAssistantId]![conversationsMessagesIndex]
+              .accountAssistantSentMessage
+              .accountAssistantSentMessageId =
+          messageForAccountAssistantSent.accountAssistantSentMessageId;
+      entityIdConversationMessageMap[connectedAccountAssistant
+              .accountAssistantId]![conversationsMessagesIndex]
+          .accountAssistantSentMessage
+          .sentAt = messageForAccountAssistantSent.sentAt;
+      entityIdConversationMessageMap[connectedAccountAssistant
+              .accountAssistantId]![conversationsMessagesIndex]
+          .accountAssistantSentMessage
+          .receivedAt = messageForAccountAssistantSent.receivedAt;
     }
   }
 

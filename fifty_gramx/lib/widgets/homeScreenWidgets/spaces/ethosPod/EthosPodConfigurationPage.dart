@@ -18,6 +18,7 @@ import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowl
 import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
@@ -43,16 +44,18 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundSecondary(context),
-      appBar: CustomAppBar(
+      backgroundColor: AppColors.backgroundPrimary(context),
+      body: CustomScrollView(slivers: <Widget>[
+        CustomSliverAppBar(
           labelText: "EthosPod",
-          actionLabelText: "Save",
+          actionLabelText: "",
           isBackEnabled: true,
+          isActionEnabled: false,
           trailingButtonCallback: () {},
-          isActionEnabled: false),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+          onStretchTriggerCallback: () {},
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate([
             Container(
                 margin:
                     EdgeInsets.only(top: 16, bottom: 4, right: 16, left: 16),
@@ -356,9 +359,9 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
                   }),
             ),
             SizedBox(height: 32),
-          ],
-        ),
-      ),
+          ]),
+        )
+      ]),
     );
   }
 

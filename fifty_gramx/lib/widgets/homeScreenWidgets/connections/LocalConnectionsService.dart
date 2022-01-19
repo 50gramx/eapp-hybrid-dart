@@ -1,11 +1,9 @@
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/discoverAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
 
 class LocalConnectionsService {
   LocalConnectionsService._();
@@ -21,6 +19,7 @@ class LocalConnectionsService {
   static Map<AccountConnectedAccount, Account>
       notInterestedPartiallyConnectedAccounts = {};
   static Map<AccountConnectedAccount, Account> onlyConnectedAccounts = {};
+  static Map<String, AccountAssistant> mappedAccountAssistant = {};
 
   void dispose() {}
 
@@ -44,6 +43,8 @@ class LocalConnectionsService {
               accountAssistant.accountAssistantMeta] =
           connectedAccountAssistants.connectedAccountAssistants[index];
       notifyInsertFullyConnectedAccountAssistant(index);
+      mapAccountAssistant(
+          accountAssistant.accountAssistantMeta.accountAssistantId);
     }
 
     var connectedAccounts =
@@ -78,6 +79,13 @@ class LocalConnectionsService {
         }
       }
     }
+  }
+
+  static mapAccountAssistant(String accountAssistantId) async {
+    mappedAccountAssistant[accountAssistantId] =
+        (await DiscoverAccountAssistantService.getAccountAssistantById(
+                accountAssistantId))
+            .accountAssistant;
   }
 
   static notifyInsertFullyConnectedAccountAssistant(int index) {

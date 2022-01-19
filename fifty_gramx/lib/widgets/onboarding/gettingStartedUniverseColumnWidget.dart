@@ -4,11 +4,13 @@ import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pbenum.dart';
+import 'package:fifty_gramx/protos/ethos/elint/entities/galaxy.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
+import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
 import 'package:fifty_gramx/widgets/components/DateTimeField/DateOfBirthField.dart';
 import 'package:fifty_gramx/widgets/components/NeuButton/dropDownButton.dart';
@@ -279,7 +281,7 @@ class _GettingStartedUniverseColumnWidgetState
                             children: [
                               TextSpan(
                                   text: (unfortunateSignUpEvent
-                                      ? "Are you trying to join 50GRAMX? Unfortunately, "
+                                      ? " Are you trying to join 50GRAMX? Unfortunately, "
                                           "you cannot launch Galaxy or create Space in-app."
                                       : ""),
                                   style: TextStyle(
@@ -290,7 +292,7 @@ class _GettingStartedUniverseColumnWidgetState
                                       height: 1.14285714)),
                               TextSpan(
                                   text: (webSignInEvent
-                                      ? "It looks like everything up and running."
+                                      ? " It looks like everything up and running."
                                           " Please access your Space via our Android/iOS Apps."
                                       : ""),
                                   style: TextStyle(
@@ -559,16 +561,21 @@ class _GettingStartedUniverseColumnWidgetState
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // start update billing
+        await AccountData().saveIsAccountBillingActive(true);
+        // end  update billing
         if (await Permission.contacts.request().isGranted) {
           ContactService.syncAccountConnectionsWithExistingAccountMobiles();
         }
-        widget.completedSelectingUniverseCallback();
+        // widget.completedSelectingUniverseCallback();
       } else {
         final snackBar = SnackBar(
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+      pushToHomeScreenWidget();
+      setState(() {});
     }
   }
 

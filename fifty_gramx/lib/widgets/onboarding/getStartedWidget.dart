@@ -109,6 +109,7 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                     isTopMostTile: true,
                     isHeadingActive: isSelectingCountry,
                     isProgressed: isCountrySelected,
+                    isLastMostTile: true,
                     headingTitle: "Getting Started"),
                 GettingStartedUniverseColumnWidget(
                   isSelectingCountry: isSelectingCountry,
@@ -117,16 +118,16 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                     await completedSelectingUniverseCallback();
                   },
                 ),
-                ProgressHeadingListTile(
-                  key: selectingGalaxyHeadingKey,
-                  isHeadingActive: isSelectingGalaxy,
-                  isProgressed: isGalaxySelected,
-                  headingTitle: "Confirming Tier",
-                  isLastMostTile: true,
-                ),
-                GettingStartedGalaxyColumnWidget(
-                    isSelectingGalaxy: isSelectingGalaxy,
-                    selectingGalaxyHeadingKey: selectingGalaxyHeadingKey),
+                // ProgressHeadingListTile(
+                //   key: selectingGalaxyHeadingKey,
+                //   isHeadingActive: isSelectingGalaxy,
+                //   isProgressed: isGalaxySelected,
+                //   headingTitle: "Confirming Tier",
+                //   isLastMostTile: true,
+                // ),
+                // GettingStartedGalaxyColumnWidget(
+                //     isSelectingGalaxy: isSelectingGalaxy,
+                //     selectingGalaxyHeadingKey: selectingGalaxyHeadingKey),
                 SizedBox(
                   height: 64,
                 )

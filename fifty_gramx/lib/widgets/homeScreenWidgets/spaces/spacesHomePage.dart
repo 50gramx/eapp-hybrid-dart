@@ -4,12 +4,15 @@ import 'dart:io';
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge/discover_space_knowledge.pb.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/LocalSpacesService.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/MyReservedSpaceWidget.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/EthosPodConfigurationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/CreateSpaceKnowledgeDomainPage.dart';
@@ -42,8 +45,13 @@ class SpacesHomePage extends StatefulWidget {
 }
 
 class _SpacesHomePageState extends State<SpacesHomePage> {
+  Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
+
   @override
   void initState() {
+    loadMySpaces();
+    listenForLocalNotifications();
     super.initState();
   }
 
@@ -52,123 +60,101 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
     super.dispose();
   }
 
+  loadMySpaces() async {
+    // Update list
+    for (int index = 0;
+        index < LocalSpacesService.mySpaceKnowledgeDomains.length;
+        index++) {
+      _spacesEntityListKey.currentState!.insertItem(index);
+    }
+  }
+
+  listenForLocalNotifications() {
+    _notificationsStream.listen((notification) {
+      if (notification.type == "LocalSpacesService") {
+        if (notification.data["subType"] == "AddedSpaceKnowledgeDomain") {
+          _spacesEntityListKey.currentState!
+              .insertItem(notification.data["at"]);
+        }
+      }
+    });
+  }
+
+  final GlobalKey<SliverAnimatedListState> _spacesEntityListKey =
+      GlobalKey<SliverAnimatedListState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundSecondary(context),
-      appBar: CustomAppBar(
-          labelText: "Spaces",
-          actionLabelText: "EthosPod",
-          isBackEnabled: false,
-          trailingButtonCallback: () {
-            _pushEthosPodConfigurationPage();
-          }),
-      body: Column(children: [
-        MyReservedSpaceWidget(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: NeumorphicText(
-                "MY SPACE DOMAINS",
-                style: NeumorphicStyle(
-                  color: AppColors.contentTertiary(context),
-                  lightSource: NeumorphicTheme.isUsingDark(context)
-                      ? LightSource.bottomRight
-                      : LightSource.topLeft,
-                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                      ? AppColors.gray600
-                      : AppColors.backgroundSecondary(context),
-                  border: NeumorphicBorder(
-                      color: AppColors.backgroundPrimary(context), width: 0.25),
-                ),
-                textAlign: TextAlign.start,
-                textStyle: NeumorphicTextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    height: 1.25),
-              ),
-            ),
+        backgroundColor: AppColors.backgroundPrimary(context),
+        body: CustomScrollView(slivers: <Widget>[
+          CustomSliverAppBar(
+            labelText: "Spaces",
+            actionLabelText: "EthosPod",
+            isBackEnabled: false,
+            trailingButtonCallback: () {
+              AppPushPage()
+                  .pushHorizontalPage(context, EthosPodConfigurationPage());
+            },
+            onStretchTriggerCallback: () {},
           ),
-        ),
-        FutureBuilder<GetSpaceKnowledgeDomainsResponse>(
-            future: DiscoverSpaceKnowledgeService.getSpaceKnowledgeDomains(),
-            builder: (context, snap) {
-              if (snap.connectionState == ConnectionState.waiting) {
-                return AppProgressIndeterminateWidget();
-              } else {
-                return Expanded(
-                    child: ListView.builder(
-                        itemCount: snap.data!.spaceKnowledgeDomains.length,
-                        itemBuilder: (context, snapShot) {
-                          return SelectorConfigurationItem(
-                            titleText:
-                                "${snap.data!.spaceKnowledgeDomains[snapShot].spaceKnowledgeDomainName}",
-                            subtitleText:
-                                "${snap.data!.spaceKnowledgeDomains[snapShot].spaceKnowledgeDomainCollarEnum.name.substring(0, snap.data!.spaceKnowledgeDomains[snapShot].spaceKnowledgeDomainCollarEnum.name.length - 7)}",
-                            selectorCallback: () {
-                              AppPushPage().pushHorizontalPage(
-                                  context,
-                                  DiscoverSpaceKnowledgeDomainFilesPage(
-                                    spaceKnowledgeDomain: snap
-                                        .data!.spaceKnowledgeDomains[snapShot],
-                                  ));
-                            },
-                          );
-                        }));
-              }
-            }),
-      ]),
-    );
+          SliverAnimatedList(
+              key: _spacesEntityListKey,
+              initialItemCount:
+                  LocalSpacesService.mySpaceKnowledgeDomains.length + 1,
+              itemBuilder: (BuildContext context, int position,
+                  Animation<double> animation) {
+                if (position == 0) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: NeumorphicText(
+                          "MY SPACE DOMAINS",
+                          style: NeumorphicStyle(
+                            color: AppColors.contentTertiary(context),
+                            lightSource: NeumorphicTheme.isUsingDark(context)
+                                ? LightSource.bottomRight
+                                : LightSource.topLeft,
+                            shadowLightColor:
+                                NeumorphicTheme.isUsingDark(context)
+                                    ? AppColors.gray600
+                                    : AppColors.backgroundSecondary(context),
+                            border: NeumorphicBorder(
+                                color: AppColors.backgroundPrimary(context),
+                                width: 0.25),
+                          ),
+                          textAlign: TextAlign.start,
+                          textStyle: NeumorphicTextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              height: 1.25),
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
+                  var newPosition = position - 1;
+                  var spaceKnowledgeDomain =
+                      LocalSpacesService.mySpaceKnowledgeDomains[newPosition];
+                  return SelectorConfigurationItem(
+                    titleText: spaceKnowledgeDomain.spaceKnowledgeDomainName,
+                    subtitleText:
+                        "${spaceKnowledgeDomain.spaceKnowledgeDomainCollarEnum.name.substring(0, spaceKnowledgeDomain.spaceKnowledgeDomainCollarEnum.name.length - 7)}",
+                    selectorCallback: () {
+                      AppPushPage().pushHorizontalPage(
+                          context,
+                          DiscoverSpaceKnowledgeDomainFilesPage(
+                            spaceKnowledgeDomain: spaceKnowledgeDomain,
+                          ));
+                    },
+                  );
+                }
+              }),
+        ]));
   }
-
-  void _pushEthosPodConfigurationPage() {
-    var isHorizontalNavigation = true;
-    // If it's not horizontal navigation,
-    // we should use the rootNavigator.
-    Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
-      _buildAdaptivePageRoute(
-        builder: (context) => EthosPodConfigurationPage(),
-        fullscreenDialog: !isHorizontalNavigation,
-      ),
-    );
-  }
-
-  // void _pushPage(BuildContext context, bool isHorizontalNavigation) {
-  //   // If it's not horizontal navigation,
-  //   // we should use the rootNavigator.
-  //   Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
-  //     _buildAdaptivePageRoute(
-  //       builder: (context) => IndexedPage(
-  //         // If it's a new flow, the displayed index should be 1 again.
-  //         index: isHorizontalNavigation ? index + 1 : 1,
-  //         // If it's a new flow, we'll randomize its color.
-  //         backgroundColor: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-  //         // If it's starting a new flow let's just call it 'New.'
-  //         containingFlowTitle:
-  //             isHorizontalNavigation ? containingFlowTitle : 'New',
-  //       ),
-  //       fullscreenDialog: !isHorizontalNavigation,
-  //     ),
-  //   );
-  // }
-
-  // Flutter will use the fullscreenDialog property to change the animation
-  // and the app bar's left icon to an X instead of an arrow.
-  PageRoute<T> _buildAdaptivePageRoute<T>({
-    required WidgetBuilder builder,
-    bool fullscreenDialog = false,
-  }) =>
-      Platform.isAndroid
-          ? MaterialPageRoute(
-              builder: builder,
-              fullscreenDialog: fullscreenDialog,
-            )
-          : CupertinoPageRoute(
-              builder: builder,
-              fullscreenDialog: fullscreenDialog,
-            );
 }

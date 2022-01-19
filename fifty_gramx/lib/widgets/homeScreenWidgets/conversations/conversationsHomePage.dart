@@ -20,6 +20,7 @@ import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/Ac
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/ethosai/EthosaiConfigurationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -60,6 +61,8 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
 
   loadMyConversations() async {
     // Update list
+    print(
+        "loadMyConversations, total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
     for (int index = 0;
         index <
             LocalConversationsService
@@ -76,6 +79,8 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
       if (notification.type == "LocalConversationsService") {
         if (notification.data["subType"] ==
             "AddedConversedEntityWithLastConversationMessage") {
+          print(
+              "listenForLocalNotifications, total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}, inserting at: ${notification.data["at"]}");
           _conversedEntityListKey.currentState!
               .insertItem(notification.data["at"]);
         } else if (notification.data["subType"] == "AddedAccountSentMessage") {
@@ -111,6 +116,9 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                 AppPushPage()
                     .pushHorizontalPage(context, EthosaiConfigurationPage());
               },
+              onStretchTriggerCallback: () {
+                LocalServices().reloadConversationsService();
+              },
             ),
             SliverAnimatedList(
               key: _conversedEntityListKey,
@@ -120,6 +128,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
                 if (position == 0) {
+                  print("building for position: 0");
                   return Padding(
                     padding: EdgeInsets.only(
                         left: 16, right: 16, bottom: 16, top: 32),
@@ -150,6 +159,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                   );
                 } else {
                   var newPosition = position - 1;
+                  print("building for position: ${position}, newPosition: $newPosition");
                   var heroTag;
                   ConversedEntityWithLastConversationMessage
                       conversedEntityWithLastConversationMessage =
