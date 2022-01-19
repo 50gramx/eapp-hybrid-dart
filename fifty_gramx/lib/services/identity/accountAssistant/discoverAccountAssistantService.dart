@@ -37,4 +37,13 @@ class DiscoverAccountAssistantService {
     return await (await serviceClient)
         .getAccountAssistantMetaByAccountAssistantId(request);
   }
+
+  static Future<GetAccountAssistantByIdResponse> getAccountAssistantById(
+      String accountAssistantId) async {
+    var request = GetAccountAssistantByIdRequest()
+      ..accessAuthDetails =
+          await AccountData().readAccountServicesAccessAuthDetails()
+      ..accountAssistantId = accountAssistantId;
+    return await (await serviceClient).getAccountAssistantById(request);
+  }
 }

@@ -1,43 +1,20 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:bubble/bubble.dart';
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/action/space_knowledge_action.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
-import 'package:fifty_gramx/protos/google/protobuf/any.pb.dart';
-import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
-import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
-import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/Style/BubbleStyle.dart';
-import 'package:fifty_gramx/widgets/components/Text/Message/ConversationMessageTimeText.dart';
 import 'package:fifty_gramx/widgets/components/TextField/messaging/AccountAssistantMessagingTextField.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountAssistantConversationsMessagesReceivedListItem.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountAssistantConversationsMessagesSentListItem.dart';
-import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesReceivedListItem.dart';
-import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesSentListItem.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:intl/intl.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AccountAssistantConversationPage extends StatefulWidget {
@@ -55,13 +32,15 @@ class AccountAssistantConversationPage extends StatefulWidget {
 
 class _AccountAssistantConversationPageState
     extends State<AccountAssistantConversationPage> {
+  // AccountAssistant accountAssistant = AccountAssistant.getDefault();
   List<ConversationMessage> conversationMessages = [];
-  List<ConversationMessage> draftedConversationMessages = [];
+
+  // List<ConversationMessage> draftedConversationMessages = [];
 
   bool messageTextFieldReadOnly = false;
-  ScrollController _conversationsScrollController = new ScrollController();
-  late final FirebaseMessaging _firebaseMessaging;
-  Account sendingAccount = Account.getDefault();
+
+  // ScrollController _conversationsScrollController = new ScrollController();
+  // Account sendingAccount = Account.getDefault();
 
   Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
@@ -70,7 +49,25 @@ class _AccountAssistantConversationPageState
 
   @override
   void initState() {
-    // TODO: Stream last typed message to container
+    print("check if local conversations service has this account id mapped");
+    if (LocalConversationsService.entityIdConversationMessageMap[
+            widget.accountAssistant.accountAssistantId] ==
+        null) {
+      LocalConversationsService.entityIdConversationMessageMap[
+          widget.accountAssistant.accountAssistantId] = [];
+    }
+    // _notificationsStream.listen((notification) {
+    //   // TODO: Implement your logic here
+    //   print('Notification: ${notification.data}');
+    //   handleListeningMessages(notification);
+    // });
+    addTextFieldListener();
+    loadConversationsMessages();
+    // getConnectedAccountAssistant();
+    super.initState();
+  }
+
+  addTextFieldListener() {
     accountAssistantMessageTextFieldController.addListener(() {
       if (!isSendButtonEnabled) {
         if (accountAssistantMessageTextFieldController.text.length != 0) {
@@ -84,61 +81,139 @@ class _AccountAssistantConversationPageState
         });
       }
     });
+  }
 
-    _notificationsStream.listen((notification) {
-      // TODO: Implement your logic here
-      print('Notification: ${notification.data}');
-      handleListeningMessages(notification);
+  listenForLocalNotifications() {
+    // TODO: Handle _notificationsStream error
+    // TODO: Handle disposed
+    Timer(Duration(milliseconds: 300), () {
+      _notificationsStream.listen((notification) {
+        // TODO: Implement your logic here
+        if (notification.type == "LocalConversationsService") {
+          if (notification.data["accountAssistantId"] ==
+              widget.accountAssistant.accountAssistantId) {
+            if (notification.data["subType"] ==
+                "AddedAccountAssistantSentMessage") {
+              _accountAssistantConversationsListKey.currentState!
+                  .removeItem(notification.data["at"], (context, animation) {
+                return SizedBox();
+              });
+              _accountAssistantConversationsListKey.currentState!.insertItem(
+                  notification.data["at"],
+                  duration: Duration(microseconds: 100));
+              scrollToBottom();
+            } else if (notification.data["subType"] ==
+                "AddedAccountAssistantReceivedMessage") {
+              _accountAssistantConversationsListKey.currentState!
+                  .removeItem(notification.data["at"], (context, animation) {
+                return SizedBox();
+              });
+              _accountAssistantConversationsListKey.currentState!.insertItem(
+                  notification.data["at"],
+                  duration: Duration(microseconds: 100));
+              scrollToBottom();
+            }
+          }
+        }
+      });
     });
-    getConnectedAccountAssistant();
-    super.initState();
+  }
+
+  scrollToBottom() {
+    Timer(Duration(milliseconds: 250), () {
+      _listScrollController.animateTo(
+        _listScrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+      );
+    });
   }
 
   @override
   void dispose() {
     accountAssistantMessageTextFieldController.dispose();
+    _listScrollController.dispose();
+    _accountAssistantConversationsListKey.currentState?.dispose();
     super.dispose();
   }
 
-  readSendingAccount() async {
-    sendingAccount = await AccountData().readAccount();
-  }
+  // readSendingAccount() async {
+  //   sendingAccount = await AccountData().readAccount();
+  // }
 
-  late AccountConnectedAccountAssistant connectedAccountAssistant;
+  // late AccountConnectedAccountAssistant connectedAccountAssistant;
 
-  getConnectedAccountAssistant() async {
-    var response = (await ConnectAccountService.getConnectedAccountAssistant(
-        widget.accountAssistant.accountAssistantId));
-    setState(() {
-      connectedAccountAssistant = response.connectedAccountAssistant;
+  // getConnectedAccountAssistant() async {
+  //   var response = (await ConnectAccountService.getConnectedAccountAssistant(
+  //       widget.accountAssistant.accountAssistantId));
+  //   setState(() {
+  //     connectedAccountAssistant = response.connectedAccountAssistant;
+  //   });
+  //   startStreamingConversationMessages();
+  // }
+
+  // startStreamingConversationMessages() async {
+  //   print("startStreamingConversationMessages");
+  //   var getLast24ProductNConversationMessagesResponse =
+  //       await MessageConversationService.getLast24ProductNConversationMessages(
+  //           1,
+  //           MessageEntity.ENTITY_ACCOUNT_ASSISTANT,
+  //           connectedAccountAssistant,
+  //           AccountConnectedAccount.getDefault());
+
+  //   for (int index = 0;
+  //       index <
+  //           getLast24ProductNConversationMessagesResponse
+  //               .conversationMessages.length;
+  //       index++) {
+  //     setState(() {
+  //       conversationMessages.add(getLast24ProductNConversationMessagesResponse
+  //           .conversationMessages[index]);
+  //     });
+  //     // _accountConversationsListKey.currentState!.insertItem(index);
+  //   }
+  // }
+
+  loadConversationsMessages() async {
+    Timer(Duration(microseconds: 100), () {
+      for (int index = LocalConversationsService
+              .entityIdConversationMessageMap[
+                  widget.accountAssistant.accountAssistantId]!
+              .length;
+          index >= 0;
+          index--) {
+        try {
+          _accountAssistantConversationsListKey.currentState!
+              .insertItem(index, duration: Duration(microseconds: 100));
+        } catch (e) {
+          print("Exception while inserting: $e");
+        }
+      }
+      scrollToBottom();
+      listenForLocalNotifications();
     });
-    startStreamingConversationMessages();
   }
 
-  startStreamingConversationMessages() async {
-    print("startStreamingConversationMessages");
-    var getLast24ProductNConversationMessagesResponse =
-        await MessageConversationService.getLast24ProductNConversationMessages(
-            1,
-            MessageEntity.ENTITY_ACCOUNT_ASSISTANT,
-            connectedAccountAssistant,
-            AccountConnectedAccount.getDefault());
-
-    for (int index = 0; index < getLast24ProductNConversationMessagesResponse
-        .conversationMessages.length; index++) {
-      setState(() {
-        conversationMessages.add(getLast24ProductNConversationMessagesResponse.conversationMessages[index]);
-      });
-      // _accountConversationsListKey.currentState!.insertItem(index);
-    }
+  sendActionableMessage() {
+    var typedMessage = accountAssistantMessageTextFieldController.text;
+    accountAssistantMessageTextFieldController.clear();
+    LocalConversationsService.sendActionableMessageToAccountAssistant(
+        widget.accountAssistant,
+        SpaceKnowledgeAction.ASK_QUESTION,
+        typedMessage);
   }
+
+  final GlobalKey<SliverAnimatedListState>
+      _accountAssistantConversationsListKey =
+      GlobalKey<SliverAnimatedListState>();
+  final ScrollController _listScrollController = new ScrollController();
 
   var isAccountConnected = false;
   var actionLabelText = "";
 
   // Messaging Params
-  var listeningSpeedMessages = false;
-  var sendingSpeedMessages = false;
+  // var listeningSpeedMessages = false;
+  // var sendingSpeedMessages = false;
 
   bool isMessagingInputClosed = false;
   bool isSuggestedDomainsClosed = true;
@@ -151,84 +226,93 @@ class _AccountAssistantConversationPageState
 
   @override
   Widget build(BuildContext context) {
+    String appBarLabelText =
+        "${widget.accountAssistant.accountAssistantName.trim()[0].toUpperCase()}${widget.accountAssistant.accountAssistantName.trim().substring(1, widget.accountAssistant.accountAssistantName.trim().length)}";
+
     return Scaffold(
-      appBar: CustomAppBar(
-        labelText: widget.accountAssistant.accountAssistantName,
-        actionLabelText: "",
-        isBackEnabled: true,
-        trailingButtonCallback: () {},
-        isActionEnabled: false,
-      ),
-      backgroundColor: AppColors.backgroundSecondary(context),
+      backgroundColor: AppColors.backgroundPrimary(context),
       body: Column(
         children: [
           Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                child: ListView.builder(
-                  controller: _conversationsScrollController,
-                  padding: EdgeInsets.only(
-                      top: 8, right: 8.0, left: 8.0, bottom: 8.0),
-                  reverse: true,
-                  shrinkWrap: true,
-                  itemCount: conversationMessages.length,
-                  itemBuilder: (_, int index) {
-                    var message = conversationMessages[index];
-                    if (message.isMessageEntityAccountAssistant) {
-                      if (message.isMessageSent) {
-                        return AccountAssistantConversationsMessagesSentListItem(
-                                message.accountAssistantSentMessage)
-                            .buildAccountAssistantConversationsSentMessage(
-                                context);
-                      } else {
-                        // print("message is received: ${message.accountAssistantReceivedMessage.receivedAt.seconds}");
-                        return AccountAssistantConversationsMessagesReceivedListItem(
-                                message.accountAssistantReceivedMessage,
-                                widget.accountAssistant)
-                            .buildAccountAssistantConversationsReceivedMessage(
-                                context);
-                      }
-                    } else {
-                      return SizedBox();
-                    }
-                  },
+            child: CustomScrollView(
+              controller: _listScrollController,
+              slivers: <Widget>[
+                CustomSliverAppBar(
+                  labelText: appBarLabelText,
+                  labelHeroTag: widget.accountAssistant.accountAssistantId,
+                  actionLabelText:
+                      "#${widget.accountAssistant.accountAssistantNameCode}",
+                  isBackEnabled: true,
+                  trailingButtonCallback: () {},
+                  onStretchTriggerCallback: () {},
+                  isActionEnabled: true,
                 ),
-              ),
+                SliverAnimatedList(
+                    key: _accountAssistantConversationsListKey,
+                    initialItemCount: LocalConversationsService
+                        .entityIdConversationMessageMap[
+                            widget.accountAssistant.accountAssistantId]!
+                        .length,
+                    itemBuilder: (BuildContext context, int index,
+                        Animation<double> animation) {
+                      if (index >=
+                          LocalConversationsService
+                              .entityIdConversationMessageMap[
+                                  widget.accountAssistant.accountAssistantId]!
+                              .length) {
+                        return SizedBox();
+                      }
+                      var message = LocalConversationsService
+                              .entityIdConversationMessageMap[
+                          widget.accountAssistant.accountAssistantId]![index];
+                      if (message.isMessageEntityAccountAssistant) {
+                        if (message.isMessageSent) {
+                          return AccountAssistantConversationsMessagesSentListItem(
+                                  message.accountAssistantSentMessage)
+                              .buildAccountAssistantConversationsSentMessage(
+                                  context);
+                        } else {
+                          return AccountAssistantConversationsMessagesReceivedListItem(
+                                  message.accountAssistantReceivedMessage,
+                                  widget.accountAssistant)
+                              .buildAccountAssistantConversationsReceivedMessage(
+                                  context);
+                        }
+                      } else {
+                        return SizedBox();
+                      }
+                    }),
+              ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              child: ListView.builder(
-                padding: EdgeInsets.only(
-                    top: 0.0, right: 8.0, left: 8.0, bottom: 0.0),
-                reverse: true,
-                shrinkWrap: true,
-                itemCount: draftedConversationMessages.length,
-                itemBuilder: (_, int index) {
-                  var message = draftedConversationMessages[index];
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Container(
+          //     child: ListView.builder(
+          //       itemCount: draftedConversationMessages.length,
+          //       itemBuilder: (_, int index) {
+          //         var message = draftedConversationMessages[index];
 
-                  if (message.isMessageEntityAccountAssistant) {
-                    if (message.isMessageSent) {
-                      return AccountAssistantConversationsMessagesSentListItem(
-                              message.accountAssistantSentMessage)
-                          .buildAccountAssistantConversationsSentMessage(
-                              context);
-                    } else {
-                      return AccountAssistantConversationsMessagesReceivedListItem(
-                              message.accountAssistantReceivedMessage,
-                              widget.accountAssistant)
-                          .buildAccountAssistantConversationsReceivedMessage(
-                              context);
-                    }
-                  } else {
-                    return SizedBox();
-                  }
-                },
-              ),
-            ),
-          ),
+          //         if (message.isMessageEntityAccountAssistant) {
+          //           if (message.isMessageSent) {
+          //             return AccountAssistantConversationsMessagesSentListItem(
+          //                     message.accountAssistantSentMessage)
+          //                 .buildAccountAssistantConversationsSentMessage(
+          //                     context);
+          //           } else {
+          //             return AccountAssistantConversationsMessagesReceivedListItem(
+          //                     message.accountAssistantReceivedMessage,
+          //                     widget.accountAssistant)
+          //                 .buildAccountAssistantConversationsReceivedMessage(
+          //                     context);
+          //           }
+          //         } else {
+          //           return SizedBox();
+          //         }
+          //       },
+          //     ),
+          //   ),
+          // ),
           Align(
             alignment: FractionalOffset.bottomCenter,
             child: Container(
@@ -240,8 +324,8 @@ class _AccountAssistantConversationPageState
                     messageTextFieldController:
                         accountAssistantMessageTextFieldController,
                     sendMessageButtonOnPressed: () {
-                      print("Send message");
-                      sendMessageToAccountAssistant();
+                      print("Send Actionable message");
+                      sendActionableMessage();
                     },
                     messageTextFieldReadOnly: messageTextFieldReadOnly,
                     isSendButtonEnabled: isSendButtonEnabled,
@@ -288,127 +372,129 @@ class _AccountAssistantConversationPageState
     });
   }
 
-  sendMessageToAccountAssistant() async {
-    var typedMessage = accountAssistantMessageTextFieldController.text.trim();
-    setState(() {
-      accountAssistantMessageTextFieldController.clear();
-      var draftedSentConversationMessage =
-          draftAccountAssistantSentConversationMessage(typedMessage);
-      draftedConversationMessages.insert(0, draftedSentConversationMessage);
-    });
-    MessageForAccountAssistantSent messageForAccountAssistantSent =
-        await SendAccountMessageService.sendMessageToAccountAssistant(
-            connectedAccountAssistant,
-            SpaceKnowledgeAction.ASK_QUESTION,
-            typedMessage);
-    if (messageForAccountAssistantSent.isSent) {
-      if (draftedConversationMessages[0].hasAccountAssistantSentMessage()) {
-        var draftedSentMessage = draftedConversationMessages[0];
-        draftedSentMessage
-                .accountAssistantSentMessage.accountAssistantSentMessageId =
-            messageForAccountAssistantSent.accountAssistantSentMessageId;
-        draftedSentMessage.accountAssistantSentMessage.sentAt =
-            messageForAccountAssistantSent.sentAt;
-        draftedSentMessage.accountAssistantSentMessage.receivedAt =
-            messageForAccountAssistantSent.receivedAt;
-        setState(() {
-          draftedConversationMessages.removeAt(0);
-          conversationMessages.insert(0, draftedSentMessage);
-        });
-      }
-    }
-    print("sendMessageToAccountAssistant: $messageForAccountAssistantSent");
-  }
+// sendMessageToAccountAssistant() async {
+//   var typedMessage = accountAssistantMessageTextFieldController.text.trim();
+//   setState(() {
+//     accountAssistantMessageTextFieldController.clear();
+//     var draftedSentConversationMessage =
+//         draftAccountAssistantSentConversationMessage(typedMessage);
+//     draftedConversationMessages.insert(0, draftedSentConversationMessage);
+//   });
+//   // ASK QUESTION IS HARD CODED FOR NOW
+//   MessageForAccountAssistantSent messageForAccountAssistantSent =
+//       await SendAccountMessageService.sendMessageToAccountAssistant(
+//           connectedAccountAssistant,
+//           SpaceKnowledgeAction.ASK_QUESTION,
+//           typedMessage);
+//   if (messageForAccountAssistantSent.isSent) {
+//     if (draftedConversationMessages[0].hasAccountAssistantSentMessage()) {
+//       var draftedSentMessage = draftedConversationMessages[0];
+//       draftedSentMessage
+//               .accountAssistantSentMessage.accountAssistantSentMessageId =
+//           messageForAccountAssistantSent.accountAssistantSentMessageId;
+//       draftedSentMessage.accountAssistantSentMessage.sentAt =
+//           messageForAccountAssistantSent.sentAt;
+//       draftedSentMessage.accountAssistantSentMessage.receivedAt =
+//           messageForAccountAssistantSent.receivedAt;
+//       setState(() {
+//         draftedConversationMessages.removeAt(0);
+//         conversationMessages.insert(0, draftedSentMessage);
+//       });
+//     }
+//   }
+//   print("sendMessageToAccountAssistant: $messageForAccountAssistantSent");
+// }
 
-  ConversationMessage draftAccountAssistantSentConversationMessage(
-      String typedMessage) {
-    return ConversationMessage(
-      isMessageEntityAccountAssistant: true,
-      isMessageSent: true,
-      accountAssistantSentMessage: AccountAssistantSentMessage(
-          accountAssistantConnectionId:
-              connectedAccountAssistant.accountAssistantConnectionId,
-          accountAssistantId: connectedAccountAssistant.accountAssistantId,
-          accountAssistantSentMessageId: "",
-          message: typedMessage,
-          sentAt: Timestamp.fromDateTime(DateTime.now()),
-          messageSpace: 0,
-          messageSpaceAction: 0),
-    );
-  }
+// ConversationMessage draftAccountAssistantSentConversationMessage(
+//     String typedMessage) {
+//   return ConversationMessage(
+//     isMessageEntityAccountAssistant: true,
+//     isMessageSent: true,
+//     accountAssistantSentMessage: AccountAssistantSentMessage(
+//         accountAssistantConnectionId:
+//             connectedAccountAssistant.accountAssistantConnectionId,
+//         accountAssistantId: connectedAccountAssistant.accountAssistantId,
+//         accountAssistantSentMessageId: "",
+//         message: typedMessage,
+//         sentAt: Timestamp.fromDateTime(DateTime.now()),
+//         messageSpace: 0,
+//         messageSpaceAction: 0),
+//   );
+// }
 
-  handleListeningMessages(LocalNotification message) async {
-    print("handleListeningMessages: ${message.data}");
-    if (message.data['service'] == "NotifyAccountService") {
-      if (message.data['rpc'] == "NewReceivedMessageFromAccountAssistant") {
-        if (message.data['account_assistant_id'] ==
-            connectedAccountAssistant.accountAssistantId) {
-          var accountAssistantReceivedMessageId =
-              message.data['account_assistant_received_message_id'];
-          var listenForReceivedAccountAssistantMessagesResponse =
-              await ReceiveAccountMessageService
-                  .listenForReceivedAccountAssistantMessages(
-                      connectedAccountAssistant,
-                      accountAssistantReceivedMessageId);
+//   handleListeningMessages(LocalNotification message) async {
+//     print("handleListeningMessages: ${message.data}");
+//     if (message.data['service'] == "NotifyAccountService") {
+//       if (message.data['rpc'] == "NewReceivedMessageFromAccountAssistant") {
+//         if (message.data['account_assistant_id'] ==
+//             connectedAccountAssistant.accountAssistantId) {
+//           var accountAssistantReceivedMessageId =
+//               message.data['account_assistant_received_message_id'];
+//           var listenForReceivedAccountAssistantMessagesResponse =
+//               await ReceiveAccountMessageService
+//                   .listenForReceivedAccountAssistantMessages(
+//                       connectedAccountAssistant,
+//                       accountAssistantReceivedMessageId);
 
-          var foundDomainRankedAnswers = [];
+//           var foundDomainRankedAnswers = [];
 
-          spaceKnowledgeDomainsActionAskQuestionMaps = {};
+//           spaceKnowledgeDomainsActionAskQuestionMaps = {};
 
-          for (Any messageSource
-              in listenForReceivedAccountAssistantMessagesResponse
-                  .messageSource) {
-            var packedDomainRankedAnswers =
-                DomainRankedAnswers().createEmptyInstance();
-            var domainRankedAnswers =
-                messageSource.unpackInto(DomainRankedAnswers());
-            print(domainRankedAnswers
-                .spaceKnowledgeDomain.spaceKnowledgeDomainName);
-            print(domainRankedAnswers.rankedAnswers);
-            if (domainRankedAnswers.rankedAnswers.length > 0) {
-              spaceKnowledgeDomainsActionAskQuestionMaps[domainRankedAnswers
-                  .spaceKnowledgeDomain] = domainRankedAnswers.rankedAnswers;
+//           for (Any messageSource
+//               in listenForReceivedAccountAssistantMessagesResponse
+//                   .messageSource) {
+//             var packedDomainRankedAnswers =
+//                 DomainRankedAnswers().createEmptyInstance();
+//             var domainRankedAnswers =
+//                 messageSource.unpackInto(DomainRankedAnswers());
+//             print(domainRankedAnswers
+//                 .spaceKnowledgeDomain.spaceKnowledgeDomainName);
+//             print(domainRankedAnswers.rankedAnswers);
+//             if (domainRankedAnswers.rankedAnswers.length > 0) {
+//               spaceKnowledgeDomainsActionAskQuestionMaps[domainRankedAnswers
+//                   .spaceKnowledgeDomain] = domainRankedAnswers.rankedAnswers;
 
-              var suggestedDomainName = domainRankedAnswers
-                  .spaceKnowledgeDomain.spaceKnowledgeDomainName;
-              suggestedDomains.add(suggestedDomainName);
-              foundDomainRankedAnswers.add(domainRankedAnswers);
-            }
-          }
+//               var suggestedDomainName = domainRankedAnswers
+//                   .spaceKnowledgeDomain.spaceKnowledgeDomainName;
+//               suggestedDomains.add(suggestedDomainName);
+//               foundDomainRankedAnswers.add(domainRankedAnswers);
+//             }
+//           }
 
-          var messageText = "";
-          if (spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList().length >
-              0) {
-            SpaceKnowledgeDomain firstSpaceKnowledgeDomain =
-                spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList().first;
-            messageText = spaceKnowledgeDomainsActionAskQuestionMaps[
-                    firstSpaceKnowledgeDomain]!
-                .first
-                .answer;
-          } else {
-            messageText = "No answers were found";
-          }
-          print("found domain answers: $foundDomainRankedAnswers");
+//           var messageText = "";
+//           if (spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList().length >
+//               0) {
+//             SpaceKnowledgeDomain firstSpaceKnowledgeDomain =
+//                 spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList().first;
+//             messageText = spaceKnowledgeDomainsActionAskQuestionMaps[
+//                     firstSpaceKnowledgeDomain]!
+//                 .first
+//                 .answer;
+//           } else {
+//             messageText = "No answers were found";
+//           }
+//           print("found domain answers: $foundDomainRankedAnswers");
 
-          var receivedConversationMessage = ConversationMessage(
-            isMessageEntityAccountAssistant: true,
-            isMessageSent: false,
-            accountAssistantReceivedMessage: AccountAssistantReceivedMessage(
-              accountAssistantReceivedMessageId:
-                  accountAssistantReceivedMessageId,
-              accountAssistantId: connectedAccountAssistant.accountAssistantId,
-              receivedAt:
-                  listenForReceivedAccountAssistantMessagesResponse.receivedAt,
-              accountAssistantConnectionId:
-                  connectedAccountAssistant.accountAssistantConnectionId,
-              message: messageText,
-            ),
-          );
-          setState(() {
-            conversationMessages.insert(0, receivedConversationMessage);
-          });
-        }
-      }
-    }
-  }
+//           var receivedConversationMessage = ConversationMessage(
+//             isMessageEntityAccountAssistant: true,
+//             isMessageSent: false,
+//             accountAssistantReceivedMessage: AccountAssistantReceivedMessage(
+//               accountAssistantReceivedMessageId:
+//                   accountAssistantReceivedMessageId,
+//               accountAssistantId: connectedAccountAssistant.accountAssistantId,
+//               receivedAt:
+//                   listenForReceivedAccountAssistantMessagesResponse.receivedAt,
+//               accountAssistantConnectionId:
+//                   connectedAccountAssistant.accountAssistantConnectionId,
+//               message: messageText,
+//             ),
+//           );
+//           setState(() {
+//             conversationMessages.insert(0, receivedConversationMessage);
+//           });
+//         }
+//       }
+//     }
+//   }
+// }
 }

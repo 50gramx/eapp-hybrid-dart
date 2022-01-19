@@ -14,6 +14,7 @@ class CustomSliverAppBar extends StatefulWidget {
     required this.actionLabelText,
     required this.isBackEnabled,
     required this.trailingButtonCallback,
+    required this.onStretchTriggerCallback,
     this.isActionEnabled = true,
   })  : preferredSize = Size.fromHeight(64.0),
         super(key: key);
@@ -23,6 +24,7 @@ class CustomSliverAppBar extends StatefulWidget {
   final String actionLabelText;
   final bool isBackEnabled;
   final VoidCallback trailingButtonCallback;
+  final VoidCallback onStretchTriggerCallback;
   final bool isActionEnabled;
 
   @override
@@ -41,15 +43,19 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
     var title = Hero(
       tag: "",
       transitionOnUserGestures: true,
-      child: Text(
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
         widget.labelText,
         maxLines: 1,
+        textAlign: TextAlign.start,
         style: TextStyle(
             color: AppColors.contentPrimary(context),
             fontSize: 24,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w500),
       ),
+      )
     );
 
     var actions = [
@@ -157,6 +163,12 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
         ),
         pinned: true,
         actions: actions,
+        stretch: true,
+        onStretchTrigger: () async {
+          print("OnStretchTrigger:start");
+          widget.onStretchTriggerCallback();
+          print("OnStretchTrigger:finish");
+        },
       );
     }
 

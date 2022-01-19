@@ -23,9 +23,21 @@ final $typed_data.Uint8List accountMessageDescriptor = $convert.base64Decode('Cg
 const AccountMessageContext$json = const {
   '1': 'AccountMessageContext',
   '2': const [
-    const {'1': 'knowledge_space_actions', '3': 1, '4': 3, '5': 14, '6': '.elint.entity.SpaceKnowledgeAction', '10': 'knowledgeSpaceActions'},
+    const {'1': 'knowledge_contextual_actions', '3': 1, '4': 3, '5': 11, '6': '.elint.services.cognitive.assist.context.account.KnowledgeContextualAction', '10': 'knowledgeContextualActions'},
   ],
 };
 
 /// Descriptor for `AccountMessageContext`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List accountMessageContextDescriptor = $convert.base64Decode('ChVBY2NvdW50TWVzc2FnZUNvbnRleHQSWgoXa25vd2xlZGdlX3NwYWNlX2FjdGlvbnMYASADKA4yIi5lbGludC5lbnRpdHkuU3BhY2VLbm93bGVkZ2VBY3Rpb25SFWtub3dsZWRnZVNwYWNlQWN0aW9ucw==');
+final $typed_data.Uint8List accountMessageContextDescriptor = $convert.base64Decode('ChVBY2NvdW50TWVzc2FnZUNvbnRleHQSjAEKHGtub3dsZWRnZV9jb250ZXh0dWFsX2FjdGlvbnMYASADKAsySi5lbGludC5zZXJ2aWNlcy5jb2duaXRpdmUuYXNzaXN0LmNvbnRleHQuYWNjb3VudC5Lbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9uUhprbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9ucw==');
+@$core.Deprecated('Use knowledgeContextualActionDescriptor instead')
+const KnowledgeContextualAction$json = const {
+  '1': 'KnowledgeContextualAction',
+  '2': const [
+    const {'1': 'knowledge_context_action_id', '3': 1, '4': 1, '5': 9, '10': 'knowledgeContextActionId'},
+    const {'1': 'knowledge_space_action', '3': 2, '4': 1, '5': 14, '6': '.elint.entity.SpaceKnowledgeAction', '10': 'knowledgeSpaceAction'},
+    const {'1': 'knowledge_context_confidence', '3': 3, '4': 1, '5': 2, '10': 'knowledgeContextConfidence'},
+  ],
+};
+
+/// Descriptor for `KnowledgeContextualAction`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List knowledgeContextualActionDescriptor = $convert.base64Decode('ChlLbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9uEj0KG2tub3dsZWRnZV9jb250ZXh0X2FjdGlvbl9pZBgBIAEoCVIYa25vd2xlZGdlQ29udGV4dEFjdGlvbklkElgKFmtub3dsZWRnZV9zcGFjZV9hY3Rpb24YAiABKA4yIi5lbGludC5lbnRpdHkuU3BhY2VLbm93bGVkZ2VBY3Rpb25SFGtub3dsZWRnZVNwYWNlQWN0aW9uEkAKHGtub3dsZWRnZV9jb250ZXh0X2NvbmZpZGVuY2UYAyABKAJSGmtub3dsZWRnZUNvbnRleHRDb25maWRlbmNl');

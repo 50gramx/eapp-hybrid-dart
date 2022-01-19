@@ -8,6 +8,7 @@ import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/components/listItem/standard/artworksmall/labelWIthSupportParaWithIconTrailing.dart';
+import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
@@ -58,12 +59,20 @@ class _EthosCoinConfigurationPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundSecondary(context),
-      appBar: CustomAppBar(labelText: "EthosCoin", actionLabelText: "Save", isBackEnabled: true,trailingButtonCallback: () {}, isActionEnabled: false),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
+      backgroundColor: AppColors.backgroundPrimary(context),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          CustomSliverAppBar(
+              labelText: "EthosCoin",
+              actionLabelText: "",
+              isBackEnabled: true,
+              isActionEnabled: false,
+              trailingButtonCallback: () {},
+              onStretchTriggerCallback: () {},
+            ),
+            SliverList(delegate: SliverChildListDelegate(
+              [
+                Container(
               margin: EdgeInsets.only(top: 16, bottom: 4, right: 16, left: 16),
                 child: FormInfoText("CURRENT VALUE").build(context)),
             BasicConfigurationItem(titleText: "INR", subtitleText: "1.49"),
@@ -127,8 +136,9 @@ class _EthosCoinConfigurationPageState
                 child: AddEthosCoinWidget(updateSelectedCoinBalance: (productDetails) {})
             ),
 
-          ],
-        ),
+              ]
+            ))
+        ],
       ),
     );
   }

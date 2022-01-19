@@ -78,17 +78,17 @@ class AccountMessage extends $pb.GeneratedMessage {
 
 class AccountMessageContext extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMessageContext', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
-    ..pc<$59.SpaceKnowledgeAction>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceActions', $pb.PbFieldType.PE, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
+    ..pc<KnowledgeContextualAction>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextualActions', $pb.PbFieldType.PM, subBuilder: KnowledgeContextualAction.create)
     ..hasRequiredFields = false
   ;
 
   AccountMessageContext._() : super();
   factory AccountMessageContext({
-    $core.Iterable<$59.SpaceKnowledgeAction>? knowledgeSpaceActions,
+    $core.Iterable<KnowledgeContextualAction>? knowledgeContextualActions,
   }) {
     final _result = create();
-    if (knowledgeSpaceActions != null) {
-      _result.knowledgeSpaceActions.addAll(knowledgeSpaceActions);
+    if (knowledgeContextualActions != null) {
+      _result.knowledgeContextualActions.addAll(knowledgeContextualActions);
     }
     return _result;
   }
@@ -114,6 +114,81 @@ class AccountMessageContext extends $pb.GeneratedMessage {
   static AccountMessageContext? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$59.SpaceKnowledgeAction> get knowledgeSpaceActions => $_getList(0);
+  $core.List<KnowledgeContextualAction> get knowledgeContextualActions => $_getList(0);
+}
+
+class KnowledgeContextualAction extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'KnowledgeContextualAction', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextActionId')
+    ..e<$59.SpaceKnowledgeAction>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAction', $pb.PbFieldType.OE, defaultOrMaker: $59.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
+    ..a<$core.double>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextConfidence', $pb.PbFieldType.OF)
+    ..hasRequiredFields = false
+  ;
+
+  KnowledgeContextualAction._() : super();
+  factory KnowledgeContextualAction({
+    $core.String? knowledgeContextActionId,
+    $59.SpaceKnowledgeAction? knowledgeSpaceAction,
+    $core.double? knowledgeContextConfidence,
+  }) {
+    final _result = create();
+    if (knowledgeContextActionId != null) {
+      _result.knowledgeContextActionId = knowledgeContextActionId;
+    }
+    if (knowledgeSpaceAction != null) {
+      _result.knowledgeSpaceAction = knowledgeSpaceAction;
+    }
+    if (knowledgeContextConfidence != null) {
+      _result.knowledgeContextConfidence = knowledgeContextConfidence;
+    }
+    return _result;
+  }
+  factory KnowledgeContextualAction.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory KnowledgeContextualAction.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  KnowledgeContextualAction clone() => KnowledgeContextualAction()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  KnowledgeContextualAction copyWith(void Function(KnowledgeContextualAction) updates) => super.copyWith((message) => updates(message as KnowledgeContextualAction)) as KnowledgeContextualAction; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static KnowledgeContextualAction create() => KnowledgeContextualAction._();
+  KnowledgeContextualAction createEmptyInstance() => create();
+  static $pb.PbList<KnowledgeContextualAction> createRepeated() => $pb.PbList<KnowledgeContextualAction>();
+  @$core.pragma('dart2js:noInline')
+  static KnowledgeContextualAction getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<KnowledgeContextualAction>(create);
+  static KnowledgeContextualAction? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get knowledgeContextActionId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set knowledgeContextActionId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasKnowledgeContextActionId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKnowledgeContextActionId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $59.SpaceKnowledgeAction get knowledgeSpaceAction => $_getN(1);
+  @$pb.TagNumber(2)
+  set knowledgeSpaceAction($59.SpaceKnowledgeAction v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasKnowledgeSpaceAction() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearKnowledgeSpaceAction() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.double get knowledgeContextConfidence => $_getN(2);
+  @$pb.TagNumber(3)
+  set knowledgeContextConfidence($core.double v) { $_setFloat(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasKnowledgeContextConfidence() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearKnowledgeContextConfidence() => clearField(3);
 }
 

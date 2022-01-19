@@ -10,6 +10,7 @@ Future<ClientChannel> grpcChannelBuilder(
     authority,
     port: port,
     options: ChannelOptions(
+      idleTimeout: Duration(seconds: 1),
       credentials: ChannelCredentials.secure(
         certificates: utf8.encode(caCert),
         authority: authority,

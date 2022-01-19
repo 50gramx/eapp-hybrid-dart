@@ -2,13 +2,12 @@ import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
-import 'package:fifty_gramx/services/identity/account/discoverAccountService.dart';
-import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/account/ConnectedAccountAssistantListItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/account/AccountConnectedAccountListItem.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/account/ConnectedAccountAssistantListItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/ethoscoin/EthosCoinConfigurationPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +34,6 @@ class ConnectionsHomePage extends StatefulWidget {
 
   @override
   State<ConnectionsHomePage> createState() {
-    print("ConnectionsHomePage:createState");
     return _ConnectionsHomePageState();
   }
 }
@@ -43,6 +41,9 @@ class ConnectionsHomePage extends StatefulWidget {
 class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
   Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
+
+  final GlobalKey<SliverAnimatedListState> _connectedEntitiesListKey =
+      GlobalKey<SliverAnimatedListState>();
 
   @override
   void initState() {
@@ -52,22 +53,30 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
     _notificationsStream.listen((event) {
       if (event.type == "LocalConnectionsService") {
         if (event.data["subType"] == "InsertFullyConnectedAccountAssistant") {
+          setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveFullyConnectedAccountAssistantListIndex(event.data["at"]));
         } else if (event.data["subType"] == "InsertFullyConnectedAccount") {
+          setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveFullyConnectedAccountListIndex(event.data["at"]));
         } else if (event.data["subType"] ==
             "InsertInterestedPartiallyConnectedAccount") {
+          var resolvedIndex =
+              resolveInterestedPartiallyConnectedAccountListIndex(
+                  event.data["at"]);
+          setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveInterestedPartiallyConnectedAccountListIndex(
                   event.data["at"]));
         } else if (event.data["subType"] ==
             "InsertNotInterestedPartiallyConnectedAccount") {
+          setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveNotInterestedPartiallyConnectedAccountListIndex(
                   event.data["at"]));
         } else if (event.data["subType"] == "InsertOnlyConnectedAccount") {
+          setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveOnlyConnectedAccountListIndex(event.data["at"]));
         }
@@ -175,9 +184,6 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
             .length;
   }
 
-  final GlobalKey<SliverAnimatedListState> _connectedEntitiesListKey =
-      GlobalKey<SliverAnimatedListState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -192,6 +198,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                 AppPushPage()
                     .pushHorizontalPage(context, EthosCoinConfigurationPage());
               },
+              onStretchTriggerCallback: () {},
             ),
             SliverAnimatedList(
                 key: _connectedEntitiesListKey,
@@ -262,9 +269,16 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                             connectedAccountAssistant]!;
                     if (accountAssistantMeta.accountAssistantName.length > 0) {
                       return ConnectedAccountAssistantListItem(
-                          connectedAccountAssistant,
-                          accountAssistantMeta,
-                          () {});
+                          connectedAccountAssistant, accountAssistantMeta, () {
+                        AppPushPage().pushHorizontalPage(
+                            context,
+                            AccountAssistantConversationPage(
+                              accountAssistant: LocalConnectionsService
+                                      .mappedAccountAssistant[
+                                  connectedAccountAssistant
+                                      .accountAssistantId]!,
+                            ));
+                      });
                     } else {
                       return SizedBox();
                     }

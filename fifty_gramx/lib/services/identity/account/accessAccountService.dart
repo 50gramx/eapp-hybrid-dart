@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:fifty_gramx/channels/identityCommonChannel.dart';
-import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pbgrpc.dart';
 import 'package:flutter/foundation.dart';
-
 import 'package:http/http.dart' as http;
 
 class AccessAccountService {
@@ -70,6 +68,7 @@ class AccessAccountService {
 
   static Future<ValidateAccountServicesResponse> validateAccountServices(
       AccountServicesAccessAuthDetails accountServicesAccessAuthDetails) async {
+    print("invoked validateAccountServices");
     var client =
         AccessAccountServiceClient(await IdentityCommonChannel.identityChannel);
     return await client

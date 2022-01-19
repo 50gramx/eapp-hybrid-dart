@@ -89,7 +89,7 @@ class _StartScreenState extends State<StartScreen> {
                       color: AppColors.contentPrimary(context),
                       fontSize: 24,
                       fontFamily: "Montserrat",
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                       height: 1.14285714),
                 ),
               ),
@@ -154,9 +154,9 @@ class _StartScreenState extends State<StartScreen> {
                                                     color: AppColors
                                                         .contentPrimary(
                                                             context),
-                                                    fontSize: 20,
+                                                    fontSize: 22,
                                                     fontFamily: "Montserrat",
-                                                    fontWeight: FontWeight.w400,
+                                                    fontWeight: FontWeight.w700,
                                                     height: 1.14285714),
                                               ),
                                             ),

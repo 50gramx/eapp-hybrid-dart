@@ -26,10 +26,10 @@ class ContextAccountServiceClient extends $grpc.Client {
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$53.AccountMessageContext> getAccountMessageContext(
-      $53.AccountMessage request,
+  $grpc.ResponseStream<$53.AccountMessageContext> getAccountMessageContext(
+      $async.Stream<$53.AccountMessage> request,
       {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getAccountMessageContext, request,
+    return $createStreamingCall(_$getAccountMessageContext, request,
         options: options);
   }
 }
@@ -42,19 +42,14 @@ abstract class ContextAccountServiceBase extends $grpc.Service {
     $addMethod(
         $grpc.ServiceMethod<$53.AccountMessage, $53.AccountMessageContext>(
             'GetAccountMessageContext',
-            getAccountMessageContext_Pre,
-            false,
-            false,
+            getAccountMessageContext,
+            true,
+            true,
             ($core.List<$core.int> value) =>
                 $53.AccountMessage.fromBuffer(value),
             ($53.AccountMessageContext value) => value.writeToBuffer()));
   }
 
-  $async.Future<$53.AccountMessageContext> getAccountMessageContext_Pre(
-      $grpc.ServiceCall call, $async.Future<$53.AccountMessage> request) async {
-    return getAccountMessageContext(call, await request);
-  }
-
-  $async.Future<$53.AccountMessageContext> getAccountMessageContext(
-      $grpc.ServiceCall call, $53.AccountMessage request);
+  $async.Stream<$53.AccountMessageContext> getAccountMessageContext(
+      $grpc.ServiceCall call, $async.Stream<$53.AccountMessage> request);
 }
