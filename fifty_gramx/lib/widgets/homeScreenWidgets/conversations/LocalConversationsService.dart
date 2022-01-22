@@ -115,6 +115,35 @@ class LocalConversationsService {
             .toList();
   }
 
+  static handleReceivedMessagesFromAccount(
+      List<MessageFromAccount> messagesFromAccount) {
+    for (MessageFromAccount messageFromAccount in messagesFromAccount) {
+      var receivedConversationMessage = ConversationMessage(
+          isMessageEntityAccountAssistant: false,
+          isMessageSent: false,
+          accountReceivedMessage: AccountReceivedMessage(
+              message: messageFromAccount.message,
+              accountId: messageFromAccount.accountId,
+              accountConnectionId:
+                  messageFromAccount.connectedAccount.accountConnectionId,
+              accountReceivedMessageId:
+                  messageFromAccount.accountReceivedMessageId,
+              receivedAt: Timestamp.fromDateTime(DateTime.now())));
+      entityIdConversationMessageMap[
+              messageFromAccount.connectedAccount.accountId]!
+          .add(receivedConversationMessage);
+
+      notifyAddedAccountReceivedMessage(
+          messageFromAccount.connectedAccount.accountId,
+          entityIdConversationMessageMap[
+                      messageFromAccount.connectedAccount.accountId]!
+                  .length -
+              1);
+    }
+  }
+
+  static handleReceivedMessagesFromAccountAssistant() {}
+
   static handleListeningMessages(LocalNotification message) async {
     print("received new notification");
     if (message.data['service'] == "NotifyAccountService") {
@@ -123,30 +152,19 @@ class LocalConversationsService {
             await ReceiveAccountMessageService
                 .listenForReceivedAccountMessages();
         if (listenForReceivedAccountMessagesResponse.responseMeta.metaDone) {
-          for (MessageFromAccount messageFromAccount
-              in listenForReceivedAccountMessagesResponse.messagesFromAccount) {
-            var receivedConversationMessage = ConversationMessage(
-                isMessageEntityAccountAssistant: false,
-                isMessageSent: false,
-                accountReceivedMessage: AccountReceivedMessage(
-                    message: messageFromAccount.message,
-                    accountId: messageFromAccount.accountId,
-                    accountConnectionId:
-                        messageFromAccount.connectedAccount.accountConnectionId,
-                    accountReceivedMessageId:
-                        messageFromAccount.accountReceivedMessageId,
-                    receivedAt: Timestamp.fromDateTime(DateTime.now())));
-            entityIdConversationMessageMap[
-                    messageFromAccount.connectedAccount.accountId]!
-                .add(receivedConversationMessage);
-
-            notifyAddedAccountReceivedMessage(
-                messageFromAccount.connectedAccount.accountId,
-                entityIdConversationMessageMap[
-                            messageFromAccount.connectedAccount.accountId]!
-                        .length -
-                    1);
-          }
+          handleReceivedMessagesFromAccount(
+              listenForReceivedAccountMessagesResponse.messagesFromAccount);
+        }
+      } else if (message.data['rpc'] ==
+          "NewReceivedMessageFromAccountAssistant") {
+        var listenForReceivedAccountAssistantMessagesResponse =
+            await ReceiveAccountMessageService
+                .listenForReceivedAccountAssistantMessages(
+                    message.data['account_assistant_id'],
+                    message.data['account_assistant_received_message_id']);
+        if (listenForReceivedAccountAssistantMessagesResponse
+            .responseMeta.metaDone) {
+          handleReceivedMessagesFromAccountAssistant();
         }
       }
     }
