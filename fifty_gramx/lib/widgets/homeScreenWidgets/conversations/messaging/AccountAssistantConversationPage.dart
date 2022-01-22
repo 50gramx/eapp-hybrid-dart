@@ -435,11 +435,11 @@ class _AccountAssistantConversationPageState
 //                   .listenForReceivedAccountAssistantMessages(
 //                       connectedAccountAssistant,
 //                       accountAssistantReceivedMessageId);
-
+//
 //           var foundDomainRankedAnswers = [];
-
+//
 //           spaceKnowledgeDomainsActionAskQuestionMaps = {};
-
+//
 //           for (Any messageSource
 //               in listenForReceivedAccountAssistantMessagesResponse
 //                   .messageSource) {
@@ -453,14 +453,14 @@ class _AccountAssistantConversationPageState
 //             if (domainRankedAnswers.rankedAnswers.length > 0) {
 //               spaceKnowledgeDomainsActionAskQuestionMaps[domainRankedAnswers
 //                   .spaceKnowledgeDomain] = domainRankedAnswers.rankedAnswers;
-
+//
 //               var suggestedDomainName = domainRankedAnswers
 //                   .spaceKnowledgeDomain.spaceKnowledgeDomainName;
 //               suggestedDomains.add(suggestedDomainName);
 //               foundDomainRankedAnswers.add(domainRankedAnswers);
 //             }
 //           }
-
+//
 //           var messageText = "";
 //           if (spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList().length >
 //               0) {
@@ -474,7 +474,7 @@ class _AccountAssistantConversationPageState
 //             messageText = "No answers were found";
 //           }
 //           print("found domain answers: $foundDomainRankedAnswers");
-
+//
 //           var receivedConversationMessage = ConversationMessage(
 //             isMessageEntityAccountAssistant: true,
 //             isMessageSent: false,
