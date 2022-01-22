@@ -11,34 +11,34 @@ import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
 import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart'
-    as $27;
+    as $24;
 import '../../../../entities/generic.pb.dart' as $2;
-import 'retriever_knowledge.pb.dart' as $52;
+import 'retriever_knowledge.pb.dart' as $49;
 export 'retriever_knowledge.pb.dart';
 
 class RetrieverKnowledgeServiceClient extends $grpc.Client {
   static final _$learnDomainForRetriever = $grpc.ClientMethod<
-          $27.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
+          $24.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
       '/elint.services.cognitive.assist.knowledge.retriever.RetrieverKnowledgeService/LearnDomainForRetriever',
-      ($27.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
+      ($24.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
   static final _$learnDomainParaForRetriever = $grpc.ClientMethod<
-          $27.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
+          $24.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
       '/elint.services.cognitive.assist.knowledge.retriever.RetrieverKnowledgeService/LearnDomainParaForRetriever',
-      ($27.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
+      ($24.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
   static final _$retrieveClosestPages = $grpc.ClientMethod<
-          $52.RetrieveClosestPagesReq, $52.ClosestPages>(
+          $49.RetrieveClosestPagesReq, $49.ClosestPages>(
       '/elint.services.cognitive.assist.knowledge.retriever.RetrieverKnowledgeService/RetrieveClosestPages',
-      ($52.RetrieveClosestPagesReq value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $52.ClosestPages.fromBuffer(value));
+      ($49.RetrieveClosestPagesReq value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $49.ClosestPages.fromBuffer(value));
   static final _$retrieveClosestParas = $grpc.ClientMethod<
-          $52.RetrieveClosestParasRequest, $52.ClosestParas>(
+          $49.RetrieveClosestParasRequest, $49.ClosestParas>(
       '/elint.services.cognitive.assist.knowledge.retriever.RetrieverKnowledgeService/RetrieveClosestParas',
-      ($52.RetrieveClosestParasRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $52.ClosestParas.fromBuffer(value));
+      ($49.RetrieveClosestParasRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $49.ClosestParas.fromBuffer(value));
 
   RetrieverKnowledgeServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -46,27 +46,27 @@ class RetrieverKnowledgeServiceClient extends $grpc.Client {
       : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$2.ResponseMeta> learnDomainForRetriever(
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request,
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$learnDomainForRetriever, request,
         options: options);
   }
 
   $grpc.ResponseFuture<$2.ResponseMeta> learnDomainParaForRetriever(
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request,
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$learnDomainParaForRetriever, request,
         options: options);
   }
 
-  $grpc.ResponseFuture<$52.ClosestPages> retrieveClosestPages(
-      $52.RetrieveClosestPagesReq request,
+  $grpc.ResponseFuture<$49.ClosestPages> retrieveClosestPages(
+      $49.RetrieveClosestPagesReq request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$retrieveClosestPages, request, options: options);
   }
 
-  $grpc.ResponseFuture<$52.ClosestParas> retrieveClosestParas(
-      $52.RetrieveClosestParasRequest request,
+  $grpc.ResponseFuture<$49.ClosestParas> retrieveClosestParas(
+      $49.RetrieveClosestParasRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$retrieveClosestParas, request, options: options);
   }
@@ -78,76 +78,76 @@ abstract class RetrieverKnowledgeServiceBase extends $grpc.Service {
 
   RetrieverKnowledgeServiceBase() {
     $addMethod($grpc.ServiceMethod<
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
         'LearnDomainForRetriever',
         learnDomainForRetriever_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
         ($2.ResponseMeta value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails, $2.ResponseMeta>(
         'LearnDomainParaForRetriever',
         learnDomainParaForRetriever_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
         ($2.ResponseMeta value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$52.RetrieveClosestPagesReq, $52.ClosestPages>(
+        $grpc.ServiceMethod<$49.RetrieveClosestPagesReq, $49.ClosestPages>(
             'RetrieveClosestPages',
             retrieveClosestPages_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $52.RetrieveClosestPagesReq.fromBuffer(value),
-            ($52.ClosestPages value) => value.writeToBuffer()));
+                $49.RetrieveClosestPagesReq.fromBuffer(value),
+            ($49.ClosestPages value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$52.RetrieveClosestParasRequest, $52.ClosestParas>(
+        $grpc.ServiceMethod<$49.RetrieveClosestParasRequest, $49.ClosestParas>(
             'RetrieveClosestParas',
             retrieveClosestParas_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $52.RetrieveClosestParasRequest.fromBuffer(value),
-            ($52.ClosestParas value) => value.writeToBuffer()));
+                $49.RetrieveClosestParasRequest.fromBuffer(value),
+            ($49.ClosestParas value) => value.writeToBuffer()));
   }
 
   $async.Future<$2.ResponseMeta> learnDomainForRetriever_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>
+      $async.Future<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>
           request) async {
     return learnDomainForRetriever(call, await request);
   }
 
   $async.Future<$2.ResponseMeta> learnDomainParaForRetriever_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>
+      $async.Future<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>
           request) async {
     return learnDomainParaForRetriever(call, await request);
   }
 
-  $async.Future<$52.ClosestPages> retrieveClosestPages_Pre(
+  $async.Future<$49.ClosestPages> retrieveClosestPages_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$52.RetrieveClosestPagesReq> request) async {
+      $async.Future<$49.RetrieveClosestPagesReq> request) async {
     return retrieveClosestPages(call, await request);
   }
 
-  $async.Future<$52.ClosestParas> retrieveClosestParas_Pre(
+  $async.Future<$49.ClosestParas> retrieveClosestParas_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$52.RetrieveClosestParasRequest> request) async {
+      $async.Future<$49.RetrieveClosestParasRequest> request) async {
     return retrieveClosestParas(call, await request);
   }
 
   $async.Future<$2.ResponseMeta> learnDomainForRetriever($grpc.ServiceCall call,
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request);
   $async.Future<$2.ResponseMeta> learnDomainParaForRetriever(
       $grpc.ServiceCall call,
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
-  $async.Future<$52.ClosestPages> retrieveClosestPages(
-      $grpc.ServiceCall call, $52.RetrieveClosestPagesReq request);
-  $async.Future<$52.ClosestParas> retrieveClosestParas(
-      $grpc.ServiceCall call, $52.RetrieveClosestParasRequest request);
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request);
+  $async.Future<$49.ClosestPages> retrieveClosestPages(
+      $grpc.ServiceCall call, $49.RetrieveClosestPagesReq request);
+  $async.Future<$49.ClosestParas> retrieveClosestParas(
+      $grpc.ServiceCall call, $49.RetrieveClosestParasRequest request);
 }

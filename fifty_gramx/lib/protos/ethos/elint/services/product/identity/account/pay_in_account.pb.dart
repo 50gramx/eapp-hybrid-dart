@@ -11,9 +11,9 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/generic.pb.dart' as $2;
 import 'access_account.pb.dart' as $0;
-import '../../../../entities/account.pb.dart' as $22;
+import '../../../../entities/account.pb.dart' as $19;
 
-import '../../../../entities/galaxy.pbenum.dart' as $57;
+import '../../../../entities/galaxy.pbenum.dart' as $54;
 import 'pay_in_account.pbenum.dart';
 
 export 'pay_in_account.pbenum.dart';
@@ -305,14 +305,14 @@ class GetAccountPayInIntentResponse extends $pb.GeneratedMessage {
 
 class ListAllCardsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListAllCardsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
-    ..pc<$22.AccountPayInCardDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountPayInCards', $pb.PbFieldType.PM, subBuilder: $22.AccountPayInCardDetails.create)
+    ..pc<$19.AccountPayInCardDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountPayInCards', $pb.PbFieldType.PM, subBuilder: $19.AccountPayInCardDetails.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   ListAllCardsResponse._() : super();
   factory ListAllCardsResponse({
-    $core.Iterable<$22.AccountPayInCardDetails>? accountPayInCards,
+    $core.Iterable<$19.AccountPayInCardDetails>? accountPayInCards,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -346,7 +346,7 @@ class ListAllCardsResponse extends $pb.GeneratedMessage {
   static ListAllCardsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$22.AccountPayInCardDetails> get accountPayInCards => $_getList(0);
+  $core.List<$19.AccountPayInCardDetails> get accountPayInCards => $_getList(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -622,14 +622,14 @@ class CreditAccountEthosCoinBalanceRequest extends $pb.GeneratedMessage {
 class CreateAccountOpenGalaxyTierSubscriptionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountOpenGalaxyTierSubscriptionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..e<$57.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $57.OpenGalaxyTierEnum.FREE_TIER, valueOf: $57.OpenGalaxyTierEnum.valueOf, enumValues: $57.OpenGalaxyTierEnum.values)
+    ..e<$54.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $54.OpenGalaxyTierEnum.FREE_TIER, valueOf: $54.OpenGalaxyTierEnum.valueOf, enumValues: $54.OpenGalaxyTierEnum.values)
     ..hasRequiredFields = false
   ;
 
   CreateAccountOpenGalaxyTierSubscriptionRequest._() : super();
   factory CreateAccountOpenGalaxyTierSubscriptionRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $57.OpenGalaxyTierEnum? openGalaxyTierEnum,
+    $54.OpenGalaxyTierEnum? openGalaxyTierEnum,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -673,9 +673,9 @@ class CreateAccountOpenGalaxyTierSubscriptionRequest extends $pb.GeneratedMessag
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $57.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
+  $54.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
   @$pb.TagNumber(2)
-  set openGalaxyTierEnum($57.OpenGalaxyTierEnum v) { setField(2, v); }
+  set openGalaxyTierEnum($54.OpenGalaxyTierEnum v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOpenGalaxyTierEnum() => $_has(1);
   @$pb.TagNumber(2)
@@ -685,7 +685,7 @@ class CreateAccountOpenGalaxyTierSubscriptionRequest extends $pb.GeneratedMessag
 class VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..e<$57.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $57.OpenGalaxyTierEnum.FREE_TIER, valueOf: $57.OpenGalaxyTierEnum.valueOf, enumValues: $57.OpenGalaxyTierEnum.values)
+    ..e<$54.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $54.OpenGalaxyTierEnum.FREE_TIER, valueOf: $54.OpenGalaxyTierEnum.valueOf, enumValues: $54.OpenGalaxyTierEnum.values)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'googlePlayPurchaseToken')
     ..hasRequiredFields = false
   ;
@@ -693,7 +693,7 @@ class VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest extends $pb.Gene
   VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest._() : super();
   factory VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $57.OpenGalaxyTierEnum? openGalaxyTierEnum,
+    $54.OpenGalaxyTierEnum? openGalaxyTierEnum,
     $core.String? googlePlayPurchaseToken,
   }) {
     final _result = create();
@@ -741,9 +741,9 @@ class VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest extends $pb.Gene
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $57.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
+  $54.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
   @$pb.TagNumber(2)
-  set openGalaxyTierEnum($57.OpenGalaxyTierEnum v) { setField(2, v); }
+  set openGalaxyTierEnum($54.OpenGalaxyTierEnum v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOpenGalaxyTierEnum() => $_has(1);
   @$pb.TagNumber(2)
@@ -762,7 +762,7 @@ class VerifyAccountOpenGalaxyPlayStoreSubscriptionChargeRequest extends $pb.Gene
 class ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..e<$57.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $57.OpenGalaxyTierEnum.FREE_TIER, valueOf: $57.OpenGalaxyTierEnum.valueOf, enumValues: $57.OpenGalaxyTierEnum.values)
+    ..e<$54.OpenGalaxyTierEnum>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'openGalaxyTierEnum', $pb.PbFieldType.OE, defaultOrMaker: $54.OpenGalaxyTierEnum.FREE_TIER, valueOf: $54.OpenGalaxyTierEnum.valueOf, enumValues: $54.OpenGalaxyTierEnum.values)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'googlePlayPurchaseToken')
     ..hasRequiredFields = false
   ;
@@ -770,7 +770,7 @@ class ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest extends $pb.Generated
   ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest._() : super();
   factory ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $57.OpenGalaxyTierEnum? openGalaxyTierEnum,
+    $54.OpenGalaxyTierEnum? openGalaxyTierEnum,
     $core.String? googlePlayPurchaseToken,
   }) {
     final _result = create();
@@ -818,9 +818,9 @@ class ConfirmAccountOpenGalaxyPlayStoreSubscriptionRequest extends $pb.Generated
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $57.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
+  $54.OpenGalaxyTierEnum get openGalaxyTierEnum => $_getN(1);
   @$pb.TagNumber(2)
-  set openGalaxyTierEnum($57.OpenGalaxyTierEnum v) { setField(2, v); }
+  set openGalaxyTierEnum($54.OpenGalaxyTierEnum v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasOpenGalaxyTierEnum() => $_has(1);
   @$pb.TagNumber(2)

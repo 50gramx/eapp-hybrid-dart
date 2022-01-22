@@ -15,13 +15,18 @@ const MessageFromAccountAssistant$json = const {
     const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
     const {'1': 'connected_account_assistant', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccountAssistant', '10': 'connectedAccountAssistant'},
     const {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
-    const {'1': 'message_source', '3': 4, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messageSource'},
-    const {'1': 'account_assistant_received_message_id', '3': 5, '4': 1, '5': 9, '10': 'accountAssistantReceivedMessageId'},
+    const {'1': 'message_source_space_id', '3': 4, '4': 1, '5': 9, '10': 'messageSourceSpaceId'},
+    const {'1': 'message_source_space_type_id', '3': 5, '4': 1, '5': 9, '10': 'messageSourceSpaceTypeId'},
+    const {'1': 'message_source_space_domain_id', '3': 6, '4': 1, '5': 9, '10': 'messageSourceSpaceDomainId'},
+    const {'1': 'message_source_space_domain_action', '3': 7, '4': 1, '5': 5, '10': 'messageSourceSpaceDomainAction'},
+    const {'1': 'message_source_space_domain_action_context_id', '3': 8, '4': 1, '5': 9, '10': 'messageSourceSpaceDomainActionContextId'},
+    const {'1': 'message_source', '3': 9, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messageSource'},
+    const {'1': 'account_assistant_received_message_id', '3': 10, '4': 1, '5': 9, '10': 'accountAssistantReceivedMessageId'},
   ],
 };
 
 /// Descriptor for `MessageFromAccountAssistant`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List messageFromAccountAssistantDescriptor = $convert.base64Decode('ChtNZXNzYWdlRnJvbUFjY291bnRBc3Npc3RhbnQSHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElkEm4KG2Nvbm5lY3RlZF9hY2NvdW50X2Fzc2lzdGFudBgCIAEoCzIuLmVsaW50LmVudGl0eS5BY2NvdW50Q29ubmVjdGVkQWNjb3VudEFzc2lzdGFudFIZY29ubmVjdGVkQWNjb3VudEFzc2lzdGFudBIYCgdtZXNzYWdlGAMgASgJUgdtZXNzYWdlEjsKDm1lc3NhZ2Vfc291cmNlGAQgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueVINbWVzc2FnZVNvdXJjZRJQCiVhY2NvdW50X2Fzc2lzdGFudF9yZWNlaXZlZF9tZXNzYWdlX2lkGAUgASgJUiFhY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlSWQ=');
+final $typed_data.Uint8List messageFromAccountAssistantDescriptor = $convert.base64Decode('ChtNZXNzYWdlRnJvbUFjY291bnRBc3Npc3RhbnQSHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElkEm4KG2Nvbm5lY3RlZF9hY2NvdW50X2Fzc2lzdGFudBgCIAEoCzIuLmVsaW50LmVudGl0eS5BY2NvdW50Q29ubmVjdGVkQWNjb3VudEFzc2lzdGFudFIZY29ubmVjdGVkQWNjb3VudEFzc2lzdGFudBIYCgdtZXNzYWdlGAMgASgJUgdtZXNzYWdlEjUKF21lc3NhZ2Vfc291cmNlX3NwYWNlX2lkGAQgASgJUhRtZXNzYWdlU291cmNlU3BhY2VJZBI+ChxtZXNzYWdlX3NvdXJjZV9zcGFjZV90eXBlX2lkGAUgASgJUhhtZXNzYWdlU291cmNlU3BhY2VUeXBlSWQSQgoebWVzc2FnZV9zb3VyY2Vfc3BhY2VfZG9tYWluX2lkGAYgASgJUhptZXNzYWdlU291cmNlU3BhY2VEb21haW5JZBJKCiJtZXNzYWdlX3NvdXJjZV9zcGFjZV9kb21haW5fYWN0aW9uGAcgASgFUh5tZXNzYWdlU291cmNlU3BhY2VEb21haW5BY3Rpb24SXgotbWVzc2FnZV9zb3VyY2Vfc3BhY2VfZG9tYWluX2FjdGlvbl9jb250ZXh0X2lkGAggASgJUidtZXNzYWdlU291cmNlU3BhY2VEb21haW5BY3Rpb25Db250ZXh0SWQSOwoObWVzc2FnZV9zb3VyY2UYCSADKAsyFC5nb29nbGUucHJvdG9idWYuQW55Ug1tZXNzYWdlU291cmNlElAKJWFjY291bnRfYXNzaXN0YW50X3JlY2VpdmVkX21lc3NhZ2VfaWQYCiABKAlSIWFjY291bnRBc3Npc3RhbnRSZWNlaXZlZE1lc3NhZ2VJZA==');
 @$core.Deprecated('Use messageFromAccountAssistantReceivedDescriptor instead')
 const MessageFromAccountAssistantReceived$json = const {
   '1': 'MessageFromAccountAssistantReceived',
@@ -119,25 +124,22 @@ const ListenForReceivedAccountAssistantMessagesRequest$json = const {
   '1': 'ListenForReceivedAccountAssistantMessagesRequest',
   '2': const [
     const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.AccountServicesAccessAuthDetails', '10': 'accessAuthDetails'},
-    const {'1': 'connected_account_assistant', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccountAssistant', '10': 'connectedAccountAssistant'},
-    const {'1': 'account_assistant_received_message_id', '3': 3, '4': 1, '5': 9, '10': 'accountAssistantReceivedMessageId'},
   ],
 };
 
 /// Descriptor for `ListenForReceivedAccountAssistantMessagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listenForReceivedAccountAssistantMessagesRequestDescriptor = $convert.base64Decode('CjBMaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRBc3Npc3RhbnRNZXNzYWdlc1JlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHMSbgobY29ubmVjdGVkX2FjY291bnRfYXNzaXN0YW50GAIgASgLMi4uZWxpbnQuZW50aXR5LkFjY291bnRDb25uZWN0ZWRBY2NvdW50QXNzaXN0YW50Uhljb25uZWN0ZWRBY2NvdW50QXNzaXN0YW50ElAKJWFjY291bnRfYXNzaXN0YW50X3JlY2VpdmVkX21lc3NhZ2VfaWQYAyABKAlSIWFjY291bnRBc3Npc3RhbnRSZWNlaXZlZE1lc3NhZ2VJZA==');
+final $typed_data.Uint8List listenForReceivedAccountAssistantMessagesRequestDescriptor = $convert.base64Decode('CjBMaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRBc3Npc3RhbnRNZXNzYWdlc1JlcXVlc3QSeQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJJLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5BY2NvdW50U2VydmljZXNBY2Nlc3NBdXRoRGV0YWlsc1IRYWNjZXNzQXV0aERldGFpbHM=');
 @$core.Deprecated('Use listenForReceivedAccountAssistantMessagesResponseDescriptor instead')
 const ListenForReceivedAccountAssistantMessagesResponse$json = const {
   '1': 'ListenForReceivedAccountAssistantMessagesResponse',
   '2': const [
-    const {'1': 'message_source', '3': 3, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messageSource'},
-    const {'1': 'received_at', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'receivedAt'},
-    const {'1': 'response_meta', '3': 5, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
+    const {'1': 'messages_from_account_assistant', '3': 1, '4': 3, '5': 11, '6': '.elint.services.product.conversation.message.account.MessageFromAccountAssistant', '10': 'messagesFromAccountAssistant'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
   ],
 };
 
 /// Descriptor for `ListenForReceivedAccountAssistantMessagesResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listenForReceivedAccountAssistantMessagesResponseDescriptor = $convert.base64Decode('CjFMaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRBc3Npc3RhbnRNZXNzYWdlc1Jlc3BvbnNlEjsKDm1lc3NhZ2Vfc291cmNlGAMgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueVINbWVzc2FnZVNvdXJjZRI7CgtyZWNlaXZlZF9hdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCnJlY2VpdmVkQXQSPwoNcmVzcG9uc2VfbWV0YRgFIAEoCzIaLmVsaW50LmVudGl0eS5SZXNwb25zZU1ldGFSDHJlc3BvbnNlTWV0YQ==');
+final $typed_data.Uint8List listenForReceivedAccountAssistantMessagesResponseDescriptor = $convert.base64Decode('CjFMaXN0ZW5Gb3JSZWNlaXZlZEFjY291bnRBc3Npc3RhbnRNZXNzYWdlc1Jlc3BvbnNlEpcBCh9tZXNzYWdlc19mcm9tX2FjY291bnRfYXNzaXN0YW50GAEgAygLMlAuZWxpbnQuc2VydmljZXMucHJvZHVjdC5jb252ZXJzYXRpb24ubWVzc2FnZS5hY2NvdW50Lk1lc3NhZ2VGcm9tQWNjb3VudEFzc2lzdGFudFIcbWVzc2FnZXNGcm9tQWNjb3VudEFzc2lzdGFudBI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
 @$core.Deprecated('Use listenForReceivedAccountMessagesRequestDescriptor instead')
 const ListenForReceivedAccountMessagesRequest$json = const {
   '1': 'ListenForReceivedAccountMessagesRequest',

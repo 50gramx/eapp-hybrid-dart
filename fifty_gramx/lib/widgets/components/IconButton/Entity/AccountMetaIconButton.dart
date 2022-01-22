@@ -36,6 +36,6 @@ class AccountMetaIconButton implements ConnectedEntityIconButton {
 
 
   @override
-  Widget buildConnectedOrganizationIconButton(BuildContext context) =>
+  Widget buildConnectedOrganisationIconButton(BuildContext context) =>
       SizedBox();
 }

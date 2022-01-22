@@ -1,7 +1,6 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/widgets/components/IconButton/ConnectedEntityIconButton.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -11,14 +10,11 @@ class AccountIconButton implements ConnectedEntityIconButton {
   final AccountConnectedAccount accountConnectedAccount;
   final VoidCallback toggleAccountInterest;
 
-
-  AccountIconButton(this.connectedAccount, this.accountConnectedAccount, this.toggleAccountInterest);
-
+  AccountIconButton(this.connectedAccount, this.accountConnectedAccount,
+      this.toggleAccountInterest);
 
   @override
   Widget buildConnectedContactIconButton(BuildContext context) => SizedBox();
-
-
 
   String getInitials(String contactName) => contactName.isNotEmpty
       ? contactName.trim().split(' ').map((l) => l[0]).take(2).join()
@@ -42,7 +38,6 @@ class AccountIconButton implements ConnectedEntityIconButton {
 
   @override
   Widget buildConnectedAccountIconButton(BuildContext context) {
-
     var neuText = NeumorphicText(
       "",
       style: NeumorphicStyle(
@@ -76,8 +71,7 @@ class AccountIconButton implements ConnectedEntityIconButton {
             ? AppColors.gray600
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
-        boxShape:
-        NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
         color: AppColors.backgroundPrimary(context),
       ),
       padding: const EdgeInsets.all(2),
@@ -85,7 +79,7 @@ class AccountIconButton implements ConnectedEntityIconButton {
         radius: 20,
         backgroundColor: AppColors.backgroundPrimary(context),
         child: Icon(
-            getConnectionStatus(accountConnectedAccount),
+          getConnectionStatus(accountConnectedAccount),
           color: AppColors.contentPrimary(context),
           size: 16,
         ),
@@ -102,6 +96,6 @@ class AccountIconButton implements ConnectedEntityIconButton {
       SizedBox();
 
   @override
-  Widget buildConnectedOrganizationIconButton(BuildContext context) =>
+  Widget buildConnectedOrganisationIconButton(BuildContext context) =>
       SizedBox();
 }

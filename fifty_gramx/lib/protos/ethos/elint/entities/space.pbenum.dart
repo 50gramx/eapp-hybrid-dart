@@ -60,11 +60,11 @@ class SpaceIsolationType extends $pb.ProtobufEnum {
 
 class SpaceEntityType extends $pb.ProtobufEnum {
   static const SpaceEntityType ACCOUNT = SpaceEntityType._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ACCOUNT');
-  static const SpaceEntityType ORGANIZATION = SpaceEntityType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ORGANIZATION');
+  static const SpaceEntityType TEAM = SpaceEntityType._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'TEAM');
 
   static const $core.List<SpaceEntityType> values = <SpaceEntityType> [
     ACCOUNT,
-    ORGANIZATION,
+    TEAM,
   ];
 
   static final $core.Map<$core.int, SpaceEntityType> _byValue = $pb.ProtobufEnum.initByValue(values);

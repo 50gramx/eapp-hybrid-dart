@@ -10,24 +10,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'delete_space.pb.dart' as $17;
+import 'delete_space.pb.dart' as $14;
 export 'delete_space.pb.dart';
 
 class DeleteSpaceServiceClient extends $grpc.Client {
-  static final _$deleteSpace = $grpc.ClientMethod<$17.DeleteSpaceRequest,
-          $17.DeleteSpaceResponse>(
+  static final _$deleteSpace = $grpc.ClientMethod<$14.DeleteSpaceRequest,
+          $14.DeleteSpaceResponse>(
       '/elint.services.product.identity.space.DeleteSpaceService/DeleteSpace',
-      ($17.DeleteSpaceRequest value) => value.writeToBuffer(),
+      ($14.DeleteSpaceRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $17.DeleteSpaceResponse.fromBuffer(value));
+          $14.DeleteSpaceResponse.fromBuffer(value));
 
   DeleteSpaceServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$17.DeleteSpaceResponse> deleteSpace(
-      $17.DeleteSpaceRequest request,
+  $grpc.ResponseFuture<$14.DeleteSpaceResponse> deleteSpace(
+      $14.DeleteSpaceRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSpace, request, options: options);
   }
@@ -39,21 +39,21 @@ abstract class DeleteSpaceServiceBase extends $grpc.Service {
 
   DeleteSpaceServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$17.DeleteSpaceRequest, $17.DeleteSpaceResponse>(
+        $grpc.ServiceMethod<$14.DeleteSpaceRequest, $14.DeleteSpaceResponse>(
             'DeleteSpace',
             deleteSpace_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $17.DeleteSpaceRequest.fromBuffer(value),
-            ($17.DeleteSpaceResponse value) => value.writeToBuffer()));
+                $14.DeleteSpaceRequest.fromBuffer(value),
+            ($14.DeleteSpaceResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$17.DeleteSpaceResponse> deleteSpace_Pre($grpc.ServiceCall call,
-      $async.Future<$17.DeleteSpaceRequest> request) async {
+  $async.Future<$14.DeleteSpaceResponse> deleteSpace_Pre($grpc.ServiceCall call,
+      $async.Future<$14.DeleteSpaceRequest> request) async {
     return deleteSpace(call, await request);
   }
 
-  $async.Future<$17.DeleteSpaceResponse> deleteSpace(
-      $grpc.ServiceCall call, $17.DeleteSpaceRequest request);
+  $async.Future<$14.DeleteSpaceResponse> deleteSpace(
+      $grpc.ServiceCall call, $14.DeleteSpaceRequest request);
 }

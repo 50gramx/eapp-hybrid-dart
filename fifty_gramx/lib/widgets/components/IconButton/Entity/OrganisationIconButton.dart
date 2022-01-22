@@ -1,19 +1,17 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/organization.pb.dart';
+import 'package:fifty_gramx/protos/ethos/elint/entities/organisation.pb.dart';
 import 'package:fifty_gramx/widgets/components/IconButton/ConnectedEntityIconButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
-class OrganizationIconButton implements ConnectedEntityIconButton {
-  final Organization connectedOrganization;
+class OrganisationIconButton implements ConnectedEntityIconButton {
+  final Organisation connectedOrganization;
 
-  OrganizationIconButton(this.connectedOrganization);
-
+  OrganisationIconButton(this.connectedOrganization);
 
   @override
   Widget buildConnectedContactIconButton(BuildContext context) => SizedBox();
 
-  
   @override
   Widget buildConnectedAccountIconButton(BuildContext context) => SizedBox();
 
@@ -21,14 +19,12 @@ class OrganizationIconButton implements ConnectedEntityIconButton {
   Widget buildConnectedAccountMetaIconButton(BuildContext context) =>
       SizedBox();
 
-
   @override
   Widget buildConnectedAccountAssistantIconButton(BuildContext context) =>
       SizedBox();
 
-
   @override
-  Widget buildConnectedOrganizationIconButton(BuildContext context) {
+  Widget buildConnectedOrganisationIconButton(BuildContext context) {
     return IconButton(
       icon: Icon(
         // TODO: Implement Organization Picture with this icon

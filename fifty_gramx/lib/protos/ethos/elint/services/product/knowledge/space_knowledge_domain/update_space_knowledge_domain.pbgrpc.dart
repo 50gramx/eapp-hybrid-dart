@@ -10,27 +10,27 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'update_space_knowledge_domain.pb.dart' as $32;
+import 'update_space_knowledge_domain.pb.dart' as $29;
 export 'update_space_knowledge_domain.pb.dart';
 
 class UpdateSpaceKnowledgeDomainServiceClient extends $grpc.Client {
   static final _$updateSpaceKnowledgeDomainName = $grpc.ClientMethod<
-          $32.UpdateSpaceKnowledgeDomainNameRequest,
-          $32.UpdateSpaceKnowledgeDomainNameResponse>(
+          $29.UpdateSpaceKnowledgeDomainNameRequest,
+          $29.UpdateSpaceKnowledgeDomainNameResponse>(
       '/elint.services.product.knowledge.domain.UpdateSpaceKnowledgeDomainService/UpdateSpaceKnowledgeDomainName',
-      ($32.UpdateSpaceKnowledgeDomainNameRequest value) =>
+      ($29.UpdateSpaceKnowledgeDomainNameRequest value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $32.UpdateSpaceKnowledgeDomainNameResponse.fromBuffer(value));
+          $29.UpdateSpaceKnowledgeDomainNameResponse.fromBuffer(value));
 
   UpdateSpaceKnowledgeDomainServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$32.UpdateSpaceKnowledgeDomainNameResponse>
+  $grpc.ResponseFuture<$29.UpdateSpaceKnowledgeDomainNameResponse>
       updateSpaceKnowledgeDomainName(
-          $32.UpdateSpaceKnowledgeDomainNameRequest request,
+          $29.UpdateSpaceKnowledgeDomainNameRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateSpaceKnowledgeDomainName, request,
         options: options);
@@ -42,27 +42,27 @@ abstract class UpdateSpaceKnowledgeDomainServiceBase extends $grpc.Service {
       'elint.services.product.knowledge.domain.UpdateSpaceKnowledgeDomainService';
 
   UpdateSpaceKnowledgeDomainServiceBase() {
-    $addMethod($grpc.ServiceMethod<$32.UpdateSpaceKnowledgeDomainNameRequest,
-            $32.UpdateSpaceKnowledgeDomainNameResponse>(
+    $addMethod($grpc.ServiceMethod<$29.UpdateSpaceKnowledgeDomainNameRequest,
+            $29.UpdateSpaceKnowledgeDomainNameResponse>(
         'UpdateSpaceKnowledgeDomainName',
         updateSpaceKnowledgeDomainName_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $32.UpdateSpaceKnowledgeDomainNameRequest.fromBuffer(value),
-        ($32.UpdateSpaceKnowledgeDomainNameResponse value) =>
+            $29.UpdateSpaceKnowledgeDomainNameRequest.fromBuffer(value),
+        ($29.UpdateSpaceKnowledgeDomainNameResponse value) =>
             value.writeToBuffer()));
   }
 
-  $async.Future<$32.UpdateSpaceKnowledgeDomainNameResponse>
+  $async.Future<$29.UpdateSpaceKnowledgeDomainNameResponse>
       updateSpaceKnowledgeDomainName_Pre(
           $grpc.ServiceCall call,
-          $async.Future<$32.UpdateSpaceKnowledgeDomainNameRequest>
+          $async.Future<$29.UpdateSpaceKnowledgeDomainNameRequest>
               request) async {
     return updateSpaceKnowledgeDomainName(call, await request);
   }
 
-  $async.Future<$32.UpdateSpaceKnowledgeDomainNameResponse>
+  $async.Future<$29.UpdateSpaceKnowledgeDomainNameResponse>
       updateSpaceKnowledgeDomainName($grpc.ServiceCall call,
-          $32.UpdateSpaceKnowledgeDomainNameRequest request);
+          $29.UpdateSpaceKnowledgeDomainNameRequest request);
 }

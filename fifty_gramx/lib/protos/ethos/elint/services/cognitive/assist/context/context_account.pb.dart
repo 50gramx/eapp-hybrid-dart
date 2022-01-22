@@ -10,8 +10,9 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../product/identity/account_assistant/access_account_assistant.pb.dart' as $8;
+import '../../../../entities/generic.pb.dart' as $2;
 
-import '../../../../entities/space_knowledge.pbenum.dart' as $59;
+import '../../../../entities/space_knowledge.pbenum.dart' as $58;
 
 class AccountMessage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMessage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
@@ -79,16 +80,21 @@ class AccountMessage extends $pb.GeneratedMessage {
 class AccountMessageContext extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountMessageContext', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
     ..pc<KnowledgeContextualAction>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextualActions', $pb.PbFieldType.PM, subBuilder: KnowledgeContextualAction.create)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   AccountMessageContext._() : super();
   factory AccountMessageContext({
     $core.Iterable<KnowledgeContextualAction>? knowledgeContextualActions,
+    $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
     if (knowledgeContextualActions != null) {
       _result.knowledgeContextualActions.addAll(knowledgeContextualActions);
+    }
+    if (responseMeta != null) {
+      _result.responseMeta = responseMeta;
     }
     return _result;
   }
@@ -115,12 +121,23 @@ class AccountMessageContext extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<KnowledgeContextualAction> get knowledgeContextualActions => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
 }
 
 class KnowledgeContextualAction extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'KnowledgeContextualAction', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.context.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextActionId')
-    ..e<$59.SpaceKnowledgeAction>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAction', $pb.PbFieldType.OE, defaultOrMaker: $59.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
+    ..e<$58.SpaceKnowledgeAction>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAction', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $58.SpaceKnowledgeAction.valueOf, enumValues: $58.SpaceKnowledgeAction.values)
     ..a<$core.double>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeContextConfidence', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
@@ -128,7 +145,7 @@ class KnowledgeContextualAction extends $pb.GeneratedMessage {
   KnowledgeContextualAction._() : super();
   factory KnowledgeContextualAction({
     $core.String? knowledgeContextActionId,
-    $59.SpaceKnowledgeAction? knowledgeSpaceAction,
+    $58.SpaceKnowledgeAction? knowledgeSpaceAction,
     $core.double? knowledgeContextConfidence,
   }) {
     final _result = create();
@@ -174,9 +191,9 @@ class KnowledgeContextualAction extends $pb.GeneratedMessage {
   void clearKnowledgeContextActionId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $59.SpaceKnowledgeAction get knowledgeSpaceAction => $_getN(1);
+  $58.SpaceKnowledgeAction get knowledgeSpaceAction => $_getN(1);
   @$pb.TagNumber(2)
-  set knowledgeSpaceAction($59.SpaceKnowledgeAction v) { setField(2, v); }
+  set knowledgeSpaceAction($58.SpaceKnowledgeAction v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasKnowledgeSpaceAction() => $_has(1);
   @$pb.TagNumber(2)

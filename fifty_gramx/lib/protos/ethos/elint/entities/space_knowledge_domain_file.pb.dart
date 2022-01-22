@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'space_knowledge_domain.pb.dart' as $31;
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'space_knowledge_domain.pb.dart' as $28;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 import 'space_knowledge_domain_file.pbenum.dart';
 
@@ -83,11 +83,11 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileSize', $pb.PbFieldType.O3)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileId')
     ..e<ExtentionType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileExtensionType', $pb.PbFieldType.OE, defaultOrMaker: ExtentionType.PNG, valueOf: ExtentionType.valueOf, enumValues: ExtentionType.values)
-    ..aOM<$31.SpaceKnowledgeDomain>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..pc<FileTag>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileTags', $pb.PbFieldType.PM, subBuilder: FileTag.create)
-    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -97,11 +97,11 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
     $core.int? spaceKnowledgeDomainFileSize,
     $core.String? spaceKnowledgeDomainFileId,
     ExtentionType? spaceKnowledgeDomainFileExtensionType,
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
     $core.Iterable<FileTag>? spaceKnowledgeDomainFileTags,
-    $55.Timestamp? createdAt,
-    $55.Timestamp? lastUpdatedAt,
-    $55.Timestamp? lastAccessedAt,
+    $52.Timestamp? createdAt,
+    $52.Timestamp? lastUpdatedAt,
+    $52.Timestamp? lastAccessedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFileName != null) {
@@ -191,50 +191,50 @@ class SpaceKnowledgeDomainFile extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainFileExtensionType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(4);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(4);
   @$pb.TagNumber(5)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(5, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasSpaceKnowledgeDomain() => $_has(4);
   @$pb.TagNumber(5)
   void clearSpaceKnowledgeDomain() => clearField(5);
   @$pb.TagNumber(5)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(4);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(4);
 
   @$pb.TagNumber(6)
   $core.List<FileTag> get spaceKnowledgeDomainFileTags => $_getList(5);
 
   @$pb.TagNumber(7)
-  $55.Timestamp get createdAt => $_getN(6);
+  $52.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(7)
-  set createdAt($55.Timestamp v) { setField(7, v); }
+  set createdAt($52.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $55.Timestamp ensureCreatedAt() => $_ensure(6);
+  $52.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $55.Timestamp get lastUpdatedAt => $_getN(7);
+  $52.Timestamp get lastUpdatedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set lastUpdatedAt($55.Timestamp v) { setField(8, v); }
+  set lastUpdatedAt($52.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasLastUpdatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearLastUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $55.Timestamp ensureLastUpdatedAt() => $_ensure(7);
+  $52.Timestamp ensureLastUpdatedAt() => $_ensure(7);
 
   @$pb.TagNumber(9)
-  $55.Timestamp get lastAccessedAt => $_getN(8);
+  $52.Timestamp get lastAccessedAt => $_getN(8);
   @$pb.TagNumber(9)
-  set lastAccessedAt($55.Timestamp v) { setField(9, v); }
+  set lastAccessedAt($52.Timestamp v) { setField(9, v); }
   @$pb.TagNumber(9)
   $core.bool hasLastAccessedAt() => $_has(8);
   @$pb.TagNumber(9)
   void clearLastAccessedAt() => clearField(9);
   @$pb.TagNumber(9)
-  $55.Timestamp ensureLastAccessedAt() => $_ensure(8);
+  $52.Timestamp ensureLastAccessedAt() => $_ensure(8);
 }
 

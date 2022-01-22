@@ -11,16 +11,16 @@ import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
 import '../space_knowledge_domain_file_page/access_space_knowledge_domain_file_page.pb.dart'
-    as $38;
+    as $35;
 import '../../../../entities/generic.pb.dart' as $2;
 export 'create_space_knowledge_domain_file_page_para.pb.dart';
 
 class CreateSpaceKnowledgeDomainFilePageParaServiceClient extends $grpc.Client {
   static final _$extractParasFromPage = $grpc.ClientMethod<
-          $38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails,
+          $35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails,
           $2.ResponseMeta>(
       '/elint.services.product.knowledge.para.CreateSpaceKnowledgeDomainFilePageParaService/ExtractParasFromPage',
-      ($38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails value) =>
+      ($35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
 
@@ -31,7 +31,7 @@ class CreateSpaceKnowledgeDomainFilePageParaServiceClient extends $grpc.Client {
       : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$2.ResponseMeta> extractParasFromPage(
-      $38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails request,
+      $35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$extractParasFromPage, request, options: options);
   }
@@ -44,25 +44,25 @@ abstract class CreateSpaceKnowledgeDomainFilePageParaServiceBase
 
   CreateSpaceKnowledgeDomainFilePageParaServiceBase() {
     $addMethod($grpc.ServiceMethod<
-            $38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails,
+            $35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails,
             $2.ResponseMeta>(
         'ExtractParasFromPage',
         extractParasFromPage_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails
+            $35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails
                 .fromBuffer(value),
         ($2.ResponseMeta value) => value.writeToBuffer()));
   }
 
   $async.Future<$2.ResponseMeta> extractParasFromPage_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails>
+      $async.Future<$35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails>
           request) async {
     return extractParasFromPage(call, await request);
   }
 
   $async.Future<$2.ResponseMeta> extractParasFromPage($grpc.ServiceCall call,
-      $38.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails request);
+      $35.SpaceKnowledgeDomainFilePageServicesAccessAuthDetails request);
 }

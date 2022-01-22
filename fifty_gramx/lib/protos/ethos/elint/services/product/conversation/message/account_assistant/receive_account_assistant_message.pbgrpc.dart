@@ -10,24 +10,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'receive_account_assistant_message.pb.dart' as $46;
+import 'receive_account_assistant_message.pb.dart' as $43;
 export 'receive_account_assistant_message.pb.dart';
 
 class ReceiveAccountAssistantMessageServiceClient extends $grpc.Client {
   static final _$receiveMessageFromAccount = $grpc.ClientMethod<
-          $46.MessageFromAccount, $46.MessageFromAccountReceived>(
+          $43.MessageFromAccount, $43.MessageFromAccountReceived>(
       '/elint.services.product.conversation.message.account.assistant.ReceiveAccountAssistantMessageService/ReceiveMessageFromAccount',
-      ($46.MessageFromAccount value) => value.writeToBuffer(),
+      ($43.MessageFromAccount value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $46.MessageFromAccountReceived.fromBuffer(value));
+          $43.MessageFromAccountReceived.fromBuffer(value));
 
   ReceiveAccountAssistantMessageServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$46.MessageFromAccountReceived>
-      receiveMessageFromAccount($46.MessageFromAccount request,
+  $grpc.ResponseFuture<$43.MessageFromAccountReceived>
+      receiveMessageFromAccount($43.MessageFromAccount request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$receiveMessageFromAccount, request,
         options: options);
@@ -39,23 +39,23 @@ abstract class ReceiveAccountAssistantMessageServiceBase extends $grpc.Service {
       'elint.services.product.conversation.message.account.assistant.ReceiveAccountAssistantMessageService';
 
   ReceiveAccountAssistantMessageServiceBase() {
-    $addMethod($grpc.ServiceMethod<$46.MessageFromAccount,
-            $46.MessageFromAccountReceived>(
+    $addMethod($grpc.ServiceMethod<$43.MessageFromAccount,
+            $43.MessageFromAccountReceived>(
         'ReceiveMessageFromAccount',
         receiveMessageFromAccount_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $46.MessageFromAccount.fromBuffer(value),
-        ($46.MessageFromAccountReceived value) => value.writeToBuffer()));
+            $43.MessageFromAccount.fromBuffer(value),
+        ($43.MessageFromAccountReceived value) => value.writeToBuffer()));
   }
 
-  $async.Future<$46.MessageFromAccountReceived> receiveMessageFromAccount_Pre(
+  $async.Future<$43.MessageFromAccountReceived> receiveMessageFromAccount_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$46.MessageFromAccount> request) async {
+      $async.Future<$43.MessageFromAccount> request) async {
     return receiveMessageFromAccount(call, await request);
   }
 
-  $async.Future<$46.MessageFromAccountReceived> receiveMessageFromAccount(
-      $grpc.ServiceCall call, $46.MessageFromAccount request);
+  $async.Future<$43.MessageFromAccountReceived> receiveMessageFromAccount(
+      $grpc.ServiceCall call, $43.MessageFromAccount request);
 }

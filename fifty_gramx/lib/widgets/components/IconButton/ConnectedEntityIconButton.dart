@@ -11,7 +11,7 @@ abstract class ConnectedEntityIconButton {
 
   Widget buildConnectedAccountMetaIconButton(BuildContext context);
 
-  Widget buildConnectedOrganizationIconButton(BuildContext context);
+  Widget buildConnectedOrganisationIconButton(BuildContext context);
 
   Widget buildConnectedAccountAssistantIconButton(BuildContext context);
 

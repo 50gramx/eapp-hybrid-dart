@@ -9,27 +9,27 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/account.pb.dart' as $22;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
-import '../../../../entities/space.pb.dart' as $58;
+import '../../../../entities/account.pb.dart' as $19;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $52;
+import '../../../../entities/space.pb.dart' as $57;
 
-import '../../../../entities/space.pbenum.dart' as $58;
+import '../../../../entities/space.pbenum.dart' as $57;
 
 class CreateAccountSpaceRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountSpaceRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.space'), createEmptyInstance: create)
-    ..aOM<$22.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $22.Account.create)
-    ..e<$58.SpaceAccessibilityType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceAccessibilityType', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceAccessibilityType.CLOSED, valueOf: $58.SpaceAccessibilityType.valueOf, enumValues: $58.SpaceAccessibilityType.values)
-    ..e<$58.SpaceIsolationType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIsolationType', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceIsolationType.NOT_ISOLATED, valueOf: $58.SpaceIsolationType.valueOf, enumValues: $58.SpaceIsolationType.values)
-    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$19.Account>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $19.Account.create)
+    ..e<$57.SpaceAccessibilityType>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceAccessibilityType', $pb.PbFieldType.OE, defaultOrMaker: $57.SpaceAccessibilityType.CLOSED, valueOf: $57.SpaceAccessibilityType.valueOf, enumValues: $57.SpaceAccessibilityType.values)
+    ..e<$57.SpaceIsolationType>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceIsolationType', $pb.PbFieldType.OE, defaultOrMaker: $57.SpaceIsolationType.NOT_ISOLATED, valueOf: $57.SpaceIsolationType.valueOf, enumValues: $57.SpaceIsolationType.values)
+    ..aOM<$52.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   CreateAccountSpaceRequest._() : super();
   factory CreateAccountSpaceRequest({
-    $22.Account? account,
-    $58.SpaceAccessibilityType? spaceAccessibilityType,
-    $58.SpaceIsolationType? spaceIsolationType,
-    $55.Timestamp? requestedAt,
+    $19.Account? account,
+    $57.SpaceAccessibilityType? spaceAccessibilityType,
+    $57.SpaceIsolationType? spaceIsolationType,
+    $52.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (account != null) {
@@ -68,49 +68,49 @@ class CreateAccountSpaceRequest extends $pb.GeneratedMessage {
   static CreateAccountSpaceRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Account get account => $_getN(0);
+  $19.Account get account => $_getN(0);
   @$pb.TagNumber(1)
-  set account($22.Account v) { setField(1, v); }
+  set account($19.Account v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccount() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccount() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Account ensureAccount() => $_ensure(0);
+  $19.Account ensureAccount() => $_ensure(0);
 
   @$pb.TagNumber(4)
-  $58.SpaceAccessibilityType get spaceAccessibilityType => $_getN(1);
+  $57.SpaceAccessibilityType get spaceAccessibilityType => $_getN(1);
   @$pb.TagNumber(4)
-  set spaceAccessibilityType($58.SpaceAccessibilityType v) { setField(4, v); }
+  set spaceAccessibilityType($57.SpaceAccessibilityType v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasSpaceAccessibilityType() => $_has(1);
   @$pb.TagNumber(4)
   void clearSpaceAccessibilityType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $58.SpaceIsolationType get spaceIsolationType => $_getN(2);
+  $57.SpaceIsolationType get spaceIsolationType => $_getN(2);
   @$pb.TagNumber(5)
-  set spaceIsolationType($58.SpaceIsolationType v) { setField(5, v); }
+  set spaceIsolationType($57.SpaceIsolationType v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasSpaceIsolationType() => $_has(2);
   @$pb.TagNumber(5)
   void clearSpaceIsolationType() => clearField(5);
 
   @$pb.TagNumber(6)
-  $55.Timestamp get requestedAt => $_getN(3);
+  $52.Timestamp get requestedAt => $_getN(3);
   @$pb.TagNumber(6)
-  set requestedAt($55.Timestamp v) { setField(6, v); }
+  set requestedAt($52.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasRequestedAt() => $_has(3);
   @$pb.TagNumber(6)
   void clearRequestedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $55.Timestamp ensureRequestedAt() => $_ensure(3);
+  $52.Timestamp ensureRequestedAt() => $_ensure(3);
 }
 
 class CreateAccountSpaceResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountSpaceResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.space'), createEmptyInstance: create)
-    ..aOM<$58.Space>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $58.Space.create)
+    ..aOM<$57.Space>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'space', subBuilder: $57.Space.create)
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createAccountSpaceDone')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createAccountSpaceMessage')
     ..hasRequiredFields = false
@@ -118,7 +118,7 @@ class CreateAccountSpaceResponse extends $pb.GeneratedMessage {
 
   CreateAccountSpaceResponse._() : super();
   factory CreateAccountSpaceResponse({
-    $58.Space? space,
+    $57.Space? space,
     $core.bool? createAccountSpaceDone,
     $core.String? createAccountSpaceMessage,
   }) {
@@ -156,15 +156,15 @@ class CreateAccountSpaceResponse extends $pb.GeneratedMessage {
   static CreateAccountSpaceResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $58.Space get space => $_getN(0);
+  $57.Space get space => $_getN(0);
   @$pb.TagNumber(1)
-  set space($58.Space v) { setField(1, v); }
+  set space($57.Space v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpace() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpace() => clearField(1);
   @$pb.TagNumber(1)
-  $58.Space ensureSpace() => $_ensure(0);
+  $57.Space ensureSpace() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.bool get createAccountSpaceDone => $_getBF(1);

@@ -9,13 +9,13 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 export '../../../google/protobuf/timestamp.pb.dart';
 class Universe extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Universe', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'universeId')
-    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bigBangAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bigBangAt', subBuilder: $52.Timestamp.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'universeName')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'universeDescription')
     ..hasRequiredFields = false
@@ -24,7 +24,7 @@ class Universe extends $pb.GeneratedMessage {
   Universe._() : super();
   factory Universe({
     $core.String? universeId,
-    $55.Timestamp? bigBangAt,
+    $52.Timestamp? bigBangAt,
     $core.String? universeName,
     $core.String? universeDescription,
   }) {
@@ -74,15 +74,15 @@ class Universe extends $pb.GeneratedMessage {
   void clearUniverseId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $55.Timestamp get bigBangAt => $_getN(1);
+  $52.Timestamp get bigBangAt => $_getN(1);
   @$pb.TagNumber(2)
-  set bigBangAt($55.Timestamp v) { setField(2, v); }
+  set bigBangAt($52.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasBigBangAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearBigBangAt() => clearField(2);
   @$pb.TagNumber(2)
-  $55.Timestamp ensureBigBangAt() => $_ensure(1);
+  $52.Timestamp ensureBigBangAt() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get universeName => $_getSZ(2);

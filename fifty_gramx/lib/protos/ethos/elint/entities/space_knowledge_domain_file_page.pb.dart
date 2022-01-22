@@ -9,19 +9,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'space_knowledge_domain_file.pb.dart' as $37;
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'space_knowledge_domain_file.pb.dart' as $34;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 export '../../../google/protobuf/timestamp.pb.dart';
 class SpaceKnowledgeDomainFilePage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFilePage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageId')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageCount', $pb.PbFieldType.O3)
-    ..aOM<$37.SpaceKnowledgeDomainFile>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $37.SpaceKnowledgeDomainFile.create)
+    ..aOM<$34.SpaceKnowledgeDomainFile>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $34.SpaceKnowledgeDomainFile.create)
     ..pc<PageTag>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageTags', $pb.PbFieldType.PM, subBuilder: PageTag.create)
-    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAccessedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -29,11 +29,11 @@ class SpaceKnowledgeDomainFilePage extends $pb.GeneratedMessage {
   factory SpaceKnowledgeDomainFilePage({
     $core.String? spaceKnowledgeDomainFilePageId,
     $core.int? spaceKnowledgeDomainFilePageCount,
-    $37.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
+    $34.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
     $core.Iterable<PageTag>? pageTags,
-    $55.Timestamp? createdAt,
-    $55.Timestamp? lastUpdatedAt,
-    $55.Timestamp? lastAccessedAt,
+    $52.Timestamp? createdAt,
+    $52.Timestamp? lastUpdatedAt,
+    $52.Timestamp? lastAccessedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFilePageId != null) {
@@ -99,51 +99,51 @@ class SpaceKnowledgeDomainFilePage extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainFilePageCount() => clearField(2);
 
   @$pb.TagNumber(3)
-  $37.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(2);
+  $34.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(2);
   @$pb.TagNumber(3)
-  set spaceKnowledgeDomainFile($37.SpaceKnowledgeDomainFile v) { setField(3, v); }
+  set spaceKnowledgeDomainFile($34.SpaceKnowledgeDomainFile v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSpaceKnowledgeDomainFile() => $_has(2);
   @$pb.TagNumber(3)
   void clearSpaceKnowledgeDomainFile() => clearField(3);
   @$pb.TagNumber(3)
-  $37.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(2);
+  $34.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(2);
 
   @$pb.TagNumber(4)
   $core.List<PageTag> get pageTags => $_getList(3);
 
   @$pb.TagNumber(5)
-  $55.Timestamp get createdAt => $_getN(4);
+  $52.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($55.Timestamp v) { setField(5, v); }
+  set createdAt($52.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $55.Timestamp ensureCreatedAt() => $_ensure(4);
+  $52.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $55.Timestamp get lastUpdatedAt => $_getN(5);
+  $52.Timestamp get lastUpdatedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set lastUpdatedAt($55.Timestamp v) { setField(6, v); }
+  set lastUpdatedAt($52.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasLastUpdatedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearLastUpdatedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $55.Timestamp ensureLastUpdatedAt() => $_ensure(5);
+  $52.Timestamp ensureLastUpdatedAt() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $55.Timestamp get lastAccessedAt => $_getN(6);
+  $52.Timestamp get lastAccessedAt => $_getN(6);
   @$pb.TagNumber(7)
-  set lastAccessedAt($55.Timestamp v) { setField(7, v); }
+  set lastAccessedAt($52.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasLastAccessedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearLastAccessedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $55.Timestamp ensureLastAccessedAt() => $_ensure(6);
+  $52.Timestamp ensureLastAccessedAt() => $_ensure(6);
 }
 
 class PageTag extends $pb.GeneratedMessage {

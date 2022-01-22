@@ -11,8 +11,8 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../identity/account_assistant/access_account_assistant.pb.dart' as $8;
 import '../../../../../entities/account_assistant.pb.dart' as $6;
-import '../../../../../../../google/protobuf/any.pb.dart' as $54;
-import '../../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../../../google/protobuf/any.pb.dart' as $51;
+import '../../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 
 export '../../../../../../../google/protobuf/timestamp.pb.dart';
 class MessageForAccount extends $pb.GeneratedMessage {
@@ -20,7 +20,12 @@ class MessageForAccount extends $pb.GeneratedMessage {
     ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOM<$6.AccountAssistantConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $6.AccountAssistantConnectedAccount.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..pc<$54.Any>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $54.Any.create)
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceId')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceTypeId')
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainId')
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainAction', $pb.PbFieldType.O3)
+    ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainActionContextId')
+    ..pc<$51.Any>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $51.Any.create)
     ..hasRequiredFields = false
   ;
 
@@ -29,7 +34,12 @@ class MessageForAccount extends $pb.GeneratedMessage {
     $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $6.AccountAssistantConnectedAccount? connectedAccount,
     $core.String? message,
-    $core.Iterable<$54.Any>? messageSource,
+    $core.String? messageSourceSpaceId,
+    $core.String? messageSourceSpaceTypeId,
+    $core.String? messageSourceSpaceDomainId,
+    $core.int? messageSourceSpaceDomainAction,
+    $core.String? messageSourceSpaceDomainActionContextId,
+    $core.Iterable<$51.Any>? messageSource,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -40,6 +50,21 @@ class MessageForAccount extends $pb.GeneratedMessage {
     }
     if (message != null) {
       _result.message = message;
+    }
+    if (messageSourceSpaceId != null) {
+      _result.messageSourceSpaceId = messageSourceSpaceId;
+    }
+    if (messageSourceSpaceTypeId != null) {
+      _result.messageSourceSpaceTypeId = messageSourceSpaceTypeId;
+    }
+    if (messageSourceSpaceDomainId != null) {
+      _result.messageSourceSpaceDomainId = messageSourceSpaceDomainId;
+    }
+    if (messageSourceSpaceDomainAction != null) {
+      _result.messageSourceSpaceDomainAction = messageSourceSpaceDomainAction;
+    }
+    if (messageSourceSpaceDomainActionContextId != null) {
+      _result.messageSourceSpaceDomainActionContextId = messageSourceSpaceDomainActionContextId;
     }
     if (messageSource != null) {
       _result.messageSource.addAll(messageSource);
@@ -99,15 +124,60 @@ class MessageForAccount extends $pb.GeneratedMessage {
   void clearMessage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$54.Any> get messageSource => $_getList(3);
+  $core.String get messageSourceSpaceId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set messageSourceSpaceId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMessageSourceSpaceId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessageSourceSpaceId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get messageSourceSpaceTypeId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set messageSourceSpaceTypeId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasMessageSourceSpaceTypeId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearMessageSourceSpaceTypeId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get messageSourceSpaceDomainId => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set messageSourceSpaceDomainId($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasMessageSourceSpaceDomainId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMessageSourceSpaceDomainId() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get messageSourceSpaceDomainAction => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set messageSourceSpaceDomainAction($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMessageSourceSpaceDomainAction() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMessageSourceSpaceDomainAction() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get messageSourceSpaceDomainActionContextId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set messageSourceSpaceDomainActionContextId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMessageSourceSpaceDomainActionContextId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMessageSourceSpaceDomainActionContextId() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.List<$51.Any> get messageSource => $_getList(8);
 }
 
 class MessageForAccountSent extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageForAccountSent', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account.assistant'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountSentMessageId')
     ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isSent')
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'sentAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -115,8 +185,8 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   factory MessageForAccountSent({
     $core.String? accountSentMessageId,
     $core.bool? isSent,
-    $55.Timestamp? sentAt,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? sentAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountSentMessageId != null) {
@@ -173,25 +243,25 @@ class MessageForAccountSent extends $pb.GeneratedMessage {
   void clearIsSent() => clearField(2);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get sentAt => $_getN(2);
+  $52.Timestamp get sentAt => $_getN(2);
   @$pb.TagNumber(3)
-  set sentAt($55.Timestamp v) { setField(3, v); }
+  set sentAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSentAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearSentAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureSentAt() => $_ensure(2);
+  $52.Timestamp ensureSentAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $55.Timestamp get receivedAt => $_getN(3);
+  $52.Timestamp get receivedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set receivedAt($55.Timestamp v) { setField(4, v); }
+  set receivedAt($52.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasReceivedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearReceivedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $55.Timestamp ensureReceivedAt() => $_ensure(3);
+  $52.Timestamp ensureReceivedAt() => $_ensure(3);
 }
 

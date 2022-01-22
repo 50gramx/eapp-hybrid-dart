@@ -24,11 +24,12 @@ const AccountMessageContext$json = const {
   '1': 'AccountMessageContext',
   '2': const [
     const {'1': 'knowledge_contextual_actions', '3': 1, '4': 3, '5': 11, '6': '.elint.services.cognitive.assist.context.account.KnowledgeContextualAction', '10': 'knowledgeContextualActions'},
+    const {'1': 'response_meta', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.ResponseMeta', '10': 'responseMeta'},
   ],
 };
 
 /// Descriptor for `AccountMessageContext`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List accountMessageContextDescriptor = $convert.base64Decode('ChVBY2NvdW50TWVzc2FnZUNvbnRleHQSjAEKHGtub3dsZWRnZV9jb250ZXh0dWFsX2FjdGlvbnMYASADKAsySi5lbGludC5zZXJ2aWNlcy5jb2duaXRpdmUuYXNzaXN0LmNvbnRleHQuYWNjb3VudC5Lbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9uUhprbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9ucw==');
+final $typed_data.Uint8List accountMessageContextDescriptor = $convert.base64Decode('ChVBY2NvdW50TWVzc2FnZUNvbnRleHQSjAEKHGtub3dsZWRnZV9jb250ZXh0dWFsX2FjdGlvbnMYASADKAsySi5lbGludC5zZXJ2aWNlcy5jb2duaXRpdmUuYXNzaXN0LmNvbnRleHQuYWNjb3VudC5Lbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9uUhprbm93bGVkZ2VDb250ZXh0dWFsQWN0aW9ucxI/Cg1yZXNwb25zZV9tZXRhGAIgASgLMhouZWxpbnQuZW50aXR5LlJlc3BvbnNlTWV0YVIMcmVzcG9uc2VNZXRh');
 @$core.Deprecated('Use knowledgeContextualActionDescriptor instead')
 const KnowledgeContextualAction$json = const {
   '1': 'KnowledgeContextualAction',

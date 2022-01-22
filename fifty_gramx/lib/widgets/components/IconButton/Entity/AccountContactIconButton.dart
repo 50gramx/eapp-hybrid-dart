@@ -1,11 +1,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/widgets/components/IconButton/ConnectedEntityIconButton.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AccountContactIconButton implements ConnectedEntityIconButton {
@@ -27,7 +23,8 @@ class AccountContactIconButton implements ConnectedEntityIconButton {
   @override
   Widget buildConnectedContactIconButton(BuildContext context) {
     var contactIcon;
-    if (contact.avatar == null || (contact.displayName != null || contact.givenName != null)) {
+    if (contact.avatar == null ||
+        (contact.displayName != null || contact.givenName != null)) {
       contactIcon = NeumorphicText(
         "${(contact.displayName != null ? getInitials(contact.displayName!) : getInitials(contact.givenName!)).toUpperCase()}",
         style: NeumorphicStyle(
@@ -104,6 +101,6 @@ class AccountContactIconButton implements ConnectedEntityIconButton {
       SizedBox();
 
   @override
-  Widget buildConnectedOrganizationIconButton(BuildContext context) =>
+  Widget buildConnectedOrganisationIconButton(BuildContext context) =>
       SizedBox();
 }

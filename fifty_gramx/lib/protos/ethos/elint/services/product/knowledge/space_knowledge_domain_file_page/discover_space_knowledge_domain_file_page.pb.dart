@@ -10,8 +10,8 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/generic.pb.dart' as $2;
-import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
+import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $37;
 
 class ListOfPageIds extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListOfPageIds', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
@@ -72,14 +72,14 @@ class ListOfPageIds extends $pb.GeneratedMessage {
 
 class GetPageTextByIdReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetPageTextByIdReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageId')
     ..hasRequiredFields = false
   ;
 
   GetPageTextByIdReq._() : super();
   factory GetPageTextByIdReq({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? spaceKnowledgeDomainFilePageId,
   }) {
     final _result = create();
@@ -113,15 +113,15 @@ class GetPageTextByIdReq extends $pb.GeneratedMessage {
   static GetPageTextByIdReq? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainFilePageId => $_getSZ(1);
@@ -198,14 +198,14 @@ class GetPageTextByIdRes extends $pb.GeneratedMessage {
 
 class GetPageByIdRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetPageByIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageId')
     ..hasRequiredFields = false
   ;
 
   GetPageByIdRequest._() : super();
   factory GetPageByIdRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? spaceKnowledgeDomainFilePageId,
   }) {
     final _result = create();
@@ -239,15 +239,15 @@ class GetPageByIdRequest extends $pb.GeneratedMessage {
   static GetPageByIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainFilePageId => $_getSZ(1);
@@ -261,14 +261,14 @@ class GetPageByIdRequest extends $pb.GeneratedMessage {
 
 class GetPageByIdResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetPageByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page'), createEmptyInstance: create)
-    ..aOM<$40.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePage', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
+    ..aOM<$37.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePage', subBuilder: $37.SpaceKnowledgeDomainFilePage.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetPageByIdResponse._() : super();
   factory GetPageByIdResponse({
-    $40.SpaceKnowledgeDomainFilePage? spaceKnowledgeDomainFilePage,
+    $37.SpaceKnowledgeDomainFilePage? spaceKnowledgeDomainFilePage,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -302,15 +302,15 @@ class GetPageByIdResponse extends $pb.GeneratedMessage {
   static GetPageByIdResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage get spaceKnowledgeDomainFilePage => $_getN(0);
+  $37.SpaceKnowledgeDomainFilePage get spaceKnowledgeDomainFilePage => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainFilePage($40.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
+  set spaceKnowledgeDomainFilePage($37.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainFilePage() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainFilePage() => clearField(1);
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage ensureSpaceKnowledgeDomainFilePage() => $_ensure(0);
+  $37.SpaceKnowledgeDomainFilePage ensureSpaceKnowledgeDomainFilePage() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);

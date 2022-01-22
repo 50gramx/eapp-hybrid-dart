@@ -1,10 +1,7 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/widgets/components/IconButton/ConnectedEntityIconButton.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AccountAssistantIconButton implements ConnectedEntityIconButton {
@@ -17,7 +14,6 @@ class AccountAssistantIconButton implements ConnectedEntityIconButton {
 
   @override
   Widget buildConnectedAccountIconButton(BuildContext context) => SizedBox();
-
 
   @override
   Widget buildConnectedAccountAssistantIconButton(BuildContext context) {
@@ -32,8 +28,7 @@ class AccountAssistantIconButton implements ConnectedEntityIconButton {
             : AppColors.backgroundSecondary(context),
         border: NeumorphicBorder(
             color: AppColors.backgroundPrimary(context), width: 0.5),
-        boxShape:
-        NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
       ),
       padding: const EdgeInsets.all(1),
       child: NeumorphicButton(
@@ -49,8 +44,7 @@ class AccountAssistantIconButton implements ConnectedEntityIconButton {
               ? AppColors.gray600
               : AppColors.backgroundSecondary(context),
           shape: NeumorphicShape.convex,
-          boxShape:
-          NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: AppColors.backgroundPrimary(context),
         ),
         padding: const EdgeInsets.all(2),
@@ -87,6 +81,6 @@ class AccountAssistantIconButton implements ConnectedEntityIconButton {
       SizedBox();
 
   @override
-  Widget buildConnectedOrganizationIconButton(BuildContext context) =>
+  Widget buildConnectedOrganisationIconButton(BuildContext context) =>
       SizedBox();
 }

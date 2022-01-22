@@ -10,36 +10,36 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'reader_knowledge.pb.dart' as $51;
+import 'reader_knowledge.pb.dart' as $48;
 export 'reader_knowledge.pb.dart';
 
 class ReaderKnowledgeServiceClient extends $grpc.Client {
   static final _$readPageQuestion = $grpc.ClientMethod<
-          $51.ReadPageQuestionRequest, $51.ReadPageQuestionResponse>(
+          $48.ReadPageQuestionRequest, $48.ReadPageQuestionResponse>(
       '/elint.services.cognitive.assist.knowledge.reader.ReaderKnowledgeService/ReadPageQuestion',
-      ($51.ReadPageQuestionRequest value) => value.writeToBuffer(),
+      ($48.ReadPageQuestionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $51.ReadPageQuestionResponse.fromBuffer(value));
+          $48.ReadPageQuestionResponse.fromBuffer(value));
   static final _$readParaQuestion = $grpc.ClientMethod<
-          $51.ReadParaQuestionRequest, $51.ReadParaQuestionResponse>(
+          $48.ReadParaQuestionRequest, $48.ReadParaQuestionResponse>(
       '/elint.services.cognitive.assist.knowledge.reader.ReaderKnowledgeService/ReadParaQuestion',
-      ($51.ReadParaQuestionRequest value) => value.writeToBuffer(),
+      ($48.ReadParaQuestionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $51.ReadParaQuestionResponse.fromBuffer(value));
+          $48.ReadParaQuestionResponse.fromBuffer(value));
 
   ReaderKnowledgeServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$51.ReadPageQuestionResponse> readPageQuestion(
-      $51.ReadPageQuestionRequest request,
+  $grpc.ResponseFuture<$48.ReadPageQuestionResponse> readPageQuestion(
+      $48.ReadPageQuestionRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$readPageQuestion, request, options: options);
   }
 
-  $grpc.ResponseFuture<$51.ReadParaQuestionResponse> readParaQuestion(
-      $51.ReadParaQuestionRequest request,
+  $grpc.ResponseFuture<$48.ReadParaQuestionResponse> readParaQuestion(
+      $48.ReadParaQuestionRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$readParaQuestion, request, options: options);
   }
@@ -50,40 +50,40 @@ abstract class ReaderKnowledgeServiceBase extends $grpc.Service {
       'elint.services.cognitive.assist.knowledge.reader.ReaderKnowledgeService';
 
   ReaderKnowledgeServiceBase() {
-    $addMethod($grpc.ServiceMethod<$51.ReadPageQuestionRequest,
-            $51.ReadPageQuestionResponse>(
+    $addMethod($grpc.ServiceMethod<$48.ReadPageQuestionRequest,
+            $48.ReadPageQuestionResponse>(
         'ReadPageQuestion',
         readPageQuestion_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $51.ReadPageQuestionRequest.fromBuffer(value),
-        ($51.ReadPageQuestionResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$51.ReadParaQuestionRequest,
-            $51.ReadParaQuestionResponse>(
+            $48.ReadPageQuestionRequest.fromBuffer(value),
+        ($48.ReadPageQuestionResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$48.ReadParaQuestionRequest,
+            $48.ReadParaQuestionResponse>(
         'ReadParaQuestion',
         readParaQuestion_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $51.ReadParaQuestionRequest.fromBuffer(value),
-        ($51.ReadParaQuestionResponse value) => value.writeToBuffer()));
+            $48.ReadParaQuestionRequest.fromBuffer(value),
+        ($48.ReadParaQuestionResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$51.ReadPageQuestionResponse> readPageQuestion_Pre(
+  $async.Future<$48.ReadPageQuestionResponse> readPageQuestion_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$51.ReadPageQuestionRequest> request) async {
+      $async.Future<$48.ReadPageQuestionRequest> request) async {
     return readPageQuestion(call, await request);
   }
 
-  $async.Future<$51.ReadParaQuestionResponse> readParaQuestion_Pre(
+  $async.Future<$48.ReadParaQuestionResponse> readParaQuestion_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$51.ReadParaQuestionRequest> request) async {
+      $async.Future<$48.ReadParaQuestionRequest> request) async {
     return readParaQuestion(call, await request);
   }
 
-  $async.Future<$51.ReadPageQuestionResponse> readPageQuestion(
-      $grpc.ServiceCall call, $51.ReadPageQuestionRequest request);
-  $async.Future<$51.ReadParaQuestionResponse> readParaQuestion(
-      $grpc.ServiceCall call, $51.ReadParaQuestionRequest request);
+  $async.Future<$48.ReadPageQuestionResponse> readPageQuestion(
+      $grpc.ServiceCall call, $48.ReadPageQuestionRequest request);
+  $async.Future<$48.ReadParaQuestionResponse> readParaQuestion(
+      $grpc.ServiceCall call, $48.ReadParaQuestionRequest request);
 }

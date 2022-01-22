@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'space_knowledge.pb.dart' as $59;
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'space_knowledge.pb.dart' as $58;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 import 'space_knowledge_domain.pbenum.dart';
 
@@ -24,9 +24,9 @@ class SpaceKnowledgeDomain extends $pb.GeneratedMessage {
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainDescription')
     ..e<SpaceKnowledgeDomainCollarEnum>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainCollarEnum', $pb.PbFieldType.OE, defaultOrMaker: SpaceKnowledgeDomainCollarEnum.WHITE_COLLAR, valueOf: SpaceKnowledgeDomainCollarEnum.valueOf, enumValues: SpaceKnowledgeDomainCollarEnum.values)
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainIsolated')
-    ..aOM<$59.SpaceKnowledge>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledge', subBuilder: $59.SpaceKnowledge.create)
-    ..aOM<$55.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$58.SpaceKnowledge>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledge', subBuilder: $58.SpaceKnowledge.create)
+    ..aOM<$52.Timestamp>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastUpdatedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -37,9 +37,9 @@ class SpaceKnowledgeDomain extends $pb.GeneratedMessage {
     $core.String? spaceKnowledgeDomainDescription,
     SpaceKnowledgeDomainCollarEnum? spaceKnowledgeDomainCollarEnum,
     $core.bool? spaceKnowledgeDomainIsolated,
-    $59.SpaceKnowledge? spaceKnowledge,
-    $55.Timestamp? createdAt,
-    $55.Timestamp? lastUpdatedAt,
+    $58.SpaceKnowledge? spaceKnowledge,
+    $52.Timestamp? createdAt,
+    $52.Timestamp? lastUpdatedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainId != null) {
@@ -135,37 +135,37 @@ class SpaceKnowledgeDomain extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainIsolated() => clearField(5);
 
   @$pb.TagNumber(6)
-  $59.SpaceKnowledge get spaceKnowledge => $_getN(5);
+  $58.SpaceKnowledge get spaceKnowledge => $_getN(5);
   @$pb.TagNumber(6)
-  set spaceKnowledge($59.SpaceKnowledge v) { setField(6, v); }
+  set spaceKnowledge($58.SpaceKnowledge v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasSpaceKnowledge() => $_has(5);
   @$pb.TagNumber(6)
   void clearSpaceKnowledge() => clearField(6);
   @$pb.TagNumber(6)
-  $59.SpaceKnowledge ensureSpaceKnowledge() => $_ensure(5);
+  $58.SpaceKnowledge ensureSpaceKnowledge() => $_ensure(5);
 
   @$pb.TagNumber(7)
-  $55.Timestamp get createdAt => $_getN(6);
+  $52.Timestamp get createdAt => $_getN(6);
   @$pb.TagNumber(7)
-  set createdAt($55.Timestamp v) { setField(7, v); }
+  set createdAt($52.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasCreatedAt() => $_has(6);
   @$pb.TagNumber(7)
   void clearCreatedAt() => clearField(7);
   @$pb.TagNumber(7)
-  $55.Timestamp ensureCreatedAt() => $_ensure(6);
+  $52.Timestamp ensureCreatedAt() => $_ensure(6);
 
   @$pb.TagNumber(8)
-  $55.Timestamp get lastUpdatedAt => $_getN(7);
+  $52.Timestamp get lastUpdatedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set lastUpdatedAt($55.Timestamp v) { setField(8, v); }
+  set lastUpdatedAt($52.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasLastUpdatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearLastUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $55.Timestamp ensureLastUpdatedAt() => $_ensure(7);
+  $52.Timestamp ensureLastUpdatedAt() => $_ensure(7);
 }
 
 class SpaceKnowledgeDomainInferringAccount extends $pb.GeneratedMessage {
@@ -173,7 +173,7 @@ class SpaceKnowledgeDomainInferringAccount extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferringAccountId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
-    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferredAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'inferredAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -182,7 +182,7 @@ class SpaceKnowledgeDomainInferringAccount extends $pb.GeneratedMessage {
     $core.String? inferringAccountId,
     $core.String? spaceKnowledgeId,
     $core.String? accountId,
-    $55.Timestamp? inferredAt,
+    $52.Timestamp? inferredAt,
   }) {
     final _result = create();
     if (inferringAccountId != null) {
@@ -248,15 +248,15 @@ class SpaceKnowledgeDomainInferringAccount extends $pb.GeneratedMessage {
   void clearAccountId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $55.Timestamp get inferredAt => $_getN(3);
+  $52.Timestamp get inferredAt => $_getN(3);
   @$pb.TagNumber(4)
-  set inferredAt($55.Timestamp v) { setField(4, v); }
+  set inferredAt($52.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasInferredAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearInferredAt() => clearField(4);
   @$pb.TagNumber(4)
-  $55.Timestamp ensureInferredAt() => $_ensure(3);
+  $52.Timestamp ensureInferredAt() => $_ensure(3);
 }
 
 class RankedAnswer extends $pb.GeneratedMessage {

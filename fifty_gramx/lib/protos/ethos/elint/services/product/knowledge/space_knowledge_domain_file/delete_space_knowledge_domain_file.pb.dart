@@ -9,20 +9,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file.pb.dart' as $37;
+import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain_file.pb.dart' as $34;
 
 class DeleteSpaceKnowledgeDomainFileRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteSpaceKnowledgeDomainFileRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainServicesAccessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
-    ..aOM<$37.SpaceKnowledgeDomainFile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $37.SpaceKnowledgeDomainFile.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainServicesAccessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$34.SpaceKnowledgeDomainFile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $34.SpaceKnowledgeDomainFile.create)
     ..hasRequiredFields = false
   ;
 
   DeleteSpaceKnowledgeDomainFileRequest._() : super();
   factory DeleteSpaceKnowledgeDomainFileRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? spaceKnowledgeDomainServicesAccessAuthDetails,
-    $37.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? spaceKnowledgeDomainServicesAccessAuthDetails,
+    $34.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainServicesAccessAuthDetails != null) {
@@ -55,25 +55,25 @@ class DeleteSpaceKnowledgeDomainFileRequest extends $pb.GeneratedMessage {
   static DeleteSpaceKnowledgeDomainFileRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get spaceKnowledgeDomainServicesAccessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get spaceKnowledgeDomainServicesAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainServicesAccessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set spaceKnowledgeDomainServicesAccessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainServicesAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainServicesAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureSpaceKnowledgeDomainServicesAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureSpaceKnowledgeDomainServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $37.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(1);
+  $34.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(1);
   @$pb.TagNumber(2)
-  set spaceKnowledgeDomainFile($37.SpaceKnowledgeDomainFile v) { setField(2, v); }
+  set spaceKnowledgeDomainFile($34.SpaceKnowledgeDomainFile v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSpaceKnowledgeDomainFile() => $_has(1);
   @$pb.TagNumber(2)
   void clearSpaceKnowledgeDomainFile() => clearField(2);
   @$pb.TagNumber(2)
-  $37.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(1);
+  $34.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(1);
 }
 

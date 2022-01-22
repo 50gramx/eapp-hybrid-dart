@@ -159,9 +159,7 @@ class LocalConversationsService {
           "NewReceivedMessageFromAccountAssistant") {
         var listenForReceivedAccountAssistantMessagesResponse =
             await ReceiveAccountMessageService
-                .listenForReceivedAccountAssistantMessages(
-                    message.data['account_assistant_id'],
-                    message.data['account_assistant_received_message_id']);
+                .listenForReceivedAccountAssistantMessages();
         if (listenForReceivedAccountAssistantMessagesResponse
             .responseMeta.metaDone) {
           handleReceivedMessagesFromAccountAssistant();

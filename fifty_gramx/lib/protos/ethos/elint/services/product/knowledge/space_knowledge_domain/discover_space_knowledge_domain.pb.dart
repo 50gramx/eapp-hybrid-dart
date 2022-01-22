@@ -9,20 +9,20 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space_knowledge_domain_file.pb.dart' as $37;
-import 'access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../../entities/space_knowledge_domain_file.pb.dart' as $34;
+import 'access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain.pb.dart' as $28;
 import '../../../../entities/generic.pb.dart' as $2;
 
 class GetAllDomainFilesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetAllDomainFilesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..pc<$37.SpaceKnowledgeDomainFile>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'files', $pb.PbFieldType.PM, subBuilder: $37.SpaceKnowledgeDomainFile.create)
+    ..pc<$34.SpaceKnowledgeDomainFile>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'files', $pb.PbFieldType.PM, subBuilder: $34.SpaceKnowledgeDomainFile.create)
     ..hasRequiredFields = false
   ;
 
   GetAllDomainFilesResponse._() : super();
   factory GetAllDomainFilesResponse({
-    $core.Iterable<$37.SpaceKnowledgeDomainFile>? files,
+    $core.Iterable<$34.SpaceKnowledgeDomainFile>? files,
   }) {
     final _result = create();
     if (files != null) {
@@ -52,12 +52,12 @@ class GetAllDomainFilesResponse extends $pb.GeneratedMessage {
   static GetAllDomainFilesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$37.SpaceKnowledgeDomainFile> get files => $_getList(0);
+  $core.List<$34.SpaceKnowledgeDomainFile> get files => $_getList(0);
 }
 
 class GetBestAnswersRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetBestAnswersRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bestAnswersCount', $pb.PbFieldType.O3)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'question')
     ..hasRequiredFields = false
@@ -65,7 +65,7 @@ class GetBestAnswersRequest extends $pb.GeneratedMessage {
 
   GetBestAnswersRequest._() : super();
   factory GetBestAnswersRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.int? bestAnswersCount,
     $core.String? question,
   }) {
@@ -103,15 +103,15 @@ class GetBestAnswersRequest extends $pb.GeneratedMessage {
   static GetBestAnswersRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.int get bestAnswersCount => $_getIZ(1);
@@ -134,14 +134,14 @@ class GetBestAnswersRequest extends $pb.GeneratedMessage {
 
 class GetBestAnswersResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetBestAnswersResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..pc<$31.RankedAnswer>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rankedAnswers', $pb.PbFieldType.PM, subBuilder: $31.RankedAnswer.create)
+    ..pc<$28.RankedAnswer>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rankedAnswers', $pb.PbFieldType.PM, subBuilder: $28.RankedAnswer.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetBestAnswersResponse._() : super();
   factory GetBestAnswersResponse({
-    $core.Iterable<$31.RankedAnswer>? rankedAnswers,
+    $core.Iterable<$28.RankedAnswer>? rankedAnswers,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -175,7 +175,7 @@ class GetBestAnswersResponse extends $pb.GeneratedMessage {
   static GetBestAnswersResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$31.RankedAnswer> get rankedAnswers => $_getList(0);
+  $core.List<$28.RankedAnswer> get rankedAnswers => $_getList(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -191,14 +191,14 @@ class GetBestAnswersResponse extends $pb.GeneratedMessage {
 
 class RetrieveMessageContextPagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RetrieveMessageContextPagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   RetrieveMessageContextPagesRequest._() : super();
   factory RetrieveMessageContextPagesRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
   }) {
     final _result = create();
@@ -232,15 +232,15 @@ class RetrieveMessageContextPagesRequest extends $pb.GeneratedMessage {
   static RetrieveMessageContextPagesRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -311,14 +311,14 @@ class RetrieveMessageContextPagesResponse extends $pb.GeneratedMessage {
 
 class IsMessageContextInDomainRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'IsMessageContextInDomainRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   IsMessageContextInDomainRequest._() : super();
   factory IsMessageContextInDomainRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
   }) {
     final _result = create();
@@ -352,15 +352,15 @@ class IsMessageContextInDomainRequest extends $pb.GeneratedMessage {
   static IsMessageContextInDomainRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);

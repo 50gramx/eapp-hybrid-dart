@@ -9,8 +9,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'universe.pb.dart' as $56;
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'universe.pb.dart' as $53;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 export 'galaxy.pbenum.dart';
 
@@ -18,8 +18,8 @@ class Galaxy extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Galaxy', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxyId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxyName')
-    ..aOM<$56.Universe>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'universe', subBuilder: $56.Universe.create)
-    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxyCreatedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$53.Universe>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'universe', subBuilder: $53.Universe.create)
+    ..aOM<$52.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'galaxyCreatedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -27,8 +27,8 @@ class Galaxy extends $pb.GeneratedMessage {
   factory Galaxy({
     $core.String? galaxyId,
     $core.String? galaxyName,
-    $56.Universe? universe,
-    $55.Timestamp? galaxyCreatedAt,
+    $53.Universe? universe,
+    $52.Timestamp? galaxyCreatedAt,
   }) {
     final _result = create();
     if (galaxyId != null) {
@@ -85,25 +85,25 @@ class Galaxy extends $pb.GeneratedMessage {
   void clearGalaxyName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $56.Universe get universe => $_getN(2);
+  $53.Universe get universe => $_getN(2);
   @$pb.TagNumber(3)
-  set universe($56.Universe v) { setField(3, v); }
+  set universe($53.Universe v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasUniverse() => $_has(2);
   @$pb.TagNumber(3)
   void clearUniverse() => clearField(3);
   @$pb.TagNumber(3)
-  $56.Universe ensureUniverse() => $_ensure(2);
+  $53.Universe ensureUniverse() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $55.Timestamp get galaxyCreatedAt => $_getN(3);
+  $52.Timestamp get galaxyCreatedAt => $_getN(3);
   @$pb.TagNumber(4)
-  set galaxyCreatedAt($55.Timestamp v) { setField(4, v); }
+  set galaxyCreatedAt($52.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasGalaxyCreatedAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearGalaxyCreatedAt() => clearField(4);
   @$pb.TagNumber(4)
-  $55.Timestamp ensureGalaxyCreatedAt() => $_ensure(3);
+  $52.Timestamp ensureGalaxyCreatedAt() => $_ensure(3);
 }
 
