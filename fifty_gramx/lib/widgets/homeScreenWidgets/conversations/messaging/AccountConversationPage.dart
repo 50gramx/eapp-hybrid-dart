@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/widgets/components/TextField/messaging/AccountMessagingTextField.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesReceivedListItem.dart';
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountConversationsMessagesSentListItem.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/ConversationListKeyManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -127,8 +127,9 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
 
   loadConversationsMessages() async {
     Timer(Duration(microseconds: 100), () {
-      for (int index = LocalConversationsService
-              .entityIdConversationMessageMap[widget.account.accountId]!.length;
+      for (int index =
+              LocalConversationsService.getEntityIdConversationMessageMapLength(
+                  widget.account.accountId);
           index >= 0;
           index--) {
         try {
@@ -181,23 +182,22 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
                 SliverAnimatedList(
                     key: _accountConversationsListKey,
                     initialItemCount: LocalConversationsService
-                        .entityIdConversationMessageMap[
-                            widget.account.accountId]!
-                        .length, // TODO: Verify the length and all
+                        .getEntityIdConversationMessageMapLength(
+                            widget.account.accountId),
+                    // TODO: Verify the length and all
                     itemBuilder: (BuildContext context, int index,
                         Animation<double> animation) {
                       if (index >=
                           LocalConversationsService
-                              .entityIdConversationMessageMap[
-                                  widget.account.accountId]!
-                              .length) {
+                              .getEntityIdConversationMessageMapLength(
+                                  widget.account.accountId)) {
                         // warn: hacky way of safely returning only the list items
                         // caused by notifications stream
                         return SizedBox();
                       }
                       var message = LocalConversationsService
-                              .entityIdConversationMessageMap[
-                          widget.account.accountId]![index];
+                          .getEntityIdConversationMessageAt(
+                              widget.account.accountId, index);
                       if (message.isMessageEntityAccountAssistant) {
                         return SizedBox();
                       } else {
