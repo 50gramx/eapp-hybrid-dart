@@ -1,23 +1,15 @@
 import 'dart:async';
-import 'dart:io';
+
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
 import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
-import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
 import 'package:fifty_gramx/widgets/components/Text/Title/listItemSubtitleText.dart';
 import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/listItem/connections/listItem/AccountConnectedAccountAssistantListItem.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/assistant/assistantConnectionWidget.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/ethosai/EthosaiConfigurationPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/AccountConversationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
@@ -61,8 +53,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
 
   loadMyConversations() async {
     // Update list
-    print(
-        "loadMyConversations, total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
     for (int index = 0;
         index <
             LocalConversationsService
@@ -79,8 +69,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
       if (notification.type == "LocalConversationsService") {
         if (notification.data["subType"] ==
             "AddedConversedEntityWithLastConversationMessage") {
-          print(
-              "listenForLocalNotifications, total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}, inserting at: ${notification.data["at"]}");
           _conversedEntityListKey.currentState!
               .insertItem(notification.data["at"]);
         } else if (notification.data["subType"] == "AddedAccountSentMessage") {
@@ -128,7 +116,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
                 if (position == 0) {
-                  print("building for position: 0");
                   return Padding(
                     padding: EdgeInsets.only(
                         left: 16, right: 16, bottom: 16, top: 32),
@@ -159,7 +146,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                   );
                 } else {
                   var newPosition = position - 1;
-                  print("building for position: ${position}, newPosition: $newPosition");
                   var heroTag;
                   ConversedEntityWithLastConversationMessage
                       conversedEntityWithLastConversationMessage =

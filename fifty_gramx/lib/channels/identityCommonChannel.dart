@@ -7,9 +7,7 @@ class IdentityCommonChannel {
   IdentityCommonChannel._();
 
   void dispose() {
-    print("IdentityCommonChannel:dispose");
     _identityChannel!.shutdown();
-    print("After disposing: ${_identityChannel}");
   }
 
   static Future<ClientChannel> get identityChannel async =>

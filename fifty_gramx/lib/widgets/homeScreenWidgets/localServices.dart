@@ -10,8 +10,6 @@ class LocalServices {
   }
 
   reloadConversationsService() {
-    print("reloadConversationsService:start");
     LocalConversationsService.getMyConversations();
-    print("reloadConversationsService:finish");
   }
 }

@@ -28,6 +28,49 @@ class LocalConversationsService {
   static Map<String, List<ConversationMessage>> entityIdConversationMessageMap =
       {};
 
+  /// returns true if entity id is present in the key for
+  /// entityIdConversationMessageMap else false
+  static bool isEntityIdConversationMessageMapExists(entityId) {
+    if (entityIdConversationMessageMap[entityId] == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  /// adds an empty conversation message list for the key entityId if key
+  /// doesn't exists
+  static addEmptyEntityIdConversationMessageMap(entityId) {
+    if (!isEntityIdConversationMessageMapExists(entityId)) {
+      entityIdConversationMessageMap[entityId] = [];
+    }
+  }
+
+  /// returns the length of list of conversation message for mapped entity id
+  /// if exists, else adds the empty entity id messages map and returns 0
+  static int getEntityIdConversationMessageMapLength(entityId) {
+    if (isEntityIdConversationMessageMapExists(entityId)) {
+      return entityIdConversationMessageMap[entityId]!.length;
+    } else {
+      addEmptyEntityIdConversationMessageMap(entityId);
+      return 0;
+    }
+  }
+
+  /// returns the ConversationMessage at index for the entity id mapped
+  /// conversations if found, else returns the default ConversationMessage
+  static ConversationMessage getEntityIdConversationMessageAt(entityId, at) {
+    if (isEntityIdConversationMessageMapExists(entityId)) {
+      if (getEntityIdConversationMessageMapLength(entityId) > at) {
+        return entityIdConversationMessageMap[entityId]![at];
+      } else {
+        return ConversationMessage.getDefault();
+      }
+    } else {
+      return ConversationMessage.getDefault();
+    }
+  }
+
   /// internal instance of LocalNotifications to update the entities and their
   /// conversations messages
   static Stream<LocalNotification> _notificationsStream =
@@ -41,7 +84,6 @@ class LocalConversationsService {
   /// by entity in conversedEntityWithLastConversationMessages,
   /// also starts listening to incoming messages
   static getMyConversations() async {
-    print("getMyConversations:start");
     var getConversedAccountAndAssistantsResponse =
         await MessageConversationService.getConversedAccountAndAssistants();
     conversedEntityWithLastConversationMessages =
@@ -57,7 +99,6 @@ class LocalConversationsService {
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
-    print("getMyConversations:end");
   }
 
   /// loads all the entity conversations to entityIdConversationMessageMap
@@ -195,7 +236,6 @@ class LocalConversationsService {
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
   static handleListeningMessages(LocalNotification message) async {
-    print("received new notification");
     if (message.data['service'] == "NotifyAccountService") {
       if (message.data['rpc'] == "NewReceivedMessageFromAccount") {
         var listenForReceivedAccountMessagesResponse =
@@ -265,15 +305,16 @@ class LocalConversationsService {
       AccountAssistant accountAssistant,
       SpaceKnowledgeAction spaceKnowledgeAction,
       String message) async {
+    print("sendActionableMessageToAccountAssistant");
     var accountAssistantMeta = AccountAssistantMeta(
         accountAssistantId: accountAssistant.accountAssistantId,
         accountAssistantName: accountAssistant.accountAssistantName,
         accountAssistantNameCode: accountAssistant.accountAssistantNameCode,
         accountId: accountAssistant.account.accountId);
-
+    print("build assistant meta: $accountAssistantMeta");
     var connectedAccountAssistant = LocalConnectionsService
         .inverseConnectedAccountAssistantMap[accountAssistantMeta]!;
-
+    print("connectedAccountAssistant: $connectedAccountAssistant");
     var draftMessage = ConversationMessage(
         isMessageEntityAccountAssistant: true,
         isMessageSent: true,
@@ -286,12 +327,12 @@ class LocalConversationsService {
           message: message,
           sentAt: Timestamp.fromDateTime(DateTime.now()),
         ));
-
+    print("draftMessage: $draftMessage");
     // warn: need to check if conversations doesn't exists
     var conversationsMessagesIndex = entityIdConversationMessageMap[
             connectedAccountAssistant.accountAssistantId]!
         .length;
-
+    print("conversationsMessagesIndex: $conversationsMessagesIndex");
     entityIdConversationMessageMap[
             connectedAccountAssistant.accountAssistantId]!
         .insert(conversationsMessagesIndex, draftMessage);
@@ -301,10 +342,10 @@ class LocalConversationsService {
                     connectedAccountAssistant.accountAssistantId]!
                 .length -
             1);
-
     var messageForAccountAssistantSent =
         await SendAccountMessageService.sendMessageToAccountAssistant(
             connectedAccountAssistant, spaceKnowledgeAction, message);
+    print("messageForAccountAssistantSent: $messageForAccountAssistantSent");
     if (messageForAccountAssistantSent.isSent) {
       entityIdConversationMessageMap[connectedAccountAssistant
                   .accountAssistantId]![conversationsMessagesIndex]
@@ -390,9 +431,12 @@ class LocalConversationsService {
 
   static updateConversedAccountAssistantWithLastConversationSentMessages(
       String accountAssistantId, int messageIndex) {
+    print("updateConversedAccountAssistantWithLastConversationSentMessages");
     int accountAssistantIndex =
         findConversedAccountAssistantWithLastConversationMessagesUsingAccountAssistantId(
             accountAssistantId);
+    print("messageIndex: $messageIndex");
+    print("accountAssistantIndex: $accountAssistantIndex");
     if (accountAssistantIndex > -1) {
       AccountAssistantSentMessage lastSentMessage =
           entityIdConversationMessageMap[accountAssistantIndex]![messageIndex]

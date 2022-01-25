@@ -25,7 +25,6 @@ class AllAssistantsConnectionsStreamingListViewWidget extends StatefulWidget {
 
   @override
   State<AllAssistantsConnectionsStreamingListViewWidget> createState() {
-    print("AllAssistantsConnectionsStreamingListViewWidget:createState");
     return _AllAssistantsConnectionsStreamingListViewWidgetState();
   }
 }

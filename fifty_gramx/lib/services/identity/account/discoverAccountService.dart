@@ -2,7 +2,6 @@ import 'package:fifty_gramx/channels/identityCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/discover_account.pbgrpc.dart';
 
 class DiscoverAccountService {
@@ -16,9 +15,7 @@ class DiscoverAccountService {
       _serviceClient ??= DiscoverAccountServiceClient(
           await IdentityCommonChannel.identityChannel);
 
-  void dispose() {
-    print("DiscoverAccountService:dispose");
-  }
+  void dispose() {}
 
   // Service declarations here
   static Future<GetAccountByIdResponse> getAccountById(String accountId) async {

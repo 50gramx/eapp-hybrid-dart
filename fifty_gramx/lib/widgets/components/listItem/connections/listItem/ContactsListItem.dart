@@ -40,7 +40,6 @@ class ContactListItemWidget extends StatelessWidget {
           children: [
             ListTile(
               onTap: () {
-                print("Tapped inside ContactListItemWidget!");
                 pushContactConversation();
               },
               leading: AccountContactIconButton(contact).buildConnectedContactIconButton(context),

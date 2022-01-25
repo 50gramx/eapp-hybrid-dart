@@ -33,9 +33,7 @@ class AccountAssistantIconButton implements ConnectedEntityIconButton {
       padding: const EdgeInsets.all(1),
       child: NeumorphicButton(
         provideHapticFeedback: true,
-        onPressed: () {
-          print("entity toggle pressed");
-        },
+         onPressed: () {},
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
               ? LightSource.bottomRight

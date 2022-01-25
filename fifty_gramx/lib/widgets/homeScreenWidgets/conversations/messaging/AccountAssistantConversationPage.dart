@@ -53,6 +53,7 @@ class _AccountAssistantConversationPageState
     if (LocalConversationsService.entityIdConversationMessageMap[
             widget.accountAssistant.accountAssistantId] ==
         null) {
+      print("it is null");
       LocalConversationsService.entityIdConversationMessageMap[
           widget.accountAssistant.accountAssistantId] = [];
     }
@@ -68,6 +69,7 @@ class _AccountAssistantConversationPageState
   }
 
   addTextFieldListener() {
+    print("added text field listener");
     accountAssistantMessageTextFieldController.addListener(() {
       if (!isSendButtonEnabled) {
         if (accountAssistantMessageTextFieldController.text.length != 0) {
@@ -84,6 +86,7 @@ class _AccountAssistantConversationPageState
   }
 
   listenForLocalNotifications() {
+    print("listenForLocalNotifications");
     // TODO: Handle _notificationsStream error
     // TODO: Handle disposed
     Timer(Duration(milliseconds: 300), () {
@@ -182,6 +185,7 @@ class _AccountAssistantConversationPageState
               .length;
           index >= 0;
           index--) {
+        print("inserting for index $index");
         try {
           _accountAssistantConversationsListKey.currentState!
               .insertItem(index, duration: Duration(microseconds: 100));
@@ -195,8 +199,10 @@ class _AccountAssistantConversationPageState
   }
 
   sendActionableMessage() {
+    print("sendActionableMessage");
     var typedMessage = accountAssistantMessageTextFieldController.text;
     accountAssistantMessageTextFieldController.clear();
+    print("typedMessage: $typedMessage");
     LocalConversationsService.sendActionableMessageToAccountAssistant(
         widget.accountAssistant,
         SpaceKnowledgeAction.ASK_QUESTION,

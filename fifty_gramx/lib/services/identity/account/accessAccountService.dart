@@ -68,7 +68,6 @@ class AccessAccountService {
 
   static Future<ValidateAccountServicesResponse> validateAccountServices(
       AccountServicesAccessAuthDetails accountServicesAccessAuthDetails) async {
-    print("invoked validateAccountServices");
     var client =
         AccessAccountServiceClient(await IdentityCommonChannel.identityChannel);
     return await client

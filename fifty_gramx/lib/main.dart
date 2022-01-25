@@ -67,7 +67,6 @@ void main() async {
           } else {
             // todo: handle in-app payments for desktops
           }
-          print("logged in snapshot.data: ${loggedInSnapshot.data}");
           if (loggedInSnapshot.data!) {
             // reflect the account is logged in
             if (Platform.isIOS || Platform.isAndroid) {
@@ -331,10 +330,8 @@ Widget getExplicitPermissionAllocationPage(String explicitText,
 }
 
 Future<bool> checkLogin() async {
-  print("checkLogin invoked");
   var accountServicesAccessAuthDetails =
       await AccountData().readAccountServicesAccessAuthDetails();
-  print(accountServicesAccessAuthDetails);
   if (accountServicesAccessAuthDetails.account.accountId == "") {
     return false;
   } else {

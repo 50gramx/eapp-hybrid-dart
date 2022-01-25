@@ -102,7 +102,6 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
   _handleInvalidPurchase(purchaseDetails) {}
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    print("AddEthosCoinWidget:_listenToPurchaseUpdated");
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         _showPendingUI();
@@ -132,18 +131,14 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
 
   @override
   void initState() {
-    print("AddEthosCoinWidget:initState");
     final Stream<List<PurchaseDetails>> purchaseUpdated =
         InAppPurchase.instance.purchaseStream;
 
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
-      print("AddEthosCoinWidget:purchaseUpdated.listen");
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
-      print("AddEthosCoinWidget:purchaseUpdated.onDone");
       _subscription.cancel();
     }, onError: (error) {
-      print("AddEthosCoinWidget:purchaseUpdated.onError");
       // handle error here.
     });
 
@@ -164,18 +159,15 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
             future: PayInAccountService.accountEthosCoinBalance(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                print("xx");
                 return AppProgressIndeterminateWidget();
               } else {
                 if (snapshot.data!.responseMeta.metaDone == false) {
-                  print("ff");
                   var newBalance = "0.00";
                   return EthosCoinBalanceCard(
                     addingXEthosCoin: newBalance,
                     ethosCoinPrice: _selectedCoinBalance.price,
                   );
                 } else {
-                  print("zz");
                   var newBalance = ((snapshot.data!.balance) +
                               _selectedCoinBalance.title.length >
                           0
@@ -193,10 +185,8 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
           future: loadCoinDetails(),
           builder: (context, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              print("loadCoinDetails:ConnectionState.waiting");
               return AppProgressIndeterminateWidget();
             } else {
-              print("loadCoinDetails:ConnectionState.notWaiting");
               widget.updateSelectedCoinBalance(_selectedCoinBalance);
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -312,19 +302,10 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
         }.toSet();
     }
 
-    print("Will query product details");
     for (var _kId in _kIds) {
-      print("query for product id: $_kId");
       var fetchedProduct = (await _inAppPurchase.queryProductDetails([_kId].toSet()));
       _coinDetails.addAll(fetchedProduct.productDetails);
-      print("fetchedProduct: $fetchedProduct");
-      print("fetchedProduct.error.message: ${fetchedProduct.error?.message}");
-      print("fetchedProduct.error.source: ${fetchedProduct.error?.source}");
-      print("fetchedProduct.error.details: ${fetchedProduct.error?.details}");
-      print("fetchedProduct.error.code: ${fetchedProduct.error?.code}");
-      print("fetchedProduct.notFoundIDs: ${fetchedProduct.notFoundIDs}");
     }
-    print("query product details done");
     _selectedCoinBalance = _coinDetails[0];
   }
 

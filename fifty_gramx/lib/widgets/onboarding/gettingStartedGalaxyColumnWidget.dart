@@ -107,19 +107,12 @@ class _GettingStartedGalaxyColumnWidgetState
   bool tierSubscribed = false;
 
   listAllProducts() async {
-    print("listAllProducts");
     final ProductDetailsResponse response =
         await InAppPurchase.instance.queryProductDetails(_kIds);
     if (response.notFoundIDs.isNotEmpty) {
       // Handle the error.
-      print("products error");
     }
     products = response.productDetails;
-
-    for (var product in products) {
-      print("${product.title}: ${product.price}");
-      print("Purchase Params: ${PurchaseParam(productDetails: product)}");
-    }
 
     var purchaseParam =
         SpaceTierPayments().getTierGooglePlayPurchaseParams(products[1]);
@@ -129,19 +122,11 @@ class _GettingStartedGalaxyColumnWidgetState
 
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 
-  _showPendingUI() {
-    print("_showPendingUI");
-    print("Purchase pending");
-  }
+  _showPendingUI() {}
 
-  _handleError(e) {
-    print("_handleError");
-    print(e);
-  }
+  _handleError(e) {}
 
   _deliverProduct(purchaseDetails) {
-    print("_deliverProduct");
-    print(purchaseDetails);
     // if (!tierSubscribed) {
     //   setState(() {
     //     tierSubscribed = true;
@@ -187,10 +172,7 @@ class _GettingStartedGalaxyColumnWidgetState
     }
   }
 
-  _handleInvalidPurchase(purchaseDetails) {
-    print("_handleInvalidPurchase");
-    print(purchaseDetails);
-  }
+  _handleInvalidPurchase(purchaseDetails) {}
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
@@ -436,20 +418,14 @@ class _GettingStartedGalaxyColumnWidgetState
   }
 
   updateSelectedTier(ProductDetails tierDetails) {
-    print("updateSelectedTier: $tierDetails");
     SkuDetailsWrapper skuDetails =
         (tierDetails as GooglePlayProductDetails).skuDetails;
-    print(skuDetails);
-    print("freeTrialPeriod: ${skuDetails.freeTrialPeriod}");
-    print("introductoryPricePeriod: ${skuDetails.introductoryPricePeriod}");
-    print("subscriptionPeriod: ${skuDetails.subscriptionPeriod}");
     setState(() {
       selectedTierDetails = tierDetails;
     });
   }
 
   updateSelectedCoinBalance(ProductDetails coinBalance) {
-    print("updateSelectedCoinBalance: $coinBalance");
     setState(() {
       selectedCoinBalance = coinBalance;
     });
@@ -469,12 +445,10 @@ class _GettingStartedGalaxyColumnWidgetState
       //   merchantDisplayName: "50GRAMX",
       // ));
       setState(() {});
-      print("init success");
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
-      print("init error: $e");
     }
 
     displayPaymentSheet();
@@ -488,12 +462,10 @@ class _GettingStartedGalaxyColumnWidgetState
       //     parameters: PresentPaymentSheetParameters(
       //         clientSecret: clientSecret, confirmPayment: true));
       setState(() {});
-      print("payment successful");
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
-      print("error: $e");
     }
   }
 
