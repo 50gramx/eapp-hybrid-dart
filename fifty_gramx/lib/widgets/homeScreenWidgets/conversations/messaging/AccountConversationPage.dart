@@ -29,10 +29,14 @@ class AccountConversationPage extends StatefulWidget {
 }
 
 class _AccountConversationPageState extends State<AccountConversationPage> {
-  List<ConversationMessage> conversationMessages = [];
+  /// Page state variable declarations
+
+  /// creates the list key manager during initialisation
+  late ConversationListKeyManager listKeyManager;
 
   bool messageTextFieldReadOnly = false;
 
+  /// we're using notificationsStream to sync with LocalNotifications
   Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
 
@@ -40,22 +44,17 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
 
   @override
   void initState() {
-    // check if local conversations service has this account id mapped
-    print("check if local conversations service has this account id mapped");
-    if (LocalConversationsService
-            .entityIdConversationMessageMap[widget.account.accountId] ==
-        null) {
-      print("No conversations found for ${widget.account.accountFirstName}");
-      LocalConversationsService
-          .entityIdConversationMessageMap[widget.account.accountId] = [];
-    }
-    addTextFieldListener();
+    /// creating the list manger
+    listKeyManager = ConversationListKeyManager();
+    LocalConversationsService.addEmptyEntityIdConversationMessageMap(
+        widget.account.accountId);
+    addMessageTextFieldListener();
     loadConversationsMessages();
     // listenForLocalNotifications();
     super.initState();
   }
 
-  addTextFieldListener() {
+  addMessageTextFieldListener() {
     accountAssistantMessageTextFieldController.addListener(() {
       if (!isSendButtonEnabled) {
         if (accountAssistantMessageTextFieldController.text.length != 0) {
@@ -80,23 +79,13 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
         if (notification.type == "LocalConversationsService") {
           if (notification.data["accountId"] == widget.account.accountId) {
             if (notification.data["subType"] == "AddedAccountSentMessage") {
-              _accountConversationsListKey.currentState!
-                  .removeItem(notification.data["at"], (context, animation) {
-                return SizedBox();
-              });
-              _accountConversationsListKey.currentState!.insertItem(
-                  notification.data["at"],
-                  duration: Duration(microseconds: 100));
+              listKeyManager.removeItem(notification.data["at"]);
+              listKeyManager.insertItem(notification.data["at"]);
               scrollToBottom();
             } else if (notification.data["subType"] ==
                 "AddedAccountReceivedMessage") {
-              _accountConversationsListKey.currentState!
-                  .removeItem(notification.data["at"], (context, animation) {
-                return SizedBox();
-              });
-              _accountConversationsListKey.currentState!.insertItem(
-                  notification.data["at"],
-                  duration: Duration(microseconds: 100));
+              listKeyManager.removeItem(notification.data["at"]);
+              listKeyManager.insertItem(notification.data["at"]);
               scrollToBottom();
             }
           }
@@ -119,7 +108,6 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
   void dispose() {
     accountAssistantMessageTextFieldController.dispose();
     _listScrollController.dispose();
-    _accountConversationsListKey.currentState?.dispose();
     super.dispose();
   }
 
@@ -133,8 +121,7 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
           index >= 0;
           index--) {
         try {
-          _accountConversationsListKey.currentState!
-              .insertItem(index, duration: Duration(microseconds: 100));
+          listKeyManager.insertItem(index);
         } catch (e) {
           print("Exception while inserting: $e");
         }
@@ -153,8 +140,6 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
         widget.account, typedMessage);
   }
 
-  final GlobalKey<SliverAnimatedListState> _accountConversationsListKey =
-      GlobalKey<SliverAnimatedListState>();
   final ScrollController _listScrollController = new ScrollController();
 
   @override
@@ -180,7 +165,7 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
                   isActionEnabled: false,
                 ),
                 SliverAnimatedList(
-                    key: _accountConversationsListKey,
+                    key: listKeyManager.getListKey(),
                     initialItemCount: LocalConversationsService
                         .getEntityIdConversationMessageMapLength(
                             widget.account.accountId),
