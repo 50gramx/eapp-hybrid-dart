@@ -11,6 +11,7 @@ import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/a
 import 'package:fifty_gramx/widgets/components/listItem/conversations/messages/accountAssistantConversationsMessagesSentListItem.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/LocalConversationsService.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/messaging/ConversationListKeyManager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -32,44 +33,40 @@ class AccountAssistantConversationPage extends StatefulWidget {
 
 class _AccountAssistantConversationPageState
     extends State<AccountAssistantConversationPage> {
-  // AccountAssistant accountAssistant = AccountAssistant.getDefault();
-  List<ConversationMessage> conversationMessages = [];
+  /// Page state variable declarations
 
-  // List<ConversationMessage> draftedConversationMessages = [];
+  /// creates the list key manager during initialisation
+  late ConversationListKeyManager listKeyManager;
 
   bool messageTextFieldReadOnly = false;
 
-  // ScrollController _conversationsScrollController = new ScrollController();
-  // Account sendingAccount = Account.getDefault();
-
+  /// we're using notificationsStream to sync with LocalNotifications
   Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
 
   bool isSendButtonEnabled = false;
 
+  // -----------
+  // AccountAssistant accountAssistant = AccountAssistant.getDefault();
+  List<ConversationMessage> conversationMessages = [];
+
+  // List<ConversationMessage> draftedConversationMessages = [];
+
+  // ScrollController _conversationsScrollController = new ScrollController();
+  // Account sendingAccount = Account.getDefault();
+
   @override
   void initState() {
-    print("check if local conversations service has this account id mapped");
-    if (LocalConversationsService.entityIdConversationMessageMap[
-            widget.accountAssistant.accountAssistantId] ==
-        null) {
-      print("it is null");
-      LocalConversationsService.entityIdConversationMessageMap[
-          widget.accountAssistant.accountAssistantId] = [];
-    }
-    // _notificationsStream.listen((notification) {
-    //   // TODO: Implement your logic here
-    //   print('Notification: ${notification.data}');
-    //   handleListeningMessages(notification);
-    // });
-    addTextFieldListener();
+    /// creating the list manger
+    listKeyManager = ConversationListKeyManager();
+    LocalConversationsService.addEmptyEntityIdConversationMessageMap(
+        widget.accountAssistant.accountAssistantId);
+    addMessageTextFieldListener();
     loadConversationsMessages();
-    // getConnectedAccountAssistant();
     super.initState();
   }
 
-  addTextFieldListener() {
-    print("added text field listener");
+  addMessageTextFieldListener() {
     accountAssistantMessageTextFieldController.addListener(() {
       if (!isSendButtonEnabled) {
         if (accountAssistantMessageTextFieldController.text.length != 0) {
@@ -86,7 +83,6 @@ class _AccountAssistantConversationPageState
   }
 
   listenForLocalNotifications() {
-    print("listenForLocalNotifications");
     // TODO: Handle _notificationsStream error
     // TODO: Handle disposed
     Timer(Duration(milliseconds: 300), () {
@@ -97,23 +93,13 @@ class _AccountAssistantConversationPageState
               widget.accountAssistant.accountAssistantId) {
             if (notification.data["subType"] ==
                 "AddedAccountAssistantSentMessage") {
-              _accountAssistantConversationsListKey.currentState!
-                  .removeItem(notification.data["at"], (context, animation) {
-                return SizedBox();
-              });
-              _accountAssistantConversationsListKey.currentState!.insertItem(
-                  notification.data["at"],
-                  duration: Duration(microseconds: 100));
+              listKeyManager.removeItem(notification.data["at"]);
+              listKeyManager.insertItem(notification.data["at"]);
               scrollToBottom();
             } else if (notification.data["subType"] ==
                 "AddedAccountAssistantReceivedMessage") {
-              _accountAssistantConversationsListKey.currentState!
-                  .removeItem(notification.data["at"], (context, animation) {
-                return SizedBox();
-              });
-              _accountAssistantConversationsListKey.currentState!.insertItem(
-                  notification.data["at"],
-                  duration: Duration(microseconds: 100));
+              listKeyManager.removeItem(notification.data["at"]);
+              listKeyManager.insertItem(notification.data["at"]);
               scrollToBottom();
             }
           }
@@ -136,7 +122,6 @@ class _AccountAssistantConversationPageState
   void dispose() {
     accountAssistantMessageTextFieldController.dispose();
     _listScrollController.dispose();
-    _accountAssistantConversationsListKey.currentState?.dispose();
     super.dispose();
   }
 
@@ -179,16 +164,14 @@ class _AccountAssistantConversationPageState
 
   loadConversationsMessages() async {
     Timer(Duration(microseconds: 100), () {
-      for (int index = LocalConversationsService
-              .entityIdConversationMessageMap[
-                  widget.accountAssistant.accountAssistantId]!
-              .length;
+      for (int index =
+              LocalConversationsService.getEntityIdConversationMessageMapLength(
+                  widget.accountAssistant.accountAssistantId);
           index >= 0;
           index--) {
         print("inserting for index $index");
         try {
-          _accountAssistantConversationsListKey.currentState!
-              .insertItem(index, duration: Duration(microseconds: 100));
+          listKeyManager.insertItem(index);
         } catch (e) {
           print("Exception while inserting: $e");
         }
@@ -209,9 +192,6 @@ class _AccountAssistantConversationPageState
         typedMessage);
   }
 
-  final GlobalKey<SliverAnimatedListState>
-      _accountAssistantConversationsListKey =
-      GlobalKey<SliverAnimatedListState>();
   final ScrollController _listScrollController = new ScrollController();
 
   var isAccountConnected = false;
@@ -254,23 +234,22 @@ class _AccountAssistantConversationPageState
                   isActionEnabled: true,
                 ),
                 SliverAnimatedList(
-                    key: _accountAssistantConversationsListKey,
+                    key: listKeyManager.getListKey(),
                     initialItemCount: LocalConversationsService
-                        .entityIdConversationMessageMap[
-                            widget.accountAssistant.accountAssistantId]!
-                        .length,
+                        .getEntityIdConversationMessageMapLength(
+                            widget.accountAssistant.accountAssistantId),
                     itemBuilder: (BuildContext context, int index,
                         Animation<double> animation) {
                       if (index >=
                           LocalConversationsService
-                              .entityIdConversationMessageMap[
-                                  widget.accountAssistant.accountAssistantId]!
-                              .length) {
+                              .getEntityIdConversationMessageMapLength(
+                                  widget.accountAssistant.accountAssistantId)) {
                         return SizedBox();
                       }
                       var message = LocalConversationsService
-                              .entityIdConversationMessageMap[
-                          widget.accountAssistant.accountAssistantId]![index];
+                          .getEntityIdConversationMessageAt(
+                              widget.accountAssistant.accountAssistantId,
+                              index);
                       if (message.isMessageEntityAccountAssistant) {
                         if (message.isMessageSent) {
                           return AccountAssistantConversationsMessagesSentListItem(

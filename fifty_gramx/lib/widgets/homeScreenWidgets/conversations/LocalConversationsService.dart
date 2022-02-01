@@ -230,8 +230,47 @@ class LocalConversationsService {
 
   /// adds each received MessageFromAccountAssistant as ConversationMessage to
   /// entityIdConversationMessageMap and notifies about added message
-  // TODO(founder): declare the handler
-  static handleReceivedMessagesFromAccountAssistant() {}
+  static handleReceivedMessagesFromAccountAssistant(
+      List<MessageFromAccountAssistant> messagesFromAccountAssistant) {
+    for (MessageFromAccountAssistant messageFromAccountAssistant
+        in messagesFromAccountAssistant) {
+      var receivedConversationMessage = ConversationMessage(
+          isMessageEntityAccountAssistant: true,
+          isMessageSent: false,
+          accountAssistantReceivedMessage: AccountAssistantReceivedMessage(
+              message: messageFromAccountAssistant.message,
+              accountAssistantId: messageFromAccountAssistant
+                  .connectedAccountAssistant.accountAssistantId,
+              accountAssistantConnectionId: messageFromAccountAssistant
+                  .connectedAccountAssistant.accountAssistantConnectionId,
+              accountAssistantReceivedMessageId:
+                  messageFromAccountAssistant.accountAssistantReceivedMessageId,
+              messageSourceSpaceTypeId:
+                  messageFromAccountAssistant.messageSourceSpaceTypeId,
+              messageSourceSpaceId:
+                  messageFromAccountAssistant.messageSourceSpaceId,
+              messageSourceSpaceDomainId:
+                  messageFromAccountAssistant.messageSourceSpaceDomainId,
+              messageSourceSpaceDomainAction:
+                  messageFromAccountAssistant.messageSourceSpaceDomainAction,
+              messageSourceSpaceDomainActionContextId:
+                  messageFromAccountAssistant
+                      .messageSourceSpaceDomainActionContextId,
+              receivedAt: Timestamp.fromDateTime(DateTime.now())));
+
+      entityIdConversationMessageMap[messageFromAccountAssistant
+              .connectedAccountAssistant.accountAssistantId]!
+          .add(receivedConversationMessage);
+
+      notifyAddedAccountAssistantReceivedMessage(
+          messageFromAccountAssistant
+              .connectedAccountAssistant.accountAssistantId,
+          entityIdConversationMessageMap[messageFromAccountAssistant
+                      .connectedAccountAssistant.accountAssistantId]!
+                  .length -
+              1);
+    }
+  }
 
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
@@ -252,8 +291,9 @@ class LocalConversationsService {
                 .listenForReceivedAccountAssistantMessages();
         if (listenForReceivedAccountAssistantMessagesResponse
             .responseMeta.metaDone) {
-          // TODO(founder): handle the incoming messages for account assistant
-          handleReceivedMessagesFromAccountAssistant();
+          handleReceivedMessagesFromAccountAssistant(
+              listenForReceivedAccountAssistantMessagesResponse
+                  .messagesFromAccountAssistant);
         }
       }
     }
@@ -437,9 +477,11 @@ class LocalConversationsService {
             accountAssistantId);
     print("messageIndex: $messageIndex");
     print("accountAssistantIndex: $accountAssistantIndex");
+    print(
+        "entityIdConversationMessageMap[accountAssistantId]: ${entityIdConversationMessageMap[accountAssistantId]}");
     if (accountAssistantIndex > -1) {
       AccountAssistantSentMessage lastSentMessage =
-          entityIdConversationMessageMap[accountAssistantIndex]![messageIndex]
+          entityIdConversationMessageMap[accountAssistantId]![messageIndex]
               .accountAssistantSentMessage;
       conversedEntityWithLastConversationMessages[accountAssistantIndex]
           .lastConversationMessage
@@ -460,7 +502,7 @@ class LocalConversationsService {
             accountAssistantId);
     if (accountAssistantIndex > -1) {
       AccountAssistantReceivedMessage lastSentMessage =
-          entityIdConversationMessageMap[accountAssistantIndex]![messageIndex]
+          entityIdConversationMessageMap[accountAssistantId]![messageIndex]
               .accountAssistantReceivedMessage;
       conversedEntityWithLastConversationMessages[accountAssistantIndex]
           .lastConversationMessage
