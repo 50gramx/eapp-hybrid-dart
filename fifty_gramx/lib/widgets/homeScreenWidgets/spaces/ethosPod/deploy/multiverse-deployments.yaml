@@ -1,0 +1,184 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ethosindiak8secrets
+  namespace: ethosverse
+type: Opaque
+data:
+  docker-server: "https://registry.hub.docker.com/"
+  username: ZXRob3NpbmRpYQ==
+  password: MTFhMzIxOWUtZDRmMS00ZWNhLWIxYTgtMWMyYWIzOGUwZmVk
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mv-id-local
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: mv-id-local
+  template:
+    metadata:
+      labels:
+        epod: mv-id-local
+    spec:
+      containers:
+        - name: mv-id-local-container
+          image: ethosindia/services:identity-local
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50501
+              name: idenity-local-rpc
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mv-id-local-service
+  namespace: ethosverse
+spec:
+  type: NodePort
+  selector:
+    epod: mv-id-local
+  ports:
+    - name: idenity-local-rpc-service
+      nodePort: 30503
+      targetPort: idenity-local-rpc
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mv-fs
+  labels:
+    app: mv-fs
+    release: eapp-mv-fs
+  namespace: ethosverse
+spec:
+  replicas: 1
+  serviceName: eapp-mv-fs
+  template:
+    metadata:
+      labels:
+        app: mv-fs
+        release: eapp-mv-fs
+    spec:
+      containers:
+        - name: mv-fs-container
+          image: ethosindia:filesystem/multiverse-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+              name: mv-fs-port
+          volumeMounts:
+            - name: mvfs-storage
+              mountPath: /data/mvfs
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: mvfs-storage
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "slow"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts-jdk11
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      volumes:
+        - name: jenkins-home
+          emptyDir: { }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eapp-ethospay
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: eapp-ethospay
+  template:
+    metadata:
+      labels:
+        epod: eapp-ethospay
+    spec:
+      containers:
+        - name: eapp-ethospay-container
+          image: ethosindia/apps:ethospay-arm64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50601
+              name: ethospay-http
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: ethosindiak8secrets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eapp-ethospay-service
+  namespace: ethosverse
+spec:
+  type: NodePort
+  selector:
+    epod: eapp-ethospay
+  ports:
+    - name: ethospay-http-service
+      port: 50601
+      nodePort: 30010
+      targetPort: ethospay-http
