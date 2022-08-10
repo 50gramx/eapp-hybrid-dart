@@ -1,5 +1,4 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -23,24 +22,23 @@ class ActionNeuButton extends StatefulWidget {
 
   @override
   State<ActionNeuButton> createState() => _ActionNeuButtonState();
-
 }
 
 class _ActionNeuButtonState extends State<ActionNeuButton> {
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
-          widget.buttonActionOnPressed();
+          if (!widget.isPrimaryButtonDisabled) {
+            widget.buttonActionOnPressed();
+          }
         },
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
@@ -52,7 +50,9 @@ class _ActionNeuButtonState extends State<ActionNeuButton> {
           shape: NeumorphicShape.flat,
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: widget.isPrimaryButton
-              ? (widget.isPrimaryButtonDisabled ? AppColors.contentStateDisabled(context) : AppColors.contentPrimary(context))
+              ? (widget.isPrimaryButtonDisabled
+                  ? AppColors.contentStateDisabled(context)
+                  : AppColors.contentPrimary(context))
               : AppColors.backgroundSecondary(context),
           border: NeumorphicBorder(
             isEnabled: true,

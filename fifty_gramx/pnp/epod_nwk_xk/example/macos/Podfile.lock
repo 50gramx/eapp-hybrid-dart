@@ -1,0 +1,22 @@
+PODS:
+  - epod_nwk_xk (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - epod_nwk_xk (from `Flutter/ephemeral/.symlinks/plugins/epod_nwk_xk/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  epod_nwk_xk:
+    :path: Flutter/ephemeral/.symlinks/plugins/epod_nwk_xk/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  epod_nwk_xk: e431995db4366dd708703634817ab1fd616d8139
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.11.3

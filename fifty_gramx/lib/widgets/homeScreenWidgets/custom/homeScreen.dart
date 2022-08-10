@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationBarSectionalItem.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationTab.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/adaptiveLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/bottomNavigationTab.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/spacesHomePage.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,7 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   @override
-  Widget build(BuildContext context) => AdaptiveBottomNavigationScaffold(
+  Widget build(BuildContext context) {
+    if (Platform.isAndroid || Platform.isIOS) {
+      print("HomeScreen found mobile platform");
+      return AdaptiveBottomNavigationScaffold(
         navigationBarItems: appFlows
             .map(
               (flow) => BottomNavigationTab(
@@ -93,4 +101,35 @@ class _HomeScreenState extends State<HomeScreen> {
             )
             .toList(),
       );
+    } else if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      print("HomeScreen found desktop platform");
+      return AdaptiveLeftNavigationScaffold(
+        navigationBarItems: appFlows
+            .map(
+              (flow) => LeftNavigationTab(
+                leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
+                  label: flow.title,
+                  icon: Icon(flow.iconData),
+                ),
+                navigatorKey: flow.navigatorKey,
+                initialPageBuilder: (context) {
+                  setStatusBarTheme();
+                  if (flow.index == 0) {
+                    return ConversationsHomePage(
+                        index: 1, containingFlowTitle: flow.title);
+                  } else if (flow.index == 1) {
+                    return SpacesHomePage(
+                        index: 1, containingFlowTitle: flow.title);
+                  } else {
+                    return ConnectionsHomePage(index: 1);
+                  }
+                },
+              ),
+            )
+            .toList(),
+      );
+    } else {
+      return SizedBox();
+    }
+  }
 }

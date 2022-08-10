@@ -1,0 +1,95 @@
+# Deployment Config
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins-admin
+      # https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts-jdk11
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.3"
+            limits:
+              memory: "600Mi"
+              cpu: "0.4"
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: jnlpport
+              containerPort: 50000
+          livenessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 90
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/login"
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-data
+          persistentVolumeClaim:
+            claimName: jenkins-pv-claim
+# Service Config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+  namespace: ethosverse
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path:   /
+    prometheus.io/port:   '8080'
+spec:
+  selector:
+    app: jenkins
+  type: NodePort
+  ports:
+    - name: httpport
+      port: 8080
+      targetPort: 8080
+      nodePort: 30000
+    - name: jnlport
+      port: 50000
+      targetPort: 50000
+---
+# Persistent Volume Claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-pv-claim
+  namespace: ethosverse
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

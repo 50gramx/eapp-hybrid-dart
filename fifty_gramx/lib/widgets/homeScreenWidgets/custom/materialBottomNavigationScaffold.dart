@@ -1,5 +1,4 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/bottomNavigationTab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -40,7 +39,6 @@ class _MaterialBottomNavigationScaffoldState
 
   @override
   void initState() {
-
     _initAnimationControllers();
     _initMaterialNavigationBarItems();
 
@@ -68,7 +66,6 @@ class _MaterialBottomNavigationScaffoldState
   }
 
   void _initAnimationControllers() {
-
     _animationControllers.addAll(
       widget.navigationBarItems.map<AnimationController>(
         (destination) => AnimationController(
@@ -127,7 +124,7 @@ class _MaterialBottomNavigationScaffoldState
           items: materialNavigationBarItems
               .map(
                 (item) => item.bottomNavigationBarItem,
-          )
+              )
               .toList(),
           onTap: widget.onItemSelected,
         ),
@@ -142,7 +139,6 @@ class _MaterialBottomNavigationScaffoldState
     _MaterialBottomNavigationTab item,
   ) {
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
-
 
     // We should build the tab content only if it was already built or
     // if it is currently selected.

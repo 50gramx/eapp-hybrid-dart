@@ -192,7 +192,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
           slivers: <Widget>[
             CustomSliverAppBar(
               labelText: "Connections",
-              actionLabelText: "EthosCoin",
+              actionLabelText: "EthosPay",
               isBackEnabled: false,
               trailingButtonCallback: () {
                 AppPushPage()

@@ -12,8 +12,11 @@ class SwitchConfigurationItem extends StatelessWidget {
   final String titleText;
   final bool switchValue;
   final Function(bool) switchOnChanged;
+  final bool isEnabled;
 
-  const SwitchConfigurationItem({Key? key, required this.titleText, required this.switchValue, required this.switchOnChanged}) : super(key: key);
+  const SwitchConfigurationItem(
+      {Key? key, required this.titleText, required this.switchValue, required this.switchOnChanged, this.isEnabled = true})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,14 @@ class SwitchConfigurationItem extends StatelessWidget {
         containerChild: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: ListItemTitleTextWidget(titleText: titleText, disableNeu: true, fontSize: 18, fontWeight: FontWeight.w500,)),
+            Expanded(child: ListItemTitleTextWidget(titleText: titleText,
+              disableNeu: true,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,)),
             NeumorphicSwitch(
               height: 28,
               value: switchValue,
+              isEnabled: isEnabled,
               onChanged: (value) {
                 switchOnChanged(value);
               },

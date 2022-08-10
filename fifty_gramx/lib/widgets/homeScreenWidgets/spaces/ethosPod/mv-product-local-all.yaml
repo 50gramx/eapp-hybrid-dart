@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mv-product-local
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: mv-product-local
+  template:
+    metadata:
+      labels:
+        epod: mv-product-local
+    spec:
+      containers:
+        - name: mv-product-local-container
+          image: ethosindia/services:product-local
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50401
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mv-id-product-service
+  namespace: ethosverse
+spec:
+  type: NodePort
+  selector:
+    epod: mv-product-local
+  ports:
+    - port: 50401
+      nodePort: 30504

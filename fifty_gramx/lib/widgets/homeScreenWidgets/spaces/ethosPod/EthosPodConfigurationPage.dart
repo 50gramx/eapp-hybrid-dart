@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/data/spaceData.dart';
@@ -8,10 +6,8 @@ import 'package:fifty_gramx/protos/ethos/elint/entities/space.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/space/access_space.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge/discover_space_knowledge.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/services/identity/space/accessSpaceService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowledgeDomainService.dart';
@@ -19,10 +15,10 @@ import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowle
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/MachineConfigurationPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/CreateSpaceKnowledgeDomainPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +55,7 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
             Container(
                 margin:
                     EdgeInsets.only(top: 16, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("ABOUT MY ETHOSPOD").build(context)),
+                child: FormInfoText("ABOUT").build(context)),
             FutureBuilder<Space>(
               future: SpaceData().readSpace(),
               builder: (context, snap) {
@@ -101,13 +97,53 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
+                } else if (snap.connectionState == ConnectionState.done) {
+                  if (snap.data!.spaceId.isNotEmpty) {
+                    return BasicConfigurationItem(
+                        titleText: "Serial Number",
+                        subtitleText:
+                            "#${snap.data!.spaceId.substring(0, 12)}");
+                  } else {
+                    return BasicConfigurationItem(
+                        titleText: "Serial Number", subtitleText: "###NA###");
+                  }
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Serial Number",
-                      subtitleText: "#${snap.data!.spaceId.substring(0, 12)}");
+                      titleText: "Serial Number", subtitleText: "NA");
                 }
               },
             ),
+
+            // ------------------------------------------------
+            // GALAXY NETWORK
+            // ------------------------------------------------
+            Container(
+                margin:
+                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                child: FormInfoText("GALAXY NETWORK").build(context)),
+            BasicConfigurationItem(
+                titleText: "Computing Cores", subtitleText: "1 Core"),
+            // TODO: Fetch actual data
+            BasicConfigurationItem(
+                titleText: "Hot Storage", subtitleText: "1 GiB"),
+            // TODO: Fetch actual data
+            BasicConfigurationItem(
+                titleText: "Fast Storage", subtitleText: "20 GiB"),
+            // TODO: Fetch actual data
+            BasicConfigurationItem(
+                titleText: "Standard Storage", subtitleText: "0 GiB"),
+            // TODO: Fetch actual data
+            SelectorConfigurationItem(
+              titleText: "Galaxy Machines",
+              subtitleText: "1 Node",
+              selectorCallback: () {
+                AppPushPage()
+                    .pushHorizontalPage(context, MachineConfigurationPage());
+              },
+            ),
+            // ------------------------------------------------
+            // MY SPACE CONTAINERS
+            // ------------------------------------------------
             Container(
                 margin:
                     EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),

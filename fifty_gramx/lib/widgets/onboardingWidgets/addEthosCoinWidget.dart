@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
@@ -9,7 +8,6 @@ import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuIconButton.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/onboardingWidgets/ethosCoinBalanceCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -160,6 +158,12 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return AppProgressIndeterminateWidget();
+              } else if (snapshot.hasError) {
+                var newBalance = "0.00";
+                return EthosCoinBalanceCard(
+                  addingXEthosCoin: newBalance,
+                  ethosCoinPrice: _selectedCoinBalance.price,
+                );
               } else {
                 if (snapshot.data!.responseMeta.metaDone == false) {
                   var newBalance = "0.00";
@@ -299,11 +303,12 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
       _kIds = <String>{
         "50gramx.add.ethoscoin.84",
         "50gramx.add.ethoscoin.164",
-        }.toSet();
+      }.toSet();
     }
 
     for (var _kId in _kIds) {
-      var fetchedProduct = (await _inAppPurchase.queryProductDetails([_kId].toSet()));
+      var fetchedProduct =
+          (await _inAppPurchase.queryProductDetails([_kId].toSet()));
       _coinDetails.addAll(fetchedProduct.productDetails);
     }
     _selectedCoinBalance = _coinDetails[0];

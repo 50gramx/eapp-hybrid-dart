@@ -1,0 +1,8 @@
+framework module "P2p" {
+	header "ref.h"
+    header "P2p.objc.h"
+    header "Universe.objc.h"
+    header "P2p.h"
+
+    export *
+}
