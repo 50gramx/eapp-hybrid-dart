@@ -119,7 +119,16 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     });
 
     // TODO: Update with live-time script path
-    var homebrewInstallationCommand = 'brew install ubuntu/microk8s/microk8s';
+    var tempShell = Shell(runInShell: true);
+    var whichMacOS = (await tempShell.run("uname -m")).outText;
+    var microk8sInstallationCommand = "";
+    if (whichMacOS == "arm64") {
+      microk8sInstallationCommand =
+          "/opt/homebrew/bin/brew install ubuntu/microk8s/microk8s";
+    } else {
+      microk8sInstallationCommand =
+          "/usr/local/bin/brew install ubuntu/microk8s/microk8s";
+    }
     // disabling the installer button
     setState(() {
       isInstalling = true;
@@ -131,9 +140,10 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     }
     try {
       var installationText =
-          (await shell.run(homebrewInstallationCommand)).outText;
+          (await shell.run(microk8sInstallationCommand)).outText;
       print("outtext: $installationText");
-      var postInstallationText = (await shell.run("microk8s install")).outText;
+      var postInstallationText =
+          (await shell.run("/usr/local/bin/microk8s install")).outText;
       print("outtext: $postInstallationText");
       // since the installation is complete, returning back
       Navigator.of(context).pop();
