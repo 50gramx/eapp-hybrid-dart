@@ -16,11 +16,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:grpc/grpc.dart' hide ConnectionState;
 import 'package:process_run/shell.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 
 import '../../custom/pushHorizontalPage.dart';
+import 'MultipassInstallerPage.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MachineConfigurationPage extends StatefulWidget {
@@ -67,20 +67,18 @@ Future<String> getHomebrewVersion() async {
     // check if ARM MacOS or Intel MacOS
     var whichMacOS = (await shell.run("uname -m")).outText;
     if (whichMacOS == "arm64") {
-      var homebrewVersionText = (await shell.run("/opt/homebrew/bin/brew -v")).outText;
+      var homebrewVersionText =
+          (await shell.run("/opt/homebrew/bin/brew -v")).outText;
       if (homebrewVersionText.length > 0) {
         return LineSplitter.split(homebrewVersionText).first.substring(9);
       } else {
         return "NA";
       }
     } else {
-      var homebrewVersionText = (await shell.run("/usr/local/bin/brew -v"))
-          .outText;
+      var homebrewVersionText =
+          (await shell.run("/usr/local/bin/brew -v")).outText;
       if (homebrewVersionText.length > 0) {
-        return LineSplitter
-            .split(homebrewVersionText)
-            .first
-            .substring(9);
+        return LineSplitter.split(homebrewVersionText).first.substring(9);
       } else {
         return "NA";
       }
@@ -94,7 +92,8 @@ Future<String> getHomebrewVersion() async {
 Future<String> getMultipassVersion() async {
   try {
     var shell = Shell(runInShell: true);
-    var multipassVersionText = (await shell.run("/usr/local/bin/multipass version")).outText;
+    var multipassVersionText =
+        (await shell.run("/usr/local/bin/multipass version")).outText;
     if (multipassVersionText.length > 0) {
       return LineSplitter.split(multipassVersionText)
           .first
@@ -109,12 +108,12 @@ Future<String> getMultipassVersion() async {
   }
 }
 
-
 Future<String> getMicrok8sVersion() async {
   try {
     var shell = Shell(runInShell: true);
     var multipassListText =
-        (await shell.run("/usr/local/bin/multipass list --format=json")).outText;
+        (await shell.run("/usr/local/bin/multipass list --format=json"))
+            .outText;
 //    var microk8sVersionText =
 //        (await shell.run("microk8s kubectl version")).outText;
     if (multipassListText.length > 0) {
@@ -250,12 +249,21 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
                 } else {
-                  return BasicConfigurationItem(
-                      titleText: "Multipass", subtitleText: snap.data!);
+                  if (snap.data! == "NA") {
+                    return SelectorConfigurationItem(
+                        titleText: "Multipass",
+                        subtitleText: "Install",
+                        selectorCallback: () {
+                          AppPushPage().pushHorizontalPage(
+                              context, MultipassInstallerPage());
+                        });
+                  } else {
+                    return BasicConfigurationItem(
+                        titleText: "Multipass", subtitleText: snap.data!);
+                  }
                 }
               },
             ),
-
 
             FutureBuilder<String>(
               future: getMicrok8sVersion(),
@@ -282,7 +290,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                         return SwitchConfigurationItem(
                             titleText: "MicroK8s",
                             isEnabled: true,
-                            switchValue: snapshot.data == "Running" ? true : false,
+                            switchValue:
+                                snapshot.data == "Running" ? true : false,
                             switchOnChanged: (value) {
                               if (value) {
                                 startMicrok8s();
@@ -292,7 +301,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                             });
                       } else {
                         return BasicConfigurationItem(
-                            titleText: "MicroK8s", subtitleText: snapshot.data!);
+                            titleText: "MicroK8s",
+                            subtitleText: snapshot.data!);
                       }
                     } else {
                       return Text("Connection Done but No Data");
@@ -484,13 +494,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   checkKnowledgeSpaceChains() async {
     var shell = Shell();
     try {
-      setState(() {
-
-      });
-    } catch (e) {
-
-    }
-
+      setState(() {});
+    } catch (e) {}
   }
 
   @override
