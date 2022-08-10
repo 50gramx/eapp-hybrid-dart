@@ -4,13 +4,12 @@ import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/widgets/components/TextField/PasswordTextField.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:process_run/shell.dart';
-
-import '../../../components/TextField/NameTextField.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MicroK8sInstallerPage extends StatefulWidget {
@@ -48,7 +47,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
             Padding(
                 padding:
                     EdgeInsets.only(top: 0, bottom: 0, right: 16, left: 16),
-                child: NameTextField(
+                child: PasswordTextField(
                     hintText: "User's Password",
                     nameTextFieldController: userPasswordTextFieldController)),
             Visibility(
