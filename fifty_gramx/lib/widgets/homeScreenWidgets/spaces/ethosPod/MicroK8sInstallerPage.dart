@@ -23,6 +23,8 @@ class MicroK8sInstallerPage extends StatefulWidget {
 }
 
 class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
+  String installEvents = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +64,10 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   buttonActionOnPressed: () {
                     installHomebrew();
                   }),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 0, bottom: 0, right: 8, left: 8),
+              child: Text("$installEvents"),
             ),
             SizedBox(height: 32),
           ]),
@@ -105,7 +111,9 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
         environment: env);
     controller.stream.listen((event) {
       // Handle output
-
+      setState(() {
+        installEvents = event;
+      });
       // ...
       // If needed kill the shell
       print(event);
