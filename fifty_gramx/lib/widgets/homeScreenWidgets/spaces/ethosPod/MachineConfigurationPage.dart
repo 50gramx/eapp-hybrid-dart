@@ -64,11 +64,26 @@ Future<String> getDiskSpace() async {
 Future<String> getHomebrewVersion() async {
   try {
     var shell = Shell(runInShell: true);
-    var homebrewVersionText = (await shell.run("/usr/local/bin/brew -v")).outText;
-    if (homebrewVersionText.length > 0) {
-      return LineSplitter.split(homebrewVersionText).first.substring(9);
+    // check if ARM MacOS or Intel MacOS
+    var whichMacOS = (await shell.run("uname -m")).outText;
+    if (whichMacOS == "arm64") {
+      var homebrewVersionText = (await shell.run("/opt/homebrew/bin/brew -v")).outText;
+      if (homebrewVersionText.length > 0) {
+        return LineSplitter.split(homebrewVersionText).first.substring(9);
+      } else {
+        return "NA";
+      }
     } else {
-      return "NA";
+      var homebrewVersionText = (await shell.run("/usr/local/bin/brew -v"))
+          .outText;
+      if (homebrewVersionText.length > 0) {
+        return LineSplitter
+            .split(homebrewVersionText)
+            .first
+            .substring(9);
+      } else {
+        return "NA";
+      }
     }
   } catch (e) {
     print("found exception --> $e");
