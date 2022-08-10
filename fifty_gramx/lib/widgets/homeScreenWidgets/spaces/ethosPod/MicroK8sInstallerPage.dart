@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
 import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/widgets/components/NeuSlider/NeuSliderWidget.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/components/TextField/PasswordTextField.dart';
@@ -50,6 +51,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                 child: PasswordTextField(
                     hintText: "User's Password",
                     nameTextFieldController: userPasswordTextFieldController)),
+            NeuSliderWidget(),
             Visibility(
               visible: isInstalling,
               child: AppProgressIndeterminateWidget(),
