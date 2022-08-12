@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/support/command/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
@@ -11,7 +12,9 @@ import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfig
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/switchConfigurationItem.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/HomebrewInstallerPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/MicroK8sInstallerPage.dart';
+import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/deploy/mutliverse/multiversePodOperator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -61,6 +64,28 @@ Future<String> getDiskSpace() async {
   return "NA";
 }
 
+Future<String> getHostPublicIPAddress() async {
+  try {
+    var shell = Shell(runInShell: true);
+    // return the host public ip address
+    return (await shell.run("curl http://ifconfig.me/ip")).outText;
+  } catch (e) {
+    print("found exception --> $e");
+    return "NA";
+  }
+}
+
+Future<String> getHostPrivateIPAddress() async {
+  try {
+    var shell = Shell(runInShell: true);
+    // return the host ip private address
+    return (await shell.run("ipconfig getifaddr en0")).outText;
+  } catch (e) {
+    print("found exception --> $e");
+    return "NA";
+  }
+}
+
 Future<String> getHomebrewVersion() async {
   try {
     var shell = Shell(runInShell: true);
@@ -108,17 +133,68 @@ Future<String> getMultipassVersion() async {
   }
 }
 
+String parseK8sStatus(outputText) {
+  var statusText = LineSplitter.split(outputText).first;
+  if (statusText == "MicroK8s is not running. Please run `microk8s start`.") {
+    return "Stopped";
+  } else if (statusText == "microk8s is running") {
+    return "Running";
+  } else {
+    return "Inactive";
+  }
+}
+
+Future<String> getK8sStatus() async {
+  try {
+    var shell = Shell(runInShell: true);
+    var command = '''
+    /usr/local/bin/multipass exec ethos-pods-orchestrator-vm microk8s status
+    ''';
+    var output = (await shell.run(command)).outText;
+    return parseK8sStatus(output);
+    ;
+  } catch (e) {
+    print("found exception --> $e");
+    return "NA";
+  }
+}
+
 Future<String> getMicrok8sVersion() async {
   try {
     var shell = Shell(runInShell: true);
     var multipassListText =
         (await shell.run("/usr/local/bin/multipass list --format=json"))
             .outText;
-//    var microk8sVersionText =
-//        (await shell.run("microk8s kubectl version")).outText;
+
     if (multipassListText.length > 0) {
+      // it means we've data
       var multipassListJson = json.decode(multipassListText);
-      return multipassListJson["list"][0]["state"];
+      // let's check if we've any list of data
+      if (multipassListJson["list"].length > 0) {
+        // it means we've one or more vm's
+        // check if vm's name is ethos-pods-orchestrator-vm in the list of vm's
+        for (int vmIndex = 0;
+            vmIndex < multipassListJson["list"].length;
+            vmIndex++) {
+          if (multipassListJson["list"][vmIndex]["name"] ==
+              "ethos-pods-orchestrator-vm") {
+            // it means the vm is there
+            // let's check it's status
+            if (multipassListJson["list"][vmIndex]["state"] == "Running") {
+              // vm is running
+              // check the microk8s status
+              return await getK8sStatus();
+            } else {
+              return "Stopped";
+            }
+          } else {
+            return "Deleted";
+          }
+        }
+      } else {
+        // it means we don't have vm's
+        return "NA";
+      }
     } else {
       return "NA";
     }
@@ -126,6 +202,7 @@ Future<String> getMicrok8sVersion() async {
     print("found exception --> $e");
     return "NA";
   }
+  return "NA";
 }
 
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
@@ -163,6 +240,23 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               },
             ),
 
+            FutureBuilder<List<ProcessResult>>(
+              future: SimpleCommandExecuter.run("id -F"),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return AppProgressIndeterminateWidget();
+                } else {
+                  return SelectorConfigurationItem(
+                      titleText: "${snap.data!.outText}",
+                      subtitleText: "Update",
+                      selectorCallback: () {
+                        AppPushPage()
+                            .pushHorizontalPage(context, HostUserDetailsPage());
+                      });
+                }
+              },
+            ),
+
             FutureBuilder<MacOsDeviceInfo>(
               future: getDeviceInfo(),
               builder: (context, snap) {
@@ -175,6 +269,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 }
               },
             ),
+
             FutureBuilder<MacOsDeviceInfo>(
               future: getDeviceInfo(),
               builder: (context, snap) {
@@ -182,7 +277,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Mother CPUs",
+                      titleText: "Core CPUs",
                       subtitleText: "${snap.data!.activeCPUs}");
                 }
               },
@@ -194,7 +289,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Attached Memory",
+                      titleText: "Memory",
                       subtitleText: formatBytes(snap.data!.memorySize, 2));
                 }
               },
@@ -208,6 +303,30 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 } else {
                   return BasicConfigurationItem(
                       titleText: "Free Storage", subtitleText: snap.data!);
+                }
+              },
+            ),
+
+            FutureBuilder<String>(
+              future: getHostPublicIPAddress(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return AppProgressIndeterminateWidget();
+                } else {
+                  return BasicConfigurationItem(
+                      titleText: "Public IP", subtitleText: snap.data!);
+                }
+              },
+            ),
+
+            FutureBuilder<String>(
+              future: getHostPrivateIPAddress(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return AppProgressIndeterminateWidget();
+                } else {
+                  return BasicConfigurationItem(
+                      titleText: "Private IP", subtitleText: snap.data!);
                 }
               },
             ),
@@ -277,7 +396,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     return Text('Connection Active');
                   case ConnectionState.done:
                     if (snapshot.hasData) {
-                      if (snapshot.data == "NA") {
+                      if (snapshot.data == "NA" || snapshot.data == "Deleted") {
                         return SelectorConfigurationItem(
                             titleText: "MicroK8s",
                             subtitleText: "Install",
@@ -312,6 +431,28 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 }
               },
             ),
+
+            // ------------------------------------------------
+            // ETHOS MULTIVERSE POD
+            // ------------------------------------------------
+            Container(
+                margin:
+                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                child: FormInfoText("MULTIVERSE PODS").build(context)),
+            SwitchConfigurationItem(
+                titleText: "File System",
+                switchValue: MultiversePodOperator.fsOp.isUp(),
+                switchOnChanged: (value) {
+                  if (!value) {
+                    // user requested to stop the pod
+                    MultiversePodOperator.fsOp.spinDown();
+                    setState(() {});
+                  } else {
+                    // user requested to start the pod
+                    MultiversePodOperator.fsOp.spinUp();
+                    setState(() {});
+                  }
+                }),
 
             // ------------------------------------------------
             // ETHOS GALAXY POD
@@ -418,27 +559,6 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
     setState(() {
       isPodOn[whichPod] = isPodOn[whichPod]! ? false : true;
     });
-  }
-
-  Future<String> getMicrok8sStatus() async {
-    var shell = Shell();
-    try {
-      var statusText = (await shell.run("microk8s status")).outText;
-      if (statusText ==
-          "MicroK8s is not running. Please run `microk8s start`.") {
-        return "Inactive";
-      } else if (statusText.substring(0, 19) == "microk8s is running") {
-        return "Active";
-      } else {
-        return "Inactive";
-      }
-    } on ProcessException {
-      print("found exception");
-      return "NA";
-    } catch (e) {
-      print("found exception:: $e");
-      return "NA";
-    }
   }
 
   deployGalaxyFS() async {

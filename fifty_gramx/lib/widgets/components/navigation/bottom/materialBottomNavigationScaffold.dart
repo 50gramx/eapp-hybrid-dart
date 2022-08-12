@@ -1,14 +1,13 @@
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationBarSectionalItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationTab.dart';
+import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/tab/bottomNavigationTab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// A Scaffold with a configured BottomNavigationBar, separate
 /// Navigators for each tab view and state retaining across tab switches.
-class EutopiaLeftNavigationScaffold extends StatefulWidget {
-  const EutopiaLeftNavigationScaffold({
+class MaterialBottomNavigationScaffold extends StatefulWidget {
+  const MaterialBottomNavigationScaffold({
     required this.navigationBarItems,
     required this.onItemSelected,
     required this.selectedIndex,
@@ -16,7 +15,7 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
   });
 
   /// List of the tabs to be displayed with their respective navigator's keys.
-  final List<LeftNavigationTab> navigationBarItems;
+  final List<BottomNavigationTab> navigationBarItems;
 
   /// Called when a tab selection occurs.
   final ValueChanged<int> onItemSelected;
@@ -24,15 +23,14 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
   final int selectedIndex;
 
   @override
-  _EutopiaLeftNavigationScaffoldState createState() =>
-      _EutopiaLeftNavigationScaffoldState();
+  _MaterialBottomNavigationScaffoldState createState() =>
+      _MaterialBottomNavigationScaffoldState();
 }
 
-class _EutopiaLeftNavigationScaffoldState
-    extends State<EutopiaLeftNavigationScaffold>
-    with TickerProviderStateMixin<EutopiaLeftNavigationScaffold> {
-  final List<_EutopiaLeftNavigationSectionalTab>
-      eutopiaNavigationBarSectionalItems = [];
+class _MaterialBottomNavigationScaffoldState
+    extends State<MaterialBottomNavigationScaffold>
+    with TickerProviderStateMixin<MaterialBottomNavigationScaffold> {
+  final List<_MaterialBottomNavigationTab> materialNavigationBarItems = [];
   final List<AnimationController> _animationControllers = [];
 
   /// Controls which tabs should have its content built. This enables us to
@@ -42,7 +40,7 @@ class _EutopiaLeftNavigationScaffoldState
   @override
   void initState() {
     _initAnimationControllers();
-    _initEutopiaNavigationBarSectionalItems();
+    _initMaterialNavigationBarItems();
 
     _shouldBuildTab.addAll(List<bool>.filled(
       widget.navigationBarItems.length,
@@ -52,13 +50,12 @@ class _EutopiaLeftNavigationScaffoldState
     super.initState();
   }
 
-  void _initEutopiaNavigationBarSectionalItems() {
-    eutopiaNavigationBarSectionalItems.addAll(
+  void _initMaterialNavigationBarItems() {
+    materialNavigationBarItems.addAll(
       widget.navigationBarItems
           .map(
-            (barItem) => _EutopiaLeftNavigationSectionalTab(
-              leftNavigationBarSectionalItem:
-                  barItem.leftNavigationBarSectionalItem,
+            (barItem) => _MaterialBottomNavigationTab(
+              bottomNavigationBarItem: barItem.bottomNavigationBarItem,
               navigatorKey: barItem.navigatorKey,
               subtreeKey: GlobalKey(),
               initialPageBuilder: barItem.initialPageBuilder,
@@ -83,10 +80,6 @@ class _EutopiaLeftNavigationScaffoldState
     }
   }
 
-  selectPressedSectionItem(sectionIndex) {
-    widget.onItemSelected(sectionIndex);
-  }
-
   @override
   void dispose() {
     _animationControllers.forEach(
@@ -98,50 +91,44 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) => Scaffold(
-          // The Stack is what allows us to retain state across tab
-          // switches by keeping all of our views in the widget tree.
-          body: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: eutopiaNavigationBarSectionalItems.length,
-                    itemBuilder: (BuildContext context, int subIndex) {
-                      return ActionNeuButton(
-                        buttonTitle:
-                            eutopiaNavigationBarSectionalItems[subIndex]
-                                .leftNavigationBarSectionalItem
-                                .label!,
-                        buttonActionOnPressed: () {
-                          selectPressedSectionItem(subIndex);
-                        },
-                      );
-                    }),
-              ],
-            ),
+        // The Stack is what allows us to retain state across tab
+        // switches by keeping all of our views in the widget tree.
+        body: Stack(
+          fit: StackFit.expand,
+          children: materialNavigationBarItems
+              .map(
+                (barItem) => _buildPageFlow(
+                  context,
+                  materialNavigationBarItems.indexOf(barItem),
+                  barItem,
+                ),
+              )
+              .toList(),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          enableFeedback: true,
+          selectedLabelStyle: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
           ),
-          Expanded(
-            flex: 3,
-            child: Stack(
-              fit: StackFit.expand,
-              children: eutopiaNavigationBarSectionalItems
-                  .map(
-                    (barItem) => _buildPageFlow(
-                      context,
-                      eutopiaNavigationBarSectionalItems.indexOf(barItem),
-                      barItem,
-                    ),
-                  )
-                  .toList(),
-            ),
+          unselectedLabelStyle: TextStyle(
+            fontFamily: "Montserrat",
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
           ),
-        ],
-      ));
+          backgroundColor: AppColors.backgroundPrimary(context),
+          currentIndex: widget.selectedIndex,
+          selectedItemColor: AppColors.contentPrimary(context),
+          unselectedItemColor: AppColors.contentTertiary(context),
+          items: materialNavigationBarItems
+              .map(
+                (item) => item.bottomNavigationBarItem,
+              )
+              .toList(),
+          onTap: widget.onItemSelected,
+        ),
+      );
 
   // The best practice here would be to extract this to another Widget,
   // however, moving it to a separate class would only harm the
@@ -149,9 +136,8 @@ class _EutopiaLeftNavigationScaffoldState
   Widget _buildPageFlow(
     BuildContext context,
     int tabIndex,
-    _EutopiaLeftNavigationSectionalTab item,
+    _MaterialBottomNavigationTab item,
   ) {
-    print("widget.selectedIndex: ${widget.selectedIndex}");
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
 
     // We should build the tab content only if it was already built or
@@ -200,14 +186,14 @@ class _EutopiaLeftNavigationScaffoldState
 
 /// Extension class of BottomNavigationTab that adds another GlobalKey to it
 /// in order to use it within the KeyedSubtree widget.
-class _EutopiaLeftNavigationSectionalTab extends LeftNavigationTab {
-  const _EutopiaLeftNavigationSectionalTab({
-    required LeftNavigationBarSectionalItem leftNavigationBarSectionalItem,
+class _MaterialBottomNavigationTab extends BottomNavigationTab {
+  const _MaterialBottomNavigationTab({
+    required BottomNavigationBarItem bottomNavigationBarItem,
     required GlobalKey<NavigatorState> navigatorKey,
     required WidgetBuilder initialPageBuilder,
     required this.subtreeKey,
   }) : super(
-          leftNavigationBarSectionalItem: leftNavigationBarSectionalItem,
+          bottomNavigationBarItem: bottomNavigationBarItem,
           navigatorKey: navigatorKey,
           initialPageBuilder: initialPageBuilder,
         );

@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/tab/bottomNavigationTab.dart';
+import 'package:fifty_gramx/widgets/components/navigation/left/LeftNavigationBarSectionalItem.dart';
+import 'package:fifty_gramx/widgets/components/navigation/left/adaptiveLeftNavigationScaffold.dart';
+import 'package:fifty_gramx/widgets/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationBarSectionalItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationTab.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/adaptiveLeftNavigationScaffold.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/bottomNavigationTab.dart';
 import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/spacesHomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import 'adaptiveBottomNavigationScaffold.dart';
+import '../../components/navigation/bottom/adaptiveBottomNavigationScaffold.dart';
 
 /// Contains our different pages flows and bottom navigation menu for
 /// alternating between them.
@@ -82,7 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
               (flow) => BottomNavigationTab(
                 bottomNavigationBarItem: BottomNavigationBarItem(
                   label: flow.title,
-                  icon: Icon(flow.iconData),
+                  icon: Icon(
+                    flow.iconData,
+                  ),
                 ),
                 navigatorKey: flow.navigatorKey,
                 initialPageBuilder: (context) {
@@ -109,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
               (flow) => LeftNavigationTab(
                 leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
                   label: flow.title,
-                  icon: Icon(flow.iconData),
+                  icon: Icon(flow.iconData,
+                      color: AppColors.contentInversePrimary(context)),
                 ),
                 navigatorKey: flow.navigatorKey,
                 initialPageBuilder: (context) {

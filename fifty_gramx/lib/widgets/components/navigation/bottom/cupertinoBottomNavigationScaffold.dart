@@ -1,5 +1,5 @@
 import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/bottomNavigationTab.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/tab/bottomNavigationTab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

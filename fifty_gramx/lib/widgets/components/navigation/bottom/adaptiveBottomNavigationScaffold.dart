@@ -1,28 +1,29 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/EutopiaLeftNavigationScaffold.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/LeftNavigationTab.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/tab/bottomNavigationTab.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/cupertinoBottomNavigationScaffold.dart';
+import 'package:fifty_gramx/widgets/components/navigation/bottom/materialBottomNavigationScaffold.dart';
 import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
 /// material's and cupertino's bottom navigation pattern.
-class AdaptiveLeftNavigationScaffold extends StatefulWidget {
-  const AdaptiveLeftNavigationScaffold({
+class AdaptiveBottomNavigationScaffold extends StatefulWidget {
+  const AdaptiveBottomNavigationScaffold({
     required this.navigationBarItems,
     Key? key,
   })  : assert(navigationBarItems != null),
         super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
-  final List<LeftNavigationTab> navigationBarItems;
+  final List<BottomNavigationTab> navigationBarItems;
 
   @override
-  _AdaptiveLeftNavigationScaffoldState createState() =>
-      _AdaptiveLeftNavigationScaffoldState();
+  _AdaptiveBottomNavigationScaffoldState createState() =>
+      _AdaptiveBottomNavigationScaffoldState();
 }
 
-class _AdaptiveLeftNavigationScaffoldState
-    extends State<AdaptiveLeftNavigationScaffold> {
+class _AdaptiveBottomNavigationScaffoldState
+    extends State<AdaptiveBottomNavigationScaffold> {
   int _currentlySelectedIndex = 0;
 
   @override
@@ -36,10 +37,20 @@ class _AdaptiveLeftNavigationScaffoldState
             .navigatorKey
             .currentState!
             .maybePop(),
-        child: _buildEutopia(context),
+        child: Platform.isAndroid
+            ? _buildMaterial(context)
+            : _buildCupertino(context),
       );
 
-  Widget _buildEutopia(BuildContext context) => EutopiaLeftNavigationScaffold(
+  Widget _buildCupertino(BuildContext context) =>
+      CupertinoBottomNavigationScaffold(
+        navigationBarItems: widget.navigationBarItems,
+        onItemSelected: onTabSelected,
+        selectedIndex: _currentlySelectedIndex,
+      );
+
+  Widget _buildMaterial(BuildContext context) =>
+      MaterialBottomNavigationScaffold(
         navigationBarItems: widget.navigationBarItems,
         onItemSelected: onTabSelected,
         selectedIndex: _currentlySelectedIndex,
@@ -47,7 +58,6 @@ class _AdaptiveLeftNavigationScaffoldState
 
   /// Called when a tab selection occurs.
   void onTabSelected(int newIndex) {
-    print("onTabSelected:$newIndex");
     if (_currentlySelectedIndex == newIndex) {
       // If the user is re-selecting the tab, the common
       // behavior is to empty the stack.
@@ -57,8 +67,12 @@ class _AdaptiveLeftNavigationScaffoldState
 
     // If we're running on iOS there's no need to rebuild the Widget to reflect
     // the tab change.
-    setState(() {
+    if (Platform.isAndroid) {
+      setState(() {
+        _currentlySelectedIndex = newIndex;
+      });
+    } else {
       _currentlySelectedIndex = newIndex;
-    });
+    }
   }
 }

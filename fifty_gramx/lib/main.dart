@@ -6,6 +6,8 @@ import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/notification/local_notification_service.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
+import 'package:fifty_gramx/support/command/multipass/multipassCommands.dart';
+import 'package:fifty_gramx/support/command/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:fifty_gramx/widgets/Multiverse/EthosverseScreen.dart';
 import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
@@ -240,10 +242,13 @@ Widget decideWhichScreen() {
 //    return EthosPayScreen();
     return EthosverseScreen();
   } else {
+    // warn: keep this in check
+    PrivilegedCommandExecuter.initPrivileged();
+    MultipassCommands();
     return NeumorphicApp(
         debugShowCheckedModeBanner: false,
         title: '50gramx',
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.system,
         // comment to adapt on system theme
         theme: NeumorphicThemeData(
           intensity: 0.6,
