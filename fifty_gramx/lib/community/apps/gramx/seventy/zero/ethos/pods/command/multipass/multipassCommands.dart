@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/support/command/multipass/exec/multipassExecCommands.dart';
-import 'package:fifty_gramx/support/command/multipass/launch/multipassLaunchCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/exec/multipassExecCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/launch/multipassLaunchCommands.dart';
 
 // operates the commands for multipass package
 //
@@ -34,10 +34,9 @@ class MultipassCommands {
       _packagePath = "/usr/local/bin/$_packageName";
     } // todo: add packagePath for windows, linux flavours
 
-    // vmName is same in all base os, so no checks needed
-    _vmName = "ethos-pods-orchestrator-vm";
+    // vmName is same in all base os, so no checks needed    _vmName = "ethos-pods-orchestrator-vm";
 
-    exec = MutlipassExecCommands(_packageName, _vmName);
+    exec = MutlipassExecCommands(_packagePath, _vmName);
     launch = MultipassLaunchCommands(_packagePath, _vmName);
   }
 }
