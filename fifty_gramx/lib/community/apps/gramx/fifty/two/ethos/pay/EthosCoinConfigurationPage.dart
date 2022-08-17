@@ -1,22 +1,22 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountDOBEditorPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountFirstNameEditorPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountMobileNumberEditorPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/community/onboardingWidgets/addEthosCoinWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/ethoscoin/AccountDOBEditorPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/ethoscoin/AccountFirstNameEditorPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/ethoscoin/AccountMobileNumberEditorPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/addEthosCoinWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,16 +1,16 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/dropDownButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/MobileNumberTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/SecurePinTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/dropDownButton.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/TextField/MobileNumberTextField.dart';
-import 'package:fifty_gramx/widgets/components/TextField/SecurePinTextField.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
