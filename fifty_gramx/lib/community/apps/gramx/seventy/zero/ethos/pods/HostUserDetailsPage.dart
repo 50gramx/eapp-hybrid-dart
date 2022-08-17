@@ -1,8 +1,8 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/TextField/PasswordTextField.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/PasswordTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
