@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/widgets/components/navigation/left/tab/LeftNavigationTab.dart';
-import 'package:fifty_gramx/widgets/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/left/tab/LeftNavigationTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 
 import 'package:flutter/widgets.dart';
 
