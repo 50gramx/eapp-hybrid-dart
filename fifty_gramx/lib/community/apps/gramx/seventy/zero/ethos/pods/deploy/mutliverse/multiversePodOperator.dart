@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/deploy/mutliverse/filesystem/multiverseFileSystemOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/filesystem/multiverseFileSystemOperator.dart';
 
 class MultiversePodOperator {
   // operates the multiverse pods
