@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/widgets/components/navigation/left/LeftNavigationBarSectionalItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/left/LeftNavigationBarSectionalItem.dart';
 import 'package:flutter/widgets.dart';
 
 class LeftNavigationTab {
