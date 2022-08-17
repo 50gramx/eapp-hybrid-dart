@@ -11,6 +11,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/Homebre
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
@@ -129,7 +130,6 @@ Future<String> getK8sStatus() async {
     ''';
     var output = (await shell.run(command)).outText;
     return parseK8sStatus(output);
-    ;
   } catch (e) {
     print("found exception --> $e");
     return "NA";
@@ -371,9 +371,15 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                 snapshot.data == "Running" ? true : false,
                             switchOnChanged: (value) {
                               if (value) {
-                                startMicrok8s();
+                                MultipassCommands.start.orchestrator();
+                                // TODO: Add notification so that the correct
+                                // switch values are reflected
+                                setState(() {});
                               } else {
-                                stopMicrok8s();
+                                MultipassCommands.stop.orchestrator();
+                                // TODO: Add notification so that the correct
+                                // switch values are reflected
+                                setState(() {});
                               }
                             });
                       } else {
@@ -539,49 +545,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
     print(statusText);
   }
 
-  bool switchingMicrok8s = false;
-
-  startMicrok8s() async {
-    var shell = Shell();
-    try {
-      setState(() {
-        switchingMicrok8s = true;
-      });
-      var statusText = (await shell.run("microk8s start")).outText;
-      setState(() {
-        switchingMicrok8s = false;
-      });
-    } catch (e) {
-      setState(() {
-        switchingMicrok8s = false;
-      });
-      print("Exception: $e");
-    }
-    setState(() {});
-  }
-
-  stopMicrok8s() async {
-    var shell = Shell();
-    try {
-      setState(() {
-        switchingMicrok8s = true;
-      });
-      var statusText = (await shell.run("multipass stop microk8s-vm")).outText;
-      print("statusText: $statusText");
-      setState(() {
-        switchingMicrok8s = false;
-      });
-    } catch (e) {
-      setState(() {
-        switchingMicrok8s = false;
-      });
-      print("Exception: $e");
-    }
-    setState(() {});
-  }
-
   checkKnowledgeSpaceChains() async {
-    var shell = Shell();
     try {
       setState(() {});
     } catch (e) {}
