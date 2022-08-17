@@ -42,6 +42,8 @@ class _EutopiaLeftNavigationScaffoldState
   /// lazy instantiate it.
   final List<bool> _shouldBuildTab = <bool>[];
 
+  final GlobalKey<ScaffoldState> _screenKey = new GlobalKey<ScaffoldState>();
+
   bool isPanningModeOn = false;
   int firstColumnFlex = 1;
   int secondColumnFlex = 3;
@@ -151,6 +153,7 @@ class _EutopiaLeftNavigationScaffoldState
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backgroundInverseTertiary(context),
+        key: _screenKey,
         // The Stack is what allows us to retain state across tab
         // switches by keeping all of our views in the widget tree.
         body: Row(
