@@ -1,6 +1,5 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
-import 'package:fifty_gramx/widgets/components/listItem/standard/artworksmall/labelWIthSupportParaWithIconTrailing.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -15,7 +14,8 @@ class ActionableMessagesCardWidget extends StatefulWidget {
       _ActionableMessagesCardWidgetState();
 }
 
-class _ActionableMessagesCardWidgetState extends State<ActionableMessagesCardWidget> {
+class _ActionableMessagesCardWidgetState
+    extends State<ActionableMessagesCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(

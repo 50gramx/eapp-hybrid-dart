@@ -10,7 +10,7 @@ import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/LocalConnectionsService.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/LocalConnectionsService.dart';
 
 /// Provides In-App Conversations Services
 class LocalConversationsService {
