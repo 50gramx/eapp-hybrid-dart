@@ -1,7 +1,7 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
-import 'package:fifty_gramx/widgets/components/listItem/standard/artworksmall/labelWIthSupportParaWithIconTrailing.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/standard/artworksmall/labelWIthSupportParaWithIconTrailing.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 

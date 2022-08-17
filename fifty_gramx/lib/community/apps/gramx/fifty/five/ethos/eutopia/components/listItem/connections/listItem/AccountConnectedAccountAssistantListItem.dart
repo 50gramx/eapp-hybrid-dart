@@ -1,16 +1,16 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
 import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
-import 'package:fifty_gramx/widgets/components/IconButton/Entity/AccountAssistantIconButton.dart';
-import 'package:fifty_gramx/widgets/components/IconButton/Entity/AccountIconButton.dart';
-import 'package:fifty_gramx/widgets/components/Text/Entity/AccountAssistantText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Entity/AccountMetaAssistantText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemSubtitleText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/listItem/connections/listItem/ConnectedAssistantsListItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/IconButton/Entity/AccountAssistantIconButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/IconButton/Entity/AccountIconButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Entity/AccountAssistantText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Entity/AccountMetaAssistantText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemSubtitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/connections/listItem/ConnectedAssistantsListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 

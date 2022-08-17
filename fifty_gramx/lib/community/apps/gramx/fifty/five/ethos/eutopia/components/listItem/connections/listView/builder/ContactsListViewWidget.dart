@@ -1,11 +1,11 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
-import 'package:fifty_gramx/widgets/components/Box/AppBoxDecoration.dart';
-import 'package:fifty_gramx/widgets/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
-import 'package:fifty_gramx/widgets/components/listItem/connections/listItem/AccountConnectedAccountAssistantListItem.dart';
-import 'package:fifty_gramx/widgets/components/listItem/connections/listItem/ContactsListItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Box/AppBoxDecoration.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/connections/listItem/AccountConnectedAccountAssistantListItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/connections/listItem/ContactsListItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
