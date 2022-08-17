@@ -1,8 +1,6 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ActionNeuChip extends StatelessWidget {
@@ -55,7 +53,7 @@ class ActionNeuChip extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: chipIconBackgroundColor,
                     child: Text(
-                      "X2",
+                      "$chipAvatarText",
                       style: TextStyle(
                           color: AppColors.contentInversePrimary(context),
                           fontSize: 12,
@@ -73,14 +71,6 @@ class ActionNeuChip extends StatelessWidget {
                 // width: MediaQuery.of(context).size.width - 66 - 116,
                 child: RichText(
                   text: TextSpan(children: [
-                    TextSpan(
-                      text: "$chipAvatarText",
-                      style: TextStyle(
-                          color: AppColors.contentPrimary(context),
-                          fontSize: 12,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w400),
-                    ),
                     TextSpan(
                       text: " $chipTitle",
                       style: TextStyle(
