@@ -1,13 +1,14 @@
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/support/command/multipass/multipassCommands.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/NeuSlider/NeuSliderWidget.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuSlider/NeuSliderWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
@@ -195,6 +196,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     setState(() {
       isInstalling = true;
     });
+    await BrewCommands.install.multipass();
     await MultipassCommands.launch.vm(selectedMemory.toInt(),
         selectedCpuCount.toInt(), selectedDiskSpace.toInt());
     await MultipassCommands.exec.updateDNS();
@@ -204,6 +206,10 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     await MultipassCommands.exec.updateIPTables();
     await MultipassCommands.exec.addMicrok8sToUserGroup();
     await MultipassCommands.exec.updateKubePermissions();
+    // MultipassCommands.exec.
+    // todo: add script to create the "ethosverse" namespace
+    // microk8s kubectl create namespace ethosverse
+    // todo: add script to run the mvfs in "ethosverse" namespace
     setState(() {
       isInstalling = false;
     });
