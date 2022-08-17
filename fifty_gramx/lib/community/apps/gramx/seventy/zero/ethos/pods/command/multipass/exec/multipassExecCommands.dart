@@ -1,4 +1,5 @@
-import 'package:fifty_gramx/support/command/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 
 class MutlipassExecCommands {
   /// contains the package path
@@ -10,13 +11,23 @@ class MutlipassExecCommands {
   /// contains the base command for exec commands
   static String _baseCommandSpace = "";
 
+  /// nested class for microk8s commands
+  static late Microk8sCommands microk8s;
+
   // initialises the class
   MutlipassExecCommands(String packagePath, String vmName) {
+    // package path comes from the parent, so no checks needed
     _packagePath = packagePath;
+
+    // vm name comes from the parent, so no checks needed
     _vmName = vmName;
+
+    // base command is same for all os, so no checks needed
     _baseCommandSpace = "${_packagePath} exec "
         "-v ${_vmName} "
         "-- ";
+
+    microk8s = Microk8sCommands(_baseCommandSpace);
   }
 
   update() async {
