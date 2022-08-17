@@ -1,22 +1,12 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge/discover_space_knowledge.pb.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/LocalSpacesService.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/DiscoverSpaceKnowledgeDomainFilesPage.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
-import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/LocalSpacesService.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/MyReservedSpaceWidget.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/EthosPodConfigurationPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/CreateSpaceKnowledgeDomainPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/DiscoverSpaceKnowledgeDomainFilesPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -92,10 +82,8 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
             labelText: "Spaces",
             actionLabelText: "EthosPod",
             isBackEnabled: false,
-            trailingButtonCallback: () {
-              AppPushPage()
-                  .pushHorizontalPage(context, EthosPodConfigurationPage());
-            },
+            trailingButtonCallback: () {},
+            isActionEnabled: false,
             onStretchTriggerCallback: () {},
           ),
           SliverAnimatedList(
