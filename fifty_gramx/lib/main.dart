@@ -244,6 +244,7 @@ Widget decideWhichScreen() {
   } else {
     // warn: keep this in check
     PrivilegedCommandExecuter.initPrivileged();
+    BrewCommands.initBrew();
     MultipassCommands();
     return NeumorphicApp(
         debugShowCheckedModeBanner: false,
