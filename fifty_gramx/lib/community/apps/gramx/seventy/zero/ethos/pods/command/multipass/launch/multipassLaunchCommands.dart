@@ -1,7 +1,7 @@
 // operates the launch commands for multipass package
 //
 // needs [String] packagePath and [String] vmName as initializers
-import 'package:fifty_gramx/support/command/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 
 class MultipassLaunchCommands {
   MultipassLaunchCommands._();
@@ -17,7 +17,6 @@ class MultipassLaunchCommands {
 
   // initialises the class
   MultipassLaunchCommands(String packagePath, String vmName) {
-    print("MultipassLaunchCommands:init");
     _packagePath = packagePath;
     _vmName = vmName;
     _baseCommandSpace = "${_packagePath} launch ";
