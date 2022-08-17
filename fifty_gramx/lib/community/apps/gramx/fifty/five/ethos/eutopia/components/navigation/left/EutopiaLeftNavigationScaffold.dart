@@ -159,136 +159,156 @@ class _EutopiaLeftNavigationScaffoldState
         body: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Column(
-              children: [
-                Neumorphic(
-                  style: NeumorphicStyle(
-                    lightSource: NeumorphicTheme.isUsingDark(context)
-                        ? LightSource.bottomRight
-                        : LightSource.topLeft,
-                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                        ? AppColors.gray600
-                        : AppColors.backgroundSecondary(context),
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                        topRight: Radius.circular(24),
-                        bottomRight: Radius.circular(24))),
-                    color: AppColors.backgroundSecondary(context),
-                    border: NeumorphicBorder(
-                      isEnabled: true,
-                      color: AppColors.backgroundPrimary(context),
-                      width: 2,
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 8),
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: NeumorphicText(
+                      "50GMx",
+                      style: NeumorphicStyle(
+                        lightSource: NeumorphicTheme.isUsingDark(context)
+                            ? LightSource.bottomRight
+                            : LightSource.topLeft,
+                        shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                            ? AppColors.gray600
+                            : AppColors.backgroundSecondary(context),
+                        shape: NeumorphicShape.flat,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.only(
+                                topRight: Radius.circular(24),
+                                bottomRight: Radius.circular(24))),
+                        color: AppColors.backgroundPrimary(context),
+                        border: NeumorphicBorder(
+                          isEnabled: true,
+                          color: AppColors.backgroundInverseTertiary(context),
+                          width: 1,
+                        ),
+                      ),
+                      textAlign: TextAlign.center,
+                      textStyle: NeumorphicTextStyle(
+                          fontSize: 22,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
-                  margin: EdgeInsets.only(top: 8, bottom: 8, right: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: Container(
-                    width: 64 + 12,
-                    height: 44 * 3 + 28 + 32,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount:
-                        eutopiaNavigationBarSectionalItems.length + 1,
-                        itemBuilder: (BuildContext context, int subIndex) {
-                          if (subIndex == 0) {
-                            return Text(
-                              "50GMx",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: AppColors.contentPrimary(context),
-                                  fontSize: 18,
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w700),
-                            );
-                          } else {
-                            subIndex = subIndex - 1;
+                  Neumorphic(
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                          topRight: Radius.circular(24),
+                          bottomRight: Radius.circular(24))),
+                      color: AppColors.backgroundPrimary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundPrimary(context),
+                        width: 2,
+                      ),
+                    ),
+                    margin: EdgeInsets.only(top: 8, bottom: 8, right: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Container(
+                      width: 64 + 12,
+                      height: 48 * 4 + 32,
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: eutopiaNavigationBarSectionalItems.length,
+                          itemBuilder: (BuildContext context, int subIndex) {
                             return AdaptiveNeuButton(
                               buttonTitle:
-                              eutopiaNavigationBarSectionalItems[subIndex]
-                                  .leftNavigationBarSectionalItem
-                                  .label!,
+                                  eutopiaNavigationBarSectionalItems[subIndex]
+                                      .leftNavigationBarSectionalItem
+                                      .label!,
                               buttonActionOnPressed: () {
                                 selectPressedSectionItem(subIndex);
                               },
-                              icon:
-                              eutopiaNavigationBarSectionalItems[subIndex]
+                              icon: eutopiaNavigationBarSectionalItems[subIndex]
                                   .leftNavigationBarSectionalItem
-                                  .icon!,
+                                  .icon,
                               isCollapsed: !isPanningModeOn,
                             );
-                          }
-                        }),
-                  ),
-                ),
-                Neumorphic(
-                  style: NeumorphicStyle(
-                    lightSource: NeumorphicTheme.isUsingDark(context)
-                        ? LightSource.bottomRight
-                        : LightSource.topLeft,
-                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                        ? AppColors.gray600
-                        : AppColors.backgroundSecondary(context),
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                        topRight: Radius.circular(24),
-                        bottomRight: Radius.circular(24))),
-                    color: AppColors.backgroundPrimary(context),
-                    border: NeumorphicBorder(
-                      isEnabled: true,
-                      color: AppColors.backgroundPrimary(context),
-                      width: 2,
+                          }),
                     ),
                   ),
-                  margin: EdgeInsets.only(top: 8, bottom: 8, right: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  child: Container(
-                    width: 64 + 12,
-                    height: MediaQuery.of(context).size.height -
-                        (44 * 3 + 28 + 32 + 64),
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: 3,
-                        itemBuilder: (BuildContext context, int subIndex) {
-                          if (subIndex == 0) {
-                            return AdaptiveNeuButton(
-                              buttonTitle: "Ethos Pods",
-                              buttonActionOnPressed: () {
-                                selectPressedSectionItem(subIndex);
-                              },
-                              icon: Icon(FeatherIcons.anchor,
-                                  color: AppColors.contentInversePrimary(
-                                      context)),
-                              isCollapsed: !isPanningModeOn,
-                            );
-                          } else if (subIndex == 1) {
-                            return AdaptiveNeuButton(
-                              buttonTitle: "Ethos Pay",
-                              buttonActionOnPressed: () {
-                                selectPressedSectionItem(subIndex);
-                              },
-                              icon: Icon(FeatherIcons.creditCard,
-                                  color: AppColors.contentInversePrimary(
-                                      context)),
-                              isCollapsed: !isPanningModeOn,
-                            );
-                          } else if (subIndex == 2) {
-                            return AdaptiveNeuButton(
-                              buttonTitle: "Ethosai",
-                              buttonActionOnPressed: () {
-                                selectPressedSectionItem(subIndex);
-                              },
-                              icon: Icon(FeatherIcons.crosshair,
-                                  color: AppColors.contentInversePrimary(
-                                      context)),
-                              isCollapsed: !isPanningModeOn,
-                            );
-                          } else {
-                            return SizedBox();
-                          }
-                        }),
+                  Neumorphic(
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                          topRight: Radius.circular(24),
+                          bottomRight: Radius.circular(24))),
+                      color: AppColors.backgroundPrimary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundPrimary(context),
+                        width: 2,
+                      ),
+                    ),
+                    margin: EdgeInsets.only(top: 8, bottom: 8, right: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: Container(
+                      width: 64 + 12,
+                      height: MediaQuery.of(context).size.height -
+                          (48 * 4 + 28 + 32 + 64 + 32),
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int subIndex) {
+                            if (subIndex == 0) {
+                              return AdaptiveNeuButton(
+                                buttonTitle: "Ethos Pods",
+                                buttonActionOnPressed: () {
+                                  selectPressedSectionItem(subIndex);
+                                },
+                                icon: Icon(FeatherIcons.anchor,
+                                    color: AppColors.contentInversePrimary(
+                                        context)),
+                                isCollapsed: !isPanningModeOn,
+                              );
+                            } else if (subIndex == 1) {
+                              return AdaptiveNeuButton(
+                                buttonTitle: "Ethos Pay",
+                                buttonActionOnPressed: () {
+                                  selectPressedSectionItem(subIndex);
+                                },
+                                icon: Icon(FeatherIcons.creditCard,
+                                    color: AppColors.contentInversePrimary(
+                                        context)),
+                                isCollapsed: !isPanningModeOn,
+                              );
+                            } else if (subIndex == 2) {
+                              return AdaptiveNeuButton(
+                                buttonTitle: "Ethosai",
+                                buttonActionOnPressed: () {
+                                  selectPressedSectionItem(subIndex);
+                                },
+                                icon: Icon(FeatherIcons.crosshair,
+                                    color: AppColors.contentInversePrimary(
+                                        context)),
+                                isCollapsed: !isPanningModeOn,
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          }),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Expanded(
                 flex: secondColumnFlex,
@@ -308,7 +328,7 @@ class _EutopiaLeftNavigationScaffoldState
                               BorderRadius.only(
                                   bottomLeft: Radius.circular(24),
                                   bottomRight: Radius.circular(24))),
-                          color: AppColors.backgroundPrimary(context),
+                          color: AppColors.backgroundTertiary(context),
                           border: NeumorphicBorder(
                             isEnabled: true,
                             color: AppColors.backgroundPrimary(context),
@@ -317,48 +337,79 @@ class _EutopiaLeftNavigationScaffoldState
                         ),
                         margin: EdgeInsets.only(bottom: 8, right: 16, left: 8),
                         child: Container(
-                          color: AppColors.backgroundTertiary(context),
+                          child: Row(
+                            children: [
+                              Container(
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount:
+                                        eutopiaNavigationBarSectionalItems
+                                            .length,
+                                    itemBuilder:
+                                        (BuildContext context, int subIndex) {
+                                      return ActionNeuChip(
+                                          chipAvatarText:
+                                              "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
+                                          chipTitle:
+                                              "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
+                                          chipIconBackgroundColor:
+                                              AppColors.contentPrimary(context),
+                                          buttonActionOnPressed: () {
+                                            selectPressedSectionItem(subIndex);
+                                          },);
+                                    }),
+                              ),
+                            ],
+                          ),
                           // height: 100,
                         ),
                       ),
                     ),
-                    Neumorphic(
-                      style: NeumorphicStyle(
-                        lightSource: NeumorphicTheme.isUsingDark(context)
-                            ? LightSource.bottomRight
-                            : LightSource.topLeft,
-                        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                            ? AppColors.gray600
-                            : AppColors.backgroundSecondary(context),
-                        shape: NeumorphicShape.flat,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.all(Radius.circular(24))),
-                        color: AppColors.backgroundPrimary(context),
-                        border: NeumorphicBorder(
-                          isEnabled: true,
-                          color: AppColors.backgroundPrimary(context),
-                          width: 2,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Neumorphic(
+                            style: NeumorphicStyle(
+                              lightSource: NeumorphicTheme.isUsingDark(context)
+                                  ? LightSource.bottomRight
+                                  : LightSource.topLeft,
+                              shadowLightColor:
+                                  NeumorphicTheme.isUsingDark(context)
+                                      ? AppColors.gray600
+                                      : AppColors.backgroundSecondary(context),
+                              shape: NeumorphicShape.flat,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.all(Radius.circular(24))),
+                              color: AppColors.backgroundPrimary(context),
+                              border: NeumorphicBorder(
+                                isEnabled: true,
+                                color: AppColors.backgroundPrimary(context),
+                                width: 2,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(
+                                top: 8, bottom: 8, right: 16, left: 8),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height -
+                                  (44 * 1 + 28),
+                              child: Stack(
+                                children: eutopiaNavigationBarSectionalItems
+                                    .map(
+                                      (barItem) => _buildPageFlow(
+                                        context,
+                                        eutopiaNavigationBarSectionalItems
+                                            .indexOf(barItem),
+                                        barItem,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      margin: EdgeInsets.only(
-                          top: 8, bottom: 8, right: 16, left: 8),
-                      child: Container(
-                        height: MediaQuery.of(context).size.height -
-                            (44 * 1 + 28 + 32),
-                        child: Stack(
-                          children: eutopiaNavigationBarSectionalItems
-                              .map(
-                                (barItem) => _buildPageFlow(
-                                  context,
-                                  eutopiaNavigationBarSectionalItems
-                                      .indexOf(barItem),
-                                  barItem,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                    ),
+                      ],
+                    )
                   ],
                 )),
           ],
@@ -373,7 +424,6 @@ class _EutopiaLeftNavigationScaffoldState
     int tabIndex,
     _EutopiaLeftNavigationSectionalTab item,
   ) {
-    print("widget.selectedIndex: ${widget.selectedIndex}");
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
 
     // We should build the tab content only if it was already built or
