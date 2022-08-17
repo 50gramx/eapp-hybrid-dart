@@ -34,7 +34,8 @@ class MultipassCommands {
       _packagePath = "/usr/local/bin/$_packageName";
     } // todo: add packagePath for windows, linux flavours
 
-    // vmName is same in all base os, so no checks needed    _vmName = "ethos-pods-orchestrator-vm";
+    // vmName is same in all base os, so no checks needed
+    _vmName = "ethos-pods-orchestrator-vm";
 
     exec = MutlipassExecCommands(_packagePath, _vmName);
     launch = MultipassLaunchCommands(_packagePath, _vmName);
