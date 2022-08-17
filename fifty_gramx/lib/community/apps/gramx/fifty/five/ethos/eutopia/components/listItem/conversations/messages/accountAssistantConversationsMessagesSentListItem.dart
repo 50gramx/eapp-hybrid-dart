@@ -1,3 +1,24 @@
+/*
+ * ************************************************************************
+ *
+ *  AMIT KUMAR KHETAN CONFIDENTIAL
+ *  __________________
+ *
+ *   [2017] - [2022] Amit Kumar Khetan
+ *   All Rights Reserved.
+ *
+ *  NOTICE:  All information contained herein is, and remains
+ *  the property of Amit Kumar Khetan and its suppliers,
+ *  if any.  The intellectual and technical concepts contained
+ *  herein are proprietary to Amit Kumar Khetan
+ *  and its suppliers and may be covered by U.S. and Foreign Patents,
+ *  patents in process, and are protected by trade secret or copyright law.
+ *  Dissemination of this information or reproduction of this material
+ *  is strictly forbidden unless prior written permission is obtained
+ *  from Amit Kumar Khetan.
+ * /
+ */
+
 import 'package:bubble/bubble.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
