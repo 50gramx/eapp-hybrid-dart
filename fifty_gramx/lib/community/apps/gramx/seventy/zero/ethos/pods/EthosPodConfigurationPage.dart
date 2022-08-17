@@ -1,4 +1,12 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/CreateSpaceKnowledgeDomainPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MachineConfigurationPage.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/data/spaceData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
@@ -12,14 +20,6 @@ import 'package:fifty_gramx/services/product/conversation/message/account/receiv
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/pushHorizontalPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/MachineConfigurationPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/CreateSpaceKnowledgeDomainPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,8 +28,13 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 /// This is the stateful widget that the main application instantiates.
 class EthosPodConfigurationPage extends StatefulWidget {
   const EthosPodConfigurationPage({
+    required this.index,
+    required this.containingFlowTitle,
     Key? key,
   }) : super(key: key);
+
+  final int index;
+  final String containingFlowTitle;
 
   @override
   State<EthosPodConfigurationPage> createState() =>
@@ -45,7 +50,7 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
         CustomSliverAppBar(
           labelText: "EthosPod",
           actionLabelText: "",
-          isBackEnabled: true,
+          isBackEnabled: false,
           isActionEnabled: false,
           trailingButtonCallback: () {},
           onStretchTriggerCallback: () {},
