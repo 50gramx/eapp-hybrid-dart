@@ -1,30 +1,29 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/Multiverse/EthosverseScreen.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/notification/local_notification_service.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:fifty_gramx/support/command/multipass/multipassCommands.dart';
-import 'package:fifty_gramx/support/command/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
-import 'package:fifty_gramx/widgets/Multiverse/EthosverseScreen.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/spacesHomePage.dart';
-import 'package:fifty_gramx/widgets/onboarding/getStartedWidget.dart';
-import 'package:fifty_gramx/widgets/onboarding/startScreen.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-// Import package
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
