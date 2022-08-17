@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/freeTierBenefitsCardItem.dart';
-import 'package:fifty_gramx/widgets/onboardingWidgets/tierDropdownRichText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/onboardingWidgets/freeTierBenefitsCardItem.dart';
+import 'package:fifty_gramx/community/onboardingWidgets/tierDropdownRichText.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
