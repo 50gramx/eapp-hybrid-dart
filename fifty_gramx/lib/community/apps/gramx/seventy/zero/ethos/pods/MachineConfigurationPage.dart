@@ -3,27 +3,23 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/support/command/simpleCommandExecuter.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/switchConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/HomebrewInstallerPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/HostUserDetailsPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/MicroK8sInstallerPage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/ethosPod/deploy/mutliverse/multiversePodOperator.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HomebrewInstallerPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/switchConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
-
-import '../../custom/pushHorizontalPage.dart';
-import 'MultipassInstallerPage.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MachineConfigurationPage extends StatefulWidget {
@@ -107,25 +103,6 @@ Future<String> getHomebrewVersion() async {
       } else {
         return "NA";
       }
-    }
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-}
-
-Future<String> getMultipassVersion() async {
-  try {
-    var shell = Shell(runInShell: true);
-    var multipassVersionText =
-        (await shell.run("/usr/local/bin/multipass version")).outText;
-    if (multipassVersionText.length > 0) {
-      return LineSplitter.split(multipassVersionText)
-          .first
-          .substring(12)
-          .replaceFirst("+mac", '');
-    } else {
-      return "NA";
     }
   } catch (e) {
     print("found exception --> $e");
@@ -248,7 +225,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 } else {
                   return SelectorConfigurationItem(
                       titleText: "${snap.data!.outText}",
-                      subtitleText: "Update",
+                      subtitleText: "Update Password",
                       selectorCallback: () {
                         AppPushPage()
                             .pushHorizontalPage(context, HostUserDetailsPage());
@@ -355,30 +332,11 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                               context, HomebrewInstallerPage());
                         });
                   } else {
-                    return BasicConfigurationItem(
-                        titleText: "Homebrew", subtitleText: snap.data!);
-                  }
-                }
-              },
-            ),
-
-            FutureBuilder<String>(
-              future: getMultipassVersion(),
-              builder: (context, snap) {
-                if (snap.connectionState == ConnectionState.waiting) {
-                  return AppProgressIndeterminateWidget();
-                } else {
-                  if (snap.data! == "NA") {
-                    return SelectorConfigurationItem(
-                        titleText: "Multipass",
-                        subtitleText: "Install",
-                        selectorCallback: () {
-                          AppPushPage().pushHorizontalPage(
-                              context, MultipassInstallerPage());
-                        });
-                  } else {
-                    return BasicConfigurationItem(
-                        titleText: "Multipass", subtitleText: snap.data!);
+                    // Based on the understanding that user won't need this any
+                    // longer, so removing this
+                    return SizedBox();
+                    // return BasicConfigurationItem(
+                    //     titleText: "Homebrew", subtitleText: snap.data!);
                   }
                 }
               },
@@ -398,7 +356,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     if (snapshot.hasData) {
                       if (snapshot.data == "NA" || snapshot.data == "Deleted") {
                         return SelectorConfigurationItem(
-                            titleText: "MicroK8s",
+                            titleText: "Orchestrator",
                             subtitleText: "Install",
                             selectorCallback: () {
                               AppPushPage().pushHorizontalPage(
@@ -407,7 +365,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                       } else if (snapshot.data == "Stopped" ||
                           snapshot.data == "Running") {
                         return SwitchConfigurationItem(
-                            titleText: "MicroK8s",
+                            titleText: "Orchestrator",
                             isEnabled: true,
                             switchValue:
                                 snapshot.data == "Running" ? true : false,
@@ -420,7 +378,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                             });
                       } else {
                         return BasicConfigurationItem(
-                            titleText: "MicroK8s",
+                            titleText: "Orchestrator",
                             subtitleText: snapshot.data!);
                       }
                     } else {
@@ -435,6 +393,17 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             // ------------------------------------------------
             // ETHOS MULTIVERSE POD
             // ------------------------------------------------
+
+            // NOTE: this should only be visible to gramx collaborators
+            // that too, collaborators associated with 50gramx
+            // we can call them (core collaborators)
+            // and this check as L1 Check
+
+            // NOTE: this should only be visible after L1 Check is a success
+            // And only when the Pod Orchestrator is up and running,
+            // if the orchestrator is not working, it should not be executed or
+            // visible in the screen, let's call this L2 Check
+
             Container(
                 margin:
                     EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
