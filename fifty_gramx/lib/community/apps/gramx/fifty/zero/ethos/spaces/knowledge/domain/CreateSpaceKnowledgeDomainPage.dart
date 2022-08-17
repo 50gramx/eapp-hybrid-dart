@@ -1,31 +1,21 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/space/access_space.pb.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
-import 'package:fifty_gramx/services/identity/space/accessSpaceService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemDisabledText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/basicConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/switchConfigurationItem.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/knowledge/domain/SelectSpaceKnowledgeDomainCollarPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/SelectSpaceKnowledgeDomainCollarPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/NameTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -36,6 +26,7 @@ class CreateSpaceKnowledgeDomainPage extends StatefulWidget {
   }) : super(key: key);
 
   final bool createIsolatedDomain;
+
   @override
   State<CreateSpaceKnowledgeDomainPage> createState() =>
       _CreateSpaceKnowledgeDomainPageState();
@@ -220,7 +211,8 @@ class _CreateSpaceKnowledgeDomainPageState
                           },
                           isPrimaryButton: true,
                           isPrimaryButtonDisabled:
-                          !domainDescriptionValidated && !domainNameValidated,
+                              !domainDescriptionValidated &&
+                                  !domainNameValidated,
                         ),
                       ),
                     ],
@@ -288,7 +280,8 @@ class _CreateSpaceKnowledgeDomainPageState
     if (createSpaceKnowledgeDomainResponse.responseMeta.metaDone) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text("Successfully Launched Domain. Taking you to your spaces page")),
+            content: Text(
+                "Successfully Launched Domain. Taking you to your spaces page")),
       );
       await Future.delayed(Duration(seconds: 1));
       Navigator.of(context).pop();

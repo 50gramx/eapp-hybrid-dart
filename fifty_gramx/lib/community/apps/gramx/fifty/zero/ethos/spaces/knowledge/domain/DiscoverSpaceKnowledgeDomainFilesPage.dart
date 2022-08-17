@@ -1,7 +1,4 @@
-import 'dart:io';
-
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/data/spaceKnowledgeData.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain_file.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pb.dart';
@@ -10,16 +7,13 @@ import 'package:fifty_gramx/services/product/knowledge/domain/accessSpaceKnowled
 import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/services/product/knowledge/file/createSpaceKnowledgeDomainFileService.dart';
 import 'package:fifty_gramx/services/product/knowledge/file/deleteSpaceKnowledgeDomainFileService.dart';
-import 'package:fifty_gramx/widgets/components/Container/NeuContainer.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.

@@ -1,8 +1,7 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/widgets/components/Container/NeuContainer.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/appTabBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +57,7 @@ class _SelectSpaceKnowledgeDomainCollarPageState
                       ? LightSource.bottomRight
                       : LightSource.topLeft,
                   boxShape:
-                  NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+                      NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
                   border: NeumorphicBorder(
                     isEnabled: true,
                     color: AppColors.backgroundPrimary(context),
