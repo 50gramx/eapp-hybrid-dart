@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AppColors {
@@ -28,7 +25,6 @@ class AppColors {
   static const green400 = Color(0xFF05944F);
 
   // Elevated Colors
-
 
   // ------------------------------------
   // Foundation
@@ -111,7 +107,6 @@ class AppColors {
       return AppColors.darkBlue;
     }
   }
-
 
   static Color platinum(BuildContext context) {
     if (NeumorphicTheme.isUsingDark(context)) {
