@@ -23,7 +23,6 @@ class MainActivity : FlutterFragmentActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "setDefaultSms") {
                 val defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(this);
-                print("default SmsApp: $defaultSmsApp");
                 var roleManager: RoleManager? = null
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     roleManager = getApplicationContext().getSystemService(RoleManager::class.java)
@@ -54,8 +53,6 @@ class MainActivity : FlutterFragmentActivity() {
                                 areWeGood = true
                             }
                         }
-                        print("areWeGood: $areWeGood");
-                        print("assistant: $assistant");
                         startActivity(Intent(Settings.ACTION_VOICE_INPUT_SETTINGS));
 //                        val intent = Intent(Intent.ACTION_ASSIST)
 //                        intent.addCategory(Intent.CATEGORY_DEFAULT)

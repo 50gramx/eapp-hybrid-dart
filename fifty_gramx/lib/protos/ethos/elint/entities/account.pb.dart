@@ -30,7 +30,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 import 'account.pbenum.dart';
 
@@ -48,9 +48,9 @@ class Account extends $pb.GeneratedMessage {
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountFirstName')
     ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountLastName')
     ..aOS(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGalaxyId')
-    ..aOM<$55.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBirthAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBirthAt', subBuilder: $52.Timestamp.create)
     ..e<AccountGender>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountGender', $pb.PbFieldType.OE, defaultOrMaker: AccountGender.UNKNOWN, valueOf: AccountGender.valueOf, enumValues: AccountGender.values)
-    ..aOM<$55.Timestamp>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $52.Timestamp.create)
     ..aOB(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountBillingActive')
     ..hasRequiredFields = false
   ;
@@ -66,9 +66,9 @@ class Account extends $pb.GeneratedMessage {
     $core.String? accountFirstName,
     $core.String? accountLastName,
     $core.String? accountGalaxyId,
-    $55.Timestamp? accountBirthAt,
+    $52.Timestamp? accountBirthAt,
     AccountGender? accountGender,
-    $55.Timestamp? createdAt,
+    $52.Timestamp? createdAt,
     $core.bool? accountBillingActive,
   }) {
     final _result = create();
@@ -216,15 +216,15 @@ class Account extends $pb.GeneratedMessage {
   void clearAccountGalaxyId() => clearField(9);
 
   @$pb.TagNumber(10)
-  $55.Timestamp get accountBirthAt => $_getN(9);
+  $52.Timestamp get accountBirthAt => $_getN(9);
   @$pb.TagNumber(10)
-  set accountBirthAt($55.Timestamp v) { setField(10, v); }
+  set accountBirthAt($52.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasAccountBirthAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearAccountBirthAt() => clearField(10);
   @$pb.TagNumber(10)
-  $55.Timestamp ensureAccountBirthAt() => $_ensure(9);
+  $52.Timestamp ensureAccountBirthAt() => $_ensure(9);
 
   @$pb.TagNumber(11)
   AccountGender get accountGender => $_getN(10);
@@ -236,15 +236,15 @@ class Account extends $pb.GeneratedMessage {
   void clearAccountGender() => clearField(11);
 
   @$pb.TagNumber(12)
-  $55.Timestamp get createdAt => $_getN(11);
+  $52.Timestamp get createdAt => $_getN(11);
   @$pb.TagNumber(12)
-  set createdAt($55.Timestamp v) { setField(12, v); }
+  set createdAt($52.Timestamp v) { setField(12, v); }
   @$pb.TagNumber(12)
   $core.bool hasCreatedAt() => $_has(11);
   @$pb.TagNumber(12)
   void clearCreatedAt() => clearField(12);
   @$pb.TagNumber(12)
-  $55.Timestamp ensureCreatedAt() => $_ensure(11);
+  $52.Timestamp ensureCreatedAt() => $_ensure(11);
 
   @$pb.TagNumber(13)
   $core.bool get accountBillingActive => $_getBF(12);
@@ -261,7 +261,7 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAccessSessionToken')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
-    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -270,7 +270,7 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.String? knowledgeSpaceAccessSessionToken,
     $core.String? spaceKnowledgeId,
-    $55.Timestamp? accessAt,
+    $52.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -336,15 +336,15 @@ class AccountSpaceKnowledgeAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeId() => clearField(3);
 
   @$pb.TagNumber(4)
-  $55.Timestamp get accessAt => $_getN(3);
+  $52.Timestamp get accessAt => $_getN(3);
   @$pb.TagNumber(4)
-  set accessAt($55.Timestamp v) { setField(4, v); }
+  set accessAt($52.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasAccessAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearAccessAt() => clearField(4);
   @$pb.TagNumber(4)
-  $55.Timestamp ensureAccessAt() => $_ensure(3);
+  $52.Timestamp ensureAccessAt() => $_ensure(3);
 }
 
 class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
@@ -353,7 +353,7 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'knowledgeSpaceAccessSessionToken')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
-    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -363,7 +363,7 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
     $core.String? knowledgeSpaceAccessSessionToken,
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeDomainId,
-    $55.Timestamp? accessAt,
+    $52.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -441,15 +441,15 @@ class AccountSpaceKnowledgeDomainAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $55.Timestamp get accessAt => $_getN(4);
+  $52.Timestamp get accessAt => $_getN(4);
   @$pb.TagNumber(5)
-  set accessAt($55.Timestamp v) { setField(5, v); }
+  set accessAt($52.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasAccessAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearAccessAt() => clearField(5);
   @$pb.TagNumber(5)
-  $55.Timestamp ensureAccessAt() => $_ensure(4);
+  $52.Timestamp ensureAccessAt() => $_ensure(4);
 }
 
 class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
@@ -459,7 +459,7 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainId')
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileId')
-    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -470,7 +470,7 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
     $core.String? spaceKnowledgeId,
     $core.String? spaceKnowledgeDomainId,
     $core.String? spaceKnowledgeDomainFileId,
-    $55.Timestamp? accessAt,
+    $52.Timestamp? accessAt,
   }) {
     final _result = create();
     if (accountId != null) {
@@ -560,15 +560,15 @@ class AccountSpaceKnowledgeDomainFileAccessMeta extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeDomainFileId() => clearField(5);
 
   @$pb.TagNumber(6)
-  $55.Timestamp get accessAt => $_getN(5);
+  $52.Timestamp get accessAt => $_getN(5);
   @$pb.TagNumber(6)
-  set accessAt($55.Timestamp v) { setField(6, v); }
+  set accessAt($52.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAccessAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearAccessAt() => clearField(6);
   @$pb.TagNumber(6)
-  $55.Timestamp ensureAccessAt() => $_ensure(5);
+  $52.Timestamp ensureAccessAt() => $_ensure(5);
 }
 
 class AccountConnectedAccount extends $pb.GeneratedMessage {
@@ -577,7 +577,7 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountInterestedInConnection')
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountInterestedInConnection')
-    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -587,7 +587,7 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.bool? accountInterestedInConnection,
     $core.bool? connectedAccountInterestedInConnection,
-    $55.Timestamp? connectedAt,
+    $52.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountConnectionId != null) {
@@ -665,22 +665,22 @@ class AccountConnectedAccount extends $pb.GeneratedMessage {
   void clearConnectedAccountInterestedInConnection() => clearField(4);
 
   @$pb.TagNumber(5)
-  $55.Timestamp get connectedAt => $_getN(4);
+  $52.Timestamp get connectedAt => $_getN(4);
   @$pb.TagNumber(5)
-  set connectedAt($55.Timestamp v) { setField(5, v); }
+  set connectedAt($52.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasConnectedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearConnectedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $55.Timestamp ensureConnectedAt() => $_ensure(4);
+  $52.Timestamp ensureConnectedAt() => $_ensure(4);
 }
 
 class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountConnectedAccountAssistant', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantConnectionId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -688,7 +688,7 @@ class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   factory AccountConnectedAccountAssistant({
     $core.String? accountAssistantConnectionId,
     $core.String? accountAssistantId,
-    $55.Timestamp? connectedAt,
+    $52.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountAssistantConnectionId != null) {
@@ -742,15 +742,15 @@ class AccountConnectedAccountAssistant extends $pb.GeneratedMessage {
   void clearAccountAssistantId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get connectedAt => $_getN(2);
+  $52.Timestamp get connectedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set connectedAt($55.Timestamp v) { setField(3, v); }
+  set connectedAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasConnectedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearConnectedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureConnectedAt() => $_ensure(2);
+  $52.Timestamp ensureConnectedAt() => $_ensure(2);
 }
 
 class AccountDeviceDetails extends $pb.GeneratedMessage {
@@ -1271,5 +1271,128 @@ class AccountTransaction extends $pb.GeneratedMessage {
   $core.bool hasBalance() => $_has(2);
   @$pb.TagNumber(5)
   void clearBalance() => clearField(5);
+}
+
+class AccountPreferredFirstLanguage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountPreferredFirstLanguage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..e<LanguageEnum>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'preferredLanguage', $pb.PbFieldType.OE, defaultOrMaker: LanguageEnum.ENGLISH, valueOf: LanguageEnum.valueOf, enumValues: LanguageEnum.values)
+    ..hasRequiredFields = false
+  ;
+
+  AccountPreferredFirstLanguage._() : super();
+  factory AccountPreferredFirstLanguage({
+    LanguageEnum? preferredLanguage,
+  }) {
+    final _result = create();
+    if (preferredLanguage != null) {
+      _result.preferredLanguage = preferredLanguage;
+    }
+    return _result;
+  }
+  factory AccountPreferredFirstLanguage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountPreferredFirstLanguage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountPreferredFirstLanguage clone() => AccountPreferredFirstLanguage()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountPreferredFirstLanguage copyWith(void Function(AccountPreferredFirstLanguage) updates) => super.copyWith((message) => updates(message as AccountPreferredFirstLanguage)) as AccountPreferredFirstLanguage; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountPreferredFirstLanguage create() => AccountPreferredFirstLanguage._();
+  AccountPreferredFirstLanguage createEmptyInstance() => create();
+  static $pb.PbList<AccountPreferredFirstLanguage> createRepeated() => $pb.PbList<AccountPreferredFirstLanguage>();
+  @$core.pragma('dart2js:noInline')
+  static AccountPreferredFirstLanguage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountPreferredFirstLanguage>(create);
+  static AccountPreferredFirstLanguage? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  LanguageEnum get preferredLanguage => $_getN(0);
+  @$pb.TagNumber(1)
+  set preferredLanguage(LanguageEnum v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPreferredLanguage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPreferredLanguage() => clearField(1);
+}
+
+class AccountPreferredSecondLanguage extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountPreferredSecondLanguage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..e<LanguageEnum>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'preferredLanguage', $pb.PbFieldType.OE, defaultOrMaker: LanguageEnum.ENGLISH, valueOf: LanguageEnum.valueOf, enumValues: LanguageEnum.values)
+    ..hasRequiredFields = false
+  ;
+
+  AccountPreferredSecondLanguage._() : super();
+  factory AccountPreferredSecondLanguage({
+    LanguageEnum? preferredLanguage,
+  }) {
+    final _result = create();
+    if (preferredLanguage != null) {
+      _result.preferredLanguage = preferredLanguage;
+    }
+    return _result;
+  }
+  factory AccountPreferredSecondLanguage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountPreferredSecondLanguage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountPreferredSecondLanguage clone() => AccountPreferredSecondLanguage()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountPreferredSecondLanguage copyWith(void Function(AccountPreferredSecondLanguage) updates) => super.copyWith((message) => updates(message as AccountPreferredSecondLanguage)) as AccountPreferredSecondLanguage; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountPreferredSecondLanguage create() => AccountPreferredSecondLanguage._();
+  AccountPreferredSecondLanguage createEmptyInstance() => create();
+  static $pb.PbList<AccountPreferredSecondLanguage> createRepeated() => $pb.PbList<AccountPreferredSecondLanguage>();
+  @$core.pragma('dart2js:noInline')
+  static AccountPreferredSecondLanguage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountPreferredSecondLanguage>(create);
+  static AccountPreferredSecondLanguage? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  LanguageEnum get preferredLanguage => $_getN(0);
+  @$pb.TagNumber(1)
+  set preferredLanguage(LanguageEnum v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPreferredLanguage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPreferredLanguage() => clearField(1);
+}
+
+class AccountCurrentLocation extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountCurrentLocation', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  AccountCurrentLocation._() : super();
+  factory AccountCurrentLocation() => create();
+  factory AccountCurrentLocation.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory AccountCurrentLocation.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  AccountCurrentLocation clone() => AccountCurrentLocation()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  AccountCurrentLocation copyWith(void Function(AccountCurrentLocation) updates) => super.copyWith((message) => updates(message as AccountCurrentLocation)) as AccountCurrentLocation; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static AccountCurrentLocation create() => AccountCurrentLocation._();
+  AccountCurrentLocation createEmptyInstance() => create();
+  static $pb.PbList<AccountCurrentLocation> createRepeated() => $pb.PbList<AccountCurrentLocation>();
+  @$core.pragma('dart2js:noInline')
+  static AccountCurrentLocation getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AccountCurrentLocation>(create);
+  static AccountCurrentLocation? _defaultInstance;
 }
 

@@ -30,18 +30,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/account.pb.dart' as $22;
+import '../../../../entities/account.pb.dart' as $19;
 
 class GetFileDetailsRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetFileDetailsRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
-    ..aOM<$22.AccountSpaceKnowledgeDomainFileAccessMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountKnowledgeDomainFileAccessMeta', subBuilder: $22.AccountSpaceKnowledgeDomainFileAccessMeta.create)
+    ..aOM<$19.AccountSpaceKnowledgeDomainFileAccessMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountKnowledgeDomainFileAccessMeta', subBuilder: $19.AccountSpaceKnowledgeDomainFileAccessMeta.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fileId')
     ..hasRequiredFields = false
   ;
 
   GetFileDetailsRequest._() : super();
   factory GetFileDetailsRequest({
-    $22.AccountSpaceKnowledgeDomainFileAccessMeta? accountKnowledgeDomainFileAccessMeta,
+    $19.AccountSpaceKnowledgeDomainFileAccessMeta? accountKnowledgeDomainFileAccessMeta,
     $core.String? fileId,
   }) {
     final _result = create();
@@ -75,15 +75,15 @@ class GetFileDetailsRequest extends $pb.GeneratedMessage {
   static GetFileDetailsRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.AccountSpaceKnowledgeDomainFileAccessMeta get accountKnowledgeDomainFileAccessMeta => $_getN(0);
+  $19.AccountSpaceKnowledgeDomainFileAccessMeta get accountKnowledgeDomainFileAccessMeta => $_getN(0);
   @$pb.TagNumber(1)
-  set accountKnowledgeDomainFileAccessMeta($22.AccountSpaceKnowledgeDomainFileAccessMeta v) { setField(1, v); }
+  set accountKnowledgeDomainFileAccessMeta($19.AccountSpaceKnowledgeDomainFileAccessMeta v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccountKnowledgeDomainFileAccessMeta() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountKnowledgeDomainFileAccessMeta() => clearField(1);
   @$pb.TagNumber(1)
-  $22.AccountSpaceKnowledgeDomainFileAccessMeta ensureAccountKnowledgeDomainFileAccessMeta() => $_ensure(0);
+  $19.AccountSpaceKnowledgeDomainFileAccessMeta ensureAccountKnowledgeDomainFileAccessMeta() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get fileId => $_getSZ(1);
@@ -97,14 +97,14 @@ class GetFileDetailsRequest extends $pb.GeneratedMessage {
 
 class FileExistsByIDRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'FileExistsByIDRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
-    ..aOM<$22.AccountSpaceKnowledgeDomainFileAccessMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountKnowledgeDomainFileAccessMeta', subBuilder: $22.AccountSpaceKnowledgeDomainFileAccessMeta.create)
+    ..aOM<$19.AccountSpaceKnowledgeDomainFileAccessMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountKnowledgeDomainFileAccessMeta', subBuilder: $19.AccountSpaceKnowledgeDomainFileAccessMeta.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fileId')
     ..hasRequiredFields = false
   ;
 
   FileExistsByIDRequest._() : super();
   factory FileExistsByIDRequest({
-    $22.AccountSpaceKnowledgeDomainFileAccessMeta? accountKnowledgeDomainFileAccessMeta,
+    $19.AccountSpaceKnowledgeDomainFileAccessMeta? accountKnowledgeDomainFileAccessMeta,
     $core.String? fileId,
   }) {
     final _result = create();
@@ -138,15 +138,15 @@ class FileExistsByIDRequest extends $pb.GeneratedMessage {
   static FileExistsByIDRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.AccountSpaceKnowledgeDomainFileAccessMeta get accountKnowledgeDomainFileAccessMeta => $_getN(0);
+  $19.AccountSpaceKnowledgeDomainFileAccessMeta get accountKnowledgeDomainFileAccessMeta => $_getN(0);
   @$pb.TagNumber(1)
-  set accountKnowledgeDomainFileAccessMeta($22.AccountSpaceKnowledgeDomainFileAccessMeta v) { setField(1, v); }
+  set accountKnowledgeDomainFileAccessMeta($19.AccountSpaceKnowledgeDomainFileAccessMeta v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccountKnowledgeDomainFileAccessMeta() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccountKnowledgeDomainFileAccessMeta() => clearField(1);
   @$pb.TagNumber(1)
-  $22.AccountSpaceKnowledgeDomainFileAccessMeta ensureAccountKnowledgeDomainFileAccessMeta() => $_ensure(0);
+  $19.AccountSpaceKnowledgeDomainFileAccessMeta ensureAccountKnowledgeDomainFileAccessMeta() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get fileId => $_getSZ(1);

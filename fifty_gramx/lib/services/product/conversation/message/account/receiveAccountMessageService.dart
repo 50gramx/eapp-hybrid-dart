@@ -23,7 +23,6 @@ import 'package:fifty_gramx/channels/conversationCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:grpc/grpc.dart';
 
 class ReceiveAccountMessageService {
@@ -67,14 +66,10 @@ class ReceiveAccountMessageService {
   }
 
   static Future<ListenForReceivedAccountAssistantMessagesResponse>
-      listenForReceivedAccountAssistantMessages(
-          AccountConnectedAccountAssistant connectedAccountAssistant,
-          String accountAssistantReceivedMessageId) async {
+      listenForReceivedAccountAssistantMessages() async {
     var request = ListenForReceivedAccountAssistantMessagesRequest()
       ..accessAuthDetails =
-          await AccountData().readAccountServicesAccessAuthDetails()
-      ..connectedAccountAssistant = connectedAccountAssistant
-      ..accountAssistantReceivedMessageId = accountAssistantReceivedMessageId;
+          await AccountData().readAccountServicesAccessAuthDetails();
     return (await serviceClient)
         .listenForReceivedAccountAssistantMessages(request);
   }

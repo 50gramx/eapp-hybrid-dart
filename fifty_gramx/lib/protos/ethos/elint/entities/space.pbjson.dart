@@ -69,12 +69,12 @@ const SpaceEntityType$json = const {
   '1': 'SpaceEntityType',
   '2': const [
     const {'1': 'ACCOUNT', '2': 0},
-    const {'1': 'ORGANIZATION', '2': 1},
+    const {'1': 'TEAM', '2': 1},
   ],
 };
 
 /// Descriptor for `SpaceEntityType`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List spaceEntityTypeDescriptor = $convert.base64Decode('Cg9TcGFjZUVudGl0eVR5cGUSCwoHQUNDT1VOVBAAEhAKDE9SR0FOSVpBVElPThAB');
+final $typed_data.Uint8List spaceEntityTypeDescriptor = $convert.base64Decode('Cg9TcGFjZUVudGl0eVR5cGUSCwoHQUNDT1VOVBAAEggKBFRFQU0QAQ==');
 @$core.Deprecated('Use spaceDescriptor instead')
 const Space$json = const {
   '1': 'Space',

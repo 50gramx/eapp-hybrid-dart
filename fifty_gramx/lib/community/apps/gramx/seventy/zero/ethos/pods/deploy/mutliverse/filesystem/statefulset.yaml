@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mv-fs
+  labels:
+    app: mv-fs
+    release: eapp-mv-fs
+  namespace: ethosverse
+spec:
+  replicas: 1
+  serviceName: eapp-mv-fs
+  template:
+    metadata:
+      labels:
+        app: mv-fs
+        release: eapp-mv-fs
+    spec:
+      containers:
+        - name: mv-fs-container
+          image: ethosindia:filesystem/multiverse-amd64
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+              name: mv-fs-port
+          volumeMounts:
+            - name: mvfs-storage
+              mountPath: /data/mvfs
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: regcred
+  volumeClaimTemplates:
+    - metadata:
+        name: mvfs-storage
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "slow"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi

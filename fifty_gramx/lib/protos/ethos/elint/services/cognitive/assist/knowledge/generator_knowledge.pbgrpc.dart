@@ -31,24 +31,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'generator_knowledge.pb.dart' as $50;
+import 'generator_knowledge.pb.dart' as $47;
 export 'generator_knowledge.pb.dart';
 
 class GeneratorKnowledgeServiceClient extends $grpc.Client {
   static final _$generatePageQuestion = $grpc.ClientMethod<
-          $50.GeneratePageQuestionRequest, $50.GeneratePageQuestionResponse>(
+          $47.GeneratePageQuestionRequest, $47.GeneratePageQuestionResponse>(
       '/elint.services.cognitive.assist.knowledge.generator.GeneratorKnowledgeService/GeneratePageQuestion',
-      ($50.GeneratePageQuestionRequest value) => value.writeToBuffer(),
+      ($47.GeneratePageQuestionRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $50.GeneratePageQuestionResponse.fromBuffer(value));
+          $47.GeneratePageQuestionResponse.fromBuffer(value));
 
   GeneratorKnowledgeServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$50.GeneratePageQuestionResponse> generatePageQuestion(
-      $50.GeneratePageQuestionRequest request,
+  $grpc.ResponseFuture<$47.GeneratePageQuestionResponse> generatePageQuestion(
+      $47.GeneratePageQuestionRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$generatePageQuestion, request, options: options);
   }
@@ -59,23 +59,23 @@ abstract class GeneratorKnowledgeServiceBase extends $grpc.Service {
       'elint.services.cognitive.assist.knowledge.generator.GeneratorKnowledgeService';
 
   GeneratorKnowledgeServiceBase() {
-    $addMethod($grpc.ServiceMethod<$50.GeneratePageQuestionRequest,
-            $50.GeneratePageQuestionResponse>(
+    $addMethod($grpc.ServiceMethod<$47.GeneratePageQuestionRequest,
+            $47.GeneratePageQuestionResponse>(
         'GeneratePageQuestion',
         generatePageQuestion_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $50.GeneratePageQuestionRequest.fromBuffer(value),
-        ($50.GeneratePageQuestionResponse value) => value.writeToBuffer()));
+            $47.GeneratePageQuestionRequest.fromBuffer(value),
+        ($47.GeneratePageQuestionResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$50.GeneratePageQuestionResponse> generatePageQuestion_Pre(
+  $async.Future<$47.GeneratePageQuestionResponse> generatePageQuestion_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$50.GeneratePageQuestionRequest> request) async {
+      $async.Future<$47.GeneratePageQuestionRequest> request) async {
     return generatePageQuestion(call, await request);
   }
 
-  $async.Future<$50.GeneratePageQuestionResponse> generatePageQuestion(
-      $grpc.ServiceCall call, $50.GeneratePageQuestionRequest request);
+  $async.Future<$47.GeneratePageQuestionResponse> generatePageQuestion(
+      $grpc.ServiceCall call, $47.GeneratePageQuestionRequest request);
 }

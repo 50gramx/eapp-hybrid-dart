@@ -30,14 +30,14 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
+import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
+import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $37;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $61;
 
 class RetrieveClosestPagesReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RetrieveClosestPagesReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'retrievePageCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -45,7 +45,7 @@ class RetrieveClosestPagesReq extends $pb.GeneratedMessage {
 
   RetrieveClosestPagesReq._() : super();
   factory RetrieveClosestPagesReq({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
     $core.int? retrievePageCount,
   }) {
@@ -83,15 +83,15 @@ class RetrieveClosestPagesReq extends $pb.GeneratedMessage {
   static RetrieveClosestPagesReq? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -114,7 +114,7 @@ class RetrieveClosestPagesReq extends $pb.GeneratedMessage {
 
 class RetrieveClosestParasRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RetrieveClosestParasRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'retrieveParaCount', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
@@ -122,7 +122,7 @@ class RetrieveClosestParasRequest extends $pb.GeneratedMessage {
 
   RetrieveClosestParasRequest._() : super();
   factory RetrieveClosestParasRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
     $core.int? retrieveParaCount,
   }) {
@@ -160,15 +160,15 @@ class RetrieveClosestParasRequest extends $pb.GeneratedMessage {
   static RetrieveClosestParasRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -305,14 +305,14 @@ class ClosestParas extends $pb.GeneratedMessage {
 
 class RankedPage extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RankedPage', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
-    ..aOM<$40.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
+    ..aOM<$37.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $37.SpaceKnowledgeDomainFilePage.create)
     ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'pageRank', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
   RankedPage._() : super();
   factory RankedPage({
-    $40.SpaceKnowledgeDomainFilePage? page,
+    $37.SpaceKnowledgeDomainFilePage? page,
     $core.double? pageRank,
   }) {
     final _result = create();
@@ -346,15 +346,15 @@ class RankedPage extends $pb.GeneratedMessage {
   static RankedPage? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage get page => $_getN(0);
+  $37.SpaceKnowledgeDomainFilePage get page => $_getN(0);
   @$pb.TagNumber(1)
-  set page($40.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
+  set page($37.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPage() => $_has(0);
   @$pb.TagNumber(1)
   void clearPage() => clearField(1);
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(0);
+  $37.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.double get pageRank => $_getN(1);
@@ -368,14 +368,14 @@ class RankedPage extends $pb.GeneratedMessage {
 
 class RankedPara extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'RankedPara', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.retriever'), createEmptyInstance: create)
-    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$61.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $61.SpaceKnowledgeDomainFilePagePara.create)
     ..a<$core.double>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'paraRank', $pb.PbFieldType.OF)
     ..hasRequiredFields = false
   ;
 
   RankedPara._() : super();
   factory RankedPara({
-    $60.SpaceKnowledgeDomainFilePagePara? para,
+    $61.SpaceKnowledgeDomainFilePagePara? para,
     $core.double? paraRank,
   }) {
     final _result = create();
@@ -409,15 +409,15 @@ class RankedPara extends $pb.GeneratedMessage {
   static RankedPara? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $60.SpaceKnowledgeDomainFilePagePara get para => $_getN(0);
+  $61.SpaceKnowledgeDomainFilePagePara get para => $_getN(0);
   @$pb.TagNumber(1)
-  set para($60.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
+  set para($61.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPara() => $_has(0);
   @$pb.TagNumber(1)
   void clearPara() => clearField(1);
   @$pb.TagNumber(1)
-  $60.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(0);
+  $61.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.double get paraRank => $_getN(1);

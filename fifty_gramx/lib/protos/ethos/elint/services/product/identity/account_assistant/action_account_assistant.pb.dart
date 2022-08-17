@@ -32,18 +32,18 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'access_account_assistant.pb.dart' as $8;
 import '../../../../entities/account_assistant.pb.dart' as $6;
-import '../../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../../entities/space_knowledge_domain.pb.dart' as $28;
 
-import '../../../../entities/space_knowledge.pbenum.dart' as $59;
+import '../../../../entities/space_knowledge.pbenum.dart' as $58;
 
 class ActOnAccountMessageRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ActOnAccountMessageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.identity.account.assistant'), createEmptyInstance: create)
     ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOM<$6.AccountAssistantConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $6.AccountAssistantConnectedAccount.create)
-    ..e<$59.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $59.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
+    ..e<$58.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $58.SpaceKnowledgeAction.valueOf, enumValues: $58.SpaceKnowledgeAction.values)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'actOnParticularDomain')
-    ..aOM<$31.SpaceKnowledgeDomain>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..hasRequiredFields = false
   ;
 
@@ -51,10 +51,10 @@ class ActOnAccountMessageRequest extends $pb.GeneratedMessage {
   factory ActOnAccountMessageRequest({
     $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $6.AccountAssistantConnectedAccount? connectedAccount,
-    $59.SpaceKnowledgeAction? spaceKnowledgeAction,
+    $58.SpaceKnowledgeAction? spaceKnowledgeAction,
     $core.String? message,
     $core.bool? actOnParticularDomain,
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -121,9 +121,9 @@ class ActOnAccountMessageRequest extends $pb.GeneratedMessage {
   $6.AccountAssistantConnectedAccount ensureConnectedAccount() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $59.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
+  $58.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
   @$pb.TagNumber(3)
-  set spaceKnowledgeAction($59.SpaceKnowledgeAction v) { setField(3, v); }
+  set spaceKnowledgeAction($58.SpaceKnowledgeAction v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSpaceKnowledgeAction() => $_has(2);
   @$pb.TagNumber(3)
@@ -148,14 +148,14 @@ class ActOnAccountMessageRequest extends $pb.GeneratedMessage {
   void clearActOnParticularDomain() => clearField(5);
 
   @$pb.TagNumber(6)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(5);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(5);
   @$pb.TagNumber(6)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(6, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasSpaceKnowledgeDomain() => $_has(5);
   @$pb.TagNumber(6)
   void clearSpaceKnowledgeDomain() => clearField(6);
   @$pb.TagNumber(6)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(5);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(5);
 }
 

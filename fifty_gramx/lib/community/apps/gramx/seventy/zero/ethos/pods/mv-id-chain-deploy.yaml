@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mv-id-chain-local
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: mv-id-chain-local
+  template:
+    metadata:
+      labels:
+        epod: mv-id-chain-local
+    spec:
+      containers:
+        - name: mv-id-chain-local-container
+          image: postgres:11
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: mv-id-chain-local-storage
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mv-id-chain-local-secret-config
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: mv-id-chain-local-storage
+          persistentVolumeClaim:
+            claimName: mv-id-chain-pvclaim

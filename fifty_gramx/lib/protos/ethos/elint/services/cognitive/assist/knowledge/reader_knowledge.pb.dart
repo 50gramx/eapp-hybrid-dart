@@ -30,23 +30,23 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
+import '../../../product/knowledge/space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $37;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $61;
 
 class ReadPageQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReadPageQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.reader'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
-    ..aOM<$40.SpaceKnowledgeDomainFilePage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$37.SpaceKnowledgeDomainFilePage>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $37.SpaceKnowledgeDomainFilePage.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'question')
     ..hasRequiredFields = false
   ;
 
   ReadPageQuestionRequest._() : super();
   factory ReadPageQuestionRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
-    $40.SpaceKnowledgeDomainFilePage? page,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $37.SpaceKnowledgeDomainFilePage? page,
     $core.String? question,
   }) {
     final _result = create();
@@ -83,26 +83,26 @@ class ReadPageQuestionRequest extends $pb.GeneratedMessage {
   static ReadPageQuestionRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $40.SpaceKnowledgeDomainFilePage get page => $_getN(1);
+  $37.SpaceKnowledgeDomainFilePage get page => $_getN(1);
   @$pb.TagNumber(2)
-  set page($40.SpaceKnowledgeDomainFilePage v) { setField(2, v); }
+  set page($37.SpaceKnowledgeDomainFilePage v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPage() => $_has(1);
   @$pb.TagNumber(2)
   void clearPage() => clearField(2);
   @$pb.TagNumber(2)
-  $40.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(1);
+  $37.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get question => $_getSZ(2);
@@ -181,16 +181,16 @@ class ReadPageQuestionResponse extends $pb.GeneratedMessage {
 
 class ReadParaQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ReadParaQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.reader'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
-    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$61.SpaceKnowledgeDomainFilePagePara>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'para', subBuilder: $61.SpaceKnowledgeDomainFilePagePara.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'question')
     ..hasRequiredFields = false
   ;
 
   ReadParaQuestionRequest._() : super();
   factory ReadParaQuestionRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
-    $60.SpaceKnowledgeDomainFilePagePara? para,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $61.SpaceKnowledgeDomainFilePagePara? para,
     $core.String? question,
   }) {
     final _result = create();
@@ -227,26 +227,26 @@ class ReadParaQuestionRequest extends $pb.GeneratedMessage {
   static ReadParaQuestionRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $60.SpaceKnowledgeDomainFilePagePara get para => $_getN(1);
+  $61.SpaceKnowledgeDomainFilePagePara get para => $_getN(1);
   @$pb.TagNumber(2)
-  set para($60.SpaceKnowledgeDomainFilePagePara v) { setField(2, v); }
+  set para($61.SpaceKnowledgeDomainFilePagePara v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasPara() => $_has(1);
   @$pb.TagNumber(2)
   void clearPara() => clearField(2);
   @$pb.TagNumber(2)
-  $60.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(1);
+  $61.SpaceKnowledgeDomainFilePagePara ensurePara() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get question => $_getSZ(2);

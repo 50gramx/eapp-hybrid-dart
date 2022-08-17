@@ -34,13 +34,13 @@ const NewReceivedMessageFromAccountAssistantRequest$json = const {
   '1': 'NewReceivedMessageFromAccountAssistantRequest',
   '2': const [
     const {'1': 'account_id', '3': 1, '4': 1, '5': 9, '10': 'accountId'},
-    const {'1': 'connected_account_assistant', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountConnectedAccountAssistant', '10': 'connectedAccountAssistant'},
-    const {'1': 'account_assistant_received_message_id', '3': 3, '4': 1, '5': 9, '10': 'accountAssistantReceivedMessageId'},
+    const {'1': 'connecting_account_assistant_id', '3': 2, '4': 1, '5': 9, '10': 'connectingAccountAssistantId'},
+    const {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
   ],
 };
 
 /// Descriptor for `NewReceivedMessageFromAccountAssistantRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List newReceivedMessageFromAccountAssistantRequestDescriptor = $convert.base64Decode('Ci1OZXdSZWNlaXZlZE1lc3NhZ2VGcm9tQWNjb3VudEFzc2lzdGFudFJlcXVlc3QSHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElkEm4KG2Nvbm5lY3RlZF9hY2NvdW50X2Fzc2lzdGFudBgCIAEoCzIuLmVsaW50LmVudGl0eS5BY2NvdW50Q29ubmVjdGVkQWNjb3VudEFzc2lzdGFudFIZY29ubmVjdGVkQWNjb3VudEFzc2lzdGFudBJQCiVhY2NvdW50X2Fzc2lzdGFudF9yZWNlaXZlZF9tZXNzYWdlX2lkGAMgASgJUiFhY2NvdW50QXNzaXN0YW50UmVjZWl2ZWRNZXNzYWdlSWQ=');
+final $typed_data.Uint8List newReceivedMessageFromAccountAssistantRequestDescriptor = $convert.base64Decode('Ci1OZXdSZWNlaXZlZE1lc3NhZ2VGcm9tQWNjb3VudEFzc2lzdGFudFJlcXVlc3QSHQoKYWNjb3VudF9pZBgBIAEoCVIJYWNjb3VudElkEkUKH2Nvbm5lY3RpbmdfYWNjb3VudF9hc3Npc3RhbnRfaWQYAiABKAlSHGNvbm5lY3RpbmdBY2NvdW50QXNzaXN0YW50SWQSGAoHbWVzc2FnZRgDIAEoCVIHbWVzc2FnZQ==');
 @$core.Deprecated('Use newReceivedMessageFromAccountRequestDescriptor instead')
 const NewReceivedMessageFromAccountRequest$json = const {
   '1': 'NewReceivedMessageFromAccountRequest',

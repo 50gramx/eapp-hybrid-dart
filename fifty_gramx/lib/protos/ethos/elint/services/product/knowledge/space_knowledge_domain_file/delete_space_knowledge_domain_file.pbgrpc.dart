@@ -31,15 +31,15 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'delete_space_knowledge_domain_file.pb.dart' as $35;
+import 'delete_space_knowledge_domain_file.pb.dart' as $32;
 import '../../../../entities/generic.pb.dart' as $2;
 export 'delete_space_knowledge_domain_file.pb.dart';
 
 class DeleteSpaceKnowledgeDomainFileServiceClient extends $grpc.Client {
   static final _$deleteSpaceKnowledgeDomainFile = $grpc.ClientMethod<
-          $35.DeleteSpaceKnowledgeDomainFileRequest, $2.ResponseMeta>(
+          $32.DeleteSpaceKnowledgeDomainFileRequest, $2.ResponseMeta>(
       '/elint.services.product.knowledge.file.DeleteSpaceKnowledgeDomainFileService/DeleteSpaceKnowledgeDomainFile',
-      ($35.DeleteSpaceKnowledgeDomainFileRequest value) =>
+      ($32.DeleteSpaceKnowledgeDomainFileRequest value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResponseMeta.fromBuffer(value));
 
@@ -49,7 +49,7 @@ class DeleteSpaceKnowledgeDomainFileServiceClient extends $grpc.Client {
       : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$2.ResponseMeta> deleteSpaceKnowledgeDomainFile(
-      $35.DeleteSpaceKnowledgeDomainFileRequest request,
+      $32.DeleteSpaceKnowledgeDomainFileRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$deleteSpaceKnowledgeDomainFile, request,
         options: options);
@@ -61,24 +61,24 @@ abstract class DeleteSpaceKnowledgeDomainFileServiceBase extends $grpc.Service {
       'elint.services.product.knowledge.file.DeleteSpaceKnowledgeDomainFileService';
 
   DeleteSpaceKnowledgeDomainFileServiceBase() {
-    $addMethod($grpc.ServiceMethod<$35.DeleteSpaceKnowledgeDomainFileRequest,
+    $addMethod($grpc.ServiceMethod<$32.DeleteSpaceKnowledgeDomainFileRequest,
             $2.ResponseMeta>(
         'DeleteSpaceKnowledgeDomainFile',
         deleteSpaceKnowledgeDomainFile_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $35.DeleteSpaceKnowledgeDomainFileRequest.fromBuffer(value),
+            $32.DeleteSpaceKnowledgeDomainFileRequest.fromBuffer(value),
         ($2.ResponseMeta value) => value.writeToBuffer()));
   }
 
   $async.Future<$2.ResponseMeta> deleteSpaceKnowledgeDomainFile_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$35.DeleteSpaceKnowledgeDomainFileRequest> request) async {
+      $async.Future<$32.DeleteSpaceKnowledgeDomainFileRequest> request) async {
     return deleteSpaceKnowledgeDomainFile(call, await request);
   }
 
   $async.Future<$2.ResponseMeta> deleteSpaceKnowledgeDomainFile(
       $grpc.ServiceCall call,
-      $35.DeleteSpaceKnowledgeDomainFileRequest request);
+      $32.DeleteSpaceKnowledgeDomainFileRequest request);
 }

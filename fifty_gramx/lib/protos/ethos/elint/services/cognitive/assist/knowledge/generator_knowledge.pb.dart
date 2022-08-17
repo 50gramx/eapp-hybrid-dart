@@ -30,17 +30,17 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $40;
+import '../../../../entities/space_knowledge_domain_file_page.pb.dart' as $37;
 
 class GeneratePageQuestionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GeneratePageQuestionRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.cognitive.assist.knowledge.generator'), createEmptyInstance: create)
-    ..aOM<$40.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $40.SpaceKnowledgeDomainFilePage.create)
+    ..aOM<$37.SpaceKnowledgeDomainFilePage>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'page', subBuilder: $37.SpaceKnowledgeDomainFilePage.create)
     ..hasRequiredFields = false
   ;
 
   GeneratePageQuestionRequest._() : super();
   factory GeneratePageQuestionRequest({
-    $40.SpaceKnowledgeDomainFilePage? page,
+    $37.SpaceKnowledgeDomainFilePage? page,
   }) {
     final _result = create();
     if (page != null) {
@@ -70,15 +70,15 @@ class GeneratePageQuestionRequest extends $pb.GeneratedMessage {
   static GeneratePageQuestionRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage get page => $_getN(0);
+  $37.SpaceKnowledgeDomainFilePage get page => $_getN(0);
   @$pb.TagNumber(1)
-  set page($40.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
+  set page($37.SpaceKnowledgeDomainFilePage v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasPage() => $_has(0);
   @$pb.TagNumber(1)
   void clearPage() => clearField(1);
   @$pb.TagNumber(1)
-  $40.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(0);
+  $37.SpaceKnowledgeDomainFilePage ensurePage() => $_ensure(0);
 }
 
 class GeneratePageQuestionResponse extends $pb.GeneratedMessage {

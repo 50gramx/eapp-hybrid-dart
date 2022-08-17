@@ -36,12 +36,17 @@ const MessageForAccount$json = const {
     const {'1': 'access_auth_details', '3': 1, '4': 1, '5': 11, '6': '.elint.services.product.identity.account.assistant.AccountAssistantServicesAccessAuthDetails', '10': 'accessAuthDetails'},
     const {'1': 'connected_account', '3': 2, '4': 1, '5': 11, '6': '.elint.entity.AccountAssistantConnectedAccount', '10': 'connectedAccount'},
     const {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
-    const {'1': 'message_source', '3': 4, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messageSource'},
+    const {'1': 'message_source_space_id', '3': 4, '4': 1, '5': 9, '10': 'messageSourceSpaceId'},
+    const {'1': 'message_source_space_type_id', '3': 5, '4': 1, '5': 9, '10': 'messageSourceSpaceTypeId'},
+    const {'1': 'message_source_space_domain_id', '3': 6, '4': 1, '5': 9, '10': 'messageSourceSpaceDomainId'},
+    const {'1': 'message_source_space_domain_action', '3': 7, '4': 1, '5': 5, '10': 'messageSourceSpaceDomainAction'},
+    const {'1': 'message_source_space_domain_action_context_id', '3': 8, '4': 1, '5': 9, '10': 'messageSourceSpaceDomainActionContextId'},
+    const {'1': 'message_source', '3': 9, '4': 3, '5': 11, '6': '.google.protobuf.Any', '10': 'messageSource'},
   ],
 };
 
 /// Descriptor for `MessageForAccount`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List messageForAccountDescriptor = $convert.base64Decode('ChFNZXNzYWdlRm9yQWNjb3VudBKMAQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJcLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5hc3Npc3RhbnQuQWNjb3VudEFzc2lzdGFudFNlcnZpY2VzQWNjZXNzQXV0aERldGFpbHNSEWFjY2Vzc0F1dGhEZXRhaWxzElsKEWNvbm5lY3RlZF9hY2NvdW50GAIgASgLMi4uZWxpbnQuZW50aXR5LkFjY291bnRBc3Npc3RhbnRDb25uZWN0ZWRBY2NvdW50UhBjb25uZWN0ZWRBY2NvdW50EhgKB21lc3NhZ2UYAyABKAlSB21lc3NhZ2USOwoObWVzc2FnZV9zb3VyY2UYBCADKAsyFC5nb29nbGUucHJvdG9idWYuQW55Ug1tZXNzYWdlU291cmNl');
+final $typed_data.Uint8List messageForAccountDescriptor = $convert.base64Decode('ChFNZXNzYWdlRm9yQWNjb3VudBKMAQoTYWNjZXNzX2F1dGhfZGV0YWlscxgBIAEoCzJcLmVsaW50LnNlcnZpY2VzLnByb2R1Y3QuaWRlbnRpdHkuYWNjb3VudC5hc3Npc3RhbnQuQWNjb3VudEFzc2lzdGFudFNlcnZpY2VzQWNjZXNzQXV0aERldGFpbHNSEWFjY2Vzc0F1dGhEZXRhaWxzElsKEWNvbm5lY3RlZF9hY2NvdW50GAIgASgLMi4uZWxpbnQuZW50aXR5LkFjY291bnRBc3Npc3RhbnRDb25uZWN0ZWRBY2NvdW50UhBjb25uZWN0ZWRBY2NvdW50EhgKB21lc3NhZ2UYAyABKAlSB21lc3NhZ2USNQoXbWVzc2FnZV9zb3VyY2Vfc3BhY2VfaWQYBCABKAlSFG1lc3NhZ2VTb3VyY2VTcGFjZUlkEj4KHG1lc3NhZ2Vfc291cmNlX3NwYWNlX3R5cGVfaWQYBSABKAlSGG1lc3NhZ2VTb3VyY2VTcGFjZVR5cGVJZBJCCh5tZXNzYWdlX3NvdXJjZV9zcGFjZV9kb21haW5faWQYBiABKAlSGm1lc3NhZ2VTb3VyY2VTcGFjZURvbWFpbklkEkoKIm1lc3NhZ2Vfc291cmNlX3NwYWNlX2RvbWFpbl9hY3Rpb24YByABKAVSHm1lc3NhZ2VTb3VyY2VTcGFjZURvbWFpbkFjdGlvbhJeCi1tZXNzYWdlX3NvdXJjZV9zcGFjZV9kb21haW5fYWN0aW9uX2NvbnRleHRfaWQYCCABKAlSJ21lc3NhZ2VTb3VyY2VTcGFjZURvbWFpbkFjdGlvbkNvbnRleHRJZBI7Cg5tZXNzYWdlX3NvdXJjZRgJIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnlSDW1lc3NhZ2VTb3VyY2U=');
 @$core.Deprecated('Use messageForAccountSentDescriptor instead')
 const MessageForAccountSent$json = const {
   '1': 'MessageForAccountSent',

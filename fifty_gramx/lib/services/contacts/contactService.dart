@@ -53,8 +53,6 @@ class ContactService {
             listOfAccountMobiles);
     streamController.listen((event) {
       if (event.accountMobilesExists.accountExists) {
-        print(
-            "Account Exists: ${event.accountMobilesExists.accountMobileNumber}, connecting now...");
         var temporaryResponse = ConnectAccountService.syncAccountConnections(
             AccountMobile(
                 accountCountryCode:

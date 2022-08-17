@@ -31,16 +31,16 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../../entities/account_assistant.pb.dart' as $6;
-import '../../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 
-import '../../../../../entities/space_knowledge.pbenum.dart' as $59;
+import '../../../../../entities/space_knowledge.pbenum.dart' as $58;
 
 export '../../../../../../../google/protobuf/timestamp.pb.dart';
 class MessageFromAccount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccount', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account.assistant'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
     ..aOM<$6.AccountAssistantConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $6.AccountAssistantConnectedAccount.create)
-    ..e<$59.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $59.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $59.SpaceKnowledgeAction.valueOf, enumValues: $59.SpaceKnowledgeAction.values)
+    ..e<$58.SpaceKnowledgeAction>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeAction', $pb.PbFieldType.OE, defaultOrMaker: $58.SpaceKnowledgeAction.ASK_QUESTION, valueOf: $58.SpaceKnowledgeAction.valueOf, enumValues: $58.SpaceKnowledgeAction.values)
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountReceivedMessageId')
     ..hasRequiredFields = false
@@ -50,7 +50,7 @@ class MessageFromAccount extends $pb.GeneratedMessage {
   factory MessageFromAccount({
     $core.String? accountAssistantId,
     $6.AccountAssistantConnectedAccount? connectedAccount,
-    $59.SpaceKnowledgeAction? spaceKnowledgeAction,
+    $58.SpaceKnowledgeAction? spaceKnowledgeAction,
     $core.String? message,
     $core.String? accountReceivedMessageId,
   }) {
@@ -114,9 +114,9 @@ class MessageFromAccount extends $pb.GeneratedMessage {
   $6.AccountAssistantConnectedAccount ensureConnectedAccount() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $59.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
+  $58.SpaceKnowledgeAction get spaceKnowledgeAction => $_getN(2);
   @$pb.TagNumber(3)
-  set spaceKnowledgeAction($59.SpaceKnowledgeAction v) { setField(3, v); }
+  set spaceKnowledgeAction($58.SpaceKnowledgeAction v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasSpaceKnowledgeAction() => $_has(2);
   @$pb.TagNumber(3)
@@ -144,14 +144,14 @@ class MessageFromAccount extends $pb.GeneratedMessage {
 class MessageFromAccountReceived extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccountReceived', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account.assistant'), createEmptyInstance: create)
     ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isReceived')
-    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   MessageFromAccountReceived._() : super();
   factory MessageFromAccountReceived({
     $core.bool? isReceived,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (isReceived != null) {
@@ -193,14 +193,14 @@ class MessageFromAccountReceived extends $pb.GeneratedMessage {
   void clearIsReceived() => clearField(1);
 
   @$pb.TagNumber(2)
-  $55.Timestamp get receivedAt => $_getN(1);
+  $52.Timestamp get receivedAt => $_getN(1);
   @$pb.TagNumber(2)
-  set receivedAt($55.Timestamp v) { setField(2, v); }
+  set receivedAt($52.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasReceivedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearReceivedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $55.Timestamp ensureReceivedAt() => $_ensure(1);
+  $52.Timestamp ensureReceivedAt() => $_ensure(1);
 }
 

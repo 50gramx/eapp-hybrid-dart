@@ -30,21 +30,21 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../entities/space_knowledge.pb.dart' as $59;
+import '../../../../entities/space_knowledge.pb.dart' as $58;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../../entities/space_knowledge_domain.pb.dart' as $28;
 import 'access_space_knowledge.pb.dart' as $10;
 
 class GetInferredSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetInferredSpaceKnowledgeDomainsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..pc<$59.SpaceKnowledgeInferredDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeInferredDomain', $pb.PbFieldType.PM, subBuilder: $59.SpaceKnowledgeInferredDomain.create)
+    ..pc<$58.SpaceKnowledgeInferredDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeInferredDomain', $pb.PbFieldType.PM, subBuilder: $58.SpaceKnowledgeInferredDomain.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetInferredSpaceKnowledgeDomainsResponse._() : super();
   factory GetInferredSpaceKnowledgeDomainsResponse({
-    $core.Iterable<$59.SpaceKnowledgeInferredDomain>? spaceKnowledgeInferredDomain,
+    $core.Iterable<$58.SpaceKnowledgeInferredDomain>? spaceKnowledgeInferredDomain,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -78,7 +78,7 @@ class GetInferredSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static GetInferredSpaceKnowledgeDomainsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$59.SpaceKnowledgeInferredDomain> get spaceKnowledgeInferredDomain => $_getList(0);
+  $core.List<$58.SpaceKnowledgeInferredDomain> get spaceKnowledgeInferredDomain => $_getList(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -94,14 +94,14 @@ class GetInferredSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
 
 class GetSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetSpaceKnowledgeDomainsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..pc<$31.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomains', $pb.PbFieldType.PM, subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..pc<$28.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomains', $pb.PbFieldType.PM, subBuilder: $28.SpaceKnowledgeDomain.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetSpaceKnowledgeDomainsResponse._() : super();
   factory GetSpaceKnowledgeDomainsResponse({
-    $core.Iterable<$31.SpaceKnowledgeDomain>? spaceKnowledgeDomains,
+    $core.Iterable<$28.SpaceKnowledgeDomain>? spaceKnowledgeDomains,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -135,7 +135,7 @@ class GetSpaceKnowledgeDomainsResponse extends $pb.GeneratedMessage {
   static GetSpaceKnowledgeDomainsResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$31.SpaceKnowledgeDomain> get spaceKnowledgeDomains => $_getList(0);
+  $core.List<$28.SpaceKnowledgeDomain> get spaceKnowledgeDomains => $_getList(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -214,14 +214,14 @@ class GetSpaceKnowledgeDomainByIdRequest extends $pb.GeneratedMessage {
 
 class GetSpaceKnowledgeDomainByIdResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetSpaceKnowledgeDomainByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
-    ..aOM<$31.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetSpaceKnowledgeDomainByIdResponse._() : super();
   factory GetSpaceKnowledgeDomainByIdResponse({
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -255,15 +255,15 @@ class GetSpaceKnowledgeDomainByIdResponse extends $pb.GeneratedMessage {
   static GetSpaceKnowledgeDomainByIdResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(1, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomain() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomain() => clearField(1);
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);

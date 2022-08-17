@@ -31,7 +31,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../identity/account_assistant/access_account_assistant.pb.dart' as $8;
-import '../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../entities/space_knowledge_domain.pb.dart' as $28;
 import '../../../entities/generic.pb.dart' as $2;
 
 class AskQuestionRequest extends $pb.GeneratedMessage {
@@ -39,7 +39,7 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
     ..aOM<$8.AccountAssistantServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $8.AccountAssistantServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'askParticularDomain')
-    ..aOM<$31.SpaceKnowledgeDomain>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..hasRequiredFields = false
   ;
 
@@ -48,7 +48,7 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
     $8.AccountAssistantServicesAccessAuthDetails? accessAuthDetails,
     $core.String? message,
     $core.bool? askParticularDomain,
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -116,15 +116,15 @@ class AskQuestionRequest extends $pb.GeneratedMessage {
   void clearAskParticularDomain() => clearField(3);
 
   @$pb.TagNumber(4)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(3);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(3);
   @$pb.TagNumber(4)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(4, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasSpaceKnowledgeDomain() => $_has(3);
   @$pb.TagNumber(4)
   void clearSpaceKnowledgeDomain() => clearField(4);
   @$pb.TagNumber(4)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(3);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(3);
 }
 
 class AskQuestionResponse extends $pb.GeneratedMessage {
@@ -186,15 +186,15 @@ class AskQuestionResponse extends $pb.GeneratedMessage {
 
 class DomainRankedAnswers extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DomainRankedAnswers', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.action.space.knowledge'), createEmptyInstance: create)
-    ..aOM<$31.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
-    ..pc<$31.RankedAnswer>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rankedAnswers', $pb.PbFieldType.PM, subBuilder: $31.RankedAnswer.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
+    ..pc<$28.RankedAnswer>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'rankedAnswers', $pb.PbFieldType.PM, subBuilder: $28.RankedAnswer.create)
     ..hasRequiredFields = false
   ;
 
   DomainRankedAnswers._() : super();
   factory DomainRankedAnswers({
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
-    $core.Iterable<$31.RankedAnswer>? rankedAnswers,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $core.Iterable<$28.RankedAnswer>? rankedAnswers,
   }) {
     final _result = create();
     if (spaceKnowledgeDomain != null) {
@@ -227,17 +227,17 @@ class DomainRankedAnswers extends $pb.GeneratedMessage {
   static DomainRankedAnswers? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(1, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomain() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomain() => clearField(1);
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$31.RankedAnswer> get rankedAnswers => $_getList(1);
+  $core.List<$28.RankedAnswer> get rankedAnswers => $_getList(1);
 }
 

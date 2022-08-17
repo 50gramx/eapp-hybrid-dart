@@ -31,37 +31,37 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'discover_space_knowledge_domain_file.pb.dart' as $36;
-import '../../../../entities/space_knowledge_domain_file.pb.dart' as $37;
+import 'discover_space_knowledge_domain_file.pb.dart' as $33;
+import '../../../../entities/space_knowledge_domain_file.pb.dart' as $34;
 export 'discover_space_knowledge_domain_file.pb.dart';
 
 class DiscoverKnowledgeDomainFileServiceClient extends $grpc.Client {
-  static final _$getFileDetails = $grpc.ClientMethod<$36.GetFileDetailsRequest,
-          $37.SpaceKnowledgeDomainFile>(
+  static final _$getFileDetails = $grpc.ClientMethod<$33.GetFileDetailsRequest,
+          $34.SpaceKnowledgeDomainFile>(
       '/elint.services.product.knowledge.file.DiscoverKnowledgeDomainFileService/GetFileDetails',
-      ($36.GetFileDetailsRequest value) => value.writeToBuffer(),
+      ($33.GetFileDetailsRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $37.SpaceKnowledgeDomainFile.fromBuffer(value));
-  static final _$fileExistsByID = $grpc.ClientMethod<$36.FileExistsByIDRequest,
-          $36.FileExistsByIDResponse>(
+          $34.SpaceKnowledgeDomainFile.fromBuffer(value));
+  static final _$fileExistsByID = $grpc.ClientMethod<$33.FileExistsByIDRequest,
+          $33.FileExistsByIDResponse>(
       '/elint.services.product.knowledge.file.DiscoverKnowledgeDomainFileService/FileExistsByID',
-      ($36.FileExistsByIDRequest value) => value.writeToBuffer(),
+      ($33.FileExistsByIDRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $36.FileExistsByIDResponse.fromBuffer(value));
+          $33.FileExistsByIDResponse.fromBuffer(value));
 
   DiscoverKnowledgeDomainFileServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$37.SpaceKnowledgeDomainFile> getFileDetails(
-      $36.GetFileDetailsRequest request,
+  $grpc.ResponseFuture<$34.SpaceKnowledgeDomainFile> getFileDetails(
+      $33.GetFileDetailsRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getFileDetails, request, options: options);
   }
 
-  $grpc.ResponseFuture<$36.FileExistsByIDResponse> fileExistsByID(
-      $36.FileExistsByIDRequest request,
+  $grpc.ResponseFuture<$33.FileExistsByIDResponse> fileExistsByID(
+      $33.FileExistsByIDRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$fileExistsByID, request, options: options);
   }
@@ -72,40 +72,40 @@ abstract class DiscoverKnowledgeDomainFileServiceBase extends $grpc.Service {
       'elint.services.product.knowledge.file.DiscoverKnowledgeDomainFileService';
 
   DiscoverKnowledgeDomainFileServiceBase() {
-    $addMethod($grpc.ServiceMethod<$36.GetFileDetailsRequest,
-            $37.SpaceKnowledgeDomainFile>(
+    $addMethod($grpc.ServiceMethod<$33.GetFileDetailsRequest,
+            $34.SpaceKnowledgeDomainFile>(
         'GetFileDetails',
         getFileDetails_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $36.GetFileDetailsRequest.fromBuffer(value),
-        ($37.SpaceKnowledgeDomainFile value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$36.FileExistsByIDRequest,
-            $36.FileExistsByIDResponse>(
+            $33.GetFileDetailsRequest.fromBuffer(value),
+        ($34.SpaceKnowledgeDomainFile value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$33.FileExistsByIDRequest,
+            $33.FileExistsByIDResponse>(
         'FileExistsByID',
         fileExistsByID_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $36.FileExistsByIDRequest.fromBuffer(value),
-        ($36.FileExistsByIDResponse value) => value.writeToBuffer()));
+            $33.FileExistsByIDRequest.fromBuffer(value),
+        ($33.FileExistsByIDResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$37.SpaceKnowledgeDomainFile> getFileDetails_Pre(
+  $async.Future<$34.SpaceKnowledgeDomainFile> getFileDetails_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$36.GetFileDetailsRequest> request) async {
+      $async.Future<$33.GetFileDetailsRequest> request) async {
     return getFileDetails(call, await request);
   }
 
-  $async.Future<$36.FileExistsByIDResponse> fileExistsByID_Pre(
+  $async.Future<$33.FileExistsByIDResponse> fileExistsByID_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$36.FileExistsByIDRequest> request) async {
+      $async.Future<$33.FileExistsByIDRequest> request) async {
     return fileExistsByID(call, await request);
   }
 
-  $async.Future<$37.SpaceKnowledgeDomainFile> getFileDetails(
-      $grpc.ServiceCall call, $36.GetFileDetailsRequest request);
-  $async.Future<$36.FileExistsByIDResponse> fileExistsByID(
-      $grpc.ServiceCall call, $36.FileExistsByIDRequest request);
+  $async.Future<$34.SpaceKnowledgeDomainFile> getFileDetails(
+      $grpc.ServiceCall call, $33.GetFileDetailsRequest request);
+  $async.Future<$33.FileExistsByIDResponse> fileExistsByID(
+      $grpc.ServiceCall call, $33.FileExistsByIDRequest request);
 }

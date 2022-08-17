@@ -102,7 +102,6 @@ class AccountData {
 
   Future<AccountServicesAccessAuthDetails>
       readAccountServicesAccessAuthDetails() async {
-    print("invoked readAccountServicesAccessAuthDetails");
     var accountServicesAccessAuthDetails = AccountServicesAccessAuthDetails(
         account: await readAccount(),
         accountServicesAccessSessionTokenDetails:
@@ -112,7 +111,6 @@ class AccountData {
     var validateAccountServicesResponse =
         await AccessAccountService.validateAccountServices(
             accountServicesAccessAuthDetails);
-    print("response: validateAccountServicesResponse");
 
     if (validateAccountServicesResponse.accountServiceAccessValidationDone ==
         false) {

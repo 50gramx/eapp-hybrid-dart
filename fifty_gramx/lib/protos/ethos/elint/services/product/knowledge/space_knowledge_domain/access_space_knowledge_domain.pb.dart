@@ -31,21 +31,21 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../space_knowledge/access_space_knowledge.pb.dart' as $10;
-import '../../../../entities/space_knowledge_domain.pb.dart' as $31;
+import '../../../../entities/space_knowledge_domain.pb.dart' as $28;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 
 class SpaceKnowledgeDomainAccessTokenRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainAccessTokenRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
     ..aOM<$10.SpaceKnowledgeServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeServicesAccessAuthDetails', subBuilder: $10.SpaceKnowledgeServicesAccessAuthDetails.create)
-    ..aOM<$31.SpaceKnowledgeDomain>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..hasRequiredFields = false
   ;
 
   SpaceKnowledgeDomainAccessTokenRequest._() : super();
   factory SpaceKnowledgeDomainAccessTokenRequest({
     $10.SpaceKnowledgeServicesAccessAuthDetails? spaceKnowledgeServicesAccessAuthDetails,
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
   }) {
     final _result = create();
     if (spaceKnowledgeServicesAccessAuthDetails != null) {
@@ -89,15 +89,15 @@ class SpaceKnowledgeDomainAccessTokenRequest extends $pb.GeneratedMessage {
   $10.SpaceKnowledgeServicesAccessAuthDetails ensureSpaceKnowledgeServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(1);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(1);
   @$pb.TagNumber(2)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(2, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSpaceKnowledgeDomain() => $_has(1);
   @$pb.TagNumber(2)
   void clearSpaceKnowledgeDomain() => clearField(2);
   @$pb.TagNumber(2)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(1);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(1);
 }
 
 class SpaceKnowledgeDomainAccessTokenResponse extends $pb.GeneratedMessage {
@@ -240,17 +240,17 @@ class ValidateSpaceKnowledgeDomainServicesResponse extends $pb.GeneratedMessage 
 
 class SpaceKnowledgeDomainServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.domain'), createEmptyInstance: create)
-    ..aOM<$31.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $31.SpaceKnowledgeDomain.create)
+    ..aOM<$28.SpaceKnowledgeDomain>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomain', subBuilder: $28.SpaceKnowledgeDomain.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   SpaceKnowledgeDomainServicesAccessAuthDetails._() : super();
   factory SpaceKnowledgeDomainServicesAccessAuthDetails({
-    $31.SpaceKnowledgeDomain? spaceKnowledgeDomain,
+    $28.SpaceKnowledgeDomain? spaceKnowledgeDomain,
     $2.PersistentSessionTokenDetails? spaceKnowledgeDomainServicesAccessSessionTokenDetails,
-    $55.Timestamp? requestedAt,
+    $52.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomain != null) {
@@ -286,15 +286,15 @@ class SpaceKnowledgeDomainServicesAccessAuthDetails extends $pb.GeneratedMessage
   static SpaceKnowledgeDomainServicesAccessAuthDetails? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
+  $28.SpaceKnowledgeDomain get spaceKnowledgeDomain => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomain($31.SpaceKnowledgeDomain v) { setField(1, v); }
+  set spaceKnowledgeDomain($28.SpaceKnowledgeDomain v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomain() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomain() => clearField(1);
   @$pb.TagNumber(1)
-  $31.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
+  $28.SpaceKnowledgeDomain ensureSpaceKnowledgeDomain() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.PersistentSessionTokenDetails get spaceKnowledgeDomainServicesAccessSessionTokenDetails => $_getN(1);
@@ -308,14 +308,14 @@ class SpaceKnowledgeDomainServicesAccessAuthDetails extends $pb.GeneratedMessage
   $2.PersistentSessionTokenDetails ensureSpaceKnowledgeDomainServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get requestedAt => $_getN(2);
+  $52.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($55.Timestamp v) { setField(3, v); }
+  set requestedAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureRequestedAt() => $_ensure(2);
+  $52.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 

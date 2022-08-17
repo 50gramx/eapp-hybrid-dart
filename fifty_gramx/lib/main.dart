@@ -22,27 +22,29 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/Multiverse/EthosverseScreen.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/notification/local_notification_service.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/widgets/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/connections/connectionsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/conversations/conversationsHomePage.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/spaces/spacesHomePage.dart';
-import 'package:fifty_gramx/widgets/onboarding/getStartedWidget.dart';
-import 'package:fifty_gramx/widgets/onboarding/startScreen.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
-// Import package
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
@@ -88,7 +90,6 @@ void main() async {
           } else {
             // todo: handle in-app payments for desktops
           }
-          print("logged in snapshot.data: ${loggedInSnapshot.data}");
           if (loggedInSnapshot.data!) {
             // reflect the account is logged in
             if (Platform.isIOS || Platform.isAndroid) {
@@ -226,53 +227,25 @@ void main() async {
                 body: Container(
                     child: Center(
                         child: Column(
-                          children: [
-                            Spacer(),
-                            Center(
-                              child: Text("Cannot connect to 50gramx machines,"
-                                  " please try again in a few minutes.",
-                                  style: AppTextStyle.appTextStyle(
-                                    loadingContext,
-                                    AppColors.textColor(loadingContext),
-                                  )),
-                            ),
-                            Spacer(),
-                          ],
-                        ))));
+                  children: [
+                    Spacer(),
+                    Center(
+                      child: Text(
+                          "Cannot connect to 50gramx machines,"
+                          " please try again in a few minutes.",
+                          style: AppTextStyle.appTextStyle(
+                            loadingContext,
+                            AppColors.textColor(loadingContext),
+                          )),
+                    ),
+                    Spacer(),
+                  ],
+                ))));
           });
         }
       });
 
-  runApp(NeumorphicApp(
-      debugShowCheckedModeBanner: false,
-      title: '50gramx',
-      // themeMode: ThemeMode.dark, // comment to adapt on system theme
-      theme: NeumorphicThemeData(
-        intensity: 0.6,
-        baseColor: AppColors.lightPrimaryB,
-        lightSource: LightSource.topLeft,
-        depth: 5,
-        accentColor: AppColors.darkPrimaryA,
-      ),
-      darkTheme: NeumorphicThemeData(
-        intensity: 0.6,
-        baseColor: AppColors.darkPrimaryB,
-        lightSource: LightSource.top,
-        depth: 5,
-        accentColor: AppColors.lightPrimaryA,
-      ),
-      routes: {
-        '/connections': (context) => ConnectionsHomePage(index: 1),
-        '/conversations': (context) => ConversationsHomePage(
-              index: 1,
-              containingFlowTitle: '',
-            ),
-        '/spaces': (context) => SpacesHomePage(
-              index: 1,
-              containingFlowTitle: '',
-            ),
-      },
-      home: isLoggedInWidget));
+  runApp(decideWhichScreen());
 
 // (isLoggedIn)
 //         ? (isAccountTierActive)
@@ -282,6 +255,49 @@ void main() async {
 //               )
 //         : StartScreen(),
 //   )
+}
+
+Widget decideWhichScreen() {
+  if (kIsWeb) {
+//    return EthosPayScreen();
+    return EthosverseScreen();
+  } else {
+    // warn: keep this in check
+    PrivilegedCommandExecuter.initPrivileged();
+    BrewCommands.initBrew();
+    MultipassCommands();
+    return NeumorphicApp(
+        debugShowCheckedModeBanner: false,
+        title: '50gramx',
+        themeMode: ThemeMode.system,
+        // comment to adapt on system theme
+        theme: NeumorphicThemeData(
+          intensity: 0.6,
+          baseColor: AppColors.lightPrimaryB,
+          lightSource: LightSource.topLeft,
+          depth: 5,
+          accentColor: AppColors.darkPrimaryA,
+        ),
+        darkTheme: NeumorphicThemeData(
+          intensity: 0.6,
+          baseColor: AppColors.darkPrimaryB,
+          lightSource: LightSource.top,
+          depth: 5,
+          accentColor: AppColors.lightPrimaryA,
+        ),
+        routes: {
+          '/connections': (context) => ConnectionsHomePage(index: 1),
+          '/conversations': (context) => ConversationsHomePage(
+                index: 1,
+                containingFlowTitle: '',
+              ),
+          '/spaces': (context) => SpacesHomePage(
+                index: 1,
+                containingFlowTitle: '',
+              ),
+        },
+        home: HomeScreen());
+  }
 }
 
 Widget getLoadingPage(String loadingText, BuildContext loadingContext) {
@@ -352,10 +368,8 @@ Widget getExplicitPermissionAllocationPage(String explicitText,
 }
 
 Future<bool> checkLogin() async {
-  print("checkLogin invoked");
   var accountServicesAccessAuthDetails =
       await AccountData().readAccountServicesAccessAuthDetails();
-  print(accountServicesAccessAuthDetails);
   if (accountServicesAccessAuthDetails.account.accountId == "") {
     return false;
   } else {

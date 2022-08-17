@@ -30,8 +30,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'account.pb.dart' as $22;
-import '../../../google/protobuf/timestamp.pb.dart' as $55;
+import 'account.pb.dart' as $19;
+import '../../../google/protobuf/timestamp.pb.dart' as $52;
 
 export '../../../google/protobuf/timestamp.pb.dart';
 class AccountAssistant extends $pb.GeneratedMessage {
@@ -39,9 +39,9 @@ class AccountAssistant extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantNameCode', $pb.PbFieldType.O3)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantName')
-    ..aOM<$22.Account>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $22.Account.create)
-    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAssistedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$19.Account>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'account', subBuilder: $19.Account.create)
+    ..aOM<$52.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'createdAt', subBuilder: $52.Timestamp.create)
+    ..aOM<$52.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'lastAssistedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -50,9 +50,9 @@ class AccountAssistant extends $pb.GeneratedMessage {
     $core.String? accountAssistantId,
     $core.int? accountAssistantNameCode,
     $core.String? accountAssistantName,
-    $22.Account? account,
-    $55.Timestamp? createdAt,
-    $55.Timestamp? lastAssistedAt,
+    $19.Account? account,
+    $52.Timestamp? createdAt,
+    $52.Timestamp? lastAssistedAt,
   }) {
     final _result = create();
     if (accountAssistantId != null) {
@@ -124,44 +124,44 @@ class AccountAssistant extends $pb.GeneratedMessage {
   void clearAccountAssistantName() => clearField(3);
 
   @$pb.TagNumber(4)
-  $22.Account get account => $_getN(3);
+  $19.Account get account => $_getN(3);
   @$pb.TagNumber(4)
-  set account($22.Account v) { setField(4, v); }
+  set account($19.Account v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasAccount() => $_has(3);
   @$pb.TagNumber(4)
   void clearAccount() => clearField(4);
   @$pb.TagNumber(4)
-  $22.Account ensureAccount() => $_ensure(3);
+  $19.Account ensureAccount() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $55.Timestamp get createdAt => $_getN(4);
+  $52.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($55.Timestamp v) { setField(5, v); }
+  set createdAt($52.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $55.Timestamp ensureCreatedAt() => $_ensure(4);
+  $52.Timestamp ensureCreatedAt() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $55.Timestamp get lastAssistedAt => $_getN(5);
+  $52.Timestamp get lastAssistedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set lastAssistedAt($55.Timestamp v) { setField(6, v); }
+  set lastAssistedAt($52.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasLastAssistedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearLastAssistedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $55.Timestamp ensureLastAssistedAt() => $_ensure(5);
+  $52.Timestamp ensureLastAssistedAt() => $_ensure(5);
 }
 
 class AccountAssistantConnectedAccount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantConnectedAccount', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountConnectionId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -169,7 +169,7 @@ class AccountAssistantConnectedAccount extends $pb.GeneratedMessage {
   factory AccountAssistantConnectedAccount({
     $core.String? accountConnectionId,
     $core.String? accountId,
-    $55.Timestamp? connectedAt,
+    $52.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountConnectionId != null) {
@@ -223,22 +223,22 @@ class AccountAssistantConnectedAccount extends $pb.GeneratedMessage {
   void clearAccountId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get connectedAt => $_getN(2);
+  $52.Timestamp get connectedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set connectedAt($55.Timestamp v) { setField(3, v); }
+  set connectedAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasConnectedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearConnectedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureConnectedAt() => $_ensure(2);
+  $52.Timestamp ensureConnectedAt() => $_ensure(2);
 }
 
 class AccountAssistantConnectedAccountAssistant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AccountAssistantConnectedAccountAssistant', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.entity'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantConnectionId')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantId')
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -246,7 +246,7 @@ class AccountAssistantConnectedAccountAssistant extends $pb.GeneratedMessage {
   factory AccountAssistantConnectedAccountAssistant({
     $core.String? accountAssistantConnectionId,
     $core.String? accountAssistantId,
-    $55.Timestamp? connectedAt,
+    $52.Timestamp? connectedAt,
   }) {
     final _result = create();
     if (accountAssistantConnectionId != null) {
@@ -300,15 +300,15 @@ class AccountAssistantConnectedAccountAssistant extends $pb.GeneratedMessage {
   void clearAccountAssistantId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get connectedAt => $_getN(2);
+  $52.Timestamp get connectedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set connectedAt($55.Timestamp v) { setField(3, v); }
+  set connectedAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasConnectedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearConnectedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureConnectedAt() => $_ensure(2);
+  $52.Timestamp ensureConnectedAt() => $_ensure(2);
 }
 
 class AccountAssistantMeta extends $pb.GeneratedMessage {

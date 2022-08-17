@@ -77,6 +77,18 @@ const AccountPayInMethod$json = const {
 
 /// Descriptor for `AccountPayInMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List accountPayInMethodDescriptor = $convert.base64Decode('ChJBY2NvdW50UGF5SW5NZXRob2QSCAoEQ0FSRBAA');
+@$core.Deprecated('Use languageEnumDescriptor instead')
+const LanguageEnum$json = const {
+  '1': 'LanguageEnum',
+  '2': const [
+    const {'1': 'ENGLISH', '2': 0},
+    const {'1': 'HINDI', '2': 1},
+    const {'1': 'ODIA', '2': 2},
+  ],
+};
+
+/// Descriptor for `LanguageEnum`. Decode as a `google.protobuf.EnumDescriptorProto`.
+final $typed_data.Uint8List languageEnumDescriptor = $convert.base64Decode('CgxMYW5ndWFnZUVudW0SCwoHRU5HTElTSBAAEgkKBUhJTkRJEAESCAoET0RJQRAC');
 @$core.Deprecated('Use accountDescriptor instead')
 const Account$json = const {
   '1': 'Account',
@@ -244,3 +256,30 @@ const AccountTransaction$json = const {
 
 /// Descriptor for `AccountTransaction`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accountTransactionDescriptor = $convert.base64Decode('ChJBY2NvdW50VHJhbnNhY3Rpb24SHQoKaXNfZGViaXRlZBgDIAEoCFIJaXNEZWJpdGVkEhYKBmFtb3VudBgEIAEoAVIGYW1vdW50EhgKB2JhbGFuY2UYBSABKAFSB2JhbGFuY2U=');
+@$core.Deprecated('Use accountPreferredFirstLanguageDescriptor instead')
+const AccountPreferredFirstLanguage$json = const {
+  '1': 'AccountPreferredFirstLanguage',
+  '2': const [
+    const {'1': 'preferred_language', '3': 1, '4': 1, '5': 14, '6': '.elint.entity.LanguageEnum', '10': 'preferredLanguage'},
+  ],
+};
+
+/// Descriptor for `AccountPreferredFirstLanguage`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountPreferredFirstLanguageDescriptor = $convert.base64Decode('Ch1BY2NvdW50UHJlZmVycmVkRmlyc3RMYW5ndWFnZRJJChJwcmVmZXJyZWRfbGFuZ3VhZ2UYASABKA4yGi5lbGludC5lbnRpdHkuTGFuZ3VhZ2VFbnVtUhFwcmVmZXJyZWRMYW5ndWFnZQ==');
+@$core.Deprecated('Use accountPreferredSecondLanguageDescriptor instead')
+const AccountPreferredSecondLanguage$json = const {
+  '1': 'AccountPreferredSecondLanguage',
+  '2': const [
+    const {'1': 'preferred_language', '3': 1, '4': 1, '5': 14, '6': '.elint.entity.LanguageEnum', '10': 'preferredLanguage'},
+  ],
+};
+
+/// Descriptor for `AccountPreferredSecondLanguage`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountPreferredSecondLanguageDescriptor = $convert.base64Decode('Ch5BY2NvdW50UHJlZmVycmVkU2Vjb25kTGFuZ3VhZ2USSQoScHJlZmVycmVkX2xhbmd1YWdlGAEgASgOMhouZWxpbnQuZW50aXR5Lkxhbmd1YWdlRW51bVIRcHJlZmVycmVkTGFuZ3VhZ2U=');
+@$core.Deprecated('Use accountCurrentLocationDescriptor instead')
+const AccountCurrentLocation$json = const {
+  '1': 'AccountCurrentLocation',
+};
+
+/// Descriptor for `AccountCurrentLocation`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List accountCurrentLocationDescriptor = $convert.base64Decode('ChZBY2NvdW50Q3VycmVudExvY2F0aW9u');

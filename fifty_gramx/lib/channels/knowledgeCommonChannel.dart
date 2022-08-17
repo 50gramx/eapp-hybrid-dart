@@ -28,7 +28,6 @@ class KnowledgeCommonChannel {
   KnowledgeCommonChannel._();
 
   void dispose() {
-    print("KnowledgeCommonChannel:dispose");
     _knowledgeChannel!.shutdown();
   }
 

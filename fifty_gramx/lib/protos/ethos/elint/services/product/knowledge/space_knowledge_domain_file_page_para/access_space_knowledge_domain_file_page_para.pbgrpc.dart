@@ -31,29 +31,29 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'access_space_knowledge_domain_file_page_para.pb.dart' as $42;
+import 'access_space_knowledge_domain_file_page_para.pb.dart' as $39;
 export 'access_space_knowledge_domain_file_page_para.pb.dart';
 
 class AccessSpaceKnowledgeDomainFilePageParaServiceClient extends $grpc.Client {
   static final _$spaceKnowledgeDomainFilePageParaAccessToken = $grpc.ClientMethod<
-          $42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest,
-          $42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>(
+          $39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest,
+          $39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>(
       '/elint.services.product.knowledge.para.AccessSpaceKnowledgeDomainFilePageParaService/SpaceKnowledgeDomainFilePageParaAccessToken',
-      ($42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest value) =>
+      ($39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse.fromBuffer(
+          $39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse.fromBuffer(
               value));
   static final _$validateSpaceKnowledgeDomainFilePageParaServices =
       $grpc.ClientMethod<
-              $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails,
-              $42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>(
+              $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails,
+              $39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>(
           '/elint.services.product.knowledge.para.AccessSpaceKnowledgeDomainFilePageParaService/ValidateSpaceKnowledgeDomainFilePageParaServices',
-          ($42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
+          ($39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
                   value) =>
               value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse
+              $39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse
                   .fromBuffer(value));
 
   AccessSpaceKnowledgeDomainFilePageParaServiceClient(
@@ -62,9 +62,9 @@ class AccessSpaceKnowledgeDomainFilePageParaServiceClient extends $grpc.Client {
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
+  $grpc.ResponseFuture<$39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
       spaceKnowledgeDomainFilePageParaAccessToken(
-          $42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest request,
+          $39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(
         _$spaceKnowledgeDomainFilePageParaAccessToken, request,
@@ -72,9 +72,9 @@ class AccessSpaceKnowledgeDomainFilePageParaServiceClient extends $grpc.Client {
   }
 
   $grpc.ResponseFuture<
-          $42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
+          $39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
       validateSpaceKnowledgeDomainFilePageParaServices(
-          $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails request,
+          $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(
         _$validateSpaceKnowledgeDomainFilePageParaServices, request,
@@ -89,55 +89,55 @@ abstract class AccessSpaceKnowledgeDomainFilePageParaServiceBase
 
   AccessSpaceKnowledgeDomainFilePageParaServiceBase() {
     $addMethod($grpc.ServiceMethod<
-            $42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest,
-            $42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>(
+            $39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest,
+            $39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>(
         'SpaceKnowledgeDomainFilePageParaAccessToken',
         spaceKnowledgeDomainFilePageParaAccessToken_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest.fromBuffer(
+            $39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest.fromBuffer(
                 value),
-        ($42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse value) =>
+        ($39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse value) =>
             value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
-            $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails,
-            $42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>(
+            $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails,
+            $39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>(
         'ValidateSpaceKnowledgeDomainFilePageParaServices',
         validateSpaceKnowledgeDomainFilePageParaServices_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
+            $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
                 .fromBuffer(value),
-        ($42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse value) =>
+        ($39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse value) =>
             value.writeToBuffer()));
   }
 
-  $async.Future<$42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
+  $async.Future<$39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
       spaceKnowledgeDomainFilePageParaAccessToken_Pre(
           $grpc.ServiceCall call,
-          $async.Future<$42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest>
+          $async.Future<$39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest>
               request) async {
     return spaceKnowledgeDomainFilePageParaAccessToken(call, await request);
   }
 
-  $async.Future<$42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
+  $async.Future<$39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
       validateSpaceKnowledgeDomainFilePageParaServices_Pre(
           $grpc.ServiceCall call,
           $async.Future<
-                  $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails>
+                  $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails>
               request) async {
     return validateSpaceKnowledgeDomainFilePageParaServices(
         call, await request);
   }
 
-  $async.Future<$42.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
+  $async.Future<$39.SpaceKnowledgeDomainFilePageParaAccessTokenResponse>
       spaceKnowledgeDomainFilePageParaAccessToken($grpc.ServiceCall call,
-          $42.SpaceKnowledgeDomainFilePageParaAccessTokenRequest request);
-  $async.Future<$42.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
+          $39.SpaceKnowledgeDomainFilePageParaAccessTokenRequest request);
+  $async.Future<$39.ValidateSpaceKnowledgeDomainFilePageParaServicesResponse>
       validateSpaceKnowledgeDomainFilePageParaServices(
           $grpc.ServiceCall call,
-          $42.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
+          $39.SpaceKnowledgeDomainFilePageParaServicesAccessAuthDetails
               request);
 }

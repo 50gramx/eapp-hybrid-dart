@@ -30,32 +30,42 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../../../../../entities/account.pb.dart' as $22;
-import '../../../../../../../google/protobuf/any.pb.dart' as $54;
-import '../../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../entities/account.pb.dart' as $19;
+import '../../../../../../../google/protobuf/any.pb.dart' as $51;
+import '../../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 import '../../../../../entities/generic.pb.dart' as $2;
 import '../../../identity/account/access_account.pb.dart' as $0;
 import '../../../../../entities/account_assistant.pb.dart' as $6;
 
-import '../../../../../entities/account.pbenum.dart' as $22;
+import '../../../../../entities/account.pbenum.dart' as $19;
 
 export '../../../../../../../google/protobuf/timestamp.pb.dart';
 class MessageFromAccountAssistant extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccountAssistant', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
-    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
+    ..aOM<$19.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $19.AccountConnectedAccountAssistant.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..pc<$54.Any>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $54.Any.create)
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantReceivedMessageId')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceId')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceTypeId')
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainId')
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainAction', $pb.PbFieldType.O3)
+    ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainActionContextId')
+    ..pc<$51.Any>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $51.Any.create)
+    ..aOS(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantReceivedMessageId')
     ..hasRequiredFields = false
   ;
 
   MessageFromAccountAssistant._() : super();
   factory MessageFromAccountAssistant({
     $core.String? accountId,
-    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $19.AccountConnectedAccountAssistant? connectedAccountAssistant,
     $core.String? message,
-    $core.Iterable<$54.Any>? messageSource,
+    $core.String? messageSourceSpaceId,
+    $core.String? messageSourceSpaceTypeId,
+    $core.String? messageSourceSpaceDomainId,
+    $core.int? messageSourceSpaceDomainAction,
+    $core.String? messageSourceSpaceDomainActionContextId,
+    $core.Iterable<$51.Any>? messageSource,
     $core.String? accountAssistantReceivedMessageId,
   }) {
     final _result = create();
@@ -67,6 +77,21 @@ class MessageFromAccountAssistant extends $pb.GeneratedMessage {
     }
     if (message != null) {
       _result.message = message;
+    }
+    if (messageSourceSpaceId != null) {
+      _result.messageSourceSpaceId = messageSourceSpaceId;
+    }
+    if (messageSourceSpaceTypeId != null) {
+      _result.messageSourceSpaceTypeId = messageSourceSpaceTypeId;
+    }
+    if (messageSourceSpaceDomainId != null) {
+      _result.messageSourceSpaceDomainId = messageSourceSpaceDomainId;
+    }
+    if (messageSourceSpaceDomainAction != null) {
+      _result.messageSourceSpaceDomainAction = messageSourceSpaceDomainAction;
+    }
+    if (messageSourceSpaceDomainActionContextId != null) {
+      _result.messageSourceSpaceDomainActionContextId = messageSourceSpaceDomainActionContextId;
     }
     if (messageSource != null) {
       _result.messageSource.addAll(messageSource);
@@ -107,15 +132,15 @@ class MessageFromAccountAssistant extends $pb.GeneratedMessage {
   void clearAccountId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
+  $19.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
+  set connectedAccountAssistant($19.AccountConnectedAccountAssistant v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccountAssistant() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccountAssistant() => clearField(2);
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
+  $19.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get message => $_getSZ(2);
@@ -127,29 +152,74 @@ class MessageFromAccountAssistant extends $pb.GeneratedMessage {
   void clearMessage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.List<$54.Any> get messageSource => $_getList(3);
+  $core.String get messageSourceSpaceId => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set messageSourceSpaceId($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMessageSourceSpaceId() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMessageSourceSpaceId() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get accountAssistantReceivedMessageId => $_getSZ(4);
+  $core.String get messageSourceSpaceTypeId => $_getSZ(4);
   @$pb.TagNumber(5)
-  set accountAssistantReceivedMessageId($core.String v) { $_setString(4, v); }
+  set messageSourceSpaceTypeId($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasAccountAssistantReceivedMessageId() => $_has(4);
+  $core.bool hasMessageSourceSpaceTypeId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearAccountAssistantReceivedMessageId() => clearField(5);
+  void clearMessageSourceSpaceTypeId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.String get messageSourceSpaceDomainId => $_getSZ(5);
+  @$pb.TagNumber(6)
+  set messageSourceSpaceDomainId($core.String v) { $_setString(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasMessageSourceSpaceDomainId() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearMessageSourceSpaceDomainId() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get messageSourceSpaceDomainAction => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set messageSourceSpaceDomainAction($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasMessageSourceSpaceDomainAction() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearMessageSourceSpaceDomainAction() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get messageSourceSpaceDomainActionContextId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set messageSourceSpaceDomainActionContextId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasMessageSourceSpaceDomainActionContextId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearMessageSourceSpaceDomainActionContextId() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.List<$51.Any> get messageSource => $_getList(8);
+
+  @$pb.TagNumber(10)
+  $core.String get accountAssistantReceivedMessageId => $_getSZ(9);
+  @$pb.TagNumber(10)
+  set accountAssistantReceivedMessageId($core.String v) { $_setString(9, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasAccountAssistantReceivedMessageId() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAccountAssistantReceivedMessageId() => clearField(10);
 }
 
 class MessageFromAccountAssistantReceived extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccountAssistantReceived', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isReceived')
-    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   MessageFromAccountAssistantReceived._() : super();
   factory MessageFromAccountAssistantReceived({
     $core.bool? isReceived,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (isReceived != null) {
@@ -191,21 +261,21 @@ class MessageFromAccountAssistantReceived extends $pb.GeneratedMessage {
   void clearIsReceived() => clearField(1);
 
   @$pb.TagNumber(2)
-  $55.Timestamp get receivedAt => $_getN(1);
+  $52.Timestamp get receivedAt => $_getN(1);
   @$pb.TagNumber(2)
-  set receivedAt($55.Timestamp v) { setField(2, v); }
+  set receivedAt($52.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasReceivedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearReceivedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $55.Timestamp ensureReceivedAt() => $_ensure(1);
+  $52.Timestamp ensureReceivedAt() => $_ensure(1);
 }
 
 class MessageFromAccount extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccount', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
-    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
+    ..aOM<$19.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $19.AccountConnectedAccount.create)
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountReceivedMessageId')
     ..hasRequiredFields = false
@@ -214,7 +284,7 @@ class MessageFromAccount extends $pb.GeneratedMessage {
   MessageFromAccount._() : super();
   factory MessageFromAccount({
     $core.String? accountId,
-    $22.AccountConnectedAccount? connectedAccount,
+    $19.AccountConnectedAccount? connectedAccount,
     $core.String? message,
     $core.String? accountReceivedMessageId,
   }) {
@@ -264,15 +334,15 @@ class MessageFromAccount extends $pb.GeneratedMessage {
   void clearAccountId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccount get connectedAccount => $_getN(1);
+  $19.AccountConnectedAccount get connectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
+  set connectedAccount($19.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
+  $19.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
 
   @$pb.TagNumber(3)
   $core.String get message => $_getSZ(2);
@@ -296,14 +366,14 @@ class MessageFromAccount extends $pb.GeneratedMessage {
 class MessageFromAccountReceived extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'MessageFromAccountReceived', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isReceived')
-    ..aOM<$55.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   MessageFromAccountReceived._() : super();
   factory MessageFromAccountReceived({
     $core.bool? isReceived,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (isReceived != null) {
@@ -345,15 +415,15 @@ class MessageFromAccountReceived extends $pb.GeneratedMessage {
   void clearIsReceived() => clearField(1);
 
   @$pb.TagNumber(2)
-  $55.Timestamp get receivedAt => $_getN(1);
+  $52.Timestamp get receivedAt => $_getN(1);
   @$pb.TagNumber(2)
-  set receivedAt($55.Timestamp v) { setField(2, v); }
+  set receivedAt($52.Timestamp v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasReceivedAt() => $_has(1);
   @$pb.TagNumber(2)
   void clearReceivedAt() => clearField(2);
   @$pb.TagNumber(2)
-  $55.Timestamp ensureReceivedAt() => $_ensure(1);
+  $52.Timestamp ensureReceivedAt() => $_ensure(1);
 }
 
 class SyncAccountReceivedMessagesResponse extends $pb.GeneratedMessage {
@@ -424,14 +494,14 @@ class SyncAccountReceivedMessagesResponse extends $pb.GeneratedMessage {
 class SyncAccountConnectedAccountReceivedMessagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SyncAccountConnectedAccountReceivedMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$22.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
+    ..aOM<$19.AccountConnectedAccount>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $19.AccountConnectedAccount.create)
     ..hasRequiredFields = false
   ;
 
   SyncAccountConnectedAccountReceivedMessagesRequest._() : super();
   factory SyncAccountConnectedAccountReceivedMessagesRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $22.AccountConnectedAccount? connectedAccount,
+    $19.AccountConnectedAccount? connectedAccount,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -475,15 +545,15 @@ class SyncAccountConnectedAccountReceivedMessagesRequest extends $pb.GeneratedMe
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccount get connectedAccount => $_getN(1);
+  $19.AccountConnectedAccount get connectedAccount => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccount($22.AccountConnectedAccount v) { setField(2, v); }
+  set connectedAccount($19.AccountConnectedAccount v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccount() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccount() => clearField(2);
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
+  $19.AccountConnectedAccount ensureConnectedAccount() => $_ensure(1);
 }
 
 class SyncAccountConnectedAccountReceivedMessagesResponse extends $pb.GeneratedMessage {
@@ -568,14 +638,14 @@ class SyncAccountConnectedAccountReceivedMessagesResponse extends $pb.GeneratedM
 class SyncAccountConnectedAccountAssistantReceivedMessagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SyncAccountConnectedAccountAssistantReceivedMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
+    ..aOM<$19.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $19.AccountConnectedAccountAssistant.create)
     ..hasRequiredFields = false
   ;
 
   SyncAccountConnectedAccountAssistantReceivedMessagesRequest._() : super();
   factory SyncAccountConnectedAccountAssistantReceivedMessagesRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $19.AccountConnectedAccountAssistant? connectedAccountAssistant,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -619,15 +689,15 @@ class SyncAccountConnectedAccountAssistantReceivedMessagesRequest extends $pb.Ge
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
+  $19.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
   @$pb.TagNumber(2)
-  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
+  set connectedAccountAssistant($19.AccountConnectedAccountAssistant v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasConnectedAccountAssistant() => $_has(1);
   @$pb.TagNumber(2)
   void clearConnectedAccountAssistant() => clearField(2);
   @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
+  $19.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
 }
 
 class SyncAccountConnectedAccountAssistantReceivedMessagesResponse extends $pb.GeneratedMessage {
@@ -712,26 +782,16 @@ class SyncAccountConnectedAccountAssistantReceivedMessagesResponse extends $pb.G
 class ListenForReceivedAccountAssistantMessagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListenForReceivedAccountAssistantMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
-    ..aOM<$22.AccountConnectedAccountAssistant>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountAssistantReceivedMessageId')
     ..hasRequiredFields = false
   ;
 
   ListenForReceivedAccountAssistantMessagesRequest._() : super();
   factory ListenForReceivedAccountAssistantMessagesRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
-    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
-    $core.String? accountAssistantReceivedMessageId,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
       _result.accessAuthDetails = accessAuthDetails;
-    }
-    if (connectedAccountAssistant != null) {
-      _result.connectedAccountAssistant = connectedAccountAssistant;
-    }
-    if (accountAssistantReceivedMessageId != null) {
-      _result.accountAssistantReceivedMessageId = accountAssistantReceivedMessageId;
     }
     return _result;
   }
@@ -766,48 +826,23 @@ class ListenForReceivedAccountAssistantMessagesRequest extends $pb.GeneratedMess
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
   $0.AccountServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
-
-  @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(1);
-  @$pb.TagNumber(2)
-  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasConnectedAccountAssistant() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearConnectedAccountAssistant() => clearField(2);
-  @$pb.TagNumber(2)
-  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(1);
-
-  @$pb.TagNumber(3)
-  $core.String get accountAssistantReceivedMessageId => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set accountAssistantReceivedMessageId($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasAccountAssistantReceivedMessageId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearAccountAssistantReceivedMessageId() => clearField(3);
 }
 
 class ListenForReceivedAccountAssistantMessagesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListenForReceivedAccountAssistantMessagesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
-    ..pc<$54.Any>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSource', $pb.PbFieldType.PM, subBuilder: $54.Any.create)
-    ..aOM<$55.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
-    ..aOM<$2.ResponseMeta>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
+    ..pc<MessageFromAccountAssistant>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messagesFromAccountAssistant', $pb.PbFieldType.PM, subBuilder: MessageFromAccountAssistant.create)
+    ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   ListenForReceivedAccountAssistantMessagesResponse._() : super();
   factory ListenForReceivedAccountAssistantMessagesResponse({
-    $core.Iterable<$54.Any>? messageSource,
-    $55.Timestamp? receivedAt,
+    $core.Iterable<MessageFromAccountAssistant>? messagesFromAccountAssistant,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
-    if (messageSource != null) {
-      _result.messageSource.addAll(messageSource);
-    }
-    if (receivedAt != null) {
-      _result.receivedAt = receivedAt;
+    if (messagesFromAccountAssistant != null) {
+      _result.messagesFromAccountAssistant.addAll(messagesFromAccountAssistant);
     }
     if (responseMeta != null) {
       _result.responseMeta = responseMeta;
@@ -835,30 +870,19 @@ class ListenForReceivedAccountAssistantMessagesResponse extends $pb.GeneratedMes
   static ListenForReceivedAccountAssistantMessagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListenForReceivedAccountAssistantMessagesResponse>(create);
   static ListenForReceivedAccountAssistantMessagesResponse? _defaultInstance;
 
-  @$pb.TagNumber(3)
-  $core.List<$54.Any> get messageSource => $_getList(0);
+  @$pb.TagNumber(1)
+  $core.List<MessageFromAccountAssistant> get messagesFromAccountAssistant => $_getList(0);
 
-  @$pb.TagNumber(4)
-  $55.Timestamp get receivedAt => $_getN(1);
-  @$pb.TagNumber(4)
-  set receivedAt($55.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasReceivedAt() => $_has(1);
-  @$pb.TagNumber(4)
-  void clearReceivedAt() => clearField(4);
-  @$pb.TagNumber(4)
-  $55.Timestamp ensureReceivedAt() => $_ensure(1);
-
-  @$pb.TagNumber(5)
-  $2.ResponseMeta get responseMeta => $_getN(2);
-  @$pb.TagNumber(5)
-  set responseMeta($2.ResponseMeta v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasResponseMeta() => $_has(2);
-  @$pb.TagNumber(5)
-  void clearResponseMeta() => clearField(5);
-  @$pb.TagNumber(5)
-  $2.ResponseMeta ensureResponseMeta() => $_ensure(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta get responseMeta => $_getN(1);
+  @$pb.TagNumber(2)
+  set responseMeta($2.ResponseMeta v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasResponseMeta() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearResponseMeta() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.ResponseMeta ensureResponseMeta() => $_ensure(1);
 }
 
 class ListenForReceivedAccountMessagesRequest extends $pb.GeneratedMessage {
@@ -1101,9 +1125,9 @@ class GetLast24ProductNReceivedMessagesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetLast24ProductNReceivedMessagesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$0.AccountServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $0.AccountServicesAccessAuthDetails.create)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'productN', $pb.PbFieldType.O3)
-    ..e<$22.MessageEntity>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageEntityEnum', $pb.PbFieldType.OE, defaultOrMaker: $22.MessageEntity.ALL_ENTITY_MESSAGE, valueOf: $22.MessageEntity.valueOf, enumValues: $22.MessageEntity.values)
-    ..aOM<$22.AccountConnectedAccountAssistant>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $22.AccountConnectedAccountAssistant.create)
-    ..aOM<$22.AccountConnectedAccount>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $22.AccountConnectedAccount.create)
+    ..e<$19.MessageEntity>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageEntityEnum', $pb.PbFieldType.OE, defaultOrMaker: $19.MessageEntity.ALL_ENTITY_MESSAGE, valueOf: $19.MessageEntity.valueOf, enumValues: $19.MessageEntity.values)
+    ..aOM<$19.AccountConnectedAccountAssistant>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccountAssistant', subBuilder: $19.AccountConnectedAccountAssistant.create)
+    ..aOM<$19.AccountConnectedAccount>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'connectedAccount', subBuilder: $19.AccountConnectedAccount.create)
     ..hasRequiredFields = false
   ;
 
@@ -1111,9 +1135,9 @@ class GetLast24ProductNReceivedMessagesRequest extends $pb.GeneratedMessage {
   factory GetLast24ProductNReceivedMessagesRequest({
     $0.AccountServicesAccessAuthDetails? accessAuthDetails,
     $core.int? productN,
-    $22.MessageEntity? messageEntityEnum,
-    $22.AccountConnectedAccountAssistant? connectedAccountAssistant,
-    $22.AccountConnectedAccount? connectedAccount,
+    $19.MessageEntity? messageEntityEnum,
+    $19.AccountConnectedAccountAssistant? connectedAccountAssistant,
+    $19.AccountConnectedAccount? connectedAccount,
   }) {
     final _result = create();
     if (accessAuthDetails != null) {
@@ -1175,35 +1199,35 @@ class GetLast24ProductNReceivedMessagesRequest extends $pb.GeneratedMessage {
   void clearProductN() => clearField(2);
 
   @$pb.TagNumber(3)
-  $22.MessageEntity get messageEntityEnum => $_getN(2);
+  $19.MessageEntity get messageEntityEnum => $_getN(2);
   @$pb.TagNumber(3)
-  set messageEntityEnum($22.MessageEntity v) { setField(3, v); }
+  set messageEntityEnum($19.MessageEntity v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasMessageEntityEnum() => $_has(2);
   @$pb.TagNumber(3)
   void clearMessageEntityEnum() => clearField(3);
 
   @$pb.TagNumber(4)
-  $22.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(3);
+  $19.AccountConnectedAccountAssistant get connectedAccountAssistant => $_getN(3);
   @$pb.TagNumber(4)
-  set connectedAccountAssistant($22.AccountConnectedAccountAssistant v) { setField(4, v); }
+  set connectedAccountAssistant($19.AccountConnectedAccountAssistant v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasConnectedAccountAssistant() => $_has(3);
   @$pb.TagNumber(4)
   void clearConnectedAccountAssistant() => clearField(4);
   @$pb.TagNumber(4)
-  $22.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(3);
+  $19.AccountConnectedAccountAssistant ensureConnectedAccountAssistant() => $_ensure(3);
 
   @$pb.TagNumber(5)
-  $22.AccountConnectedAccount get connectedAccount => $_getN(4);
+  $19.AccountConnectedAccount get connectedAccount => $_getN(4);
   @$pb.TagNumber(5)
-  set connectedAccount($22.AccountConnectedAccount v) { setField(5, v); }
+  set connectedAccount($19.AccountConnectedAccount v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasConnectedAccount() => $_has(4);
   @$pb.TagNumber(5)
   void clearConnectedAccount() => clearField(5);
   @$pb.TagNumber(5)
-  $22.AccountConnectedAccount ensureConnectedAccount() => $_ensure(4);
+  $19.AccountConnectedAccount ensureConnectedAccount() => $_ensure(4);
 }
 
 class GetLast24ProductNReceivedMessagesResponse extends $pb.GeneratedMessage {
@@ -1530,14 +1554,14 @@ class GetAccountAssistantLastReceivedMessageResponse extends $pb.GeneratedMessag
 class GetReceivedMessagesAccountsResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetReceivedMessagesAccountsResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.conversation.message.account'), createEmptyInstance: create)
     ..aOM<$2.ResponseMeta>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
-    ..pc<$22.Account>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedMessagesAccounts', $pb.PbFieldType.PM, subBuilder: $22.Account.create)
+    ..pc<$19.Account>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedMessagesAccounts', $pb.PbFieldType.PM, subBuilder: $19.Account.create)
     ..hasRequiredFields = false
   ;
 
   GetReceivedMessagesAccountsResponse._() : super();
   factory GetReceivedMessagesAccountsResponse({
     $2.ResponseMeta? responseMeta,
-    $core.Iterable<$22.Account>? receivedMessagesAccounts,
+    $core.Iterable<$19.Account>? receivedMessagesAccounts,
   }) {
     final _result = create();
     if (responseMeta != null) {
@@ -1581,7 +1605,7 @@ class GetReceivedMessagesAccountsResponse extends $pb.GeneratedMessage {
   $2.ResponseMeta ensureResponseMeta() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $core.List<$22.Account> get receivedMessagesAccounts => $_getList(1);
+  $core.List<$19.Account> get receivedMessagesAccounts => $_getList(1);
 }
 
 class GetReceivedMessagesAccountAssistantsResponse extends $pb.GeneratedMessage {
@@ -1652,7 +1676,7 @@ class AccountAssistantReceivedMessage extends $pb.GeneratedMessage {
     ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainId')
     ..a<$core.int>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainAction', $pb.PbFieldType.O3)
     ..aOS(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'messageSourceSpaceDomainActionContextId')
-    ..aOM<$55.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1667,7 +1691,7 @@ class AccountAssistantReceivedMessage extends $pb.GeneratedMessage {
     $core.String? messageSourceSpaceDomainId,
     $core.int? messageSourceSpaceDomainAction,
     $core.String? messageSourceSpaceDomainActionContextId,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountAssistantReceivedMessageId != null) {
@@ -1805,15 +1829,15 @@ class AccountAssistantReceivedMessage extends $pb.GeneratedMessage {
   void clearMessageSourceSpaceDomainActionContextId() => clearField(9);
 
   @$pb.TagNumber(10)
-  $55.Timestamp get receivedAt => $_getN(9);
+  $52.Timestamp get receivedAt => $_getN(9);
   @$pb.TagNumber(10)
-  set receivedAt($55.Timestamp v) { setField(10, v); }
+  set receivedAt($52.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasReceivedAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearReceivedAt() => clearField(10);
   @$pb.TagNumber(10)
-  $55.Timestamp ensureReceivedAt() => $_ensure(9);
+  $52.Timestamp ensureReceivedAt() => $_ensure(9);
 }
 
 class AccountReceivedMessage extends $pb.GeneratedMessage {
@@ -1822,7 +1846,7 @@ class AccountReceivedMessage extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountId')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accountConnectionId')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..aOM<$55.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'receivedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -1832,7 +1856,7 @@ class AccountReceivedMessage extends $pb.GeneratedMessage {
     $core.String? accountId,
     $core.String? accountConnectionId,
     $core.String? message,
-    $55.Timestamp? receivedAt,
+    $52.Timestamp? receivedAt,
   }) {
     final _result = create();
     if (accountReceivedMessageId != null) {
@@ -1910,15 +1934,15 @@ class AccountReceivedMessage extends $pb.GeneratedMessage {
   void clearMessage() => clearField(4);
 
   @$pb.TagNumber(5)
-  $55.Timestamp get receivedAt => $_getN(4);
+  $52.Timestamp get receivedAt => $_getN(4);
   @$pb.TagNumber(5)
-  set receivedAt($55.Timestamp v) { setField(5, v); }
+  set receivedAt($52.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasReceivedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearReceivedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $55.Timestamp ensureReceivedAt() => $_ensure(4);
+  $52.Timestamp ensureReceivedAt() => $_ensure(4);
 }
 
 class AccountReceivedMessagesCountResponse extends $pb.GeneratedMessage {

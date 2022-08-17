@@ -76,7 +76,6 @@ class LocalNotificationService {
           badge: true,
           sound: true,
         );
-    print("resultIOS: ${resultIOS}");
 
     final bool? resultMACOS = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -86,7 +85,6 @@ class LocalNotificationService {
           badge: true,
           sound: true,
         );
-    print("resultMACOS: ${resultMACOS}");
 
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(

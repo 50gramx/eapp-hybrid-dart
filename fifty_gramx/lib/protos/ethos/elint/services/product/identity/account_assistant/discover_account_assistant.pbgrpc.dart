@@ -31,41 +31,49 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import '../../../../entities/account.pb.dart' as $22;
+import '../../../../entities/account.pb.dart' as $19;
 import '../../../../entities/account_assistant.pb.dart' as $6;
-import 'discover_account_assistant.pb.dart' as $23;
+import 'discover_account_assistant.pb.dart' as $20;
 export 'discover_account_assistant.pb.dart';
 
 class DiscoverAccountAssistantServiceClient extends $grpc.Client {
-  static final _$getAccountAssistantByAccount = $grpc.ClientMethod<$22.Account,
+  static final _$getAccountAssistantByAccount = $grpc.ClientMethod<$19.Account,
           $6.AccountAssistant>(
       '/elint.services.product.identity.account.assistant.DiscoverAccountAssistantService/GetAccountAssistantByAccount',
-      ($22.Account value) => value.writeToBuffer(),
+      ($19.Account value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $6.AccountAssistant.fromBuffer(value));
   static final _$getAccountAssistantMetaByAccountId = $grpc.ClientMethod<
-          $23.GetAccountAssistantMetaByAccountIdRequest,
-          $23.GetAccountAssistantMetaByAccountIdResponse>(
+          $20.GetAccountAssistantMetaByAccountIdRequest,
+          $20.GetAccountAssistantMetaByAccountIdResponse>(
       '/elint.services.product.identity.account.assistant.DiscoverAccountAssistantService/GetAccountAssistantMetaByAccountId',
-      ($23.GetAccountAssistantMetaByAccountIdRequest value) =>
+      ($20.GetAccountAssistantMetaByAccountIdRequest value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $23.GetAccountAssistantMetaByAccountIdResponse.fromBuffer(value));
+          $20.GetAccountAssistantMetaByAccountIdResponse.fromBuffer(value));
   static final _$getAccountAssistantMetaByAccountAssistantId = $grpc.ClientMethod<
-          $23.GetAccountAssistantMetaByAccountAssistantIdRequest,
-          $23.GetAccountAssistantMetaByAccountAssistantIdResponse>(
+          $20.GetAccountAssistantMetaByAccountAssistantIdRequest,
+          $20.GetAccountAssistantMetaByAccountAssistantIdResponse>(
       '/elint.services.product.identity.account.assistant.DiscoverAccountAssistantService/GetAccountAssistantMetaByAccountAssistantId',
-      ($23.GetAccountAssistantMetaByAccountAssistantIdRequest value) =>
+      ($20.GetAccountAssistantMetaByAccountAssistantIdRequest value) =>
           value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $23.GetAccountAssistantMetaByAccountAssistantIdResponse.fromBuffer(
+          $20.GetAccountAssistantMetaByAccountAssistantIdResponse.fromBuffer(
               value));
   static final _$getAccountAssistantById = $grpc.ClientMethod<
-          $23.GetAccountAssistantByIdRequest,
-          $23.GetAccountAssistantByIdResponse>(
+          $20.GetAccountAssistantByIdRequest,
+          $20.GetAccountAssistantByIdResponse>(
       '/elint.services.product.identity.account.assistant.DiscoverAccountAssistantService/GetAccountAssistantById',
-      ($23.GetAccountAssistantByIdRequest value) => value.writeToBuffer(),
+      ($20.GetAccountAssistantByIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $23.GetAccountAssistantByIdResponse.fromBuffer(value));
+          $20.GetAccountAssistantByIdResponse.fromBuffer(value));
+  static final _$getAccountAssistantNameCodeById = $grpc.ClientMethod<
+          $20.GetAccountAssistantNameCodeByIdRequest,
+          $20.GetAccountAssistantNameCodeByIdResponse>(
+      '/elint.services.product.identity.account.assistant.DiscoverAccountAssistantService/GetAccountAssistantNameCodeById',
+      ($20.GetAccountAssistantNameCodeByIdRequest value) =>
+          value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $20.GetAccountAssistantNameCodeByIdResponse.fromBuffer(value));
 
   DiscoverAccountAssistantServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -73,33 +81,41 @@ class DiscoverAccountAssistantServiceClient extends $grpc.Client {
       : super(channel, options: options, interceptors: interceptors);
 
   $grpc.ResponseFuture<$6.AccountAssistant> getAccountAssistantByAccount(
-      $22.Account request,
+      $19.Account request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountAssistantByAccount, request,
         options: options);
   }
 
-  $grpc.ResponseFuture<$23.GetAccountAssistantMetaByAccountIdResponse>
+  $grpc.ResponseFuture<$20.GetAccountAssistantMetaByAccountIdResponse>
       getAccountAssistantMetaByAccountId(
-          $23.GetAccountAssistantMetaByAccountIdRequest request,
+          $20.GetAccountAssistantMetaByAccountIdRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountAssistantMetaByAccountId, request,
         options: options);
   }
 
-  $grpc.ResponseFuture<$23.GetAccountAssistantMetaByAccountAssistantIdResponse>
+  $grpc.ResponseFuture<$20.GetAccountAssistantMetaByAccountAssistantIdResponse>
       getAccountAssistantMetaByAccountAssistantId(
-          $23.GetAccountAssistantMetaByAccountAssistantIdRequest request,
+          $20.GetAccountAssistantMetaByAccountAssistantIdRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(
         _$getAccountAssistantMetaByAccountAssistantId, request,
         options: options);
   }
 
-  $grpc.ResponseFuture<$23.GetAccountAssistantByIdResponse>
-      getAccountAssistantById($23.GetAccountAssistantByIdRequest request,
+  $grpc.ResponseFuture<$20.GetAccountAssistantByIdResponse>
+      getAccountAssistantById($20.GetAccountAssistantByIdRequest request,
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAccountAssistantById, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$20.GetAccountAssistantNameCodeByIdResponse>
+      getAccountAssistantNameCodeById(
+          $20.GetAccountAssistantNameCodeByIdRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getAccountAssistantNameCodeById, request,
         options: options);
   }
 }
@@ -109,82 +125,103 @@ abstract class DiscoverAccountAssistantServiceBase extends $grpc.Service {
       'elint.services.product.identity.account.assistant.DiscoverAccountAssistantService';
 
   DiscoverAccountAssistantServiceBase() {
-    $addMethod($grpc.ServiceMethod<$22.Account, $6.AccountAssistant>(
+    $addMethod($grpc.ServiceMethod<$19.Account, $6.AccountAssistant>(
         'GetAccountAssistantByAccount',
         getAccountAssistantByAccount_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $22.Account.fromBuffer(value),
+        ($core.List<$core.int> value) => $19.Account.fromBuffer(value),
         ($6.AccountAssistant value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
-            $23.GetAccountAssistantMetaByAccountIdRequest,
-            $23.GetAccountAssistantMetaByAccountIdResponse>(
+            $20.GetAccountAssistantMetaByAccountIdRequest,
+            $20.GetAccountAssistantMetaByAccountIdResponse>(
         'GetAccountAssistantMetaByAccountId',
         getAccountAssistantMetaByAccountId_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $23.GetAccountAssistantMetaByAccountIdRequest.fromBuffer(value),
-        ($23.GetAccountAssistantMetaByAccountIdResponse value) =>
+            $20.GetAccountAssistantMetaByAccountIdRequest.fromBuffer(value),
+        ($20.GetAccountAssistantMetaByAccountIdResponse value) =>
             value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<
-            $23.GetAccountAssistantMetaByAccountAssistantIdRequest,
-            $23.GetAccountAssistantMetaByAccountAssistantIdResponse>(
+            $20.GetAccountAssistantMetaByAccountAssistantIdRequest,
+            $20.GetAccountAssistantMetaByAccountAssistantIdResponse>(
         'GetAccountAssistantMetaByAccountAssistantId',
         getAccountAssistantMetaByAccountAssistantId_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $23.GetAccountAssistantMetaByAccountAssistantIdRequest.fromBuffer(
+            $20.GetAccountAssistantMetaByAccountAssistantIdRequest.fromBuffer(
                 value),
-        ($23.GetAccountAssistantMetaByAccountAssistantIdResponse value) =>
+        ($20.GetAccountAssistantMetaByAccountAssistantIdResponse value) =>
             value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$23.GetAccountAssistantByIdRequest,
-            $23.GetAccountAssistantByIdResponse>(
+    $addMethod($grpc.ServiceMethod<$20.GetAccountAssistantByIdRequest,
+            $20.GetAccountAssistantByIdResponse>(
         'GetAccountAssistantById',
         getAccountAssistantById_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $23.GetAccountAssistantByIdRequest.fromBuffer(value),
-        ($23.GetAccountAssistantByIdResponse value) => value.writeToBuffer()));
+            $20.GetAccountAssistantByIdRequest.fromBuffer(value),
+        ($20.GetAccountAssistantByIdResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$20.GetAccountAssistantNameCodeByIdRequest,
+            $20.GetAccountAssistantNameCodeByIdResponse>(
+        'GetAccountAssistantNameCodeById',
+        getAccountAssistantNameCodeById_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $20.GetAccountAssistantNameCodeByIdRequest.fromBuffer(value),
+        ($20.GetAccountAssistantNameCodeByIdResponse value) =>
+            value.writeToBuffer()));
   }
 
   $async.Future<$6.AccountAssistant> getAccountAssistantByAccount_Pre(
-      $grpc.ServiceCall call, $async.Future<$22.Account> request) async {
+      $grpc.ServiceCall call, $async.Future<$19.Account> request) async {
     return getAccountAssistantByAccount(call, await request);
   }
 
-  $async.Future<$23.GetAccountAssistantMetaByAccountIdResponse>
+  $async.Future<$20.GetAccountAssistantMetaByAccountIdResponse>
       getAccountAssistantMetaByAccountId_Pre(
           $grpc.ServiceCall call,
-          $async.Future<$23.GetAccountAssistantMetaByAccountIdRequest>
+          $async.Future<$20.GetAccountAssistantMetaByAccountIdRequest>
               request) async {
     return getAccountAssistantMetaByAccountId(call, await request);
   }
 
-  $async.Future<$23.GetAccountAssistantMetaByAccountAssistantIdResponse>
+  $async.Future<$20.GetAccountAssistantMetaByAccountAssistantIdResponse>
       getAccountAssistantMetaByAccountAssistantId_Pre(
           $grpc.ServiceCall call,
-          $async.Future<$23.GetAccountAssistantMetaByAccountAssistantIdRequest>
+          $async.Future<$20.GetAccountAssistantMetaByAccountAssistantIdRequest>
               request) async {
     return getAccountAssistantMetaByAccountAssistantId(call, await request);
   }
 
-  $async.Future<$23.GetAccountAssistantByIdResponse>
+  $async.Future<$20.GetAccountAssistantByIdResponse>
       getAccountAssistantById_Pre($grpc.ServiceCall call,
-          $async.Future<$23.GetAccountAssistantByIdRequest> request) async {
+          $async.Future<$20.GetAccountAssistantByIdRequest> request) async {
     return getAccountAssistantById(call, await request);
   }
 
+  $async.Future<$20.GetAccountAssistantNameCodeByIdResponse>
+      getAccountAssistantNameCodeById_Pre(
+          $grpc.ServiceCall call,
+          $async.Future<$20.GetAccountAssistantNameCodeByIdRequest>
+              request) async {
+    return getAccountAssistantNameCodeById(call, await request);
+  }
+
   $async.Future<$6.AccountAssistant> getAccountAssistantByAccount(
-      $grpc.ServiceCall call, $22.Account request);
-  $async.Future<$23.GetAccountAssistantMetaByAccountIdResponse>
+      $grpc.ServiceCall call, $19.Account request);
+  $async.Future<$20.GetAccountAssistantMetaByAccountIdResponse>
       getAccountAssistantMetaByAccountId($grpc.ServiceCall call,
-          $23.GetAccountAssistantMetaByAccountIdRequest request);
-  $async.Future<$23.GetAccountAssistantMetaByAccountAssistantIdResponse>
+          $20.GetAccountAssistantMetaByAccountIdRequest request);
+  $async.Future<$20.GetAccountAssistantMetaByAccountAssistantIdResponse>
       getAccountAssistantMetaByAccountAssistantId($grpc.ServiceCall call,
-          $23.GetAccountAssistantMetaByAccountAssistantIdRequest request);
-  $async.Future<$23.GetAccountAssistantByIdResponse> getAccountAssistantById(
-      $grpc.ServiceCall call, $23.GetAccountAssistantByIdRequest request);
+          $20.GetAccountAssistantMetaByAccountAssistantIdRequest request);
+  $async.Future<$20.GetAccountAssistantByIdResponse> getAccountAssistantById(
+      $grpc.ServiceCall call, $20.GetAccountAssistantByIdRequest request);
+  $async.Future<$20.GetAccountAssistantNameCodeByIdResponse>
+      getAccountAssistantNameCodeById($grpc.ServiceCall call,
+          $20.GetAccountAssistantNameCodeByIdRequest request);
 }

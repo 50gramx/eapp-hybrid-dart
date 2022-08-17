@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mv-id-cache-config
+  namespace: ethosverse
+data:
+  redis-config: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru

@@ -95,3 +95,24 @@ const GetAccountAssistantByIdResponse$json = const {
 
 /// Descriptor for `GetAccountAssistantByIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getAccountAssistantByIdResponseDescriptor = $convert.base64Decode('Ch9HZXRBY2NvdW50QXNzaXN0YW50QnlJZFJlc3BvbnNlEj8KDXJlc3BvbnNlX21ldGEYASABKAsyGi5lbGludC5lbnRpdHkuUmVzcG9uc2VNZXRhUgxyZXNwb25zZU1ldGESSwoRYWNjb3VudF9hc3Npc3RhbnQYAiABKAsyHi5lbGludC5lbnRpdHkuQWNjb3VudEFzc2lzdGFudFIQYWNjb3VudEFzc2lzdGFudA==');
+@$core.Deprecated('Use getAccountAssistantNameCodeByIdRequestDescriptor instead')
+const GetAccountAssistantNameCodeByIdRequest$json = const {
+  '1': 'GetAccountAssistantNameCodeByIdRequest',
+  '2': const [
+    const {'1': 'account_assistant_id', '3': 1, '4': 1, '5': 9, '10': 'accountAssistantId'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantNameCodeByIdRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantNameCodeByIdRequestDescriptor = $convert.base64Decode('CiZHZXRBY2NvdW50QXNzaXN0YW50TmFtZUNvZGVCeUlkUmVxdWVzdBIwChRhY2NvdW50X2Fzc2lzdGFudF9pZBgBIAEoCVISYWNjb3VudEFzc2lzdGFudElk');
+@$core.Deprecated('Use getAccountAssistantNameCodeByIdResponseDescriptor instead')
+const GetAccountAssistantNameCodeByIdResponse$json = const {
+  '1': 'GetAccountAssistantNameCodeByIdResponse',
+  '2': const [
+    const {'1': 'account_assistant_name_code', '3': 2, '4': 1, '5': 5, '10': 'accountAssistantNameCode'},
+    const {'1': 'account_assistant_name', '3': 3, '4': 1, '5': 9, '10': 'accountAssistantName'},
+  ],
+};
+
+/// Descriptor for `GetAccountAssistantNameCodeByIdResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getAccountAssistantNameCodeByIdResponseDescriptor = $convert.base64Decode('CidHZXRBY2NvdW50QXNzaXN0YW50TmFtZUNvZGVCeUlkUmVzcG9uc2USPQobYWNjb3VudF9hc3Npc3RhbnRfbmFtZV9jb2RlGAIgASgFUhhhY2NvdW50QXNzaXN0YW50TmFtZUNvZGUSNAoWYWNjb3VudF9hc3Npc3RhbnRfbmFtZRgDIAEoCVIUYWNjb3VudEFzc2lzdGFudE5hbWU=');

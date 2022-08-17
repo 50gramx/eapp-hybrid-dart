@@ -98,3 +98,20 @@ class AccountPayInMethod extends $pb.ProtobufEnum {
   const AccountPayInMethod._($core.int v, $core.String n) : super(v, n);
 }
 
+class LanguageEnum extends $pb.ProtobufEnum {
+  static const LanguageEnum ENGLISH = LanguageEnum._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ENGLISH');
+  static const LanguageEnum HINDI = LanguageEnum._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'HINDI');
+  static const LanguageEnum ODIA = LanguageEnum._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'ODIA');
+
+  static const $core.List<LanguageEnum> values = <LanguageEnum> [
+    ENGLISH,
+    HINDI,
+    ODIA,
+  ];
+
+  static final $core.Map<$core.int, LanguageEnum> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static LanguageEnum? valueOf($core.int value) => _byValue[value];
+
+  const LanguageEnum._($core.int v, $core.String n) : super(v, n);
+}
+

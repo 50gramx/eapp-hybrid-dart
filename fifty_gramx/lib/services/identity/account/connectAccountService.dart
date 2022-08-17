@@ -36,9 +36,7 @@ class ConnectAccountService {
       _serviceClient ??= ConnectAccountServiceClient(
           await IdentityCommonChannel.identityChannel);
 
-  void dispose() {
-    print("ConnectAccountService:dispose");
-  }
+  void dispose() {}
 
   // Service declarations here
   static Future<GetAccountSelfConnectedAccountAssistantResponse>
@@ -81,11 +79,9 @@ class ConnectAccountService {
     var accessAuth =
         (await AccountData().readAccountServicesAccessAuthDetails());
 
-    print("parseAccountMobiles:building request");
     var request = ParseAccountMobilesRequest()
       ..accessAuthDetails = accessAuth
       ..connectingAccountMobileNumbers.addAll(connectingAccountMobileNumbers);
-    print("parseAccountMobiles:request built");
     return await (await serviceClient).parseAccountMobiles(request);
   }
 

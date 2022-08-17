@@ -31,36 +31,36 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import 'discover_space_knowledge_domain_file_page_para.pb.dart' as $43;
+import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import 'discover_space_knowledge_domain_file_page_para.pb.dart' as $40;
 export 'discover_space_knowledge_domain_file_page_para.pb.dart';
 
 class DiscoverSpaceKnowledgeDomainFilePageParaServiceClient
     extends $grpc.Client {
   static final _$getAllParaIds = $grpc.ClientMethod<
-          $27.SpaceKnowledgeDomainServicesAccessAuthDetails, $43.ListOfParaIds>(
+          $24.SpaceKnowledgeDomainServicesAccessAuthDetails, $40.ListOfParaIds>(
       '/elint.services.product.knowledge.page.para.DiscoverSpaceKnowledgeDomainFilePageParaService/GetAllParaIds',
-      ($27.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
+      ($24.SpaceKnowledgeDomainServicesAccessAuthDetails value) =>
           value.writeToBuffer(),
-      ($core.List<$core.int> value) => $43.ListOfParaIds.fromBuffer(value));
-  static final _$getParaTextById = $grpc.ClientMethod<$43.GetParaTextByIdReq,
-          $43.GetParaTextByIdRes>(
+      ($core.List<$core.int> value) => $40.ListOfParaIds.fromBuffer(value));
+  static final _$getParaTextById = $grpc.ClientMethod<$40.GetParaTextByIdReq,
+          $40.GetParaTextByIdRes>(
       '/elint.services.product.knowledge.page.para.DiscoverSpaceKnowledgeDomainFilePageParaService/GetParaTextById',
-      ($43.GetParaTextByIdReq value) => value.writeToBuffer(),
+      ($40.GetParaTextByIdReq value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $43.GetParaTextByIdRes.fromBuffer(value));
-  static final _$getParaById = $grpc.ClientMethod<$43.GetParaByIdRequest,
-          $43.GetParaByIdResponse>(
+          $40.GetParaTextByIdRes.fromBuffer(value));
+  static final _$getParaById = $grpc.ClientMethod<$40.GetParaByIdRequest,
+          $40.GetParaByIdResponse>(
       '/elint.services.product.knowledge.page.para.DiscoverSpaceKnowledgeDomainFilePageParaService/GetParaById',
-      ($43.GetParaByIdRequest value) => value.writeToBuffer(),
+      ($40.GetParaByIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $43.GetParaByIdResponse.fromBuffer(value));
+          $40.GetParaByIdResponse.fromBuffer(value));
   static final _$getParaImageById = $grpc.ClientMethod<
-          $43.GetParaImageByIdRequest, $43.GetParaImageByIdResponse>(
+          $40.GetParaImageByIdRequest, $40.GetParaImageByIdResponse>(
       '/elint.services.product.knowledge.page.para.DiscoverSpaceKnowledgeDomainFilePageParaService/GetParaImageById',
-      ($43.GetParaImageByIdRequest value) => value.writeToBuffer(),
+      ($40.GetParaImageByIdRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $43.GetParaImageByIdResponse.fromBuffer(value));
+          $40.GetParaImageByIdResponse.fromBuffer(value));
 
   DiscoverSpaceKnowledgeDomainFilePageParaServiceClient(
       $grpc.ClientChannel channel,
@@ -68,26 +68,26 @@ class DiscoverSpaceKnowledgeDomainFilePageParaServiceClient
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$43.ListOfParaIds> getAllParaIds(
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request,
+  $grpc.ResponseFuture<$40.ListOfParaIds> getAllParaIds(
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getAllParaIds, request, options: options);
   }
 
-  $grpc.ResponseFuture<$43.GetParaTextByIdRes> getParaTextById(
-      $43.GetParaTextByIdReq request,
+  $grpc.ResponseFuture<$40.GetParaTextByIdRes> getParaTextById(
+      $40.GetParaTextByIdReq request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getParaTextById, request, options: options);
   }
 
-  $grpc.ResponseFuture<$43.GetParaByIdResponse> getParaById(
-      $43.GetParaByIdRequest request,
+  $grpc.ResponseFuture<$40.GetParaByIdResponse> getParaById(
+      $40.GetParaByIdRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getParaById, request, options: options);
   }
 
-  $grpc.ResponseStream<$43.GetParaImageByIdResponse> getParaImageById(
-      $43.GetParaImageByIdRequest request,
+  $grpc.ResponseStream<$40.GetParaImageByIdResponse> getParaImageById(
+      $40.GetParaImageByIdRequest request,
       {$grpc.CallOptions? options}) {
     return $createStreamingCall(
         _$getParaImageById, $async.Stream.fromIterable([request]),
@@ -102,74 +102,74 @@ abstract class DiscoverSpaceKnowledgeDomainFilePageParaServiceBase
 
   DiscoverSpaceKnowledgeDomainFilePageParaServiceBase() {
     $addMethod($grpc.ServiceMethod<
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails,
-            $43.ListOfParaIds>(
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails,
+            $40.ListOfParaIds>(
         'GetAllParaIds',
         getAllParaIds_Pre,
         false,
         false,
         ($core.List<$core.int> value) =>
-            $27.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
-        ($43.ListOfParaIds value) => value.writeToBuffer()));
+            $24.SpaceKnowledgeDomainServicesAccessAuthDetails.fromBuffer(value),
+        ($40.ListOfParaIds value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$43.GetParaTextByIdReq, $43.GetParaTextByIdRes>(
+        $grpc.ServiceMethod<$40.GetParaTextByIdReq, $40.GetParaTextByIdRes>(
             'GetParaTextById',
             getParaTextById_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $43.GetParaTextByIdReq.fromBuffer(value),
-            ($43.GetParaTextByIdRes value) => value.writeToBuffer()));
+                $40.GetParaTextByIdReq.fromBuffer(value),
+            ($40.GetParaTextByIdRes value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$43.GetParaByIdRequest, $43.GetParaByIdResponse>(
+        $grpc.ServiceMethod<$40.GetParaByIdRequest, $40.GetParaByIdResponse>(
             'GetParaById',
             getParaById_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $43.GetParaByIdRequest.fromBuffer(value),
-            ($43.GetParaByIdResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$43.GetParaImageByIdRequest,
-            $43.GetParaImageByIdResponse>(
+                $40.GetParaByIdRequest.fromBuffer(value),
+            ($40.GetParaByIdResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$40.GetParaImageByIdRequest,
+            $40.GetParaImageByIdResponse>(
         'GetParaImageById',
         getParaImageById_Pre,
         false,
         true,
         ($core.List<$core.int> value) =>
-            $43.GetParaImageByIdRequest.fromBuffer(value),
-        ($43.GetParaImageByIdResponse value) => value.writeToBuffer()));
+            $40.GetParaImageByIdRequest.fromBuffer(value),
+        ($40.GetParaImageByIdResponse value) => value.writeToBuffer()));
   }
 
-  $async.Future<$43.ListOfParaIds> getAllParaIds_Pre(
+  $async.Future<$40.ListOfParaIds> getAllParaIds_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>
+      $async.Future<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>
           request) async {
     return getAllParaIds(call, await request);
   }
 
-  $async.Future<$43.GetParaTextByIdRes> getParaTextById_Pre(
+  $async.Future<$40.GetParaTextByIdRes> getParaTextById_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$43.GetParaTextByIdReq> request) async {
+      $async.Future<$40.GetParaTextByIdReq> request) async {
     return getParaTextById(call, await request);
   }
 
-  $async.Future<$43.GetParaByIdResponse> getParaById_Pre($grpc.ServiceCall call,
-      $async.Future<$43.GetParaByIdRequest> request) async {
+  $async.Future<$40.GetParaByIdResponse> getParaById_Pre($grpc.ServiceCall call,
+      $async.Future<$40.GetParaByIdRequest> request) async {
     return getParaById(call, await request);
   }
 
-  $async.Stream<$43.GetParaImageByIdResponse> getParaImageById_Pre(
+  $async.Stream<$40.GetParaImageByIdResponse> getParaImageById_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$43.GetParaImageByIdRequest> request) async* {
+      $async.Future<$40.GetParaImageByIdRequest> request) async* {
     yield* getParaImageById(call, await request);
   }
 
-  $async.Future<$43.ListOfParaIds> getAllParaIds($grpc.ServiceCall call,
-      $27.SpaceKnowledgeDomainServicesAccessAuthDetails request);
-  $async.Future<$43.GetParaTextByIdRes> getParaTextById(
-      $grpc.ServiceCall call, $43.GetParaTextByIdReq request);
-  $async.Future<$43.GetParaByIdResponse> getParaById(
-      $grpc.ServiceCall call, $43.GetParaByIdRequest request);
-  $async.Stream<$43.GetParaImageByIdResponse> getParaImageById(
-      $grpc.ServiceCall call, $43.GetParaImageByIdRequest request);
+  $async.Future<$40.ListOfParaIds> getAllParaIds($grpc.ServiceCall call,
+      $24.SpaceKnowledgeDomainServicesAccessAuthDetails request);
+  $async.Future<$40.GetParaTextByIdRes> getParaTextById(
+      $grpc.ServiceCall call, $40.GetParaTextByIdReq request);
+  $async.Future<$40.GetParaByIdResponse> getParaById(
+      $grpc.ServiceCall call, $40.GetParaByIdRequest request);
+  $async.Stream<$40.GetParaImageByIdResponse> getParaImageById(
+      $grpc.ServiceCall call, $40.GetParaImageByIdRequest request);
 }

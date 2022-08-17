@@ -31,8 +31,8 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../../../entities/generic.pb.dart' as $2;
-import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $60;
+import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain_file_page_para.pb.dart' as $61;
 
 class ListOfParaIds extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListOfParaIds', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
@@ -93,14 +93,14 @@ class ListOfParaIds extends $pb.GeneratedMessage {
 
 class GetParaTextByIdReq extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetParaTextByIdReq', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageParaId')
     ..hasRequiredFields = false
   ;
 
   GetParaTextByIdReq._() : super();
   factory GetParaTextByIdReq({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? spaceKnowledgeDomainFilePageParaId,
   }) {
     final _result = create();
@@ -134,15 +134,15 @@ class GetParaTextByIdReq extends $pb.GeneratedMessage {
   static GetParaTextByIdReq? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainFilePageParaId => $_getSZ(1);
@@ -219,14 +219,14 @@ class GetParaTextByIdRes extends $pb.GeneratedMessage {
 
 class GetParaByIdRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetParaByIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageParaId')
     ..hasRequiredFields = false
   ;
 
   GetParaByIdRequest._() : super();
   factory GetParaByIdRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? spaceKnowledgeDomainFilePageParaId,
   }) {
     final _result = create();
@@ -260,15 +260,15 @@ class GetParaByIdRequest extends $pb.GeneratedMessage {
   static GetParaByIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainFilePageParaId => $_getSZ(1);
@@ -282,14 +282,14 @@ class GetParaByIdRequest extends $pb.GeneratedMessage {
 
 class GetParaByIdResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetParaByIdResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
-    ..aOM<$60.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePagePara', subBuilder: $60.SpaceKnowledgeDomainFilePagePara.create)
+    ..aOM<$61.SpaceKnowledgeDomainFilePagePara>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePagePara', subBuilder: $61.SpaceKnowledgeDomainFilePagePara.create)
     ..aOM<$2.ResponseMeta>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'responseMeta', subBuilder: $2.ResponseMeta.create)
     ..hasRequiredFields = false
   ;
 
   GetParaByIdResponse._() : super();
   factory GetParaByIdResponse({
-    $60.SpaceKnowledgeDomainFilePagePara? spaceKnowledgeDomainFilePagePara,
+    $61.SpaceKnowledgeDomainFilePagePara? spaceKnowledgeDomainFilePagePara,
     $2.ResponseMeta? responseMeta,
   }) {
     final _result = create();
@@ -323,15 +323,15 @@ class GetParaByIdResponse extends $pb.GeneratedMessage {
   static GetParaByIdResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $60.SpaceKnowledgeDomainFilePagePara get spaceKnowledgeDomainFilePagePara => $_getN(0);
+  $61.SpaceKnowledgeDomainFilePagePara get spaceKnowledgeDomainFilePagePara => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainFilePagePara($60.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
+  set spaceKnowledgeDomainFilePagePara($61.SpaceKnowledgeDomainFilePagePara v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainFilePagePara() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainFilePagePara() => clearField(1);
   @$pb.TagNumber(1)
-  $60.SpaceKnowledgeDomainFilePagePara ensureSpaceKnowledgeDomainFilePagePara() => $_ensure(0);
+  $61.SpaceKnowledgeDomainFilePagePara ensureSpaceKnowledgeDomainFilePagePara() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.ResponseMeta get responseMeta => $_getN(1);
@@ -347,14 +347,14 @@ class GetParaByIdResponse extends $pb.GeneratedMessage {
 
 class GetParaImageByIdRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetParaImageByIdRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.page.para'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFilePageParaId')
     ..hasRequiredFields = false
   ;
 
   GetParaImageByIdRequest._() : super();
   factory GetParaImageByIdRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? accessAuthDetails,
     $core.String? spaceKnowledgeDomainFilePageParaId,
   }) {
     final _result = create();
@@ -388,15 +388,15 @@ class GetParaImageByIdRequest extends $pb.GeneratedMessage {
   static GetParaImageByIdRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get accessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set accessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set accessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $core.String get spaceKnowledgeDomainFilePageParaId => $_getSZ(1);

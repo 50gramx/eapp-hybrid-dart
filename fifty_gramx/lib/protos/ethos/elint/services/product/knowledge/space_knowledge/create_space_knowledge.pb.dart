@@ -31,7 +31,7 @@ import 'dart:core' as $core;
 import 'package:protobuf/protobuf.dart' as $pb;
 
 import '../../identity/space/access_space.pb.dart' as $9;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 import 'access_space_knowledge.pb.dart' as $10;
 
 export '../../../../../../google/protobuf/timestamp.pb.dart';
@@ -39,7 +39,7 @@ class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateAccountSpaceKnowledgeRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.space'), createEmptyInstance: create)
     ..aOM<$9.SpaceServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceServiceAccessAuthDetails', subBuilder: $9.SpaceServicesAccessAuthDetails.create)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeName')
-    ..aOM<$55.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -47,7 +47,7 @@ class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   factory CreateAccountSpaceKnowledgeRequest({
     $9.SpaceServicesAccessAuthDetails? spaceServiceAccessAuthDetails,
     $core.String? spaceKnowledgeName,
-    $55.Timestamp? requestedAt,
+    $52.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceServiceAccessAuthDetails != null) {
@@ -103,15 +103,15 @@ class CreateAccountSpaceKnowledgeRequest extends $pb.GeneratedMessage {
   void clearSpaceKnowledgeName() => clearField(2);
 
   @$pb.TagNumber(6)
-  $55.Timestamp get requestedAt => $_getN(2);
+  $52.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(6)
-  set requestedAt($55.Timestamp v) { setField(6, v); }
+  set requestedAt($52.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(6)
   void clearRequestedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $55.Timestamp ensureRequestedAt() => $_ensure(2);
+  $52.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 
 class CreateAccountSpaceKnowledgeResponse extends $pb.GeneratedMessage {

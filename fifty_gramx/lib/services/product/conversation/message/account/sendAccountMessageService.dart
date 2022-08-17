@@ -24,7 +24,6 @@ import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:grpc/grpc.dart';
 
 class SendAccountMessageService {
@@ -97,9 +96,8 @@ class SendAccountMessageService {
     return (await serviceClient).getAccountSentMessagesCount(request);
   }
 
-
   static Future<AccountAssistantSentMessagesCountResponse>
-  getAccountAssistantSentMessagesCount() async {
+      getAccountAssistantSentMessagesCount() async {
     var request = await AccountData().readAccountServicesAccessAuthDetails();
     return (await serviceClient).getAccountAssistantSentMessagesCount(request);
   }

@@ -31,24 +31,24 @@ import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:grpc/service_api.dart' as $grpc;
-import 'send_account_assistant_message.pb.dart' as $47;
+import 'send_account_assistant_message.pb.dart' as $44;
 export 'send_account_assistant_message.pb.dart';
 
 class SendAccountAssistantMessageServiceClient extends $grpc.Client {
   static final _$sendMessageToAccount = $grpc.ClientMethod<
-          $47.MessageForAccount, $47.MessageForAccountSent>(
+          $44.MessageForAccount, $44.MessageForAccountSent>(
       '/elint.services.product.conversation.message.account.assistant.SendAccountAssistantMessageService/SendMessageToAccount',
-      ($47.MessageForAccount value) => value.writeToBuffer(),
+      ($44.MessageForAccount value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
-          $47.MessageForAccountSent.fromBuffer(value));
+          $44.MessageForAccountSent.fromBuffer(value));
 
   SendAccountAssistantMessageServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
-  $grpc.ResponseFuture<$47.MessageForAccountSent> sendMessageToAccount(
-      $47.MessageForAccount request,
+  $grpc.ResponseFuture<$44.MessageForAccountSent> sendMessageToAccount(
+      $44.MessageForAccount request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$sendMessageToAccount, request, options: options);
   }
@@ -60,22 +60,22 @@ abstract class SendAccountAssistantMessageServiceBase extends $grpc.Service {
 
   SendAccountAssistantMessageServiceBase() {
     $addMethod(
-        $grpc.ServiceMethod<$47.MessageForAccount, $47.MessageForAccountSent>(
+        $grpc.ServiceMethod<$44.MessageForAccount, $44.MessageForAccountSent>(
             'SendMessageToAccount',
             sendMessageToAccount_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $47.MessageForAccount.fromBuffer(value),
-            ($47.MessageForAccountSent value) => value.writeToBuffer()));
+                $44.MessageForAccount.fromBuffer(value),
+            ($44.MessageForAccountSent value) => value.writeToBuffer()));
   }
 
-  $async.Future<$47.MessageForAccountSent> sendMessageToAccount_Pre(
+  $async.Future<$44.MessageForAccountSent> sendMessageToAccount_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$47.MessageForAccount> request) async {
+      $async.Future<$44.MessageForAccount> request) async {
     return sendMessageToAccount(call, await request);
   }
 
-  $async.Future<$47.MessageForAccountSent> sendMessageToAccount(
-      $grpc.ServiceCall call, $47.MessageForAccount request);
+  $async.Future<$44.MessageForAccountSent> sendMessageToAccount(
+      $grpc.ServiceCall call, $44.MessageForAccount request);
 }

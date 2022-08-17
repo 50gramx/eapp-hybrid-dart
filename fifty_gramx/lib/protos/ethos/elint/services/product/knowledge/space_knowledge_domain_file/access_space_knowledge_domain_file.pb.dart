@@ -30,22 +30,22 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $27;
-import '../../../../entities/space_knowledge_domain_file.pb.dart' as $37;
+import '../space_knowledge_domain/access_space_knowledge_domain.pb.dart' as $24;
+import '../../../../entities/space_knowledge_domain_file.pb.dart' as $34;
 import '../../../../entities/generic.pb.dart' as $2;
-import '../../../../../../google/protobuf/timestamp.pb.dart' as $55;
+import '../../../../../../google/protobuf/timestamp.pb.dart' as $52;
 
 class SpaceKnowledgeDomainFileAccessTokenRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFileAccessTokenRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
-    ..aOM<$27.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainServicesAccessAuthDetails', subBuilder: $27.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
-    ..aOM<$37.SpaceKnowledgeDomainFile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $37.SpaceKnowledgeDomainFile.create)
+    ..aOM<$24.SpaceKnowledgeDomainServicesAccessAuthDetails>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainServicesAccessAuthDetails', subBuilder: $24.SpaceKnowledgeDomainServicesAccessAuthDetails.create)
+    ..aOM<$34.SpaceKnowledgeDomainFile>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $34.SpaceKnowledgeDomainFile.create)
     ..hasRequiredFields = false
   ;
 
   SpaceKnowledgeDomainFileAccessTokenRequest._() : super();
   factory SpaceKnowledgeDomainFileAccessTokenRequest({
-    $27.SpaceKnowledgeDomainServicesAccessAuthDetails? spaceKnowledgeDomainServicesAccessAuthDetails,
-    $37.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
+    $24.SpaceKnowledgeDomainServicesAccessAuthDetails? spaceKnowledgeDomainServicesAccessAuthDetails,
+    $34.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainServicesAccessAuthDetails != null) {
@@ -78,26 +78,26 @@ class SpaceKnowledgeDomainFileAccessTokenRequest extends $pb.GeneratedMessage {
   static SpaceKnowledgeDomainFileAccessTokenRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails get spaceKnowledgeDomainServicesAccessAuthDetails => $_getN(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails get spaceKnowledgeDomainServicesAccessAuthDetails => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainServicesAccessAuthDetails($27.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
+  set spaceKnowledgeDomainServicesAccessAuthDetails($24.SpaceKnowledgeDomainServicesAccessAuthDetails v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainServicesAccessAuthDetails() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainServicesAccessAuthDetails() => clearField(1);
   @$pb.TagNumber(1)
-  $27.SpaceKnowledgeDomainServicesAccessAuthDetails ensureSpaceKnowledgeDomainServicesAccessAuthDetails() => $_ensure(0);
+  $24.SpaceKnowledgeDomainServicesAccessAuthDetails ensureSpaceKnowledgeDomainServicesAccessAuthDetails() => $_ensure(0);
 
   @$pb.TagNumber(2)
-  $37.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(1);
+  $34.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(1);
   @$pb.TagNumber(2)
-  set spaceKnowledgeDomainFile($37.SpaceKnowledgeDomainFile v) { setField(2, v); }
+  set spaceKnowledgeDomainFile($34.SpaceKnowledgeDomainFile v) { setField(2, v); }
   @$pb.TagNumber(2)
   $core.bool hasSpaceKnowledgeDomainFile() => $_has(1);
   @$pb.TagNumber(2)
   void clearSpaceKnowledgeDomainFile() => clearField(2);
   @$pb.TagNumber(2)
-  $37.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(1);
+  $34.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(1);
 }
 
 class SpaceKnowledgeDomainFileAccessTokenResponse extends $pb.GeneratedMessage {
@@ -240,17 +240,17 @@ class ValidateSpaceKnowledgeDomainFileServicesResponse extends $pb.GeneratedMess
 
 class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SpaceKnowledgeDomainFileServicesAccessAuthDetails', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'elint.services.product.knowledge.file'), createEmptyInstance: create)
-    ..aOM<$37.SpaceKnowledgeDomainFile>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $37.SpaceKnowledgeDomainFile.create)
+    ..aOM<$34.SpaceKnowledgeDomainFile>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFile', subBuilder: $34.SpaceKnowledgeDomainFile.create)
     ..aOM<$2.PersistentSessionTokenDetails>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'spaceKnowledgeDomainFileServicesAccessSessionTokenDetails', subBuilder: $2.PersistentSessionTokenDetails.create)
-    ..aOM<$55.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $55.Timestamp.create)
+    ..aOM<$52.Timestamp>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'requestedAt', subBuilder: $52.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
   SpaceKnowledgeDomainFileServicesAccessAuthDetails._() : super();
   factory SpaceKnowledgeDomainFileServicesAccessAuthDetails({
-    $37.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
+    $34.SpaceKnowledgeDomainFile? spaceKnowledgeDomainFile,
     $2.PersistentSessionTokenDetails? spaceKnowledgeDomainFileServicesAccessSessionTokenDetails,
-    $55.Timestamp? requestedAt,
+    $52.Timestamp? requestedAt,
   }) {
     final _result = create();
     if (spaceKnowledgeDomainFile != null) {
@@ -286,15 +286,15 @@ class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMes
   static SpaceKnowledgeDomainFileServicesAccessAuthDetails? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $37.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(0);
+  $34.SpaceKnowledgeDomainFile get spaceKnowledgeDomainFile => $_getN(0);
   @$pb.TagNumber(1)
-  set spaceKnowledgeDomainFile($37.SpaceKnowledgeDomainFile v) { setField(1, v); }
+  set spaceKnowledgeDomainFile($34.SpaceKnowledgeDomainFile v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasSpaceKnowledgeDomainFile() => $_has(0);
   @$pb.TagNumber(1)
   void clearSpaceKnowledgeDomainFile() => clearField(1);
   @$pb.TagNumber(1)
-  $37.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(0);
+  $34.SpaceKnowledgeDomainFile ensureSpaceKnowledgeDomainFile() => $_ensure(0);
 
   @$pb.TagNumber(2)
   $2.PersistentSessionTokenDetails get spaceKnowledgeDomainFileServicesAccessSessionTokenDetails => $_getN(1);
@@ -308,14 +308,14 @@ class SpaceKnowledgeDomainFileServicesAccessAuthDetails extends $pb.GeneratedMes
   $2.PersistentSessionTokenDetails ensureSpaceKnowledgeDomainFileServicesAccessSessionTokenDetails() => $_ensure(1);
 
   @$pb.TagNumber(3)
-  $55.Timestamp get requestedAt => $_getN(2);
+  $52.Timestamp get requestedAt => $_getN(2);
   @$pb.TagNumber(3)
-  set requestedAt($55.Timestamp v) { setField(3, v); }
+  set requestedAt($52.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasRequestedAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearRequestedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $55.Timestamp ensureRequestedAt() => $_ensure(2);
+  $52.Timestamp ensureRequestedAt() => $_ensure(2);
 }
 
