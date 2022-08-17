@@ -94,10 +94,14 @@ flutter:
     - lib/assets/certs/identityServer.crt
     - lib/assets/certs/conversationServer.crt
     - lib/assets/certs/knowledgeServer.crt
-    - lib/assets/images/ethosCoin-light.png
-    - lib/assets/images/ethosCoin-light-disabled.png
-    - lib/assets/images/ethosCoin-dark.png
-    - lib/assets/images/ethosCoin-dark-disabled.png
+    # assets of 70GRAMx
+    #   Ethos Pods
+    #     Orchestrator Setup Scripts
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/homebrew.sh
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/install.sh
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/installMultipass.sh
+    #     multiverse resources
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/ethosverse-namespace.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
