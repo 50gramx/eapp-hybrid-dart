@@ -47,6 +47,8 @@ class MultipassCommands {
 
     exec = MutlipassExecCommands(_packagePath, _vmName);
     launch = MultipassLaunchCommands(_packagePath, _vmName);
+    start = MultipassStartCommands(_packagePath, _vmName);
+    stop = MultipassStopCommands(_packagePath, _vmName);
   }
 }
 
