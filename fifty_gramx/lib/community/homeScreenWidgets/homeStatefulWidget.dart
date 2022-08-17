@@ -1,5 +1,5 @@
-import 'package:fifty_gramx/widgets/homeScreenWidgets//conversations/conversationsStatefulWidget.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/appFlow.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsStatefulWidget.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -30,6 +30,7 @@ class _HomeStatefulWidgetState extends State<HomeStatefulWidget> {
   final List<AppFlow> appFlows = [
     AppFlow(
       title: 'Conversations',
+      code: 50,
       iconData: Icons.ondemand_video,
       mainColor: Colors.red,
       navigatorKey: GlobalKey<NavigatorState>(),
@@ -37,6 +38,7 @@ class _HomeStatefulWidgetState extends State<HomeStatefulWidget> {
     ),
     AppFlow(
       title: 'Connections',
+      code: 50,
       iconData: Icons.music_note,
       mainColor: Colors.green,
       navigatorKey: GlobalKey<NavigatorState>(),
@@ -45,6 +47,7 @@ class _HomeStatefulWidgetState extends State<HomeStatefulWidget> {
     AppFlow(
       index: 0,
       title: 'Spaces',
+      code: 50,
       iconData: Icons.music_note,
       mainColor: Colors.green,
       navigatorKey: GlobalKey<NavigatorState>(),
