@@ -1,6 +1,6 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/Container/NeuContainer.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Container/NeuContainer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
 import 'package:flutter/cupertino.dart';
 
 /// This is the stateful widget that the main application instantiates.

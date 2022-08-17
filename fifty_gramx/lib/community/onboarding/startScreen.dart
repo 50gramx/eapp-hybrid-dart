@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
-import 'package:fifty_gramx/widgets/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

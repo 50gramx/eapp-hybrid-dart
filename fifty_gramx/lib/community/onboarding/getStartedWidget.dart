@@ -1,8 +1,8 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
-import 'package:fifty_gramx/widgets/components/listItem/progress/progressHeadingListTile.dart';
-import 'package:fifty_gramx/widgets/onboarding/gettingStartedGalaxyColumnWidget.dart';
-import 'package:fifty_gramx/widgets/onboarding/gettingStartedUniverseColumnWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/progress/progressHeadingListTile.dart';
+import 'package:fifty_gramx/community/onboarding/gettingStartedGalaxyColumnWidget.dart';
+import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

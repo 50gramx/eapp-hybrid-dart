@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pbenum.dart';
@@ -12,16 +12,16 @@ import 'package:fifty_gramx/services/identity/account/accessAccountService.dart'
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:fifty_gramx/widgets/components/DateTimeField/DateOfBirthField.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/dropDownButton.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/widgets/components/TextField/MobileNumberTextField.dart';
-import 'package:fifty_gramx/widgets/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/widgets/components/TextField/SecurePinTextField.dart';
-import 'package:fifty_gramx/widgets/components/listItem/progress/progressContentListTile.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/custom/homeScreen.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets/localServices.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/DateTimeField/DateOfBirthField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/dropDownButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/MobileNumberTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/NameTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/SecurePinTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/progress/progressContentListTile.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
