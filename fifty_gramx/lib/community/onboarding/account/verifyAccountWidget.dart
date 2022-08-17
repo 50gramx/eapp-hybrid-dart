@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
-import 'package:fifty_gramx/widgets/homeScreenWidgets//homeStatefulWidget.dart';
-import 'package:fifty_gramx/widgets/onboarding/account/validateAccountWidget.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets//homeStatefulWidget.dart';
+import 'package:fifty_gramx/community/onboarding/account/validateAccountWidget.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.

@@ -2,7 +2,7 @@ import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
-import 'package:fifty_gramx/widgets/onboarding/account/verifyAccountWidget.dart';
+import 'package:fifty_gramx/community/onboarding/account/verifyAccountWidget.dart';
 import 'package:flutter/material.dart';
 
 class ValidateAccountData {

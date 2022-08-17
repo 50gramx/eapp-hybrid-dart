@@ -1,14 +1,14 @@
 
 
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
-import 'package:fifty_gramx/widgets/components/NeuButton/dropDownButton.dart';
-import 'package:fifty_gramx/widgets/components/NeuToggleButton/neuToggleButton.dart';
-import 'package:fifty_gramx/widgets/components/NeuToggleButton/neuToggleIconButtonContainer.dart';
-import 'package:fifty_gramx/widgets/components/NeuToggleButton/neuToggleTextButtonContainer.dart';
-import 'package:fifty_gramx/widgets/components/Text/Form/FormRowToggleSelectionButton.dart';
-import 'package:fifty_gramx/widgets/components/TextField/CardNumberTextField.dart';
-import 'package:fifty_gramx/widgets/components/listItem/progress/progressContentListTile.dart';
-import 'package:fifty_gramx/widgets/components/listItem/progress/progressHeadingListTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/dropDownButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuToggleButton/neuToggleButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuToggleButton/neuToggleIconButtonContainer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuToggleButton/neuToggleTextButtonContainer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormRowToggleSelectionButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/CardNumberTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/progress/progressContentListTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/listItem/progress/progressHeadingListTile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
