@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 class LeftNavigationBarSectionalItem {
   const LeftNavigationBarSectionalItem({
     required this.icon,
+    required this.code,
     this.label,
     Widget? activeIcon,
     this.backgroundColor,
@@ -11,6 +12,7 @@ class LeftNavigationBarSectionalItem {
         assert(icon != null);
 
   final Widget icon;
+  final int code;
   final Widget activeIcon;
   final String? label;
   final Color? backgroundColor;
