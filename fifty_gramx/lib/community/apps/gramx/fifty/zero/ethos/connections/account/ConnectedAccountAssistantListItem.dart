@@ -1,15 +1,8 @@
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemSubtitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
-import 'package:fifty_gramx/widgets/components/IconButton/Entity/AccountAssistantIconButton.dart';
-import 'package:fifty_gramx/widgets/components/IconButton/Entity/AccountIconButton.dart';
-import 'package:fifty_gramx/widgets/components/IconButton/Entity/AccountMetaIconButton.dart';
-import 'package:fifty_gramx/widgets/components/Text/Entity/AccountAssistantText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Entity/AccountMetaAssistantText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemSubtitleText.dart';
-import 'package:fifty_gramx/widgets/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/widgets/components/listItem/connections/listItem/ConnectedAssistantsListItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:intl/intl.dart';
@@ -74,7 +67,7 @@ class ConnectedAccountAssistantListItem extends StatelessWidget {
                   enableFeedback: true,
                   dense: true,
                   contentPadding:
-                  EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                      EdgeInsets.symmetric(vertical: 0, horizontal: 0),
                 ),
               ),
             ],
