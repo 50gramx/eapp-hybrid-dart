@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:fifty_gramx/widgets/components/navigation/bottom/tab/bottomNavigationTab.dart';
-import 'package:fifty_gramx/widgets/components/navigation/bottom/cupertinoBottomNavigationScaffold.dart';
-import 'package:fifty_gramx/widgets/components/navigation/bottom/materialBottomNavigationScaffold.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/bottom/tab/bottomNavigationTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/bottom/cupertinoBottomNavigationScaffold.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/navigation/bottom/materialBottomNavigationScaffold.dart';
 import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
