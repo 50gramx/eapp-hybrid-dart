@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/exec/multipassExecCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/launch/multipassLaunchCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/start/multipassStartCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/stop/multipassStopCommands.dart';
 
 // operates the commands for multipass package
 //
@@ -23,6 +25,12 @@ class MultipassCommands {
 
   /// nested class for launch commands
   static late MultipassLaunchCommands launch;
+
+  /// nested class for start commands
+  static late MultipassStartCommands start;
+
+  /// nested class for stop commands
+  static late MultipassStopCommands stop;
 
   // initialises the class
   MultipassCommands() {
@@ -60,8 +68,6 @@ class MultipassCommands {
     recover
     set
     shell
-    start
-    stop
     suspend
     transfer
     umount
