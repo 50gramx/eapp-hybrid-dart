@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
 import 'package:flutter/widgets.dart';
 
 class FormInfoText {

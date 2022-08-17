@@ -1,23 +1,31 @@
-import 'package:contacts_service/contacts_service.dart';
-import 'package:fifty_gramx/assets/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/widgets/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/widgets/components/Text/Entity/AbstractEntityAssistantText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Entity/AbstractEntityAssistantText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class AccountContactText implements AbstractEntityAssistantText {
-  final Contact contact;
+class AccountAssistantText implements AbstractEntityAssistantText {
+  final Account connectedAccount;
+  final AccountAssistant connectedAccountAssistant;
 
-  AccountContactText(this.contact);
+  AccountAssistantText(this.connectedAccountAssistant, this.connectedAccount);
+
 
   @override
-  Widget buildAccountContactTitleText(BuildContext context) {
+  Widget buildAccountContactTitleText(BuildContext context) => SizedBox();
+
+  @override
+  Widget buildAccountContactSubtitleText(BuildContext context) =>
+      SizedBox();
+
+  @override
+  Widget buildAccountAssistantTitleText(BuildContext context) {
     return Row(
       children: [
         NeumorphicText(
-          contact.displayName != null ? contact.displayName! : contact.givenName!,
+          connectedAccountAssistant.accountAssistantName,
           style: NeumorphicStyle(
             color: AppColors.contentPrimary(context),
             lightSource: NeumorphicTheme.isUsingDark(context)
@@ -41,9 +49,10 @@ class AccountContactText implements AbstractEntityAssistantText {
   }
 
   @override
-  Widget buildAccountContactSubtitleText(BuildContext context) {
+  Widget buildAccountAssistantSubtitleText(BuildContext context) {
     return NeumorphicText(
-      "",
+      "${connectedAccount.accountFirstName} "
+          "${connectedAccount.accountLastName}",
       style: NeumorphicStyle(
         color: AppColors.contentTertiary(context),
         lightSource: NeumorphicTheme.isUsingDark(context)
@@ -63,13 +72,6 @@ class AccountContactText implements AbstractEntityAssistantText {
           height: 1.42857143),
     );
   }
-
-  @override
-  Widget buildAccountAssistantTitleText(BuildContext context) => SizedBox();
-
-  @override
-  Widget buildAccountAssistantSubtitleText(BuildContext context) =>
-      SizedBox();
 
   @override
   Widget buildAccountMetaAssistantTitleText(BuildContext context) => SizedBox();
