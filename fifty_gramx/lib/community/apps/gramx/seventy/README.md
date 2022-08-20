@@ -1,8 +1,8 @@
 # seventy
 
-contains the ethos apps for community with codes from 70 to 79
+contains the ethos apps for community with code 70
 
 ## Folders and some descriptions
 
-- zero
-    - folder which contains the ethos apps for 70GMx community 
+- ethos
+    - folder which contains the ethos apps for "Ethos" Organisation
