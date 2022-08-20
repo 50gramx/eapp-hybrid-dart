@@ -49,10 +49,10 @@ class Microk8sStatusCommands {
           // parse the first line
           var status = LineSplitter.split(output).first;
           // process the output based on the status
-          if (output ==
+          if (status ==
               "MicroK8s is not running. Please run `microk8s start`.") {
             return "$orchestratorState, STOPPED";
-          } else if (output == "microk8s is running") {
+          } else if (status == "microk8s is running") {
             return "$orchestratorState, RUNNING";
           } else {
             return "$orchestratorState, INACTIVE";
