@@ -44,7 +44,7 @@ class MultipassListCommands {
   /// returns Map<String, dynamic> if orchestrator vm is available, else empty
   Future<Map<String, dynamic>> getOrchestratorVmMeta() async {
     // get the list of vms in json
-    Map<String, dynamic> vmsInJsonList = (await vmsInJson())["list"];
+    List<dynamic> vmsInJsonList = (await vmsInJson())["list"];
     // loop through the list of vms
     for (int vmIndex = 0; vmIndex < vmsInJsonList.length; vmIndex++) {
       // check for the orchestrator vm name in this list
