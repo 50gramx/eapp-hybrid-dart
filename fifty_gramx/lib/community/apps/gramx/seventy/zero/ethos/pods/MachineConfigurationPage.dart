@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -12,6 +11,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUse
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
@@ -82,78 +82,6 @@ Future<String> getHostPrivateIPAddress() async {
     print("found exception --> $e");
     return "NA";
   }
-}
-
-
-String parseK8sStatus(outputText) {
-  var statusText = LineSplitter.split(outputText).first;
-  if (statusText == "MicroK8s is not running. Please run `microk8s start`.") {
-    return "Stopped";
-  } else if (statusText == "microk8s is running") {
-    return "Running";
-  } else {
-    return "Inactive";
-  }
-}
-
-Future<String> getK8sStatus() async {
-  try {
-    var shell = Shell(runInShell: true);
-    var command = '''
-    /usr/local/bin/multipass exec ethos-pods-orchestrator-vm microk8s status
-    ''';
-    var output = (await shell.run(command)).outText;
-    return parseK8sStatus(output);
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-}
-
-Future<String> getMicrok8sVersion() async {
-  try {
-    var shell = Shell(runInShell: true);
-    var multipassListText =
-        (await shell.run("/usr/local/bin/multipass list --format=json"))
-            .outText;
-
-    if (multipassListText.length > 0) {
-      // it means we've data
-      var multipassListJson = json.decode(multipassListText);
-      // let's check if we've any list of data
-      if (multipassListJson["list"].length > 0) {
-        // it means we've one or more vm's
-        // check if vm's name is ethos-pods-orchestrator-vm in the list of vm's
-        for (int vmIndex = 0;
-            vmIndex < multipassListJson["list"].length;
-            vmIndex++) {
-          if (multipassListJson["list"][vmIndex]["name"] ==
-              "ethos-pods-orchestrator-vm") {
-            // it means the vm is there
-            // let's check it's status
-            if (multipassListJson["list"][vmIndex]["state"] == "Running") {
-              // vm is running
-              // check the microk8s status
-              return await getK8sStatus();
-            } else {
-              return "Stopped";
-            }
-          } else {
-            return "Deleted";
-          }
-        }
-      } else {
-        // it means we don't have vm's
-        return "NA";
-      }
-    } else {
-      return "NA";
-    }
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-  return "NA";
 }
 
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
@@ -317,7 +245,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             ),
 
             FutureBuilder<String>(
-              future: getMicrok8sVersion(),
+              future: Microk8sCommands.status.orchestratorStatus(),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -328,38 +256,47 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     return Text('Connection Active');
                   case ConnectionState.done:
                     if (snapshot.hasData) {
-                      if (snapshot.data == "NA" || snapshot.data == "Deleted") {
-                        return SelectorConfigurationItem(
-                            titleText: "Orchestrator",
-                            subtitleText: "Install",
-                            selectorCallback: () {
-                              AppPushPage().pushHorizontalPage(
-                                  context, MicroK8sInstallerPage());
-                            });
-                      } else if (snapshot.data == "Stopped" ||
-                          snapshot.data == "Running") {
-                        return SwitchConfigurationItem(
-                            titleText: "Orchestrator",
-                            isEnabled: true,
-                            switchValue:
-                                snapshot.data == "Running" ? true : false,
-                            switchOnChanged: (value) {
-                              if (value) {
-                                MultipassCommands.start.orchestrator();
-                                // TODO: Add notification so that the correct
-                                // switch values are reflected
-                                setState(() {});
-                              } else {
-                                MultipassCommands.stop.orchestrator();
-                                // TODO: Add notification so that the correct
-                                // switch values are reflected
-                                setState(() {});
-                              }
-                            });
-                      } else {
-                        return BasicConfigurationItem(
-                            titleText: "Orchestrator",
-                            subtitleText: snapshot.data!);
+                      switch (snapshot.data) {
+                        case ("RUNNING, STOPPED"):
+                        case ("RUNNING, RUNNING"):
+                        case ("RUNNING, INACTIVE"):
+                          {
+                            return SwitchConfigurationItem(
+                                titleText: "Orchestrator",
+                                isEnabled: true,
+                                switchValue: snapshot.data == "RUNNING, RUNNING"
+                                    ? true
+                                    : false,
+                                switchOnChanged: (value) {
+                                  if (value) {
+                                    MultipassCommands.start.orchestrator();
+                                    // TODO: Add notification so that the correct
+                                    // switch values are reflected
+                                    setState(() {});
+                                  } else {
+                                    MultipassCommands.stop.orchestrator();
+                                    // TODO: Add notification so that the correct
+                                    // switch values are reflected
+                                    setState(() {});
+                                  }
+                                });
+                          }
+                        case ("UNAVAILABLE, UNAVAILABLE "):
+                          {
+                            return SelectorConfigurationItem(
+                                titleText: "Orchestrator",
+                                subtitleText: "Install",
+                                selectorCallback: () {
+                                  AppPushPage().pushHorizontalPage(
+                                      context, MicroK8sInstallerPage());
+                                });
+                          }
+                        default:
+                          {
+                            return BasicConfigurationItem(
+                                titleText: "Orchestrator",
+                                subtitleText: snapshot.data!);
+                          }
                       }
                     } else {
                       return Text("Connection Done but No Data");
