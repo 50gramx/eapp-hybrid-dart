@@ -3,6 +3,7 @@
 // needs [String] package path with space
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/status/microk8sStatusCommands.dart';
 
 class Microk8sCommands {
   Microk8sCommands._();
@@ -16,6 +17,9 @@ class Microk8sCommands {
   /// nested class for exec commands
   static late KubectlCommands kubectl;
 
+  /// nested class for status commands
+  static late Microk8sStatusCommands status;
+
   Microk8sCommands(String packagePath) {
     // package name is same in all base os, so no checks needed
     _packageName = "microk8s";
@@ -25,6 +29,9 @@ class Microk8sCommands {
 
     // instantiate the kubectl commands
     kubectl = KubectlCommands(_packagePath);
+
+    // instantiate the status commands
+    status = Microk8sStatusCommands(_packagePath);
   }
 }
 
@@ -45,7 +52,6 @@ class Microk8sCommands {
     microk8s remove-node
     microk8s reset
     microk8s start
-    microk8s status
     microk8s stop
     microk8s version
  */
