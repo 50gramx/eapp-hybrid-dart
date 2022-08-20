@@ -260,6 +260,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                         case ("RUNNING, STOPPED"):
                         case ("RUNNING, RUNNING"):
                         case ("RUNNING, INACTIVE"):
+                        case ("STOPPED, UNAVAILABLE"):
                           {
                             return SwitchConfigurationItem(
                                 titleText: "Orchestrator",
