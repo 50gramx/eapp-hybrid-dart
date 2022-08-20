@@ -10,6 +10,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/compon
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HomebrewInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
@@ -83,33 +84,6 @@ Future<String> getHostPrivateIPAddress() async {
   }
 }
 
-Future<String> getHomebrewVersion() async {
-  try {
-    var shell = Shell(runInShell: true);
-    // check if ARM MacOS or Intel MacOS
-    var whichMacOS = (await shell.run("uname -m")).outText;
-    if (whichMacOS == "arm64") {
-      var homebrewVersionText =
-          (await shell.run("/opt/homebrew/bin/brew -v")).outText;
-      if (homebrewVersionText.length > 0) {
-        return LineSplitter.split(homebrewVersionText).first.substring(9);
-      } else {
-        return "NA";
-      }
-    } else {
-      var homebrewVersionText =
-          (await shell.run("/usr/local/bin/brew -v")).outText;
-      if (homebrewVersionText.length > 0) {
-        return LineSplitter.split(homebrewVersionText).first.substring(9);
-      } else {
-        return "NA";
-      }
-    }
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-}
 
 String parseK8sStatus(outputText) {
   var statusText = LineSplitter.split(outputText).first;
@@ -318,7 +292,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 child: FormInfoText("ETHOS POD ORCHESTRATOR").build(context)),
 
             FutureBuilder<String>(
-              future: getHomebrewVersion(),
+              future: BrewCommands.version(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
