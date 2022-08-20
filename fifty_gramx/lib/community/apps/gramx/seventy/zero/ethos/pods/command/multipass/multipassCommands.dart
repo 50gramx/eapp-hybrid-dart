@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/exec/multipassExecCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/launch/multipassLaunchCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/list/multipassListCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/start/multipassStartCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/stop/multipassStopCommands.dart';
 
 // operates the commands for multipass package
 //
-// needs no initializers
+// needs no initializer
 class MultipassCommands {
   MultipassCommands._();
 
@@ -32,6 +33,9 @@ class MultipassCommands {
   /// nested class for stop commands
   static late MultipassStopCommands stop;
 
+  /// nested class for list commands
+  static late MultipassListCommands list;
+
   // initialises the class
   MultipassCommands() {
     // package name is same in all base os, so no checks needed
@@ -45,10 +49,20 @@ class MultipassCommands {
     // vmName is same in all base os, so no checks needed
     _vmName = "ethos-pods-orchestrator-vm";
 
+    // instantiate the exec commands
     exec = MutlipassExecCommands(_packagePath, _vmName);
+
+    // instantiate the launch commands
     launch = MultipassLaunchCommands(_packagePath, _vmName);
+
+    // instantiate the start commands
     start = MultipassStartCommands(_packagePath, _vmName);
+
+    // instantiate the stop commands
     stop = MultipassStopCommands(_packagePath, _vmName);
+
+    // instantiate the list commands
+    list = MultipassListCommands(_packagePath, _vmName);
   }
 }
 
@@ -63,7 +77,6 @@ class MultipassCommands {
     get (preview)
     help
     info
-    list
     mount
     networks
     purge
