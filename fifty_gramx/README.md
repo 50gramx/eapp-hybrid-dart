@@ -1,16 +1,21 @@
 # fifty_gramx
 
-A new Flutter project.
+A hybrid app to run ethos apps for all the gramx communities
 
-## Getting Started
+- on any device with adaptive design (55.ethos.eutopia)
+- on any screen with responsive design (55.ethos.eutopia)
 
-This project is a starting point for a Flutter application.
+## Folders and some descriptions
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- lib
+    - folder which contains actual implementation of ethos apps
+- folders which contains the build from *lib* for the respective base os
+    - linux
+    - macos
+    - windows
+    - ios
+    - android
+- folders which are generated during development and are not supposed to be pushed to VCS
+    - .dart_tool
+    - .idea
+    - build
