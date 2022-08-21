@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/create/kubectlCreateCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/get/kubectlGetCommands.dart';
 
 class KubectlCommands {
   KubectlCommands._();
@@ -12,6 +13,9 @@ class KubectlCommands {
   /// nested class for create commands
   static late KubectlCreateCommands create;
 
+  /// nested class for get commands
+  static late KubectlGetCommands get;
+
   KubectlCommands(String packagePath) {
     // package name is same in all base os, so no checks needed
     _packageName = "kubectl";
@@ -22,6 +26,10 @@ class KubectlCommands {
     // todo: separate functionality
     _packagePath = "$packagePath$_packageName ";
 
+    // initialize the get commands
+    get = KubectlGetCommands(_packagePath);
+
+    // initialize the create commands
     create = KubectlCreateCommands(_packagePath);
   }
 }
@@ -43,7 +51,7 @@ class KubectlCommands {
  * -- cluster resources --
  * clusterrole
  * clusterrolebinding
- * namespace
+ *
  *
  *
  * -- namespaced resources --
@@ -62,7 +70,6 @@ class KubectlCommands {
 
 /**
  * -- getting started --
- * get
  * run
  * expose
  * delete
