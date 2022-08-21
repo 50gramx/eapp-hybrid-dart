@@ -1,5 +1,6 @@
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 
 class MutlipassExecCommands {
   /// contains the package path
@@ -84,5 +85,15 @@ class MutlipassExecCommands {
         "sudo chown -f -R ubuntu ~/.kube";
     // run the command
     await PrivilegedCommandExecuter.run(command);
+  }
+
+  /// deletes the asset from the vm at a given
+  /// vm's asset path as String
+  removeAsset(String vmAssetPath) async {
+    // build the command
+    String command = "${_baseCommandSpace}"
+        "rm $vmAssetPath";
+    // run the command
+    await SimpleCommandExecuter.run(command);
   }
 }
