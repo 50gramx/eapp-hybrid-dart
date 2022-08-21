@@ -65,4 +65,16 @@ class Microk8sStatusCommands {
         }
     }
   }
+
+  Future<bool> isOrchestratorRunning() async {
+    // get the orchestrator status
+    String status = await orchestratorStatus();
+    // return ture if RUNNING, RUNNING
+    if (status == "RUNNING, RUNNING") {
+      return true;
+    } else {
+      // return false if anything else
+      return false;
+    }
+  }
 }

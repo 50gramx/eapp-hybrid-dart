@@ -11,6 +11,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUse
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
@@ -87,6 +88,28 @@ Future<String> getHostPrivateIPAddress() async {
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   @override
   Widget build(BuildContext context) {
+    var multiversePodsWidgets = Column(
+      children: [
+        Container(
+            margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+            child: FormInfoText("MULTIVERSE PODS").build(context)),
+        SwitchConfigurationItem(
+            titleText: "File System",
+            switchValue: MultiversePodOperator.fsOp.isUp(),
+            switchOnChanged: (value) {
+              if (!value) {
+                // user requested to stop the pod
+                MultiversePodOperator.fsOp.spinDown();
+                setState(() {});
+              } else {
+                // user requested to start the pod
+                MultiversePodOperator.fsOp.spinUp();
+                setState(() {});
+              }
+            }),
+      ],
+    );
+
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary(context),
       body: CustomScrollView(slivers: <Widget>[
@@ -322,24 +345,117 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             // if the orchestrator is not working, it should not be executed or
             // visible in the screen, let's call this L2 Check
 
-            Container(
-                margin:
-                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("MULTIVERSE PODS").build(context)),
-            SwitchConfigurationItem(
-                titleText: "File System",
-                switchValue: MultiversePodOperator.fsOp.isUp(),
-                switchOnChanged: (value) {
-                  if (!value) {
-                    // user requested to stop the pod
-                    MultiversePodOperator.fsOp.spinDown();
-                    setState(() {});
-                  } else {
-                    // user requested to start the pod
-                    MultiversePodOperator.fsOp.spinUp();
-                    setState(() {});
-                  }
-                }),
+            // we need to run this command
+            // kubectl get namespaces
+            // check if the list has "ethosverse" namespace
+            // if available, proceed
+            // if not, create namespace
+            // Let's call this L3 Check
+
+            // L1 Check
+            Visibility(
+                visible: true, // TODO: update this with L1 Check
+                child: FutureBuilder<bool>(
+                  future: Microk8sCommands.status.isOrchestratorRunning(),
+                  builder: (context, snapshotOrchestratorStatus) {
+                    switch (snapshotOrchestratorStatus.connectionState) {
+                      case ConnectionState.waiting:
+                        {
+                          return AppProgressIndeterminateWidget();
+                        }
+                      case ConnectionState.none:
+                      case ConnectionState.active:
+                        {
+                          return SizedBox();
+                        }
+                      case ConnectionState.done:
+                        {
+                          if (snapshotOrchestratorStatus.hasData) {
+                            return Visibility(
+                              visible: snapshotOrchestratorStatus.data!,
+                              child: FutureBuilder<bool>(
+                                future: KubectlCommands.get.namespaced.namespace
+                                    .isEthosverseExists(),
+                                builder:
+                                    (context, snapshotMultiverseNamespace) {
+                                  switch (snapshotMultiverseNamespace
+                                      .connectionState) {
+                                    case ConnectionState.waiting:
+                                    case ConnectionState.none:
+                                    case ConnectionState.active:
+                                      return AppProgressIndeterminateWidget();
+                                    case ConnectionState.done:
+                                      {
+                                        if (snapshotMultiverseNamespace
+                                            .hasData) {
+                                          if (snapshotMultiverseNamespace
+                                              .data!) {
+                                            // if the ethosverse namespace exists,
+                                            // return the widget
+                                            return multiversePodsWidgets;
+                                          } else {
+                                            // if not, then create the resource,
+                                            // setState() after creating
+                                            return FutureBuilder<bool>(
+                                                future: KubectlCommands
+                                                    .create.namespaced.namespace
+                                                    .ethosverse(),
+                                                builder: (context,
+                                                    snapshotCreateResource) {
+                                                  switch (snapshotCreateResource
+                                                      .connectionState) {
+                                                    case ConnectionState
+                                                        .waiting:
+                                                    case ConnectionState.none:
+                                                    case ConnectionState.active:
+                                                      {
+                                                        return AppProgressIndeterminateWidget();
+                                                      }
+                                                    case ConnectionState.done:
+                                                      {
+                                                        if (snapshotCreateResource
+                                                            .hasData) {
+                                                          if (snapshotCreateResource
+                                                              .data!) {
+                                                            return multiversePodsWidgets;
+                                                          } else {
+                                                            return Text(
+                                                                "Couldn't create ethosverse resource");
+                                                          }
+                                                        } else {
+                                                          return SizedBox();
+                                                        }
+                                                      }
+                                                    default:
+                                                      {
+                                                        return SizedBox();
+                                                      }
+                                                  }
+                                                });
+                                          }
+                                        } else {
+                                          return SizedBox();
+                                        }
+                                      }
+                                    default:
+                                      {
+                                        return SizedBox();
+                                      }
+                                  }
+                                },
+                              ),
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      default:
+                        {
+                          return SizedBox();
+                        }
+                    }
+                  },
+                )),
 
             // ------------------------------------------------
             // ETHOS GALAXY POD
