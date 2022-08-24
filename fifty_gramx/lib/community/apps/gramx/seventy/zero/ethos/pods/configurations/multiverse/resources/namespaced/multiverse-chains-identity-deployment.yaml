@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-chains
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: mv-xc-id
+  template:
+    metadata:
+      labels:
+        epod: mv-xc-id
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: mv-xc-universe-id-container
+          image: ethosindia/chains:multiverse-universe-identity-arm64
+          imagePullPolicy: Always
+          env:
+            - name: SERVICE_IP
+              value: "10.152.183.152"
+            - name: SERVICE_PORT
+              value: "30501"
+            - name: PRESENT_NODE_MVFS_ENDPOINT
+              value: "ip4/$(SERVICE_IP)/tcp/$(SERVICE_PORT)"
+          ports:
+            - containerPort: 1001
+              name: xrpc
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
+        - name: mv-xc-community-collaborar-id-container
+          image: ethosindia/chains:multiverse-community_collaborator-identity-arm64
+          imagePullPolicy: Always
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: PRESENT_NODE_MVFS_ENDPOINT
+              value: "ip4/$(NODE_IP)/tcp/30501"
+          ports:
+            - containerPort: 2001
+              name: xrpc
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"

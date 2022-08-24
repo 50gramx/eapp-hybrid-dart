@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multiverse-filesystem-service
+  namespace: ethosverse
+spec:
+  type: NodePort
+  selector:
+    epod: mv-fs
+  ports:
+    - name: mv-fs-control
+      port: 5001
+      targetPort: 5001
+      nodePort: 30501
