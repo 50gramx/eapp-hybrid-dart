@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mv-fs-pv
+  labels:
+    type: local
+spec:
+  storageClassName: local-storage
+  claimRef:
+    name: mv-fs-pv-claim
+    namespace: ethosverse
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  local:
+    path: /mnt
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/app
+              operator: In
+              values:
+                - mv-fs
