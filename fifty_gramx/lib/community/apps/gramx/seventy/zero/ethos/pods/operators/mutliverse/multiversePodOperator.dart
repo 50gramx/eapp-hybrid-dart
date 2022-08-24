@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/chains/multiverseChainsOperator.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/filesystem/multiverseFileSystemOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/ingress/multiverseIngressOperator.dart';
 
 class MultiversePodOperator {
   // operates the multiverse pods
@@ -7,4 +8,5 @@ class MultiversePodOperator {
 
   static MultiverseFileSystemOperator fsOp = MultiverseFileSystemOperator();
   static MultiverseChainsOperator xcOp = MultiverseChainsOperator();
+  static MultiverseIngressOperator inOp = MultiverseIngressOperator();
 }
