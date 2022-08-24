@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.6+51
+version: 1.0.6+52
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -27,8 +27,8 @@ dependencies:
   grpc: ^3.0.0
   protobuf: ^2.0.0
   shared_preferences: ^2.0.5
-  firebase_core: ^1.13.1
-  firebase_messaging: ^10.0.3
+  firebase_core: 1.13.1
+  firebase_messaging: 10.0.3
   overlay_support: ^1.2.1
   flutter_neumorphic: ^3.2.0
   flutter_launcher_icons: ^0.9.0
@@ -67,7 +67,10 @@ dependencies:
   speech_to_text: ^4.2.2
   # A Dart package which parses total and available disk spaces on
   # Windows and UNIX-based systems (including Linux and macOS).
+
+  # A parser for YAML.
   universal_disk_space: ^0.2.3
+  yaml: 3.1.1
 
 flutter_icons:
   android: "launcher_icon"
@@ -101,7 +104,15 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/install.sh
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/installMultipass.sh
     #     multiverse resources
+    #       namespaced resources
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/ethosverse-namespace.yaml
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/multiverse-filesystem-statefulset.yaml
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/multiverse-filesystem-deployment.yaml
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/multiverse-operator-pull-secret.yaml
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/multiverse-chains-identity-deployment.yaml
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/multiverse-filesystem-service.yaml
+    #       cluster resources
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/cluster/multiverse-filesystem-persistent-volume.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -14,7 +14,9 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/multiversePodOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/chains/multiverseChainsOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/filesystem/multiverseFileSystemOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/multiversePodOperator.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/switchConfigurationItem.dart';
@@ -88,25 +90,88 @@ Future<String> getHostPrivateIPAddress() async {
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   @override
   Widget build(BuildContext context) {
+    // we need add L4 level check to verify the status of the pod
+    var multiverseFileSystemPodStatusInteraction = FutureBuilder<bool>(
+        future: MultiverseFileSystemOperator().checkPodStatus(),
+        builder: (context, snapshotMultiverseFileSystemPodStatus) {
+          switch (snapshotMultiverseFileSystemPodStatus.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return AppProgressIndeterminateWidget();
+            case ConnectionState.done:
+              print(
+                  "snapshotMultiverseFileSystemPodStatus: $snapshotMultiverseFileSystemPodStatus");
+              if (snapshotMultiverseFileSystemPodStatus.hasData) {
+                return SwitchConfigurationItem(
+                    titleText: "File System",
+                    switchValue: snapshotMultiverseFileSystemPodStatus.data!,
+                    switchOnChanged: (value) {
+                      print("switchOnChanged: $value");
+                      if (!value) {
+                        // user requested to stop the pod
+                        print("MultiversePodOperator.fsOp.spinDown()");
+                        MultiversePodOperator.fsOp.spinDown();
+                        setState(() {});
+                      } else {
+                        // user requested to start the pod
+                        MultiversePodOperator.fsOp.spinUp();
+                        setState(() {});
+                      }
+                    });
+              } else {
+                return SizedBox();
+              }
+            default:
+              return SizedBox();
+          }
+        });
+    var multiverseChainsIdentityPodStatusInteraction = FutureBuilder<bool>(
+        future: MultiverseChainsOperator().checkPodStatus(allChains: true),
+        builder: (context, snapshotMultiverseChainsIdentityPodStatus) {
+          switch (snapshotMultiverseChainsIdentityPodStatus.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return AppProgressIndeterminateWidget();
+            case ConnectionState.done:
+              print(
+                  "snapshotMultiverseChainsIdentityPodStatus: $snapshotMultiverseChainsIdentityPodStatus");
+              if (snapshotMultiverseChainsIdentityPodStatus.hasData) {
+                return SwitchConfigurationItem(
+                    titleText: "Identity Chains",
+                    switchValue:
+                        snapshotMultiverseChainsIdentityPodStatus.data!,
+                    switchOnChanged: (value) {
+                      if (!value) {
+                        // user requested to stop the pod
+                        MultiversePodOperator.xcOp.spinDown();
+                        setState(() {});
+                      } else {
+                        // user requested to start the pod
+                        MultiversePodOperator.xcOp.spinUp();
+                        setState(() {});
+                      }
+                    });
+              } else {
+                return SizedBox();
+              }
+            default:
+              return SizedBox();
+          }
+        });
     var multiversePodsWidgets = Column(
       children: [
         Container(
             margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
             child: FormInfoText("MULTIVERSE PODS").build(context)),
+        multiverseFileSystemPodStatusInteraction,
+        multiverseChainsIdentityPodStatusInteraction,
         SwitchConfigurationItem(
-            titleText: "File System",
-            switchValue: MultiversePodOperator.fsOp.isUp(),
-            switchOnChanged: (value) {
-              if (!value) {
-                // user requested to stop the pod
-                MultiversePodOperator.fsOp.spinDown();
-                setState(() {});
-              } else {
-                // user requested to start the pod
-                MultiversePodOperator.fsOp.spinUp();
-                setState(() {});
-              }
-            }),
+          titleText: "Identity Capabilities",
+          switchValue: false,
+          switchOnChanged: (value) {},
+        ),
       ],
     );
 

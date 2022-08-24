@@ -1,4 +1,6 @@
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/apply/kubectlApplyCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/create/kubectlCreateCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/delete/kubectlDeleteCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/crud/get/kubectlGetCommands.dart';
 
 class KubectlCommands {
@@ -16,6 +18,12 @@ class KubectlCommands {
   /// nested class for get commands
   static late KubectlGetCommands get;
 
+  /// nested class for apply commands
+  static late KubectlApplyCommands apply;
+
+  /// nested class for delete commands
+  static late KubectlDeleteCommands delete;
+
   KubectlCommands(String packagePath) {
     // package name is same in all base os, so no checks needed
     _packageName = "kubectl";
@@ -31,6 +39,12 @@ class KubectlCommands {
 
     // initialize the create commands
     create = KubectlCreateCommands(_packagePath);
+
+    // initialize the apply commands
+    apply = KubectlApplyCommands(_packagePath);
+
+    // initialize the delete commands
+    delete = KubectlDeleteCommands(_packagePath);
   }
 }
 
@@ -72,10 +86,8 @@ class KubectlCommands {
  * -- getting started --
  * run
  * expose
- * delete
  *
  * -- app management commands --
- * apply
  * annotate
  * autoscale
  * debug

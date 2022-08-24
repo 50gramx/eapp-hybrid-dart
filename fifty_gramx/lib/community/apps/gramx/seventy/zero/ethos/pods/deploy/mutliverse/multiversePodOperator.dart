@@ -1,8 +1,0 @@
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/deploy/mutliverse/filesystem/multiverseFileSystemOperator.dart';
-
-class MultiversePodOperator {
-  // operates the multiverse pods
-  static Map<String, dynamic> _multiversePodDetails = {};
-
-  static MultiverseFileSystemOperator fsOp = MultiverseFileSystemOperator();
-}
