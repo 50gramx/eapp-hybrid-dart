@@ -75,22 +75,23 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
               padding: EdgeInsets.zero,
               margin: EdgeInsets.zero,
             ),
-            Visibility(
+            Expanded(child: Visibility(
               visible: !widget.isCollapsed,
               child: Container(
-              width: MediaQuery.of(context).size.width - 66 - 116,
-              child: Text(
-                widget.buttonTitle,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: widget.isPrimaryButton
-                        ? AppColors.contentInversePrimary(context)
-                        : AppColors.contentPrimary(context),
-                    fontSize: 18,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w700),
-              ),
-            ),),
+                width: MediaQuery.of(context).size.width - 66 - 116,
+                child: Text(
+                  widget.buttonTitle,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: widget.isPrimaryButton
+                          ? AppColors.contentInversePrimary(context)
+                          : AppColors.contentPrimary(context),
+                      fontSize: 18,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w600),
+                ),
+              ),),),
           ],
         ));
   }
