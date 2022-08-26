@@ -77,4 +77,22 @@ class MultipassListCommands {
       return "UNAVAILABLE";
     }
   }
+
+  /// gets the orchestrator vm IPv4 (locally reachable)
+  ///
+  /// returns a list of IPs in string format if found, else empty
+  Future<List<String>> getOrchestratorVmIPv4() async {
+    List<String> vmIPv4List = [];
+    // get orchestrator meta
+    Map<String, dynamic> orchestratorVmMeta = await getOrchestratorVmMeta();
+    // return its state
+    if (orchestratorVmMeta.isNotEmpty) {
+      print(
+          "orchestratorVmMeta.ipv4.runtimeType: ${orchestratorVmMeta["ipv4"]}");
+      return orchestratorVmMeta["ipv4"];
+    } else {
+      // empty map, reflects no vm with orchestrator name
+      return vmIPv4List;
+    }
+  }
 }
