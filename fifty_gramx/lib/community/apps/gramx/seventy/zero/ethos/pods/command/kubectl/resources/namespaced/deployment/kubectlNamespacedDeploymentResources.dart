@@ -78,6 +78,35 @@ class KubectlNamespacedDeploymentResources {
     return true;
   }
 
+  /// gets the resource "multiverse-file-system" in a yaml parsed format
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl get commands
+  Future<dynamic> getMultiverseFileSystem() async {
+    // fetches the deployment info
+    // build the command
+    String command = "$_multiverseDeploymentBCS filesystem";
+    // run the command
+    List<ProcessResult> output = await SimpleCommandExecuter.run(command);
+    dynamic parsedOutput = loadYaml(output.outText);
+    return parsedOutput;
+  }
+
+  /// gets the status of resource "multiverse-file-system"
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl get commands
+  Future<bool> multiverseFileSystemStatus() async {
+    dynamic parsedOutput = await getMultiverseFileSystem();
+    if (parsedOutput == null) {
+      return false;
+    }
+    YamlMap parsedStatus = _getParsedDeploymentStatus(parsedOutput);
+    YamlList parsedStatusConditions =
+        _getParsedDeploymentStatusConditions(parsedStatus);
+    return isDeploymentRolling(parsedStatusConditions);
+  }
+
   /// creates the resource for "multiverse-chains-identity"
   ///
   /// warning, it is intended to work only
@@ -111,20 +140,6 @@ class KubectlNamespacedDeploymentResources {
     return true;
   }
 
-  /// gets the resource "multiverse-file-system" in a yaml parsed format
-  ///
-  /// warning, it is intended to work only
-  /// when nested under kubectl get commands
-  Future<dynamic> getMultiverseFileSystem() async {
-    // fetches the deployment info
-    // build the command
-    String command = "$_multiverseDeploymentBCS filesystem";
-    // run the command
-    List<ProcessResult> output = await SimpleCommandExecuter.run(command);
-    dynamic parsedOutput = loadYaml(output.outText);
-    return parsedOutput;
-  }
-
   /// gets the resource "multiverse-chains-identity" in a yaml parsed format
   ///
   /// warning, it is intended to work only
@@ -139,12 +154,12 @@ class KubectlNamespacedDeploymentResources {
     return parsedOutput;
   }
 
-  /// gets the status of resource "multiverse-file-system"
+  /// gets the status of resource "multiverse-chains-identity"
   ///
   /// warning, it is intended to work only
   /// when nested under kubectl get commands
-  Future<bool> multiverseFileSystemStatus() async {
-    dynamic parsedOutput = await getMultiverseFileSystem();
+  Future<bool> multiverseChainsIdentityStatus() async {
+    dynamic parsedOutput = await getMultiverseChainsIdentity();
     if (parsedOutput == null) {
       return false;
     }
@@ -154,12 +169,66 @@ class KubectlNamespacedDeploymentResources {
     return isDeploymentRolling(parsedStatusConditions);
   }
 
-  /// gets the status of resource "multiverse-chains-identity"
+  /// creates the resource for "multiverse-ingress-controller"
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl apply commands
+  Future<bool> multiverseIngressController() async {
+    String tempBaseCommandSpace = _baseCommandSpace;
+    print("this.toString:" + this.toString());
+    // fetch the temporary path for configuration file from the assets
+    String assetPath =
+        "lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/ingress-nginx-controller-deployment.yaml";
+    // transfer the asset to vm
+    String vmAssetPath = await MultipassCommands.transfer.asset(assetPath);
+    // build the command
+    String command = "$tempBaseCommandSpace -f $vmAssetPath";
+    // run the command
+    await SimpleCommandExecuter.run(command);
+    // remove the asset from vm
+    await MultipassCommands.exec.removeAsset(vmAssetPath);
+    return true;
+  }
+
+  /// deletes the resource for "multiverse-ingress-controller"
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl delete commands
+  Future<bool> deleteMultiverseIngressController() async {
+    String multiverseIngressBaseCommandSpace =
+        _multiverseIngressBaseCommandSpace;
+    // build the command
+    String command =
+        "$multiverseIngressBaseCommandSpace deployment ingress-nginx-controller";
+    // run the command
+    await SimpleCommandExecuter.run(command);
+    return true;
+  }
+
+  /// gets the resource "multiverse-ingress-controller" in a yaml parsed format
   ///
   /// warning, it is intended to work only
   /// when nested under kubectl get commands
-  Future<bool> multiverseChainsIdentityStatus() async {
-    dynamic parsedOutput = await getMultiverseChainsIdentity();
+  Future<dynamic> getMultiverseIngressController() async {
+    // fetches the deployment info
+    // build the command
+    String command =
+        "$_multiverseIngressDeploymentBCS ingress-nginx-controller";
+    // run the command
+    print("command: $command");
+    List<ProcessResult> output = await SimpleCommandExecuter.run(command);
+    print("output: $output");
+    dynamic parsedOutput = loadYaml(output.outText);
+    return parsedOutput;
+  }
+
+  /// gets the status of resource "multiverse-ingress-controller"
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl get commands
+  Future<bool> multiverseIngressControllerStatus() async {
+    print("this.toString:" + this.toString());
+    dynamic parsedOutput = await getMultiverseIngressController();
     if (parsedOutput == null) {
       return false;
     }
