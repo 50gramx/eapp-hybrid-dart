@@ -21,11 +21,11 @@ spec:
           imagePullPolicy: Always
           env:
             - name: SERVICE_IP
-              value: "10.152.183.152"
+              value: "multiverse-filesystem-service.ethosverse.svc.cluster.local"
             - name: SERVICE_PORT
               value: "30501"
             - name: PRESENT_NODE_MVFS_ENDPOINT
-              value: "ip4/$(SERVICE_IP)/tcp/$(SERVICE_PORT)"
+              value: "http://$(SERVICE_IP):$(SERVICE_PORT)"
           ports:
             - containerPort: 1001
               name: xrpc
@@ -40,12 +40,12 @@ spec:
           image: ethosindia/chains:multiverse-community_collaborator-identity-arm64
           imagePullPolicy: Always
           env:
-            - name: NODE_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
+            - name: SERVICE_IP
+              value: "multiverse-filesystem-service.ethosverse.svc.cluster.local"
+            - name: SERVICE_PORT
+              value: "30502"
             - name: PRESENT_NODE_MVFS_ENDPOINT
-              value: "ip4/$(NODE_IP)/tcp/30501"
+              value: "http://$(SERVICE_IP):$(SERVICE_PORT)"
           ports:
             - containerPort: 2001
               name: xrpc

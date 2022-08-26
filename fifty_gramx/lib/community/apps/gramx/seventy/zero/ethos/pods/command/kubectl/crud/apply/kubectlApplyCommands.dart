@@ -2,6 +2,7 @@
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/resources/cluster/kubectlClusterResources.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/resources/namespaced/kubectlNamespacedResources.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/resources/persona/kubectlPersonaResources.dart';
 
 class KubectlApplyCommands {
   KubectlApplyCommands._();
@@ -19,7 +20,11 @@ class KubectlApplyCommands {
   /// nested class for cluster resources
   KubectlClusterResources get cluster =>
       KubectlClusterResources(_baseCommandSpace);
-  
+
+  /// nested class for persona resources
+  KubectlPersonaResources get persona =>
+      KubectlPersonaResources(_baseCommandSpace);
+
   // initialises the class
   KubectlApplyCommands(String packagePath) {
     _packagePath = packagePath;
