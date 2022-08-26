@@ -29,6 +29,7 @@ class MultiverseFileSystemOperator {
     _multiverseFileSystem["podRunning"] = await KubectlCommands
         .get.namespaced.deployment
         .multiverseFileSystemStatus();
+    // TODO: check service status
     return _multiverseFileSystem["podRunning"];
   }
 
@@ -38,7 +39,6 @@ class MultiverseFileSystemOperator {
     // check if pod is not running
     if (this.isUp() == false) {
       // pod is not running
-      // todo: write the code to spin up
       // todo: update with the spin up with sticky-pod
       // await KubectlCommands.apply.cluster.persistentVolume
       //     .multiverseFileSystem();
@@ -60,12 +60,9 @@ class MultiverseFileSystemOperator {
   Future<int> spinDown() async {
     // check if pod is running
     if (isUp()) {
-      print("mv-fs pod was running, shutting down now");
-      // pod is running
-      // todo: write the code to spin down
       await KubectlCommands.delete.namespaced.deployment
           .deleteMultiverseFileSystem();
-      await KubectlCommands.apply.namespaced.service
+      await KubectlCommands.delete.namespaced.service
           .deleteMultiverseFileSystem();
       await checkPodStatus();
       return 1103;
