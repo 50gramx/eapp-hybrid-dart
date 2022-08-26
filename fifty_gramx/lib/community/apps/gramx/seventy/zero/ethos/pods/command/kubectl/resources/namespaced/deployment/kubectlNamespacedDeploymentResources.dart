@@ -29,10 +29,19 @@ class KubectlNamespacedDeploymentResources {
     // initialisation of namespace command for multiverse
     _multiverseBaseCommandSpace = "$_baseCommandSpace --namespace ethosverse";
 
+    // initialisation of namespace command for multiverse ingress
+    _multiverseIngressBaseCommandSpace =
+        "$_baseCommandSpace --namespace ingress-nginx";
+
     // initialisation of namespace command for multiverse
     // specific to deployment commands
     _multiverseDeploymentBCS =
         "$_multiverseBaseCommandSpace deployment -o yaml";
+
+    // initialisation of namespace command for multiverse ingress
+    // specific to deployment commands
+    _multiverseIngressDeploymentBCS =
+        "$_multiverseIngressBaseCommandSpace deployment -o yaml";
   }
 
   /// creates the resource for "multiverse-file-system"
