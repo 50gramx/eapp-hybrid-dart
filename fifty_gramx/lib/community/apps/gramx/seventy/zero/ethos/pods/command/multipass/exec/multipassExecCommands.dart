@@ -58,7 +58,7 @@ class MutlipassExecCommands {
   installMicrok8s() async {
     // build the command
     String command = "${_baseCommandSpace}"
-        "sudo snap install microk8s --classic --channel=1.18/stable";
+        "sudo snap install microk8s --classic --channel=1.21/stable";
     // run the command
     await PrivilegedCommandExecuter.run(command);
   }
