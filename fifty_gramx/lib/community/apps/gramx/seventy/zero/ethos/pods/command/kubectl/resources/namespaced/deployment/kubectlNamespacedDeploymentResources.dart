@@ -23,8 +23,6 @@ class KubectlNamespacedDeploymentResources {
 
   // initialises the class
   KubectlNamespacedDeploymentResources(String baseCommandSpace) {
-    print(
-        "KubectlNamespacedDeploymentResources:baseCommandSpace: $baseCommandSpace");
     // initialisation of base command
     _baseCommandSpace = baseCommandSpace;
 
