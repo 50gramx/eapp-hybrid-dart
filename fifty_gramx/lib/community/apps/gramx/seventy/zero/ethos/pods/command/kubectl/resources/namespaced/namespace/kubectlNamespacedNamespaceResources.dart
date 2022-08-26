@@ -29,6 +29,23 @@ class KubectlNamespacedNamespaceResources {
     return false;
   }
 
+  /// returns true if the mutliverse-ingress namespace exists in the cluster,
+  /// else false
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl get commands
+  Future<bool> isMultiverseIngressExists() async {
+    List<String> listOfAllNamespaces = await listAllNamespaces();
+    for (int listIndex = 0;
+        listIndex < listOfAllNamespaces.length;
+        listIndex++) {
+      if (listOfAllNamespaces[listIndex] == "ingress-nginx") {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /// returns the list of all namespaces names in the cluster
   ///
   /// warning, it is intended to work only
@@ -57,11 +74,30 @@ class KubectlNamespacedNamespaceResources {
   /// creates the resource for "ethosverse"
   ///
   /// warning, it is intended to work only
-  /// when nested under kubectl create commands
+  /// when nested under kubectl apply commands
   Future<bool> ethosverse() async {
     // fetch the temporary path for configuration file from the assets
     String assetPath =
-        "lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/ethosverse-namespace.yaml";
+        "lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/cluster/ethosverse-namespace.yaml";
+    // transfer the asset to vm
+    String vmAssetPath = await MultipassCommands.transfer.asset(assetPath);
+    // build the command
+    String command = "$_baseCommandSpace -f $vmAssetPath";
+    // run the command
+    await SimpleCommandExecuter.run(command);
+    // remove the asset from vm
+    await MultipassCommands.exec.removeAsset(vmAssetPath);
+    return true;
+  }
+
+  /// creates the resource for "multiverse-ingress"
+  ///
+  /// warning, it is intended to work only
+  /// when nested under kubectl apply commands
+  Future<bool> multiverseIngress() async {
+    // fetch the temporary path for configuration file from the assets
+    String assetPath =
+        "lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/cluster/ingress-nginx-namespace.yaml";
     // transfer the asset to vm
     String vmAssetPath = await MultipassCommands.transfer.asset(assetPath);
     // build the command
