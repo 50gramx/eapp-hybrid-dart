@@ -12,8 +12,14 @@ class KubectlNamespacedDeploymentResources {
   /// contains the multiverse base command for resource management commands
   static String _multiverseBaseCommandSpace = "";
 
+  /// contains the multiverse ingress base command for resource management commands
+  static String _multiverseIngressBaseCommandSpace = "";
+
   /// contains the multiverse base command for resource management commands
   static String _multiverseDeploymentBCS = "";
+
+  /// contains the multiverse ingress base command for resource management commands
+  static String _multiverseIngressDeploymentBCS = "";
 
   // initialises the class
   KubectlNamespacedDeploymentResources(String baseCommandSpace) {
