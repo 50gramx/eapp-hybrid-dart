@@ -4,7 +4,6 @@ metadata:
   name: multiverse-filesystem-service
   namespace: ethosverse
 spec:
-  type: NodePort
   selector:
     epod: mv-fs
   ports:
