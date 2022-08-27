@@ -17,7 +17,7 @@ spec:
         - name: regcred
       containers:
         - name: mv-xc-universe-id-container
-          image: ethosindia/chains:multiverse-universe-identity-arm64
+          image: ethosindia/chains-multiverse-universe-identity:latest
           imagePullPolicy: Always
           env:
             - name: SERVICE_IP
@@ -37,7 +37,7 @@ spec:
               memory: "256Mi"
               cpu: "0.2"
         - name: mv-xc-community-collaborar-id-container
-          image: ethosindia/chains:multiverse-community_collaborator-identity-arm64
+          image: ethosindia/chains-multiverse-community_collaborator-identity:latest
           imagePullPolicy: Always
           env:
             - name: SERVICE_IP
