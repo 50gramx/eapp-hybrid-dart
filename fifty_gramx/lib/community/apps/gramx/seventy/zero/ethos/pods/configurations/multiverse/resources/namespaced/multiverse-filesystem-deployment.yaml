@@ -23,7 +23,6 @@ spec:
             - containerPort: 4001
               name: bootstrap
             - containerPort: 5001
-              protocol: TCP
               name: control
           resources:
             requests:
