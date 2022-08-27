@@ -17,7 +17,7 @@ spec:
         - name: regcred
       containers:
         - name: mv-fs-container
-          image: ethosindia/filesystem:multiverse-arm64
+          image: ethosindia/filesystem-multiverse:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 4001
