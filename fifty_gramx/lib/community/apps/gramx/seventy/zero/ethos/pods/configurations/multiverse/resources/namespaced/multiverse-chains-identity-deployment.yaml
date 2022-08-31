@@ -43,7 +43,7 @@ spec:
             - name: SERVICE_IP
               value: "multiverse-filesystem-service.ethosverse.svc.cluster.local"
             - name: SERVICE_PORT
-              value: "30502"
+              value: "30501"
             - name: PRESENT_NODE_MVFS_ENDPOINT
               value: "http://$(SERVICE_IP):$(SERVICE_PORT)"
           ports:
