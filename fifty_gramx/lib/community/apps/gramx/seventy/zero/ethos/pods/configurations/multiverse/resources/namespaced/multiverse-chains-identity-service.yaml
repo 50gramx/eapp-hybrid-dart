@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multiverse-chains-identity-service
+  namespace: ethosverse
+spec:
+  selector:
+    epod: mv-xc-id
+  ports:
+    - name: mv-xc-uv-id
+      protocol: TCP
+      port: 30101
+      targetPort: 1001
+    - name: mv-xc-cc-id
+      protocol: TCP
+      port: 30102
+      targetPort: 2001
