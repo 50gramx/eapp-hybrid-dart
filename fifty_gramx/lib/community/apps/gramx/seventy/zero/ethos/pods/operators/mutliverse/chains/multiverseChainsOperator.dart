@@ -61,6 +61,7 @@ class MultiverseChainsOperator {
       print("calling multiverseChainsIdentity");
       await KubectlCommands.apply.namespaced.deployment
           .multiverseChainsIdentity();
+      await KubectlCommands.apply.namespaced.service.multiverseChainsIdentity();
       if (await checkPodStatus(entity: "universe", chain: "identity") ||
           await checkPodStatus(
               entity: "community_collaborator", chain: "identity")) {
@@ -83,6 +84,8 @@ class MultiverseChainsOperator {
       // pod is running
       // todo: write the code to spin down
       await KubectlCommands.delete.namespaced.deployment
+          .deleteMultiverseChainsIdentity();
+      await KubectlCommands.delete.namespaced.service
           .deleteMultiverseChainsIdentity();
       await checkPodStatus();
       return 1103;
