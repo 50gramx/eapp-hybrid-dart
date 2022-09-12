@@ -23,10 +23,11 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:fifty_gramx/community/Multiverse/EthosverseScreen.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/webScreen.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
@@ -258,9 +259,30 @@ void main() async {
 }
 
 Widget decideWhichScreen() {
+  var lightThemeData = NeumorphicThemeData(
+    intensity: 0.6,
+    baseColor: AppColors.lightPrimaryB,
+    lightSource: LightSource.topLeft,
+    depth: 5,
+    accentColor: AppColors.darkPrimaryA,
+  );
+  var darkThemeData = NeumorphicThemeData(
+    intensity: 0.6,
+    baseColor: AppColors.darkPrimaryB,
+    lightSource: LightSource.top,
+    depth: 5,
+    accentColor: AppColors.lightPrimaryA,
+  );
   if (kIsWeb) {
 //    return EthosPayScreen();
-    return EthosverseScreen();
+    return NeumorphicApp(
+        debugShowCheckedModeBanner: false,
+        title: '50gramx',
+        themeMode: ThemeMode.system,
+        // comment to adapt on system theme
+        theme: lightThemeData,
+        darkTheme: darkThemeData,
+        home: WebScreen());
   } else {
     // warn: keep this in check
     PrivilegedCommandExecuter.initPrivileged();
@@ -271,20 +293,8 @@ Widget decideWhichScreen() {
         title: '50gramx',
         themeMode: ThemeMode.system,
         // comment to adapt on system theme
-        theme: NeumorphicThemeData(
-          intensity: 0.6,
-          baseColor: AppColors.lightPrimaryB,
-          lightSource: LightSource.topLeft,
-          depth: 5,
-          accentColor: AppColors.darkPrimaryA,
-        ),
-        darkTheme: NeumorphicThemeData(
-          intensity: 0.6,
-          baseColor: AppColors.darkPrimaryB,
-          lightSource: LightSource.top,
-          depth: 5,
-          accentColor: AppColors.lightPrimaryA,
-        ),
+        theme: lightThemeData,
+        darkTheme: darkThemeData,
         routes: {
           '/connections': (context) => ConnectionsHomePage(index: 1),
           '/conversations': (context) => ConversationsHomePage(
