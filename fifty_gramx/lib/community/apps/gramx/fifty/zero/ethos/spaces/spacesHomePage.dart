@@ -21,8 +21,8 @@
 
 import 'dart:async';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/LocalSpacesService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/DiscoverSpaceKnowledgeDomainFilesPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';

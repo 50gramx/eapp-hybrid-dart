@@ -1,7 +1,7 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

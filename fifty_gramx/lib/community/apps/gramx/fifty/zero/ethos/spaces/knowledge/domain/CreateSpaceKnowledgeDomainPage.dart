@@ -21,7 +21,7 @@
 
 import 'dart:io';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/space.pb.dart';
@@ -30,9 +30,9 @@ import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/SelectSpaceKnowledgeDomainCollarPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
