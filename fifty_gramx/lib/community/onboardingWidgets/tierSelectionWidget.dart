@@ -21,7 +21,7 @@
 
 import 'dart:ui';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/freeTierBenefitsCardItem.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/tierDropdownRichText.dart';
 import 'package:flutter/widgets.dart';
