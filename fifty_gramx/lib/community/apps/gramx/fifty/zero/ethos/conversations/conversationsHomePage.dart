@@ -21,7 +21,7 @@
 
 import 'dart:async';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
 import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
@@ -29,9 +29,9 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/ethosai/EthosaiConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountConversationPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemSubtitleText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemSubtitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:flutter/cupertino.dart';
