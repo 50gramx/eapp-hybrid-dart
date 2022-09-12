@@ -1,6 +1,6 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Container/NeuContainer.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemDisabledText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Container/NeuContainer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemDisabledText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
 import 'package:flutter/cupertino.dart';
 
 class BasicConfigurationItem extends StatelessWidget {
