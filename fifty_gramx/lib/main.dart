@@ -22,7 +22,7 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
-import 'package:fifty_gramx/community/Multiverse/EthosverseScreen.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
@@ -273,41 +273,43 @@ Widget decideWhichScreen() {
     depth: 5,
     accentColor: AppColors.lightPrimaryA,
   );
-  if (kIsWeb) {
-//    return EthosPayScreen();
-    return NeumorphicApp(
-        debugShowCheckedModeBanner: false,
-        title: '50gramx',
-        themeMode: ThemeMode.system,
-        // comment to adapt on system theme
-        theme: lightThemeData,
-        darkTheme: darkThemeData,
-        home: WebScreen());
-  } else {
-    // warn: keep this in check
+
+  var webApp = NeumorphicApp(
+      debugShowCheckedModeBanner: false,
+      title: '50gramx',
+      themeMode: ThemeMode.system,
+      // comment to adapt on system theme
+      theme: lightThemeData,
+      darkTheme: darkThemeData,
+      home: WebScreen());
+
+  // warn: keep this in check
+  if (Platform.isMacOS) {
     PrivilegedCommandExecuter.initPrivileged();
     BrewCommands.initBrew();
     MultipassCommands();
-    return NeumorphicApp(
-        debugShowCheckedModeBanner: false,
-        title: '50gramx',
-        themeMode: ThemeMode.system,
-        // comment to adapt on system theme
-        theme: lightThemeData,
-        darkTheme: darkThemeData,
-        routes: {
-          '/connections': (context) => ConnectionsHomePage(index: 1),
-          '/conversations': (context) => ConversationsHomePage(
-                index: 1,
-                containingFlowTitle: '',
-              ),
-          '/spaces': (context) => SpacesHomePage(
-                index: 1,
-                containingFlowTitle: '',
-              ),
-        },
-        home: HomeScreen());
   }
+  EthosAppFlowBob();
+  return NeumorphicApp(
+      debugShowCheckedModeBanner: true,
+      title: '50gramx',
+      // themeMode: ThemeMode.dark,
+      // comment to adapt on system theme
+      theme: lightThemeData,
+      darkTheme: darkThemeData,
+      routes: {
+        '/connections': (context) => ConnectionsHomePage(index: 1),
+        '/conversations': (context) => ConversationsHomePage(
+          index: 1,
+          containingFlowTitle: '',
+        ),
+        '/spaces': (context) => SpacesHomePage(
+          index: 1,
+          containingFlowTitle: '',
+        ),
+      },
+      home: HomeScreen());
+
 }
 
 Widget getLoadingPage(String loadingText, BuildContext loadingContext) {
