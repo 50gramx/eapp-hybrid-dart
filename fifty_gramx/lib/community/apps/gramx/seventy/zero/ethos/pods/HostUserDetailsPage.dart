@@ -1,8 +1,9 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/button/fifty/two/ethos/pay/paymentButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/PasswordTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/PasswordTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -40,10 +41,12 @@ class _HostUserDetailsPageState extends State<HostUserDetailsPage> {
                     nameTextFieldController: userPasswordTextFieldController)),
             Padding(
               padding: EdgeInsets.only(top: 0, bottom: 0, right: 8, left: 8),
-              child: ActionNeuButton(
-                  buttonTitle: "Save",
+              child: PaymentButton(
+                  productName: "Space Licence",
+                  productPrice: 300,
+                  productTenure: "yr",
                   isPrimaryButton: true,
-                  isPrimaryButtonDisabled: !isPasswordGiven,
+                  isPrimaryButtonDisabled: false,
                   buttonActionOnPressed: () {
                     saveHostUserPassword();
                   }),

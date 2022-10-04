@@ -51,6 +51,8 @@ class _WebScreenState extends State<WebScreen> {
       iconData: FeatherIcons.user,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
+      firstPage:
+          ConversationsHomePage(index: 1, containingFlowTitle: 'Identity'),
     ),
     AppFlow(
       index: 1,
@@ -59,6 +61,7 @@ class _WebScreenState extends State<WebScreen> {
       iconData: FeatherIcons.dollarSign,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
+      firstPage: SpacesHomePage(index: 1, containingFlowTitle: 'Pay'),
     ),
     AppFlow(
       index: 2,
@@ -67,6 +70,7 @@ class _WebScreenState extends State<WebScreen> {
       iconData: FeatherIcons.cloud,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
+      firstPage: ConnectionsHomePage(index: 1),
     )
   ];
 

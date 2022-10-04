@@ -1,9 +1,13 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
 import 'package:yaml/yaml.dart';
 
 class LocalCapabilityComposer {
   Function fromContract(
-      {required YamlList expects,
+      {required int communityCode,
+      required String appName,
+      required String orgName,
+      required YamlList expects,
       required YamlMap returns,
       required YamlList steps}) {
     // fetch the return information
@@ -13,14 +17,29 @@ class LocalCapabilityComposer {
     dynamic returnType = LocalVariableComposer()
         .getType(variableTypeNameCode: returnTypeNameCode);
 
+    // post-process holders
+    dynamic returnValue = true;
+
     // pre-process the steps information
     for (int stepsIndex = 0; stepsIndex < steps.length; stepsIndex++) {
-      // todo: do this
+      // fetch the step contract
+      YamlMap step = steps[stepsIndex];
+      // check if contains return
+      if (step.containsKey('return')) {
+        String returnValueNameCode = step['return'];
+        returnValue = EthosAppFlowBob.getGramxAppsLocalVariableValue(
+            communityCode: communityCode,
+            orgName: orgName,
+            appName: appName,
+            variableNameCode: returnValueNameCode);
+        print("returnValue: $returnValue");
+        continue;
+      }
     }
 
     // compose the function
     Function composedFunction = () {
-      return true;
+      return returnValue;
     };
 
     // return the function

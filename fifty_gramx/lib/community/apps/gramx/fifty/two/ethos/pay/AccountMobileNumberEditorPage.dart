@@ -1,11 +1,11 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/NeuButton/dropDownButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/MobileNumberTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/TextField/SecurePinTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/dropDownButton.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/MobileNumberTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
@@ -29,9 +29,9 @@ class _AccountMobileNumberEditorPageState
     extends State<AccountMobileNumberEditorPage> {
   // allows to show a list of countries
   // TODO: Get this from an Ethos Core Services API
-  String selectedCountry = 'INDIA';
+  String selectedCountry = 'India';
   String selectedCountryCode = '+91';
-  List<String> listCountries = <String>['INDIA'];
+  List<String> listCountries = <String>['Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland'];
   List<String> listCountryCodes = <String>['+91'];
 
   // Universe Widget Properties
@@ -313,10 +313,15 @@ class _AccountMobileNumberEditorPageState
   }
 
   // function to change the selected country
-  onChangedSelectedCountry(String country) {
+  onChangedSelectedCountry(String userSelectedCountry) {
     setState(() {
-      selectedCountry = country;
-      selectedCountryCode = listCountryCodes[listCountries.indexOf(country)];
+      selectedCountry = userSelectedCountry;
+      try {
+        selectedCountryCode = listCountryCodes[listCountries.indexOf(userSelectedCountry)];
+      } catch (e) {
+        print("found exception during selecting country code");
+      }
+
     });
   }
 }

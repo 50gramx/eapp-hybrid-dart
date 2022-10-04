@@ -1,7 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Container/NeuContainer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/AdaptiveIconButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuChip.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:flutter/material.dart';
@@ -44,45 +44,10 @@ class _EutopiaLeftNavigationScaffoldState
 
   final GlobalKey<ScaffoldState> _screenKey = new GlobalKey<ScaffoldState>();
 
-  bool isPanningModeOn = true;
-  int firstColumnFlex = 2;
-  int secondColumnFlex = 10;
+  bool focusMode = true;
 
-  switchPanningMode() {
-    if (isPanningModeOn) {
-      setState(() {
-        firstColumnFlex = 1;
-        secondColumnFlex = 11;
-        isPanningModeOn = false;
-      });
-    } else {
-      setState(() {
-        firstColumnFlex = 2;
-        secondColumnFlex = 10;
-        isPanningModeOn = true;
-      });
-    }
-  }
-
-  bool isOpenTilesPanningMadeOn = true;
-  int openPagesPanFlex = 8;
-  int openTilesPanFlex = 4;
-
-  switchTilesPanningMode() {
-    if (isOpenTilesPanningMadeOn) {
-      setState(() {
-        openPagesPanFlex = 10;
-        openTilesPanFlex = 2;
-        isOpenTilesPanningMadeOn = false;
-      });
-    } else {
-      setState(() {
-        openPagesPanFlex = 8;
-        openTilesPanFlex = 4;
-        isOpenTilesPanningMadeOn = true;
-      });
-    }
-  }
+  // todo: gayab mode
+  TextEditingController nameTextFieldController = TextEditingController();
 
   @override
   void initState() {
@@ -184,143 +149,21 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) {
-    Widget appLogoPane = Container(
-      child: NeumorphicButton(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        margin: const EdgeInsets.only(left: 8, top: 8),
-        style: NeumorphicStyle(
-          lightSource: NeumorphicTheme.isUsingDark(context)
-              ? LightSource.bottomRight
-              : LightSource.topLeft,
-          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-              ? AppColors.gray600
-              : AppColors.backgroundSecondary(context),
-          shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-          color: AppColors.backgroundInverseTertiary(context),
-          border: NeumorphicBorder(
-            isEnabled: true,
-            color: AppColors.backgroundInverseTertiary(context),
-            width: 0,
-          ),
-          depth: 0,
-        ),
-        child: NeumorphicText(
-          isPanningModeOn ? "50GRAMx" : "50GMx",
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                topRight: Radius.circular(24),
-                bottomRight: Radius.circular(24))),
-            color: AppColors.backgroundPrimary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.backgroundInverseTertiary(context),
-              width: 1,
-            ),
-          ),
-          textAlign: TextAlign.center,
-          textStyle: NeumorphicTextStyle(
-              fontSize: 22,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w700),
-        ),
-        onPressed: () {
-          print('pressed');
-          switchPanningMode();
+    _buildAppButton(context, subIndex) {
+      return AdaptiveNeuButton(
+        buttonTitle: eutopiaNavigationBarSectionalItems[subIndex]
+            .leftNavigationBarSectionalItem
+            .label!,
+        buttonActionOnPressed: () {
+          selectPressedSectionItem(subIndex);
         },
-      ),
-    );
-
-    List<Widget> appCardCommunityLabels = [];
-    for (int code = 50; code < 100; code++) {
-      appCardCommunityLabels.add(Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6),
-        margin: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
-        child: NeumorphicText(
-          isPanningModeOn ? "${code}GRAMx" : "${code}GMx",
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.flat,
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                topRight: Radius.circular(24),
-                bottomRight: Radius.circular(24))),
-            color: AppColors.contentPrimary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.contentPrimary(context),
-              width: 1,
-            ),
-          ),
-          textAlign: TextAlign.left,
-          textStyle: NeumorphicTextStyle(
-              fontSize: 12,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w300),
-        ),
-      ));
+        icon: eutopiaNavigationBarSectionalItems[subIndex]
+            .leftNavigationBarSectionalItem
+            .icon,
+        isCollapsed: true,
+        isSelected: subIndex == widget.selectedIndex,
+      );
     }
-
-    Widget communityAppCardPaneControl = NeumorphicButton(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      margin: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
-      style: NeumorphicStyle(
-        lightSource: NeumorphicTheme.isUsingDark(context)
-            ? LightSource.bottomRight
-            : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-            ? AppColors.gray600
-            : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: AppColors.backgroundSecondary(context),
-        border: NeumorphicBorder(
-          isEnabled: true,
-          color: AppColors.backgroundSecondary(context),
-          width: 0,
-        ),
-        depth: 0,
-      ),
-      child: NeumorphicText(
-        isPanningModeOn ? "ETHOS CARDS" : "eCARDS",
-        style: NeumorphicStyle(
-          lightSource: NeumorphicTheme.isUsingDark(context)
-              ? LightSource.bottomRight
-              : LightSource.topLeft,
-          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-              ? AppColors.gray600
-              : AppColors.backgroundSecondary(context),
-          shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-              topRight: Radius.circular(24), bottomRight: Radius.circular(24))),
-          color: AppColors.backgroundInverseTertiary(context),
-          border: NeumorphicBorder(
-            isEnabled: true,
-            color: AppColors.backgroundInverseTertiary(context),
-            width: 1,
-          ),
-        ),
-        textAlign: TextAlign.left,
-        textStyle: NeumorphicTextStyle(
-            fontSize: 12,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w400),
-      ),
-      onPressed: () {
-        switchPanningMode();
-      },
-    );
 
     Widget communityAppCardPane = Neumorphic(
       style: NeumorphicStyle(
@@ -330,67 +173,58 @@ class _EutopiaLeftNavigationScaffoldState
         shadowLightColor: NeumorphicTheme.isUsingDark(context)
             ? AppColors.gray600
             : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.flat,
+        shape: NeumorphicShape.concave,
+        depth: -6,
         boxShape:
             NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
-        color: AppColors.backgroundSecondary(context),
+        color: AppColors.backgroundInverseSecondary(context),
         border: NeumorphicBorder(
           isEnabled: true,
-          color: AppColors.backgroundSecondary(context),
+          color: AppColors.backgroundInverseTertiary(context),
           width: 2,
         ),
       ),
-      margin: EdgeInsets.only(top: 8, bottom: 8, right: 16, left: 16),
+      margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 8),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Container(
+        height: eutopiaNavigationBarSectionalItems.length * 57,
         child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: eutopiaNavigationBarSectionalItems.length + 1 + 3,
+            itemCount: eutopiaNavigationBarSectionalItems.length,
             itemBuilder: (BuildContext context, int subIndex) {
-              if (subIndex == 0) {
-                return communityAppCardPaneControl;
-              } else if (subIndex == 1) {
-                subIndex = subIndex - 1;
-                return appCardCommunityLabels[subIndex];
-              } else if (subIndex > 1 &&
-                  subIndex < eutopiaNavigationBarSectionalItems.length + 2) {
-                subIndex = subIndex - 2;
-                return AdaptiveNeuButton(
-                  buttonTitle: eutopiaNavigationBarSectionalItems[subIndex]
-                      .leftNavigationBarSectionalItem
-                      .label!,
-                  buttonActionOnPressed: () {
-                    selectPressedSectionItem(subIndex);
-                  },
-                  icon: eutopiaNavigationBarSectionalItems[subIndex]
-                      .leftNavigationBarSectionalItem
-                      .icon,
-                  isCollapsed: !isPanningModeOn,
-                );
-              } else {
-                subIndex = subIndex - eutopiaNavigationBarSectionalItems.length;
-                return appCardCommunityLabels[subIndex];
-              }
+              return _buildAppButton(context, subIndex);
             }),
       ),
     );
 
-    Widget firstColumnContainer = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 1,
-            child: appLogoPane,
-          ),
-          Expanded(
-            flex: 11,
-            child: communityAppCardPane,
-          ),
-        ],
-      ),
+
+    Widget column = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 12,
+          child: communityAppCardPane,
+        ),
+      ],
     );
+
+    Widget firstColumnContainer = Container(
+      child: Center(child: communityAppCardPane,),
+    );
+
+    _buildAppPageButton(content, subIndex) {
+      return ActionNeuChip(
+        chipAvatarText:
+            "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
+        chipTitle:
+            "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
+        chipIconBackgroundColor: AppColors.contentPrimary(context),
+        buttonActionOnPressed: () {
+          selectPressedSectionItem(subIndex);
+        },
+      );
+    }
 
     Widget pageTabPane = Neumorphic(
       style: NeumorphicStyle(
@@ -403,10 +237,10 @@ class _EutopiaLeftNavigationScaffoldState
         shape: NeumorphicShape.flat,
         boxShape:
             NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
-        color: AppColors.backgroundTertiary(context),
+        color: AppColors.backgroundInverseSecondary(context),
         border: NeumorphicBorder(
           isEnabled: true,
-          color: AppColors.backgroundPrimary(context),
+          color: AppColors.backgroundInverseTertiary(context),
           width: 2,
         ),
       ),
@@ -420,17 +254,7 @@ class _EutopiaLeftNavigationScaffoldState
                   scrollDirection: Axis.horizontal,
                   itemCount: eutopiaNavigationBarSectionalItems.length,
                   itemBuilder: (BuildContext context, int subIndex) {
-                    return ActionNeuChip(
-                      chipAvatarText:
-                          "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
-                      chipTitle:
-                          "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
-                      chipIconBackgroundColor:
-                          AppColors.contentPrimary(context),
-                      buttonActionOnPressed: () {
-                        selectPressedSectionItem(subIndex);
-                      },
-                    );
+                    return _buildAppPageButton(context, subIndex);
                   }),
             )
           ],
@@ -439,251 +263,304 @@ class _EutopiaLeftNavigationScaffoldState
       ),
     );
 
+    Widget ethosaiSearchInput = Center(
+      child: Container(
+        // height: 64,
+        child: Neumorphic(
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.flat,
+            depth: 6,
+            boxShape: NeumorphicBoxShape.roundRect(
+                BorderRadius.all(Radius.circular(24))),
+            color: AppColors.contentInverseSecondary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.contentInverseTertiary(context),
+              width: 2,
+            ),
+          ),
+          margin: EdgeInsets.only(bottom: 8, right: 16, left: 8, top: 8),
+          child: Column(
+            children: [
+              // Update with tile for ethosai with search
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: NameTextField(
+                    hintText: "Search Ethosverse",
+                    nameTextFieldController: nameTextFieldController),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
     Widget openPagesPane = Expanded(
-      flex: openPagesPanFlex,
+      flex: 8,
       child: Container(
         child: Column(
           children: [
-            Expanded(
-                flex: 2,
-                child: Container(
-                  child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource: NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(context),
-                      shape: NeumorphicShape.flat,
-                      depth: 6,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.contentInverseSecondary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color: AppColors.contentInverseTertiary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin:
-                        EdgeInsets.only(bottom: 8, right: 16, left: 8, top: 8),
-                    child: Container(),
-                  ),
-                )),
             Flexible(
-              flex: 35,
-              child: Row(
-                children: [
-                  Expanded(
-                      flex: 12,
-                      child: Neumorphic(
-                        style: NeumorphicStyle(
-                          lightSource: NeumorphicTheme.isUsingDark(context)
-                              ? LightSource.bottomRight
-                              : LightSource.topLeft,
-                          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                              ? AppColors.gray600
-                              : AppColors.backgroundSecondary(context),
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.all(Radius.circular(24))),
-                          color: AppColors.backgroundPrimary(context),
-                          border: NeumorphicBorder(
-                            isEnabled: true,
-                            color: AppColors.backgroundPrimary(context),
-                            width: 2,
-                          ),
-                        ),
-                        margin: EdgeInsets.only(
-                            top: 8, bottom: 8, right: 8, left: 8),
-                        child: Container(
-                          child: Stack(
-                            children: eutopiaNavigationBarSectionalItems
-                                .map(
-                                  (barItem) => _buildPageFlow(
-                                    context,
-                                    eutopiaNavigationBarSectionalItems
-                                        .indexOf(barItem),
-                                    barItem,
+                flex: 4, //2,
+                child: ethosaiSearchInput),
+            Visibility(
+                visible: focusMode,
+                child: Flexible(
+                  flex: 8, //35
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 12,
+                          child: Neumorphic(
+                            style: NeumorphicStyle(
+                              lightSource: NeumorphicTheme.isUsingDark(context)
+                                  ? LightSource.bottomRight
+                                  : LightSource.topLeft,
+                              shadowLightColor:
+                                  NeumorphicTheme.isUsingDark(context)
+                                      ? AppColors.gray600
+                                      : AppColors.backgroundSecondary(context),
+                              shape: NeumorphicShape.flat,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.all(Radius.circular(24))),
+                              color: AppColors.backgroundPrimary(context),
+                              border: NeumorphicBorder(
+                                isEnabled: true,
+                                color: AppColors.backgroundPrimary(context),
+                                width: 2,
+                              ),
+                            ),
+                            margin: EdgeInsets.only(
+                                top: 8, bottom: 8, right: 8, left: 8),
+                            child: Container(
+                              child: Stack(
+                                children: eutopiaNavigationBarSectionalItems
+                                    .map(
+                                      (barItem) => _buildPageFlow(
+                                        context,
+                                        eutopiaNavigationBarSectionalItems
+                                            .indexOf(barItem),
+                                        barItem,
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          )),
+                      Visibility(
+                        visible: false,
+                        child: Expanded(
+                            flex: 0,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
                                   ),
-                                )
-                                .toList(),
-                          ),
-                        ),
-                      )),
-                  Visibility(visible: false, child: Expanded(
-                      flex: 0,
-                      child: Column(
-                        children: [
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          )),
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          )),
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          )),
-                        ],
-                      )),),
-                  Visibility(visible: false, child: Expanded(
-                      flex: 0,
-                      child: Column(
-                        children: [
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          )),
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          )),
-                          Expanded(child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                                  ? AppColors.gray600
-                                  : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
-                                color: AppColors.backgroundPrimary(context),
-                                width: 2,
-                              ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              color: AppColors.backgroundPrimary(context),
-                              child: SizedBox(),
-                            ),
-                          ))
-                        ],
-                      )),),
-                ],
-              ),
-            ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                )),
+                              ],
+                            )),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Expanded(
+                            flex: 0,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                )),
+                                Expanded(
+                                    child: Neumorphic(
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.all(Radius.circular(24))),
+                                    color: AppColors.backgroundPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  margin: EdgeInsets.only(
+                                      top: 8, bottom: 8, right: 8, left: 8),
+                                  child: Container(
+                                    color: AppColors.backgroundPrimary(context),
+                                    child: SizedBox(),
+                                  ),
+                                ))
+                              ],
+                            )),
+                      ),
+                    ],
+                  ),
+                )), // todo: gayab mode
           ],
         ),
       ),
     );
 
     Widget openTilesPane = Expanded(
-      flex: openTilesPanFlex,
+      flex: 4,
       child: Neumorphic(
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
@@ -696,10 +573,10 @@ class _EutopiaLeftNavigationScaffoldState
           depth: 6,
           boxShape: NeumorphicBoxShape.roundRect(
               BorderRadius.all(Radius.circular(24))),
-          color: AppColors.contentInverseTertiary(context),
+          color: AppColors.backgroundInverseTertiary(context),
           border: NeumorphicBorder(
             isEnabled: true,
-            color: AppColors.contentInverseTertiary(context),
+            color: AppColors.backgroundInverseTertiary(context),
             width: 2,
           ),
         ),
@@ -711,28 +588,7 @@ class _EutopiaLeftNavigationScaffoldState
               itemCount: 12,
               itemBuilder: (BuildContext context, int subIndex) {
                 if (subIndex == 0) {
-                  return NeumorphicButton(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 6),
-                    margin: const EdgeInsets.only(left: 16, top: 8),
-                    style: NeumorphicStyle(
-                      lightSource: NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(24)),
-                      color: AppColors.contentInverseTertiary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color: AppColors.contentInverseTertiary(context),
-                        width: 0,
-                      ),
-                      depth: 0,
-                    ),
+                  return Container(
                     child: NeumorphicText(
                       "COMMUNITY TILES",
                       style: NeumorphicStyle(
@@ -747,10 +603,10 @@ class _EutopiaLeftNavigationScaffoldState
                             BorderRadius.only(
                                 topRight: Radius.circular(24),
                                 bottomRight: Radius.circular(24))),
-                        color: AppColors.backgroundInverseTertiary(context),
+                        color: AppColors.backgroundTertiary(context),
                         border: NeumorphicBorder(
                           isEnabled: true,
-                          color: AppColors.backgroundInverseTertiary(context),
+                          color: AppColors.backgroundTertiary(context),
                           width: 1,
                         ),
                       ),
@@ -760,17 +616,39 @@ class _EutopiaLeftNavigationScaffoldState
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.w400),
                     ),
-                    onPressed: () {
-                      switchTilesPanningMode();
-                    },
+                    margin: EdgeInsets.only(
+                        top: 16, bottom: 16, right: 16, left: 16),
                   );
                 } else {
+                  Widget box = SizedBox(
+                    height: 120,
+                    width: MediaQuery.of(context).size.width - 12,
+                  );
+                  Widget container = Neumorphic(
+                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      depth: 6,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.all(Radius.circular(24))),
+                      color: AppColors.backgroundTertiary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundTertiary(context),
+                        width: 2,
+                      ),
+                    ),
+                    child: box,
+                  );
                   return Flexible(
-                    child: NeuContainer(
-                        containerChild: SizedBox(
-                      height: 120,
-                      width: MediaQuery.of(context).size.width - 12,
-                    )),
+                    child: container,
                   );
                 }
               }),
@@ -781,16 +659,19 @@ class _EutopiaLeftNavigationScaffoldState
     Widget windowPane = Row(
       children: [
         openPagesPane,
-        openTilesPane,
+
+        // todo: something like gayab mode
       ],
     );
 
     Widget secondColumnContainer = Column(
       children: [
-        Expanded(
-          flex: 1,
-          child: pageTabPane,
-        ),
+        Visibility(
+            visible: focusMode, // todo: something like gayab mode
+            child: Expanded(
+              flex: 1,
+              child: pageTabPane,
+            )),
         Expanded(flex: 11, child: windowPane),
       ],
     );
@@ -804,8 +685,14 @@ class _EutopiaLeftNavigationScaffoldState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(flex: firstColumnFlex, child: firstColumnContainer),
-              Expanded(flex: secondColumnFlex, child: secondColumnContainer),
+              Expanded(flex: 1, child: firstColumnContainer),
+              Expanded(flex: 11, child: secondColumnContainer),
+              Expanded(
+                child: Visibility(
+                  child: openTilesPane,
+                  visible: focusMode,
+                ),
+              ),
             ],
           ),
         ));

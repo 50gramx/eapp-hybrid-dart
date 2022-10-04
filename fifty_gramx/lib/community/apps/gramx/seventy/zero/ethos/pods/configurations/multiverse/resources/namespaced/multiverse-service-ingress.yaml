@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multiverse-service-ingress
+  namespace: ethosverse
+spec:
+  defaultBackend:
+    service:
+      name: multiverse-filesystem-service
+      port:
+        number: 30501
+  ingressClassName: nginx
+  rules:
+    - host: "control.filesystem.multiverse.pod.macos-amit-khetan.work-laptops.amit.khetan.70.50gramx.com"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: multiverse-filesystem-service
+                port:
+                  number: 30501
+#
+#                  curl -X POST "http://192.168.64.19:80/api/v0/cat?arg=QmWj5aeavXdCrXrfttjSFfqteanUfdEMp2XpAL8GNeVeex"
+#                  curl -X POST "http://localhost:5001/api/v0/cat?arg=QmWj5aeavXdCrXrfttjSFfqteanUfdEMp2XpAL8GNeVeex"
+#
+#                  microk8s kubectl -n ethosverse exec -i -t filesystem-85d97c89f7-2g5j5 -- nslookup kubernetes.default
+#                  "multiverse-filesystem-service.ethosverse.svc.cluster.local"

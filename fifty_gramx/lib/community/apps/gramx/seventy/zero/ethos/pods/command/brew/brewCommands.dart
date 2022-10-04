@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/install/brewInstallCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/uninstall/brewUninstallCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
@@ -24,6 +25,9 @@ class BrewCommands {
   /// nested class for install commands
   static late BrewInstallCommands install;
 
+  /// nested class for uninstall commands
+  static late BrewUninstallCommands uninstall;
+
   // initialises the class
   // warn: initBrew initialised the class during startup, if defined
   BrewCommands() {}
@@ -44,6 +48,7 @@ class BrewCommands {
     } // TODO(founder@): add a check for MacOS
 
     install = BrewInstallCommands(_packagePath);
+    uninstall = BrewUninstallCommands(_packagePath);
   }
 
   static Future<String> setupBrew() async {

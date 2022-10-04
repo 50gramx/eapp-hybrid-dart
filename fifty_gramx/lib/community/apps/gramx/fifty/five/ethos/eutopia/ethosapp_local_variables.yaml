@@ -1,0 +1,9 @@
+- name-code: EIV1001
+  name: Screen
+  type: ELVT1003
+  default:
+    values:
+      - unidentified
+      - web
+      - desktop
+      - mobile

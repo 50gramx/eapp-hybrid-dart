@@ -2,10 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/Text/Form/FormInfoText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Tile/70/ethos/PodStatusTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HomebrewInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
@@ -15,7 +16,6 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/chains/multiverseChainsOperator.dart';
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/filesystem/multiverseFileSystemOperator.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/multiversePodOperator.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
@@ -88,11 +88,14 @@ Future<String> getHostPrivateIPAddress() async {
 }
 
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
+  Future<bool> _MultiversePodOperatorfsOpPodStatus =
+      MultiversePodOperator.fsOp.checkPodStatus();
+
   @override
   Widget build(BuildContext context) {
     // we need add L4 level check to verify the status of the pod
     var multiverseFileSystemPodStatusInteraction = FutureBuilder<bool>(
-        future: MultiverseFileSystemOperator().checkPodStatus(),
+        future: _MultiversePodOperatorfsOpPodStatus,
         builder: (context, snapshotMultiverseFileSystemPodStatus) {
           switch (snapshotMultiverseFileSystemPodStatus.connectionState) {
             case ConnectionState.waiting:
@@ -100,25 +103,30 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             case ConnectionState.active:
               return AppProgressIndeterminateWidget();
             case ConnectionState.done:
-              print(
-                  "snapshotMultiverseFileSystemPodStatus: $snapshotMultiverseFileSystemPodStatus");
               if (snapshotMultiverseFileSystemPodStatus.hasData) {
-                return SwitchConfigurationItem(
-                    titleText: "File System",
-                    switchValue: snapshotMultiverseFileSystemPodStatus.data!,
-                    switchOnChanged: (value) {
-                      print("switchOnChanged: $value");
-                      if (!value) {
-                        // user requested to stop the pod
-                        print("MultiversePodOperator.fsOp.spinDown()");
-                        MultiversePodOperator.fsOp.spinDown();
-                        setState(() {});
-                      } else {
-                        // user requested to start the pod
-                        MultiversePodOperator.fsOp.spinUp();
-                        setState(() {});
-                      }
+                return PodStatusTile(
+                  titleText: "File System",
+                  switchValue: snapshotMultiverseFileSystemPodStatus.data!,
+                  switchOnChanged: (value) {
+                    print("switchOnChanged: $value");
+                    if (!value) {
+                      // user requested to stop the pod
+                      print("MultiversePodOperator.fsOp.spinDown()");
+                      MultiversePodOperator.fsOp.spinDown();
+                      setState(() {});
+                    } else {
+                      // user requested to start the pod
+                      MultiversePodOperator.fsOp.spinUp();
+                      setState(() {});
+                    }
+                  },
+                  switchOnRefresh: () {
+                    setState(() {
+                      _MultiversePodOperatorfsOpPodStatus =
+                          MultiversePodOperator.fsOp.checkPodStatus();
                     });
+                  },
+                );
               } else {
                 return SizedBox();
               }
@@ -135,8 +143,6 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             case ConnectionState.active:
               return AppProgressIndeterminateWidget();
             case ConnectionState.done:
-              print(
-                  "snapshotMultiverseChainsIdentityPodStatus: $snapshotMultiverseChainsIdentityPodStatus");
               if (snapshotMultiverseChainsIdentityPodStatus.hasData) {
                 return SwitchConfigurationItem(
                     titleText: "Identity Chains",
@@ -160,6 +166,101 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               return SizedBox();
           }
         });
+
+    var mutliverseIngressPodStatusInteraction = FutureBuilder<bool>(
+        future: MultiversePodOperator.inOp.checkPodStatus(),
+        builder: (context, snapshotMultiverseIngressPodStatus) {
+          switch (snapshotMultiverseIngressPodStatus.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return AppProgressIndeterminateWidget();
+            case ConnectionState.done:
+              if (snapshotMultiverseIngressPodStatus.hasData) {
+                return SwitchConfigurationItem(
+                    titleText: "Multiverse Ingress",
+                    switchValue: snapshotMultiverseIngressPodStatus.data!,
+                    switchOnChanged: (value) {
+                      if (!value) {
+                        // user requested to stop the pod
+                        MultiversePodOperator.inOp.spinDown();
+                        setState(() {});
+                      } else {
+                        // user requested to start the pod
+                        MultiversePodOperator.inOp.spinUp();
+                        setState(() {});
+                      }
+                    });
+              } else {
+                return SizedBox();
+              }
+            default:
+              return SizedBox();
+          }
+        });
+
+    var multiverseIngressNamespaceBuilderInteraction = FutureBuilder<bool>(
+      future:
+          KubectlCommands.get.namespaced.namespace.isMultiverseIngressExists(),
+      builder: (context, snapshotMultiverseIngressNamespace) {
+        switch (snapshotMultiverseIngressNamespace.connectionState) {
+          case ConnectionState.waiting:
+          case ConnectionState.none:
+          case ConnectionState.active:
+            return AppProgressIndeterminateWidget();
+          case ConnectionState.done:
+            {
+              if (snapshotMultiverseIngressNamespace.hasData) {
+                if (snapshotMultiverseIngressNamespace.data!) {
+                  // if the multiverse ingress namespace exists,
+                  // return the widget
+                  return mutliverseIngressPodStatusInteraction;
+                } else {
+                  // if not, then create the resource,
+                  // setState() after creating
+                  return FutureBuilder<bool>(
+                      future: KubectlCommands.apply.namespaced.namespace
+                          .multiverseIngress(),
+                      builder: (context, snapshotCreateResource) {
+                        switch (snapshotCreateResource.connectionState) {
+                          case ConnectionState.waiting:
+                          case ConnectionState.none:
+                          case ConnectionState.active:
+                            {
+                              return AppProgressIndeterminateWidget();
+                            }
+                          case ConnectionState.done:
+                            {
+                              if (snapshotCreateResource.hasData) {
+                                if (snapshotCreateResource.data!) {
+                                  return mutliverseIngressPodStatusInteraction;
+                                } else {
+                                  return Text(
+                                      "Couldn't create multiverse-ingress resource");
+                                }
+                              } else {
+                                return SizedBox();
+                              }
+                            }
+                          default:
+                            {
+                              return SizedBox();
+                            }
+                        }
+                      });
+                }
+              } else {
+                return SizedBox();
+              }
+            }
+          default:
+            {
+              return SizedBox();
+            }
+        }
+      },
+    );
+
     var multiversePodsWidgets = Column(
       children: [
         Container(
@@ -172,6 +273,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
           switchValue: false,
           switchOnChanged: (value) {},
         ),
+        multiverseIngressNamespaceBuilderInteraction,
       ],
     );
 
@@ -370,7 +472,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                   }
                                 });
                           }
-                        case ("UNAVAILABLE, UNAVAILABLE "):
+                        case ("UNAVAILABLE, UNAVAILABLE"):
                           {
                             return SelectorConfigurationItem(
                                 titleText: "Orchestrator",
@@ -378,6 +480,17 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                 selectorCallback: () {
                                   AppPushPage().pushHorizontalPage(
                                       context, MicroK8sInstallerPage());
+                                });
+                          }
+                        case ("UNKNOWN, UNAVAILABLE"):
+                          {
+                            return SelectorConfigurationItem(
+                                titleText: "Orchestrator",
+                                subtitleText: "Uninstall",
+                                selectorCallback: () {
+                                  MultipassCommands.delete.vm();
+                                  BrewCommands.uninstall.multipass();
+                                  setState(() {});
                                 });
                           }
                         default:
@@ -388,7 +501,13 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                           }
                       }
                     } else {
-                      return Text("Connection Done but No Data");
+                      return SelectorConfigurationItem(
+                          titleText: "Orchestrator",
+                          subtitleText: "Install",
+                          selectorCallback: () {
+                            AppPushPage().pushHorizontalPage(
+                                context, MicroK8sInstallerPage());
+                          });
                     }
                   default:
                     return Text('Error: ${snapshot.error}');
@@ -463,7 +582,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                             // setState() after creating
                                             return FutureBuilder<bool>(
                                                 future: KubectlCommands
-                                                    .create.namespaced.namespace
+                                                    .apply.namespaced.namespace
                                                     .ethosverse(),
                                                 builder: (context,
                                                     snapshotCreateResource) {

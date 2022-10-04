@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/delete/multipassDeleteCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/exec/multipassExecCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/launch/multipassLaunchCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/list/multipassListCommands.dart';
@@ -40,6 +41,9 @@ class MultipassCommands {
   /// nested class for list commands
   static late MultipassTransferCommands transfer;
 
+  /// nested class for delete commands
+  static late MultipassDeleteCommands delete;
+
   // initialises the class
   MultipassCommands() {
     // package name is same in all base os, so no checks needed
@@ -70,6 +74,9 @@ class MultipassCommands {
 
     // instantiate the transfer commands
     transfer = MultipassTransferCommands(_packagePath, _vmName);
+
+    // instantiate the transfer commands
+    delete = MultipassDeleteCommands(_packagePath, _vmName);
   }
 }
 

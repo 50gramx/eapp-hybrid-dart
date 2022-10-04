@@ -30,6 +30,7 @@ class AppFlow {
     required this.mainColor,
     required this.iconData,
     required this.navigatorKey,
+    required this.firstPage,
   });
 
   final int index;
@@ -38,4 +39,5 @@ class AppFlow {
   final Color mainColor;
   final IconData iconData;
   final GlobalKey<NavigatorState> navigatorKey;
+  final Widget firstPage;
 }

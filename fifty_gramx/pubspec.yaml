@@ -36,6 +36,9 @@ dependencies:
   flutter_feather_icons: ^2.0.0+1
   async: ^2.6.1
   bubble: ^1.2.1
+  # dart_eval is an extensible bytecode compiler and runtime for the Dart language,
+  # written in Dart, enabling dynamic codepush for Flutter and Dart AOT.
+  dart_eval: ^0.4.6
   datetime_picker_formfield: ^2.0.0
   intl: ^0.17.0
   flutter_switch: ^0.3.1
@@ -58,6 +61,8 @@ dependencies:
   flutter_local_notifications: ^6.0.0
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS,
   # Linux, macOS and Windows. Not all methods are supported on all platforms.
+
+
   path_provider: ^2.0.11
   # manages all the device level permissions
   permission_handler: ^8.1.2
@@ -100,6 +105,13 @@ flutter:
     # assets of 70GRAMx
     #   Ethos Pods
     #     Orchestrator Setup Scripts
+    # 50 community eapp assets
+    - lib/community/apps/gramx/fifty/zero/ethosapps.yaml
+    - lib/community/apps/gramx/fifty/five/ethosapps.yaml
+    # 50 ethos identity app assets
+    - lib/community/apps/gramx/fifty/zero/ethos/identity/
+    # 55 ethos eutopia app assets
+    - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/homebrew.sh
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/install.sh
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/installMultipass.sh
@@ -125,26 +137,26 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Regular.ttf
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Italic.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Italic.ttf
           style: italic
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Thin.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Thin.ttf
           weight: 100
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-ExtraLight.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-ExtraLight.ttf
           weight: 200
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Light.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Light.ttf
           weight: 300
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Regular.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Regular.ttf
           weight: 400
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Medium.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Medium.ttf
           weight: 500
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-SemiBold.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-SemiBold.ttf
           weight: 600
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Black.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Black.ttf
           weight: 700
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Black.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Black.ttf
           weight: 800
-        - asset: lib/community/apps/gramx/fifty/five/ethos/eutopia/fonts/Montserrat/Montserrat-Black.ttf
+        - asset: lib/community/apps/gramx/fifty/five/ethos/level/fonts/Montserrat/Montserrat-Black.ttf
           weight: 900
   #     - family: Trajan Pro
   #       fonts:
