@@ -88,8 +88,8 @@ pipeline {
             agent {
                 label 'ethosverse_india_50gramx_delivery'
             }
-            steps {
-                echo "hello delivery!"
+            withKubeConfig([credentialsId: "multiverse-ethosindia-pi-config"]) {
+                sh 'kubectl get pods --all-namespaces'
             }
         }
 
