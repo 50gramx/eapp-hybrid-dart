@@ -21,8 +21,6 @@ pipeline {
                   #!/bin/sh
                    APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
                   '''
-            }
-            steps {
                 echo $APP_VERSION
             }
         }
