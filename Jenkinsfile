@@ -1,12 +1,10 @@
 node {
     stage('Build Web Release') {
-        steps {
-            sh '''
-              #!/bin/sh
-              cd fifty_gramx && flutter build web --release
-              '''
-            echo "done"
-        }
+        sh '''
+        #!/bin/sh
+        cd fifty_gramx && flutter build web --release
+        '''
+        echo "done"
     }
     stage('Build Image for Web -- arm64') {
         steps {
