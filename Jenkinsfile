@@ -15,8 +15,13 @@ pipeline {
                 sh '''
                 #!/bin/sh
                 export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
-                docker build --platform=linux/arm64 -t ethosindia/eapp-web:v${APP_VERSION} .
+                docker build --platform=linux/arm64 -t ethosindia/eapp-web:v${APP_VERSION}-arm64 .
                 '''
+            }
+        }
+        stage('Push Web Docker Image') {
+            steps {
+                echo "Will push"
             }
         }
     }
