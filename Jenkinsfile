@@ -65,11 +65,11 @@ node {
         '''
         echo "done"
     }
-}
-node {
     stage('Start Multiverse Delivery') {
         withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-pi-config', namespace: 'ethosverse', serverUrl: 'https://192.168.1.19:16443') {
+            sh 'kubectl apply -f playbook/deployment.yaml'
             sh 'kubectl apply -f playbook/service.yaml'
         }
+        echo "done"
     }
 }
