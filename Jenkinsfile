@@ -1,4 +1,10 @@
 node {
+    stage('Clean workspace') {
+        cleanWs()
+    }
+    stage('Checkout Repository') {
+        checkout scm
+    }
     stage('Build Web Release') {
         sh '''
         #!/bin/sh
