@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // APP_VERSION
-        APP_VERSION = '0'
-    }
-
     stages {
         stage('Build Web Release') {
             steps {
@@ -15,36 +10,14 @@ pipeline {
                   '''
             }
         }
-        stage('Show Build Number Before Fetch') {
-            steps {
-                echo APP_VERSION
-            }
-        }
-        stage('Fetch Build Number') {
+        stage('Build Web Docker Image') {
             steps {
                 sh '''
-                  #!/bin/sh
-                   export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
-                   echo "Set the APP_VERSION as ${APP_VERSION}"
-                  '''
-                echo APP_VERSION
-                sh '''
-                echo $APP_VERSION
+                #!/bin/sh
+                export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
+                docker build --platform=linux/arm64 -t ethosindia/eapp-web:v${APP_VERSION} .
                 '''
             }
         }
-        stage('Show Build Number') {
-            steps {
-                echo APP_VERSION
-            }
-        }
-//         stage('Build Web Docker Image') {
-//             steps {
-//                 sh '''
-//                 #!/bin/sh
-//                 docker build --platform=linux/arm64 -t ethosindia/eapp-web: .
-//                 '''
-//             }
-//         }
     }
 }
