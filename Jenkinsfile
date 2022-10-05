@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Show files') {
                     steps {
-                        echo `ls`
+                        ls
                     }
                 }
         stage('Building web') {
