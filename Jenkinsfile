@@ -69,7 +69,7 @@ pipeline {
                 sh '''
                 #!/bin/sh
                 export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
-                docker manifest push ethosindia/eapp:v{APP_VERSION}
+                docker manifest push ethosindia/eapp:v${APP_VERSION}
                 '''
                 echo "done"
             }
@@ -79,7 +79,7 @@ pipeline {
                 sh '''
                 #!/bin/sh
                 export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
-                docker buildx imagetools inspect ethosindia/eapp:v{APP_VERSION}
+                docker buildx imagetools inspect ethosindia/eapp:v${APP_VERSION}
                 '''
                 echo "done"
             }
