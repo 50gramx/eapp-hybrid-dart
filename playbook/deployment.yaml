@@ -14,14 +14,14 @@ spec:
         epod: eapp-web
     spec:
       imagePullSecrets:
-        - name: regcred
+        - name: ethosindiak8secrets
       containers:
         - name: eapp-web-host-container
           image: ethosindia/eapp-web:v52-arm64
           imagePullPolicy: Always
           ports:
             - containerPort: 50601
-              name: ethospay-http
+              name: ethos-web-http
           resources:
             requests:
               memory: "128Mi"
