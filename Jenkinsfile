@@ -7,10 +7,16 @@ pipeline {
                 echo "Will build web"
             }
         }
+        stage('Show files') {
+                    steps {
+                        echo `ls`
+                    }
+                }
         stage('Building web') {
             steps {
                 sh '''
                   #!/bin/sh
+                  cd fifty_gramx
                   flutter build web --release
                   '''
             }
