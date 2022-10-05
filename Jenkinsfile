@@ -5,7 +5,14 @@ pipeline {
         stage('Build Web') {
             steps {
                 echo "Will build web"
-                flutter build web --release
+            }
+        }
+        stage('Building web') {
+            steps {
+                sh '''
+                  #!/bin/sh
+                  flutter build web --release
+                  '''
             }
         }
     }
