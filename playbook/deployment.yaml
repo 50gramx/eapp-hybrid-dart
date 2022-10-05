@@ -17,7 +17,7 @@ spec:
         - name: regcred
       containers:
         - name: eapp-web-host-container
-          image: ethosindia/eapp-web:v52
+          image: ethosindia/eapp-web:v"{{ app_version }}"
           imagePullPolicy: Always
           ports:
             - containerPort: 50601
