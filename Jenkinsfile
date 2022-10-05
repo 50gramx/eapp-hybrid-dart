@@ -85,12 +85,11 @@ pipeline {
             }
         }
         stage('Start Multiverse Delivery') {
-            agent {
-                label 'ethosverse_india_50gramx_delivery'
-            }
-            steps {
-                withKubeConfig([credentialsId: "multiverse-ethosindia-pi-config"]) {
-                    sh 'kubectl get pods --all-namespaces'
+            node {
+                stage('Start Multiverse Delivery') {
+                    withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-pi-config', namespace: 'ethosverse', serverUrl: 'https://192.168.1.19:16443') {
+                        sh 'kubectl apply -f playbook/service.yaml'
+                    }
                 }
             }
         }
