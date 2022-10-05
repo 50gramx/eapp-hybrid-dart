@@ -84,5 +84,12 @@ pipeline {
                 echo "done"
             }
         }
+        stage('Start Multiverse Delivery') {
+            steps {
+                build job: 'elint/eapp-hybrid-dart/multiverse-delivery'
+                echo "done"
+            }
+        }
+
     }
 }
