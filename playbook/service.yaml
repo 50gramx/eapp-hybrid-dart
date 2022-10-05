@@ -7,10 +7,6 @@ spec:
   selector:
     epod: eapp-web
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 50601
-      nodePort: 30010
     - name: mv-web-http
       protocol: TCP
       port: 30010

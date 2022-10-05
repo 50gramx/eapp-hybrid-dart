@@ -17,7 +17,7 @@ spec:
         - name: ethosindiak8secrets
       containers:
         - name: eapp-web-host-container
-          image: ethosindia/eapp-web:v55
+          image: ethosindia/eapp-web:v56
           imagePullPolicy: Always
           ports:
             - containerPort: 50601
