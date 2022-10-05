@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: ethosverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      epod: eapp-web
+  template:
+    metadata:
+      labels:
+        epod: eapp-web
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: eapp-web-host-container
+          image: ethosindia/eapp-web:v52
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50601
+              name: ethospay-http
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.08"
+            limits:
+              memory: "256Mi"
+              cpu: "0.2"
