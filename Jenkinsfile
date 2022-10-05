@@ -21,13 +21,11 @@ pipeline {
             }
         }
         stage('Fetch Build Number') {
-            environment {
-                APP_VERSION = `echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
-            }
             steps {
                 sh '''
                   #!/bin/sh
                    export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
+                   echo "Set the APP_VERSION as ${APP_VERSION}"
                   '''
                 echo APP_VERSION
                 sh '''
