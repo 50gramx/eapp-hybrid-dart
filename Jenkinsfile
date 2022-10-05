@@ -70,6 +70,6 @@ node {
             sh 'kubectl apply -f playbook/deployment.yaml'
             sh 'kubectl apply -f playbook/service.yaml'
         }
-        echo "done"
+        echo "done, nicely"
     }
 }
