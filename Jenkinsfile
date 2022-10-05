@@ -85,14 +85,10 @@ pipeline {
             }
         }
         stage('Delivering Pods') {
-            parallel {
-                stage('Multiverse Delivery') {
-                    node {
-                        stage('Start Multiverse Delivery') {
-                            withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-pi-config', namespace: 'ethosverse', serverUrl: 'https://192.168.1.19:16443') {
-                                sh 'kubectl apply -f playbook/service.yaml'
-                            }
-                        }
+            node {
+                stage('Start Multiverse Delivery') {
+                    withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-pi-config', namespace: 'ethosverse', serverUrl: 'https://192.168.1.19:16443') {
+                        sh 'kubectl apply -f playbook/service.yaml'
                     }
                 }
             }
