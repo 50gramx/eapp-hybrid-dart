@@ -85,9 +85,11 @@ pipeline {
             }
         }
         stage('Start Multiverse Delivery') {
+            agent {
+                label 'ethosverse_india_50gramx_delivery'
+            }
             steps {
-                build job: 'elint/eapp-hybrid-dart/multiverse-delivery'
-                echo "done"
+                echo "hello delivery!"
             }
         }
 
