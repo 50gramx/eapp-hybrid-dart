@@ -24,9 +24,12 @@ pipeline {
             steps {
                 sh '''
                   #!/bin/sh
-                   APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
+                   export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
                   '''
                 echo APP_VERSION
+                sh '''
+                echo $APP_VERSION
+                '''
             }
         }
         stage('Show Build Number') {
