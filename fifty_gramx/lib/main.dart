@@ -284,10 +284,12 @@ Widget decideWhichScreen() {
       home: WebScreen());
 
   // warn: keep this in check
-  if (Platform.isMacOS) {
-    PrivilegedCommandExecuter.initPrivileged();
-    BrewCommands.initBrew();
-    MultipassCommands();
+  if (!kIsWeb) {
+    if (Platform.isMacOS) {
+      PrivilegedCommandExecuter.initPrivileged();
+      BrewCommands.initBrew();
+      MultipassCommands();
+    }
   }
   EthosAppFlowBob();
   return NeumorphicApp(
@@ -300,16 +302,15 @@ Widget decideWhichScreen() {
       routes: {
         '/connections': (context) => ConnectionsHomePage(index: 1),
         '/conversations': (context) => ConversationsHomePage(
-          index: 1,
-          containingFlowTitle: '',
-        ),
+              index: 1,
+              containingFlowTitle: '',
+            ),
         '/spaces': (context) => SpacesHomePage(
-          index: 1,
-          containingFlowTitle: '',
-        ),
+              index: 1,
+              containingFlowTitle: '',
+            ),
       },
       home: HomeScreen());
-
 }
 
 Widget getLoadingPage(String loadingText, BuildContext loadingContext) {
