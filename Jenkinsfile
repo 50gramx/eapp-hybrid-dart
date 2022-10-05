@@ -21,7 +21,6 @@ pipeline {
         }
         stage('Push Web Docker Image') {
             steps {
-                echo "Will push"
                 sh '''
                 #!/bin/sh
                 export APP_VERSION=`echo "$buildNumber" | sed -n -e 18p fifty_gramx/pubspec.yaml | sed 's/^.*+//'`
