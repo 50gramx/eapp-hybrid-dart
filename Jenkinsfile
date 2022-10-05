@@ -1,4 +1,12 @@
 node {
+    options {
+        skipDefaultCheckout(true)
+    }
+    stage('Checkout') {
+        cleanWs()
+        echo "cleaned workspace"
+        checkout scm
+    }
     stage('Build Web Release') {
         sh '''
         #!/bin/sh
@@ -72,8 +80,10 @@ node {
         }
         echo "done, nicely"
     }
-    stage('Clean up workspace') {
-        cleanWs()
-        echo "done"
+    post {
+        always {
+            cleanWs()
+            echo "cleaned workspace"
+        }
     }
 }
