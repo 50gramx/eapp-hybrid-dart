@@ -1,12 +1,4 @@
 node {
-    options {
-        skipDefaultCheckout(true)
-    }
-    stage('Checkout') {
-        cleanWs()
-        echo "cleaned workspace"
-        checkout scm
-    }
     stage('Build Web Release') {
         sh '''
         #!/bin/sh
