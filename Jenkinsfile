@@ -78,7 +78,13 @@ node {
             sh 'kubectl apply -f playbook/deployment.yaml'
             sh 'kubectl apply -f playbook/service.yaml'
         }
-        echo "done, nicely"
+        echo "done, nicely on pi"
+
+        withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-digitalocean-config', namespace: 'ethosverse', serverUrl: 'https://157.245.106.167:16443') {
+            sh 'kubectl apply -f playbook/deployment.yaml'
+            sh 'kubectl apply -f playbook/service.yaml'
+        }
+        echo "done, nicely on digitalocean"
     }
     stage('Clean workspace') {
         cleanWs()
