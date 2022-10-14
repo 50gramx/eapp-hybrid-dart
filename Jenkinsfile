@@ -73,18 +73,12 @@ node {
         '''
         echo "done"
     }
-    stage('Delivery - Multiverse') {
-        withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-pi-config', namespace: 'ethosverse', serverUrl: 'https://192.168.1.19:16443') {
+    stage('Delivery - Multiverse - Digital Ocean Node') {
+        withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-india-do-config', namespace: 'ethosverse', serverUrl: 'https://157.245.106.167:16443') {
             sh 'kubectl apply -f playbook/deployment.yaml'
             sh 'kubectl apply -f playbook/service.yaml'
         }
-        echo "done, nicely on pi"
-
-        withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-ethosindia-digitalocean-config', namespace: 'ethosverse', serverUrl: 'https://157.245.106.167:16443') {
-            sh 'kubectl apply -f playbook/deployment.yaml'
-            sh 'kubectl apply -f playbook/service.yaml'
-        }
-        echo "done, nicely on digitalocean"
+        echo "done"
     }
     stage('Clean workspace') {
         cleanWs()
