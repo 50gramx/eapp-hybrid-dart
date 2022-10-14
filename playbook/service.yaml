@@ -4,10 +4,11 @@ metadata:
   name: eapp-web-host-svc
   namespace: ethosverse
 spec:
+  type: ClusterIP
   selector:
     epod: eapp-web
   ports:
     - name: mv-web-http
       protocol: TCP
-      port: 30010
+      port: 80
       targetPort: 50601
