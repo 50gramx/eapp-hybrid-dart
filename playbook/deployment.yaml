@@ -14,7 +14,7 @@ spec:
         epod: eapp-web
     spec:
       imagePullSecrets:
-        - name: ethosindiak8secrets
+        - name: multiverse-operator-pull-secret
       containers:
         - name: eapp-web-host-container
           image: ethosindia/eapp-web:v56
