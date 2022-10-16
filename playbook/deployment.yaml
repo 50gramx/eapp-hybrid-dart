@@ -17,7 +17,7 @@ spec:
         - name: multiverse-operator-pull-secret
       containers:
         - name: eapp-web-host-container
-          image: ethosindia/eapp-web:v56
+          image: ethosindia/eapp-web:v57
           imagePullPolicy: Always
           ports:
             - containerPort: 50601

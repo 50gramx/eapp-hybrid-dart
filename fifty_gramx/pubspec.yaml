@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.6+56
+version: 1.0.6+57
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -38,8 +38,8 @@ dependencies:
   bubble: ^1.2.1
   # dart_eval is an extensible bytecode compiler and runtime for the Dart language,
   # written in Dart, enabling dynamic codepush for Flutter and Dart AOT.
-  dart_eval: ^0.4.6
-  datetime_picker_formfield: ^2.0.0
+#  dart_eval: ^0.4.6
+#  datetime_picker_formfield: ^2.0.0
   intl: ^0.17.0
   flutter_switch: ^0.3.1
   rxdart: ^0.27.1
@@ -56,7 +56,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   # Get current device information from within the Flutter application.
-  device_info_plus: ^4.1.2
+  device_info_plus: ^3.2.3
   # A cross platform plugin for displaying local notifications.
   flutter_local_notifications: ^6.0.0
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS,
