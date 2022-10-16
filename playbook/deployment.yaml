@@ -14,10 +14,10 @@ spec:
         epod: eapp-web
     spec:
       imagePullSecrets:
-        - name: multiverse-operator-pull-secret
+        - name: regcred
       containers:
         - name: eapp-web-host-container
-          image: ethosindia/eapp-web:v57
+          image: ethosindia/eapp-web:v58
           imagePullPolicy: Always
           ports:
             - containerPort: 50601
