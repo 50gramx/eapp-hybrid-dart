@@ -1,9 +1,11 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/AdaptiveIconButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuChip.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -54,7 +56,7 @@ class _EutopiaLeftNavigationScaffoldState
   @override
   void initState() {
     _initAnimationControllers();
-    _initEutopiaNavigationBarSectionalItems();
+//    _initEutopiaNavigationBarSectionalItems();
 
     _shouldBuildTab.addAll(List<bool>.filled(
       EthosAppFlowBob.navigationBarItems.length,
@@ -67,29 +69,44 @@ class _EutopiaLeftNavigationScaffoldState
     super.initState();
   }
 
-  void _initEutopiaNavigationBarSectionalItems() {
-    eutopiaNavigationBarSectionalItems.addAll(
-      widget.navigationBarItems
-          .map(
-            (barItem) => _EutopiaLeftNavigationSectionalTab(
-              leftNavigationBarSectionalItem:
-                  barItem.leftNavigationBarSectionalItem,
-              navigatorKey: barItem.navigatorKey,
-              subtreeKey: GlobalKey(),
-              initialPageBuilder: barItem.initialPageBuilder,
-            ),
-          )
-          .toList(),
-    );
+  /// handler invoked inside localNotifications, which listens to new messages
+  /// when the device receives a push notification based on metadata
+  static handleListeningMessages(LocalNotification message) async {
+    if (message.type == "EthosAppFlowBob") {
+      if (message.data["subType"] == "Loaded eApp") {}
+    }
   }
 
+//  void _initEutopiaNavigationBarSectionalItems() {
+//    eutopiaNavigationBarSectionalItems.addAll(
+//      widget.navigationBarItems
+//          .map(
+//            (barItem) => EutopiaLeftNavigationSectionalTab(
+//              leftNavigationBarSectionalItem:
+//                  barItem.leftNavigationBarSectionalItem,
+//              navigatorKey: barItem.navigatorKey,
+//              subtreeKey: GlobalKey(),
+//              initialPageBuilder: barItem.initialPageBuilder,
+//            ),
+//          )
+//          .toList(),
+//    );
+//  }
+
   void _initAnimationControllers() {
-    _animationControllers.addAll(
-      widget.navigationBarItems.map<AnimationController>(
-        (destination) => AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 200),
-        ),
+//    _animationControllers.addAll(
+//      EthosAppFlowBob.navigationBarItems.map<AnimationController>(
+//        (destination) => AnimationController(
+//          vsync: this,
+//          duration: const Duration(milliseconds: 200),
+//        ),
+//      ),
+//    );
+
+    _animationControllers.add(
+      AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 200),
       ),
     );
 
@@ -154,17 +171,19 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "EutopiaLeftNavigation:build:${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
     _buildAppButton(context, subIndex) {
       return AdaptiveNeuButton(
-        buttonTitle: eutopiaNavigationBarSectionalItems[subIndex]
+        buttonTitle: EthosAppFlowBob
+            .eutopiaNavigationBarSectionalItems[subIndex]
             .leftNavigationBarSectionalItem
             .label!,
         buttonActionOnPressed: () {
           selectPressedSectionItem(subIndex);
         },
-        icon: eutopiaNavigationBarSectionalItems[subIndex]
-            .leftNavigationBarSectionalItem
-            .icon,
+        icon: EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex]
+            .leftNavigationBarSectionalItem.icon,
         isCollapsed: true,
         isSelected: subIndex == widget.selectedIndex,
       );
@@ -203,10 +222,12 @@ class _EutopiaLeftNavigationScaffoldState
           margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Container(
-            height: eutopiaNavigationBarSectionalItems.length * 57,
+            height:
+                EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: eutopiaNavigationBarSectionalItems.length,
+                itemCount:
+                    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
                 itemBuilder: (BuildContext context, int subIndex) {
                   return _buildAppButton(context, subIndex);
                 }),
@@ -242,11 +263,13 @@ class _EutopiaLeftNavigationScaffoldState
           margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
           padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Container(
-            height: 57,
-            width: eutopiaNavigationBarSectionalItems.length * 57,
+            height: 64,
+            width:
+                EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: eutopiaNavigationBarSectionalItems.length,
+                itemCount:
+                    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
                 itemBuilder: (BuildContext context, int subIndex) {
                   return _buildAppButton(context, subIndex);
                 }),
@@ -261,6 +284,7 @@ class _EutopiaLeftNavigationScaffoldState
     Widget EAIT1007 = Visibility(
         visible: isNavigatingLeft,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [EAIT1005],
         ));
 
@@ -272,7 +296,10 @@ class _EutopiaLeftNavigationScaffoldState
     Widget EAIT1008 = Visibility(
         visible: !isNavigatingLeft,
         child: Row(
-          children: [EAIT1006],
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(child: EAIT1006),
+          ],
         ));
 
 
@@ -290,9 +317,9 @@ class _EutopiaLeftNavigationScaffoldState
     _buildAppPageButton(content, subIndex) {
       return ActionNeuChip(
         chipAvatarText:
-            "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
+            "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
         chipTitle:
-            "${eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
+            "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
         chipIconBackgroundColor: AppColors.contentPrimary(context),
         buttonActionOnPressed: () {
           selectPressedSectionItem(subIndex);
@@ -326,7 +353,8 @@ class _EutopiaLeftNavigationScaffoldState
               child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: eutopiaNavigationBarSectionalItems.length,
+                  itemCount:
+                      EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
                   itemBuilder: (BuildContext context, int subIndex) {
                     return _buildAppPageButton(context, subIndex);
                   }),
@@ -375,18 +403,25 @@ class _EutopiaLeftNavigationScaffoldState
       ),
     );
 
+    List<Widget> _buildStackChildrens = [];
+
+    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.forEach((barItem) {
+      _buildStackChildrens.add(_buildPageFlow(
+        context,
+        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.indexOf(barItem),
+        barItem,
+      ));
+    });
+
     Widget openPagesPane = Expanded(
       flex: 8,
       child: Container(
         child: Column(
           children: [
-            Flexible(
-                flex: 4, //2,
-                child: ethosaiSearchInput),
             Visibility(
                 visible: focusMode,
                 child: Flexible(
-                  flex: 8, //35
+                  flex: 12, //35
                   child: Row(
                     children: [
                       Expanded(
@@ -414,16 +449,7 @@ class _EutopiaLeftNavigationScaffoldState
                                 top: 8, bottom: 8, right: 8, left: 8),
                             child: Container(
                               child: Stack(
-                                children: eutopiaNavigationBarSectionalItems
-                                    .map(
-                                      (barItem) => _buildPageFlow(
-                                        context,
-                                        eutopiaNavigationBarSectionalItems
-                                            .indexOf(barItem),
-                                        barItem,
-                                      ),
-                                    )
-                                    .toList(),
+                                children: _buildStackChildrens,
                               ),
                             ),
                           )),
@@ -738,17 +764,19 @@ class _EutopiaLeftNavigationScaffoldState
       ],
     );
 
-    Widget EAIT1002 = Column(
-      children: [
-        Visibility(
-            visible: focusMode, // todo: something like gayab mode
-            child: Expanded(
-              flex: 1,
-              child: pageTabPane,
-            )),
-        Expanded(flex: 11, child: windowPane),
-        EAIT1008,
-      ],
+    Widget EAIT1002 = Container(
+      child: Column(
+        children: [
+          Visibility(
+              visible: focusMode, // todo: something like gayab mode
+              child: Expanded(
+                flex: 1,
+                child: pageTabPane,
+              )),
+          Expanded(flex: 11, child: windowPane),
+          EAIT1008,
+        ],
+      ),
     );
 
     print("Layout Breakpoint: ${LayoutBreakpoint().getBreakpoint(context)}");
@@ -762,13 +790,15 @@ class _EutopiaLeftNavigationScaffoldState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(flex: 1, child: EAIT1001),
+              Visibility(
+                  visible: isNavigatingLeft,
+                  child: Expanded(flex: 1, child: EAIT1001)),
               Expanded(flex: 11, child: EAIT1002),
-              Expanded(
-                child: Visibility(
+              Visibility(
+                child: Expanded(
                   child: openTilesPane,
-                  visible: focusMode,
                 ),
+                visible: false,
               ),
             ],
           ),
@@ -781,9 +811,16 @@ class _EutopiaLeftNavigationScaffoldState
   Widget _buildPageFlow(
     BuildContext context,
     int tabIndex,
-    _EutopiaLeftNavigationSectionalTab item,
+    EutopiaLeftNavigationSectionalTab item,
   ) {
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
+
+    print("tabIndex: $tabIndex");
+    print("_shouldBuildTab: ${_shouldBuildTab.isEmpty}");
+
+    if (_shouldBuildTab.isEmpty) {
+      _shouldBuildTab.add(false);
+    }
 
     // We should build the tab content only if it was already built or
     // if it is currently selected.
@@ -827,23 +864,6 @@ class _EutopiaLeftNavigationScaffoldState
       return Offstage(child: view);
     }
   }
-}
-
-/// Extension class of BottomNavigationTab that adds another GlobalKey to it
-/// in order to use it within the KeyedSubtree widget.
-class _EutopiaLeftNavigationSectionalTab extends LeftNavigationTab {
-  const _EutopiaLeftNavigationSectionalTab({
-    required LeftNavigationBarSectionalItem leftNavigationBarSectionalItem,
-    required GlobalKey<NavigatorState> navigatorKey,
-    required WidgetBuilder initialPageBuilder,
-    required this.subtreeKey,
-  }) : super(
-          leftNavigationBarSectionalItem: leftNavigationBarSectionalItem,
-          navigatorKey: navigatorKey,
-          initialPageBuilder: initialPageBuilder,
-        );
-
-  final GlobalKey subtreeKey;
 }
 
 /*
