@@ -302,7 +302,6 @@ class _EutopiaLeftNavigationScaffoldState
           ],
         ));
 
-
     /*
     * 55GMx Ethos Eutopia
     * eApp Interactions
