@@ -34,8 +34,10 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
 class _EutopiaLeftNavigationScaffoldState
     extends State<EutopiaLeftNavigationScaffold>
     with TickerProviderStateMixin<EutopiaLeftNavigationScaffold> {
-  final List<_EutopiaLeftNavigationSectionalTab>
-      eutopiaNavigationBarSectionalItems = [];
+  /// internal instance of LocalNotifications
+  static Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
+
   final List<AnimationController> _animationControllers = [];
 
   /// Controls which tabs should have its content built. This enables us to
@@ -59,6 +61,9 @@ class _EutopiaLeftNavigationScaffoldState
       false,
     ));
 
+    _notificationsStream.listen((notification) {
+      handleListeningMessages(notification);
+    });
     super.initState();
   }
 
