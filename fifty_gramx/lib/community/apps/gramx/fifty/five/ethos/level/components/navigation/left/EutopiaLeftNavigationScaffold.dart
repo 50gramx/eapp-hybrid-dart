@@ -757,8 +757,8 @@ class _EutopiaLeftNavigationScaffoldState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(flex: 1, child: firstColumnContainer),
-              Expanded(flex: 11, child: secondColumnContainer),
+              Expanded(flex: 1, child: EAIT1001),
+              Expanded(flex: 11, child: EAIT1002),
               Expanded(
                 child: Visibility(
                   child: openTilesPane,
