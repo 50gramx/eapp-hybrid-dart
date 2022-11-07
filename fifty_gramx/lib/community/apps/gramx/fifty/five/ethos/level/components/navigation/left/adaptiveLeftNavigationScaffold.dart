@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 
@@ -8,14 +9,13 @@ import 'package:flutter/widgets.dart';
 /// A platform-aware Scaffold which encapsulates the common behaviour between
 /// material's and cupertino's bottom navigation pattern.
 class AdaptiveLeftNavigationScaffold extends StatefulWidget {
+
   const AdaptiveLeftNavigationScaffold({
-    required this.navigationBarItems,
     Key? key,
-  })  : assert(navigationBarItems != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
-  final List<LeftNavigationTab> navigationBarItems;
+//  final List<LeftNavigationTab> navigationBarItems;
 
   @override
   _AdaptiveLeftNavigationScaffoldState createState() =>
@@ -32,7 +32,7 @@ class _AdaptiveLeftNavigationScaffoldState
         // when the back button is pressed and the inner navigator can handle
         // it. That occurs when the inner has more than one page on its stack.
         // You can comment the onWillPop callback and watch "the bug".
-        onWillPop: () async => !await widget
+        onWillPop: () async => !await EthosAppFlowBob
             .navigationBarItems[_currentlySelectedIndex]
             .navigatorKey
             .currentState!
@@ -41,7 +41,7 @@ class _AdaptiveLeftNavigationScaffoldState
       );
 
   Widget _buildEutopia(BuildContext context) => EutopiaLeftNavigationScaffold(
-        navigationBarItems: widget.navigationBarItems,
+        navigationBarItems: EthosAppFlowBob.navigationBarItems,
         onItemSelected: onTabSelected,
         selectedIndex: _currentlySelectedIndex,
       );
@@ -63,7 +63,7 @@ class _AdaptiveLeftNavigationScaffoldState
       and should show a cross/dashboard back button, on right to community button
       in this hover-mode of your space, you should enclose the third column, if any
       * */
-      widget.navigationBarItems[newIndex].navigatorKey.currentState!
+      EthosAppFlowBob.navigationBarItems[newIndex].navigatorKey.currentState!
           .popUntil((route) => route.isFirst);
     }
 
