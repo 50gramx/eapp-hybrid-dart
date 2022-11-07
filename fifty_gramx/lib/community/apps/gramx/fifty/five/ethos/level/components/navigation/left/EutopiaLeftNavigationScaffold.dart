@@ -55,7 +55,7 @@ class _EutopiaLeftNavigationScaffoldState
     _initEutopiaNavigationBarSectionalItems();
 
     _shouldBuildTab.addAll(List<bool>.filled(
-      widget.navigationBarItems.length,
+      EthosAppFlowBob.navigationBarItems.length,
       false,
     ));
 
