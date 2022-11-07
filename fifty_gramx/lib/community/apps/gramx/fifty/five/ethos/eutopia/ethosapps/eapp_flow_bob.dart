@@ -67,6 +67,17 @@ class EthosAppFlowBob {
   // we need map of org to app
   static List<int> recognizedGramxCommunities = [50];
 
+  /// internal instance of LocalNotifications
+  static Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
+
+  static List<LeftNavigationTab> navigationBarItems = [];
+
+  static List<EutopiaLeftNavigationSectionalTab>
+      eutopiaNavigationBarSectionalItems = [];
+
+  static List<AnimationController> _animationControllers = [];
+
   /// constructor definition
   EthosAppFlowBob() {
     _buildGramxCommunityAssetsPath();
