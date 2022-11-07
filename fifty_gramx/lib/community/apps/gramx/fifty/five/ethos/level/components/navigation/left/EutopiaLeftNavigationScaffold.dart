@@ -165,37 +165,99 @@ class _EutopiaLeftNavigationScaffoldState
       );
     }
 
-    Widget communityAppCardPane = Neumorphic(
-      style: NeumorphicStyle(
-        lightSource: NeumorphicTheme.isUsingDark(context)
-            ? LightSource.bottomRight
-            : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-            ? AppColors.gray600
-            : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.concave,
-        depth: -6,
-        boxShape:
-            NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
-        color: AppColors.backgroundInverseSecondary(context),
-        border: NeumorphicBorder(
-          isEnabled: true,
-          color: AppColors.backgroundInverseTertiary(context),
-          width: 2,
-        ),
-      ),
-      margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 8),
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      child: Container(
-        height: eutopiaNavigationBarSectionalItems.length * 57,
-        child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemCount: eutopiaNavigationBarSectionalItems.length,
-            itemBuilder: (BuildContext context, int subIndex) {
-              return _buildAppButton(context, subIndex);
-            }),
-      ),
-    );
+    int viewPort = LayoutBreakpoint().getBreakpoint(context);
+    bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
+
+    /*
+    * 55GMx Ethos Eutopia
+    * eApp Interactions
+    * Tile - EAIT1005
+    * */
+    Widget EAIT1005 = Visibility(
+        visible:
+            viewPort == 4 || viewPort == 5 || viewPort == 6 || viewPort == 7,
+        child: Neumorphic(
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.concave,
+            depth: -6,
+            boxShape: NeumorphicBoxShape.roundRect(
+                BorderRadius.all(Radius.circular(24))),
+            color: AppColors.backgroundInverseSecondary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.backgroundInverseTertiary(context),
+              width: 2,
+            ),
+          ),
+          margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          child: Container(
+            height: eutopiaNavigationBarSectionalItems.length * 57,
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: eutopiaNavigationBarSectionalItems.length,
+                itemBuilder: (BuildContext context, int subIndex) {
+                  return _buildAppButton(context, subIndex);
+                }),
+          ),
+        ));
+
+    /*
+    * 55GMx Ethos Eutopia
+    * eApp Interactions
+    * Tile - EAIT1006
+    * */
+    Widget EAIT1006 = Visibility(
+        visible: viewPort == 2 || viewPort == 3,
+        child: Neumorphic(
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.concave,
+            depth: -6,
+            boxShape: NeumorphicBoxShape.roundRect(
+                BorderRadius.all(Radius.circular(24))),
+            color: AppColors.backgroundInverseSecondary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.backgroundInverseTertiary(context),
+              width: 2,
+            ),
+          ),
+          margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          child: Container(
+            height: 57,
+            width: eutopiaNavigationBarSectionalItems.length * 57,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: eutopiaNavigationBarSectionalItems.length,
+                itemBuilder: (BuildContext context, int subIndex) {
+                  return _buildAppButton(context, subIndex);
+                }),
+          ),
+        ));
+
+    /*
+    * 55GMx Ethos Eutopia
+    * eApp Interactions
+    * Tile - EAIT1007
+    * */
+    Widget EAIT1007 = Visibility(
+        visible: isNavigatingLeft,
+        child: Column(
+          children: [EAIT1005],
+        ));
 
     /*
     * 55GMx Ethos Eutopia
