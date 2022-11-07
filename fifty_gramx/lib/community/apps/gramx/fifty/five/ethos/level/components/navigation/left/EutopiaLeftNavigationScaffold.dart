@@ -671,7 +671,7 @@ class _EutopiaLeftNavigationScaffoldState
       ],
     );
 
-    Widget secondColumnContainer = Column(
+    Widget EAIT1002 = Column(
       children: [
         Visibility(
             visible: focusMode, // todo: something like gayab mode
@@ -680,8 +680,11 @@ class _EutopiaLeftNavigationScaffoldState
               child: pageTabPane,
             )),
         Expanded(flex: 11, child: windowPane),
+        EAIT1008,
       ],
     );
+
+    print("Layout Breakpoint: ${LayoutBreakpoint().getBreakpoint(context)}");
 
     return Scaffold(
         backgroundColor: AppColors.backgroundInverseTertiary(context),
