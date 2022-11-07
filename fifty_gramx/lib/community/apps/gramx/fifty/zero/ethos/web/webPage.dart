@@ -75,7 +75,7 @@ class _WebViewPageState extends State<WebViewPage> {
         backgroundColor: AppColors.backgroundPrimary(context),
         body: CustomScrollView(slivers: <Widget>[
           CustomSliverAppBar(
-            labelText: "Spaces",
+            labelText: "Ethos Identity",
             actionLabelText: "EthosPod",
             isBackEnabled: false,
             trailingButtonCallback: () {},
