@@ -1,10 +1,17 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/component_composer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/tile_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_capability_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:yaml/yaml.dart';
 
 /// EthosAppFlowBob is like Bob the builder
@@ -452,6 +459,48 @@ class EthosAppFlowBob {
       // fetch all the pages
       // add each page to map for usage later
     }
+    AppFlow appFlow = AppFlow(
+      index: 1,
+      title: 'Identity',
+      code: communityCode,
+      iconData: FeatherIcons.shield,
+      mainColor: AppColors.lightNeuPrimaryBackground,
+      navigatorKey: GlobalKey<NavigatorState>(),
+      firstPage: WebViewPage(index: 1, containingFlowTitle: 'Ethos Identity'),
+    );
+    communityAppFlow[communityCode]!.add(appFlow);
+    LeftNavigationTab leftNavigationTab = LeftNavigationTab(
+      leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
+        label: appFlow.title,
+        code: appFlow.code,
+        icon: Icon(appFlow.iconData),
+      ),
+      navigatorKey: appFlow.navigatorKey,
+      initialPageBuilder: (context) {
+//        setStatusBarTheme();
+        return appFlow.firstPage;
+      },
+    );
+    navigationBarItems.add(leftNavigationTab);
+    eutopiaNavigationBarSectionalItems.add(EutopiaLeftNavigationSectionalTab(
+      leftNavigationBarSectionalItem: leftNavigationTab.leftNavigationBarSectionalItem,
+      navigatorKey: leftNavigationTab.navigatorKey,
+      subtreeKey: GlobalKey(),
+      initialPageBuilder: leftNavigationTab.initialPageBuilder,
+    ));
+
+//
+//    _animationControllers.addAll(
+//      EthosAppFlowBob.navigationBarItems.map<AnimationController>(
+//            (destination) => AnimationController(
+//          vsync: this,
+//          duration: const Duration(milliseconds: 200),
+//        ),
+//      ),
+//    );
+
+    NotificationsBloc.instance.newNotification(
+        LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
     // add the orgdata to assetsPath
     gramxCommunityAssetsPath[communityCode]!['organisations'].add(
         {'name': orgName, 'assetPath': orgAssetPath, 'apps': orgAppsPaths});
@@ -486,6 +535,7 @@ class EthosAppFlowBob {
       // fetch the community code ethosapps asset
       int recognizedCommunityCode =
           recognizedGramxCommunities[recognizedCommunityCodeIndex];
+      communityAppFlow[recognizedCommunityCode] = [];
       await _loadCommunityEthosappContracts(
           communityCode: recognizedCommunityCode);
       // gramxCommunityOrganisationAssetsPaths
