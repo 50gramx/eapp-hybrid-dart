@@ -299,17 +299,6 @@ Widget decideWhichScreen() {
       // comment to adapt on system theme
       theme: lightThemeData,
       darkTheme: darkThemeData,
-      routes: {
-        '/connections': (context) => ConnectionsHomePage(index: 1),
-        '/conversations': (context) => ConversationsHomePage(
-              index: 1,
-              containingFlowTitle: '',
-            ),
-        '/spaces': (context) => SpacesHomePage(
-              index: 1,
-              containingFlowTitle: '',
-            ),
-      },
       home: HomeScreen());
 }
 
