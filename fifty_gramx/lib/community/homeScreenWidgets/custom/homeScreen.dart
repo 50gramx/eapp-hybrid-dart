@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/bottom/adaptiveBottomNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/bottom/tab/bottomNavigationTab.dart';
@@ -12,6 +13,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesH
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -28,10 +30,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  /// internal instance of LocalNotifications
+  static Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
+
   @override
   void initState() {
     super.initState();
     // EthosAppFlowBob();
+    _notificationsStream.listen((notification) {
+      handleListeningMessages(notification);
+    });
+  }
+
+  /// handler invoked inside localNotifications, which listens to new messages
+  /// when the device receives a push notification based on metadata
+  handleListeningMessages(LocalNotification message) async {
+    if (message.type == "EthosAppFlowBob") {
+      if (message.data["subType"] == "Loaded eApp") {
+        print("loaded new app: ${navigationBarItems.length}");
+        handleLoadedEApp();
+      }
+    }
   }
 
   setStatusBarTheme() {
@@ -48,8 +68,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  final List<AppFlow> appFlows = [
-    AppFlow(
+  /*
+   AppFlow(
       index: 0,
       title: 'Conversations',
       code: 50,
@@ -89,54 +109,50 @@ class _HomeScreenState extends State<HomeScreen> {
         containingFlowTitle: 'Pods',
       ),
     ),
+  * */
+  final List<AppFlow> appFlows = [
     AppFlow(
-      index: 4,
-      title: 'Web',
+      index: 1,
+      title: 'Identity',
       code: 50,
       iconData: FeatherIcons.shield,
       mainColor: AppColors.lightNeuPrimaryBackground,
       navigatorKey: GlobalKey<NavigatorState>(),
-      firstPage: WebViewPage(index: 1, containingFlowTitle: 'Web'),
+      firstPage: WebViewPage(index: 1, containingFlowTitle: 'Ethos Identity'),
     ),
   ];
 
+  List<LeftNavigationTab> navigationBarItems = [];
+
+  handleLoadedEApp() {
+    print("handleLoadedEApp");
+    navigationBarItems = [];
+    EthosAppFlowBob.communityAppFlow.keys.forEach((appFlow) {
+      EthosAppFlowBob.communityAppFlow[appFlow]?.forEach((flow) {
+        navigationBarItems.add(LeftNavigationTab(
+          leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
+            label: flow.title,
+            code: flow.code,
+            icon: Icon(flow.iconData,
+                color: AppColors.contentInversePrimary(context)),
+          ),
+          navigatorKey: flow.navigatorKey,
+          initialPageBuilder: (context) {
+            setStatusBarTheme();
+            return flow.firstPage;
+          },
+        ));
+      });
+    });
+    print("will set state: ${navigationBarItems.length}");
+    setState(() {});
+    print("set state done: ${navigationBarItems.length}");
+  }
+
   @override
   Widget build(BuildContext context) {
-    var leftNavigationScaffold = AdaptiveLeftNavigationScaffold(
-      navigationBarItems: appFlows
-          .map(
-            (flow) => LeftNavigationTab(
-              leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
-                label: flow.title,
-                code: flow.code,
-                icon: Icon(flow.iconData,
-                    color: AppColors.contentInversePrimary(context)),
-              ),
-              navigatorKey: flow.navigatorKey,
-              initialPageBuilder: (context) {
-                setStatusBarTheme();
-                return flow.firstPage;
-                if (flow.index == 0) {
-                  return ConversationsHomePage(
-                      index: 1, containingFlowTitle: flow.title);
-                } else if (flow.index == 1) {
-                  return SpacesHomePage(
-                      index: 1, containingFlowTitle: flow.title);
-                } else if (flow.index == 2) {
-                  return ConnectionsHomePage(index: 1);
-                } else if (flow.index == 3) {
-                  return EthosPodConfigurationPage(
-                    index: 1,
-                    containingFlowTitle: flow.title,
-                  );
-                } else {
-                  return WebViewPage(index: 1, containingFlowTitle: flow.title);
-                }
-              },
-            ),
-          )
-          .toList(),
-    );
+    print("HomeScree:build: ${navigationBarItems.length}");
+    var leftNavigationScaffold = AdaptiveLeftNavigationScaffold();
 
     if (kIsWeb) {
       return leftNavigationScaffold;
