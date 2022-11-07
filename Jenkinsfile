@@ -74,7 +74,12 @@ node {
         echo "done"
     }
     stage('Delivery - Multiverse - Digital Ocean Node') {
-        withKubeConfig(clusterName: 'microk8s-cluster', contextName: 'microk8s', credentialsId: 'multiverse-india-do-config', namespace: 'ethosverse', serverUrl: 'https://157.245.106.167:16443') {
+        withKubeConfig(
+            clusterName: 'microk8s-cluster',
+            contextName: 'microk8s',
+            credentialsId: 'multiverse-india-do-config',
+            namespace: 'ethosverse',
+            serverUrl: 'https://157.245.106.167:16443') {
             sh 'kubectl apply -f playbook/deployment.yaml'
             sh 'kubectl apply -f playbook/service.yaml'
         }
