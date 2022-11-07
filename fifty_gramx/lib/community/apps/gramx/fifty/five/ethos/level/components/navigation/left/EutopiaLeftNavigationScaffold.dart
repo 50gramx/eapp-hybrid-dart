@@ -208,19 +208,16 @@ class _EutopiaLeftNavigationScaffoldState
           children: [EAIT1006],
         ));
 
-    Widget column = Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          flex: 12,
-          child: communityAppCardPane,
-        ),
-      ],
-    );
 
-    Widget firstColumnContainer = Container(
-      child: Center(child: communityAppCardPane,),
+    /*
+    * 55GMx Ethos Eutopia
+    * eApp Interactions
+    * Tile - EAIT1001
+    * */
+    Widget EAIT1001 = Container(
+      child: Center(
+        child: EAIT1007,
+      ),
     );
 
     _buildAppPageButton(content, subIndex) {
