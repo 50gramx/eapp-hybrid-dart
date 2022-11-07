@@ -353,7 +353,8 @@ class EthosAppFlowBob {
       String name = appTileContract['name']; // name
       String about = appTileContract['about']; // about
       YamlMap composition = appTileContract['composition']; // composition
-      YamlList conditions = appTileContract['conditions'] ?? YamlList(); // conditions
+      YamlList conditions =
+          appTileContract['conditions'] ?? YamlList(); // conditions
 
       print("Composing Tile: $nameCode");
       print("Found conditions: $conditions");
