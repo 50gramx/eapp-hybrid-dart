@@ -197,6 +197,16 @@ class _EutopiaLeftNavigationScaffoldState
       ),
     );
 
+    /*
+    * 55GMx Ethos Eutopia
+    * eApp Interactions
+    * Tile - EAIT1008
+    * */
+    Widget EAIT1008 = Visibility(
+        visible: !isNavigatingLeft,
+        child: Row(
+          children: [EAIT1006],
+        ));
 
     Widget column = Column(
       mainAxisAlignment: MainAxisAlignment.center,
