@@ -8,7 +8,7 @@ job("Hello World!") {
     container(displayName = "Say Hello", image = "ubuntu") {
       shellScript {
       	content = """
-       		ls
+       		flutter doctor -v
          """
       }
     }
