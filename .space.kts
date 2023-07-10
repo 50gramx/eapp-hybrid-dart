@@ -5,11 +5,17 @@
 */
 
 job("Hello World!") {
-    container(displayName = "Say Hello", image = "ubuntu") {
-      shellScript {
-      	content = """
-       		flutter doctor -v
-         """
-      }
+    container(displayName = "Say Hello", image = "hello-world") 
+}
+
+
+job("Run on Docker Integration Update") {
+    startOn {
+        gitPush {
+            pathFilter {
+                +"Dockerfile.integration"
+            }
+        }
     }
+    container(displayName = "Say Integration", image = "hello-world")
 }
