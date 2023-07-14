@@ -46,9 +46,9 @@ job("web release") {
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.5") {
     	shellScript {
           content = """
-          	pws
+          	pwd
           	ls -l
-          	cd fifty_gramx && flutter build web --release
+          	cd fifty_gramx && flutter pub get && flutter build web --release
           """
         }
     }
