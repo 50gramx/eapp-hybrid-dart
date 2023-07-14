@@ -47,10 +47,11 @@ job("web release") {
     	shellScript {
           content = """
             apt update -y
-            apt install snapd -y
-            service snapd start
-            sleep 3
-          	snap install flutter --classic
+          	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz -o flutter_linux_3.10.6-stable.tar.xz
+            tar xf ~/Downloads/flutter_linux_3.10.6-stable.tar.xz
+            export PATH="$PATH:`pwd`/flutter/bin"
+            flutter doctor -v
+            flutter precache
             flutter doctor -v
            	cd fifty_gramx && flutter build web --release
           """
