@@ -13,7 +13,7 @@ job("Build Base Image") {
         }
     }
     
-    host("Build and push a Docker image") {
+    host("Build and push web base image") {
         dockerBuildPush {
             // by default, the step runs not only 'docker build' but also 'docker push'
             // to disable pushing, add the following line:
@@ -41,8 +41,16 @@ job("Build Base Image") {
     }
 }
 
-job("web release") {	
+job("web release") {
   
+	startOn {
+        gitPush {
+            pathFilter {
+                -"Dockerfile.web.base"
+            }
+        }
+    }
+    
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base") {
     	shellScript {
           content = """
