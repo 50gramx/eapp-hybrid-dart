@@ -10,7 +10,7 @@ job("web release") {
           content = """
             apt update -y
             apt install snapd -y
-          	snap install flutter --classic -y
+          	snap install flutter --classic
             flutter doctor -v
            	cd fifty_gramx && flutter build web --release
           """
