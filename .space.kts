@@ -49,7 +49,7 @@ job("web release") {
             apt update -y
           	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz -o flutter_linux_3.10.6-stable.tar.xz
             tar xf ~/Downloads/flutter_linux_3.10.6-stable.tar.xz
-            export PATH="$PATH:`pwd`/flutter/bin"
+            export PATH="{$}PATH:`pwd`/flutter/bin"
             flutter doctor -v
             flutter precache
             flutter doctor -v
