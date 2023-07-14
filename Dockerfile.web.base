@@ -7,8 +7,8 @@ RUN apt update -y && \
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz && \
 	tar xf flutter_linux_3.10.6-stable.tar.xz
 
-RUN ls -l
-RUN pwd
 ENV PATH="$PATH:/flutter/bin"
+
+RUN git config --global --add safe.directory /flutter
 
 RUN flutter doctor -v
