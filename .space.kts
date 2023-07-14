@@ -47,6 +47,7 @@ job("web release") {
     	shellScript {
           content = """
             apt update -y
+            apt install wget -y
           	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz -o flutter_linux_3.10.6-stable.tar.xz
             tar xf ~/Downloads/flutter_linux_3.10.6-stable.tar.xz
             export PATH="{$}PATH:`pwd`/flutter/bin"
