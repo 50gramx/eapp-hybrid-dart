@@ -50,6 +50,8 @@ job("web release") {
             apt update -y
             echo "install wget"
             apt install wget -y
+            echo "install xz"
+            apt install xz-utils
             echo "download flutter"
           	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
            	pwd
