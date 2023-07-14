@@ -8,6 +8,8 @@ job("web release") {
     container(displayName = "Build Web Release", image = "ubuntu") {
     	shellScript {
           content = """
+            apt update -y
+            apt install snapd -y
           	snap install flutter --classic -y
             flutter doctor -v
            	cd fifty_gramx && flutter build web --release
