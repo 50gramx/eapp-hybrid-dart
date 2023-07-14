@@ -61,6 +61,7 @@ job("web release") {
             echo "updated PATH: ${'$'}PATH"
             echo "flutter doctor"
             flutter doctor -v
+            flutter channel
             echo "flutter precache"
             flutter precache
             echo "flutter doctor"
