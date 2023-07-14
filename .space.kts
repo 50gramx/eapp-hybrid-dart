@@ -5,10 +5,12 @@
 */
 
 job("web release") {
-    container(displayName = "Say Hello", image = "ubuntu") {
+    container(displayName = "Build Web Release", image = "ubuntu") {
     	shellScript {
           content = """
-          	cd fifty_gramx && flutter build web --release
+          	snap install flutter --classic -y
+            flutter doctor -v
+           	cd fifty_gramx && flutter build web --release
           """
         }
     }
