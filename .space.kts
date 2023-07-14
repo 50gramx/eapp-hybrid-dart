@@ -46,14 +46,24 @@ job("web release") {
     container(displayName = "Build Web Release", image = "ubuntu") {
     	shellScript {
           content = """
+          	echo "update ubuntu"
             apt update -y
+            echo "install wget"
             apt install wget -y
-          	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz -o flutter_linux_3.10.6-stable.tar.xz
+            echo "download flutter"
+          	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
+           	echo "extract flutter"
             tar xf flutter_linux_3.10.6-stable.tar.xz
+            echo "updating path"
             export PATH="{$}PATH:`pwd`/flutter/bin"
+            echo "updated PATH: {$}PATH"
+            echo "flutter doctor"
             flutter doctor -v
+            echo "flutter precache"
             flutter precache
+            echo "flutter doctor"
             flutter doctor -v
+            echo "build web release"
            	cd fifty_gramx && flutter build web --release
           """
         }
