@@ -59,6 +59,7 @@ job("web release") {
             echo "updating path"
             export PATH="${'$'}PATH:`pwd`/flutter/bin"
             echo "updated PATH: ${'$'}PATH"
+            git config --global --add safe.directory /mnt/space/work/eapp-hybrid-dart/flutter
             echo "flutter doctor"
             flutter doctor -v
             flutter channel
