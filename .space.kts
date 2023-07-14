@@ -8,7 +8,7 @@ job("web release") {
     container(displayName = "Say Hello", image = "ubuntu") {
     	shellScript {
           content = """
-          	echo Hello
+          	cd fifty_gramx && flutter build web --release
           """
         }
     }
