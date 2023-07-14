@@ -48,7 +48,7 @@ job("web release") {
           content = """
             apt update -y
             apt install snapd -y
-            service start snapd
+            service snapd start
             sleep 3
           	snap install flutter --classic
             flutter doctor -v
