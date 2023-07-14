@@ -7,6 +7,7 @@ RUN apt update -y && \
 RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz && \
 	tar xf flutter_linux_3.10.6-stable.tar.xz
 
+RUN ls -l
 ENV PATH="$PATH:`pwd`/flutter/bin"
 
 RUN flutter doctor -v
