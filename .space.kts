@@ -59,8 +59,8 @@ job("web release") {
             echo "extract flutter"
             tar xf /mnt/space/work/eapp-hybrid-dart/flutter_linux_3.10.6-stable.tar.xz
             echo "updating path"
-            export PATH="{$}PATH:`pwd`/flutter/bin"
-            echo "updated PATH: {$}PATH"
+            export PATH="${'$'}PATH:`pwd`/flutter/bin"
+            echo "updated PATH: ${'$'}PATH"
             echo "flutter doctor"
             flutter doctor -v
             echo "flutter precache"
