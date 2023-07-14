@@ -52,7 +52,8 @@ job("web release") {
             apt install wget -y
             echo "download flutter"
           	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
-           	echo ls -l -h
+           	pwd
+            ls -l -h
             echo "extract flutter"
             tar xf flutter_linux_3.10.6-stable.tar.xz
             echo "updating path"
