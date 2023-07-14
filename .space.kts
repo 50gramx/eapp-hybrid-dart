@@ -55,7 +55,7 @@ job("web release") {
            	pwd
             ls -l -h
             echo "extract flutter"
-            tar xf flutter_linux_3.10.6-stable.tar.xz
+            tar xf /mnt/space/work/eapp-hybrid-dart/flutter_linux_3.10.6-stable.tar.xz
             echo "updating path"
             export PATH="{$}PATH:`pwd`/flutter/bin"
             echo "updated PATH: {$}PATH"
