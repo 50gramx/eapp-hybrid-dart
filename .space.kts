@@ -4,6 +4,12 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
-job("Hello World!") {
-    container(displayName = "Say Hello", image = "hello-world")
+job("web release") {
+    container(displayName = "Say Hello", image = "ubuntu") {
+    	shellScript {
+          content = """
+          	echo Hello
+          """
+        }
+    }
 }
