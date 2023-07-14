@@ -46,34 +46,30 @@ job("web release") {
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.5") {
     	shellScript {
           content = """
-          	flutter doctor -v
+          	pws
+          	ls -l
+          	cd fifty_gramx && flutter build web --release
           """
         }
     }
 }
 
+
 /* 
-          	echo "update ubuntu"
-            apt update -y
-            echo "install flutter CLI Tools"
-            apt install -y wget bash curl file git unzip xz-utils zip
-            echo "download flutter"
-          	wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.10.6-stable.tar.xz
-           	pwd
-            ls -l -h
-            echo "extract flutter"
-            tar xf /mnt/space/work/eapp-hybrid-dart/flutter_linux_3.10.6-stable.tar.xz
-            echo "updating path"
-            export PATH="${'$'}PATH:`pwd`/flutter/bin"
-            echo "updated PATH: ${'$'}PATH"
-            git config --global --add safe.directory /mnt/space/work/eapp-hybrid-dart/flutter
-            echo "flutter doctor"
-            flutter doctor -v
-            flutter channel
-            echo "flutter precache"
-            flutter precache
-            echo "flutter doctor"
-            flutter doctor -v
-            echo "build web release"
-           	cd fifty_gramx && flutter build web --release
+
+
+         // Upload build/build.zip to the default file repository
+        fileArtifacts {
+            // To upload to another repo, uncomment the next line
+            // repository = FileRepository(name = "my-file-repo", remoteBasePath = "{{ run:number }}")
+
+            // Local path to artifact relative to working dir
+            localPath = "build/build.zip"
+            // Don't fail job if build.zip is not found
+            optional = true
+            // Target path to artifact in file repository.
+            remotePath = "{{ run:number }}/build.zip"
+            // Upload condition (job run result): SUCCESS (default), ERROR, ALWAYS
+            onStatus = OnStatus.SUCCESS
+        }
 */
