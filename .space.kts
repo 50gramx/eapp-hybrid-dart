@@ -42,16 +42,8 @@ job("Build Base Image") {
 }
 
 job("web release") {
-  
-	startOn {
-        gitPush {
-            pathFilter {
-                -"Dockerfile.web.base"
-            }
-        }
-    }
     
-    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base") {
+    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.5") {
     	shellScript {
           content = """
           	flutter doctor -v
