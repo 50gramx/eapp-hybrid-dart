@@ -41,32 +41,25 @@ class LocalNotificationService {
         AndroidInitializationSettings('launcher_icon');
 
     // +++ Initialising the settings for iOS
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
+    final DarwinInitializationSettings initializationSettingsDarwin =
+        DarwinInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
       requestAlertPermission: false,
       // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
-    // +++ Initialising the settings for MacOS
-    final MacOSInitializationSettings initializationSettingsMacOS =
-        MacOSInitializationSettings(
-            requestAlertPermission: false,
-            requestBadgePermission: false,
-            requestSoundPermission: false);
-
     // +++ Finalising the Initialized settings for Platforms supported
     // by FCM and flutter_local_notifications
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS,
-            macOS: initializationSettingsMacOS);
+            iOS: initializationSettingsDarwin,
+            macOS: initializationSettingsDarwin);
 
     // --> Wait till settings are initialized
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
+        onDidReceiveNotificationResponse: selectNotification);
 
     final bool? resultIOS = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -90,20 +83,13 @@ class LocalNotificationService {
         AndroidNotificationDetails(
       "com.fiftygramx.ethosai",
       "notifications.local",
-      "SMS Notifications",
       importance: Importance.high,
       priority: Priority.high,
       playSound: true,
     );
 
-    const IOSNotificationDetails iosNotificationDetails =
-        IOSNotificationDetails(
-      presentSound: true,
-      presentAlert: true,
-    );
-
-    const MacOSNotificationDetails macOSNotificationDetails =
-        MacOSNotificationDetails(
+    const DarwinNotificationDetails darwinNotificationDetails =
+        DarwinNotificationDetails(
       presentSound: true,
       presentAlert: true,
     );
@@ -111,8 +97,8 @@ class LocalNotificationService {
     // Setting the platform channel specifics
     platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
-      iOS: iosNotificationDetails,
-      macOS: macOSNotificationDetails,
+      iOS: darwinNotificationDetails,
+      macOS: darwinNotificationDetails,
     );
   }
 
@@ -122,7 +108,7 @@ class LocalNotificationService {
         .show(id, title, body, platformChannelSpecifics, payload: payload);
   }
 
-  Future selectNotification(String? payload) async {
+  selectNotification(NotificationResponse notificationResponse) async {
     //Handle notification tapped logic here
   }
 

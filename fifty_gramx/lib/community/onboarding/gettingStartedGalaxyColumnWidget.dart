@@ -439,8 +439,8 @@ class _GettingStartedGalaxyColumnWidgetState
   }
 
   updateSelectedTier(ProductDetails tierDetails) {
-    SkuDetailsWrapper skuDetails =
-        (tierDetails as GooglePlayProductDetails).skuDetails;
+    // SkuDetailsWrapper skuDetails =
+    //     (tierDetails as GooglePlayProductDetails).productDetails;
     setState(() {
       selectedTierDetails = tierDetails;
     });

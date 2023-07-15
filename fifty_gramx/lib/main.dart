@@ -355,9 +355,9 @@ Widget getExplicitPermissionAllocationPage(String explicitText,
                 buttonTitle: buttonText,
                 buttonActionOnPressed: () {
                   if (permission == "NOTIFICATIONS") {
-                    AppSettings.openNotificationSettings();
+                    AppSettings.openAppSettings(type: AppSettingsType.notification);
                   } else if (permission == "CONTACTS") {
-                    AppSettings.openAppSettings();
+                    AppSettings.openAppSettings(type: AppSettingsType.settings);
                   }
                 },
                 isPrimaryButton: true,

@@ -50,7 +50,8 @@ class PushNotificationService {
   // ********************************************************* //
   Future<void> start() async {
     // Verify this isSupported (Safari doesn't support PUSH API's)
-    if (!_started && (await firebaseMessaging).isSupported()) {
+    bool messagingSupported = (await firebaseMessaging).isSupported() as bool;
+    if (!_started && messagingSupported) {
       await _start();
       _started = true;
       _refreshToken();
