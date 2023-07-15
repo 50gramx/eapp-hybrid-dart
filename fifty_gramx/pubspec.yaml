@@ -42,7 +42,7 @@ dependencies:
   # dart_eval is an extensible bytecode compiler and runtime for the Dart language,
   # written in Dart, enabling dynamic codepush for Flutter and Dart AOT.
   dart_eval: ^0.4.6
-  datetime_picker_formfield: ^2.0.0
+  datetime_picker_formfield_new: ^2.1.0
   intl: ^0.17.0
   flutter_switch: ^0.3.1
   rxdart: ^0.27.1
