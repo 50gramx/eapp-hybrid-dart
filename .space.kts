@@ -43,7 +43,7 @@ job("Build Base Image") {
 
 job("web release") {
     
-    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.7") {
+    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.11") {
     	shellScript {
           content = """
           	pwd
