@@ -48,7 +48,7 @@ job("web release") {
           content = """
           	pwd
           	ls -l
-          	cd fifty_gramx && flutter pub get && flutter build web --release
+          	cd fifty_gramx && flutter clean && flutter pub get && flutter build web --release
           """
         }
     }
