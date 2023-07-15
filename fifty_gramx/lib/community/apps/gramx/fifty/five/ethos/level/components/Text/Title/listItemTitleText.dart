@@ -9,7 +9,7 @@ class ListItemTitleTextWidget extends StatelessWidget {
   final FontWeight fontWeight;
   final Color textColor;
 
-  const ListItemTitleTextWidget({Key? key, required this.titleText, this.disableNeu = false, this.fontSize: 16, this.fontWeight = FontWeight.w600, this.textColor = Colors.transparent}) : super(key: key);
+  const ListItemTitleTextWidget({Key? key, required this.titleText, this.disableNeu = false, this.fontSize = 16, this.fontWeight = FontWeight.w600, this.textColor = Colors.transparent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
