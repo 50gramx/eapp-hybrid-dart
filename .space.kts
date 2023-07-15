@@ -49,6 +49,8 @@ job("web release") {
           	pwd
           	ls -l
            	export FIREBASE_TOKEN=1//0g6W2blF3CHfpCgYIARAAGBASNwF-L9IrtUdRaTxhajHTTi15Sqz3y8HKX3XxVS7vXva_88tbGJifrxut3cbAWlz5wKg1C5c6LXI
+            npm -v
+            snap install node --classic
           	cd fifty_gramx && flutter clean && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
