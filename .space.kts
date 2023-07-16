@@ -42,7 +42,17 @@ job("Build Base Image") {
 }
 
 job("web release") {
-    
+    container("amazoncorretto:17-alpine") {
+        kotlinScript { api ->
+            api.space().projects.automation.deployments.start(
+                project = api.projectIdentifier(),
+                targetIdentifier = TargetIdentifier.Key("evo-on-50gramx-com"),
+                version = "1.0.0",
+                // automatically update deployment status based on a status of a job
+                syncWithAutomationJob = true
+            )
+        }
+    }
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.11") {
     	shellScript {
           content = """
