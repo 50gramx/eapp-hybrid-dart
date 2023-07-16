@@ -42,6 +42,15 @@ job("Build Base Image") {
 }
 
 job("web release") {
+	startOn {
+        gitPush {
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
+    }
+  
     container("amazoncorretto:17-alpine") {
         kotlinScript { api ->
             api.space().projects.automation.deployments.start(
@@ -53,7 +62,9 @@ job("web release") {
             )
         }
     }
+    
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.11") {
+      
     	shellScript {
           content = """
           	pwd
@@ -65,25 +76,24 @@ job("web release") {
           	cd fifty_gramx && flutter clean && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
+
     }
 }
 
 
-/* 
-
-
-         // Upload build/build.zip to the default file repository
-        fileArtifacts {
-            // To upload to another repo, uncomment the next line
-            // repository = FileRepository(name = "my-file-repo", remoteBasePath = "{{ run:number }}")
-
-            // Local path to artifact relative to working dir
-            localPath = "build/build.zip"
-            // Don't fail job if build.zip is not found
-            optional = true
-            // Target path to artifact in file repository.
-            remotePath = "{{ run:number }}/build.zip"
-            // Upload condition (job run result): SUCCESS (default), ERROR, ALWAYS
-            onStatus = OnStatus.SUCCESS
+job("Test deployment") {
+    host("Deploy test container") {
+        shellScript {
+            content = """
+                docker run -d -p 8080:80 httpd:2.4
+            """
         }
-*/
+
+        // run this job only on
+        // a Windows worker
+        // that is tagged as 'pool-1'
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
+}
