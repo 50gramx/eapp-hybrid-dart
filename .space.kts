@@ -48,7 +48,6 @@ job("web release") {
                 project = api.projectIdentifier(),
                 targetIdentifier = TargetIdentifier.Key("evo-on-50gramx-com"),
                 version = "1.0.${System.getenv("JB_SPACE_EXECUTION_NUMBER")}",
-              	externalLinkLabel = "My CI/CD service",
                 // automatically update deployment status based on a status of a job
                 syncWithAutomationJob = true
             )
