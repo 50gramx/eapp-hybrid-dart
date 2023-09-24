@@ -24,6 +24,7 @@ import 'dart:async';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,7 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Widget scaffold = Scaffold(
         backgroundColor: AppColors.backgroundPrimary(context),
         body: CustomScrollView(slivers: <Widget>[
           CustomSliverAppBar(
@@ -95,5 +96,7 @@ class _WebViewPageState extends State<WebViewPage> {
                 );
               }),
         ]));
+    Widget getStarted = GetStartedWidget();
+    return getStarted;
   }
 }
