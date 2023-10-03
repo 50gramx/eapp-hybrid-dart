@@ -875,11 +875,29 @@ class EthosAppFlowBob {
     print(
         "_loadCommunityEthosappContracts - Start for communityCode: $communityCode");
     communityAppFlow[communityCode] = [];
-    String communityAssetsPath = _getCommunityAssetsPath(communityCode);
-    List ethosappContracts = await _fetchEthosappContracts(communityAssetsPath);
+    String communityAssetsPath;
 
-    print(
-        "_loadCommunityEthosappContracts - Contracts fetched for communityCode: $communityCode");
+    try {
+      communityAssetsPath = _getCommunityAssetsPath(communityCode);
+      print(
+          "_loadCommunityEthosappContracts - Assets fetched for communityCode: $communityCode");
+    } catch (e) {
+      print(
+          "_loadCommunityEthosappContracts - Couldn't start due to missing communityAssetsPath for communityCode: $communityCode");
+      return; // Exit the function if assets path is not found.
+    }
+
+    List ethosappContracts;
+
+    try {
+      ethosappContracts = await _fetchEthosappContracts(communityAssetsPath);
+      print(
+          "_loadCommunityEthosappContracts - Contracts fetched for communityCode: $communityCode");
+    } catch (e) {
+      print(
+          "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode");
+      return; // Exit the function if ethosappContracts are not fetched.
+    }
 
     await Future.wait(
       ethosappContracts.map(
@@ -911,7 +929,22 @@ class EthosAppFlowBob {
   /// String assetsPath = _getCommunityAssetsPath(communityCode: 1);
   /// ```
   String _getCommunityAssetsPath(int communityCode) {
-    return gramxCommunityAssetsPath[communityCode]!['assetPath'];
+    try {
+      final assetsPath = gramxCommunityAssetsPath[communityCode]!['assetPath'];
+      if (assetsPath != null) {
+        return assetsPath;
+      } else {
+        print(
+            "Error: Assets path not found for communityCode: $communityCode");
+        // You can throw an exception here if needed or return a default value.
+        return ''; // Return an empty string as a fallback.
+      }
+    } catch (e) {
+      print(
+          "Error: Failed to retrieve assets path for communityCode: $communityCode");
+      // You can throw an exception here or handle it as per your requirement.
+      return ''; // Return an empty string as a fallback.
+    }
   }
 
   /// Fetches all ethos app contracts from a specified assets path.
@@ -935,8 +968,16 @@ class EthosAppFlowBob {
   /// List contracts = await _fetchEthosappContracts(assetsPath: 'assets/ethosapps/');
   /// ```
   Future<List> _fetchEthosappContracts(String communityAssetsPath) async {
-    return await _getContractListFromAssetPath(
-        assetPath: "$communityAssetsPath/ethosapps.yaml");
+    try {
+      final contracts = await _getContractListFromAssetPath(
+          assetPath: "$communityAssetsPath/ethosapps.yaml");
+      return contracts;
+    } catch (e) {
+      print(
+          "Error: Failed to fetch ethos app contracts for assetsPath: $communityAssetsPath");
+      // Handle the error as per your requirement. You can throw an exception here or return a default value.
+      return []; // Return an empty list as a fallback.
+    }
   }
 
   /// Fetches all ethos applications associated with recognized Gramx communities.
