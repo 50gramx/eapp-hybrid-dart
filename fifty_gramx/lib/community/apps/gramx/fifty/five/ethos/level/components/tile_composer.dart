@@ -29,9 +29,6 @@ class TileComposer {
             variableTypeNameCode: variableTypeCodeName,
             condition: condition,
             localVariableValue: localVariableValue);
-        print("got: $nameCode");
-        print("hasValue: ${localVariableValue}");
-        print("resolvedCondition: ${resolvedCondition}");
         visible = visible && resolvedCondition;
       } else {
         print("unhandled condition");
