@@ -132,6 +132,8 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/
     #       persona resources
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/persona/
+    # 88 community eapp common-assets
+    - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
