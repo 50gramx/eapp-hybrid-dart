@@ -6,19 +6,13 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-/// A scaffold that incorporates a BottomNavigationBar, separates navigators for each tab view,
-/// and retains state across tab switches.
+/// A Scaffold with a configured BottomNavigationBar, separate
+/// Navigators for each tab view and state retaining across tab switches.
 class EutopiaLeftNavigationScaffold extends StatefulWidget {
-  /// Creates a new instance of [EutopiaLeftNavigationScaffold].
-  ///
-  /// The [navigationBarItems] parameter specifies the list of tabs to be displayed
-  /// along with their respective navigator's keys.
-  ///
-  /// The [onItemSelected] callback is invoked when a tab selection occurs.
-  ///
-  /// The [selectedIndex] parameter determines the initially selected tab index.
   const EutopiaLeftNavigationScaffold({
     required this.navigationBarItems,
     required this.onItemSelected,
@@ -26,15 +20,12 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
     Key? key,
   });
 
-  /// A list of tabs to be displayed in the bottom navigation bar, each paired
-  /// with its respective navigator's key.
+  /// List of the tabs to be displayed with their respective navigator's keys.
   final List<LeftNavigationTab> navigationBarItems;
 
-  /// A callback function that is invoked when a tab is selected. It receives the
-  /// index of the selected tab as a parameter.
+  /// Called when a tab selection occurs.
   final ValueChanged<int> onItemSelected;
 
-  /// The index of the currently selected tab.
   final int selectedIndex;
 
   @override
@@ -42,66 +33,66 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
       _EutopiaLeftNavigationScaffoldState();
 }
 
-/// The state object for the [EutopiaLeftNavigationScaffold].
-///
-/// This class manages the internal state of the [EutopiaLeftNavigationScaffold].
-/// It handles animations, tab switching, and other UI interactions.
-///
-/// Typically, you don't need to interact with this class directly, as the
-/// [EutopiaLeftNavigationScaffold] widget provides a high-level interface for
-/// creating left navigation layouts with tabbed content.
-///
-/// To use [EutopiaLeftNavigationScaffold], create an instance of the
-/// [EutopiaLeftNavigationScaffold] widget and configure it with the desired tabs
-/// and content. The scaffold state will handle the rendering and switching of tabs.
 class _EutopiaLeftNavigationScaffoldState
     extends State<EutopiaLeftNavigationScaffold>
     with TickerProviderStateMixin<EutopiaLeftNavigationScaffold> {
-  /// An internal instance of LocalNotifications.
+  /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
 
-  /// List of animation controllers for managing tab animations.
   final List<AnimationController> _animationControllers = [];
 
-  /// Keeps track of whether each tab's content should be built.
+  /// Controls which tabs should have its content built. This enables us to
+  /// lazy instantiate it.
   final List<bool> _shouldBuildTab = <bool>[];
 
-  /// A key for accessing the scaffold state.
-  final GlobalKey<ScaffoldState> _screenKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _screenKey = new GlobalKey<ScaffoldState>();
 
-  /// Indicates whether the app is in focus mode.
   bool focusMode = true;
 
-  /// Controller for the text field used for searching.
+  // todo: gayab mode
   TextEditingController nameTextFieldController = TextEditingController();
 
   @override
   void initState() {
-    // Initialize animation controllers for tab transitions.
     _initAnimationControllers();
+//    _initEutopiaNavigationBarSectionalItems();
 
-    // Initialize a list to track whether each tab's content should be built.
     _shouldBuildTab.addAll(List<bool>.filled(
       EthosAppFlowBob.navigationBarItems.length,
       false,
     ));
 
-    // Listen to notifications and handle them.
-    _notificationsStream.listen(_handleListeningMessages);
-
+    _notificationsStream.listen((notification) {
+      handleListeningMessages(notification);
+    });
     super.initState();
   }
 
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
-  static _handleListeningMessages(LocalNotification message) async {
+  static handleListeningMessages(LocalNotification message) async {
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {}
     }
   }
 
-  /// Initializes animation controllers for tab transitions.
+//  void _initEutopiaNavigationBarSectionalItems() {
+//    eutopiaNavigationBarSectionalItems.addAll(
+//      widget.navigationBarItems
+//          .map(
+//            (barItem) => EutopiaLeftNavigationSectionalTab(
+//              leftNavigationBarSectionalItem:
+//                  barItem.leftNavigationBarSectionalItem,
+//              navigatorKey: barItem.navigatorKey,
+//              subtreeKey: GlobalKey(),
+//              initialPageBuilder: barItem.initialPageBuilder,
+//            ),
+//          )
+//          .toList(),
+//    );
+//  }
+
   void _initAnimationControllers() {
 //    _animationControllers.addAll(
 //      EthosAppFlowBob.navigationBarItems.map<AnimationController>(
