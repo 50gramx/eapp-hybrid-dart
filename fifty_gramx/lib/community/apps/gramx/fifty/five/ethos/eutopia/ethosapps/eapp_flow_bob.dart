@@ -229,14 +229,32 @@ class EthosAppFlowBob {
     }
   }
 
-  /// loads the asset from the path
-  /// and returns the asset as YamlList
-  Future<YamlList> _getContractListFromAssetPath(
-      {required String assetPath}) async {
-    final assetData = await rootBundle.loadString(assetPath);
-    YamlList contractList = loadYaml(assetData.toString());
-    return contractList;
+  /// Loads the asset from the path and returns the asset as YamlList.
+  ///
+  /// Given an asset path, this method loads the asset as a string and parses
+  /// it into a YamlList. If any errors occur during the loading or parsing
+  /// process, an error message is logged and an empty YamlList is returned.
+  ///
+  /// - Parameter `assetPath`: The path to the asset file. This parameter is required.
+  ///
+  /// - Returns: A `Future<YamlList>` representing the parsed YamlList from the asset.
+  ///
+  /// Example Usage:
+  /// ```dart
+  /// YamlList contracts = await _getContractListFromAssetPath(assetPath: 'assets/ethosapps.yaml');
+  /// ```
+  Future<YamlList> _getContractListFromAssetPath({required String assetPath}) async {
+    try {
+      final assetData = await rootBundle.loadString(assetPath);
+      YamlList contractList = loadYaml(assetData.toString());
+      return contractList;
+    } catch (e) {
+      // Handle any errors that occur during loading or parsing
+      print("Error loading asset from path: $assetPath. Error: $e");
+      return YamlList(); // Return an empty YamlList in case of an error
+    }
   }
+
 
   /// Loads the local variables for a specified application within a given community and organization.
   ///
