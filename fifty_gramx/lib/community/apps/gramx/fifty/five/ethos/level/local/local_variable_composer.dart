@@ -5,7 +5,6 @@ class LocalVariableComposer {
   int _getVariableTypeCode({required String variableTypeNameCode}) {
     // get the code for variable
     String typeCodeString = variableTypeNameCode.replaceFirst("ELVT", '');
-    print("typeCodeString: $typeCodeString");
     return int.parse(typeCodeString);
   }
 
@@ -82,7 +81,6 @@ class LocalVariableComposer {
   }
 
   bool _build1002({required YamlMap defaultValues}) {
-    print("defaultValues: $defaultValues");
     return defaultValues['value'] ?? false;
   }
 

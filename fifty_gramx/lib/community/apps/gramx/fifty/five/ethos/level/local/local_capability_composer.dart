@@ -32,7 +32,6 @@ class LocalCapabilityComposer {
             orgName: orgName,
             appName: appName,
             variableNameCode: returnValueNameCode);
-        print("returnValue: $returnValue");
         continue;
       }
     }
