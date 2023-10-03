@@ -625,6 +625,9 @@ class EthosAppFlowBob {
     final orgApps = organisationEthosappContract['apps'] as YamlList;
     final List<Map<String, dynamic>> orgAppsPaths = [];
 
+    // Log the number of apps being loaded for the organization
+    print("Loading ${orgApps.length} apps for organization: $orgName");
+
     for (final appName in orgApps) {
       final appAssetPath = '$orgAssetPath/$appName';
       orgAppsPaths.add({
@@ -633,14 +636,14 @@ class EthosAppFlowBob {
       });
 
       // Load app assets sequentially
-      print("Assets loading for app: $appName");
+      print("Start loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode)");
       await _loadAppAssets(
         appAssetPath: appAssetPath,
         appName: appName,
         communityCode: communityCode,
         orgName: orgName,
       );
-      print("Assets loaded for app: $appName");
+      print("Assets loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
     }
 
     final appFlow = _createAppFlow(communityCode);
