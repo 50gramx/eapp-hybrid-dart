@@ -243,18 +243,31 @@ class EthosAppFlowBob {
   /// ```dart
   /// YamlList contracts = await _getContractListFromAssetPath(assetPath: 'assets/ethosapps.yaml');
   /// ```
-  Future<YamlList> _getContractListFromAssetPath({required String assetPath}) async {
+  Future<YamlList> _getContractListFromAssetPath(
+      {required String assetPath}) async {
     try {
-      final assetData = await rootBundle.loadString(assetPath);
-      YamlList contractList = loadYaml(assetData.toString());
-      return contractList;
+      final dynamic assetData = await rootBundle.loadString(assetPath);
+
+      if (assetData != null) {
+        final YamlMap appVariables = loadYaml(assetData.toString());
+
+        if (appVariables is YamlList) {
+          // Handle the case where it's a YamlList
+          return (appVariables as YamlList);
+        } else {
+          print("Error loading contract list for path: $assetPath");
+          throw Exception("Error data from asset is not list: $assetPath");
+        }
+      } else {
+        print("Error loading contracts data: Asset data is null");
+        throw Exception("Error no data from asset: $assetPath");
+      }
     } catch (e) {
       // Handle any errors that occur during loading or parsing
       print("Error loading asset from path: $assetPath. Error: $e");
-      return YamlList(); // Return an empty YamlList in case of an error
+      throw Exception("Error loading asset from path: $assetPath. Error: $e");
     }
   }
-
 
   /// Loads the local variables for a specified application within a given community and organization.
   ///
@@ -288,22 +301,46 @@ class EthosAppFlowBob {
     required String appName,
   }) async {
     print("_loadAppLocalVariables - Start for app: $appName");
+    YamlList appVariables;
 
-    final assetPath = '$appAssetPath/ethosapp_local_variables.yaml';
-    final YamlList appVariables =
-        await _getContractListFromAssetPath(assetPath: assetPath);
+    try {
+      final assetPath = '$appAssetPath/ethosapp_local_variables.yaml';
+      appVariables = await _getContractListFromAssetPath(assetPath: assetPath);
 
-    print("Loaded app local variables contracts for app: $appName");
+      print(
+          "Loaded ${appVariables.length} app local variables contracts for app: $appName");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print("Error loading app local variables for app: $appName. Error: $e");
+      throw e;
+    }
 
     final appLocalVariablesMap = <String, Map<String, dynamic>>{};
 
     await Future.forEach(appVariables, (dynamic appVariableContract) async {
-      final appVariableData =
-          _extractAppVariableData(appVariableContract as YamlMap);
-      final String nameCode = appVariableData['nameCode']!;
-      appLocalVariablesMap[nameCode] = appVariableData;
+      try {
+        if (appVariableContract != null) {
+          final appVariableData =
+              _extractAppVariableData(appVariableContract as YamlMap);
+          final String nameCode = appVariableData['nameCode']!;
+          appLocalVariablesMap[nameCode] = appVariableData;
 
-      print("Loaded local variable: $nameCode for app: $appName");
+          print("Loaded local variable: $nameCode for app: $appName");
+        } else {
+          print("Empty app variable contract data encountered.");
+        }
+      } catch (e) {
+        if (e.toString() ==
+            "Exception: Incomplete app variable contract data.") {
+          // Handle the specific exception here
+          print("Incomplete app variable contract data encountered.");
+        } else {
+          print("Error loading local variable for app: $appName - Error: $e");
+          // Handle the exception here or rethrow it as needed
+          throw Exception(
+              "Error loading local variable for app: $appName - $e");
+        }
+      }
     });
 
     gramxAppsLocalVariables[communityCode] = {
@@ -335,25 +372,36 @@ class EthosAppFlowBob {
   /// This method is typically used internally within other methods that process app variable contracts,
   /// preparing the data for further use or storage.
   Map<String, String?> _extractAppVariableData(YamlMap appVariableContract) {
-    final String nameCode = appVariableContract['name-code'];
-    final String name = appVariableContract['name'];
-    final String type = appVariableContract['type'];
-    final YamlMap defaultValues = appVariableContract['default'] ?? YamlMap();
+    try {
+      final String nameCode = appVariableContract['name-code'] ?? '';
+      final String name = appVariableContract['name'] ?? '';
+      final String type = appVariableContract['type'] ?? '';
+      final YamlMap defaultValues = appVariableContract['default'] ?? YamlMap();
 
-    print(
-        "_extractAppVariableData - Extracting data for variable: $nameCode, Name: $name, Type: $type");
+      print(
+          "_extractAppVariableData - Extracting data for variable: $nameCode, Name: $name, Type: $type");
 
-    final appVariable = LocalVariableComposer().fromVariableContract(
-        variableTypeNameCode: type, defaultValues: defaultValues);
+      if (nameCode.isEmpty || name.isEmpty || type.isEmpty) {
+        throw Exception("Incomplete app variable contract data.");
+      }
 
-    print("_extractAppVariableData - Extracted data for variable: $nameCode");
+      final appVariable = LocalVariableComposer().fromVariableContract(
+          variableTypeNameCode: type, defaultValues: defaultValues);
 
-    return {
-      'value': appVariable,
-      'type': type,
-      'name': name,
-      'nameCode': nameCode,
-    };
+      print("_extractAppVariableData - Extracted data for variable: $nameCode");
+
+      return {
+        'value': appVariable,
+        'type': type,
+        'name': name,
+        'nameCode': nameCode,
+      };
+    } catch (e) {
+      print(
+          "_extractAppVariableData - Error extracting data from app variable contract: $e");
+      // Handle the exception here or rethrow it as needed
+      throw Exception("Error extracting app variable data: $e");
+    }
   }
 
   /// Loads the local capabilities of an application from the provided asset path,
@@ -394,42 +442,67 @@ class EthosAppFlowBob {
   }) async {
     print(
         "_loadAppLocalCapabilities - Loading local capabilities for $orgName/$appName");
+    YamlList appCapabilities;
 
-    final appCapabilities = await _getContractListFromAssetPath(
-        assetPath: "$appAssetPath/ethosapp_local_capabilities.yaml");
-
-    print(
-        "_loadAppLocalCapabilities - Found ${appCapabilities.length} capability contracts");
+    try {
+      final assetPath = "$appAssetPath/ethosapp_local_capabilities.yaml";
+      appCapabilities =
+          await _getContractListFromAssetPath(assetPath: assetPath);
+      print(
+          "_loadAppLocalCapabilities - Found ${appCapabilities.length} capability contracts for app: $appName");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "_loadAppLocalCapabilities - Error loading app local capability for app: $appName. Error: $e");
+      throw e;
+    }
 
     final Map<String, Map<String, dynamic>> appLocalCapabilitiesMap = {};
 
     for (final appCapabilityContract in appCapabilities) {
-      final nameCode = appCapabilityContract['name-code'];
-      final name = appCapabilityContract['name'];
-      final context = appCapabilityContract['context'];
+      if (appCapabilityContract == null) {
+        print("Incomplete app capability contract data encountered.");
+        break;
+      }
+      try {
+        final String nameCode = appCapabilityContract['name-code'] ?? '';
+        final String name = appCapabilityContract['name'] ?? '';
+        final context = appCapabilityContract['context'] ?? '';
 
-      final contextExpects = context['expects'] ?? YamlList();
-      final contextReturns = context['returns'];
-      final contextSteps = context['steps'];
+        final contextExpects = context['expects'] ?? YamlList();
+        final contextReturns = context['returns'] ?? YamlMap();
+        final contextSteps = context['steps'] ?? YamlList();
 
-      print(
-          "_loadAppLocalCapabilities - Processing capability contract: $nameCode, Name: $name");
+        print(
+            "_loadAppLocalCapabilities - Processing capability contract: $nameCode, Name: $name");
 
-      final appCapability = LocalCapabilityComposer().fromContract(
-          appName: appName,
-          communityCode: communityCode,
-          orgName: orgName,
-          expects: contextExpects,
-          returns: contextReturns,
-          steps: contextSteps);
+        if (nameCode.isEmpty || name.isEmpty || context.isEmpty) {
+          throw Exception("Incomplete app variable contract data.");
+        }
 
-      appLocalCapabilitiesMap[nameCode] = {
-        'value': appCapability,
-        'name': name
-      };
+        final appCapability = LocalCapabilityComposer().fromContract(
+            appName: appName,
+            communityCode: communityCode,
+            orgName: orgName,
+            expects: contextExpects,
+            returns: contextReturns,
+            steps: contextSteps);
 
-      print(
-          "_loadAppLocalCapabilities - Processed capability contract: $nameCode");
+        print(
+            "_loadAppLocalCapabilities - Extracted data for capability: $nameCode");
+
+        appLocalCapabilitiesMap[nameCode] = {
+          'value': appCapability,
+          'name': name
+        };
+        print(
+            "_loadAppLocalCapabilities - Processed capability contract: $nameCode");
+      } catch (e) {
+        print(
+            "_loadAppLocalCapabilities - Error extracting data from app capability contract: $e");
+        // Handle the exception here or rethrow it as needed
+        throw Exception("Error extracting app capability data: $e");
+      }
     }
 
     gramxAppsLocalCapabilities[communityCode] = {
@@ -475,48 +548,66 @@ class EthosAppFlowBob {
     print(
         "_loadAppInteractionComponents - Loading interaction components for $orgName/$appName");
 
-    final appComponents = await _getContractListFromAssetPath(
-      assetPath: "$appAssetPath/ethosapp_interaction_components.yaml",
-    );
-
-    print(
-        "_loadAppInteractionComponents - Found ${appComponents.length} component contracts");
-
-    final Map<String, Map<String, dynamic>> appInteractionComponentsMap = {};
-
-    for (final appComponentContract in appComponents) {
-      final nameCode = appComponentContract['name-code'];
-      final name = appComponentContract['name'];
-      final component = appComponentContract['component'];
-
-      final componentNameCode = component['name-code'] ?? '';
-
-      print(
-          "_loadAppInteractionComponents - Processing component contract: $nameCode, Name: $name");
-
-      final appComponent = ComponentComposer().fromComponentContract(
-        communityCode: communityCode,
-        orgName: orgName,
-        appName: appName,
-        componentNameCode: componentNameCode,
-        componentProperties: component,
+    try {
+      final appComponents = await _getContractListFromAssetPath(
+        assetPath: "$appAssetPath/ethosapp_interaction_components.yaml",
       );
 
-      appInteractionComponentsMap[nameCode] = {
-        'value': appComponent,
-        'name': name,
+      print(
+          "_loadAppInteractionComponents - Found ${appComponents.length} component contracts");
+
+      final Map<String, Map<String, dynamic>> appInteractionComponentsMap = {};
+
+      for (final appComponentContract in appComponents) {
+        if (appComponentContract == null) {
+          print("Incomplete app component contract data encountered.");
+          break;
+        }
+        try {
+          final nameCode = appComponentContract['name-code'];
+          final name = appComponentContract['name'];
+          final component = appComponentContract['component'];
+
+          final componentNameCode = component['name-code'] ?? '';
+
+          print(
+              "_loadAppInteractionComponents - Processing component contract: $nameCode, Name: $name");
+
+          final appComponent = ComponentComposer().fromComponentContract(
+            communityCode: communityCode,
+            orgName: orgName,
+            appName: appName,
+            componentNameCode: componentNameCode,
+            componentProperties: component,
+          );
+
+          appInteractionComponentsMap[nameCode] = {
+            'value': appComponent,
+            'name': name,
+          };
+
+          print(
+              "_loadAppInteractionComponents - Processed component contract: $nameCode");
+        } catch (e) {
+          print(
+              "_loadAppInteractionComponents - Error processing component contract: $e");
+          // Handle the exception here or rethrow it as needed
+          throw Exception("Error processing component contract: $e");
+        }
+      }
+
+      gramxAppsInteractionComponents[communityCode] = {
+        "$orgName-$appName": appInteractionComponentsMap,
       };
 
       print(
-          "_loadAppInteractionComponents - Processed component contract: $nameCode");
+          "_loadAppInteractionComponents - Interaction components loaded for $orgName/$appName");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "_loadAppInteractionComponents - Error loading interaction components for $orgName/$appName. Error: $e");
+      throw e;
     }
-
-    gramxAppsInteractionComponents[communityCode] = {
-      "$orgName-$appName": appInteractionComponentsMap,
-    };
-
-    print(
-        "_loadAppInteractionComponents - Interaction components loaded for $orgName/$appName");
   }
 
   /// Loads interaction tiles of an application from the specified asset path,
@@ -648,36 +739,48 @@ class EthosAppFlowBob {
 
     for (final appName in orgApps) {
       final appAssetPath = '$orgAssetPath/$appName';
-      orgAppsPaths.add({
-        'name': appName,
-        'assetPath': appAssetPath,
-      });
+      AppFlow appFlow;
 
-      // Load app assets sequentially
-      print("Start loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode)");
-      await _loadAppAssets(
-        appAssetPath: appAssetPath,
-        appName: appName,
-        communityCode: communityCode,
-        orgName: orgName,
-      );
-      print("Assets loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      try {
+        // Load app assets sequentially
+        print(
+            "Start loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+        await _loadAppAssets(
+          appAssetPath: appAssetPath,
+          appName: appName,
+          communityCode: communityCode,
+          orgName: orgName,
+        );
+        print(
+            "Assets loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+
+        orgAppsPaths.add({
+          'name': appName,
+          'assetPath': appAssetPath,
+        });
+
+        appFlow = _createAppFlow(communityCode, appName);
+        print("App flow created for communityCode: $communityCode");
+        communityAppFlow[communityCode]!.add(appFlow);
+
+        final leftNavigationTab = _createLeftNavigationTab(appFlow);
+        print("Left navigation tab created for communityCode: $communityCode");
+        navigationBarItems.add(leftNavigationTab);
+
+        final eutopiaTab = _createEutopiaTab(leftNavigationTab);
+        print("Eutopia tab created for communityCode: $communityCode");
+        eutopiaNavigationBarSectionalItems.add(eutopiaTab);
+
+        NotificationsBloc.instance.newNotification(
+            LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
+      } catch (e) {
+        // Handle any errors that occur during loading
+        print(
+            "Error loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+        print("Will stop loading app contracts");
+        break;
+      }
     }
-
-    final appFlow = _createAppFlow(communityCode);
-    print("App flow created for communityCode: $communityCode");
-    communityAppFlow[communityCode]!.add(appFlow);
-
-    final leftNavigationTab = _createLeftNavigationTab(appFlow);
-    print("Left navigation tab created for communityCode: $communityCode");
-    navigationBarItems.add(leftNavigationTab);
-
-    final eutopiaTab = _createEutopiaTab(leftNavigationTab);
-    print("Eutopia tab created for communityCode: $communityCode");
-    eutopiaNavigationBarSectionalItems.add(eutopiaTab);
-
-    NotificationsBloc.instance.newNotification(
-        LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
 
     try {
       // Attempt to access the nested properties
@@ -734,41 +837,77 @@ class EthosAppFlowBob {
   }) async {
     print("_loadAppAssets - Start for app: $appName");
 
-    print("Loading app local variables for app: $appName");
-    await _loadAppLocalVariables(
-      appAssetPath: appAssetPath,
-      appName: appName,
-      communityCode: communityCode,
-      orgName: orgName,
-    );
-    print("App local variables loaded for app: $appName");
+    print(
+        "Loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    try {
+      await _loadAppLocalVariables(
+        appAssetPath: appAssetPath,
+        appName: appName,
+        communityCode: communityCode,
+        orgName: orgName,
+      );
+      print(
+          "App local variables loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "Error loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      throw e;
+    }
 
-    print("Loading app local capabilities for app: $appName");
-    await _loadAppLocalCapabilities(
-      appAssetPath: appAssetPath,
-      appName: appName,
-      communityCode: communityCode,
-      orgName: orgName,
-    );
-    print("App local capabilities loaded for app: $appName");
+    print(
+        "Loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    try {
+      await _loadAppLocalCapabilities(
+        appAssetPath: appAssetPath,
+        appName: appName,
+        communityCode: communityCode,
+        orgName: orgName,
+      );
+      print(
+          "App local capabilities loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "Error loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      throw e;
+    }
 
-    print("Loading app interaction components for app: $appName");
-    await _loadAppInteractionComponents(
-      appAssetPath: appAssetPath,
-      communityCode: communityCode,
-      orgName: orgName,
-      appName: appName,
-    );
-    print("App interaction components loaded for app: $appName");
+    print(
+        "Loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    try {
+      await _loadAppInteractionComponents(
+        appAssetPath: appAssetPath,
+        communityCode: communityCode,
+        orgName: orgName,
+        appName: appName,
+      );
+      print(
+          "App interaction components loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "Error loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      throw e;
+    }
 
-    print("Loading app interaction tiles for app: $appName");
-    await _loadAppInteractionTiles(
-      appAssetPath: appAssetPath,
-      communityCode: communityCode,
-      orgName: orgName,
-      appName: appName,
-    );
-    print("App interaction tiles loaded for app: $appName");
+    print(
+        "Loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    try {
+      await _loadAppInteractionTiles(
+        appAssetPath: appAssetPath,
+        communityCode: communityCode,
+        orgName: orgName,
+        appName: appName,
+      );
+      print(
+          "App interaction tiles loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    } catch (e) {
+      // Handle any errors that occur during loading
+      print(
+          "Error loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      throw e;
+    }
 
     // Optionally, Load app interaction pages if necessary
     // Implementation depending on your application's requirements
@@ -794,7 +933,7 @@ class EthosAppFlowBob {
   /// ```
   ///
   /// This method can be used whenever an [AppFlow] instance is needed for a community, ensuring a consistent setup for the app flow across different parts of the application.
-  AppFlow _createAppFlow(int communityCode) {
+  AppFlow _createAppFlow(int communityCode, String title) {
     return AppFlow(
       index: 1,
       title: 'Identity',
