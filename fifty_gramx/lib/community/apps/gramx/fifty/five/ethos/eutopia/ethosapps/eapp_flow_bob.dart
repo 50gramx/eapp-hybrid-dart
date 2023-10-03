@@ -73,7 +73,7 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  static List<int> recognizedGramxCommunities = [50];
+  static List<int> recognizedGramxCommunities = [50, 88];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -223,6 +223,9 @@ class EthosAppFlowBob {
       gramxCommunityAssetsPath[communityCode] = {
         'assetPath': namedCommunityCodedPath
       };
+
+      print(
+          "Community Assets Path for Code $communityCode: $namedCommunityCodedPath");
     }
   }
 
@@ -892,10 +895,10 @@ class EthosAppFlowBob {
     try {
       ethosappContracts = await _fetchEthosappContracts(communityAssetsPath);
       print(
-          "_loadCommunityEthosappContracts - Contracts fetched for communityCode: $communityCode");
+          "_loadCommunityEthosappContracts - Fetched ${ethosappContracts.length} contracts for communityCode: $communityCode");
     } catch (e) {
       print(
-          "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode");
+          "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode, error: $e");
       return; // Exit the function if ethosappContracts are not fetched.
     }
 
@@ -934,8 +937,7 @@ class EthosAppFlowBob {
       if (assetsPath != null) {
         return assetsPath;
       } else {
-        print(
-            "Error: Assets path not found for communityCode: $communityCode");
+        print("Error: Assets path not found for communityCode: $communityCode");
         // You can throw an exception here if needed or return a default value.
         return ''; // Return an empty string as a fallback.
       }
