@@ -58,7 +58,8 @@ final String iframeHtml = '''
       showCloseButton: false,
       "botName": "Patel 88GMx",
       hideWidget: true,
-      "avatarUrl": "https://play-lh.googleusercontent.com/vZHsU6AXcSl-JdIk7CL1oRjqYWpDJk1gne0fNriE8zl18LGV3fCY-muWXHvLQ3l4hw=w220-rw", 
+      "avatarUrl": "https://play-lh.googleusercontent.com/vZHsU6AXcSl-JdIk7CL1oRjqYWpDJk1gne0fNriE8zl18LGV3fCY-muWXHvLQ3l4hw=w220-rw",
+      "stylesheet": "https://webchat-styler-css.botpress.app/prod/f0e80e9a-2689-48b1-a915-24333fc7b3bb/v64897/style.css"
     });
     window.botpressWebChat.onEvent(function () { window.botpressWebChat.sendEvent({ type: 'show' }) }, ['LIFECYCLE.LOADED']);
   </script>
