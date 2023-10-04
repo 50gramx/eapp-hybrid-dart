@@ -95,22 +95,28 @@ class _EutopiaLeftNavigationScaffoldState
 
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
-  static _handleListeningMessages(LocalNotification message) async {
+  _handleListeningMessages(LocalNotification message) async {
     if (message.type == "EthosAppFlowBob") {
-      if (message.data["subType"] == "Loaded eApp") {}
+      if (message.data["subType"] == "Loaded eApp") {
+        handleLoadedApp();
+      }
     }
+  }
+
+  handleLoadedApp() {
+    _initAnimationControllers();
   }
 
   /// Initializes animation controllers for tab transitions.
   void _initAnimationControllers() {
-//    _animationControllers.addAll(
-//      EthosAppFlowBob.navigationBarItems.map<AnimationController>(
-//        (destination) => AnimationController(
-//          vsync: this,
-//          duration: const Duration(milliseconds: 200),
-//        ),
-//      ),
-//    );
+   _animationControllers.addAll(
+     EthosAppFlowBob.navigationBarItems.map<AnimationController>(
+       (destination) => AnimationController(
+         vsync: this,
+         duration: const Duration(milliseconds: 200),
+       ),
+     ),
+   );
 
     _animationControllers.add(
       AnimationController(
@@ -821,10 +827,13 @@ class _EutopiaLeftNavigationScaffoldState
     int tabIndex,
     EutopiaLeftNavigationSectionalTab item,
   ) {
+    print("_buildPageFlow for page label ${item.leftNavigationBarSectionalItem.label}");
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
 
     print("tabIndex: $tabIndex");
+    print("isCurrentlySelected: $isCurrentlySelected");
     print("_shouldBuildTab: ${_shouldBuildTab.isEmpty}");
+    print("_shouldBuildTab[tabIndex]: ${_shouldBuildTab[tabIndex]}");
 
     if (_shouldBuildTab.isEmpty) {
       _shouldBuildTab.add(false);
@@ -835,10 +844,19 @@ class _EutopiaLeftNavigationScaffoldState
     _shouldBuildTab[tabIndex] =
         isCurrentlySelected || _shouldBuildTab[tabIndex];
 
-    final Widget view = FadeTransition(
-      opacity: _animationControllers[tabIndex].drive(
+    final viewOpacity;
+    print("_animationControllers.length: ${_animationControllers.length}");
+    try {
+      viewOpacity = _animationControllers[tabIndex].drive(
         CurveTween(curve: Curves.fastOutSlowIn),
-      ),
+      );
+    } catch (e) {
+      print("Error while creating viewOpacity: $e");
+      throw e;
+    }
+
+    final Widget view = FadeTransition(
+      opacity: viewOpacity,
       child: KeyedSubtree(
         key: item.subtreeKey,
         child: _shouldBuildTab[tabIndex]
@@ -863,10 +881,15 @@ class _EutopiaLeftNavigationScaffoldState
 
     if (tabIndex == widget.selectedIndex) {
       _animationControllers[tabIndex].forward();
+      print("Tab Index $tabIndex is currently selected. Forward animation.");
       return view;
     } else {
       _animationControllers[tabIndex].reverse();
+      print(
+          "Tab Index $tabIndex is not currently selected. Reverse animation.");
+
       if (_animationControllers[tabIndex].isAnimating) {
+        print("Ignoring pointer for Tab Index $tabIndex.");
         return IgnorePointer(child: view);
       }
       return Offstage(child: view);

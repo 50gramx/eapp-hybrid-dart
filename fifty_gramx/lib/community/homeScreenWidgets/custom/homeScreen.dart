@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<LeftNavigationTab> navigationBarItems = [];
 
   handleLoadedEApp() {
-    print("handleLoadedEApp");
+    print("homeScreen: handleLoadedEApp");
     navigationBarItems = [];
     EthosAppFlowBob.communityAppFlow.keys.forEach((appFlow) {
       EthosAppFlowBob.communityAppFlow[appFlow]?.forEach((flow) {

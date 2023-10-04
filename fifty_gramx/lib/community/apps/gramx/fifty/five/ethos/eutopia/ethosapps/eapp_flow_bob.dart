@@ -1,5 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/constants.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/component_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
@@ -7,12 +7,10 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/tile_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_capability_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:yaml/yaml.dart';
 
 /// EthosAppFlowBob is like Bob the builder
@@ -654,6 +652,11 @@ class EthosAppFlowBob {
     final Map<String, Map<String, dynamic>> appInteractionTilesMap = {};
 
     for (final appTileContract in appTiles) {
+      if (appTileContract == null) {
+        print("Incorrect data for app tile contract");
+        break;
+      }
+
       final nameCode = appTileContract['name-code'];
       final name = appTileContract['name'];
       final about = appTileContract['about'];
@@ -934,15 +937,7 @@ class EthosAppFlowBob {
   ///
   /// This method can be used whenever an [AppFlow] instance is needed for a community, ensuring a consistent setup for the app flow across different parts of the application.
   AppFlow _createAppFlow(int communityCode, String title) {
-    return AppFlow(
-      index: 1,
-      title: 'Identity',
-      code: communityCode,
-      iconData: FeatherIcons.shield,
-      mainColor: AppColors.lightNeuPrimaryBackground,
-      navigatorKey: GlobalKey<NavigatorState>(),
-      firstPage: WebViewPage(index: 1, containingFlowTitle: 'Ethos Identity'),
-    );
+    return EappFlow().getAppFlow(communityCode, title);
   }
 
   /// Creates a [LeftNavigationTab] instance using a given [AppFlow] instance.

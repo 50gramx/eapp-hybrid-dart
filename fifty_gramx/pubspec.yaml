@@ -69,6 +69,7 @@ dependencies:
   # Linux, macOS and Windows. Not all methods are supported on all platforms.
 
 
+
   path_provider: ^2.0.11
   # manages all the device level permissions
   permission_handler: ^10.4.3
@@ -120,6 +121,7 @@ flutter:
     - lib/community/apps/gramx/fifty/five/ethos/ethosapps.yaml
     # 50 ethos identity app assets
     - lib/community/apps/gramx/fifty/zero/ethos/identity/
+    - lib/community/apps/gramx/fifty/zero/ethos/knowledge_spaces/
     # 55 ethos eutopia app assets
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/homebrew.sh
