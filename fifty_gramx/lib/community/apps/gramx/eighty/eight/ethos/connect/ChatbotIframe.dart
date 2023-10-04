@@ -1,5 +1,5 @@
 import 'dart:html' as html;
-import 'dart:ui_web';
+import 'dart:ui_web' as ui;
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ class ChatbotIframe extends StatelessWidget {
     final String viewId = 'chatbot-iframe';
 
     // Register the view with the platform
-    platformViewRegistry.registerViewFactory(
+    ui.platformViewRegistry.registerViewFactory(
       viewId,
       (int _) => html.IFrameElement()
         ..width = '400' // or any desired width
