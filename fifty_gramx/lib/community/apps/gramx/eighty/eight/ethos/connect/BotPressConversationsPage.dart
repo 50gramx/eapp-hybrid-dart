@@ -55,6 +55,10 @@ final String iframeHtml = '''
       messagingUrl: 'https://messaging.botpress.cloud',
       clientId: 'de82101e-b0f3-44b5-8ad4-bd9c8c3948ae',
       "composerPlaceholder": "Curious about Mahatma Gandhi's early life? Ask me!",
+      showCloseButton: false,
+      "botName": "Patel 88GMx",
+      hideWidget: true,
+      "avatarUrl": "https://play-lh.googleusercontent.com/vZHsU6AXcSl-JdIk7CL1oRjqYWpDJk1gne0fNriE8zl18LGV3fCY-muWXHvLQ3l4hw=w220-rw", 
     });
     window.botpressWebChat.onEvent(function () { window.botpressWebChat.sendEvent({ type: 'show' }) }, ['LIFECYCLE.LOADED']);
   </script>
@@ -77,9 +81,6 @@ class _BotPressConversationsPageState extends State<BotPressConversationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary(context),
-      appBar: AppBar(
-        title: Text('BotPress Conversations'),
-      ),
       body: Center(child: ChatbotIframe(srcDoc: iframeHtml)),
     );
   }
