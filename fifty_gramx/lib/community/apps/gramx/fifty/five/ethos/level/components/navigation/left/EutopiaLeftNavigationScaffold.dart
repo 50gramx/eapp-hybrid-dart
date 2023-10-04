@@ -210,7 +210,7 @@ class _EutopiaLeftNavigationScaffoldState
     Widget communityLogo = Container(
       margin: EdgeInsets.symmetric(horizontal: 8),
       child: NeumorphicText(
-        "50GM\u2093",
+        "50GMx",
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
               ? LightSource.bottomRight
@@ -223,7 +223,7 @@ class _EutopiaLeftNavigationScaffoldState
               topRight: Radius.circular(24), bottomRight: Radius.circular(24))),
           color: AppColors.backgroundPrimary(context),
           border: NeumorphicBorder(
-            isEnabled: false,
+            isEnabled: true,
             color: AppColors.backgroundInverseTertiary(context),
             width: 1,
           ),
@@ -823,7 +823,7 @@ class _EutopiaLeftNavigationScaffoldState
                   ],
                 ),
               )),
-          Expanded(flex: 11, child: windowPane),
+          Expanded(flex: isNavigatingLeft ? 11 : 8, child: windowPane),
           EAIT1008,
         ],
       ),
