@@ -20,7 +20,6 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/ChatbotIframe.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class BotPressConversationsPage extends StatefulWidget {
@@ -61,7 +60,7 @@ final String iframeHtml = '''
       showCloseButton: false,
       "botName": "Patel 88GMx",
       hideWidget: true,
-      "avatarUrl": "https://play-lh.googleusercontent.com/vZHsU6AXcSl-JdIk7CL1oRjqYWpDJk1gne0fNriE8zl18LGV3fCY-muWXHvLQ3l4hw=w220-rw",
+      "avatarUrl": "https://thispersondoesnotexist.com",
       "stylesheet": "https://webchat-styler-css.botpress.app/prod/f0e80e9a-2689-48b1-a915-24333fc7b3bb/v23052/style.css"
     });
     window.botpressWebChat.onEvent(function () { window.botpressWebChat.sendEvent({ type: 'show' }) }, ['LIFECYCLE.LOADED']);
@@ -83,6 +82,15 @@ class _BotPressConversationsPageState extends State<BotPressConversationsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChatbotIframe(srcDoc: iframeHtml);
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+              'https://images.unsplash.com/photo-1477948879622-5f16e220fa42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: ChatbotIframe(srcDoc: iframeHtml),
+    );
   }
 }
