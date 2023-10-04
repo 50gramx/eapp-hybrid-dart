@@ -208,7 +208,7 @@ class _EutopiaLeftNavigationScaffoldState
     bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
 
     Widget communityLogo = Container(
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: EdgeInsets.symmetric(horizontal: 16),
       child: NeumorphicText(
         "50GMx",
         style: NeumorphicStyle(
