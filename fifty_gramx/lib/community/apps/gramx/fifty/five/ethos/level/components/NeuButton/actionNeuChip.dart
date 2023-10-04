@@ -75,7 +75,7 @@ class ActionNeuChip extends StatelessWidget {
                       text: " $chipTitle",
                       style: TextStyle(
                           color: AppColors.contentPrimary(context),
-                          fontSize: 12,
+                          fontSize: 16,
                           fontFamily: "Montserrat",
                           fontWeight: FontWeight.w400),
                     )
