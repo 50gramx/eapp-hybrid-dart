@@ -14,7 +14,6 @@ class ChatbotIframe extends StatelessWidget {
     final String viewId = 'chatbot-iframe';
 
     // Register the view with the platform
-    // ignore:undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
       viewId,
       (int _) => html.IFrameElement()
