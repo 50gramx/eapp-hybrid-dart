@@ -72,6 +72,7 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       theme: lightThemeData,
       darkTheme: darkThemeData,
+      themeMode: ThemeMode.light,
       home: FutureBuilder<void>(
         future: initializeApp(),
         builder: (context, snapshot) {

@@ -44,7 +44,7 @@ class EappFlow {
       firstPage = SpacesHomePage(index: index, containingFlowTitle: title);
     } else if (communityCode == 88 && title == 'connect') {
       index = 3;
-      appTitle = "Patel Pal";
+      appTitle = "Patel";
       iconData = FeatherIcons.messageCircle;
       firstPage =
           BotPressConversationsPage(index: index, containingFlowTitle: title);

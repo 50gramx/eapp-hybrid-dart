@@ -207,6 +207,35 @@ class _EutopiaLeftNavigationScaffoldState
     int viewPort = LayoutBreakpoint().getBreakpoint(context);
     bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
 
+    Widget communityLogo = Container(
+      margin: EdgeInsets.symmetric(horizontal: 8),
+      child: NeumorphicText(
+        "50GM\u2093",
+        style: NeumorphicStyle(
+          lightSource: NeumorphicTheme.isUsingDark(context)
+              ? LightSource.bottomRight
+              : LightSource.topLeft,
+          shadowLightColor: NeumorphicTheme.isUsingDark(context)
+              ? AppColors.gray600
+              : AppColors.backgroundSecondary(context),
+          shape: NeumorphicShape.flat,
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+              topRight: Radius.circular(24), bottomRight: Radius.circular(24))),
+          color: AppColors.backgroundPrimary(context),
+          border: NeumorphicBorder(
+            isEnabled: false,
+            color: AppColors.backgroundInverseTertiary(context),
+            width: 1,
+          ),
+        ),
+        textAlign: TextAlign.center,
+        textStyle: NeumorphicTextStyle(
+            fontSize: 36,
+            fontFamily: "Montserrat",
+            fontWeight: FontWeight.w700),
+      ),
+    );
+
     /*
     * 55GMx Ethos Eutopia
     * eApp Interactions
@@ -309,7 +338,7 @@ class _EutopiaLeftNavigationScaffoldState
     * Tile - EAIT1008
     * */
     Widget EAIT1008 = Visibility(
-        visible: !isNavigatingLeft,
+        visible: false, // !isNavigatingLeft,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -440,30 +469,32 @@ class _EutopiaLeftNavigationScaffoldState
                     children: [
                       Expanded(
                           flex: 12,
-                          child: Neumorphic(
-                            style: NeumorphicStyle(
-                              lightSource: NeumorphicTheme.isUsingDark(context)
-                                  ? LightSource.bottomRight
-                                  : LightSource.topLeft,
-                              shadowLightColor:
-                                  NeumorphicTheme.isUsingDark(context)
-                                      ? AppColors.gray600
-                                      : AppColors.backgroundSecondary(context),
-                              shape: NeumorphicShape.flat,
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.all(Radius.circular(24))),
-                              color: AppColors.backgroundPrimary(context),
-                              border: NeumorphicBorder(
-                                isEnabled: true,
+                          child: Flexible(
+                            child: Neumorphic(
+                              style: NeumorphicStyle(
+                                lightSource: NeumorphicTheme.isUsingDark(context)
+                                    ? LightSource.bottomRight
+                                    : LightSource.topLeft,
+                                shadowLightColor:
+                                NeumorphicTheme.isUsingDark(context)
+                                    ? AppColors.gray600
+                                    : AppColors.backgroundSecondary(context),
+                                shape: NeumorphicShape.flat,
+                                boxShape: NeumorphicBoxShape.roundRect(
+                                    BorderRadius.all(Radius.circular(24))),
                                 color: AppColors.backgroundPrimary(context),
-                                width: 2,
+                                border: NeumorphicBorder(
+                                  isEnabled: true,
+                                  color: AppColors.backgroundPrimary(context),
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            margin: EdgeInsets.only(
-                                top: 8, bottom: 8, right: 8, left: 8),
-                            child: Container(
-                              child: Stack(
-                                children: _buildStackChildrens,
+                              margin: EdgeInsets.only(
+                                  top: 8, bottom: 8, right: 8, left: 8),
+                              child: Container(
+                                child: Stack(
+                                  children: _buildStackChildrens,
+                                ),
                               ),
                             ),
                           )),
@@ -785,7 +816,12 @@ class _EutopiaLeftNavigationScaffoldState
               visible: focusMode, // todo: something like gayab mode
               child: Expanded(
                 flex: 1,
-                child: pageTabPane,
+                child: Row(
+                  children: [
+                    communityLogo,
+                    Expanded(child: pageTabPane)
+                  ],
+                ),
               )),
           Expanded(flex: 11, child: windowPane),
           EAIT1008,
@@ -805,7 +841,7 @@ class _EutopiaLeftNavigationScaffoldState
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Visibility(
-                  visible: isNavigatingLeft,
+                  visible: false, // isNavigatingLeft,
                   child: Expanded(flex: 1, child: EAIT1001)),
               Expanded(flex: 11, child: EAIT1002),
               Visibility(
