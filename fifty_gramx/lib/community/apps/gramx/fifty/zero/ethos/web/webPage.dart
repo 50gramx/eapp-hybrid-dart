@@ -24,7 +24,10 @@ import 'dart:async';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +100,9 @@ class _WebViewPageState extends State<WebViewPage> {
               }),
         ]));
     Widget getStarted = GetStartedWidget();
+    // Widget getStarted = ConversationsHomePage(index: 1, containingFlowTitle: "Conversations",);
+    // Widget getStarted = AccountAssistantConversationPage(
+    //     accountAssistant: AccountAssistant.create());
     return getStarted;
   }
 }
