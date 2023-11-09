@@ -1,16 +1,29 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/AdaptiveIconButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuChip.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1001.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1002.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/open_tiles_pane.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/page_flow_builder.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/window_pane.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// A scaffold that incorporates a BottomNavigationBar, separates navigators for each tab view,
 /// and retains state across tab switches.
 class EutopiaLeftNavigationScaffold extends StatefulWidget {
+  /// A list of tabs to be displayed in the bottom navigation bar, each paired
+  /// with its respective navigator's key.
+  final List<LeftNavigationTab> navigationBarItems;
+
+  /// A callback function that is invoked when a tab is selected. It receives the
+  /// index of the selected tab as a parameter.
+  final ValueChanged<int> onItemSelected;
+
+  /// The index of the currently selected tab.
+  final int selectedIndex;
+
   /// Creates a new instance of [EutopiaLeftNavigationScaffold].
   ///
   /// The [navigationBarItems] parameter specifies the list of tabs to be displayed
@@ -25,17 +38,6 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
     required this.selectedIndex,
     Key? key,
   });
-
-  /// A list of tabs to be displayed in the bottom navigation bar, each paired
-  /// with its respective navigator's key.
-  final List<LeftNavigationTab> navigationBarItems;
-
-  /// A callback function that is invoked when a tab is selected. It receives the
-  /// index of the selected tab as a parameter.
-  final ValueChanged<int> onItemSelected;
-
-  /// The index of the currently selected tab.
-  final int selectedIndex;
 
   @override
   _EutopiaLeftNavigationScaffoldState createState() =>
@@ -57,6 +59,9 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
 class _EutopiaLeftNavigationScaffoldState
     extends State<EutopiaLeftNavigationScaffold>
     with TickerProviderStateMixin<EutopiaLeftNavigationScaffold> {
+  /// A key for accessing the scaffold state.
+  final GlobalKey<ScaffoldState> _screenKey = GlobalKey<ScaffoldState>();
+
   /// An internal instance of LocalNotifications.
   static Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
@@ -67,9 +72,6 @@ class _EutopiaLeftNavigationScaffoldState
   /// Keeps track of whether each tab's content should be built.
   final List<bool> _shouldBuildTab = <bool>[];
 
-  /// A key for accessing the scaffold state.
-  final GlobalKey<ScaffoldState> _screenKey = GlobalKey<ScaffoldState>();
-
   /// Indicates whether the app is in focus mode.
   bool focusMode = true;
 
@@ -78,14 +80,9 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   void initState() {
+    print("EutopiaLeftNavigationScaffoldState: initState called");
     // Initialize animation controllers for tab transitions.
     _initAnimationControllers();
-
-    // Initialize a list to track whether each tab's content should be built.
-    _shouldBuildTab.addAll(List<bool>.filled(
-      EthosAppFlowBob.navigationBarItems.length,
-      false,
-    ));
 
     // Listen to notifications and handle them.
     _notificationsStream.listen(_handleListeningMessages);
@@ -96,32 +93,39 @@ class _EutopiaLeftNavigationScaffoldState
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
   _handleListeningMessages(LocalNotification message) async {
+    print(
+        "EutopiaLeftNavigationScaffoldState: Received notification: $message");
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {
+        print("Handling Loaded eApp");
         handleLoadedApp();
       }
     }
   }
 
   handleLoadedApp() {
+    print("EutopiaLeftNavigationScaffoldState: Handling Loaded App");
+
+    _shouldBuildTab.clear();
+    // Initialize a list to track whether each tab's content should be built.
+    _shouldBuildTab.addAll(List<bool>.filled(
+      EthosAppFlowBob.navigationBarItems.length,
+      false,
+    ));
     _initAnimationControllers();
   }
 
   /// Initializes animation controllers for tab transitions.
   void _initAnimationControllers() {
-   _animationControllers.addAll(
-     EthosAppFlowBob.navigationBarItems.map<AnimationController>(
-       (destination) => AnimationController(
-         vsync: this,
-         duration: const Duration(milliseconds: 200),
-       ),
-     ),
-   );
-
-    _animationControllers.add(
-      AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 200),
+    print(
+        "EutopiaLeftNavigationScaffoldState: Initializing animation controllers");
+    _animationControllers.clear();
+    _animationControllers.addAll(
+      EthosAppFlowBob.navigationBarItems.map<AnimationController>(
+        (destination) => AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 200),
+        ),
       ),
     );
 
@@ -143,831 +147,83 @@ class _EutopiaLeftNavigationScaffoldState
     super.dispose();
   }
 
-  /*
-  * We need to hack the below widget, which shows two columns
-  * in a way, where we three columns in max
-  * first column, covering not more than 10% of the screen if default mode
-  * first column, covering not more than 18% of the screen in panning mode
-  * first column, sticks to the left end of the screen
-  * first column, we can call it ***app bar***
-  * first column, this app bar divides itself in vertical stack of two columns
-  * first column, the first of these two columns should show three
-  * first column, platform apps/50gramx "community enabler"
-  * first column, we can call this CORE PANE
-  * first column, the second of these two columns should show 50 different communities
-  * first column, we can call these COMMUNITY PANE
-  * second column, covering rest of the screen
-  * second column, we can call it **app view base**
-  * second column, this app view base divides itself in vertical stack of two columns
-  * second column, first row, cover the 30% of the column in relax mode
-  * second column, first row, covers the 10% of the column in focus mode
-  * second column, second row, covers the rest of the screen in both the modes
-  * second column, second row, divides itself into stack of two horizontal columns
-  * second column, second row, first column, covers the whole row in single page mode
-  * second column, second row, first column, covers the 50% of the row in double page mode
-  * second column, second row, first column, covers the 70% of the row in pinned page mode
-  * second column, second row, second column, covers the 50% of the row in double page mode
-  * second column, second row, second column, covers the 30% of the row in side page mode
-  *
-  *
-  * idea wise, both type of pane should be built with a container
-  * pane container should be concave on screen layer
-  * inside pane container, top-left area should be given to community number in default mode
-  * inside pane container, full top area should be given to community number and name in panning mode
-  * let's call it community canopy area to this top area built with convex text inside box with radius
-  * we can use community canopy to show notifications later
-  * inside pane container, corresponding bottom area should be given to community apps logo and their name in a vertical stack same with convex
-  *
-  * idea wise, in single page mode, second column, second row, first column should
-  * have its bounding box as convex on screen layer
-  * in double page mode, second column, second row, first column should have its
-  * bounding box as
-  * */
-
   @override
   Widget build(BuildContext context) {
-    print(
-        "EutopiaLeftNavigation:build:${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
-    _buildAppButton(context, subIndex) {
-      return AdaptiveNeuButton(
-        buttonTitle: EthosAppFlowBob
-            .eutopiaNavigationBarSectionalItems[subIndex]
-            .leftNavigationBarSectionalItem
-            .label!,
-        buttonActionOnPressed: () {
-          selectPressedSectionItem(subIndex);
-        },
-        icon: EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex]
-            .leftNavigationBarSectionalItem.icon,
-        isCollapsed: true,
-        isSelected: subIndex == widget.selectedIndex,
-      );
-    }
+    print("Building EutopiaLeftNavigationScaffold");
 
     int viewPort = LayoutBreakpoint().getBreakpoint(context);
     bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
 
-    Widget communityLogo = Container(
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      child: NeumorphicText(
-        "50GMx",
-        style: NeumorphicStyle(
-          lightSource: NeumorphicTheme.isUsingDark(context)
-              ? LightSource.bottomRight
-              : LightSource.topLeft,
-          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-              ? AppColors.gray600
-              : AppColors.backgroundSecondary(context),
-          shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-              topRight: Radius.circular(24), bottomRight: Radius.circular(24))),
-          color: AppColors.backgroundPrimary(context),
-          border: NeumorphicBorder(
-            isEnabled: true,
-            color: AppColors.backgroundInverseTertiary(context),
-            width: 1,
-          ),
-        ),
-        textAlign: TextAlign.center,
-        textStyle: NeumorphicTextStyle(
-            fontSize: 36,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w700),
-      ),
-    );
-
-    /*
-    * 55GMx Ethos Eutopia
-    * eApp Interactions
-    * Tile - EAIT1005
-    * */
-    Widget EAIT1005 = Visibility(
-        visible:
-            viewPort == 4 || viewPort == 5 || viewPort == 6 || viewPort == 7,
-        child: Neumorphic(
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.concave,
-            depth: -6,
-            boxShape: NeumorphicBoxShape.roundRect(
-                BorderRadius.all(Radius.circular(24))),
-            color: AppColors.backgroundInverseSecondary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.backgroundInverseTertiary(context),
-              width: 2,
-            ),
-          ),
-          margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Container(
-            height:
-                EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount:
-                    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
-                itemBuilder: (BuildContext context, int subIndex) {
-                  return _buildAppButton(context, subIndex);
-                }),
-          ),
-        ));
-
-    /*
-    * 55GMx Ethos Eutopia
-    * eApp Interactions
-    * Tile - EAIT1006
-    * */
-    Widget EAIT1006 = Visibility(
-        visible: viewPort == 2 || viewPort == 3,
-        child: Neumorphic(
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.concave,
-            depth: -6,
-            boxShape: NeumorphicBoxShape.roundRect(
-                BorderRadius.all(Radius.circular(24))),
-            color: AppColors.backgroundInverseSecondary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.backgroundInverseTertiary(context),
-              width: 2,
-            ),
-          ),
-          margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Container(
-            height: 64,
-            width:
-                EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount:
-                    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
-                itemBuilder: (BuildContext context, int subIndex) {
-                  return _buildAppButton(context, subIndex);
-                }),
-          ),
-        ));
-
-    /*
-    * 55GMx Ethos Eutopia
-    * eApp Interactions
-    * Tile - EAIT1007
-    * */
-    Widget EAIT1007 = Visibility(
-        visible: isNavigatingLeft,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [EAIT1005],
-        ));
-
-    /*
-    * 55GMx Ethos Eutopia
-    * eApp Interactions
-    * Tile - EAIT1008
-    * */
-    Widget EAIT1008 = Visibility(
-        visible: false, // !isNavigatingLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(child: EAIT1006),
-          ],
-        ));
-
-    /*
-    * 55GMx Ethos Eutopia
-    * eApp Interactions
-    * Tile - EAIT1001
-    * */
-    Widget EAIT1001 = Container(
-      child: Center(
-        child: EAIT1007,
-      ),
-    );
-
-    _buildAppPageButton(content, subIndex) {
-      return ActionNeuChip(
-        chipAvatarText:
-            "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.code}",
-        chipTitle:
-            "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
-        chipIconBackgroundColor: AppColors.contentPrimary(context),
-        buttonActionOnPressed: () {
-          selectPressedSectionItem(subIndex);
-        },
-      );
-    }
-
-    Widget pageTabPane = Neumorphic(
-      style: NeumorphicStyle(
-        lightSource: NeumorphicTheme.isUsingDark(context)
-            ? LightSource.bottomRight
-            : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-            ? AppColors.gray600
-            : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.flat,
-        boxShape:
-            NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
-        color: AppColors.backgroundInverseSecondary(context),
-        border: NeumorphicBorder(
-          isEnabled: true,
-          color: AppColors.backgroundInverseTertiary(context),
-          width: 2,
-        ),
-      ),
-      margin: EdgeInsets.only(bottom: 8, right: 16, left: 8, top: 16),
-      child: Container(
-        child: Row(
-          children: [
-            Container(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount:
-                      EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
-                  itemBuilder: (BuildContext context, int subIndex) {
-                    return _buildAppPageButton(context, subIndex);
-                  }),
-            )
-          ],
-        ),
-        // height: 100,
-      ),
-    );
-
-    Widget ethosaiSearchInput = Center(
-      child: Container(
-        // height: 64,
-        child: Neumorphic(
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.flat,
-            depth: 6,
-            boxShape: NeumorphicBoxShape.roundRect(
-                BorderRadius.all(Radius.circular(24))),
-            color: AppColors.contentInverseSecondary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.contentInverseTertiary(context),
-              width: 2,
-            ),
-          ),
-          margin: EdgeInsets.only(bottom: 8, right: 16, left: 8, top: 8),
-          child: Column(
-            children: [
-              // Update with tile for ethosai with search
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: NameTextField(
-                    hintText: "Search Ethosverse",
-                    nameTextFieldController: nameTextFieldController),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
     List<Widget> _buildStackChildrens = [];
 
     EthosAppFlowBob.eutopiaNavigationBarSectionalItems.forEach((barItem) {
-      _buildStackChildrens.add(_buildPageFlow(
-        context,
-        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.indexOf(barItem),
-        barItem,
-      ));
+      print(
+          "Building page flow for ${barItem.leftNavigationBarSectionalItem.label}");
+      print("_animationControllers: ${_animationControllers}");
+
+      Widget built_page_flow = PageFlowBuilder.buildPageFlow(
+          context,
+          EthosAppFlowBob.eutopiaNavigationBarSectionalItems.indexOf(barItem),
+          barItem,
+          _animationControllers,
+          _shouldBuildTab,
+          widget);
+
+      _buildStackChildrens.add(built_page_flow);
     });
 
-    Widget openPagesPane = Expanded(
-      flex: 8,
-      child: Container(
-        child: Column(
-          children: [
-            Visibility(
-                visible: focusMode,
-                child: Flexible(
-                  flex: 12, //35
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 12,
-                          child: Flexible(
-                            child: Neumorphic(
-                              style: NeumorphicStyle(
-                                lightSource: NeumorphicTheme.isUsingDark(context)
-                                    ? LightSource.bottomRight
-                                    : LightSource.topLeft,
-                                shadowLightColor:
-                                NeumorphicTheme.isUsingDark(context)
-                                    ? AppColors.gray600
-                                    : AppColors.backgroundSecondary(context),
-                                shape: NeumorphicShape.flat,
-                                boxShape: NeumorphicBoxShape.roundRect(
-                                    BorderRadius.all(Radius.circular(24))),
-                                color: AppColors.backgroundPrimary(context),
-                                border: NeumorphicBorder(
-                                  isEnabled: true,
-                                  color: AppColors.backgroundPrimary(context),
-                                  width: 2,
-                                ),
-                              ),
-                              margin: EdgeInsets.only(
-                                  top: 8, bottom: 8, right: 8, left: 8),
-                              child: Container(
-                                child: Stack(
-                                  children: _buildStackChildrens,
-                                ),
-                              ),
-                            ),
-                          )),
-                      Visibility(
-                        visible: false,
-                        child: Expanded(
-                            flex: 0,
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                )),
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                )),
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                )),
-                              ],
-                            )),
-                      ),
-                      Visibility(
-                        visible: false,
-                        child: Expanded(
-                            flex: 0,
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                )),
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                )),
-                                Expanded(
-                                    child: Neumorphic(
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.all(Radius.circular(24))),
-                                    color: AppColors.backgroundPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  margin: EdgeInsets.only(
-                                      top: 8, bottom: 8, right: 8, left: 8),
-                                  child: Container(
-                                    color: AppColors.backgroundPrimary(context),
-                                    child: SizedBox(),
-                                  ),
-                                ))
-                              ],
-                            )),
-                      ),
-                    ],
+    /// Builds the main content scaffold for the EutopiaLeftNavigationScaffold widget.
+    ///
+    /// This scaffold includes a background color, a key for state management,
+    /// and a row with various child widgets.
+    Widget buildMainContentScaffold() {
+      return Scaffold(
+          backgroundColor: AppColors.backgroundInverseTertiary(context),
+          key: _screenKey,
+          // The Stack is what allows us to retain state across tab
+          // switches by keeping all of our views in the widget tree.
+          body: Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // Left Navigation (EAIT1001)
+                Visibility(
+                    visible: false, // isNavigatingLeft,
+                    child: Expanded(
+                        flex: 1,
+                        child: EAIT1001(
+                          navigationViewPort: viewPort,
+                          isNavigatingLeft: isNavigatingLeft,
+                          selectPressedSectionItem: selectPressedSectionItem,
+                          navigationWidget: widget,
+                        ))),
+
+                // Main Content (EAIT1002)
+                Expanded(
+                    flex: 11,
+                    child: EAIT1002(
+                      isNavigatingLeft: isNavigatingLeft,
+                      selectPressedSectionItem: selectPressedSectionItem,
+                      navigationWidget: widget,
+                      navigationViewPort: viewPort,
+                      focusMode: focusMode,
+                      windowPane: WindowPane(
+                          focusMode: focusMode,
+                          pagesStack: _buildStackChildrens),
+                    )),
+
+                // Additional Content (OpenTilesPane)
+                Visibility(
+                  child: Expanded(
+                    child: OpenTilesPane(),
                   ),
-                )), // todo: gayab mode
-          ],
-        ),
-      ),
-    );
-
-    Widget openTilesPane = Expanded(
-      flex: 4,
-      child: Neumorphic(
-        style: NeumorphicStyle(
-          lightSource: NeumorphicTheme.isUsingDark(context)
-              ? LightSource.bottomRight
-              : LightSource.topLeft,
-          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-              ? AppColors.gray600
-              : AppColors.backgroundSecondary(context),
-          shape: NeumorphicShape.flat,
-          depth: 6,
-          boxShape: NeumorphicBoxShape.roundRect(
-              BorderRadius.all(Radius.circular(24))),
-          color: AppColors.backgroundInverseTertiary(context),
-          border: NeumorphicBorder(
-            isEnabled: true,
-            color: AppColors.backgroundInverseTertiary(context),
-            width: 2,
-          ),
-        ),
-        margin: EdgeInsets.only(top: 8, bottom: 8, right: 16, left: 8),
-        child: Container(
-          child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: 12,
-              itemBuilder: (BuildContext context, int subIndex) {
-                if (subIndex == 0) {
-                  return Container(
-                    child: NeumorphicText(
-                      "COMMUNITY TILES",
-                      style: NeumorphicStyle(
-                        lightSource: NeumorphicTheme.isUsingDark(context)
-                            ? LightSource.bottomRight
-                            : LightSource.topLeft,
-                        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                            ? AppColors.gray600
-                            : AppColors.backgroundSecondary(context),
-                        shape: NeumorphicShape.flat,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.only(
-                                topRight: Radius.circular(24),
-                                bottomRight: Radius.circular(24))),
-                        color: AppColors.backgroundTertiary(context),
-                        border: NeumorphicBorder(
-                          isEnabled: true,
-                          color: AppColors.backgroundTertiary(context),
-                          width: 1,
-                        ),
-                      ),
-                      textAlign: TextAlign.left,
-                      textStyle: NeumorphicTextStyle(
-                          fontSize: 12,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w400),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 16, bottom: 16, right: 16, left: 16),
-                  );
-                } else {
-                  Widget box = SizedBox(
-                    height: 120,
-                    width: MediaQuery.of(context).size.width - 12,
-                  );
-                  Widget container = Neumorphic(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    style: NeumorphicStyle(
-                      lightSource: NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(context),
-                      shape: NeumorphicShape.flat,
-                      depth: 6,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundTertiary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color: AppColors.backgroundTertiary(context),
-                        width: 2,
-                      ),
-                    ),
-                    child: box,
-                  );
-                  return Flexible(
-                    child: container,
-                  );
-                }
-              }),
-        ),
-      ),
-    );
-
-    Widget windowPane = Row(
-      children: [
-        openPagesPane,
-
-        // todo: something like gayab mode
-      ],
-    );
-
-    Widget EAIT1002 = Container(
-      child: Column(
-        children: [
-          Visibility(
-              visible: focusMode, // todo: something like gayab mode
-              child: Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    communityLogo,
-                    Expanded(child: pageTabPane)
-                  ],
+                  visible: false,
                 ),
-              )),
-          Expanded(flex: isNavigatingLeft ? 11 : 8, child: windowPane),
-          EAIT1008,
-        ],
-      ),
-    );
-
-    print("Layout Breakpoint: ${LayoutBreakpoint().getBreakpoint(context)}");
-
-    return Scaffold(
-        backgroundColor: AppColors.backgroundInverseTertiary(context),
-        key: _screenKey,
-        // The Stack is what allows us to retain state across tab
-        // switches by keeping all of our views in the widget tree.
-        body: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Visibility(
-                  visible: false, // isNavigatingLeft,
-                  child: Expanded(flex: 1, child: EAIT1001)),
-              Expanded(flex: 11, child: EAIT1002),
-              Visibility(
-                child: Expanded(
-                  child: openTilesPane,
-                ),
-                visible: false,
-              ),
-            ],
-          ),
-        ));
-  }
-
-  // The best practice here would be to extract this to another Widget,
-  // however, moving it to a separate class would only harm the
-  // readability of our guide.
-  Widget _buildPageFlow(
-    BuildContext context,
-    int tabIndex,
-    EutopiaLeftNavigationSectionalTab item,
-  ) {
-    print("_buildPageFlow for page label ${item.leftNavigationBarSectionalItem.label}");
-    final isCurrentlySelected = tabIndex == widget.selectedIndex;
-
-    print("tabIndex: $tabIndex");
-    print("isCurrentlySelected: $isCurrentlySelected");
-    print("_shouldBuildTab: ${_shouldBuildTab.isEmpty}");
-    print("_shouldBuildTab[tabIndex]: ${_shouldBuildTab[tabIndex]}");
-
-    if (_shouldBuildTab.isEmpty) {
-      _shouldBuildTab.add(false);
+              ],
+            ),
+          ));
     }
 
-    // We should build the tab content only if it was already built or
-    // if it is currently selected.
-    _shouldBuildTab[tabIndex] =
-        isCurrentlySelected || _shouldBuildTab[tabIndex];
-
-    final viewOpacity;
-    print("_animationControllers.length: ${_animationControllers.length}");
-    try {
-      viewOpacity = _animationControllers[tabIndex].drive(
-        CurveTween(curve: Curves.fastOutSlowIn),
-      );
-    } catch (e) {
-      print("Error while creating viewOpacity: $e");
-      throw e;
-    }
-
-    final Widget view = FadeTransition(
-      opacity: viewOpacity,
-      child: KeyedSubtree(
-        key: item.subtreeKey,
-        child: _shouldBuildTab[tabIndex]
-            ? Navigator(
-                // The key enables us to access the Navigator's state inside the
-                // onWillPop callback and for emptying its stack when a tab is
-                // re-selected. That is why a GlobalKey is needed instead of
-                // a simpler ValueKey.
-                key: item.navigatorKey,
-                // Since this isn't the purpose of this sample, we're not using
-                // named routes. Because of that, the onGenerateRoute callback
-                // will be called only for the initial route.
-                onGenerateRoute: (settings) {
-                  return MaterialPageRoute(
-                    settings: settings,
-                    builder: item.initialPageBuilder,
-                  );
-                })
-            : Container(),
-      ),
-    );
-
-    if (tabIndex == widget.selectedIndex) {
-      _animationControllers[tabIndex].forward();
-      print("Tab Index $tabIndex is currently selected. Forward animation.");
-      return view;
-    } else {
-      _animationControllers[tabIndex].reverse();
-      print(
-          "Tab Index $tabIndex is not currently selected. Reverse animation.");
-
-      if (_animationControllers[tabIndex].isAnimating) {
-        print("Ignoring pointer for Tab Index $tabIndex.");
-        return IgnorePointer(child: view);
-      }
-      return Offstage(child: view);
-    }
-  }
-}
-
-/*
-* Learn more ->
-* https://carbondesignsystem.com/guidelines/2x-grid/overview/
-* https://yesviz.com/viewport/
-* 1 - XXSVP - XX Small View Port- 1 columns -
-* 2 - XSVP - X Small - 2 columns - 320px
-* 3 - SVP - Small - 4 columns - 428px
-* 4 - MVP - Medium - 8 columns - 672px
-* 5 - LVP - Large - 16 columns - 1056px
-* 6 - XLVP - X Large - 16 columns - 1312px
-* 7 - XXLVP - XX Large - 16 columns - 1584
-* */
-class LayoutBreakpoint {
-  int getBreakpoint(context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    if (screenWidth < 320) {
-      return 2;
-    } else if (screenWidth < 428) {
-      return 3;
-    } else if (screenWidth < 672) {
-      return 4;
-    } else if (screenWidth < 1056) {
-      return 5;
-    } else if (screenWidth < 1312) {
-      return 6;
-    } else {
-      return 7;
-    }
-  }
-
-  bool isNavigatingLeft(context) {
-    if (this.getBreakpoint(context) > 3) {
-      return true;
-    } else {
-      return false;
-    }
+    return buildMainContentScaffold();
   }
 }
