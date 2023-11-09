@@ -71,7 +71,7 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  static List<int> recognizedGramxCommunities = [50, 88];
+  static List<int> recognizedGramxCommunities = [88];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -247,7 +247,7 @@ class EthosAppFlowBob {
       final dynamic assetData = await rootBundle.loadString(assetPath);
 
       if (assetData != null) {
-        final YamlMap appVariables = loadYaml(assetData.toString());
+        final dynamic appVariables = loadYaml(assetData.toString());
 
         if (appVariables is YamlList) {
           // Handle the case where it's a YamlList
@@ -369,7 +369,7 @@ class EthosAppFlowBob {
   ///
   /// This method is typically used internally within other methods that process app variable contracts,
   /// preparing the data for further use or storage.
-  Map<String, String?> _extractAppVariableData(YamlMap appVariableContract) {
+  Map<String, dynamic> _extractAppVariableData(YamlMap appVariableContract) {
     try {
       final String nameCode = appVariableContract['name-code'] ?? '';
       final String name = appVariableContract['name'] ?? '';
