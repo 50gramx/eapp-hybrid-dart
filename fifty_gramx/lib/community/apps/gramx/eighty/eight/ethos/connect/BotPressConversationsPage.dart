@@ -20,6 +20,8 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/ChatbotIframe.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class BotPressConversationsPage extends StatefulWidget {
@@ -82,6 +84,10 @@ class _BotPressConversationsPageState extends State<BotPressConversationsPage> {
 
   @override
   Widget build(BuildContext context) {
+    Widget chatbotIframe = SizedBox();
+    if (kIsWeb) {
+      chatbotIframe = ChatbotIframe(srcDoc: iframeHtml);
+    }
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -90,7 +96,7 @@ class _BotPressConversationsPageState extends State<BotPressConversationsPage> {
           fit: BoxFit.cover,
         ),
       ),
-      child: ChatbotIframe(srcDoc: iframeHtml),
+      child: chatbotIframe,
     );
   }
 }
