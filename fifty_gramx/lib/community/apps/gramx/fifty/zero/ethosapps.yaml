@@ -1,4 +1,4 @@
-#- organisation: ethos
-#  apps:
-#    - identity
-#    - knowledge_spaces
+- organisation: ethos
+  apps:
+    - identity
+    - knowledge_spaces
