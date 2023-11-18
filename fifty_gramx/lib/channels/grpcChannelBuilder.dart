@@ -24,19 +24,21 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
-Future<ClientChannel> grpcChannelBuilder(
-    String authority, int port, String certPath) async {
-  final caCert = await rootBundle.loadString(certPath);
+Future<ClientChannel> grpcChannelBuilder(String authority, int port,
+    {String certPath = ""}) async {
+  final caCert = certPath == "" ? await rootBundle.loadString(certPath) : "";
+  ChannelCredentials insecureCredentials = ChannelCredentials.insecure();
+  ChannelCredentials secureCredentials = ChannelCredentials.secure(
+    certificates: utf8.encode(caCert),
+    authority: authority,
+    onBadCertificate: (certificate, host) => host == authority,
+  );
   return ClientChannel(
     authority,
     port: port,
     options: ChannelOptions(
       idleTimeout: Duration(seconds: 1),
-      credentials: ChannelCredentials.secure(
-        certificates: utf8.encode(caCert),
-        authority: authority,
-        onBadCertificate: (certificate, host) => host == authority,
-      ),
+      credentials: certPath == "" ? insecureCredentials : secureCredentials,
     ),
   );
 }
