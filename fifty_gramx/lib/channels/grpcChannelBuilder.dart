@@ -27,7 +27,9 @@ import 'package:grpc/grpc.dart';
 Future<ClientChannel> grpcChannelBuilder(String authority, int port,
     {String certPath = ""}) async {
   final caCert = certPath == "" ? await rootBundle.loadString(certPath) : "";
-  ChannelCredentials insecureCredentials = ChannelCredentials.insecure();
+  ChannelCredentials insecureCredentials = ChannelCredentials.insecure(
+    authority: authority,
+  );
   ChannelCredentials secureCredentials = ChannelCredentials.secure(
     certificates: utf8.encode(caCert),
     authority: authority,
