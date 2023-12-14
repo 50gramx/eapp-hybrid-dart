@@ -12,6 +12,21 @@ job("Build Web Base Image") {
             }
         }
     }
+
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+    }
     
     host("Build and push web base image") {
         dockerBuildPush {
@@ -35,7 +50,8 @@ job("Build Web Base Image") {
             // image tags
             tags {
                 // use current job run number as a tag - '0.0.run_number'
-                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.${"$"}JB_SPACE_EXECUTION_NUMBER"
+                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:{{ VERSION_NUMBER }}"
+                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest"
             }
         }
     }
@@ -47,6 +63,21 @@ job("Build Android Base Image") {
             pathFilter {
                 +"Dockerfile.android.base"
             }
+        }
+    }
+
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
     }
 
@@ -72,16 +103,18 @@ job("Build Android Base Image") {
             // image tags
             tags {
                 // use current job run number as a tag - '0.0.run_number'
-                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:1.0.${"$"}JB_SPACE_EXECUTION_NUMBER"
+                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:{{ VERSION_NUMBER }}"
+                +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest"
             }
         }
     }
 }
 
 
-job("web release") {
+job("Build and publish bundle to web track") {
 	startOn {
         gitPush {
+            enabled = false
             anyBranchMatching {
                 +"release-*"
                 +"master"
@@ -101,17 +134,17 @@ job("web release") {
         }
     }
     
-    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:1.0.11") {
-      
+    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:1.0.11") {
+        env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
+
     	shellScript {
           content = """
           	pwd
           	ls -l
-           	export FIREBASE_TOKEN=1//0g6W2blF3CHfpCgYIARAAGBASNwF-L9IrtUdRaTxhajHTTi15Sqz3y8HKX3XxVS7vXva_88tbGJifrxut3cbAWlz5wKg1C5c6LXI
             npm -v
            	npm install -g n 
             n stable
-          	# cd fifty_gramx && flutter clean && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          	cd fifty_gramx && flutter clean && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
 
@@ -120,17 +153,22 @@ job("web release") {
 
 
 job("Build and publish bundle to internal track") {
-    // disable gitPush job trigger
     startOn {
-        gitPush { enabled = false }
+        gitPush {
+            enabled = false
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
     }
 
-    container("Build and publish", "mycompany.registry.jetbrains.space/p/projectkey/mydocker/automation-android:1.0.5") {
-        env["GOOGLE_SA_KEY"] = Secrets("google_sa_key")
+    container("Build and publish", "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
+        env["GOOGLE_SA_KEY"] = Secrets("GOOGLE_SERVICE_ACCOUNT_KEY")
         env["KEY_STORE"] = Secrets("key_store")
-        env["KEY_STORE_PASSWORD"] = Secrets("key_store_password")
-        env["KEY_PASSWORD"] = Secrets("key_password")
-        env["KEY_ALIAS"] = Params("key_alias")
+        env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
+        env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
+        env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
 
         shellScript {
             content = """
@@ -141,7 +179,8 @@ job("Build and publish bundle to internal track") {
                 echo ${'$'}GOOGLE_SA_KEY > google_sa_key.hex
                 xxd -plain -revert google_sa_key.hex  google_sa_key.json
                 echo Build and publish AAB...
-                ./gradlew publishBundle
+                flutter doctor -v
+                ls -l -h
             """
         }
     }
