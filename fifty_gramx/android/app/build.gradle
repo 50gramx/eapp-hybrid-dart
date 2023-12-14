@@ -55,6 +55,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 
+def appVersionCode = Integer.valueOf(System.env.JB_SPACE_EXECUTION_NUMBER ?: 1)
+def appVersionName = "${System.env.VERSION_NUMBER}"
 
 android {
     compileSdkVersion 33
@@ -68,8 +70,8 @@ android {
         applicationId "com.fiftygramx.ethosai"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 65
-        versionName "23.12.5"
+        versionCode appVersionCode
+        versionName appVersionName
         // Enabling multidex support.
         multiDexEnabled true
     }
