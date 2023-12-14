@@ -16,7 +16,7 @@ RUN flutter doctor -v
 
 USER root
 
-RUN apt install openjdk-11-jdk
+RUN apt install openjdk-11-jdk -y
 
 ENV TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-6858069_latest.zip" \
     ANDROID_SDK_ROOT="/usr/local/android-sdk" \
