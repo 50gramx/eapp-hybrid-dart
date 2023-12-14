@@ -67,9 +67,9 @@ android {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.fiftygramx.ethosai"
         minSdkVersion 23
-        targetSdkVersion 30
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        targetSdkVersion 33
+        versionCode 65
+        versionName "23.12.5"
         // Enabling multidex support.
         multiDexEnabled true
     }
