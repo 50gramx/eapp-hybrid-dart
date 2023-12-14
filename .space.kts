@@ -183,6 +183,8 @@ job("Build and publish bundle to internal track") {
                 echo Build and publish AAB...
                 flutter doctor -v
                 ls -l -h
+                cd fifty_gramx
+                flutter build appbundle --verbose
             """
         }
     }
