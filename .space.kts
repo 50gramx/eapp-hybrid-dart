@@ -167,7 +167,7 @@ job("Build and publish bundle to internal track") {
 
     container("Build and publish", "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
         env["GOOGLE_SA_KEY"] = Secrets("GOOGLE_SERVICE_ACCOUNT_KEY")
-        env["KEY_STORE"] = Secrets("key_store")
+//        env["KEY_STORE"] = Secrets("key_store")
         env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
         env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
         env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
@@ -192,7 +192,7 @@ job("Test deployment") {
     host("Deploy test container") {
         shellScript {
             content = """
-                docker run -d -p 8080:80 httpd:2.4
+                echo "Test Container"
             """
         }
 
