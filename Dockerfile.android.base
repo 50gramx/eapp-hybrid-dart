@@ -44,6 +44,10 @@ RUN $ANDROID_SDK_ROOT/cmdline-tools/tools/bin/sdkmanager "build-tools;${ANDROID_
 RUN apt-get update && \
     apt-get install xxd
 
+RUN $ANDROID_SDK_ROOT/cmdline-tools/tools/bin/sdkmanager "cmdline-tools;latest"
+
+RUN flutter doctor -v
+
 RUN flutter doctor --android-licenses
 
 RUN flutter doctor -v
