@@ -17,7 +17,7 @@ RUN flutter doctor -v
 USER root
 
 RUN apt update -y && \
-    apt install -y openjdk-11-jdk
+    apt install -y openjdk-19-jdk
 
 ENV TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip" \
     ANDROID_SDK_ROOT="/usr/local/android-sdk" \
@@ -48,6 +48,6 @@ RUN $ANDROID_SDK_ROOT/cmdline-tools/tools/bin/sdkmanager "cmdline-tools;latest"
 
 RUN flutter doctor -v
 
-RUN flutter doctor --android-licenses
+RUN flutter doctor --android-licenses -v
 
 RUN flutter doctor -v
