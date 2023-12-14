@@ -4,6 +4,8 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
+import java.time.LocalDate
+
 job("Build Web Base Image") {
     startOn {
         gitPush {
@@ -155,7 +157,7 @@ job("Build and publish bundle to web track") {
 job("Build and publish bundle to internal track") {
     startOn {
         gitPush {
-            enabled = false
+            enabled = true
             anyBranchMatching {
                 +"release-*"
                 +"master"
