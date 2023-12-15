@@ -191,7 +191,7 @@ job("Build and publish bundle to internal track") {
                 flutter pub get && flutter pub cache repair
                 
                 echo "Build the app bundle"
-                flutter build appbundle --stacktrace
+                flutter build appbundle -vv
             """
         }
     }
