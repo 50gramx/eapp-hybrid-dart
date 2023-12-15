@@ -190,11 +190,6 @@ job("Build and publish bundle to internal track") {
                 echo "fix dependencies"
                 flutter pub get && flutter pub cache repair
                 
-                flutter upgrade
-                flutter clean
-                flutter build appbundle
-                flutter build appbundle --debug
-                
                 echo "Build the app bundle"
                 flutter build appbundle -vv
                 
