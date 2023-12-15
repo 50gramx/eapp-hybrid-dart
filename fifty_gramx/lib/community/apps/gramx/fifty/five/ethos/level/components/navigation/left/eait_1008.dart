@@ -1,6 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1006.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class EAIT1008 extends StatelessWidget {
   final bool isNavigatingLeft;
@@ -17,8 +18,9 @@ class EAIT1008 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("building EAIT1008");
     return Visibility(
-      visible: false, // !isNavigatingLeft
+      visible: !isNavigatingLeft,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

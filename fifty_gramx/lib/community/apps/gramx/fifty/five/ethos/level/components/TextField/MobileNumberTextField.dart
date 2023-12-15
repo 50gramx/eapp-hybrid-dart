@@ -50,6 +50,7 @@ class MobileNumberTextField extends StatelessWidget {
             Expanded(
               child: TextField(
                 controller: mobileNumberTextFieldController,
+                scrollPadding: EdgeInsets.only(bottom:64),
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(10),

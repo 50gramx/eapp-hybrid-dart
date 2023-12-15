@@ -113,6 +113,7 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                   LocalSpacesService.mySpaceKnowledgeDomains.length + 1,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
+                print("position: $position");
                 if (position == 0) {
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

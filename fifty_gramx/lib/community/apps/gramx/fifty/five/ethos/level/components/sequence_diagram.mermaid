@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant User
+    participant ComponentComposer
+    participant EthosAppFlowBob
+    participant EIC1004
+    participant ActionNeuButton
+    participant NameTextField
+
+    User ->> ComponentComposer: Request to build component
+    ComponentComposer ->> ComponentComposer: Parse component contract
+    ComponentComposer ->> ComponentComposer: Determine component code
+    ComponentComposer ->> EthosAppFlowBob: Retrieve component value
+    EthosAppFlowBob ->> EIC1004: Build EIC1004
+    EthosAppFlowBob ->> ActionNeuButton: Build ActionNeuButton
+    EthosAppFlowBob ->> NameTextField: Build NameTextField
+    ComponentComposer ->> ComponentComposer: Assemble components
+    ComponentComposer ->> User: Return assembled component

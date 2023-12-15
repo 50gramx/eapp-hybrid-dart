@@ -36,7 +36,17 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/Lo
 /// Provides In-App Conversations Services
 class LocalConversationsService {
   /// Singleton Instance Definition of the service
+  static LocalConversationsService? _instance;
+
   LocalConversationsService._();
+
+  factory LocalConversationsService() {
+    if (_instance == null) {
+      _instance = LocalConversationsService._();
+      _instance!.getMyConversations();
+    }
+    return _instance!;
+  }
 
   /// List of entities (accounts, account assistants, etc.) with their last
   /// conversation messages. This is primarily used to reflect the last message
@@ -104,7 +114,7 @@ class LocalConversationsService {
   /// to conversation, loads all the conversations to particular index reflected
   /// by entity in conversedEntityWithLastConversationMessages,
   /// also starts listening to incoming messages
-  static getMyConversations() async {
+  Future<void> getMyConversations() async {
     var getConversedAccountAndAssistantsResponse =
         await MessageConversationService.getConversedAccountAndAssistants();
     conversedEntityWithLastConversationMessages =

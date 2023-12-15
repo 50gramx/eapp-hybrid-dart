@@ -9,9 +9,12 @@ Widget buildAppButton(
     int subIndex,
     Function(int) selectPressedSectionItem,
     EutopiaLeftNavigationScaffold parentWidget) {
+  print("building AppButton");
+  String title = EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex]
+      .leftNavigationBarSectionalItem.label!;
+  print("title: $title");
   return AdaptiveNeuButton(
-    buttonTitle: EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex]
-        .leftNavigationBarSectionalItem.label!,
+    buttonTitle: title,
     buttonActionOnPressed: () {
       selectPressedSectionItem(subIndex);
     },

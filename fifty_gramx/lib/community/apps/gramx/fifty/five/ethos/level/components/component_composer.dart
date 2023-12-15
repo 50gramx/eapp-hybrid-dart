@@ -37,6 +37,9 @@ class ComponentComposer {
     // maps the component code to it's case,
     // returns SizedBox if no mapping found
     switch (componentCode) {
+      case 1001:
+        print("fromComponentContract - requested 1001");
+        return SizedBox();
       // builds TileHeader Widget
       case 1004:
         print("Building TileHeader component for app: $appName");

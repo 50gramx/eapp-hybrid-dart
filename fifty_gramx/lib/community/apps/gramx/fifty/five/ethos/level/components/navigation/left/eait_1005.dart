@@ -21,39 +21,18 @@ class EAIT1005 extends StatelessWidget {
             navigationViewPort == 5 ||
             navigationViewPort == 6 ||
             navigationViewPort == 7,
-        child: Neumorphic(
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.concave,
-            depth: -6,
-            boxShape: NeumorphicBoxShape.roundRect(
-                BorderRadius.all(Radius.circular(24))),
-            color: AppColors.backgroundInverseSecondary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.backgroundInverseTertiary(context),
-              width: 2,
-            ),
-          ),
-          margin: EdgeInsets.only(top: 16, bottom: 16, right: 16, left: 16),
-          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Container(
-            height:
-                EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount:
-                    EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
-                itemBuilder: (BuildContext context, int subIndex) {
-                  return buildAppButton(context, subIndex,
-                      selectPressedSectionItem, navigationWidget);
-                }),
-          ),
+        child: Container(
+          margin: EdgeInsets.only(left: 8, right: 8),
+          height:
+          EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount:
+              EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
+              itemBuilder: (BuildContext context, int subIndex) {
+                return buildAppButton(context, subIndex,
+                    selectPressedSectionItem, navigationWidget);
+              }),
         ));
   }
 }

@@ -22,21 +22,18 @@
 import 'dart:async';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
-import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
-import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemSubtitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/ethosai/EthosaiConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountConversationPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemSubtitleText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pb.dart';
+import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -62,7 +59,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
 
   @override
   void initState() {
-    loadMyConversations();
+    // loadMyConversations();
     listenForLocalNotifications();
     super.initState();
   }
@@ -73,12 +70,16 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
   }
 
   loadMyConversations() async {
+    print("loadMyConversations");
+    print(
+        "loadMyConversations: total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
     // Update list
     for (int index = 0;
         index <
             LocalConversationsService
                 .conversedEntityWithLastConversationMessages.length;
         index++) {
+      print("loadMyConversations: inserting at $index");
       _conversedEntityListKey.currentState!.insertItem(index);
     }
   }
@@ -90,8 +91,10 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
       if (notification.type == "LocalConversationsService") {
         if (notification.data["subType"] ==
             "AddedConversedEntityWithLastConversationMessage") {
-          _conversedEntityListKey.currentState!
-              .insertItem(notification.data["at"]);
+          if (_conversedEntityListKey.currentState != null) {
+            _conversedEntityListKey.currentState!
+                .insertItem(notification.data["at"]);
+          }
         } else if (notification.data["subType"] == "AddedAccountSentMessage") {
           setState(() {});
         } else if (notification.data["subType"] ==
@@ -120,13 +123,14 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
             CustomSliverAppBar(
               labelText: "Conversations",
               actionLabelText: "Ethosai",
+              isActionEnabled: false,
               isBackEnabled: false,
               trailingButtonCallback: () {
                 AppPushPage()
                     .pushHorizontalPage(context, EthosaiConfigurationPage());
               },
               onStretchTriggerCallback: () {
-                LocalServices().reloadConversationsService();
+                LocalServices().conversations();
               },
             ),
             SliverAnimatedList(
@@ -136,6 +140,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                   1,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
+                print("position: $position");
                 if (position == 0) {
                   return Padding(
                     padding: EdgeInsets.only(
@@ -165,9 +170,14 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                       ),
                     ),
                   );
-                } else {
+                } else if (position <=
+                    LocalConversationsService
+                        .conversedEntityWithLastConversationMessages.length) {
                   var newPosition = position - 1;
                   var heroTag;
+                  print("newPosition: $newPosition");
+                  print(
+                      "LocalConversationsService:length ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
                   ConversedEntityWithLastConversationMessage
                       conversedEntityWithLastConversationMessage =
                       LocalConversationsService
@@ -378,6 +388,9 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                       ),
                     ),
                   );
+                } else {
+                  print("Why extra index was passed?");
+                  return SizedBox();
                 }
               },
             ),

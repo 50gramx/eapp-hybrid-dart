@@ -1,18 +1,15 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/account/AccountConnectedAccountListItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/account/ConnectedAccountAssistantListItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountConversationPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'LocalConnectionsService.dart';
@@ -47,17 +44,18 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
 
   @override
   void initState() {
-    loadMyConnections();
+    // loadMyConnections();
 
     // Listen for local notification for changes to underlying service
     _notificationsStream.listen((event) {
-      if (event.type == "LocalConnectionsService") {
+      if (event.type == "LocalConnectionsService" &&
+          _connectedEntitiesListKey.currentState != null) {
         if (event.data["subType"] == "InsertFullyConnectedAccountAssistant") {
-          setState(() {});
+          // setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveFullyConnectedAccountAssistantListIndex(event.data["at"]));
         } else if (event.data["subType"] == "InsertFullyConnectedAccount") {
-          setState(() {});
+          // setState(() {});
           _connectedEntitiesListKey.currentState!.insertItem(
               resolveFullyConnectedAccountListIndex(event.data["at"]));
         } else if (event.data["subType"] ==
@@ -193,6 +191,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
             CustomSliverAppBar(
               labelText: "Connections",
               actionLabelText: "EthosPay",
+              isActionEnabled: false,
               isBackEnabled: false,
               trailingButtonCallback: () {
                 AppPushPage()
@@ -254,10 +253,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                     );
                   } else if (position > 0 &&
                       position <
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
+                          LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length +
                               1) {
                     int widgetIndex = position - 1;
                     AccountConnectedAccountAssistant connectedAccountAssistant =
@@ -283,10 +279,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                       return SizedBox();
                     }
                   } else if (position ==
-                      LocalConnectionsService
-                              .fullyConnectedAccountAssistants.keys
-                              .toList()
-                              .length +
+                      LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length +
                           1) {
                     return Padding(
                       padding: EdgeInsets.only(
@@ -317,16 +310,9 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                         ),
                       ),
                     );
-                  } else if (position >
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              1 &&
+                  } else if (position > LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + 1 &&
                       position <
-                          LocalConnectionsService.fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
+                          LocalConnectionsService.fullyConnectedAccounts.keys.toList().length +
                               2 +
                               LocalConnectionsService
                                   .fullyConnectedAccountAssistants.keys
@@ -354,12 +340,9 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                       toggleConnectedAccountInterest(connectedAccount);
                     });
                   } else if (position ==
-                      LocalConnectionsService.fullyConnectedAccounts.keys
-                              .toList()
-                              .length +
+                      LocalConnectionsService.fullyConnectedAccounts.keys.toList().length +
                           2 +
-                          LocalConnectionsService
-                              .fullyConnectedAccountAssistants.keys
+                          LocalConnectionsService.fullyConnectedAccountAssistants.keys
                               .toList()
                               .length) {
                     return Padding(
@@ -391,22 +374,10 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                         ),
                       ),
                     );
-                  } else if (position >
-                          LocalConnectionsService.fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              2 +
-                              LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length &&
+                  } else if (position > LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 2 + LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length &&
                       position <
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .fullyConnectedAccounts.keys
+                          LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length +
+                              LocalConnectionsService.fullyConnectedAccounts.keys
                                   .toList()
                                   .length +
                               LocalConnectionsService
@@ -435,18 +406,12 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                       toggleConnectedAccountInterest(connectedAccount);
                     });
                   } else if (position ==
-                      LocalConnectionsService
-                              .fullyConnectedAccountAssistants.keys
+                      LocalConnectionsService.fullyConnectedAccountAssistants.keys
                               .toList()
                               .length +
-                          LocalConnectionsService.fullyConnectedAccounts.keys
-                              .toList()
-                              .length +
+                          LocalConnectionsService.fullyConnectedAccounts.keys.toList().length +
                           3 +
-                          LocalConnectionsService
-                              .interestedPartiallyConnectedAccounts.keys
-                              .toList()
-                              .length) {
+                          LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length) {
                     return Padding(
                       padding: EdgeInsets.only(
                           left: 16, right: 16, bottom: 16, top: 32),
@@ -476,37 +441,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                         ),
                       ),
                     );
-                  } else if (position >
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService.fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              3 +
-                              LocalConnectionsService
-                                  .interestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length &&
-                      position <
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              4 +
-                              LocalConnectionsService
-                                  .interestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .notInterestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length) {
+                  } else if (position > LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 3 + LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length && position < LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 4 + LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length + LocalConnectionsService.notInterestedPartiallyConnectedAccounts.keys.toList().length) {
                     int widgetIndex = position -
                         4 -
                         LocalConnectionsService
@@ -531,23 +466,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                         connectedAccount, account, () {}, (connectedAccount) {
                       toggleConnectedAccountInterest(connectedAccount);
                     });
-                  } else if (position ==
-                      LocalConnectionsService
-                              .fullyConnectedAccountAssistants.keys
-                              .toList()
-                              .length +
-                          LocalConnectionsService.fullyConnectedAccounts.keys
-                              .toList()
-                              .length +
-                          4 +
-                          LocalConnectionsService
-                              .interestedPartiallyConnectedAccounts.keys
-                              .toList()
-                              .length +
-                          LocalConnectionsService
-                              .notInterestedPartiallyConnectedAccounts.keys
-                              .toList()
-                              .length) {
+                  } else if (position == LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 4 + LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length + LocalConnectionsService.notInterestedPartiallyConnectedAccounts.keys.toList().length) {
                     return Padding(
                       padding: EdgeInsets.only(
                           left: 16, right: 16, bottom: 16, top: 32),
@@ -577,44 +496,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
                         ),
                       ),
                     );
-                  } else if (position >
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService.fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              4 +
-                              LocalConnectionsService
-                                  .interestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .notInterestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length &&
-                      position <
-                          LocalConnectionsService
-                                  .fullyConnectedAccountAssistants.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .fullyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              5 +
-                              LocalConnectionsService
-                                  .interestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService
-                                  .notInterestedPartiallyConnectedAccounts.keys
-                                  .toList()
-                                  .length +
-                              LocalConnectionsService.onlyConnectedAccounts.keys
-                                  .toList()
-                                  .length) {
+                  } else if (position > LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 4 + LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length + LocalConnectionsService.notInterestedPartiallyConnectedAccounts.keys.toList().length && position < LocalConnectionsService.fullyConnectedAccountAssistants.keys.toList().length + LocalConnectionsService.fullyConnectedAccounts.keys.toList().length + 5 + LocalConnectionsService.interestedPartiallyConnectedAccounts.keys.toList().length + LocalConnectionsService.notInterestedPartiallyConnectedAccounts.keys.toList().length + LocalConnectionsService.onlyConnectedAccounts.keys.toList().length) {
                     int widgetIndex = position -
                         5 -
                         LocalConnectionsService

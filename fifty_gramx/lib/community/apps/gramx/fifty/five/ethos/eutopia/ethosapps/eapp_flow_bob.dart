@@ -11,13 +11,24 @@ import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:yaml/yaml.dart';
 
 /// EthosAppFlowBob is like Bob the builder
 /// for EthosAppFlows for each community
 class EthosAppFlowBob {
   /// singleton definition
+  static EthosAppFlowBob? _instance;
+
   EthosAppFlowBob._();
+
+  factory EthosAppFlowBob() {
+    if (_instance == null) {
+      _instance = EthosAppFlowBob._();
+      _instance!.start();
+    }
+    return _instance!;
+  }
 
   /// contains the list of app flows for each community
   static Map<int, List<AppFlow>> communityAppFlow = {};
@@ -71,7 +82,7 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  static List<int> recognizedGramxCommunities = [88];
+  static List<int> recognizedGramxCommunities = [50, 52, 70];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -85,7 +96,7 @@ class EthosAppFlowBob {
   static List<AnimationController> _animationControllers = [];
 
   /// constructor definition
-  EthosAppFlowBob() {
+  Future<void> start() async {
     print("EthosAppFlowBob constructor started."); // Add a log statement
 
     buildCommunityAssetsPath();
@@ -163,6 +174,10 @@ class EthosAppFlowBob {
       required String orgName,
       required String appName,
       required String componentNameCode}) {
+    print(
+        "getGramxAppsInteractionComponentValue - Components for App: ${gramxAppsInteractionComponents[communityCode]["$orgName-$appName"]}");
+    print(
+        "getGramxAppsInteractionComponentValue - will get component for $communityCode, $orgName, $appName, $componentNameCode");
     dynamic component = gramxAppsInteractionComponents[communityCode]
         ["$orgName-$appName"][componentNameCode]['value'];
     return component;
@@ -668,6 +683,8 @@ class EthosAppFlowBob {
 
       final compositionNameCode = composition['name-code'] ?? '';
 
+      print(
+          "_loadAppInteractionTiles - will compose for ${compositionNameCode}, with properties ${composition}");
       final composedComponent = ComponentComposer().fromComponentContract(
         communityCode: communityCode,
         orgName: orgName,
@@ -965,7 +982,7 @@ class EthosAppFlowBob {
       leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
         label: appFlow.title,
         code: appFlow.code,
-        icon: Icon(appFlow.iconData),
+        icon: appFlow.iconData,
       ),
       navigatorKey: appFlow.navigatorKey,
       initialPageBuilder: (context) {
@@ -1050,7 +1067,7 @@ class EthosAppFlowBob {
     try {
       ethosappContracts = await _fetchEthosappContracts(communityAssetsPath);
       print(
-          "_loadCommunityEthosappContracts - Fetched ${ethosappContracts.length} contracts for communityCode: $communityCode");
+          "_loadCommunityEthosappContracts - Fetched ${ethosappContracts.length} contracts for communityCode: $communityCode with contract: ${ethosappContracts}");
     } catch (e) {
       print(
           "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode, error: $e");

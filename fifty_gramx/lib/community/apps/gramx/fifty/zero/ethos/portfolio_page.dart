@@ -1,3 +1,5 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/page_tab_pane.dart';
 import 'package:flutter/material.dart';
 
 class PortfolioPage extends StatefulWidget {
@@ -43,13 +45,28 @@ class _PortfolioPageState extends State<PortfolioPage> {
           ListView.builder(
             itemCount: items.length,
             itemBuilder: (context, index) {
+              if (index == 0) {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [AppColors.backgroundInverseTertiary(context), AppColors.backgroundInverseSecondary(context)],
+                    ),
+                  ),
+                  child: PageTabPane(
+                    selectPressedSectionItem: (value) {},
+                  ),
+                );
+              }
               return Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.blue, Colors.red],
+                    colors: [AppColors.backgroundInverseSecondary(context), AppColors.backgroundInverseTertiary(context)],
                   ),
                 ),
               );

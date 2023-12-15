@@ -19,7 +19,7 @@ class AdaptiveNeuButton extends StatefulWidget {
 
   final String buttonTitle;
   final VoidCallback buttonActionOnPressed;
-  final Widget icon;
+  final IconData icon;
   final bool isSelected;
   final bool isPrimaryButtonDisabled;
   final bool noBorder;
@@ -38,16 +38,10 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
 
   @override
   Widget build(BuildContext context) {
-    Widget icon = Container(
-      height: 24,
-      width: 24,
-      child: widget.icon,
-      padding: EdgeInsets.zero,
-      margin: EdgeInsets.zero,
-    );
+    print("building AdaptiveNeuButton");
 
     Widget neuIcon = NeumorphicIcon(
-      FeatherIcons.anchor,
+      widget.icon,
       size: 24,
       style: NeumorphicStyle(
         lightSource: NeumorphicTheme.isUsingDark(context)
@@ -58,17 +52,16 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.concave,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: AppColors.contentInversePrimary(context),
+        color: widget.isSelected ? AppColors.contentInversePrimary(context) : AppColors.contentInverseSecondary(context),
         border: NeumorphicBorder(
           isEnabled: true,
-          color: AppColors.contentInversePrimary(context),
+          color: widget.isSelected ? AppColors.contentInversePrimary(context) : AppColors.contentInverseSecondary(context),
           width: widget.noBorder ? 0 : 2,
         ),
       ),
     );
 
-    Widget name = Expanded(
-        child: Visibility(
+    Widget name = Visibility(
       visible: !widget.isCollapsed,
       child: Container(
         width: MediaQuery.of(context).size.width - 66 - 116,
@@ -83,13 +76,14 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
               fontWeight: FontWeight.w600),
         ),
       ),
-    ));
+    );
 
     Widget expanded = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [icon, name],
+      children: [neuIcon, name],
     );
 
+    print("returning AdaptiveNeuButton");
     return NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
@@ -104,23 +98,24 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
           shadowLightColor: NeumorphicTheme.isUsingDark(context)
               ? AppColors.gray600
               : AppColors.backgroundSecondary(context),
-          shape: NeumorphicShape.flat,
-          disableDepth: true,
+          shape: widget.isSelected ? NeumorphicShape.flat : NeumorphicShape.convex,
+          disableDepth: false,
+          depth: widget.isSelected ? -3 : 0,
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: widget.isSelected
-              ? AppColors.backgroundInverseTertiary(context)
-              : AppColors.backgroundInverseSecondary(context),
+              ? AppColors.backgroundInverseSecondary(context)
+              : AppColors.backgroundInverseTertiary(context),
           border: NeumorphicBorder(
             isEnabled: true,
             color: widget.isSelected
                 ? AppColors.backgroundInverseTertiary(context)
-                : AppColors.backgroundInverseSecondary(context),
-            width: widget.noBorder ? 0 : (widget.isSelected ? 4 : 2),
+                : AppColors.backgroundInverseTertiary(context),
+            width: widget.noBorder ? 0 : 4,
           ),
         ),
         margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
         child: Center(
-          child: expanded,
+          child: neuIcon,
         ));
   }
 }

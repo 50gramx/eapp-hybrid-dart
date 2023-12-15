@@ -17,7 +17,7 @@ class ProgressContentListTile extends StatelessWidget {
     required this.contentActionButtonTitle,
     required this.contentWidget,
     this.isSecondaryButtonActive = false,
-    this.secondaryButtonTitle = "Previous",
+    this.secondaryButtonTitle = "Back",
     required this.primaryButtonOnPressed,
     required this.secondaryButtonOnPressed,
     this.isPrimaryButtonActive = true,

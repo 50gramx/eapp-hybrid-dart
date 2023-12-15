@@ -22,20 +22,24 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
-  static final LocalNotificationService _notificationService =
-      LocalNotificationService._internal();
+  /// singleton definition
+  static LocalNotificationService? _instance;
+
+  LocalNotificationService._();
 
   factory LocalNotificationService() {
-    return _notificationService;
+    if (_instance == null) {
+      _instance = LocalNotificationService._();
+      _instance!.start();
+    }
+    return _instance!;
   }
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   late NotificationDetails platformChannelSpecifics;
 
-  LocalNotificationService._internal();
-
-  Future<void> init() async {
+  Future<void> start() async {
     // +++ Initialising the settings for Android
     final AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('launcher_icon');
@@ -58,8 +62,10 @@ class LocalNotificationService {
             macOS: initializationSettingsDarwin);
 
     // --> Wait till settings are initialized
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: selectNotification);
+    await flutterLocalNotificationsPlugin.initialize(
+        initializationSettings,
+        onDidReceiveNotificationResponse: selectNotification,
+    );
 
     final bool? resultIOS = await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<

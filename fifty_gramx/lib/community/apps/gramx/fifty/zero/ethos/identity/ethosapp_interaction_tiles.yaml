@@ -117,4 +117,21 @@
     children-components:
       - EAIC1007
       - EAIT1001
-#      - EAIT1025
+- name-code: EAIT1008
+  name: Account Details Tile
+  about: It is a tile where user see’s their account related information
+  conditions:
+    - name-code: EAIV1002
+      value: true
+    - name-code: EIV1001
+      values:
+        - web
+        - desktop
+        - mobile
+  composition:
+    name-code: EIC1005
+    children-components:
+      - EAIC1003
+      - EAIC1008
+      - EAIC1009
+      - EAIC1010

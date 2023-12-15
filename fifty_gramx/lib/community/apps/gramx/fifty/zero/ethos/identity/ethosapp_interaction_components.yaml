@@ -53,4 +53,20 @@
   component:
     name-code: EIC1006
     label: Verify Secret
-
+- name-code: EAIC1003
+  name: About Tile Header
+  component:
+    name-code: EIC1004
+    label: About
+- name-code: EAIC1008
+  name: Account Name Configuration Item
+  component:
+    name-code: EIC1001
+- name-code: EAIC1009
+  name: Account Assistant Name Configuration Item
+  component:
+    name-code: EIC1001
+- name-code: EAIC1010
+  name: Account Ethos Pay Status Configuration Item
+  component:
+    name-code: EIC1001

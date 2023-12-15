@@ -12,6 +12,7 @@ class OpenPagesPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("building OpenPagesPane");
     Widget primaryPageContainer = Neumorphic(
       style: NeumorphicStyle(
         lightSource:
@@ -26,14 +27,15 @@ class OpenPagesPane extends StatelessWidget {
         boxShape: NeumorphicBoxShape.roundRect(
             BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundPrimary(context),
+        depth: NeumorphicTheme.isUsingDark(context) ? 6 : 3,
         border: NeumorphicBorder(
           isEnabled: true,
-          color: AppColors.backgroundPrimary(context),
-          width: 2,
+          color: AppColors.backgroundInverseTertiary(context),
+          width: 1,
         ),
       ),
       margin: EdgeInsets.only(
-          top: 8, bottom: 8, right: 8, left: 8),
+          top: 16, bottom: 8, right: 8, left: 8),
       child: Container(
         child: Stack(
           children: pagesStack,

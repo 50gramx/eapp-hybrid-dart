@@ -8,6 +8,9 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/window_pane.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// A scaffold that incorporates a BottomNavigationBar, separates navigators for each tab view,
@@ -73,7 +76,9 @@ class _EutopiaLeftNavigationScaffoldState
   final List<bool> _shouldBuildTab = <bool>[];
 
   /// Indicates whether the app is in focus mode.
-  bool focusMode = true;
+  bool focusMode = false;
+  bool isNavigatingPages = true;
+  bool isNavigatingSinglePage = true;
 
   /// Controller for the text field used for searching.
   TextEditingController nameTextFieldController = TextEditingController();
@@ -99,6 +104,8 @@ class _EutopiaLeftNavigationScaffoldState
       if (message.data["subType"] == "Loaded eApp") {
         print("Handling Loaded eApp");
         handleLoadedApp();
+      } else if (message.data["subType"] == "Open Community Tiles") {
+        print("Opening Community Tiles");
       }
     }
   }
@@ -138,6 +145,25 @@ class _EutopiaLeftNavigationScaffoldState
     widget.onItemSelected(sectionIndex);
   }
 
+  toggleNavigatingPages() {
+    print("------------------------------------------------------------");
+    print("------------------------------------------------------------");
+    print("-----------------------TOGGLE-------------------------------");
+    print("---------------------NAVIGATING-----------------------------");
+    print("-----------------------PAGES--------------------------------");
+    print("------------------------------------------------------------");
+    print("------------------------------------------------------------");
+    if (isNavigatingPages) {
+      setState(() {
+        isNavigatingPages = false;
+      });
+    } else {
+      setState(() {
+        isNavigatingPages = true;
+      });
+    }
+  }
+
   @override
   void dispose() {
     _animationControllers.forEach(
@@ -152,7 +178,9 @@ class _EutopiaLeftNavigationScaffoldState
     print("Building EutopiaLeftNavigationScaffold");
 
     int viewPort = LayoutBreakpoint().getBreakpoint(context);
+    print("fetched viewPort");
     bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
+    print("isNavigatingLeft: $isNavigatingLeft");
 
     List<Widget> _buildStackChildrens = [];
 
@@ -161,63 +189,115 @@ class _EutopiaLeftNavigationScaffoldState
           "Building page flow for ${barItem.leftNavigationBarSectionalItem.label}");
       print("_animationControllers: ${_animationControllers}");
 
-      Widget built_page_flow = PageFlowBuilder.buildPageFlow(
-          context,
-          EthosAppFlowBob.eutopiaNavigationBarSectionalItems.indexOf(barItem),
-          barItem,
-          _animationControllers,
-          _shouldBuildTab,
-          widget);
+      Widget built_page_flow = SizedBox();
+      try {
+        built_page_flow = PageFlowBuilder.buildPageFlow(
+            context,
+            EthosAppFlowBob.eutopiaNavigationBarSectionalItems.indexOf(barItem),
+            barItem,
+            _animationControllers,
+            _shouldBuildTab,
+            widget);
+      } on Exception catch (exception) {
+        if (!kIsWeb) {
+          FirebaseCrashlytics.instance.log(
+              "PageFlowBuilder.buildPageFlow() Exception at "
+              "${barItem} w/ ${exception} w/ "
+              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+        } else {
+          print("PageFlowBuilder.buildPageFlow() Exception at "
+              "${barItem} w/ ${exception} w/ "
+              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+        }
+      } catch (error) {
+        if (!kIsWeb) {
+          FirebaseCrashlytics.instance.log(
+              "PageFlowBuilder.buildPageFlow() Error at "
+              "${barItem} w/ ${error} w/ "
+              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+        } else {
+          print("PageFlowBuilder.buildPageFlow() Error at "
+              "${barItem} w/ ${error} w/ "
+              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+        }
+      }
 
       _buildStackChildrens.add(built_page_flow);
     });
+
+    setStatusBarTheme() {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.backgroundInverseTertiary(context),
+        statusBarBrightness: NeumorphicTheme.isUsingDark(context)
+            ? Brightness.light
+            : Brightness.dark,
+        statusBarIconBrightness: NeumorphicTheme.isUsingDark(context)
+            ? Brightness.dark
+            : Brightness.light,
+        systemNavigationBarColor: AppColors.backgroundInverseTertiary(context),
+        systemNavigationBarIconBrightness: NeumorphicTheme.isUsingDark(context)
+            ? Brightness.dark
+            : Brightness.light,
+        systemNavigationBarDividerColor:
+            AppColors.backgroundInverseTertiary(context),
+      ));
+    }
 
     /// Builds the main content scaffold for the EutopiaLeftNavigationScaffold widget.
     ///
     /// This scaffold includes a background color, a key for state management,
     /// and a row with various child widgets.
     Widget buildMainContentScaffold() {
+      print("called buildMainContentScaffold");
+      setStatusBarTheme();
       return Scaffold(
           backgroundColor: AppColors.backgroundInverseTertiary(context),
           key: _screenKey,
-          // The Stack is what allows us to retain state across tab
-          // switches by keeping all of our views in the widget tree.
           body: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 // Left Navigation (EAIT1001)
                 Visibility(
-                    visible: false, // isNavigatingLeft,
-                    child: Expanded(
-                        flex: 1,
-                        child: EAIT1001(
-                          navigationViewPort: viewPort,
-                          isNavigatingLeft: isNavigatingLeft,
-                          selectPressedSectionItem: selectPressedSectionItem,
-                          navigationWidget: widget,
-                        ))),
+                  visible: isNavigatingLeft,
+                  child: Container(
+                    width: 86,
+                    child: EAIT1001(
+                      navigationViewPort: viewPort,
+                      isNavigatingLeft: isNavigatingLeft,
+                      selectPressedSectionItem: selectPressedSectionItem,
+                      navigationWidget: widget,
+                    ),
+                  ),
+                ),
 
                 // Main Content (EAIT1002)
-                Expanded(
-                    flex: 11,
+                Visibility(
+                  visible: true,
+                  child: Expanded(
+                    flex: (LayoutBreakpoint().getBreakpoint(context) <= 4 ? 7 : 11),
                     child: EAIT1002(
                       isNavigatingLeft: isNavigatingLeft,
                       selectPressedSectionItem: selectPressedSectionItem,
+                      toggleNavigatingPages: toggleNavigatingPages,
                       navigationWidget: widget,
                       navigationViewPort: viewPort,
                       focusMode: focusMode,
                       windowPane: WindowPane(
-                          focusMode: focusMode,
-                          pagesStack: _buildStackChildrens),
-                    )),
+                          focusMode: focusMode, pagesStack: _buildStackChildrens),
+                    ),
+                  ),
+                ),
 
                 // Additional Content (OpenTilesPane)
                 Visibility(
-                  child: Expanded(
-                    child: OpenTilesPane(),
+                  child: OpenTilesPane(
+                      selectPressedSectionItem: selectPressedSectionItem,
+                    isNavigatingLeft: isNavigatingLeft,
+                    toggleNavigatingPages: toggleNavigatingPages,
+                      isNavigatingPages: isNavigatingPages
                   ),
-                  visible: false,
+                  visible: isNavigatingLeft ? true : (isNavigatingPages ? false : true),
                 ),
               ],
             ),
