@@ -1,15 +1,42 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/LocalConnectionsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/LocalSpacesService.dart';
+import 'package:fifty_gramx/services/contacts/contactService.dart';
+import 'package:fifty_gramx/services/notification/local_notification_service.dart';
+import 'package:fifty_gramx/services/notification/notifications_service.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class LocalServices {
-  loadLocalServices() async {
-    LocalConnectionsService.getMyConnections();
+  load() async {
+    LocalConnectionsService();
+    LocalConversationsService();
+    LocalNotificationService();
     LocalSpacesService.getMySpaceKnowledgeDomains();
-    LocalConversationsService.getMyConversations();
   }
 
-  reloadConversationsService() {
-    LocalConversationsService.getMyConversations();
+  conversations() async {
+    LocalConversationsService().getMyConversations();
+  }
+
+  reload() async {
+    LocalConnectionsService().getMyConnections();
+    LocalConversationsService().getMyConversations();
+    LocalSpacesService.getMySpaceKnowledgeDomains();
+  }
+
+  notifications() async {
+    PushNotificationService.instance.start();
+  }
+
+  contacts() async {
+    if (await Permission.contacts.request().isGranted) {
+      ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+    }
+  }
+
+  user() async {
+    LocalServices().reload();
+    LocalServices().notifications();
+    LocalServices().contacts();
   }
 }
