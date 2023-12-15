@@ -504,10 +504,12 @@ class _GettingStartedUniverseColumnWidgetState
             increaseUniverseHorizontalNav();
           }
         } else {
+          print("account doesn't exists");
           if (kIsWeb) {
             await validateAccountWithMobile();
             increaseUniverseHorizontalNav();
           } else {
+            print("platform is not web");
             await validateAccountWithMobile();
             increaseUniverseHorizontalNav();
             // TODO: Uncomment to disable sign up via apps
@@ -569,25 +571,32 @@ class _GettingStartedUniverseColumnWidgetState
         increaseUniverseHorizontalNav();
       }
     } else if (universeHorizontalNavIndex == 5) {
+      print("will wait for capture");
       var captureAccountMetaDetailsResponse = await captureAccountMetaDetails();
+      print("captured: ${captureAccountMetaDetailsResponse}");
       if (captureAccountMetaDetailsResponse.accountCreationDone) {
+        print("created account");
         saveAccessAuth(
             captureAccountMetaDetailsResponse.accountServiceAccessAuthDetails);
+        print("saved access auth");
         final snackBar = SnackBar(
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // start update billing
+        print("will update billing");
         await AccountData().saveIsAccountBillingActive(true);
         // end  update billing
         LocalServices().contacts();
         // widget.completedSelectingUniverseCallback();
       } else {
+        print("couldn't create account");
         final snackBar = SnackBar(
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
+      print("will push");
       pushToHomeScreenWidget();
       setState(() {});
     }
