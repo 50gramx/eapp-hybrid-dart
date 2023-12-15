@@ -531,9 +531,7 @@ class _GettingStartedUniverseColumnWidgetState
             final snackBar = SnackBar(
                 content: Text(verifyAccountResponse.verificationMessage));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            if (await Permission.contacts.request().isGranted) {
-              ContactService.syncAccountConnectionsWithExistingAccountMobiles();
-            }
+            LocalServices().contacts();
             if ((await AccountData().readAccount()).accountBillingActive) {
               // checking if the billing is not active
               // todo: load local services here
@@ -581,9 +579,7 @@ class _GettingStartedUniverseColumnWidgetState
         // start update billing
         await AccountData().saveIsAccountBillingActive(true);
         // end  update billing
-        if (await Permission.contacts.request().isGranted) {
-          ContactService.syncAccountConnectionsWithExistingAccountMobiles();
-        }
+        LocalServices().contacts();
         // widget.completedSelectingUniverseCallback();
       } else {
         final snackBar = SnackBar(
