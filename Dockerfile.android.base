@@ -57,4 +57,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
     apt-get install -y gem
 
+RUN apt-get install -y ruby-dev
+
 RUN gem install -y fastlane
