@@ -1,8 +1,8 @@
 /**
-* JetBrains Space Automation
-* This Kotlin script file lets you automate build activities
-* For more info, see https://www.jetbrains.com/help/space/automation.html
-*/
+ * JetBrains Space Automation
+ * This Kotlin script file lets you automate build activities
+ * For more info, see https://www.jetbrains.com/help/space/automation.html
+ */
 
 import java.time.LocalDate
 
@@ -29,7 +29,7 @@ job("Build Web Base Image") {
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
     }
-    
+
     host("Build and push web base image") {
         dockerBuildPush {
             // by default, the step runs not only 'docker build' but also 'docker push'
@@ -114,7 +114,7 @@ job("Build Android Base Image") {
 
 
 job("Build and publish bundle to web track") {
-	startOn {
+    startOn {
         gitPush {
             enabled = false
             anyBranchMatching {
@@ -123,24 +123,24 @@ job("Build and publish bundle to web track") {
             }
         }
     }
-  
+
     container("amazoncorretto:17-alpine") {
         kotlinScript { api ->
             api.space().projects.automation.deployments.start(
-                project = api.projectIdentifier(),
-                targetIdentifier = TargetIdentifier.Key("evo-on-50gramx-com"),
-                version = "1.0.${System.getenv("JB_SPACE_EXECUTION_NUMBER")}",
-                // automatically update deployment status based on a status of a job
-                syncWithAutomationJob = true
+                    project = api.projectIdentifier(),
+                    targetIdentifier = TargetIdentifier.Key("evo-on-50gramx-com"),
+                    version = "1.0.${System.getenv("JB_SPACE_EXECUTION_NUMBER")}",
+                    // automatically update deployment status based on a status of a job
+                    syncWithAutomationJob = true
             )
         }
     }
-    
+
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:1.0.11") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
 
-    	shellScript {
-          content = """
+        shellScript {
+            content = """
           	pwd
           	ls -l
             npm -v
@@ -173,9 +173,7 @@ job("Build and publish bundle to internal track") {
         env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
 
         shellScript {
-        }
-    }
-    content = """
+            content = """
                 echo Get private signing key...
                 echo ${'$'}KEY_STORE > upload_key.hex
                 xxd -plain -revert upload_key.hex  upload_key.jks
@@ -195,6 +193,8 @@ job("Build and publish bundle to internal track") {
                 echo "Build the app bundle"
                 flutter build appbundle --stacktrace
             """
+        }
+    }
 }
 
 job("Test deployment") {
