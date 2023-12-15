@@ -25,11 +25,12 @@
     <application
         android:name="androidx.multidex.MultiDexApplication"
         android:icon="@mipmap/launcher_icon"
-        android:label="iEthos">
+        android:label="evo by 50GRAMx">
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
+            android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:windowSoftInputMode="adjustResize">
