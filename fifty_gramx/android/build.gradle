@@ -21,9 +21,13 @@
 
 buildscript {
     ext.kotlin_version = '1.8.20'
+
+    // NOTE: refrain to use jcenter()
+    // JCenter service update
+    // read-only repository on March 31, 2021
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -34,10 +38,14 @@ buildscript {
     }
 }
 
+// NOTE: refrain to use jcenter()
+// JCenter service update
+// read-only repository on March 31, 2021
+
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
