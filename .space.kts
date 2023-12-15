@@ -124,6 +124,21 @@ job("Build and publish bundle to web track") {
         }
     }
 
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+    }
+
     container("amazoncorretto:17-alpine") {
         kotlinScript { api ->
             api.space().projects.automation.deployments.start(
