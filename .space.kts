@@ -173,7 +173,9 @@ job("Build and publish bundle to internal track") {
         env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
 
         shellScript {
-            content = """
+        }
+    }
+    content = """
                 echo Get private signing key...
                 echo ${'$'}KEY_STORE > upload_key.hex
                 xxd -plain -revert upload_key.hex  upload_key.jks
@@ -184,13 +186,15 @@ job("Build and publish bundle to internal track") {
                 flutter doctor -v
                 ls -l -h
                 
-                # Build the app bundle
+                echo "Switch to 50GRAMx Directory"
                 cd fifty_gramx
+                
+                echo "fix dependencies"
                 flutter pub get && flutter pub cache repair
-                flutter build appbundle --info --stacktrace
+                
+                echo "Build the app bundle"
+                flutter build appbundle --stacktrace
             """
-        }
-    }
 }
 
 job("Test deployment") {
