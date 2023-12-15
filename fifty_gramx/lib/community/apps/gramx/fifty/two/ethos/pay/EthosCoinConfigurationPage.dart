@@ -68,7 +68,7 @@ class _EthosCoinConfigurationPageState
           CustomSliverAppBar(
             labelText: "Ethos Pay",
             actionLabelText: "",
-            isBackEnabled: true,
+            isBackEnabled: false,
             isActionEnabled: false,
             trailingButtonCallback: () {},
             onStretchTriggerCallback: () {},
