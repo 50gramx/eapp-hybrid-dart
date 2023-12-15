@@ -52,6 +52,9 @@ RUN flutter doctor --android-licenses -v
 
 RUN flutter doctor -v
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && \
-    apt-get install gem -y && \
-    gem install fastlane
+    apt-get install gem
+
+RUN gem install fastlane
