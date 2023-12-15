@@ -36,9 +36,7 @@ class CognitiveAssistContextCommonChannel {
 
   static Future<ClientChannel> buildGrpcChannel() async {
     var channel = await grpcChannelBuilder(
-        "context.assist.cognitive.50gramx.com",
-        50507,
-        "lib/assets/certs/identityServer.crt");
+        "122.166.150.115", 50501);
     return channel;
   }
 }

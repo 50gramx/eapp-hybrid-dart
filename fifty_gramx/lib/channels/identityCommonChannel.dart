@@ -36,7 +36,7 @@ class IdentityCommonChannel {
 
   static Future<ClientChannel> buildGrpcChannel() async {
     var channel = await grpcChannelBuilder(
-        "identity.50gramx.com", 50501, "lib/assets/certs/identityServer.crt");
+        "122.166.150.115", 50501);
     return channel;
   }
 }

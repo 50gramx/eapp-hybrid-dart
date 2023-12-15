@@ -35,8 +35,7 @@ class ConversationCommonChannel {
       _conversationChannel ??= await buildGrpcChannel();
 
   static Future<ClientChannel> buildGrpcChannel() async {
-    var channel = await grpcChannelBuilder("conversation.50gramx.com", 50504,
-        "lib/assets/certs/conversationServer.crt");
+    var channel = await grpcChannelBuilder("122.166.150.115", 50501);
     return channel;
   }
 }

@@ -36,7 +36,7 @@ class KnowledgeCommonChannel {
 
   static Future<ClientChannel> buildGrpcChannel() async {
     var channel = await grpcChannelBuilder(
-        "knowledge.50gramx.com", 50502, "lib/assets/certs/knowledgeServer.crt");
+        "122.166.150.115", 50501);
     return channel;
   }
 }
