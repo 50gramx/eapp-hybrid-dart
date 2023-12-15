@@ -41,7 +41,7 @@ platform :android do
         skip_upload_images: true,
         skip_upload_screenshots: true,
         skip_upload_aab: false,
-        aab: "../../build/app/outputs/bundle/release/app-release.aab"
+        aab: "../../../build/app/outputs/bundle/release/app-release.aab"
     )
   end
 end

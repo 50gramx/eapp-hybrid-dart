@@ -197,7 +197,9 @@ job("Build and publish bundle to internal track") {
                 ls build/app/outputs/bundle/release/app-release.aab
                 
                 echo "Switch to Android Directory"
+                pwd
                 cd android
+                pwd 
                 
                 echo "Deploy"
                 fastlane deploy
