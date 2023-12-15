@@ -24,7 +24,9 @@ class EthosAppFlowBob {
 
   factory EthosAppFlowBob() {
     if (_instance == null) {
+      print("EthosAppFlowBob:factory:no instance were found");
       _instance = EthosAppFlowBob._();
+      print("EthosAppFlowBob:factory:new instance assigned");
       _instance!.start();
     }
     return _instance!;

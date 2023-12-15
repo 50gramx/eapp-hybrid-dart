@@ -27,6 +27,7 @@ buildscript {
     // read-only repository on March 31, 2021
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 
@@ -45,6 +46,7 @@ buildscript {
 allprojects {
     repositories {
         google()
+        jcenter()
         mavenCentral()
     }
 }
