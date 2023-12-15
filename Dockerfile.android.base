@@ -17,7 +17,7 @@ RUN flutter doctor -v
 USER root
 
 RUN apt update -y && \
-    apt install -y openjdk-19-jdk
+    apt install -y openjdk-17-jdk
 
 ENV TOOLS_URL="https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip" \
     ANDROID_SDK_ROOT="/usr/local/android-sdk" \
