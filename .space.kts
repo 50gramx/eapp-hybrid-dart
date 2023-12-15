@@ -202,6 +202,8 @@ job("Build and publish bundle to internal track") {
                 pwd 
                 
                 echo "Deploy"
+                export LC_ALL=en_US.UTF-8                                                    
+                export LANG=en_US.UTF-8
                 fastlane deploy
                 
             """
