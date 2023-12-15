@@ -52,8 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
             label: flow.title,
             code: flow.code,
-            icon: Icon(flow.iconData,
-                color: AppColors.contentInversePrimary(context)),
+            icon: flow.iconData,
           ),
           navigatorKey: flow.navigatorKey,
           initialPageBuilder: (context) {
