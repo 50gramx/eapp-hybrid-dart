@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.6+60
+version: 23.11.5
 
 environment:
   sdk: ">=3.0.6"
@@ -26,9 +26,11 @@ dependencies:
   platform: ^3.1.0
   grpc: ^3.0.0
   protobuf: ^3.0.0
-  shared_preferences: ^2.0.5
-  firebase_core: ^2.17.0
-  firebase_messaging: ^14.6.9
+  shared_preferences: ^2.2.2
+  firebase_core: ^2.23.0
+  firebase_messaging: ^14.7.5
+  firebase_crashlytics: ^3.4.5
+  firebase_performance_platform_interface: ^0.1.4+13
   overlay_support: ^2.1.0
   flutter_neumorphic:
     git:
@@ -41,47 +43,43 @@ dependencies:
   bubble: ^1.2.1
   # dart_eval is an extensible bytecode compiler and runtime for the Dart language,
   # written in Dart, enabling dynamic codepush for Flutter and Dart AOT.
-  dart_eval: ^0.6.0
+  dart_eval: ^0.7.1
   datetime_picker_formfield_new: ^2.1.0
   intl: ^0.18.1
   flutter_switch: ^0.3.1
   rxdart: ^0.27.1
   http: ^1.1.0
   smooth_page_indicator: ^1.1.0
-  file_picker: ^5.3.2
+  file_picker: ^6.1.1
   # A storefront-independent API for purchases in Flutter apps.
   # This plugin supports in-app purchases (IAP) through an underlying store,
   # which can be the App Store (on iOS and macOS) or Google Play (on Android).
   in_app_purchase: ^3.1.7
   # A Flutter plugin for opening iOS and Android phone settings from an app.
-  app_settings: ^5.0.0
+  app_settings: ^5.1.1
   # A Flutter plugin to access and manage the device's contacts.
-  contacts_service: ^0.6.1
+  contacts_service: ^0.6.3
   #  msix: ^2.1.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.6
   # Get current device information from within the Flutter application.
-  device_info_plus: ^9.0.2
+  device_info_plus: ^9.1.1
   # A cross platform plugin for displaying local notifications.
-  flutter_local_notifications: ^15.1.0+1
+  flutter_local_notifications: ^16.1.0
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS,
   # Linux, macOS and Windows. Not all methods are supported on all platforms.
-
-
-
   path_provider: ^2.0.11
   # manages all the device level permissions
   permission_handler: ^10.4.3
   # Process run helpers for Linux/Win/Mac.
   process_run: ^0.13.0
   # A library that exposes device specific speech recognition capability.
-  speech_to_text: ^6.3.0
+  speech_to_text: ^6.4.1
   # A Dart package which parses total and available disk spaces on
   # Windows and UNIX-based systems (including Linux and macOS).
-
-  # A parser for YAML.
   universal_disk_space: ^0.2.3
+  # A parser for YAML.
   yaml: ^3.1.2
 
 flutter_icons:
@@ -116,19 +114,24 @@ flutter:
     # assets of 70GRAMx
     #   Ethos Pods
     #     Orchestrator Setup Scripts
-    # 50 community eapp assets
+    # 50GRAMx
     - lib/community/apps/gramx/fifty/zero/ethosapps.yaml
-    # 52 community eapp assets
-    - lib/community/apps/gramx/fifty/two/ethosapps.yaml
-    # 52 ethos pay app assets
-    - lib/community/apps/gramx/fifty/two/ethos/pay/
-    # 55 community eapp assets
-    - lib/community/apps/gramx/fifty/five/ethos/ethosapps.yaml
-    # 50 ethos identity app assets
+    # 50GRAMx Ethos
     - lib/community/apps/gramx/fifty/zero/ethos/identity/
     - lib/community/apps/gramx/fifty/zero/ethos/knowledge_spaces/
-    # 55 ethos eutopia app assets
+    - lib/community/apps/gramx/fifty/zero/ethos/spaces/
+    - lib/community/apps/gramx/fifty/zero/ethos/conversations/
+    - lib/community/apps/gramx/fifty/zero/ethos/connections/
+    # 52GRAMx
+    - lib/community/apps/gramx/fifty/two/ethosapps.yaml
+    # 52GRAMx Ethos
+    - lib/community/apps/gramx/fifty/two/ethos/pay/
+    # 55GRAMx
+    - lib/community/apps/gramx/fifty/five/ethos/ethosapps.yaml
+    # 55GRAMx Ethos
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
+    # 70GRAMx
+    # 70GRAMx Ethos
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/homebrew.sh
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/install.sh
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/installMultipass.sh
