@@ -51,15 +51,6 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
       completedSelectingUniverseCallback();
     }
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: AppColors.backgroundPrimary(context),
-      statusBarBrightness: NeumorphicTheme.isUsingDark(context)
-          ? Brightness.light
-          : Brightness.dark,
-      statusBarIconBrightness: NeumorphicTheme.isUsingDark(context)
-          ? Brightness.light
-          : Brightness.dark,
-    ));
 
     super.initState();
   }
