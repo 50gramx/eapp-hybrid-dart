@@ -191,7 +191,10 @@ job("Build and publish bundle to internal track") {
                 flutter pub get && flutter pub cache repair
                 
                 echo "Build the app bundle"
-                flutter build appbundle -vv
+                flutter build appbundle
+                
+                echo "Check Release"
+                ls build/app/outputs/bundle/release/app-release.aab
                 
             """
         }
