@@ -28,6 +28,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -695,7 +696,7 @@ class _GettingStartedUniverseColumnWidgetState
 
   pushToHomeScreenWidget() async {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
-    await LocalServices().loadLocalServices();
+        context, MaterialPageRoute(builder: (context) => WebViewPage(index: 1, containingFlowTitle: "Identity")));
+    // await LocalServices().loadLocalServices();
   }
 }
