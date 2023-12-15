@@ -1,114 +1,34 @@
 {
   "project_info": {
-    "project_number": "852895682356",
-    "firebase_url": "https://healthcare-analytics-197813.firebaseio.com",
-    "project_id": "healthcare-analytics-197813",
-    "storage_bucket": "healthcare-analytics-197813.appspot.com"
+    "project_number": "1048555807763",
+    "project_id": "ethosverse-india",
+    "storage_bucket": "ethosverse-india.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:852895682356:android:d1034a5621d91da42f9f61",
-        "android_client_info": {
-          "package_name": "com.elint.iethos"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA7By-0D2CWb_RfmuVqU9vgGlX0HCs_AoE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "852895682356-81jp348bhtj602u448kp6vaa1pb0qkmn.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fiftyGramx"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:852895682356:android:9ee8ba785c6881132f9f61",
-        "android_client_info": {
-          "package_name": "com.example.fiftyGramx"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA7By-0D2CWb_RfmuVqU9vgGlX0HCs_AoE"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "852895682356-81jp348bhtj602u448kp6vaa1pb0qkmn.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fiftyGramx"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:852895682356:android:befb1040f0de86c42f9f61",
+        "mobilesdk_app_id": "1:1048555807763:android:f30ab92102bfcb3740cbe6",
         "android_client_info": {
           "package_name": "com.fiftygramx.ethosai"
         }
       },
       "oauth_client": [
         {
-          "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+          "client_id": "1048555807763-i75qqruna1ck6hlst7d0942p8k9vpl98.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA7By-0D2CWb_RfmuVqU9vgGlX0HCs_AoE"
+          "current_key": "AIzaSyC7yYXxIPP1QmegxaWscNqWvLDCFI73XkY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "852895682356-t8u5vn7884phb4tiftsa9e3ut8j4lqfq.apps.googleusercontent.com",
+              "client_id": "1048555807763-i75qqruna1ck6hlst7d0942p8k9vpl98.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "852895682356-81jp348bhtj602u448kp6vaa1pb0qkmn.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.fiftyGramx"
-              }
             }
           ]
         }

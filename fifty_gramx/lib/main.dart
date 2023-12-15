@@ -28,14 +28,34 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// Entry point of the 50gramx Flutter application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   print("App is starting...");
+
+  if (!kIsWeb) {
+    await Firebase.initializeApp();
+
+    bool weWantFatalErrorRecording = false;
+    FlutterError.onError = (errorDetails) {
+      if(weWantFatalErrorRecording){
+        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+      } else {
+        FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      }
+    };
+
+    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+  }
 
   runApp(MyApp());
 }
@@ -72,21 +92,23 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       theme: lightThemeData,
       darkTheme: darkThemeData,
-      themeMode: ThemeMode.light,
-      home: FutureBuilder<void>(
-        future: initializeApp(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            print("App initialization completed."); // Add a log statement
-            return HomeScreen();
-          } else {
-            return Scaffold(
-              body: Center(
-                child: AppProgressIndeterminateWidget(),
-              ),
-            );
-          }
-        },
+      themeMode: ThemeMode.system,
+      home: SafeArea(
+        child: FutureBuilder<void>(
+          future: initializeApp(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              print("App initialization completed."); // Add a log statement
+              return HomeScreen();
+            } else {
+              return Scaffold(
+                body: Center(
+                  child: AppProgressIndeterminateWidget(),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -96,7 +118,7 @@ class MyApp extends StatelessWidget {
         if (!kIsWeb && Platform.isMacOS) {
           initializePlatformServices();
         }
-        await EthosAppFlowBob();
+        EthosAppFlowBob();
         print("EthosAppFlowBob initialized.");
       })();
 
