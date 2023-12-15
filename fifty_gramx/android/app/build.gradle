@@ -42,7 +42,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 // Key store file name
 // The Automation script will create the key store file in the root directory,
 // but this build.gradle is located one level down - on the project level.
-def appKeyStoreFile = "../upload_key.jks"
+def appKeyStoreFile = "../../../upload_key.jks"
 // Key store password, key alias and password created on the prev steps.
 // Env vars will be assigned by the Automation script.
 def appKeyStorePassword = System.env.PLAY_KEY_STORE_PASSWORD
