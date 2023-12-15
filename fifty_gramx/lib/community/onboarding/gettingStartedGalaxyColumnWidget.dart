@@ -493,6 +493,6 @@ class _GettingStartedGalaxyColumnWidgetState
   pushToHomeScreenWidget() async {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
-    await LocalServices().loadLocalServices();
+    await LocalServices().load();
   }
 }
