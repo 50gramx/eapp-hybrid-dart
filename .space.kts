@@ -201,6 +201,7 @@ job("Build and publish bundle to internal track") {
         env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
         env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
         env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
+        env["VERSION_NUMBER"] = {{ VERSION_NUMBER }}
 
         shellScript {
             content = """
