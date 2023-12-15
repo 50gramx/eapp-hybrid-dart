@@ -187,7 +187,7 @@ job("Build and publish bundle to internal track") {
                 # Build the app bundle
                 cd fifty_gramx
                 flutter pub get && flutter pub cache repair
-                flutter build appbundle
+                flutter build appbundle --info --stacktrace
             """
         }
     }
