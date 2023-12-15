@@ -52,4 +52,6 @@ RUN flutter doctor --android-licenses -v
 
 RUN flutter doctor -v
 
-RUN gem install fastlane
+RUN apt-get update && \
+    apt-get install gem -y && \
+    gem install fastlane
