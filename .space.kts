@@ -214,9 +214,10 @@ job("Build and publish bundle to internal track") {
                 flutter doctor -v
                 ls -l -h
                 
+                echo ${'$'}VERSION_
                 echo "Switch to 50GRAMx Directory"
                 cd fifty_gramx
-                env
+                env VERSION_NUMBER
                 
                 echo "fix dependencies"
                 flutter pub get && flutter pub cache repair
