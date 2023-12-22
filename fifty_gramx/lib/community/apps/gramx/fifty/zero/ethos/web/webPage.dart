@@ -27,6 +27,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -435,6 +436,13 @@ class _WebViewPageState extends State<WebViewPage> {
                         }
                       },
                     ),
+                    SelectorConfigurationItem(
+                        titleText: "Account",
+                        subtitleText: "EMPTY",
+                        selectorCallback: () {
+                          AccountData().emptyAccount();
+                          print('pressed');
+                        }),
                   ],
                 );
               }),
