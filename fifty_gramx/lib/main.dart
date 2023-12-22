@@ -33,17 +33,26 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import 'firebase_options.dart';
+
 /// Entry point of the 50gramx Flutter application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   print("App is starting...");
 
-  if (!kIsWeb) {
-    await Firebase.initializeApp();
+  // Firebase not available for windows, linux at the moment
+  // Firebase is not enabled for web at the moment
+  if (kIsWeb || Platform.isWindows || Platform.isLinux) {
+    print("Platform is not supported, not initialising Firebase");
+    //   not doing anything
+  } else {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     bool weWantFatalErrorRecording = false;
     FlutterError.onError = (errorDetails) {
-      if(weWantFatalErrorRecording){
+      if (weWantFatalErrorRecording) {
         FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
       } else {
         FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
@@ -53,6 +62,7 @@ void main() async {
     // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
     PlatformDispatcher.instance.onError = (error, stack) {
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      print("recordError: ${error}, ${stack}");
       return true;
     };
   }
