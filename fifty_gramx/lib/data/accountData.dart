@@ -63,6 +63,11 @@ class AccountData {
     }
   }
 
+  emptyAccount() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('account', Account.getDefault().writeToJson());
+  }
+
   saveAccountServicesAccessSessionTokenDetails(
       PersistentSessionTokenDetails
           accountServicesAccessSessionTokenDetails) async {
