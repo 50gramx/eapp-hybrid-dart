@@ -207,9 +207,11 @@ job("Build and publish bundle to internal track") {
                 echo Get private signing key...
                 echo ${'$'}KEY_STORE > upload_key.hex
                 xxd -plain -revert upload_key.hex  upload_key.jks
+                
                 echo Get Google service account key...
                 echo ${'$'}GOOGLE_SA_KEY > google_sa_key.hex
                 xxd -plain -revert google_sa_key.hex  google_sa_key.json
+               
                 echo Build and publish AAB...
                 flutter doctor -v
                 ls -l -h
@@ -245,7 +247,77 @@ job("Build and publish bundle to internal track") {
     }
 }
 
+
+job("Build and publish bundle to desktop track") {
+    startOn {
+        gitPush {
+            enabled = false
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
+    }
+
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+    }
+
+    container("Build and publish", "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
+        env["MSIX_CERTIFICATE"] = Secrets("MSIX_CERTIFICATE")
+        env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
+
+        shellScript {
+            content = """
+                echo Get MSIX Certificate...
+                echo ${'$'}MSIX_CERTIFICATE > msix_certificate.hex
+                xxd -plain -revert msix_certificate.hex  msix_certificate.pfx
+               
+                echo Build and publish AAB...
+                flutter doctor -v
+                ls -l -h
+                
+                echo ${'$'}VERSION_NUMBER
+                echo "breaker"
+                echo {{ VERSION_NUMBER }}
+                export VERSION_NUMBER={{ VERSION_NUMBER }}
+                echo "Switch to 50GRAMx Directory"
+                cd fifty_gramx
+                
+                echo "fix dependencies"
+                flutter pub get && flutter pub cache repair
+                
+                echo "Build the windows"
+                flutter build windows
+                dart run msix:create
+                
+            """
+        }
+    }
+}
+
 job("Test deployment") {
+    startOn {
+        gitPush {
+            enabled = false
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
+    }
+
     host("Deploy test container") {
         shellScript {
             content = """
