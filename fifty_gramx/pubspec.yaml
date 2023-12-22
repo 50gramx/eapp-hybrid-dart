@@ -93,6 +93,7 @@ dev_dependencies:
 
   # A fully featured Gherkin parser and test runner. Works with Flutter and Dart 2.
   flutter_gherkin: ^2.0.0
+  msix: ^3.16.7
 
 
 # For information on the generic Dart part of this file, see the
@@ -199,9 +200,10 @@ msix_config:
   display_name: 50GRAMX
   publisher_display_name: Amit Khetan
   identity_name: 11781AppsHub.50GRAMX
-  msix_version: 1.0.2.0
-  #  certificate_path: C:\<PathToCertificate>\<MyCertificate.pfx>
-  #  certificate_password: 1234 (require if using .pfx certificate)
+  msix_version: 23.12.44.0
+  certificate_path: /msix_certificate.pfx
+  #    C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\CERTIFICATE.pfx
+  certificate_password: getethos
   publisher: CN=D4AFB810-EF13-46E0-8839-A4A110696588
   #  logo_path: C:\<PathToIcon>\<Logo.png>
   #  start_menu_icon_path: C:\<PathToIcon>\<Icon.png>
