@@ -25,6 +25,7 @@ import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 
 class PushNotificationService {
   bool _started = false;
@@ -51,8 +52,9 @@ class PushNotificationService {
   Future<void> start() async {
     // Verify this isSupported (Safari doesn't support PUSH API's)
 
+    bool platformSupported =  !kIsWeb || !Platform.isWindows || !Platform.isLinux;
     bool messagingSupported = await ((await firebaseMessaging).isSupported());
-    if (!_started && messagingSupported) {
+    if (!_started && messagingSupported && platformSupported) {
       await _start();
       _started = true;
       _refreshToken();
@@ -84,13 +86,21 @@ class PushNotificationService {
   }
 
   updateLastCheckedDeviceToken() async {
-    NotificationSettings settings = await getSettings();
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      isNotificationFailure = false;
-      _lastCheckedDeviceToken = (await (await firebaseMessaging).getToken())!;
-      return _lastCheckedDeviceToken;
+    // TODO: change the strategy to grab device tokens
+    // We cannot request firebase way for Push Notifications
+    bool platformNotSupported = Platform.isWindows || Platform.isLinux;
+    if (platformNotSupported) {
+        isNotificationFailure = true;
+        final now = DateTime.now();
+        _lastCheckedDeviceToken = now.microsecondsSinceEpoch.toString();
+        return _lastCheckedDeviceToken;
     } else {
-      isNotificationFailure = true;
+        NotificationSettings settings = await getSettings();
+        if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+          isNotificationFailure = false;
+          _lastCheckedDeviceToken = (await (await firebaseMessaging).getToken())!;
+          return _lastCheckedDeviceToken;
+      }
     }
   }
 
@@ -153,6 +163,11 @@ class PushNotificationService {
         ..accountDeviceOs = AccountDeviceOS.MACOS
         ..deviceToken =
             PushNotificationService.instance.getLastCheckedDeviceToken();
+    } else if (Platform.isWindows) {
+      accountDeviceDetails = AccountDeviceDetails()
+        ..accountDeviceOs = AccountDeviceOS.WINDOWS
+        ..deviceToken =
+        PushNotificationService.instance.getLastCheckedDeviceToken();
     }
     return accountDeviceDetails;
   }
