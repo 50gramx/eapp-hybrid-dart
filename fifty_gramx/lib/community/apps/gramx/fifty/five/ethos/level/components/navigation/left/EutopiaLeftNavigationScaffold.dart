@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1001.dart';
@@ -199,7 +201,8 @@ class _EutopiaLeftNavigationScaffoldState
             _shouldBuildTab,
             widget);
       } on Exception catch (exception) {
-        if (!kIsWeb) {
+        bool platformNotSupported = kIsWeb || Platform.isWindows || Platform.isLinux;
+        if (!platformNotSupported) {
           FirebaseCrashlytics.instance.log(
               "PageFlowBuilder.buildPageFlow() Exception at "
               "${barItem} w/ ${exception} w/ "
@@ -210,7 +213,8 @@ class _EutopiaLeftNavigationScaffoldState
               "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
         }
       } catch (error) {
-        if (!kIsWeb) {
+        bool platformNotSupported = kIsWeb || Platform.isWindows || Platform.isLinux;
+        if (!platformNotSupported) {
           FirebaseCrashlytics.instance.log(
               "PageFlowBuilder.buildPageFlow() Error at "
               "${barItem} w/ ${error} w/ "
