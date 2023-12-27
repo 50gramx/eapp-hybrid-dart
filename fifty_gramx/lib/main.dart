@@ -125,7 +125,7 @@ class MyApp extends StatelessWidget {
 
   /// Initializes the application.
   Future<void> initializeApp() async => await (() async {
-        if (!kIsWeb && Platform.isMacOS) {
+        if (Platform.isMacOS || Platform.isWindows) {
           initializePlatformServices();
         }
         EthosAppFlowBob();
@@ -135,7 +135,11 @@ class MyApp extends StatelessWidget {
   /// Initializes platform-specific services.
   void initializePlatformServices() {
     PrivilegedCommandExecuter.initPrivileged();
-    BrewCommands.initBrew();
+    if (Platform.isMacOS) {
+      BrewCommands.initBrew();
+    } else if (Platform.isWindows) {
+      print("do something");
+    }
     MultipassCommands();
     print("Platform services initialized.");
   }
