@@ -13,8 +13,8 @@ class HostUserData {
   Future<String> readHostUserPassword() async {
     final prefs = await SharedPreferences.getInstance();
     final base64StrPassword = prefs.getString('hostUserPassword');
-    if (base64StrPassword != "") {
-      final bytesPassword = base64.decode(base64StrPassword!);
+    if (base64StrPassword != "" && base64StrPassword != null) {
+      final bytesPassword = base64.decode(base64StrPassword);
       return utf8.decode(bytesPassword);
     } else {
       return "";
