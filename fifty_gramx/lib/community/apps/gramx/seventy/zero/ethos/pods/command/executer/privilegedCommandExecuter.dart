@@ -98,7 +98,13 @@ class PrivilegedCommandExecuter {
   static _runSmokeTest() async {
     print("running smoke test");
     // warn: a fake sudo test to check the status of some random port
-    await run("sudo lsof -i:50501");
+    if (Platform.isMacOS) {
+      await run("sudo lsof -i:50501");
+    } else if (Platform.isWindows) {
+      await run("multipass version");
+    }
+
+
   }
 
   static Future<File> writeToFile(ByteData data, String path) {
