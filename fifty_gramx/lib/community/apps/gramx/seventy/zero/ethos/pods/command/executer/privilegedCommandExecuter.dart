@@ -102,6 +102,8 @@ class PrivilegedCommandExecuter {
       await run("sudo lsof -i:50501");
     } else if (Platform.isWindows) {
       await run("multipass version");
+    } else if (Platform.isLinux) {
+      await run("lsb_release -a");
     }
 
 
