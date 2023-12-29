@@ -55,7 +55,7 @@ RUN flutter doctor -v
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y gem
+    apt-get install -y gem clang cmake ninja-build pkg-config
 
 RUN apt-get install -y ruby-dev
 
