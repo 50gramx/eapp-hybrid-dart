@@ -49,7 +49,7 @@ def appKeyStorePassword = "h20hot&cold"
 def appKeyAlias = "upload"
 def appKeyPassword = "h20hot&cold"
 
-def appVersionCode = 100 + Integer.valueOf(System.env.JB_SPACE_EXECUTION_NUMBER ?: 1)
+def appVersionCode = 150 + Integer.valueOf(System.env.JB_SPACE_EXECUTION_NUMBER ?: 1)
 def appVersionName = "${System.env.VERSION_NUMBER}"
 
 android {
