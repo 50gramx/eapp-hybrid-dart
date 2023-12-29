@@ -169,7 +169,7 @@ job("Build and publish bundle to web track") {
 }
 
 
-job("Build and publish bundle to internal track") {
+job("Build and publish bundle to android internal track") {
     startOn {
         gitPush {
             enabled = true
@@ -248,7 +248,7 @@ job("Build and publish bundle to internal track") {
 }
 
 
-job("Build and publish bundle to desktop track") {
+job("Build and publish bundle to windows desktop track") {
     startOn {
         gitPush {
             enabled = false
