@@ -168,6 +168,11 @@ class PushNotificationService {
         ..accountDeviceOs = AccountDeviceOS.WINDOWS
         ..deviceToken =
         PushNotificationService.instance.getLastCheckedDeviceToken();
+    } else if (Platform.isLinux) {
+      accountDeviceDetails = AccountDeviceDetails()
+        ..accountDeviceOs = AccountDeviceOS.LINUX
+        ..deviceToken =
+        PushNotificationService.instance.getLastCheckedDeviceToken();
     }
     return accountDeviceDetails;
   }

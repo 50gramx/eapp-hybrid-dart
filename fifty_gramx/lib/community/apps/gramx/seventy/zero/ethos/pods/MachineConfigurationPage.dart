@@ -8,6 +8,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Tile/70/ethos/PodStatusTile.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HomebrewInstallerPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
@@ -42,6 +43,12 @@ Future<MacOsDeviceInfo> getDeviceInfo() async {
   return deviceInfo.macOsInfo;
 }
 
+
+Future<WindowsDeviceInfo> getWindowsDeviceInfo() async {
+  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+  return deviceInfo.windowsInfo;
+}
+
 String formatBytes(int bytes, int decimals) {
   if (bytes <= 0) return "0 B";
   const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
@@ -49,43 +56,8 @@ String formatBytes(int bytes, int decimals) {
   return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
 }
 
-Future<String> getDiskSpace() async {
-  final diskSpace = DiskSpace();
-  // scan for disks in the system
-  await diskSpace.scan();
-  // list of disks in the system
-  var disks = diskSpace.disks;
 
-  // Prints the device path, mount path, and total size of each disk in system.
-  for (final disk in disks) {
-    if (disk.mountPath == "/System/Volumes/Data") {
-      return "${formatBytes(disk.availableSpace, 2)} of ${formatBytes(disk.totalSize, 2)}";
-    }
-  }
-  return "NA";
-}
 
-Future<String> getHostPublicIPAddress() async {
-  try {
-    var shell = Shell(runInShell: true);
-    // return the host public ip address
-    return (await shell.run("curl http://ifconfig.me/ip")).outText;
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-}
-
-Future<String> getHostPrivateIPAddress() async {
-  try {
-    var shell = Shell(runInShell: true);
-    // return the host ip private address
-    return (await shell.run("ipconfig getifaddr en0")).outText;
-  } catch (e) {
-    print("found exception --> $e");
-    return "NA";
-  }
-}
 
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   Future<bool> _MultiversePodOperatorfsOpPodStatus =
@@ -294,8 +266,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             // This Machine
             // ------------------------------------------------
 
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<String>(
+              future: HostMachineData().name(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -303,20 +275,20 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return Container(
                       margin: EdgeInsets.only(
                           top: 32, bottom: 4, right: 16, left: 16),
-                      child: FormInfoText(snap.data!.computerName.toUpperCase())
+                      child: FormInfoText(snap.data!.toUpperCase())
                           .build(context));
                 }
               },
             ),
 
-            FutureBuilder<List<ProcessResult>>(
-              future: SimpleCommandExecuter.run("id -F"),
+            FutureBuilder<String>(
+              future: HostMachineData().hostName(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return SelectorConfigurationItem(
-                      titleText: "${snap.data!.outText}",
+                      titleText: "${snap.data!}",
                       subtitleText: "Update Password",
                       selectorCallback: () {
                         AppPushPage()
@@ -326,46 +298,46 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               },
             ),
 
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<String>(
+              future: HostMachineData().release(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "MacOS",
-                      subtitleText: "${snap.data!.osRelease}");
+                      titleText: "Release",
+                      subtitleText: "${snap.data!}");
                 }
               },
             ),
 
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<String>(
+              future: HostMachineData().processor(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Core CPUs",
-                      subtitleText: "${snap.data!.activeCPUs}");
+                      titleText: "Processor",
+                      subtitleText: snap.data!);
                 }
               },
             ),
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<String>(
+              future: HostMachineData().memory(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
                       titleText: "Memory",
-                      subtitleText: formatBytes(snap.data!.memorySize, 2));
+                      subtitleText: snap.data!);
                 }
               },
             ),
 
             FutureBuilder<String>(
-              future: getDiskSpace(),
+              future: HostMachineData().diskSpace(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -377,7 +349,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             ),
 
             FutureBuilder<String>(
-              future: getHostPublicIPAddress(),
+              future: HostMachineData().publicIPAddress(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -389,7 +361,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             ),
 
             FutureBuilder<String>(
-              future: getHostPrivateIPAddress(),
+              future: HostMachineData().privateIPAddress(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -409,29 +381,32 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
                 child: FormInfoText("ETHOS POD ORCHESTRATOR").build(context)),
 
-            FutureBuilder<String>(
-              future: BrewCommands.version(),
-              builder: (context, snap) {
-                if (snap.connectionState == ConnectionState.waiting) {
-                  return AppProgressIndeterminateWidget();
-                } else {
-                  if (snap.data! == "NA") {
-                    return SelectorConfigurationItem(
-                        titleText: "Homebrew",
-                        subtitleText: "Install",
-                        selectorCallback: () {
-                          AppPushPage().pushHorizontalPage(
-                              context, HomebrewInstallerPage());
-                        });
+            Visibility(
+              visible: Platform.isMacOS,
+              child: FutureBuilder<String>(
+                future: BrewCommands.version(),
+                builder: (context, snap) {
+                  if (snap.connectionState == ConnectionState.waiting) {
+                    return AppProgressIndeterminateWidget();
                   } else {
-                    // Based on the understanding that user won't need this any
-                    // longer, so removing this
-                    return SizedBox();
-                    // return BasicConfigurationItem(
-                    //     titleText: "Homebrew", subtitleText: snap.data!);
+                    if (snap.data! == "NA") {
+                      return SelectorConfigurationItem(
+                          titleText: "Homebrew",
+                          subtitleText: "Install",
+                          selectorCallback: () {
+                            AppPushPage().pushHorizontalPage(
+                                context, HomebrewInstallerPage());
+                          });
+                    } else {
+                      // Based on the understanding that user won't need this any
+                      // longer, so removing this
+                      return SizedBox();
+                      // return BasicConfigurationItem(
+                      //     titleText: "Homebrew", subtitleText: snap.data!);
+                    }
                   }
-                }
-              },
+                },
+              ),
             ),
 
             FutureBuilder<String>(
@@ -727,7 +702,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
                 child: FormInfoText("STAR NODES").build(context)),
             BasicConfigurationItem(
-                titleText: "Richard's AWS Node", subtitleText: "Delaware, USA"),
+                titleText: "Bootstrap Node", subtitleText: "Bangalore, KA"),
             // TODO: Fetch actual data
             SizedBox(height: 32),
           ]),
