@@ -40,32 +40,32 @@ class EappFlow {
 
     if (communityCode == 50 && title == 'identity') {
       index = 1;
-      appTitle = "Identity";
+      appTitle = "Ethos Identity";
       iconData = FeatherIcons.user;
       firstPage = WebViewPage(index: 1, containingFlowTitle: appTitle);
     } else if (communityCode == 50 && title == 'conversations') {
       index = 2;
-      appTitle = "Conversations";
+      appTitle = "Ethos Conversations";
       iconData = FeatherIcons.messageCircle;
       firstPage = ConversationsHomePage(index: index, containingFlowTitle: appTitle,);
     } else if (communityCode == 50 && title == 'connections') {
       index = 3;
-      appTitle = "Connections";
+      appTitle = "Ethos Connections";
       iconData = FeatherIcons.users;
       firstPage = ConnectionsHomePage(index: index);
     } else if (communityCode == 50 && title == 'knowledge_spaces') {
       index = 4;
-      appTitle = "Knowledge";
+      appTitle = "Ethos Knowledge";
       iconData = FeatherIcons.shield;
       firstPage = SpacesHomePage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 52 && title == 'pay') {
       index = 5;
-      appTitle = "Pay";
+      appTitle = "Ethos Pay";
       iconData = FeatherIcons.dollarSign;
       firstPage = EthosCoinConfigurationPage();
     } else if (communityCode == 70 && title == 'pods') {
       index = 6;
-      appTitle = "Pods";
+      appTitle = "Ethos Pods";
       iconData = FeatherIcons.box;
       firstPage =
           EthosPodConfigurationPage(index: index, containingFlowTitle: title);
