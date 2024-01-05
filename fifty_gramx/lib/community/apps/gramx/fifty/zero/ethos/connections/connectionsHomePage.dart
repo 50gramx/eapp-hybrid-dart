@@ -189,7 +189,7 @@ class _ConnectionsHomePageState extends State<ConnectionsHomePage> {
         body: CustomScrollView(
           slivers: <Widget>[
             CustomSliverAppBar(
-              labelText: "Connections",
+              labelText: "Ethos Connections",
               actionLabelText: "EthosPay",
               isActionEnabled: false,
               isBackEnabled: false,
