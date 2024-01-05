@@ -68,6 +68,22 @@ class AccountData {
     prefs.setString('account', Account.getDefault().writeToJson());
   }
 
+  Future<bool> accountPresent() async {
+    // Create a stopwatch and start it
+    final stopwatch = Stopwatch()..start();
+    bool accountPresent = (await AccountData().readAccount()).accountId != "";
+    stopwatch.stop();
+    print('Time elapsed to accountPresent: ${stopwatch.elapsedMilliseconds} ms');
+    return accountPresent;
+  }
+
+  Future<bool> accountAvailable() async {
+    return (await AccountData().readAccountServicesAccessAuthDetails())
+            .account
+            .accountId !=
+        "";
+  }
+
   saveAccountServicesAccessSessionTokenDetails(
       PersistentSessionTokenDetails
           accountServicesAccessSessionTokenDetails) async {
