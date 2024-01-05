@@ -1,8 +1,8 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/adaptiveLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
+    LocalServices().user();
   }
 
   /// handler invoked inside localNotifications, which listens to new messages
@@ -69,6 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print("HomeScree:build: ${navigationBarItems.length}");
-    return AdaptiveLeftNavigationScaffold();
+    return SafeArea(child: AdaptiveLeftNavigationScaffold());
   }
 }
