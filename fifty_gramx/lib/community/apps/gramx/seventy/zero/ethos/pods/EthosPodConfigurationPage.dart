@@ -48,7 +48,7 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
       backgroundColor: AppColors.backgroundPrimary(context),
       body: CustomScrollView(slivers: <Widget>[
         CustomSliverAppBar(
-          labelText: "EthosPod",
+          labelText: "Ethos Pods",
           actionLabelText: "",
           isBackEnabled: false,
           isActionEnabled: false,
