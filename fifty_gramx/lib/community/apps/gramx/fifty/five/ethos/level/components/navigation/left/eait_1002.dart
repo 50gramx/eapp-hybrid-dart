@@ -2,6 +2,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1008.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/page_tab_pane.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -48,7 +49,6 @@ class EAIT1002 extends StatelessWidget {
                 children: [
                   CommunityLogo(),
                   pageTabPane,
-                  buildAccountAssistantIconButton(context, toggleNavigatingPages),
                 ],
               ),
             ),
