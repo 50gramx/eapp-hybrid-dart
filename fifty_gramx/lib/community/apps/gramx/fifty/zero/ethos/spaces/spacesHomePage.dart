@@ -100,7 +100,7 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
         backgroundColor: AppColors.backgroundPrimary(context),
         body: CustomScrollView(slivers: <Widget>[
           CustomSliverAppBar(
-            labelText: "Spaces",
+            labelText: "Ethos Spaces",
             actionLabelText: "EthosPod",
             isBackEnabled: false,
             trailingButtonCallback: () {},
