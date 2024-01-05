@@ -28,6 +28,8 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/onboarding/startScreen.dart';
+import 'package:fifty_gramx/data/accountData.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -97,6 +99,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget progress = Scaffold(
+      body: Center(
+        child: AppProgressIndeterminateWidget(),
+      ),
+    );
     return NeumorphicApp(
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
@@ -109,13 +116,21 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               print("App initialization completed."); // Add a log statement
-              return HomeScreen();
+              return FutureBuilder<bool>(
+                  future: AccountData().accountPresent(),
+                  builder: (context, presentData) {
+                    if (presentData.connectionState == ConnectionState.done) {
+                      if (presentData.data == true) {
+                        return HomeScreen();
+                      } else {
+                        return StartScreen();
+                      }
+                    } else {
+                      return progress;
+                    }
+                  });
             } else {
-              return Scaffold(
-                body: Center(
-                  child: AppProgressIndeterminateWidget(),
-                ),
-              );
+              return progress;
             }
           },
         ),
@@ -125,11 +140,18 @@ class MyApp extends StatelessWidget {
 
   /// Initializes the application.
   Future<void> initializeApp() async => await (() async {
+        // Create a stopwatch and start it
+        final stopwatch = Stopwatch()..start();
+
         if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
           initializePlatformServices();
         }
         EthosAppFlowBob();
         print("EthosAppFlowBob initialized.");
+        // Stop the stopwatch
+        stopwatch.stop();
+        print(
+            'Time elapsed to initializeApp: ${stopwatch.elapsedMilliseconds} ms');
       })();
 
   /// Initializes platform-specific services.
