@@ -28,8 +28,6 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
-import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
-import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
@@ -447,27 +445,10 @@ class _WebViewPageState extends State<WebViewPage> {
                 );
               }),
         ]));
-    Widget getStarted = GetStartedWidget();
     // Widget getStarted = ConversationsHomePage(index: 1, containingFlowTitle: "Conversations",);
     // Widget getStarted = AccountAssistantConversationPage(
     //     accountAssistant: AccountAssistant.create());
-    return FutureBuilder(
-        future: isUserSigned(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData && snapshot.data!) {
-              LocalServices().user();
-              return scaffold;
-            } else {
-              return getStarted;
-            }
-          } else {
-            return Scaffold(
-              body: Center(
-                child: AppProgressIndeterminateWidget(),
-              ),
-            );
-          }
-        });
+    return scaffold;
+    ;
   }
 }
