@@ -244,7 +244,7 @@ class _GettingStartedGalaxyColumnWidgetState
     setState(() {
       galaxyHorizontalNavPrimaryButtonDisabled[0] = false;
     });
-    checkBillingActive();
+    // checkBillingActive();
 
     if (Platform.isAndroid) {
       final Stream<List<PurchaseDetails>> purchaseUpdated =
@@ -277,29 +277,29 @@ class _GettingStartedGalaxyColumnWidgetState
       isContentActive: widget.isSelectingGalaxy,
       contentWidget:
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            child: RichText(
-              text: TextSpan(
-                text: galaxyHorizontalNavPrimaryHeadingText[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                child: RichText(
+                  text: TextSpan(
+                    text: galaxyHorizontalNavPrimaryHeadingText[
                     galaxyHorizontalNavIndex][0],
-                style: TextStyle(
-                    color: AppColors.contentPrimary(context),
-                    fontSize: 14,
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w400,
-                    height: 1.14285714),
+                    style: TextStyle(
+                        color: AppColors.contentPrimary(context),
+                        fontSize: 14,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w400,
+                        height: 1.14285714),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        Visibility(
-          visible: galaxyHorizontalNavIndex == 0,
-          child: TierSelectionWidget(
-              updateSelectedTier: (value) => updateSelectedTier(value)),
-        ),
+            Visibility(
+              visible: galaxyHorizontalNavIndex == 0,
+              child: TierSelectionWidget(
+                  updateSelectedTier: (value) => updateSelectedTier(value)),
+            ),
         FormInfoText(galaxyHorizontalNavInfoText[galaxyHorizontalNavIndex])
             .build(context),
       ]),
