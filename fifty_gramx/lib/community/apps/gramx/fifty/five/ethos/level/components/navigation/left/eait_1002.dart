@@ -40,7 +40,7 @@ class EAIT1002 extends StatelessWidget {
       child: Column(
         children: [
           Visibility(
-            visible: true,
+            visible: LayoutBreakpoint().isNavigatingLeft(context),
             child: Container(
               height: isNavigatingLeft ? 64 : 48,
               child: Row(
