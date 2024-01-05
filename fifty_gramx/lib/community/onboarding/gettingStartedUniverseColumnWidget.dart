@@ -538,8 +538,12 @@ class _GettingStartedUniverseColumnWidgetState
             if ((await AccountData().readAccount()).accountBillingActive) {
               // checking if the billing is not active
               // todo: load local services here
-              pushToHomeScreenWidget();
+              print("will pushToHomeScreenWidget");
+              // pushToHomeScreenWidget();
+              print("will set state");
               setState(() {});
+              print("done set state");
+              widget.completedSelectingUniverseCallback();
             } else {
               // pushing the account to complete tier selection
               widget.completedSelectingUniverseCallback();
@@ -597,8 +601,9 @@ class _GettingStartedUniverseColumnWidgetState
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
       print("will push");
-      pushToHomeScreenWidget();
-      setState(() {});
+      widget.completedSelectingUniverseCallback();
+      // pushToHomeScreenWidget();
+      // setState(() {});
     }
   }
 
@@ -704,8 +709,9 @@ class _GettingStartedUniverseColumnWidgetState
   }
 
   pushToHomeScreenWidget() async {
+    print("pushToHomeScreenWidget");
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => WebViewPage(index: 1, containingFlowTitle: "Identity")));
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
     // await LocalServices().loadLocalServices();
   }
 }
