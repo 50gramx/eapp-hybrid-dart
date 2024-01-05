@@ -121,7 +121,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
         body: CustomScrollView(
           slivers: <Widget>[
             CustomSliverAppBar(
-              labelText: "Conversations",
+              labelText: "Ethos Conversations",
               actionLabelText: "Ethosai",
               isActionEnabled: false,
               isBackEnabled: false,
