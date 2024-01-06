@@ -3,7 +3,7 @@ description: Your. Unified. Simple. Secure. Internet.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 23.11.5
+version: 24.11.13
 
 environment:
   sdk: ">=3.0.6"
@@ -95,13 +95,11 @@ dev_dependencies:
   flutter_gherkin: ^2.0.0
   msix: ^3.16.7
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -211,4 +209,4 @@ msix_config:
   #  vs_generated_images_folder_path: C:\<PathToFolder>\icons
   #  icons_background_color: transparent
   architecture: x64
-  capabilities: 'internetClient,microphone'
+  capabilities: "internetClient,microphone"
