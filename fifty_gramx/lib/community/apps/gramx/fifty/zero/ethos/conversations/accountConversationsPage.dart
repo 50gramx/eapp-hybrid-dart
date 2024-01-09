@@ -112,12 +112,14 @@ class AccountConversationsPage extends StatelessWidget {
             ),
    */
 
+  // warn: not using this
   getAccountConnectedAccountReceivedMessages(
       AccountConnectedAccount accountConnectedAccount) async {
     ReceiveAccountMessageService.syncAccountConnectedAccountReceivedMessages(
         accountConnectedAccount);
   }
 
+  // warn: not using this
   Future<Stream<SyncAccountConnectedAccountSentMessagesResponse>>
       getAccountConnectedAccountSentMessages(accountConnectedAccount) async {
     var responseStream =
