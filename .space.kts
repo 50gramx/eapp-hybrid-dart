@@ -325,9 +325,8 @@ job("Build and publish bundle to iOS internal track") {
                 xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
                 chmod 600 ~/.ssh/id_rsa
 
-                pwd
-                ls /tmp/jetbrains/space/automation/worker
-                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/spaces/eapp-hybrid-dart/fifty_gramx; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY login.keychain; flutter build ipa"
+                echo Build IPA...
+                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/data/automation/eapp-hybrid-dart/fifty_gramx; git checkout master_v2; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY login.keychain; flutter build ipa"
                 ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
             """
         }
