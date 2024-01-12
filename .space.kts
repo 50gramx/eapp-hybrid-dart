@@ -315,6 +315,7 @@ job("Build and publish bundle to iOS internal track") {
 
     host("Build and publish") {
         env["SSH_CONNECT_AMITKUMARKHETAN15_KEY"] = Secrets("SSH_CONNECT_AMITKUMARKHETAN15_KEY")
+        env["SSH_CONNECT_AMITKUMARKHETAN15_SECURITY"] = Secrets("SSH_CONNECT_AMITKUMARKHETAN15_SECURITY")
 
         shellScript {
             content = """
@@ -326,8 +327,8 @@ job("Build and publish bundle to iOS internal track") {
 
                 pwd
                 ls /tmp/jetbrains/space/automation/worker
-                df -h
-                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal 'df; ls -l;'
+                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/spaces/eapp-hybrid-dart/fifty_gramx; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY login.keychain; flutter build ipa"
+                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
             """
         }
 
