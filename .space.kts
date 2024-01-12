@@ -290,23 +290,26 @@ job("Build and publish bundle to iOS internal track") {
     }
 
     host("Build and publish") {
-        env["GOOGLE_SA_KEY"] = Secrets("GOOGLE_SERVICE_ACCOUNT_KEY")
-        env["KEY_STORE"] = Secrets("PLAY_APP_SIGNING_UPLOAD_KEY")
-        env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
-        env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
-        env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
+        env["SSH_CONNECT_AMITKUMARKHETAN15_KEY"] = Secrets("SSH_CONNECT_AMITKUMARKHETAN15_KEY")
 
         shellScript {
             content = """
+                echo Get amitkumarkhetan15 SSH key...
+                echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
+                xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
+
                 pwd
-                ls /opt/ethos
+                ls /tmp/jetbrains/space/automation/worker
                 df -h
-                
+                ssh amitkumarkhetan15@host.docker.internal
+                pwd
+                df -h
             """
         }
 
         requirements {
             workerTags("macos-pool")
+            workerTags("amitkumarkhetan15-user")
         }
     }
 }
