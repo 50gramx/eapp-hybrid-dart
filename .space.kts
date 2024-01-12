@@ -56,6 +56,10 @@ job("Build Web Base Image") {
                 +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest"
             }
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
     }
 }
 
@@ -109,6 +113,10 @@ job("Build Android Base Image") {
                 +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest"
             }
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
     }
 }
 
@@ -164,6 +172,10 @@ job("Build and publish bundle to web track") {
           	cd fifty_gramx && flutter clean && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
 
     }
 }
@@ -244,6 +256,58 @@ job("Build and publish bundle to android internal track") {
                 
             """
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
+    }
+}
+
+job("Build and publish bundle to iOS internal track") {
+    startOn {
+        gitPush {
+            enabled = true
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
+    }
+
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+    }
+
+    host("Build and publish") {
+        env["GOOGLE_SA_KEY"] = Secrets("GOOGLE_SERVICE_ACCOUNT_KEY")
+        env["KEY_STORE"] = Secrets("PLAY_APP_SIGNING_UPLOAD_KEY")
+        env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
+        env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
+        env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
+
+        shellScript {
+            content = """
+                pwd
+                ls /opt/ethos
+                df -h
+                
+            """
+        }
+
+        requirements {
+            workerTags("macos-pool")
+        }
     }
 }
 
@@ -304,6 +368,10 @@ job("Build and publish bundle to windows desktop track") {
                 
             """
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
     }
 }
 
