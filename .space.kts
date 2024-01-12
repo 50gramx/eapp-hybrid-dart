@@ -327,9 +327,7 @@ job("Build and publish bundle to iOS internal track") {
                 pwd
                 ls /tmp/jetbrains/space/automation/worker
                 df -h
-                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal
-                pwd
-                df -h
+                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal 'df; ls -l;'
             """
         }
 
