@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 
 class MultiverseFileSystemOperator {
@@ -26,10 +28,12 @@ class MultiverseFileSystemOperator {
   }
 
   Future<bool> checkPodStatus() async {
-    _multiverseFileSystem["podRunning"] = await KubectlCommands
+    if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+      _multiverseFileSystem["podRunning"] = await KubectlCommands
         .get.namespaced.deployment
         .multiverseFileSystemStatus();
     // TODO: check service status
+    }
     return _multiverseFileSystem["podRunning"];
   }
 

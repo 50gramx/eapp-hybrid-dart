@@ -41,9 +41,21 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   getStartedButtonOnPressed() async {
+    print("getStartedButtonOnPressed");
     if (Platform.isAndroid || Platform.isIOS) {
+      print("android or ios");
       if (await Permission.contacts.request().isGranted) {
+        print("android or ios");
         pushToGetStartedWidget();
+      } else if (await Permission.contacts.isPermanentlyDenied) {
+        // The user opted to never again see the permission request dialog for this
+        // app. The only way to change the permission's status now is to let the
+        // user manually enables it in the system settings.
+        openAppSettings();
+      } else {
+        print(await Permission.contacts.status);
+        await Permission.contacts.request();
+        print("contacts permissions not granted");
       }
     } else if (Platform.isWindows) {
       pushToGetStartedWidget();

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.fiftygramx.ethosai</string>
+    </array>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -31,7 +35,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSContactsUsageDescription</key>
-	<string>contacts</string>
+	<string>App lets you connect your contacts to assist you</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>App listen to your commands to take action and assist you</string>
 	<key>NSPhotoLibraryUsageDescription</key>

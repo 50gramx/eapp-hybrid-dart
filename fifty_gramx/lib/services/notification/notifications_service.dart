@@ -114,6 +114,7 @@ class PushNotificationService {
   }
 
   void _tokenRefresh(String newToken) {
+    print("_tokenRefresh: $newToken");
     _lastCheckedDeviceToken = newToken;
   }
 

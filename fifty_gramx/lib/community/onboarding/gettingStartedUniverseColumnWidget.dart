@@ -455,6 +455,7 @@ class _GettingStartedUniverseColumnWidgetState
 
   // Universe : Horizontal Nav
   increaseUniverseHorizontalNav() {
+    print("increaseUniverseHorizontalNav: $universeHorizontalNavIndex");
     setState(() {
       universeHorizontalNavIndex += 1;
     });
@@ -493,6 +494,9 @@ class _GettingStartedUniverseColumnWidgetState
       activeUniverseSecondaryButton();
     } else if (universeHorizontalNavIndex == 1) {
       if (!universeHorizontalNavPrimaryButtonDisabled[1]) {
+        setState(() {
+          universeHorizontalNavPrimaryButtonDisabled[1] = true;
+        });
         await validateAccount();
         if (validateAccountResponse.accountExists) {
           if (kIsWeb) {
@@ -507,11 +511,15 @@ class _GettingStartedUniverseColumnWidgetState
           print("account doesn't exists");
           if (kIsWeb) {
             await validateAccountWithMobile();
-            increaseUniverseHorizontalNav();
+            if (validateAccountWithMobileResponse.validateAccountWithMobileDone) {
+              increaseUniverseHorizontalNav();
+            }
           } else {
             print("platform is not web");
             await validateAccountWithMobile();
-            increaseUniverseHorizontalNav();
+            if (validateAccountWithMobileResponse.validateAccountWithMobileDone) {
+              increaseUniverseHorizontalNav();
+            }
             // TODO: Uncomment to disable sign up via apps
             // setState(() {
             //   universeHorizontalNavPrimaryButtonDisabled[1] = true;
@@ -609,14 +617,18 @@ class _GettingStartedUniverseColumnWidgetState
 
   // Universe Helper functions
   validateAccount() async {
+    print("validateAccount");
     validateAccountResponse = await AccessAccountService.validateAccount(
         selectedCountryCode, mobileNumberTextFieldController.text);
+    print("validateAccount.validateAccountResponse: $validateAccountResponse");
   }
 
   validateAccountWithMobile() async {
+    print("validateAccountWithMobile");
     validateAccountWithMobileResponse =
         await CreateAccountService.validateAccountWithMobile(
             selectedCountryCode, mobileNumberTextFieldController.text);
+    print("validateAccountWithMobile: $validateAccountWithMobileResponse");
   }
 
   verifyAccount() async {
