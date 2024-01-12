@@ -326,7 +326,7 @@ job("Build and publish bundle to iOS internal track") {
                 chmod 600 ~/.ssh/id_rsa
 
                 echo Build IPA...
-                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/data/automation/eapp-hybrid-dart/fifty_gramx; git checkout master_v2; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY; flutter build ipa;"
+                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/data/automation/eapp-hybrid-dart/fifty_gramx; git checkout master_v2; git pull; security unlock-keychain -p peace login.keychain; flutter build ipa;"
                 ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
             """
         }
