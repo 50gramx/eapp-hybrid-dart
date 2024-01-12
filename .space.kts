@@ -28,6 +28,10 @@ job("Build Web Base Image") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     host("Build and push web base image") {
@@ -84,6 +88,10 @@ job("Build Android Base Image") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
@@ -145,6 +153,10 @@ job("Build and publish bundle to web track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     container("amazoncorretto:17-alpine") {
@@ -156,6 +168,10 @@ job("Build and publish bundle to web track") {
                     // automatically update deployment status based on a status of a job
                     syncWithAutomationJob = true
             )
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
@@ -204,6 +220,10 @@ job("Build and publish bundle to android internal track") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
@@ -287,6 +307,10 @@ job("Build and publish bundle to iOS internal track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     host("Build and publish") {
@@ -338,6 +362,10 @@ job("Build and publish bundle to windows desktop track") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
