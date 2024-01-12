@@ -493,6 +493,9 @@ class _GettingStartedUniverseColumnWidgetState
       activeUniverseSecondaryButton();
     } else if (universeHorizontalNavIndex == 1) {
       if (!universeHorizontalNavPrimaryButtonDisabled[1]) {
+        setState(() {
+          universeHorizontalNavPrimaryButtonDisabled[1] = true;
+        });
         await validateAccount();
         if (validateAccountResponse.accountExists) {
           if (kIsWeb) {
