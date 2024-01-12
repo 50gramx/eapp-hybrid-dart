@@ -322,6 +322,7 @@ job("Build and publish bundle to iOS internal track") {
                 apt-get install -y xxd
                 echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
                 xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
 
                 pwd
                 ls /tmp/jetbrains/space/automation/worker
