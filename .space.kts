@@ -329,7 +329,7 @@ job("Build and publish bundle to iOS internal track") {
                 chmod 600 ~/.ssh/id_rsa
 
                 echo Build IPA...
-                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/data/automation/eapp-hybrid-dart/fifty_gramx/ios; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export FLUTTER_BUILD_NAME={{ VERSION_NUMBER }}; fastlane beta;"
+                export BUILD_COMMAND="source ~/.zshrc; cd /opt/ethos/data/automation/eapp-hybrid-dart/fifty_gramx/ios; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ JB_SPACE_EXECUTION_NUMBER }}; fastlane beta;"
                 echo ${'$'}BUILD_COMMAND
                 ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
             """
