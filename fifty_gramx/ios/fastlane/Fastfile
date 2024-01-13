@@ -20,6 +20,6 @@ platform :ios do
   lane :beta do
     # increment_build_number(xcodeproj: "Runner.xcodeproj")
     build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight
+    upload_to_testflight(app_version: ENV["FLUTTER_BUILD_NAME"])
   end
 end
