@@ -147,7 +147,7 @@ class MyApp extends StatelessWidget {
                               if (envSnap.connectionState ==
                                   ConnectionState.done) {
                                 if (envSnap.data == "com.50gramx") {
-                                  return HomeScreen();
+                                  return StartScreen();
                                 } else {
                                   if (kIsWeb) {
                                     createScriptElement(envSnap.data!);
