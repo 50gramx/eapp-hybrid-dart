@@ -132,7 +132,7 @@ job("Build Android Base Image") {
 job("Build and publish bundle to web track") {
     startOn {
         gitPush {
-            enabled = false
+            enabled = true
             anyBranchMatching {
                 +"release-*"
                 +"master"
