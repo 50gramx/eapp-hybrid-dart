@@ -186,7 +186,7 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=${"$"}PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
 
@@ -259,7 +259,7 @@ job("Build and publish bundle to android internal track") {
                 
                 echo "fix dependencies"
                 flutter pub get && flutter pub cache repair
-                dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=${"$"}PACKGAGES_READ_TOKEN
+                dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN
                 
                 echo "Build the app bundle"
                 flutter build appbundle
