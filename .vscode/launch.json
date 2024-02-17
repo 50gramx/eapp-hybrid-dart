@@ -5,10 +5,37 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "fifty_gramx",
+            "name": "Debug - 70.ethos.pods - Web",
             "cwd": "fifty_gramx",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--dart-define=flavor=70.ethos.pods"
+            ]
+        },
+        {
+            "name": "Debug - 70.ethos.pods - iOS",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "00008110-000524293E01401E",
+                "--flavor", 
+                "70.ethos.pods"
+            ]
+        },
+        {
+            "name": "Debug - 50GRAMx - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome"
+            ]
         },
         {
             "name": "fifty_gramx (profile mode)",

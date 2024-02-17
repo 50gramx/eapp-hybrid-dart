@@ -19,9 +19,9 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/knowledgeCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge/access_space_knowledge.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/spaceData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge/access_space_knowledge.pbgrpc.dart';
 
 class AccessSpaceKnowledgeService {
   // Client declarations here
@@ -32,7 +32,7 @@ class AccessSpaceKnowledgeService {
   // getting the client on the very first call
   static Future<AccessSpaceKnowledgeServiceClient> get serviceClient async =>
       _serviceClient ??= AccessSpaceKnowledgeServiceClient(
-          await KnowledgeCommonChannel.knowledgeChannel);
+          await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("AccessSpaceKnowledgeService:dispose");

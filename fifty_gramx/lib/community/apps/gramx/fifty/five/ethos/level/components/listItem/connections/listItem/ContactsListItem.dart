@@ -21,21 +21,9 @@
 
 import 'package:contacts_service/contacts_service.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/IconButton/Entity/AccountContactIconButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/IconButton/Entity/AccountIconButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/IconButton/Entity/AccountMetaIconButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Entity/AccountAssistantText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Entity/AccountContactText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Entity/AccountMetaAssistantText.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/ConnectedAssistantsListItem.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/conversations/messages/conversationsMessagesListItem.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 /// A ListItem that contains data to display a heading.
 class ContactListItemWidget extends StatelessWidget {
@@ -47,10 +35,7 @@ class ContactListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    var accountContactText =
-    AccountContactText(contact);
-
+    var accountContactText = AccountContactText(contact);
 
     return Container(
         decoration: BoxDecoration(
@@ -63,9 +48,11 @@ class ContactListItemWidget extends StatelessWidget {
               onTap: () {
                 pushContactConversation();
               },
-              leading: AccountContactIconButton(contact).buildConnectedContactIconButton(context),
+              leading: AccountContactIconButton(contact)
+                  .buildConnectedContactIconButton(context),
               title: accountContactText.buildAccountContactTitleText(context),
-              subtitle: accountContactText.buildAccountContactSubtitleText(context),
+              subtitle:
+                  accountContactText.buildAccountContactSubtitleText(context),
               isThreeLine: false,
               enableFeedback: true,
               dense: true,

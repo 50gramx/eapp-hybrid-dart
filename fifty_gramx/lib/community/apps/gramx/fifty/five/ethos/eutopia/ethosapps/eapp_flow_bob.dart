@@ -8,6 +8,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_capability_composer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
+import 'package:fifty_gramx/environment.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,7 +85,7 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  static List<int> recognizedGramxCommunities = [50, 52, 70];
+  static List<int> recognizedGramxCommunities = [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -755,11 +756,23 @@ class EthosAppFlowBob {
     final orgAssetPath = "$communityAssetsPath/$orgName";
     final orgApps = organisationEthosappContract['apps'] as YamlList;
     final List<Map<String, dynamic>> orgAppsPaths = [];
+    final currentEnv = await Environment.current();
 
     // Log the number of apps being loaded for the organization
     print("Loading ${orgApps.length} apps for organization: $orgName");
 
     for (final appName in orgApps) {
+      if (currentEnv != "com.50gramx") {
+        if (currentEnv != "com.50gramx.$communityCode.$orgName.$appName") {
+          print("_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load $appName...");
+          break;
+        }
+      }
+      print("_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
+      // will skip if the flavor is not com.50gramx
+      // will only build for the flavor org name, community code, and app name
+      
+
       final appAssetPath = '$orgAssetPath/$appName';
       AppFlow appFlow;
 

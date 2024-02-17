@@ -20,7 +20,7 @@ Widget buildAppButton(
     },
     icon: EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex]
         .leftNavigationBarSectionalItem.icon,
-    isCollapsed: true,
+    isCollapsed: false,
     isSelected: subIndex == parentWidget.selectedIndex,
   );
 }

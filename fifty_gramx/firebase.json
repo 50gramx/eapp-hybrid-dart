@@ -1,1 +1,55 @@
-{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"ethosverse-india","appId":"1:1048555807763:android:f30ab92102bfcb3740cbe6","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"ethosverse-india","appId":"1:1048555807763:ios:c49421f1468b3dc340cbe6","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"ethosverse-india","appId":"1:1048555807763:ios:701fcc12bef6c05840cbe6","uploadDebugSymbols":true,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"ethosverse-india","configurations":{"android":"1:1048555807763:android:f30ab92102bfcb3740cbe6","ios":"1:1048555807763:ios:c49421f1468b3dc340cbe6","macos":"1:1048555807763:ios:701fcc12bef6c05840cbe6","web":"1:1048555807763:web:5c1e0a6f9cd7b38e40cbe6","windows":"1:1048555807763:web:931d95f68df49c6d40cbe6"}}}}}}
+{
+    "hosting": {
+        "public": "build/web",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "ethosverse-india",
+                    "appId": "1:1048555807763:android:f30ab92102bfcb3740cbe6",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "ethosverse-india",
+                    "appId": "1:1048555807763:ios:c49421f1468b3dc340cbe6",
+                    "uploadDebugSymbols": true,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "macos": {
+                "default": {
+                    "projectId": "ethosverse-india",
+                    "appId": "1:1048555807763:ios:701fcc12bef6c05840cbe6",
+                    "uploadDebugSymbols": true,
+                    "fileOutput": "macos/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "ethosverse-india",
+                    "configurations": {
+                        "android": "1:1048555807763:android:f30ab92102bfcb3740cbe6",
+                        "ios": "1:1048555807763:ios:c49421f1468b3dc340cbe6",
+                        "macos": "1:1048555807763:ios:701fcc12bef6c05840cbe6",
+                        "web": "1:1048555807763:web:5c1e0a6f9cd7b38e40cbe6",
+                        "windows": "1:1048555807763:web:931d95f68df49c6d40cbe6"
+                    }
+                }
+            }
+        }
+    }
+}

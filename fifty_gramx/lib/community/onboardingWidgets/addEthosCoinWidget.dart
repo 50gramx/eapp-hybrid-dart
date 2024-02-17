@@ -22,15 +22,14 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
-import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
-import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuIconButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/ethosCoinBalanceCard.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
+import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';

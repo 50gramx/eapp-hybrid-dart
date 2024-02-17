@@ -5,6 +5,9 @@
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
+  'Debug-70.ethos.pods' => :debug,
+  'Profile-70.ethos.pods' => :release,
+  'Release-70.ethos.pods' => :release,
   'Debug' => :debug,
   'Profile' => :release,
   'Release' => :release,

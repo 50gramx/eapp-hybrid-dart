@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -52,10 +53,14 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.concave,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: widget.isSelected ? AppColors.contentInversePrimary(context) : AppColors.contentInverseSecondary(context),
+        color: widget.isSelected
+            ? AppColors.contentInversePrimary(context)
+            : AppColors.contentInverseSecondary(context),
         border: NeumorphicBorder(
-          isEnabled: true,
-          color: widget.isSelected ? AppColors.contentInversePrimary(context) : AppColors.contentInverseSecondary(context),
+          isEnabled: false,
+          color: widget.isSelected
+              ? AppColors.contentInversePrimary(context)
+              : AppColors.contentInverseSecondary(context),
           width: widget.noBorder ? 0 : 2,
         ),
       ),
@@ -64,27 +69,20 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
     Widget name = Visibility(
       visible: !widget.isCollapsed,
       child: Container(
-        width: MediaQuery.of(context).size.width - 66 - 116,
         child: Text(
           widget.buttonTitle,
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: AppColors.contentInversePrimary(context),
-              fontSize: 18,
+              fontSize: 10,
               fontFamily: "Montserrat",
               fontWeight: FontWeight.w600),
         ),
       ),
     );
 
-    Widget expanded = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [neuIcon, name],
-    );
-
-    print("returning AdaptiveNeuButton");
-    return NeumorphicButton(
+    Widget neuButton = NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
           if (!widget.isPrimaryButtonDisabled) {
@@ -98,24 +96,41 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
           shadowLightColor: NeumorphicTheme.isUsingDark(context)
               ? AppColors.gray600
               : AppColors.backgroundSecondary(context),
-          shape: widget.isSelected ? NeumorphicShape.flat : NeumorphicShape.convex,
-          disableDepth: false,
+          shape:
+              widget.isSelected ? NeumorphicShape.flat : NeumorphicShape.convex,
+          disableDepth: true,
           depth: widget.isSelected ? -3 : 0,
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: widget.isSelected
               ? AppColors.backgroundInverseSecondary(context)
               : AppColors.backgroundInverseTertiary(context),
           border: NeumorphicBorder(
-            isEnabled: true,
+            isEnabled: false,
             color: widget.isSelected
                 ? AppColors.backgroundInverseTertiary(context)
                 : AppColors.backgroundInverseTertiary(context),
             width: widget.noBorder ? 0 : 4,
           ),
         ),
-        margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-        child: Center(
+        margin: LayoutBreakpoint().isNavigatingLeft(context)
+            ? const EdgeInsets.fromLTRB(0, 6, 0, 6)
+            : const EdgeInsets.fromLTRB(6, 0, 6, 0),
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        child: Container(child: Center(
           child: neuIcon,
-        ));
+        ),));
+
+
+    Widget leftExpanded = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [neuIcon, name],
+    );
+
+    Widget bottomExpanded = Container(
+      child: Column(children: [Container(child: neuButton), name],),
+    );
+
+    print("returning AdaptiveNeuButton");
+    return LayoutBreakpoint().isNavigatingLeft(context) ? leftExpanded : bottomExpanded;
   }
 }

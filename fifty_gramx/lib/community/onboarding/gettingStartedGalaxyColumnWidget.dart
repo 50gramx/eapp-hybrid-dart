@@ -22,25 +22,20 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/galaxy.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/galaxy.pb.dart';
-import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
-import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
-import 'package:fifty_gramx/services/payments/spaceTierPayments.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/tierSelectionWidget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
+import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
+import 'package:fifty_gramx/services/payments/spaceTierPayments.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-//import for SkuDetailsWrapper
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-//import for GooglePlayProductDetails
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class GettingStartedGalaxyColumnWidget extends StatefulWidget {
   const GettingStartedGalaxyColumnWidget(
@@ -277,29 +272,29 @@ class _GettingStartedGalaxyColumnWidgetState
       isContentActive: widget.isSelectingGalaxy,
       contentWidget:
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-                child: RichText(
-                  text: TextSpan(
-                    text: galaxyHorizontalNavPrimaryHeadingText[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            child: RichText(
+              text: TextSpan(
+                text: galaxyHorizontalNavPrimaryHeadingText[
                     galaxyHorizontalNavIndex][0],
-                    style: TextStyle(
-                        color: AppColors.contentPrimary(context),
-                        fontSize: 14,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w400,
-                        height: 1.14285714),
-                  ),
-                ),
+                style: TextStyle(
+                    color: AppColors.contentPrimary(context),
+                    fontSize: 14,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w400,
+                    height: 1.14285714),
               ),
             ),
-            Visibility(
-              visible: galaxyHorizontalNavIndex == 0,
-              child: TierSelectionWidget(
-                  updateSelectedTier: (value) => updateSelectedTier(value)),
-            ),
+          ),
+        ),
+        Visibility(
+          visible: galaxyHorizontalNavIndex == 0,
+          child: TierSelectionWidget(
+              updateSelectedTier: (value) => updateSelectedTier(value)),
+        ),
         FormInfoText(galaxyHorizontalNavInfoText[galaxyHorizontalNavIndex])
             .build(context),
       ]),

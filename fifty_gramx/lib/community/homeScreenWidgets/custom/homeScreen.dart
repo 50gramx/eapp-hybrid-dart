@@ -70,6 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     print("HomeScree:build: ${navigationBarItems.length}");
-    return SafeArea(child: AdaptiveLeftNavigationScaffold());
+    return AdaptiveLeftNavigationScaffold();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
@@ -28,6 +29,7 @@ class EAIT1002 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
     Widget pageTabPane = Visibility(
       visible: isNavigatingLeft,
       child: Expanded(
@@ -41,7 +43,7 @@ class EAIT1002 extends StatelessWidget {
       child: Column(
         children: [
           Visibility(
-            visible: LayoutBreakpoint().isNavigatingLeft(context),
+            visible: LayoutBreakpoint().isNavigatingLeft(context) ? (isOneEappLoaded ? false : true) : false,
             child: Container(
               height: isNavigatingLeft ? 64 : 48,
               child: Row(

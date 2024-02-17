@@ -12,7 +12,6 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMac
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
@@ -25,7 +24,6 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPag
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
-import 'package:universal_disk_space/universal_disk_space.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MachineConfigurationPage extends StatefulWidget {
@@ -43,7 +41,6 @@ Future<MacOsDeviceInfo> getDeviceInfo() async {
   return deviceInfo.macOsInfo;
 }
 
-
 Future<WindowsDeviceInfo> getWindowsDeviceInfo() async {
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   return deviceInfo.windowsInfo;
@@ -55,9 +52,6 @@ String formatBytes(int bytes, int decimals) {
   var i = (log(bytes) / log(1024)).floor();
   return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
 }
-
-
-
 
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   Future<bool> _MultiversePodOperatorfsOpPodStatus =
@@ -98,9 +92,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
         });
   }
 
-
-    buildMutliverseIngressPodStatusInteraction() {
-      return FutureBuilder<bool>(
+  buildMutliverseIngressPodStatusInteraction() {
+    return FutureBuilder<bool>(
         future: MultiversePodOperator.inOp.checkPodStatus(),
         builder: (context, snapshotMultiverseIngressPodStatus) {
           switch (snapshotMultiverseIngressPodStatus.connectionState) {
@@ -131,10 +124,10 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               return SizedBox();
           }
         });
-    }
+  }
 
   buildMultiverseIngressNamespaceBuilderInteraction() {
-      return FutureBuilder<bool>(
+    return FutureBuilder<bool>(
       future:
           KubectlCommands.get.namespaced.namespace.isMultiverseIngressExists(),
       builder: (context, snapshotMultiverseIngressNamespace) {
@@ -195,7 +188,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
         }
       },
     );
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -240,25 +233,26 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               return SizedBox();
           }
         });
-    
 
-    
-    buildMultiversePodsWidgets () {
+    buildMultiversePodsWidgets() {
       return Column(
-      children: [
-        Container(
-            margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-            child: FormInfoText("MULTIVERSE PODS").build(context)),
-        multiverseFileSystemPodStatusInteraction,
-        Visibility(visible: Platform.isMacOS || Platform.isLinux || Platform.isWindows, child: buildMultiverseChainsIdentityPodStatusInteraction(), ),
-        SwitchConfigurationItem(
-          titleText: "Identity Capabilities",
-          switchValue: false,
-          switchOnChanged: (value) {},
-        ),
-        buildMultiverseIngressNamespaceBuilderInteraction(),
-      ],
-    );
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+              child: FormInfoText("MULTIVERSE PODS").build(context)),
+          multiverseFileSystemPodStatusInteraction,
+          Visibility(
+            visible: Platform.isMacOS || Platform.isLinux || Platform.isWindows,
+            child: buildMultiverseChainsIdentityPodStatusInteraction(),
+          ),
+          SwitchConfigurationItem(
+            titleText: "Identity Capabilities",
+            switchValue: false,
+            switchOnChanged: (value) {},
+          ),
+          buildMultiverseIngressNamespaceBuilderInteraction(),
+        ],
+      );
     }
 
     return Scaffold(
@@ -317,8 +311,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Release",
-                      subtitleText: "${snap.data!}");
+                      titleText: "Release", subtitleText: "${snap.data!}");
                 }
               },
             ),
@@ -330,8 +323,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Processor",
-                      subtitleText: snap.data!);
+                      titleText: "Processor", subtitleText: snap.data!);
                 }
               },
             ),
@@ -342,8 +334,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Memory",
-                      subtitleText: snap.data!);
+                      titleText: "Memory", subtitleText: snap.data!);
                 }
               },
             ),
@@ -576,7 +567,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                                   switch (snapshotCreateResource
                                                       .connectionState) {
                                                     case ConnectionState
-                                                        .waiting:
+                                                          .waiting:
                                                     case ConnectionState.none:
                                                     case ConnectionState.active:
                                                       {

@@ -20,9 +20,9 @@
  */
 
 import 'package:contacts_service/contacts_service.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/discover_account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/connect_account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/discover_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/discoverAccountService.dart';
 import 'package:permission_handler/permission_handler.dart';

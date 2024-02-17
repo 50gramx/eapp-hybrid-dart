@@ -19,12 +19,11 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/conversationCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/conversation/message/message_conversation.pbgrpc.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/connect_account.pb.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/message_conversation.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
 import 'package:grpc/grpc.dart';
 
 class MessageConversationService {
@@ -36,7 +35,7 @@ class MessageConversationService {
   // getting the client on the very first call
   static Future<MessageConversationServiceClient> get serviceClient async =>
       _serviceClient ??= MessageConversationServiceClient(
-          await ConversationCommonChannel.conversationChannel);
+          await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   // Service declarations here
   static Future<ResponseStream<GetAccountAndAssistantConversationsResponse>>

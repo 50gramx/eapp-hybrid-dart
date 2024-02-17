@@ -19,9 +19,9 @@
  * /
  */
 
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/notifyAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
@@ -54,6 +54,7 @@ class AccountData {
   }
 
   Future<Account> readAccount() async {
+    print("AccountData:readAccount");
     final prefs = await SharedPreferences.getInstance();
     var details = prefs.getString('account') ?? "";
     if (details == "") {

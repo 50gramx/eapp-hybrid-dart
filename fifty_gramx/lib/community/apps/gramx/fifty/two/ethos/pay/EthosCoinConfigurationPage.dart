@@ -1,23 +1,22 @@
 import 'dart:io';
 
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountDOBEditorPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountFirstNameEditorPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountMobileNumberEditorPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountDOBEditorPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountFirstNameEditorPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/AccountMobileNumberEditorPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/addEthosCoinWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.

@@ -19,6 +19,9 @@
  * /
  */
 
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/access_account.pbgrpc.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/DateTimeField/DateOfBirthField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/dropDownButton.dart';
@@ -28,23 +31,15 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pbenum.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
-import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class GettingStartedUniverseColumnWidget extends StatefulWidget {
@@ -499,25 +494,28 @@ class _GettingStartedUniverseColumnWidgetState
         });
         await validateAccount();
         if (validateAccountResponse.accountExists) {
-          if (kIsWeb) {
-            setState(() {
-              webSignInEvent = true;
-              universeHorizontalNavPrimaryButtonDisabled[1] = true;
-            });
-          } else {
-            increaseUniverseHorizontalNav();
-          }
+          // if (kIsWeb) {
+          //   setState(() {
+          //     webSignInEvent = true;
+          //     universeHorizontalNavPrimaryButtonDisabled[1] = true;
+          //   });
+          // } else {
+          //   increaseUniverseHorizontalNav();
+          // }
+          increaseUniverseHorizontalNav();
         } else {
           print("account doesn't exists");
           if (kIsWeb) {
             await validateAccountWithMobile();
-            if (validateAccountWithMobileResponse.validateAccountWithMobileDone) {
+            if (validateAccountWithMobileResponse
+                .validateAccountWithMobileDone) {
               increaseUniverseHorizontalNav();
             }
           } else {
             print("platform is not web");
             await validateAccountWithMobile();
-            if (validateAccountWithMobileResponse.validateAccountWithMobileDone) {
+            if (validateAccountWithMobileResponse
+                .validateAccountWithMobileDone) {
               increaseUniverseHorizontalNav();
             }
             // TODO: Uncomment to disable sign up via apps

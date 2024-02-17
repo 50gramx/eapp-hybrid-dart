@@ -1,3 +1,4 @@
 - organisation: ethos
   apps:
     - pods
+    - entities

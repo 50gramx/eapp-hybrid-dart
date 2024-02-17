@@ -19,18 +19,13 @@
  * /
  */
 
-import 'dart:io';
-
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 /// Page that displays its index, flow's title and color.
 ///
@@ -57,11 +52,10 @@ class AccountConversationsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.lightNeuPrimaryBackground,
       appBar: CustomAppBar(
-        labelText: account.accountFirstName + " " + account.accountLastName,
-        actionLabelText: "Info",
-        isBackEnabled: true,
-          trailingButtonCallback: () {}
-      ),
+          labelText: account.accountFirstName + " " + account.accountLastName,
+          actionLabelText: "Info",
+          isBackEnabled: true,
+          trailingButtonCallback: () {}),
       body: Center(
           child: ListView(
         children: [],

@@ -19,14 +19,11 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/knowledgeCommonChannel.dart';
-import 'package:fifty_gramx/data/spaceKnowledgeData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain_file.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/create_space_knowledge_domain.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain_file/create_space_knowledge_domain_file.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain_file/delete_space_knowledge_domain_file.pbgrpc.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain_file.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain_file/delete_space_knowledge_domain_file.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/accessSpaceKnowledgeDomainService.dart';
 
 class DeleteSpaceKnowledgeDomainFileService {
@@ -39,7 +36,7 @@ class DeleteSpaceKnowledgeDomainFileService {
   static Future<DeleteSpaceKnowledgeDomainFileServiceClient>
       get serviceClient async =>
           _serviceClient ??= DeleteSpaceKnowledgeDomainFileServiceClient(
-              await KnowledgeCommonChannel.knowledgeChannel);
+              await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("DeleteSpaceKnowledgeDomainFileService:dispose");

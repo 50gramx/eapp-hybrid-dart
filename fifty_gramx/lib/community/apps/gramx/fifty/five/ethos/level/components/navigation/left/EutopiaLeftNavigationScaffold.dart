@@ -201,7 +201,8 @@ class _EutopiaLeftNavigationScaffoldState
             _shouldBuildTab,
             widget);
       } on Exception catch (exception) {
-        bool platformNotSupported = kIsWeb || Platform.isWindows || Platform.isLinux;
+        bool platformNotSupported =
+            kIsWeb || Platform.isWindows || Platform.isLinux;
         if (!platformNotSupported) {
           FirebaseCrashlytics.instance.log(
               "PageFlowBuilder.buildPageFlow() Exception at "
@@ -213,7 +214,8 @@ class _EutopiaLeftNavigationScaffoldState
               "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
         }
       } catch (error) {
-        bool platformNotSupported = kIsWeb || Platform.isWindows || Platform.isLinux;
+        bool platformNotSupported =
+            kIsWeb || Platform.isWindows || Platform.isLinux;
         if (!platformNotSupported) {
           FirebaseCrashlytics.instance.log(
               "PageFlowBuilder.buildPageFlow() Error at "
@@ -228,6 +230,27 @@ class _EutopiaLeftNavigationScaffoldState
 
       _buildStackChildrens.add(built_page_flow);
     });
+
+    setFutureStatusBarTheme() {
+      Future.delayed(Duration(milliseconds: 1)).then(
+          (value) => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    AppColors.backgroundInverseTertiary(context),
+                systemNavigationBarDividerColor:
+                    AppColors.backgroundInverseTertiary(context),
+                systemNavigationBarIconBrightness:
+                    NeumorphicTheme.isUsingDark(context)
+                        ? Brightness.dark
+                        : Brightness.light,
+                statusBarColor: AppColors.backgroundInverseTertiary(context),
+                statusBarBrightness: NeumorphicTheme.isUsingDark(context)
+                    ? Brightness.light
+                    : Brightness.dark,
+                statusBarIconBrightness: NeumorphicTheme.isUsingDark(context)
+                    ? Brightness.dark
+                    : Brightness.light,
+              )));
+    }
 
     setStatusBarTheme() {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -253,17 +276,18 @@ class _EutopiaLeftNavigationScaffoldState
     /// and a row with various child widgets.
     Widget buildMainContentScaffold() {
       print("called buildMainContentScaffold");
-      setStatusBarTheme();
+      setFutureStatusBarTheme();
+      bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
       return Scaffold(
           backgroundColor: AppColors.backgroundInverseTertiary(context),
           key: _screenKey,
-          body: Container(
+          body: SafeArea(child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 // Left Navigation (EAIT1001)
                 Visibility(
-                  visible: isNavigatingLeft,
+                  visible: isNavigatingLeft ? (isOneEappLoaded ? false : true) : false,
                   child: Container(
                     width: 86,
                     child: EAIT1001(
@@ -279,7 +303,9 @@ class _EutopiaLeftNavigationScaffoldState
                 Visibility(
                   visible: true,
                   child: Expanded(
-                    flex: (LayoutBreakpoint().getBreakpoint(context) <= 4 ? 7 : 11),
+                    flex: (LayoutBreakpoint().getBreakpoint(context) <= 4
+                        ? 7
+                        : 11),
                     child: EAIT1002(
                       isNavigatingLeft: isNavigatingLeft,
                       selectPressedSectionItem: selectPressedSectionItem,
@@ -288,7 +314,8 @@ class _EutopiaLeftNavigationScaffoldState
                       navigationViewPort: viewPort,
                       focusMode: focusMode,
                       windowPane: WindowPane(
-                          focusMode: focusMode, pagesStack: _buildStackChildrens),
+                          focusMode: focusMode,
+                          pagesStack: _buildStackChildrens),
                     ),
                   ),
                 ),
@@ -297,15 +324,16 @@ class _EutopiaLeftNavigationScaffoldState
                 Visibility(
                   child: OpenTilesPane(
                       selectPressedSectionItem: selectPressedSectionItem,
-                    isNavigatingLeft: isNavigatingLeft,
-                    toggleNavigatingPages: toggleNavigatingPages,
-                      isNavigatingPages: isNavigatingPages
-                  ),
-                  visible: isNavigatingLeft ? true : (isNavigatingPages ? false : true),
+                      isNavigatingLeft: isNavigatingLeft,
+                      toggleNavigatingPages: toggleNavigatingPages,
+                      isNavigatingPages: isNavigatingPages),
+                  visible: isNavigatingLeft
+                      ? (isOneEappLoaded ? false : true)
+                      : (isNavigatingPages ? false : true),
                 ),
               ],
             ),
-          ));
+          ),));
     }
 
     return buildMainContentScaffold();

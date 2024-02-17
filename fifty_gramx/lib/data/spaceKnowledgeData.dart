@@ -19,10 +19,9 @@
  * /
  */
 
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge/access_space_knowledge.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge/access_space_knowledge.pb.dart';
 import 'package:fifty_gramx/services/product/knowledge/space/accessSpaceKnowledgeService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,9 +92,8 @@ class SpaceKnowledgeData {
             .spaceKnowledgeServicesAccessValidationDone ==
         false) {
       var spaceKnowledgeAccessTokenResponse =
-      await AccessSpaceKnowledgeService.spaceKnowledgeAccessToken();
-      if (spaceKnowledgeAccessTokenResponse
-          .spaceKnowledgeServicesAccessDone) {
+          await AccessSpaceKnowledgeService.spaceKnowledgeAccessToken();
+      if (spaceKnowledgeAccessTokenResponse.spaceKnowledgeServicesAccessDone) {
         saveSpaceKnowledgeServicesAccessAuthDetails(
             spaceKnowledgeAccessTokenResponse
                 .spaceKnowledgeServicesAccessAuthDetails);

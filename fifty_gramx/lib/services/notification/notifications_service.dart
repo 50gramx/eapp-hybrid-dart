@@ -21,7 +21,7 @@
 
 import 'dart:io';
 
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -31,6 +31,7 @@ class PushNotificationService {
   bool _started = false;
   bool isNotificationFailure = true;
   String _lastCheckedDeviceToken = "";
+  bool platformNotSupported = true;
 
   PushNotificationService._internal();
 
@@ -51,10 +52,17 @@ class PushNotificationService {
   // ********************************************************* //
   Future<void> start() async {
     // Verify this isSupported (Safari doesn't support PUSH API's)
+    print("PushNotificationService:start");
 
-    bool platformSupported =  !kIsWeb || !Platform.isWindows || !Platform.isLinux;
+    if (!kIsWeb) {
+      platformNotSupported = Platform.isWindows || Platform.isLinux;
+    } else {
+      platformNotSupported = false;
+    }
+    print("PushNotificationService:$platformNotSupported");
+
     bool messagingSupported = await ((await firebaseMessaging).isSupported());
-    if (!_started && messagingSupported && platformSupported) {
+    if (!_started && messagingSupported && !platformNotSupported) {
       await _start();
       _started = true;
       _refreshToken();
@@ -88,18 +96,26 @@ class PushNotificationService {
   updateLastCheckedDeviceToken() async {
     // TODO: change the strategy to grab device tokens
     // We cannot request firebase way for Push Notifications
-    bool platformNotSupported = Platform.isWindows || Platform.isLinux;
     if (platformNotSupported) {
+      print(
+          "PushNotificationService:updateLastCheckedDeviceToken: platformNotSupported");
+      isNotificationFailure = true;
+      final now = DateTime.now();
+      _lastCheckedDeviceToken = now.microsecondsSinceEpoch.toString();
+      return _lastCheckedDeviceToken;
+    } else {
+      print(
+          "PushNotificationService:updateLastCheckedDeviceToken: platformSupported");
+      NotificationSettings settings = await getSettings();
+      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+        isNotificationFailure = false;
+        _lastCheckedDeviceToken = (await (await firebaseMessaging).getToken())!;
+        return _lastCheckedDeviceToken;
+      } else {
         isNotificationFailure = true;
         final now = DateTime.now();
         _lastCheckedDeviceToken = now.microsecondsSinceEpoch.toString();
         return _lastCheckedDeviceToken;
-    } else {
-        NotificationSettings settings = await getSettings();
-        if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-          isNotificationFailure = false;
-          _lastCheckedDeviceToken = (await (await firebaseMessaging).getToken())!;
-          return _lastCheckedDeviceToken;
       }
     }
   }
@@ -149,7 +165,12 @@ class PushNotificationService {
     await PushNotificationService.instance.updateLastCheckedDeviceToken();
     AccountDeviceDetails accountDeviceDetails =
         AccountDeviceDetails.getDefault();
-    if (Platform.isAndroid) {
+    if (kIsWeb) {
+      accountDeviceDetails = AccountDeviceDetails()
+        ..accountDeviceOs = AccountDeviceOS.WEB
+        ..deviceToken =
+            PushNotificationService.instance.getLastCheckedDeviceToken();
+    } else if (Platform.isAndroid) {
       accountDeviceDetails = AccountDeviceDetails()
         ..accountDeviceOs = AccountDeviceOS.ANDROID
         ..deviceToken =
@@ -168,12 +189,12 @@ class PushNotificationService {
       accountDeviceDetails = AccountDeviceDetails()
         ..accountDeviceOs = AccountDeviceOS.WINDOWS
         ..deviceToken =
-        PushNotificationService.instance.getLastCheckedDeviceToken();
+            PushNotificationService.instance.getLastCheckedDeviceToken();
     } else if (Platform.isLinux) {
       accountDeviceDetails = AccountDeviceDetails()
         ..accountDeviceOs = AccountDeviceOS.LINUX
         ..deviceToken =
-        PushNotificationService.instance.getLastCheckedDeviceToken();
+            PushNotificationService.instance.getLastCheckedDeviceToken();
     }
     return accountDeviceDetails;
   }

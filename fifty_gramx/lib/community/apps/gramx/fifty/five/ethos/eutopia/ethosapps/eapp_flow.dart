@@ -3,11 +3,10 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/portfolio_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/landing_page.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -40,42 +39,51 @@ class EappFlow {
 
     if (communityCode == 50 && title == 'identity') {
       index = 1;
-      appTitle = "Ethos Identity";
+      appTitle = "Identity";
       iconData = FeatherIcons.user;
       firstPage = WebViewPage(index: 1, containingFlowTitle: appTitle);
     } else if (communityCode == 50 && title == 'conversations') {
       index = 2;
-      appTitle = "Ethos Conversations";
+      appTitle = "Conversations";
       iconData = FeatherIcons.messageCircle;
-      firstPage = ConversationsHomePage(index: index, containingFlowTitle: appTitle,);
+      firstPage = ConversationsHomePage(
+        index: index,
+        containingFlowTitle: appTitle,
+      );
     } else if (communityCode == 50 && title == 'connections') {
       index = 3;
-      appTitle = "Ethos Connections";
+      appTitle = "Connections";
       iconData = FeatherIcons.users;
       firstPage = ConnectionsHomePage(index: index);
     } else if (communityCode == 50 && title == 'knowledge_spaces') {
       index = 4;
-      appTitle = "Ethos Knowledge";
+      appTitle = "Knowledge";
       iconData = FeatherIcons.shield;
       firstPage = SpacesHomePage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 52 && title == 'pay') {
       index = 5;
-      appTitle = "Ethos Pay";
+      appTitle = "Pay";
       iconData = FeatherIcons.dollarSign;
       firstPage = EthosCoinConfigurationPage();
     } else if (communityCode == 70 && title == 'pods') {
       index = 6;
-      appTitle = "Ethos Pods";
+      appTitle = "Pods";
       iconData = FeatherIcons.box;
-      firstPage =
-          EthosPodConfigurationPage(index: index, containingFlowTitle: title);
+      firstPage = EthosPodConfigurationPage(
+          index: index, containingFlowTitle: appTitle);
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'entities') {
+      index = 7001;
+      appTitle = "Entities";
+      iconData = FeatherIcons.anchor;
+      firstPage = AddEntityPage(
+          index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 88 && title == 'connect') {
       index = 7;
       appTitle = "Patel";
       iconData = FeatherIcons.messageCircle;
-      firstPage =
-          BotPressConversationsPage(index: index, containingFlowTitle: title);
+      firstPage = BotPressConversationsPage(
+          index: index, containingFlowTitle: appTitle);
     } else {
       index = 999;
       appTitle = "50GRAMx Boundaries";

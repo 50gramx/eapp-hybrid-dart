@@ -26,6 +26,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -42,6 +43,9 @@ class StartScreen extends StatefulWidget {
 class _StartScreenState extends State<StartScreen> {
   getStartedButtonOnPressed() async {
     print("getStartedButtonOnPressed");
+    if (kIsWeb) {
+      pushToGetStartedWidget();
+    } 
     if (Platform.isAndroid || Platform.isIOS) {
       print("android or ios");
       if (await Permission.contacts.request().isGranted) {
