@@ -52,6 +52,8 @@ class MultipassCommands {
     // package path is defined as per the os
     if (Platform.isMacOS) {
       _packagePath = "/usr/local/bin/$_packageName";
+    } else if (Platform.isWindows) {
+      _packagePath = "$_packageName";
     } // todo: add packagePath for windows, linux flavours
 
     // vmName is same in all base os, so no checks needed
