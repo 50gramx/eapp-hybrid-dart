@@ -1,7 +1,10 @@
 // operates the launch commands for multipass package
 //
 // needs [String] packagePath and [String] vmName as initializers
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 
 class MultipassLaunchCommands {
   MultipassLaunchCommands._();
@@ -33,11 +36,17 @@ class MultipassLaunchCommands {
     String command = "${_baseCommandSpace}"
         "focal "
         "--name ${_vmName} "
-        "--mem ${memoryInGB}G "
+        "--memory ${memoryInGB}G "
         "--cpus ${cpuCoreCount} "
         "--disk ${diskSpaceInGB}G";
     print("command: $command");
     // run the command
-    await PrivilegedCommandExecuter.run(command);
+    if (Platform.isWindows) {
+      print("running launch vm on Windows");
+      await SimpleCommandExecuter.run("multipass list");
+      await SimpleCommandExecuter.run(command);
+    } else if (Platform.isMacOS || Platform.isLinux){
+      await PrivilegedCommandExecuter.run(command);
+    }
   }
 }
