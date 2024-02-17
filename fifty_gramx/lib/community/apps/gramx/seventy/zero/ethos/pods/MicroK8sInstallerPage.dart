@@ -7,7 +7,9 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -78,8 +80,8 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                     EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
                 child:
                     FormInfoText("The lightweight Kubernetes").build(context)),
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<double>(
+              future: HostMachineData().processorCount(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -106,8 +108,8 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                 }
               },
             ),
-            FutureBuilder<MacOsDeviceInfo>(
-              future: getDeviceInfo(),
+            FutureBuilder<double>(
+              future: HostMachineData().memoryGiBs(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -116,9 +118,8 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   var minMemory = 1.0;
                   // keeping 0.25 GB of memory for base os
                   // todo: ensure this conversion is for GB only
-                  var maxMemory =
-                      getBytesAndSuffix(snap.data!.memorySize, 0)[0].toInt() -
-                          0.25;
+
+                  var maxMemory = snap.data! - 2.0;
                   // keeping one division less than total memory
                   var memoryDivisions = (maxMemory - 1).toInt();
                   return NeuSliderWidget(
