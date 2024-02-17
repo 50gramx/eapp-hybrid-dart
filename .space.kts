@@ -175,7 +175,7 @@ job("Build and publish bundle to web track") {
         }
     }
 
-    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:1.0.11") {
+    container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
 
         shellScript {
