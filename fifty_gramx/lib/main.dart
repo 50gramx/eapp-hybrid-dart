@@ -19,7 +19,6 @@
  * /
  */
 
-import 'dart:html' as html;
 import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
@@ -39,22 +38,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'firebase_options.dart';
-
-void createScriptElement(String titleText) {
-  // Find the existing title element
-  html.TitleElement title =
-      html.document.getElementsByTagName('title').first as html.TitleElement;
-
-  // If it doesn't exist, create a new one and append it to the head
-  if (title == null) {
-    title = html.TitleElement();
-    html.document.head?.append(title);
-  }
-
-  html.document.head?.append(title);
-
-  title.text = titleText;
-}
 
 /// Entry point of the 50gramx Flutter application.
 void main() async {
@@ -149,9 +132,6 @@ class MyApp extends StatelessWidget {
                                 if (envSnap.data == "com.50gramx") {
                                   return StartScreen();
                                 } else {
-                                  if (kIsWeb) {
-                                    createScriptElement(envSnap.data!);
-                                  }
                                   return HomeScreen();
                                 }
                               } else {
