@@ -137,8 +137,8 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                 }
               },
             ),
-            FutureBuilder<List>(
-              future: getAvailableDiskSpace(),
+            FutureBuilder<double>(
+              future: HostMachineData().diskSpaceGiBs(),
               builder: (context, snap) {
                 if (snap.connectionState == ConnectionState.waiting) {
                   return AppProgressIndeterminateWidget();
@@ -146,12 +146,12 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   // minimum 7GB is needed
                   double minDisk = 7.0;
                   // maximum disk should leave 2GB for base os operations
-                  double maxDisk = snap.data![0] - 2.0;
+                  double maxDisk = snap.data! - 2.0;
                   // disk divisions should be calculated in 10s of GBs
                   int diskDivisions = maxDisk ~/ 10 - 1;
                   return NeuSliderWidget(
                     sliderFor: "Disk",
-                    sliderValue: "${selectedDiskSpace} ${snap.data![1]}",
+                    sliderValue: "${selectedDiskSpace} GB",
                     value: selectedDiskSpace,
                     min: minDisk,
                     max: maxDisk,
