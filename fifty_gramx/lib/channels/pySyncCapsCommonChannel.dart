@@ -19,10 +19,9 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/grpcChannelBuilder.dart';
+import 'package:fifty_gramx/channels/grpcChannelBuilder.dart'
+    if (dart.library.html) 'package:fifty_gramx/channels/grpcWebChannelBuilder.dart';
 import 'package:flutter/foundation.dart';
-import 'package:grpc/grpc.dart';
-import 'package:grpc/grpc_web.dart';
 
 class PySyncCapsCommonChannel {
   static dynamic _pySyncCapsCommonChannel;
@@ -41,15 +40,17 @@ class PySyncCapsCommonChannel {
     // final web_channel = GrpcWebClientChannel.xhr(Uri.parse('http://122.166.150.115:50503'));
     //   final web_client = AccessAccountServiceClient(web_channel);
     var channel;
-
+    var uri;
+    var port = 443;
     if (kIsWeb) {
       print('is web');
-      channel =
-          GrpcWebClientChannel.xhr(Uri.parse('https://capabilities.atlas.starflare.bangalore.in.networks.50gramx.com'));
+      uri =
+          "https://capabilities.atlas.starflare.bangalore.in.networks.50gramx.com";
     } else {
-      channel = await grpcChannelBuilder("122.166.150.115", 50501);
+      uri = '122.166.150.115';
+      port = 50501;
     }
-
+    channel = await grpcChannelBuilder(uri, port);
     print("returning ${channel.runtimeType}");
     return channel;
   }
