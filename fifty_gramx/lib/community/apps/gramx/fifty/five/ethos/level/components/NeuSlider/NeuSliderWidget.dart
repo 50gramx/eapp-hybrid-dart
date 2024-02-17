@@ -71,6 +71,8 @@ class _NeuSliderWidgetState extends State<NeuSliderWidget> {
             ),
           ),
           child: Slider(
+            activeColor: AppColors.contentSecondary(context),
+            inactiveColor: AppColors.contentInverseSecondary(context),
             onChanged: widget.onChanged,
             min: widget.min,
             max: widget.max,
