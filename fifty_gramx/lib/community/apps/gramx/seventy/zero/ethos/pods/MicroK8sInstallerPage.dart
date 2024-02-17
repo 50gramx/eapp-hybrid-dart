@@ -90,7 +90,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   // minimum one core is needed
                   var minCores = 1.0;
                   // keeping one cpu for base os
-                  var maxCores = snap.data!.activeCPUs.toDouble() - 1;
+                  var maxCores = snap.data!;
                   // keeping one division less than total core
                   var coreDivisions = maxCores.toInt() - 1;
                   return NeuSliderWidget(
