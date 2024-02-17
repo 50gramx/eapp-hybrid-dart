@@ -26,7 +26,7 @@ class _AddEntityPageState extends State<AddEntityPage> {
   String aboutEntity = '';
   List<Map<String, String>> contractParameters = [];
 
-  // Options for entity types
+  // Options for entity type
   final List<String> entityTypeOptions = ['Message', 'Enum'];
 
   // Method to handle submission of the entity creation form
