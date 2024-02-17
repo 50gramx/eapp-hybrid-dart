@@ -72,7 +72,7 @@ class _DiscoverSpaceKnowledgeDomainFilesPageState
                             titleText:
                                 "${snap.data!.files[position].spaceKnowledgeDomainFileName}",
                             subtitleText:
-                                "${snap.data!.files[position].spaceKnowledgeDomainFileExtensionType}",
+                                "${snap.data!.files[position].createdAt}",
                             selectorCallback: () {
                               deleteSpaceKnowledgeDomainFile(
                                   snap.data!.files[position]);
