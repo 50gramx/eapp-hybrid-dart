@@ -82,7 +82,7 @@ dependencies:
   # A parser for YAML.
   yaml: ^3.1.2
   # This Flutter plugin provides an API for querying information about an application package.
-  package_info_plus: ^5.0.1
+  package_info_plus: ^4.2.0
   eapp_dart_domain:
     hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
     version: ^24.1.102
