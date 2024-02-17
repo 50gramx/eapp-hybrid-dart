@@ -319,7 +319,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 } else {
                   return BasicConfigurationItem(
                       titleText: "Processor",
-                      subtitleText: snap.data!);
+                      subtitleText: "${snap.data!}");
                 }
               },
             ),
@@ -331,7 +331,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 } else {
                   return BasicConfigurationItem(
                       titleText: "Memory",
-                      subtitleText: snap.data!);
+                      subtitleText: "${snap.data!}");
                 }
               },
             ),
