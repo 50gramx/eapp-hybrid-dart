@@ -177,6 +177,7 @@ job("Build and publish bundle to web track") {
 
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
+        env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
 
         shellScript {
             content = """
@@ -185,7 +186,7 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=${"$"}PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
           """
         }
 
@@ -233,6 +234,7 @@ job("Build and publish bundle to android internal track") {
         env["KEY_STORE_PASSWORD"] = Secrets("PLAY_KEY_STORE_PASSWORD")
         env["KEY_PASSWORD"] = Secrets("PLAY_KEY_PASSWORD")
         env["KEY_ALIAS"] = Params("PLAY_KEY_ALIAS")
+        env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
 
         shellScript {
             content = """
@@ -257,7 +259,7 @@ job("Build and publish bundle to android internal track") {
                 
                 echo "fix dependencies"
                 flutter pub get && flutter pub cache repair
-                dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
+                dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=${"$"}PACKGAGES_READ_TOKEN
                 
                 echo "Build the app bundle"
                 flutter build appbundle
