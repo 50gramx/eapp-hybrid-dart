@@ -3,7 +3,7 @@ description: Your. Unified. Simple. Secure. Internet.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 23.11.5
+version: 24.11.13
 
 environment:
   sdk: ">=3.0.6"
@@ -27,7 +27,7 @@ dependencies:
   grpc: ^3.0.0
   protobuf: ^3.0.0
   shared_preferences: ^2.2.2
-  firebase_core: ^2.23.0
+  firebase_core: ^2.24.2
   firebase_messaging: ^14.7.5
   firebase_crashlytics: ^3.4.5
   firebase_performance_platform_interface: ^0.1.4+13
@@ -81,6 +81,11 @@ dependencies:
   universal_disk_space: ^0.2.3
   # A parser for YAML.
   yaml: ^3.1.2
+  # This Flutter plugin provides an API for querying information about an application package.
+  package_info_plus: ^4.2.0
+  eapp_dart_domain:
+    hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
+    version: ^24.1.102
 
 flutter_icons:
   android: "launcher_icon"
@@ -95,13 +100,11 @@ dev_dependencies:
   flutter_gherkin: ^2.0.0
   msix: ^3.16.7
 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -133,9 +136,7 @@ flutter:
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     # 70GRAMx
     # 70GRAMx Ethos
-    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/homebrew.sh
-    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/install.sh
-    - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/installMultipass.sh
+    # - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/
     #     multiverse resources
     #       cluster resources
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/cluster/
@@ -147,6 +148,7 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/ethosapps.yaml
     # 70 ethos pods app assets
     - lib/community/apps/gramx/seventy/zero/ethos/pods/
+    - lib/community/apps/gramx/seventy/zero/ethos/entities/
     # 88 community eapp common-assets
     - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
     # 88 ethos connect app assets
@@ -211,4 +213,4 @@ msix_config:
   #  vs_generated_images_folder_path: C:\<PathToFolder>\icons
   #  icons_background_color: transparent
   architecture: x64
-  capabilities: 'internetClient,microphone'
+  capabilities: "internetClient,microphone"

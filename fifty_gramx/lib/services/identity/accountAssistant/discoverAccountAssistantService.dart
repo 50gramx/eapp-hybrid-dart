@@ -19,12 +19,11 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/identityCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account_assistant/discover_account_assistant.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account_assistant/discover_account_assistant.pbgrpc.dart';
 
 class DiscoverAccountAssistantService {
   // Client declarations here
@@ -36,7 +35,7 @@ class DiscoverAccountAssistantService {
   static Future<DiscoverAccountAssistantServiceClient>
       get serviceClient async =>
           _serviceClient ??= DiscoverAccountAssistantServiceClient(
-              await IdentityCommonChannel.identityChannel);
+              await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("DiscoverAccountService:dispose");

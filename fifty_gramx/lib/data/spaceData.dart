@@ -19,17 +19,13 @@
  * /
  */
 
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/space/access_space.pb.dart';
-import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/space/access_space.pb.dart';
 import 'package:fifty_gramx/services/identity/space/accessSpaceService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpaceData {
-
   saveSpace(Space space) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString('space', space.writeToJson());
@@ -70,8 +66,7 @@ class SpaceData {
     final prefs = await SharedPreferences.getInstance();
     saveSpace(spaceServicesAccessAuthDetails.space);
     saveSpaceServicesAccessSessionTokenDetails(
-        spaceServicesAccessAuthDetails
-            .spaceServicesAccessSessionTokenDetails);
+        spaceServicesAccessAuthDetails.spaceServicesAccessSessionTokenDetails);
     // TODO: remove this, modify read services
     prefs.setString('spaceServicesAccessAuthDetails',
         spaceServicesAccessAuthDetails.writeToJson());
@@ -92,9 +87,10 @@ class SpaceData {
     if (validateSpaceServicesResponse.spaceServiceAccessValidationDone ==
         false) {
       var spaceAccessTokenResponse =
-      await AccessSpaceService.spaceAccessToken();
+          await AccessSpaceService.spaceAccessToken();
       if (spaceAccessTokenResponse.spaceServicesAccessDone) {
-        saveSpaceServicesAccessAuthDetails(spaceAccessTokenResponse.spaceServicesAccessAuthDetails);
+        saveSpaceServicesAccessAuthDetails(
+            spaceAccessTokenResponse.spaceServicesAccessAuthDetails);
         return spaceAccessTokenResponse.spaceServicesAccessAuthDetails;
       } else {
         return SpaceServicesAccessAuthDetails.getDefault();

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 
 class MultiverseIngressOperator {
@@ -26,9 +28,11 @@ class MultiverseIngressOperator {
 
   Future<bool> checkPodStatus() async {
     // check the pod status of controller
-    _multiverseIngress["podRunning"] = await KubectlCommands
+    if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
+      _multiverseIngress["podRunning"] = await KubectlCommands
         .get.namespaced.deployment
         .multiverseIngressControllerStatus();
+    }
     return _multiverseIngress["podRunning"];
   }
 

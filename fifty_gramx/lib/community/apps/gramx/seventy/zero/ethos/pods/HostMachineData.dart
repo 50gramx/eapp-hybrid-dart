@@ -216,6 +216,7 @@ class HostMachineData {
   }
 
   Future<String> diskSpace() async {
+    print("diskSpace");
     final diskSpace = DiskSpace();
     // scan for disks in the system
     await diskSpace.scan();

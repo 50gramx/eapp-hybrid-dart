@@ -6,8 +6,8 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/MobileNumberTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/access_account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';

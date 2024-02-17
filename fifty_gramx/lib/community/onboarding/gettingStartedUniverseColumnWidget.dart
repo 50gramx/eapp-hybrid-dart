@@ -19,6 +19,9 @@
  * /
  */
 
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/access_account.pbgrpc.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/create_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/DateTimeField/DateOfBirthField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/dropDownButton.dart';
@@ -28,23 +31,15 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pbenum.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/access_account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/create_account.pb.dart';
-import 'package:fifty_gramx/services/contacts/contactService.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class GettingStartedUniverseColumnWidget extends StatefulWidget {
@@ -455,6 +450,7 @@ class _GettingStartedUniverseColumnWidgetState
 
   // Universe : Horizontal Nav
   increaseUniverseHorizontalNav() {
+    print("increaseUniverseHorizontalNav: $universeHorizontalNavIndex");
     setState(() {
       universeHorizontalNavIndex += 1;
     });
@@ -493,25 +489,35 @@ class _GettingStartedUniverseColumnWidgetState
       activeUniverseSecondaryButton();
     } else if (universeHorizontalNavIndex == 1) {
       if (!universeHorizontalNavPrimaryButtonDisabled[1]) {
+        setState(() {
+          universeHorizontalNavPrimaryButtonDisabled[1] = true;
+        });
         await validateAccount();
         if (validateAccountResponse.accountExists) {
-          if (kIsWeb) {
-            setState(() {
-              webSignInEvent = true;
-              universeHorizontalNavPrimaryButtonDisabled[1] = true;
-            });
-          } else {
-            increaseUniverseHorizontalNav();
-          }
+          // if (kIsWeb) {
+          //   setState(() {
+          //     webSignInEvent = true;
+          //     universeHorizontalNavPrimaryButtonDisabled[1] = true;
+          //   });
+          // } else {
+          //   increaseUniverseHorizontalNav();
+          // }
+          increaseUniverseHorizontalNav();
         } else {
           print("account doesn't exists");
           if (kIsWeb) {
             await validateAccountWithMobile();
-            increaseUniverseHorizontalNav();
+            if (validateAccountWithMobileResponse
+                .validateAccountWithMobileDone) {
+              increaseUniverseHorizontalNav();
+            }
           } else {
             print("platform is not web");
             await validateAccountWithMobile();
-            increaseUniverseHorizontalNav();
+            if (validateAccountWithMobileResponse
+                .validateAccountWithMobileDone) {
+              increaseUniverseHorizontalNav();
+            }
             // TODO: Uncomment to disable sign up via apps
             // setState(() {
             //   universeHorizontalNavPrimaryButtonDisabled[1] = true;
@@ -538,8 +544,12 @@ class _GettingStartedUniverseColumnWidgetState
             if ((await AccountData().readAccount()).accountBillingActive) {
               // checking if the billing is not active
               // todo: load local services here
-              pushToHomeScreenWidget();
+              print("will pushToHomeScreenWidget");
+              // pushToHomeScreenWidget();
+              print("will set state");
               setState(() {});
+              print("done set state");
+              widget.completedSelectingUniverseCallback();
             } else {
               // pushing the account to complete tier selection
               widget.completedSelectingUniverseCallback();
@@ -597,21 +607,26 @@ class _GettingStartedUniverseColumnWidgetState
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
       print("will push");
-      pushToHomeScreenWidget();
-      setState(() {});
+      widget.completedSelectingUniverseCallback();
+      // pushToHomeScreenWidget();
+      // setState(() {});
     }
   }
 
   // Universe Helper functions
   validateAccount() async {
+    print("validateAccount");
     validateAccountResponse = await AccessAccountService.validateAccount(
         selectedCountryCode, mobileNumberTextFieldController.text);
+    print("validateAccount.validateAccountResponse: $validateAccountResponse");
   }
 
   validateAccountWithMobile() async {
+    print("validateAccountWithMobile");
     validateAccountWithMobileResponse =
         await CreateAccountService.validateAccountWithMobile(
             selectedCountryCode, mobileNumberTextFieldController.text);
+    print("validateAccountWithMobile: $validateAccountWithMobileResponse");
   }
 
   verifyAccount() async {
@@ -704,8 +719,9 @@ class _GettingStartedUniverseColumnWidgetState
   }
 
   pushToHomeScreenWidget() async {
+    print("pushToHomeScreenWidget");
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => WebViewPage(index: 1, containingFlowTitle: "Identity")));
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
     // await LocalServices().loadLocalServices();
   }
 }

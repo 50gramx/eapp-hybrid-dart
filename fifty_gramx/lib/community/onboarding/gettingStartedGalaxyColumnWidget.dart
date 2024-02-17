@@ -22,25 +22,20 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/galaxy.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/galaxy.pb.dart';
-import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
-import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
-import 'package:fifty_gramx/services/payments/spaceTierPayments.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/tierSelectionWidget.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
+import 'package:fifty_gramx/services/payments/ethosCoinPayments.dart';
+import 'package:fifty_gramx/services/payments/spaceTierPayments.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-//import for SkuDetailsWrapper
-import 'package:in_app_purchase_android/billing_client_wrappers.dart';
-//import for GooglePlayProductDetails
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 
 class GettingStartedGalaxyColumnWidget extends StatefulWidget {
   const GettingStartedGalaxyColumnWidget(
@@ -244,7 +239,7 @@ class _GettingStartedGalaxyColumnWidgetState
     setState(() {
       galaxyHorizontalNavPrimaryButtonDisabled[0] = false;
     });
-    checkBillingActive();
+    // checkBillingActive();
 
     if (Platform.isAndroid) {
       final Stream<List<PurchaseDetails>> purchaseUpdated =

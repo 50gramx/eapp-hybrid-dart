@@ -19,6 +19,7 @@
  * /
  */
 
+import 'dart:html' as html;
 import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
@@ -28,6 +29,10 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
+import 'package:fifty_gramx/community/onboarding/startScreen.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/environment.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -35,17 +40,29 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'firebase_options.dart';
 
+void createScriptElement(String titleText) {
+  // Find the existing title element
+  html.TitleElement title =
+      html.document.getElementsByTagName('title').first as html.TitleElement;
+
+  // If it doesn't exist, create a new one and append it to the head
+  if (title == null) {
+    title = html.TitleElement();
+    html.document.head?.append(title);
+  }
+
+  html.document.head?.append(title);
+
+  title.text = titleText;
+}
+
 /// Entry point of the 50gramx Flutter application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   print("App is starting...");
-
   // Firebase not available for windows, linux at the moment
   // Firebase is not enabled for web at the moment
-  if (kIsWeb || Platform.isWindows || Platform.isLinux) {
-    print("Platform is not supported, not initialising Firebase");
-    //   not doing anything
-  } else {
+  if (kIsWeb || Platform.isAndroid || Platform.isIOS) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -65,6 +82,9 @@ void main() async {
       print("recordError: ${error}, ${stack}");
       return true;
     };
+  } else {
+    print("Platform is not supported, not initialising Firebase");
+    //   not doing anything
   }
 
   runApp(MyApp());
@@ -97,39 +117,78 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget progress = Scaffold(
+      body: Center(
+        child: AppProgressIndeterminateWidget(),
+      ),
+    );
+    LocalServices().notifications();
     return NeumorphicApp(
-      debugShowCheckedModeBanner: false,
-      title: Constants.appName,
-      theme: lightThemeData,
-      darkTheme: darkThemeData,
-      themeMode: ThemeMode.system,
-      home: SafeArea(
-        child: FutureBuilder<void>(
+        debugShowCheckedModeBanner: false,
+        title: Constants.appName,
+        theme: lightThemeData,
+        darkTheme: darkThemeData,
+        themeMode: ThemeMode.system,
+        home: FutureBuilder<void>(
           future: initializeApp(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               print("App initialization completed."); // Add a log statement
-              return HomeScreen();
+              return FutureBuilder<bool>(
+                  future: AccountData().accountPresent(),
+                  builder: (context, presentData) {
+                    if (presentData.connectionState == ConnectionState.done) {
+                      if (presentData.data == true) {
+                        return HomeScreen();
+                      } else {
+                        return FutureBuilder<String>(
+                            future: Environment.current(),
+                            builder: (context, envSnap) {
+                              if (envSnap.connectionState ==
+                                  ConnectionState.done) {
+                                if (envSnap.data == "com.50gramx") {
+                                  return StartScreen();
+                                } else {
+                                  if (kIsWeb) {
+                                    createScriptElement(envSnap.data!);
+                                  }
+                                  return HomeScreen();
+                                }
+                              } else {
+                                return progress;
+                              }
+                            });
+                      }
+                    } else {
+                      return progress;
+                    }
+                  });
             } else {
-              return Scaffold(
-                body: Center(
-                  child: AppProgressIndeterminateWidget(),
-                ),
-              );
+              return progress;
             }
           },
-        ),
-      ),
-    );
+        ));
   }
 
   /// Initializes the application.
   Future<void> initializeApp() async => await (() async {
-        if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+        print("debug: initializeApp");
+        // Create a stopwatch and start it
+        print("will start stopwatch");
+        final stopwatch = Stopwatch()..start();
+        print("started stopwatch");
+        if (!kIsWeb &&
+            (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
+          print("will start platform services");
           initializePlatformServices();
         }
+        print("debug: will start EthosAppFlowBob");
         EthosAppFlowBob();
         print("EthosAppFlowBob initialized.");
+        // Stop the stopwatch
+        stopwatch.stop();
+        print(
+            'Time elapsed to initializeApp: ${stopwatch.elapsedMilliseconds} ms');
       })();
 
   /// Initializes platform-specific services.

@@ -20,18 +20,14 @@
  */
 
 import 'package:bubble/bubble.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/receive_account_message.pb.dart';
-import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/BubbleStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/conversations/messages/conversationsMessagesListItem.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:intl/intl.dart';
 
 /// A ListItem that contains data to display a heading.
 class AccountConversationsMessagesReceivedListItem

@@ -1,11 +1,10 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressHeadingListTile.dart';
-import 'package:fifty_gramx/community/onboarding/gettingStartedGalaxyColumnWidget.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
-import 'package:flutter/foundation.dart';
+import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -27,12 +26,14 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   final selectingUniverseHeadingKey = new GlobalKey();
 
   completedSelectingUniverseCallback() async {
+    print("completedSelectingUniverseCallback");
     setState(() {
       // update to select galaxy
       isSelectingCountry = false;
       isCountrySelected = true;
       isSelectingGalaxy = true;
     });
+    pushToHomeScreenWidget();
   }
 
   bool isGalaxySelected = false;
@@ -40,6 +41,12 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   final selectingGalaxyHeadingKey = new GlobalKey();
 
   // Helper functions
+  pushToHomeScreenWidget() async {
+    print("pushToHomeScreenWidget");
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    // await LocalServices().loadLocalServices();
+  }
 
   @override
   void initState() {
@@ -50,7 +57,6 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
     if (widget.isAccountLoggedIn) {
       completedSelectingUniverseCallback();
     }
-
 
     super.initState();
   }
@@ -113,7 +119,7 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                 //   key: selectingGalaxyHeadingKey,
                 //   isHeadingActive: isSelectingGalaxy,
                 //   isProgressed: isGalaxySelected,
-                //   headingTitle: "Confirming Tier",
+                //   headingTitle: "Confirming eGalaxy",
                 //   isLastMostTile: true,
                 // ),
                 // GettingStartedGalaxyColumnWidget(

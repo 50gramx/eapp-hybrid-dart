@@ -1,5 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuChip.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuToggleButton/domains/neuToggleSpaceKnowledgeDomainButtonContainer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuToggleButton/neuToggleButton.dart';

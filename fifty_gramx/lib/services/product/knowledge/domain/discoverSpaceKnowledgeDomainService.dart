@@ -19,13 +19,10 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/knowledgeCommonChannel.dart';
-import 'package:fifty_gramx/data/spaceKnowledgeData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/create_space_knowledge_domain.pbgrpc.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pbgrpc.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/accessSpaceKnowledgeDomainService.dart';
-import 'package:fifty_gramx/services/product/knowledge/space/accessSpaceKnowledgeService.dart';
 
 class DiscoverSpaceKnowledgeDomainService {
   // Client declarations here
@@ -37,7 +34,7 @@ class DiscoverSpaceKnowledgeDomainService {
   static Future<DiscoverSpaceKnowledgeDomainServiceClient>
       get serviceClient async =>
           _serviceClient ??= DiscoverSpaceKnowledgeDomainServiceClient(
-              await KnowledgeCommonChannel.knowledgeChannel);
+              await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("DiscoverSpaceKnowledgeDomainService:dispose");

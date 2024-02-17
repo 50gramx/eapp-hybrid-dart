@@ -6,7 +6,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 

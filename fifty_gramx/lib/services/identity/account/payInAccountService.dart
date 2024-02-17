@@ -19,11 +19,11 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/identityCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/galaxy.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/galaxy.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/generic.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/pay_in_account.pbgrpc.dart';
 
 class PayInAccountService {
   // Client declarations here
@@ -34,7 +34,7 @@ class PayInAccountService {
   // getting the client on the very first call
   static Future<PayInAccountServiceClient> get serviceClient async =>
       _serviceClient ??= PayInAccountServiceClient(
-          await IdentityCommonChannel.identityChannel);
+          await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("PayInAccountService:dispose");

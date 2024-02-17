@@ -1,19 +1,17 @@
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain_file.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain_file/create_space_knowledge_domain_file.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain_file.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/discover_space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain_file/create_space_knowledge_domain_file.pb.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/accessSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowledgeDomainService.dart';
 import 'package:fifty_gramx/services/product/knowledge/file/createSpaceKnowledgeDomainFileService.dart';
 import 'package:fifty_gramx/services/product/knowledge/file/deleteSpaceKnowledgeDomainFileService.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
-import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.

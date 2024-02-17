@@ -19,10 +19,10 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/knowledgeCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain/create_space_knowledge_domain.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/spaceKnowledgeData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/knowledge/space_knowledge_domain/create_space_knowledge_domain.pbgrpc.dart';
 
 class CreateSpaceKnowledgeDomainService {
   // Client declarations here
@@ -34,7 +34,7 @@ class CreateSpaceKnowledgeDomainService {
   static Future<CreateSpaceKnowledgeDomainServiceClient>
       get serviceClient async =>
           _serviceClient ??= CreateSpaceKnowledgeDomainServiceClient(
-              await KnowledgeCommonChannel.knowledgeChannel);
+              await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
     print("CreateSpaceKnowledgeDomainService:dispose");

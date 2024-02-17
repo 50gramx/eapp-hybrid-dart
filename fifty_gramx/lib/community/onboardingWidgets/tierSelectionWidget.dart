@@ -19,12 +19,9 @@
  * /
  */
 
-import 'dart:ui';
-
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/freeTierBenefitsCardItem.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/tierDropdownRichText.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -43,8 +40,8 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
 
   @override
   void initState() {
-    loadTierDetails();
     super.initState();
+    loadTierDetails();
   }
 
   List<ProductDetails> _tierDetails = [];
@@ -91,6 +88,16 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var itemList = _tierDetails.map<DropdownMenuItem<String>>(
+            (ProductDetails _tierDetail) {
+          return DropdownMenuItem<String>(
+            value: _tierDetail.title
+                .substring(0, _tierDetail.title.length - 8),
+            child: _tierDetailsRichTexts[_tierDetail.title
+                .substring(0, _tierDetail.title.length - 8)]!,
+          );
+        }).toList();
+    print("itemList: $itemList");
     return Column(
       children: [
         Neumorphic(
@@ -238,15 +245,7 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
                             onTierChange(newValue!);
                           });
                         },
-                        items: _tierDetails.map<DropdownMenuItem<String>>(
-                            (ProductDetails _tierDetail) {
-                          return DropdownMenuItem<String>(
-                            value: _tierDetail.title
-                                .substring(0, _tierDetail.title.length - 8),
-                            child: _tierDetailsRichTexts[_tierDetail.title
-                                .substring(0, _tierDetail.title.length - 8)]!,
-                          );
-                        }).toList(),
+                        items: itemList,
                       ),
                     ),
                   ),
@@ -287,7 +286,15 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
     }
   }
 
+  Future<ProductDetailsResponse> getProductDetails(String _kId) async {
+    ProductDetailsResponse productDetails =
+        await _inAppPurchase.queryProductDetails([_kId].toSet());
+    print("productDetails: ${productDetails.productDetails}");
+    return productDetails;
+  }
+
   loadTierDetails() async {
+    print("loadTierDetails");
     Set<String> _kIds = <String>{
       "50gramx.space.tier.starter",
       "50gramx.space.tier.basic",
@@ -295,9 +302,8 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
       "50gramx.space.tier.professional",
     }.toSet();
     for (var _kId in _kIds) {
-      _tierDetails.addAll(
-          (await _inAppPurchase.queryProductDetails([_kId].toSet()))
-              .productDetails);
+      print("for ${_kId}");
+      _tierDetails.addAll((await getProductDetails(_kId)).productDetails);
     }
 
     setState(() {

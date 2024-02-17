@@ -22,11 +22,11 @@
 import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -42,9 +42,24 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   getStartedButtonOnPressed() async {
+    print("getStartedButtonOnPressed");
+    if (kIsWeb) {
+      pushToGetStartedWidget();
+    } 
     if (Platform.isAndroid || Platform.isIOS) {
+      print("android or ios");
       if (await Permission.contacts.request().isGranted) {
+        print("android or ios");
         pushToGetStartedWidget();
+      } else if (await Permission.contacts.isPermanentlyDenied) {
+        // The user opted to never again see the permission request dialog for this
+        // app. The only way to change the permission's status now is to let the
+        // user manually enables it in the system settings.
+        openAppSettings();
+      } else {
+        print(await Permission.contacts.status);
+        await Permission.contacts.request();
+        print("contacts permissions not granted");
       }
     } else if (Platform.isWindows) {
       pushToGetStartedWidget();
@@ -82,7 +97,24 @@ class _StartScreenState extends State<StartScreen> {
           ? Brightness.light
           : Brightness.dark,
     ));
+    checkIfUserSigned();
     super.initState();
+  }
+
+  bool signedIn = false;
+
+  checkIfUserSigned() async {
+    // Create a stopwatch and start it
+    final stopwatch = Stopwatch()..start();
+
+    signedIn = await AccountData().accountAvailable();
+
+    // Stop the stopwatch
+    stopwatch.stop();
+
+    // Print the elapsed time in milliseconds
+    print(
+        'Time elapsed to check accountAvailable: ${stopwatch.elapsedMilliseconds} ms');
   }
 
   @override
@@ -170,7 +202,7 @@ class _StartScreenState extends State<StartScreen> {
                                                 bottom: 4),
                                             child: RichText(
                                               text: TextSpan(
-                                                text: "iEthos",
+                                                text: "50GRAMx Ethosverse",
                                                 style: TextStyle(
                                                     color: AppColors
                                                         .contentPrimary(
@@ -199,7 +231,7 @@ class _StartScreenState extends State<StartScreen> {
                                             child: RichText(
                                               text: TextSpan(
                                                 text:
-                                                    "Allow iEthos to connect your contacts",
+                                                    "Collection of communities that share a common ethos and vision",
                                                 style: TextStyle(
                                                     color: AppColors
                                                         .contentSecondary(
@@ -280,7 +312,11 @@ class _StartScreenState extends State<StartScreen> {
 
   pushToGetStartedWidget() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => GetStartedWidget()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => GetStartedWidget(
+                  isAccountLoggedIn: signedIn,
+                )));
   }
 
   pushToHomeScreenWidget() {

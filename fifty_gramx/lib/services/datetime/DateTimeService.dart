@@ -19,7 +19,7 @@
  * /
  */
 
-import 'package:fifty_gramx/protos/google/protobuf/timestamp.pb.dart';
+import 'package:eapp_dart_domain/google/protobuf/timestamp.pb.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeService {

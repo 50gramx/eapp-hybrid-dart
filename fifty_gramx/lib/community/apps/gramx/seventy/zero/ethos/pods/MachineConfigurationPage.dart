@@ -12,7 +12,6 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMac
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostUserDetailsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MicroK8sInstallerPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
@@ -25,7 +24,6 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPag
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
-import 'package:universal_disk_space/universal_disk_space.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MachineConfigurationPage extends StatefulWidget {
@@ -43,7 +41,6 @@ Future<MacOsDeviceInfo> getDeviceInfo() async {
   return deviceInfo.macOsInfo;
 }
 
-
 Future<WindowsDeviceInfo> getWindowsDeviceInfo() async {
   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
   return deviceInfo.windowsInfo;
@@ -56,12 +53,142 @@ String formatBytes(int bytes, int decimals) {
   return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
 }
 
-
-
-
 class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   Future<bool> _MultiversePodOperatorfsOpPodStatus =
       MultiversePodOperator.fsOp.checkPodStatus();
+
+  buildMultiverseChainsIdentityPodStatusInteraction() {
+    return FutureBuilder<bool>(
+        future: MultiverseChainsOperator().checkPodStatus(allChains: true),
+        builder: (context, snapshotMultiverseChainsIdentityPodStatus) {
+          switch (snapshotMultiverseChainsIdentityPodStatus.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return AppProgressIndeterminateWidget();
+            case ConnectionState.done:
+              if (snapshotMultiverseChainsIdentityPodStatus.hasData) {
+                return SwitchConfigurationItem(
+                    titleText: "Identity Chains",
+                    switchValue:
+                        snapshotMultiverseChainsIdentityPodStatus.data!,
+                    switchOnChanged: (value) {
+                      if (!value) {
+                        // user requested to stop the pod
+                        MultiversePodOperator.xcOp.spinDown();
+                        setState(() {});
+                      } else {
+                        // user requested to start the pod
+                        MultiversePodOperator.xcOp.spinUp();
+                        setState(() {});
+                      }
+                    });
+              } else {
+                return SizedBox();
+              }
+            default:
+              return SizedBox();
+          }
+        });
+  }
+
+  buildMutliverseIngressPodStatusInteraction() {
+    return FutureBuilder<bool>(
+        future: MultiversePodOperator.inOp.checkPodStatus(),
+        builder: (context, snapshotMultiverseIngressPodStatus) {
+          switch (snapshotMultiverseIngressPodStatus.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.none:
+            case ConnectionState.active:
+              return AppProgressIndeterminateWidget();
+            case ConnectionState.done:
+              if (snapshotMultiverseIngressPodStatus.hasData) {
+                return SwitchConfigurationItem(
+                    titleText: "Multiverse Ingress",
+                    switchValue: snapshotMultiverseIngressPodStatus.data!,
+                    switchOnChanged: (value) {
+                      if (!value) {
+                        // user requested to stop the pod
+                        MultiversePodOperator.inOp.spinDown();
+                        setState(() {});
+                      } else {
+                        // user requested to start the pod
+                        MultiversePodOperator.inOp.spinUp();
+                        setState(() {});
+                      }
+                    });
+              } else {
+                return SizedBox();
+              }
+            default:
+              return SizedBox();
+          }
+        });
+  }
+
+  buildMultiverseIngressNamespaceBuilderInteraction() {
+    return FutureBuilder<bool>(
+      future:
+          KubectlCommands.get.namespaced.namespace.isMultiverseIngressExists(),
+      builder: (context, snapshotMultiverseIngressNamespace) {
+        switch (snapshotMultiverseIngressNamespace.connectionState) {
+          case ConnectionState.waiting:
+          case ConnectionState.none:
+          case ConnectionState.active:
+            return AppProgressIndeterminateWidget();
+          case ConnectionState.done:
+            {
+              if (snapshotMultiverseIngressNamespace.hasData) {
+                if (snapshotMultiverseIngressNamespace.data!) {
+                  // if the multiverse ingress namespace exists,
+                  // return the widget
+                  return buildMutliverseIngressPodStatusInteraction();
+                } else {
+                  // if not, then create the resource,
+                  // setState() after creating
+                  return FutureBuilder<bool>(
+                      future: KubectlCommands.apply.namespaced.namespace
+                          .multiverseIngress(),
+                      builder: (context, snapshotCreateResource) {
+                        switch (snapshotCreateResource.connectionState) {
+                          case ConnectionState.waiting:
+                          case ConnectionState.none:
+                          case ConnectionState.active:
+                            {
+                              return AppProgressIndeterminateWidget();
+                            }
+                          case ConnectionState.done:
+                            {
+                              if (snapshotCreateResource.hasData) {
+                                if (snapshotCreateResource.data!) {
+                                  return buildMutliverseIngressPodStatusInteraction();
+                                } else {
+                                  return Text(
+                                      "Couldn't create multiverse-ingress resource");
+                                }
+                              } else {
+                                return SizedBox();
+                              }
+                            }
+                          default:
+                            {
+                              return SizedBox();
+                            }
+                        }
+                      });
+                }
+              } else {
+                return SizedBox();
+              }
+            }
+          default:
+            {
+              return SizedBox();
+            }
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,148 +233,27 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               return SizedBox();
           }
         });
-    var multiverseChainsIdentityPodStatusInteraction = FutureBuilder<bool>(
-        future: MultiverseChainsOperator().checkPodStatus(allChains: true),
-        builder: (context, snapshotMultiverseChainsIdentityPodStatus) {
-          switch (snapshotMultiverseChainsIdentityPodStatus.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-            case ConnectionState.active:
-              return AppProgressIndeterminateWidget();
-            case ConnectionState.done:
-              if (snapshotMultiverseChainsIdentityPodStatus.hasData) {
-                return SwitchConfigurationItem(
-                    titleText: "Identity Chains",
-                    switchValue:
-                        snapshotMultiverseChainsIdentityPodStatus.data!,
-                    switchOnChanged: (value) {
-                      if (!value) {
-                        // user requested to stop the pod
-                        MultiversePodOperator.xcOp.spinDown();
-                        setState(() {});
-                      } else {
-                        // user requested to start the pod
-                        MultiversePodOperator.xcOp.spinUp();
-                        setState(() {});
-                      }
-                    });
-              } else {
-                return SizedBox();
-              }
-            default:
-              return SizedBox();
-          }
-        });
 
-    var mutliverseIngressPodStatusInteraction = FutureBuilder<bool>(
-        future: MultiversePodOperator.inOp.checkPodStatus(),
-        builder: (context, snapshotMultiverseIngressPodStatus) {
-          switch (snapshotMultiverseIngressPodStatus.connectionState) {
-            case ConnectionState.waiting:
-            case ConnectionState.none:
-            case ConnectionState.active:
-              return AppProgressIndeterminateWidget();
-            case ConnectionState.done:
-              if (snapshotMultiverseIngressPodStatus.hasData) {
-                return SwitchConfigurationItem(
-                    titleText: "Multiverse Ingress",
-                    switchValue: snapshotMultiverseIngressPodStatus.data!,
-                    switchOnChanged: (value) {
-                      if (!value) {
-                        // user requested to stop the pod
-                        MultiversePodOperator.inOp.spinDown();
-                        setState(() {});
-                      } else {
-                        // user requested to start the pod
-                        MultiversePodOperator.inOp.spinUp();
-                        setState(() {});
-                      }
-                    });
-              } else {
-                return SizedBox();
-              }
-            default:
-              return SizedBox();
-          }
-        });
-
-    var multiverseIngressNamespaceBuilderInteraction = FutureBuilder<bool>(
-      future:
-          KubectlCommands.get.namespaced.namespace.isMultiverseIngressExists(),
-      builder: (context, snapshotMultiverseIngressNamespace) {
-        switch (snapshotMultiverseIngressNamespace.connectionState) {
-          case ConnectionState.waiting:
-          case ConnectionState.none:
-          case ConnectionState.active:
-            return AppProgressIndeterminateWidget();
-          case ConnectionState.done:
-            {
-              if (snapshotMultiverseIngressNamespace.hasData) {
-                if (snapshotMultiverseIngressNamespace.data!) {
-                  // if the multiverse ingress namespace exists,
-                  // return the widget
-                  return mutliverseIngressPodStatusInteraction;
-                } else {
-                  // if not, then create the resource,
-                  // setState() after creating
-                  return FutureBuilder<bool>(
-                      future: KubectlCommands.apply.namespaced.namespace
-                          .multiverseIngress(),
-                      builder: (context, snapshotCreateResource) {
-                        switch (snapshotCreateResource.connectionState) {
-                          case ConnectionState.waiting:
-                          case ConnectionState.none:
-                          case ConnectionState.active:
-                            {
-                              return AppProgressIndeterminateWidget();
-                            }
-                          case ConnectionState.done:
-                            {
-                              if (snapshotCreateResource.hasData) {
-                                if (snapshotCreateResource.data!) {
-                                  return mutliverseIngressPodStatusInteraction;
-                                } else {
-                                  return Text(
-                                      "Couldn't create multiverse-ingress resource");
-                                }
-                              } else {
-                                return SizedBox();
-                              }
-                            }
-                          default:
-                            {
-                              return SizedBox();
-                            }
-                        }
-                      });
-                }
-              } else {
-                return SizedBox();
-              }
-            }
-          default:
-            {
-              return SizedBox();
-            }
-        }
-      },
-    );
-
-    var multiversePodsWidgets = Column(
-      children: [
-        Container(
-            margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-            child: FormInfoText("MULTIVERSE PODS").build(context)),
-        multiverseFileSystemPodStatusInteraction,
-        multiverseChainsIdentityPodStatusInteraction,
-        SwitchConfigurationItem(
-          titleText: "Identity Capabilities",
-          switchValue: false,
-          switchOnChanged: (value) {},
-        ),
-        multiverseIngressNamespaceBuilderInteraction,
-      ],
-    );
+    buildMultiversePodsWidgets() {
+      return Column(
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+              child: FormInfoText("MULTIVERSE PODS").build(context)),
+          multiverseFileSystemPodStatusInteraction,
+          Visibility(
+            visible: Platform.isMacOS || Platform.isLinux || Platform.isWindows,
+            child: buildMultiverseChainsIdentityPodStatusInteraction(),
+          ),
+          SwitchConfigurationItem(
+            titleText: "Identity Capabilities",
+            switchValue: false,
+            switchOnChanged: (value) {},
+          ),
+          buildMultiverseIngressNamespaceBuilderInteraction(),
+        ],
+      );
+    }
 
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary(context),
@@ -305,8 +311,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Release",
-                      subtitleText: "${snap.data!}");
+                      titleText: "Release", subtitleText: "${snap.data!}");
                 }
               },
             ),
@@ -551,7 +556,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                               .data!) {
                                             // if the ethosverse namespace exists,
                                             // return the widget
-                                            return multiversePodsWidgets;
+                                            return buildMultiversePodsWidgets();
                                           } else {
                                             // if not, then create the resource,
                                             // setState() after creating
@@ -564,7 +569,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                                   switch (snapshotCreateResource
                                                       .connectionState) {
                                                     case ConnectionState
-                                                        .waiting:
+                                                          .waiting:
                                                     case ConnectionState.none:
                                                     case ConnectionState.active:
                                                       {
@@ -576,7 +581,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                                             .hasData) {
                                                           if (snapshotCreateResource
                                                               .data!) {
-                                                            return multiversePodsWidgets;
+                                                            return buildMultiversePodsWidgets();
                                                           } else {
                                                             return Text(
                                                                 "Couldn't create ethosverse resource");

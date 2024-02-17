@@ -22,7 +22,7 @@
 import 'dart:io';
 
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets//homeStatefulWidget.dart';
 import 'package:fifty_gramx/community/onboarding/account/validateAccountWidget.dart';

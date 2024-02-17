@@ -1,3 +1,4 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -13,6 +14,7 @@ class OpenPagesPane extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("building OpenPagesPane");
+    bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
     Widget primaryPageContainer = Neumorphic(
       style: NeumorphicStyle(
         lightSource:
@@ -24,17 +26,17 @@ class OpenPagesPane extends StatelessWidget {
             ? AppColors.gray600
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.roundRect(
+        boxShape: isOneEappLoaded ? NeumorphicBoxShape.rect() : NeumorphicBoxShape.roundRect(
             BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundPrimary(context),
         depth: NeumorphicTheme.isUsingDark(context) ? 6 : 3,
         border: NeumorphicBorder(
-          isEnabled: true,
+          isEnabled: isOneEappLoaded ? false : true,
           color: AppColors.backgroundInverseTertiary(context),
           width: 1,
         ),
       ),
-      margin: EdgeInsets.only(
+      margin: isOneEappLoaded ? EdgeInsets.zero : EdgeInsets.only(
           top: 16, bottom: 8, right: 8, left: 8),
       child: Container(
         child: Stack(

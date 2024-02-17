@@ -19,19 +19,22 @@ class EAIT1006 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("building EAIT1006");
-    print("length: ${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+    print(
+        "length: ${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
     Widget container = Container(
-      margin: EdgeInsets.only(bottom: 8, left: 8, right: 8),
-      height: 64,
-      width:
-      EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 57,
+      margin: EdgeInsets.only(left: 8, right: 8),
+      height: 48,
+      width: EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length * 68,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount:
-          EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
+          itemCount: EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
           itemBuilder: (BuildContext context, int subIndex) {
-            return buildAppButton(context, subIndex,
-                selectPressedSectionItem, navigationWidget);
+            return Expanded(
+              child: Container(
+                  child: buildAppButton(context, subIndex,
+                      selectPressedSectionItem, navigationWidget),
+                ),
+            );
           }),
     );
     Widget neuContainer = Neumorphic(
@@ -44,8 +47,8 @@ class EAIT1006 extends StatelessWidget {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.concave,
         depth: -6,
-        boxShape: NeumorphicBoxShape.roundRect(
-            BorderRadius.all(Radius.circular(24))),
+        boxShape:
+            NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundInverseSecondary(context),
         border: NeumorphicBorder(
           isEnabled: true,

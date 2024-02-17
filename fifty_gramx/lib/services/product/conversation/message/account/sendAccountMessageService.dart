@@ -19,11 +19,11 @@
  * /
  */
 
-import 'package:fifty_gramx/channels/conversationCommonChannel.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/conversation/message/account/send_account_message.pbgrpc.dart';
+import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/space_knowledge.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pbgrpc.dart';
 import 'package:grpc/grpc.dart';
 
 class SendAccountMessageService {
@@ -35,7 +35,7 @@ class SendAccountMessageService {
   // basically getting the client on the very first call
   static Future<SendAccountMessageServiceClient> get serviceClient async =>
       _serviceClient ??= SendAccountMessageServiceClient(
-          await ConversationCommonChannel.conversationChannel);
+          await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   // Service declarations here
   static Future<

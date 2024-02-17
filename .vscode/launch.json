@@ -1,0 +1,75 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug - 70.ethos.pods - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--dart-define=flavor=70.ethos.pods"
+            ]
+        },
+        {
+            "name": "Debug - 70.ethos.pods - iOS",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "00008110-000524293E01401E",
+                "--flavor", 
+                "70.ethos.pods"
+            ]
+        },
+        {
+            "name": "Debug - 50GRAMx - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome"
+            ]
+        },
+        {
+            "name": "fifty_gramx (profile mode)",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "fifty_gramx (release mode)",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "epod_nwk_xk",
+            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "epod_nwk_xk (profile mode)",
+            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "epod_nwk_xk (release mode)",
+            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

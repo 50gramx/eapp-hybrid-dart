@@ -1,18 +1,10 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/entities/account.pb.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/identity/account/connect_account.pb.dart';
-import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Box/AppBoxDecoration.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/AccountConnectedAccountAssistantListItem.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/ContactsListItem.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-
 // Import package
 import 'package:contacts_service/contacts_service.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/connect_account.pb.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/ContactsListItem.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -41,7 +33,6 @@ class _ContactsListViewWidgetState extends State<ContactsListViewWidget> {
   List<Contact> fetchedContacts = [];
 
   getAllContacts() async {
-
     print("getAllContacts");
     if (await Permission.contacts.request().isGranted) {
       print("permissions granted");
@@ -94,7 +85,8 @@ class _ContactsListViewWidgetState extends State<ContactsListViewWidget> {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: fetchedContacts.length > 5 ? 5 : fetchedContacts.length,
+                  itemCount:
+                      fetchedContacts.length > 5 ? 5 : fetchedContacts.length,
                   itemBuilder: (_, int index) {
                     return ContactListItemWidget(
                       contact: fetchedContacts[index],

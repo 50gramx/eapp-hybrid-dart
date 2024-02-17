@@ -20,15 +20,13 @@
  */
 
 import 'package:bubble/bubble.dart';
+import 'package:eapp_dart_domain/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/protos/ethos/elint/services/product/conversation/message/account/send_account_message.pb.dart';
-import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/BubbleStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/conversations/messages/conversationsMessagesListItem.dart';
-import 'package:flutter/material.dart';
+import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:intl/intl.dart';
 
 /// A ListItem that contains data to display a heading.
 class AccountAssistantConversationsMessagesSentListItem
@@ -65,7 +63,8 @@ class AccountAssistantConversationsMessagesSentListItem
       extraSpace = ' ' * (10 - msgLength);
     }
 
-    var messageTime = DateTimeService().getHourMinuteWithMarker(accountAssistantSentMessage.sentAt);
+    var messageTime = DateTimeService()
+        .getHourMinuteWithMarker(accountAssistantSentMessage.sentAt);
     var messageHeading = RichText(
         text: TextSpan(children: [
       TextSpan(
