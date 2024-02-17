@@ -19,6 +19,9 @@ class SimpleCommandExecuter {
   /// Returns a list of executed command line results.
   static Future<List<ProcessResult>> run(String command) async {
     try {
+      if (Platform.isWindows) {
+        command = 'powershell -c ${shellArgument(command)}';
+      }
       return (await _shell.run(command));
     } catch (e) {
       print("Found Exception: $e");
