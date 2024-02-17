@@ -87,12 +87,40 @@ class HostMachineData {
     }
   }
 
+  List formatBytesAndSuffix(int bytes, int decimals) {
+    if (bytes <= 0) return [0, "B"];
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var i = (log(bytes) / log(1024)).floor();
+    var bytesPrecisionString = ((bytes / pow(1024, i)).toStringAsFixed(decimals));
+    return [double.parse(bytesPrecisionString), suffixes[i]];
+  }
 
   String formatBytes(int bytes, int decimals) {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var i = (log(bytes) / log(1024)).floor();
     return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
+  }
+
+  Future<double> processorCount() async {
+    if (Platform.isMacOS) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      var macOsInfo = await deviceInfo.macOsInfo;
+      return (macOsInfo.activeCPUs).toDouble();
+    } else if (Platform.isWindows) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      var windowsInfo = await deviceInfo.windowsInfo;
+      return (windowsInfo.numberOfCores).toDouble();
+    } else if (Platform.isLinux) {
+      // TODO: fix linux count
+      return 1.0;
+    } else if (Platform.isAndroid) {
+      return 1.0;
+    } else if (Platform.isIOS) {
+      return 1.0;
+    } else {
+      return 1.0;
+    }
   }
 
   Future<String> processor() async {
@@ -118,6 +146,26 @@ class HostMachineData {
       return iosInfo.model;
     } else {
       return "UNKNOWN PROCESSOR";
+    }
+  }
+
+  Future<double> memoryGiBs() async {
+    if (Platform.isMacOS) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      var macOsInfo = await deviceInfo.macOsInfo;
+      return formatBytesAndSuffix(macOsInfo.memorySize, 2)[0];
+    } else if (Platform.isWindows) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      var windowsInfo = await deviceInfo.windowsInfo;
+      return formatBytesAndSuffix((windowsInfo.systemMemoryInMegabytes * 1024 * 1024), 2)[0];
+    } else if (Platform.isLinux) {
+      return 1.0;
+    } else if (Platform.isAndroid) {
+      return 1.0;
+    } else if (Platform.isIOS) {
+      return 1.0;
+    } else {
+      return 1.0;
     }
   }
 
@@ -147,6 +195,25 @@ class HostMachineData {
     }
   }
 
+  Future<double> diskSpaceGiBs() async {
+    final diskSpace = DiskSpace();
+    // scan for disks in the system
+    await diskSpace.scan();
+    // list of disks in the system
+    var disks = diskSpace.disks;
+
+    // Prints the device path, mount path, and total size of each disk in system.
+    for (final disk in disks) {
+      print("disk: $disk");
+      print("disk: ${disk.mountPath}");
+      if (disk.mountPath == "/System/Volumes/Data") {
+        return formatBytesAndSuffix(disk.availableSpace, 2)[0];
+      } else if (disk.mountPath == 'C:') {
+        return formatBytesAndSuffix(disk.availableSpace, 2)[0];
+      }
+    }
+    return 1.0;
+  }
 
   Future<String> diskSpace() async {
     final diskSpace = DiskSpace();
@@ -187,7 +254,7 @@ class HostMachineData {
         return (await shell.run("ipconfig getifaddr en0")).outText;
       } else if (Platform.isWindows) {
         String command = 'Get-NetIPAddress -InterfaceAlias "Wi-Fi" -AddressFamily "IPv4" | Select-Object -ExpandProperty IPAddress';
-        List<ProcessResult> result = await SimpleCommandExecuter.run("powershell -c ${shellArgument(command)}");
+        List<ProcessResult> result = await SimpleCommandExecuter.run(command);
         return result.outText;
       } else {
         return "UNKNOWN IP";
