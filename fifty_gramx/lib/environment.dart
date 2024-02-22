@@ -26,7 +26,7 @@ class Environment {
         default:
           _current = "com.50gramx";
       }
-    } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
+    } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS || Platform.isWindows) {
       print("Environment:current: it's devices");
       switch (packageInfo.packageName) {
         case "com.fiftygramx.seventy.zero.ethos.pods":
