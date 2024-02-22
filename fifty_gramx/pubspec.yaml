@@ -27,7 +27,7 @@ dependencies:
   grpc: ^3.0.0
   protobuf: ^3.0.0
   shared_preferences: ^2.2.2
-  firebase_analytics: ^10.8.6
+  firebase_analytics: ^10.8.0
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.5
   firebase_crashlytics: ^3.4.5
