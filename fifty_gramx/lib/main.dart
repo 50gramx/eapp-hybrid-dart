@@ -50,12 +50,11 @@ void main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    bool isPlatformDesktop =
-        Platform.isWindows || Platform.isMacOS || Platform.isLinux;
-    bool weWantFatalErrorRecording = isPlatformDesktop;
-
     // Firebase Crashlytics is enabled for web at the moment
     if (!kIsWeb) {
+      bool isPlatformDesktop =
+          Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+      bool weWantFatalErrorRecording = isPlatformDesktop;
       FlutterError.onError = (errorDetails) {
         if (weWantFatalErrorRecording) {
           FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
