@@ -32,6 +32,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -103,6 +104,10 @@ class MyApp extends StatelessWidget {
     accentColor: AppColors.lightPrimaryA,
   );
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     Widget progress = Scaffold(
@@ -117,6 +122,7 @@ class MyApp extends StatelessWidget {
         theme: lightThemeData,
         darkTheme: darkThemeData,
         themeMode: ThemeMode.system,
+        navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(
           future: initializeApp(),
           builder: (context, snapshot) {
