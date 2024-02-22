@@ -21,8 +21,9 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!--
+  <!--
       If you are serving your web app in a path other than the root, change the
       href value below to reflect the base path you are serving from.
 
@@ -32,33 +33,59 @@
       Fore more details:
       * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
     -->
-    <base href="/">
+  <base href="/">
 
-    <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Your. Unified. Simple. Secure. Internet.">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Your. Unified. Simple. Secure. Internet.">
 
-    <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="50GRAMX">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="50GRAMX">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png"/>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-    <title>50gramx</title>
-    <link rel="manifest" href="manifest.json">
+  <title>50gramx</title>
+  <link rel="manifest" href="manifest.json">
 </head>
-<body>
 
-<script>
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('flutter-first-frame', function () {
-            navigator.serviceWorker.register('flutter_service_worker.js');
-          });
-        }
-</script>
-<script src="main.dart.js" type="application/javascript"></script>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+
+    var firebaseConfig = {
+      apiKey: 'AIzaSyCIPrTkBIPNHqYYAFepgno_QA2Lq2MAuPg',
+      appId: '1:1048555807763:web:5c1e0a6f9cd7b38e40cbe6',
+      messagingSenderId: '1048555807763',
+      projectId: 'ethosverse-india',
+      authDomain: 'ethosverse-india.firebaseapp.com',
+      storageBucket: 'ethosverse-india.appspot.com',
+      measurementId: 'G-PKH5LYECY6',
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>
