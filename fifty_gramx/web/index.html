@@ -51,46 +51,13 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
-<!-- This script installs service_worker.js to provide PWA functionality to
-     application. For more information, see:
-     https://developers.google.com/web/fundamentals/primers/service-workers -->
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyBCvDXwr713FTOE4mgXsmqRej2cPdDhPF0",
-        authDomain: "healthcare-analytics-197813.firebaseapp.com",
-        databaseURL: "https://healthcare-analytics-197813.firebaseio.com",
-        projectId: "healthcare-analytics-197813",
-        storageBucket: "healthcare-analytics-197813.appspot.com",
-        messagingSenderId: "852895682356",
-        appId: "1:852895682356:web:aabd16dc4af367532f9f61"
-      };
-      firebase.initializeApp(firebaseConfig);
-
-
-
-
-
-
-</script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
 <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('flutter-first-frame', function () {
             navigator.serviceWorker.register('flutter_service_worker.js');
           });
         }
-
-
-
-
-
-
 </script>
 <script src="main.dart.js" type="application/javascript"></script>
 </body>
