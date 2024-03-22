@@ -65,6 +65,24 @@ job("Build Web Base Image") {
             workerTags("windows-pool")
         }    
     }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building Web Base Image v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
 }
 
 job("Build Android Base Image") {
@@ -125,6 +143,24 @@ job("Build Android Base Image") {
         requirements {
             workerTags("windows-pool")
         }    
+    }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building Android Base Image v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 }
 
@@ -194,6 +230,24 @@ job("Build and publish bundle to web track") {
             workerTags("windows-pool")
         }    
 
+    }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Web Open Track v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 }
 
@@ -284,6 +338,24 @@ job("Build and publish bundle to android internal track") {
             workerTags("windows-pool")
         }    
     }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Android Internal Track v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
 }
 
 job("Build and publish bundle to iOS internal track") {
@@ -342,6 +414,24 @@ job("Build and publish bundle to iOS internal track") {
         requirements {
             workerTags("macos-pool")
             workerTags("amitkumarkhetan15-user")
+        }
+    }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On iOS Internal Track v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 }
@@ -411,6 +501,24 @@ job("Build and publish bundle to windows desktop track") {
         requirements {
             workerTags("windows-pool")
         }    
+    }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Windows Desktop Track v$version")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 }
 
