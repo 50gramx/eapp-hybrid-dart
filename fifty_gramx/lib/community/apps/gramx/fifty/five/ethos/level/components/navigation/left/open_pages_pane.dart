@@ -26,7 +26,7 @@ class OpenPagesPane extends StatelessWidget {
             ? AppColors.gray600
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
-        boxShape: isOneEappLoaded ? NeumorphicBoxShape.rect() : NeumorphicBoxShape.roundRect(
+        boxShape: isOneEappLoaded ? NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))) : NeumorphicBoxShape.roundRect(
             BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundPrimary(context),
         depth: NeumorphicTheme.isUsingDark(context) ? 6 : 3,
