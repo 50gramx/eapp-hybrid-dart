@@ -762,10 +762,11 @@ class EthosAppFlowBob {
     print("Loading ${orgApps.length} apps for organization: $orgName");
 
     for (final appName in orgApps) {
+      print("Loading ${appName} app for organization: $orgName");
       if (currentEnv != "com.50gramx") {
         if (currentEnv != "com.50gramx.$communityCode.$orgName.$appName") {
-          print("_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load $appName...");
-          break;
+          print("_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load com.50gramx.$communityCode.$orgName.$appName...");
+          continue;
         }
       }
       print("_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
