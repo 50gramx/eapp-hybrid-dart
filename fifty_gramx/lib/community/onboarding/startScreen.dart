@@ -32,6 +32,8 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:carousel_slider/carousel_slider.dart';
+
 /// This is the stateful widget that the main application instantiates.
 class StartScreen extends StatefulWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -45,7 +47,7 @@ class _StartScreenState extends State<StartScreen> {
     print("getStartedButtonOnPressed");
     if (kIsWeb) {
       pushToGetStartedWidget();
-    } 
+    }
     if (Platform.isAndroid || Platform.isIOS) {
       print("android or ios");
       if (await Permission.contacts.request().isGranted) {
@@ -75,6 +77,9 @@ class _StartScreenState extends State<StartScreen> {
     "Simple",
     "Secure",
   ];
+
+  // Legal, Health, Education, Finance, Interactions, Automation,
+  // Management, Marketing, Machine, Intelligence, Entertainment, Travel
 
   List<IconData> ethosaiFeaturesParaIcons = [
     FeatherIcons.users,
@@ -154,158 +159,313 @@ class _StartScreenState extends State<StartScreen> {
     return BaseWidget(
       builder: (context, sizingInformation) {
         return Scaffold(
-            backgroundColor: AppColors.backgroundPrimary(context),
-            body: Container(
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 40,
-                        height: 40,
-                      ),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Neumorphic(
-                              style: NeumorphicStyle(
-                                lightSource:
-                                    NeumorphicTheme.isUsingDark(context)
-                                        ? LightSource.bottomRight
-                                        : LightSource.topLeft,
-                                shadowLightColor: NeumorphicTheme.isUsingDark(
-                                        context)
-                                    ? AppColors.gray600
-                                    : AppColors.backgroundSecondary(context),
-                                shape: NeumorphicShape.flat,
-                                boxShape: NeumorphicBoxShape.roundRect(
-                                    BorderRadius.circular(24)),
-                                color: AppColors.backgroundPrimary(context),
-                                border: NeumorphicBorder(
-                                  isEnabled: true,
-                                  color: AppColors.backgroundPrimary(context),
-                                  width: 2,
+          backgroundColor: AppColors.backgroundPrimary(context),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Neumorphic(
+                        style: NeumorphicStyle(
+                          lightSource: NeumorphicTheme.isUsingDark(context)
+                              ? LightSource.bottomRight
+                              : LightSource.topLeft,
+                          shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                              ? AppColors.gray600
+                              : AppColors.backgroundSecondary(context),
+                          shape: NeumorphicShape.flat,
+                          boxShape: NeumorphicBoxShape.roundRect(
+                              BorderRadius.only(
+                                  bottomLeft: Radius.circular(300),
+                                  bottomRight: Radius.circular(300))),
+                          color: AppColors.backgroundPrimary(context),
+                          border: NeumorphicBorder(
+                            isEnabled: true,
+                            color: AppColors.backgroundPrimary(context),
+                            width: 2,
+                          ),
+                          depth: -8,
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
+                          child: Column(children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      width: 0.7 *
+                                          MediaQuery.of(context).size.width,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 32,
+                                            left: 16,
+                                            right: 16,
+                                            bottom: 4),
+                                        child: RichText(
+                                          textAlign: TextAlign.center,
+                                          text: TextSpan(
+                                            text:
+                                                "Unlock Professional Excellence with 50GRAMx Galaxy",
+                                            style: TextStyle(
+                                                color: AppColors.contentPrimary(
+                                                    context),
+                                                fontSize: 48,
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.14285714),
+                                          ),
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    width:
+                                        0.7 * MediaQuery.of(context).size.width,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 16,
+                                          right: 16,
+                                          top: 4,
+                                          bottom: 16),
+                                      child: RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          text:
+                                              "Choose 50GRAMx Galaxy for a Seamless Interaction with Private and Open Information, Services, Products or Things Domains",
+                                          style: TextStyle(
+                                              color: AppColors.contentSecondary(
+                                                  context),
+                                              fontSize: 22,
+                                              fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w400,
+                                              height: 1.14285714),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              margin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
-                              child: Container(
-                                child: Column(children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 16,
-                                                left: 16,
-                                                right: 16,
-                                                bottom: 4),
-                                            child: RichText(
-                                              text: TextSpan(
-                                                text: "50GRAMx Ethosverse",
-                                                style: TextStyle(
-                                                    color: AppColors
-                                                        .contentPrimary(
-                                                            context),
-                                                    fontSize: 22,
-                                                    fontFamily: "Montserrat",
-                                                    fontWeight: FontWeight.w700,
-                                                    height: 1.14285714),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: NeumorphicButton(
+                                  provideHapticFeedback: true,
+                                  onPressed: () {
+                                    getStartedButtonOnPressed();
+                                  },
+                                  style: NeumorphicStyle(
+                                    lightSource:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? LightSource.bottomRight
+                                            : LightSource.topLeft,
+                                    shadowLightColor:
+                                        NeumorphicTheme.isUsingDark(context)
+                                            ? AppColors.gray600
+                                            : AppColors.backgroundSecondary(
+                                                context),
+                                    shape: NeumorphicShape.flat,
+                                    boxShape: NeumorphicBoxShape.roundRect(
+                                        BorderRadius.circular(24)),
+                                    color: AppColors.contentPrimary(context),
+                                    border: NeumorphicBorder(
+                                      isEnabled: true,
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      width: 2,
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 16,
-                                                right: 16,
-                                                top: 4,
-                                                bottom: 16),
-                                            child: RichText(
-                                              text: TextSpan(
-                                                text:
-                                                    "Collection of communities that share a common ethos and vision",
-                                                style: TextStyle(
-                                                    color: AppColors
-                                                        .contentSecondary(
-                                                            context),
-                                                    fontSize: 16,
-                                                    fontFamily: "Montserrat",
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.14285714),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: ethosaiFeaturesParaRows,
-                                  ),
-                                  Row(children: [
-                                    Expanded(
-                                      child: NeumorphicButton(
-                                          provideHapticFeedback: true,
-                                          onPressed: () {
-                                            getStartedButtonOnPressed();
-                                          },
-                                          style: NeumorphicStyle(
-                                            lightSource:
-                                                NeumorphicTheme.isUsingDark(
-                                                        context)
-                                                    ? LightSource.bottomRight
-                                                    : LightSource.topLeft,
-                                            shadowLightColor: NeumorphicTheme
-                                                    .isUsingDark(context)
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 20, horizontal: 25),
+                                  margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
+                                  child: Text(
+                                    "Reserve Now",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: AppColors.contentInversePrimary(
+                                            context),
+                                        fontSize: 24,
+                                        fontFamily: "Montserrat",
+                                        fontWeight: FontWeight.w600),
+                                  )),
+                            ),
+                          ]),
+                        ))),
+                SizedBox(height: 32),
+
+                // Professional Objectives Carousel
+                Neumorphic(
+                  style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(25)),
+                      color: AppColors.backgroundPrimary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundPrimary(context),
+                        width: 2,
+                      ),
+                      disableDepth: true),
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 5),
+                            enlargeCenterPage: true,
+                          ),
+                          items: [
+                            // Replace the placeholders with your actual objectives for each professional
+                            'Legal Professionals: Access Legal Information Securely',
+                            'Finance Professionals: Manage Financial Data Efficiently',
+                            // Add more objectives as needed
+                          ].map((objective) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Neumorphic(
+                                      style: NeumorphicStyle(
+                                        lightSource:
+                                            NeumorphicTheme.isUsingDark(context)
+                                                ? LightSource.bottomRight
+                                                : LightSource.topLeft,
+                                        shadowLightColor:
+                                            NeumorphicTheme.isUsingDark(context)
                                                 ? AppColors.gray600
                                                 : AppColors.backgroundSecondary(
                                                     context),
-                                            shape: NeumorphicShape.flat,
-                                            boxShape:
-                                                NeumorphicBoxShape.roundRect(
-                                                    BorderRadius.circular(24)),
-                                            color: AppColors.contentPrimary(
+                                        shape: NeumorphicShape.flat,
+                                        boxShape: NeumorphicBoxShape.stadium(),
+                                        color:
+                                            AppColors.backgroundInverseTertiary(
                                                 context),
-                                            border: NeumorphicBorder(
-                                              isEnabled: true,
-                                              color:
-                                                  AppColors.backgroundPrimary(
-                                                      context),
-                                              width: 2,
-                                            ),
-                                          ),
-                                          padding: const EdgeInsets.all(14.0),
-                                          margin: const EdgeInsets.fromLTRB(
-                                              6, 6, 6, 6),
-                                          child: Text(
-                                            "Get Started",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: AppColors
-                                                    .contentInversePrimary(
-                                                        context),
-                                                fontSize: 14,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w500),
-                                          )),
-                                    )
-                                  ]),
-                                ]),
-                              ))),
-                      SizedBox(height: 32),
-                    ],
+                                        border: NeumorphicBorder(
+                                          isEnabled: true,
+                                          color: AppColors.backgroundPrimary(
+                                              context),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        objective,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    ));
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ));
+
+                // Social Proof
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.stadium(),
+                    color: AppColors.backgroundPrimary(context),
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundPrimary(context),
+                      width: 2,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Social Proof',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Join Thousands of Professionals Trusting 50GRAMx Galaxy',
+                        ),
+                        // Social Proof Carousel can be implemented here
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Single Subscription Pricing
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.stadium(),
+                    color: AppColors.backgroundPrimary(context),
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundPrimary(context),
+                      width: 2,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Single Subscription Pricing',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Get Started for Just \$X/Month',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }

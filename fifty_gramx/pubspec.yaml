@@ -83,6 +83,8 @@ dependencies:
   yaml: ^3.1.2
   # This Flutter plugin provides an API for querying information about an application package.
   package_info_plus: ^4.2.0
+  
+  carousel_slider: ^4.0.0
   eapp_dart_domain:
     hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
     version: ^24.1.102
@@ -202,10 +204,11 @@ msix_config:
   display_name: 50GRAMX
   publisher_display_name: Amit Khetan
   identity_name: 11781AppsHub.50GRAMX
-  msix_version: 23.12.44.0
-  certificate_path: /msix_certificate.pfx
-  #    C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\CERTIFICATE.pfx
+  msix_version: 24.2.1.0
+  certificate_path: C:\Users\amitk\Documents\CERTIFICATE.pfx
   certificate_password: getethos
+  app_installer:
+    publish_folder_path: C:\Users\amitk\Documents
   publisher: CN=D4AFB810-EF13-46E0-8839-A4A110696588
   #  logo_path: C:\<PathToIcon>\<Logo.png>
   #  start_menu_icon_path: C:\<PathToIcon>\<Icon.png>
