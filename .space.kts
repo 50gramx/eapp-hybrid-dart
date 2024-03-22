@@ -4,6 +4,8 @@
  * For more info, see https://www.jetbrains.com/help/space/automation.html
  */
 
+@file:DependsOn("com.slack.api:slack-api-client:1.1.1")
+import com.slack.api.Slack
 import java.time.LocalDate
 
 job("Build Web Base Image") {
