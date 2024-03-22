@@ -2,3 +2,9 @@
   apps:
     - pods
     - entities
+- organisation: gs
+  apps:
+    - weather
+- organisation: bp
+  apps:
+    - ai
