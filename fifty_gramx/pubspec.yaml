@@ -125,6 +125,7 @@ flutter:
     - lib/community/apps/gramx/fifty/zero/ethosapps.yaml
     # 50GRAMx Ethos
     - lib/community/apps/gramx/fifty/zero/ethos/identity/
+    - lib/community/apps/gramx/fifty/zero/ethos/domains/
     - lib/community/apps/gramx/fifty/zero/ethos/knowledge_spaces/
     - lib/community/apps/gramx/fifty/zero/ethos/spaces/
     - lib/community/apps/gramx/fifty/zero/ethos/conversations/
@@ -152,6 +153,8 @@ flutter:
     # 70 ethos pods app assets
     - lib/community/apps/gramx/seventy/zero/ethos/pods/
     - lib/community/apps/gramx/seventy/zero/ethos/entities/
+    - lib/community/apps/gramx/seventy/zero/gs/weather/
+    - lib/community/apps/gramx/seventy/zero/bp/ai/
     # 88 community eapp common-assets
     - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
     # 88 ethos connect app assets
