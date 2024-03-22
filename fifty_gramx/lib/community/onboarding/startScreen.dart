@@ -21,6 +21,7 @@
 
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
@@ -31,8 +32,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'package:carousel_slider/carousel_slider.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class StartScreen extends StatefulWidget {
@@ -163,143 +162,160 @@ class _StartScreenState extends State<StartScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Neumorphic(
-                        style: NeumorphicStyle(
-                          lightSource: NeumorphicTheme.isUsingDark(context)
-                              ? LightSource.bottomRight
-                              : LightSource.topLeft,
-                          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                              ? AppColors.gray600
-                              : AppColors.backgroundSecondary(context),
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.roundRect(
-                              BorderRadius.only(
-                                  bottomLeft: Radius.circular(300),
-                                  bottomRight: Radius.circular(300))),
-                          color: AppColors.backgroundPrimary(context),
-                          border: NeumorphicBorder(
-                            isEnabled: true,
+                Container(
+                  height: 0.7 * MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(bottom: 32),
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Neumorphic(
+                          style: NeumorphicStyle(
+                            lightSource: NeumorphicTheme.isUsingDark(context)
+                                ? LightSource.bottomRight
+                                : LightSource.topLeft,
+                            shadowLightColor:
+                                NeumorphicTheme.isUsingDark(context)
+                                    ? AppColors.gray600
+                                    : AppColors.backgroundSecondary(context),
+                            shape: NeumorphicShape.flat,
+                            boxShape: NeumorphicBoxShape.roundRect(
+                                BorderRadius.only(
+                                    bottomLeft: Radius.circular(300),
+                                    bottomRight: Radius.circular(300))),
                             color: AppColors.backgroundPrimary(context),
-                            width: 2,
+                            border: NeumorphicBorder(
+                              isEnabled: true,
+                              color: AppColors.backgroundPrimary(context),
+                              width: 2,
+                            ),
+                            depth: -8,
                           ),
-                          depth: -8,
-                        ),
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 16),
-                          child: Column(children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      width: 0.7 *
-                                          MediaQuery.of(context).size.width,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 32,
-                                            left: 16,
-                                            right: 16,
-                                            bottom: 4),
-                                        child: RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
-                                            text:
-                                                "Unlock Professional Excellence with 50GRAMx Galaxy",
-                                            style: TextStyle(
-                                                color: AppColors.contentPrimary(
-                                                    context),
-                                                fontSize: 48,
-                                                fontFamily: "Montserrat",
-                                                fontWeight: FontWeight.w700,
-                                                height: 1.14285714),
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                          alignment: Alignment.center,
+                                          child: Container(
+                                            width: 0.7 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 32,
+                                                  left: 16,
+                                                  right: 16,
+                                                  bottom: 4),
+                                              child: RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                  text:
+                                                      "Unlock Professional Excellence with 50GRAMx Galaxy",
+                                                  style: TextStyle(
+                                                      color: AppColors
+                                                          .contentPrimary(
+                                                              context),
+                                                      fontSize: 48,
+                                                      fontFamily: "Montserrat",
+                                                      fontWeight:
+                                                          FontWeight.w900,
+                                                      height: 1.14285714),
+                                                ),
+                                              ),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Container(
+                                          width: 0.7 *
+                                              MediaQuery.of(context).size.width,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 4,
+                                                bottom: 16),
+                                            child: RichText(
+                                              textAlign: TextAlign.center,
+                                              text: TextSpan(
+                                                text:
+                                                    "Welcome to Your Personalized Cyber-Physical Universe",
+                                                style: TextStyle(
+                                                    color: AppColors
+                                                        .contentSecondary(
+                                                            context),
+                                                    fontSize: 22,
+                                                    fontFamily: "Montserrat",
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.14285714),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    )),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                    width:
-                                        0.7 * MediaQuery.of(context).size.width,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 16,
-                                          right: 16,
-                                          top: 4,
-                                          bottom: 16),
-                                      child: RichText(
-                                        textAlign: TextAlign.center,
-                                        text: TextSpan(
-                                          text:
-                                              "Choose 50GRAMx Galaxy for a Seamless Interaction with Private and Open Information, Services, Products or Things Domains",
-                                          style: TextStyle(
-                                              color: AppColors.contentSecondary(
+                                    ],
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: NeumorphicButton(
+                                        provideHapticFeedback: true,
+                                        onPressed: () {
+                                          getStartedButtonOnPressed();
+                                        },
+                                        style: NeumorphicStyle(
+                                          lightSource:
+                                              NeumorphicTheme.isUsingDark(
+                                                      context)
+                                                  ? LightSource.bottomRight
+                                                  : LightSource.topLeft,
+                                          shadowLightColor: NeumorphicTheme
+                                                  .isUsingDark(context)
+                                              ? AppColors.gray600
+                                              : AppColors.backgroundSecondary(
                                                   context),
-                                              fontSize: 22,
-                                              fontFamily: "Montserrat",
-                                              fontWeight: FontWeight.w400,
-                                              height: 1.14285714),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: NeumorphicButton(
-                                  provideHapticFeedback: true,
-                                  onPressed: () {
-                                    getStartedButtonOnPressed();
-                                  },
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
+                                          shape: NeumorphicShape.flat,
+                                          boxShape:
+                                              NeumorphicBoxShape.roundRect(
+                                                  BorderRadius.circular(24)),
+                                          color:
+                                              AppColors.contentPrimary(context),
+                                          border: NeumorphicBorder(
+                                            isEnabled: true,
+                                            color: AppColors.backgroundPrimary(
                                                 context),
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.circular(24)),
-                                    color: AppColors.contentPrimary(context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color:
-                                          AppColors.backgroundPrimary(context),
-                                      width: 2,
-                                    ),
+                                            width: 2,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 20, horizontal: 25),
+                                        margin: const EdgeInsets.fromLTRB(
+                                            6, 6, 6, 6),
+                                        child: Text(
+                                          "Reserve Now",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: AppColors
+                                                  .contentInversePrimary(
+                                                      context),
+                                              fontSize: 24,
+                                              fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w600),
+                                        )),
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 25),
-                                  margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-                                  child: Text(
-                                    "Reserve Now",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: AppColors.contentInversePrimary(
-                                            context),
-                                        fontSize: 24,
-                                        fontFamily: "Montserrat",
-                                        fontWeight: FontWeight.w600),
-                                  )),
-                            ),
-                          ]),
-                        ))),
-                SizedBox(height: 32),
+                                ]),
+                          ))),
+                ),
 
                 // Professional Objectives Carousel
                 Neumorphic(
@@ -325,6 +341,24 @@ class _StartScreenState extends State<StartScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Welcome to Your Personalized Cyber-Physical Universe',
+                                  style: TextStyle(
+                                      color: AppColors.contentPrimary(context),
+                                      fontSize: 36,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w900,
+                                      height: 1.14285714),
+                                ),
+                                SizedBox(height: 10),
+                              ]),
+                        ),
                         CarouselSlider(
                           options: CarouselOptions(
                             height: MediaQuery.of(context).size.height * 0.7,
@@ -365,11 +399,32 @@ class _StartScreenState extends State<StartScreen> {
                                           width: 2,
                                         ),
                                       ),
-                                      child: Text(
-                                        objective,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 16.0,
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Container(
+                                          width: 0.7 *
+                                              MediaQuery.of(context).size.width,
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 4,
+                                                bottom: 16),
+                                            child: RichText(
+                                              textAlign: TextAlign.center,
+                                              text: TextSpan(
+                                                text: objective,
+                                                style: TextStyle(
+                                                    color: AppColors
+                                                        .contentInversePrimary(
+                                                            context),
+                                                    fontSize: 22,
+                                                    fontFamily: "Montserrat",
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.14285714),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ));
@@ -383,64 +438,90 @@ class _StartScreenState extends State<StartScreen> {
                 ),
 
                 // Social Proof
-                Neumorphic(
-                  margin: EdgeInsets.all(20),
-                  style: NeumorphicStyle(
-                    lightSource: NeumorphicTheme.isUsingDark(context)
-                        ? LightSource.bottomRight
-                        : LightSource.topLeft,
-                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                        ? AppColors.gray600
-                        : AppColors.backgroundSecondary(context),
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.stadium(),
-                    color: AppColors.backgroundPrimary(context),
-                    border: NeumorphicBorder(
-                      isEnabled: true,
-                      color: AppColors.backgroundPrimary(context),
-                      width: 2,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                Container(
+                    height: 0.7 * MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.only(left: 16, right: 16),
+                    child: Row(
                       children: [
-                        Text(
-                          'Social Proof',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                            flex: 4,
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Social Proof',
+                                      style: TextStyle(
+                                          color:
+                                              AppColors.contentPrimary(context),
+                                          fontSize: 48,
+                                          fontFamily: "Montserrat",
+                                          fontWeight: FontWeight.w700,
+                                          height: 1.14285714),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      'Join Thousands of Professionals Trusting 50GRAMx Galaxy',
+                                    ),
+                                  ]),
+                            )),
+                        Expanded(
+                          flex: 6,
+                          child: Neumorphic(
+                            margin: EdgeInsets.all(20),
+                            style: NeumorphicStyle(
+                              lightSource: NeumorphicTheme.isUsingDark(context)
+                                  ? LightSource.bottomRight
+                                  : LightSource.topLeft,
+                              shadowLightColor:
+                                  NeumorphicTheme.isUsingDark(context)
+                                      ? AppColors.gray600
+                                      : AppColors.backgroundSecondary(context),
+                              shape: NeumorphicShape.flat,
+                              boxShape: NeumorphicBoxShape.stadium(),
+                              color: AppColors.backgroundPrimary(context),
+                              border: NeumorphicBorder(
+                                isEnabled: true,
+                                color: AppColors.backgroundPrimary(context),
+                                width: 2,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Social Proof',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'Join Thousands of Professionals Trusting 50GRAMx Galaxy',
+                                  ),
+                                  // Social Proof Carousel can be implemented here
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Join Thousands of Professionals Trusting 50GRAMx Galaxy',
-                        ),
-                        // Social Proof Carousel can be implemented here
                       ],
-                    ),
-                  ),
-                ),
+                    )),
 
                 // Single Subscription Pricing
                 Neumorphic(
                   margin: EdgeInsets.all(20),
                   style: NeumorphicStyle(
-                    lightSource: NeumorphicTheme.isUsingDark(context)
-                        ? LightSource.bottomRight
-                        : LightSource.topLeft,
-                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                        ? AppColors.gray600
-                        : AppColors.backgroundSecondary(context),
-                    shape: NeumorphicShape.flat,
-                    boxShape: NeumorphicBoxShape.stadium(),
-                    color: AppColors.backgroundPrimary(context),
-                    border: NeumorphicBorder(
-                      isEnabled: true,
-                      color: AppColors.backgroundPrimary(context),
-                      width: 2,
-                    ),
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -448,7 +529,67 @@ class _StartScreenState extends State<StartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Single Subscription Pricing',
+                          'Exclusive Offer: Licence to 50GRAMx',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue, // Highlight color
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Unlock the Power of 50GRAMx for Just \$1149', // Add pricing details
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black87, // Darker color for emphasis
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Experience seamless integration across domains, enhanced security, and access to a thriving professional community.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors
+                                .black54, // Lighter color for additional information
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                // Add action for button press
+                              },
+                              child: Text(
+                                'Get Started',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Benefits
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Benefits',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -456,7 +597,133 @@ class _StartScreenState extends State<StartScreen> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Get Started for Just \$X/Month',
+                          '- Seamless Integration Across Domains\n- Unified Management and Operations\n- Enhanced Security and Privacy\n- Balanced EthosCoin for Transactions',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Getting Started
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Getting Started',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          '1. Reserve Your Galaxy\n2. Launch Your Domain\n3. Interact with Open Domains',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Professional Highlights
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Professional Highlights',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Empower Your Professional Journey with 50GRAMx Galaxy',
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Learn More'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                // Experience with 50GRAMx Galaxy
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Experience with 50GRAMx Galaxy',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Discover the Power of Seamless Integration and Enhanced Collaboration',
+                        ),
+                        ElevatedButton(
+                            onPressed: () {}, child: Text('Explore Now')),
+                      ],
+                    ),
+                  ),
+                ),
+                // Footer
+                Neumorphic(
+                  margin: EdgeInsets.all(20),
+                  style: NeumorphicStyle(
+                    shape: NeumorphicShape.concave,
+                    depth: 5,
+                    intensity: 0.7,
+                    color: Colors.grey[200],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Thank You for Exploring 50GRAMx Galaxy',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Join Our Community and Embrace Professional Excellence',
+                        ),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Join Now'),
                         ),
                       ],
                     ),
