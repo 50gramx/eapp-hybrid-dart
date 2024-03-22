@@ -1,97 +1,73 @@
 <!--
   ~ /*************************************************************************
   ~ *
-  ~ * AMIT KUMAR KHETAN CONFIDENTIAL
+  ~ * 50GRAMX, INC. CONFIDENTIAL
   ~ * __________________
   ~ *
-  ~ *  [2017] - [2022] Amit Kumar Khetan
+  ~ *  [2017] - [2024] 50GRAMx, Inc.
   ~ *  All Rights Reserved.
   ~ *
   ~ * NOTICE:  All information contained herein is, and remains
-  ~ * the property of Amit Kumar Khetan and its suppliers,
+  ~ * the property of 50GRAMx, Inc. and its suppliers,
   ~ * if any.  The intellectual and technical concepts contained
-  ~ * herein are proprietary to Amit Kumar Khetan
+  ~ * herein are proprietary to 50GRAMx, Inc.
   ~ * and its suppliers and may be covered by U.S. and Foreign Patents,
   ~ * patents in process, and are protected by trade secret or copyright law.
   ~ * Dissemination of this information or reproduction of this material
   ~ * is strictly forbidden unless prior written permission is obtained
-  ~ * from Amit Kumar Khetan.
+  ~ * from 50GRAMx, Inc.
   ~ */
   -->
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!--
-      If you are serving your web app in a path other than the root, change the
-      href value below to reflect the base path you are serving from.
+  <base href="/">
 
-      The path provided below has to start and end with a slash "/" in order for
-      it to work correctly.
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Your. Unified. Simple. Secure. Internet.">
 
-      Fore more details:
-      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-    -->
-    <base href="/">
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="50GRAMX">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <meta charset="UTF-8">
-    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-    <meta name="description" content="Your. Unified. Simple. Secure. Internet.">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
 
-    <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="50GRAMX">
-    <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png"/>
-
-    <title>50gramx</title>
-    <link rel="manifest" href="manifest.json">
+  <title>50gramx</title>
+  <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
-<!-- This script installs service_worker.js to provide PWA functionality to
-     application. For more information, see:
-     https://developers.google.com/web/fundamentals/primers/service-workers -->
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: 'AIzaSyCIPrTkBIPNHqYYAFepgno_QA2Lq2MAuPg',
+      appId: '1:1048555807763:web:5c1e0a6f9cd7b38e40cbe6',
+      messagingSenderId: '1048555807763',
+      projectId: 'ethosverse-india',
+      authDomain: 'ethosverse-india.firebaseapp.com',
+      storageBucket: 'ethosverse-india.appspot.com',
+      measurementId: 'G-PKH5LYECY6',
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyBCvDXwr713FTOE4mgXsmqRej2cPdDhPF0",
-        authDomain: "healthcare-analytics-197813.firebaseapp.com",
-        databaseURL: "https://healthcare-analytics-197813.firebaseio.com",
-        projectId: "healthcare-analytics-197813",
-        storageBucket: "healthcare-analytics-197813.appspot.com",
-        messagingSenderId: "852895682356",
-        appId: "1:852895682356:web:aabd16dc4af367532f9f61"
-      };
-      firebase.initializeApp(firebaseConfig);
-
-
-
-
-
-
-</script>
-<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
-<script>
-        if ('serviceWorker' in navigator) {
-          window.addEventListener('flutter-first-frame', function () {
-            navigator.serviceWorker.register('flutter_service_worker.js');
-          });
-        }
-
-
-
-
-
-
-</script>
-<script src="main.dart.js" type="application/javascript"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
 </body>
+
 </html>

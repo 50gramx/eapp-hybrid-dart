@@ -164,7 +164,7 @@ job("Build and publish bundle to web track") {
             api.space().projects.automation.deployments.start(
                     project = api.projectIdentifier(),
                     targetIdentifier = TargetIdentifier.Key("evo-on-50gramx-com"),
-                    version = "1.0.${System.getenv("JB_SPACE_EXECUTION_NUMBER")}",
+                    version = "${System.getenv("VERSION_NUMBER")}",
                     // automatically update deployment status based on a status of a job
                     syncWithAutomationJob = true
             )

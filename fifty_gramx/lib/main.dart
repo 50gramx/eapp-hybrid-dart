@@ -32,6 +32,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -44,27 +45,32 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   print("App is starting...");
   // Firebase not available for windows, linux at the moment
-  // Firebase is not enabled for web at the moment
+  // Firebase is enabled for web at the moment
   if (kIsWeb || Platform.isAndroid || Platform.isIOS) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
 
-    bool weWantFatalErrorRecording = false;
-    FlutterError.onError = (errorDetails) {
-      if (weWantFatalErrorRecording) {
-        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-      } else {
-        FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-      }
-    };
+    // Firebase Crashlytics is enabled for web at the moment
+    if (!kIsWeb) {
+      bool isPlatformDesktop =
+          Platform.isWindows || Platform.isMacOS || Platform.isLinux;
+      bool weWantFatalErrorRecording = isPlatformDesktop;
+      FlutterError.onError = (errorDetails) {
+        if (weWantFatalErrorRecording) {
+          FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+        } else {
+          FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+        }
+      };
 
-    // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-    PlatformDispatcher.instance.onError = (error, stack) {
-      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-      print("recordError: ${error}, ${stack}");
-      return true;
-    };
+      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+      PlatformDispatcher.instance.onError = (error, stack) {
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        print("recordError: ${error}, ${stack}");
+        return true;
+      };
+    }
   } else {
     print("Platform is not supported, not initialising Firebase");
     //   not doing anything
@@ -98,6 +104,10 @@ class MyApp extends StatelessWidget {
     accentColor: AppColors.lightPrimaryA,
   );
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     Widget progress = Scaffold(
@@ -112,6 +122,7 @@ class MyApp extends StatelessWidget {
         theme: lightThemeData,
         darkTheme: darkThemeData,
         themeMode: ThemeMode.system,
+        navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(
           future: initializeApp(),
           builder: (context, snapshot) {

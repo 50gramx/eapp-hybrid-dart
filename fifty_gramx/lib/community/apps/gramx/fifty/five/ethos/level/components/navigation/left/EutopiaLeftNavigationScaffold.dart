@@ -10,6 +10,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/window_pane.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -145,6 +146,8 @@ class _EutopiaLeftNavigationScaffoldState
 
   selectPressedSectionItem(sectionIndex) {
     widget.onItemSelected(sectionIndex);
+    // Somewhere in your widgets...
+    FirebaseAnalytics.instance.logScreenView(screenName: "Page #$sectionIndex");
   }
 
   toggleNavigatingPages() {
@@ -277,63 +280,68 @@ class _EutopiaLeftNavigationScaffoldState
     Widget buildMainContentScaffold() {
       print("called buildMainContentScaffold");
       setFutureStatusBarTheme();
-      bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
+      bool isOneEappLoaded =
+          EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
       return Scaffold(
           backgroundColor: AppColors.backgroundInverseTertiary(context),
           key: _screenKey,
-          body: SafeArea(child: Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                // Left Navigation (EAIT1001)
-                Visibility(
-                  visible: isNavigatingLeft ? (isOneEappLoaded ? false : true) : false,
-                  child: Container(
-                    width: 86,
-                    child: EAIT1001(
-                      navigationViewPort: viewPort,
-                      isNavigatingLeft: isNavigatingLeft,
-                      selectPressedSectionItem: selectPressedSectionItem,
-                      navigationWidget: widget,
+          body: SafeArea(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Left Navigation (EAIT1001)
+                  Visibility(
+                    visible: isNavigatingLeft
+                        ? (isOneEappLoaded ? false : true)
+                        : false,
+                    child: Container(
+                      width: 86,
+                      child: EAIT1001(
+                        navigationViewPort: viewPort,
+                        isNavigatingLeft: isNavigatingLeft,
+                        selectPressedSectionItem: selectPressedSectionItem,
+                        navigationWidget: widget,
+                      ),
                     ),
                   ),
-                ),
 
-                // Main Content (EAIT1002)
-                Visibility(
-                  visible: true,
-                  child: Expanded(
-                    flex: (LayoutBreakpoint().getBreakpoint(context) <= 4
-                        ? 7
-                        : 11),
-                    child: EAIT1002(
-                      isNavigatingLeft: isNavigatingLeft,
-                      selectPressedSectionItem: selectPressedSectionItem,
-                      toggleNavigatingPages: toggleNavigatingPages,
-                      navigationWidget: widget,
-                      navigationViewPort: viewPort,
-                      focusMode: focusMode,
-                      windowPane: WindowPane(
-                          focusMode: focusMode,
-                          pagesStack: _buildStackChildrens),
+                  // Main Content (EAIT1002)
+                  Visibility(
+                    visible: true,
+                    child: Expanded(
+                      flex: (LayoutBreakpoint().getBreakpoint(context) <= 4
+                          ? 7
+                          : 11),
+                      child: EAIT1002(
+                        isNavigatingLeft: isNavigatingLeft,
+                        selectPressedSectionItem: selectPressedSectionItem,
+                        toggleNavigatingPages: toggleNavigatingPages,
+                        navigationWidget: widget,
+                        navigationViewPort: viewPort,
+                        focusMode: focusMode,
+                        windowPane: WindowPane(
+                            focusMode: focusMode,
+                            pagesStack: _buildStackChildrens),
+                      ),
                     ),
                   ),
-                ),
 
-                // Additional Content (OpenTilesPane)
-                Visibility(
-                  child: OpenTilesPane(
-                      selectPressedSectionItem: selectPressedSectionItem,
-                      isNavigatingLeft: isNavigatingLeft,
-                      toggleNavigatingPages: toggleNavigatingPages,
-                      isNavigatingPages: isNavigatingPages),
-                  visible: isNavigatingLeft
-                      ? (isOneEappLoaded ? false : true)
-                      : (isNavigatingPages ? false : true),
-                ),
-              ],
+                  // Additional Content (OpenTilesPane)
+                  Visibility(
+                    child: OpenTilesPane(
+                        selectPressedSectionItem: selectPressedSectionItem,
+                        isNavigatingLeft: isNavigatingLeft,
+                        toggleNavigatingPages: toggleNavigatingPages,
+                        isNavigatingPages: isNavigatingPages),
+                    visible: isNavigatingLeft
+                        ? (isOneEappLoaded ? false : true)
+                        : (isNavigatingPages ? false : true),
+                  ),
+                ],
+              ),
             ),
-          ),));
+          ));
     }
 
     return buildMainContentScaffold();
