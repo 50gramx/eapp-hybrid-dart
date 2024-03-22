@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug - 50.ethos.domains - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--dart-define=flavor=50.ethos.domains"
+            ]
+        },
+        {
             "name": "Debug - 70.ethos.pods - Web",
             "cwd": "fifty_gramx",
             "request": "launch",
@@ -13,6 +24,17 @@
                 "-d",
                 "chrome",
                 "--dart-define=flavor=70.ethos.pods"
+            ]
+        },
+        {
+            "name": "Debug - 70.gs.weather - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--dart-define=flavor=70.gs.weather"
             ]
         },
         {
