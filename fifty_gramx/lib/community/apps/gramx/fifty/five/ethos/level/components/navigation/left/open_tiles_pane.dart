@@ -18,6 +18,132 @@ class OpenTilesPane extends StatelessWidget {
     required this.isNavigatingPages,
   });
 
+  Widget buildCard() {
+    return Center(
+      child: Neumorphic(
+        style: NeumorphicStyle(
+          shape: NeumorphicShape.flat,
+          depth: 10,
+          intensity: 0.7,
+          color: Colors.white,
+        ),
+        child: Container(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Open Ethos Domain Information',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Domain Name: Patel',
+                style: TextStyle(fontSize: 16),
+              ),
+               SizedBox(height: 5),
+              Text(
+                'Updated At: 10/10/2024',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              SizedBox(height: 10),
+              Text(
+                'Community Information:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Community Code: 88',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Community Name: Education',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Domain Location Information:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Universe: Ethosverse India',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Galaxy: 50GRAMx Ethos',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Space: Study India',
+                style: TextStyle(fontSize: 16),
+              ),
+             
+              SizedBox(height: 10),
+              Text(
+                'Domain Licence Information:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Licenced At: 02/10/2024',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Licenced Till: 01/10/2025',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'Space Information:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Space Kind: Knowledge',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Space Access: Open',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Space Type: Team',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Space Isolation: Non-Isolated',
+                style: TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget tiles = Neumorphic(
@@ -45,7 +171,7 @@ class OpenTilesPane extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemCount:
-              EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length + 1,
+              2,
           itemBuilder: (BuildContext context, int subIndex) {
             if (subIndex == 0) {
               return Container(
@@ -106,13 +232,16 @@ class OpenTilesPane extends StatelessWidget {
                 ),
                 child: box,
               );
-              return buildAppPageButton(
-                  context, subIndex - 1, selectPressedSectionItem);
+              return buildCard();
+              // return Text("${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex - 1].leftNavigationBarSectionalItem.label}");
+              // return buildAppPageButton(
+              //     context, subIndex - 1, selectPressedSectionItem);
             }
           },
         ),
       ),
     );
+
     Widget topRow = Visibility(
       visible: !isNavigatingLeft,
       child: Container(
@@ -133,11 +262,8 @@ class OpenTilesPane extends StatelessWidget {
     Widget expandedTiles = Expanded(
         flex: LayoutBreakpoint().getBreakpoint(context) <= 4 ? 6 : 4,
         child: Container(
-          child: Column(
-            children: [
-              topRow,
-              tiles
-            ],
+          child: ListView(
+            children: [topRow, tiles],
           ),
         ));
     return expandedTiles;

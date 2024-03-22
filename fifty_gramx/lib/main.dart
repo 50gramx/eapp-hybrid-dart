@@ -46,7 +46,8 @@ void main() async {
   print("App is starting...");
   // Firebase not available for windows, linux at the moment
   // Firebase is enabled for web at the moment
-  if (kIsWeb || Platform.isAndroid || Platform.isIOS) {
+  bool isFirebaseSupportedPlatform = kIsWeb || Platform.isAndroid || Platform.isIOS;
+  if (isFirebaseSupportedPlatform) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -163,23 +164,13 @@ class MyApp extends StatelessWidget {
 
   /// Initializes the application.
   Future<void> initializeApp() async => await (() async {
-        print("debug: initializeApp");
-        // Create a stopwatch and start it
-        print("will start stopwatch");
-        final stopwatch = Stopwatch()..start();
-        print("started stopwatch");
         if (!kIsWeb &&
             (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
           print("will start platform services");
           initializePlatformServices();
         }
-        print("debug: will start EthosAppFlowBob");
         EthosAppFlowBob();
         print("EthosAppFlowBob initialized.");
-        // Stop the stopwatch
-        stopwatch.stop();
-        print(
-            'Time elapsed to initializeApp: ${stopwatch.elapsedMilliseconds} ms');
       })();
 
   /// Initializes platform-specific services.
@@ -188,9 +179,9 @@ class MyApp extends StatelessWidget {
     if (Platform.isMacOS) {
       BrewCommands.initBrew();
     } else if (Platform.isWindows) {
-      print("do something");
+      print("initializePlatformServices failed for Windows");
     } else if (Platform.isLinux) {
-      print("do something");
+      print("initializePlatformServices failed for Linux");
     }
     MultipassCommands();
     print("Platform services initialized.");

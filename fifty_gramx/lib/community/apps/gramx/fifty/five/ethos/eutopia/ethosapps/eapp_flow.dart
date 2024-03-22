@@ -2,11 +2,14 @@ import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/BotP
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -42,6 +45,14 @@ class EappFlow {
       appTitle = "Identity";
       iconData = FeatherIcons.user;
       firstPage = WebViewPage(index: 1, containingFlowTitle: appTitle);
+    } else if (communityCode == 50 && title == 'domains') {
+      index = 5001;
+      appTitle = "Domains";
+      iconData = FeatherIcons.globe;
+      firstPage = HomePage(
+        index: index,
+        containingFlowTitle: appTitle,
+      );
     } else if (communityCode == 50 && title == 'conversations') {
       index = 2;
       appTitle = "Conversations";
@@ -72,6 +83,18 @@ class EappFlow {
       firstPage = EthosPodConfigurationPage(
           index: index, containingFlowTitle: appTitle);
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'weather') {
+      index = 7002;
+      appTitle = "Weather";
+      iconData = FeatherIcons.box;
+      firstPage = WeatherHomePage(
+          index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'ai') {
+      index = 7003;
+      appTitle = "Self AI";
+      iconData = FeatherIcons.box;
+      firstPage = BaibhavAIPage(
+          index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'entities') {
       index = 7001;
       appTitle = "Entities";

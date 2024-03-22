@@ -20,6 +20,9 @@ class Environment {
       flavor = const String.fromEnvironment("flavor");
       print("Environment:current: flavor:$flavor");
       switch (flavor) {
+        case "50.ethos.domains":
+          _current = "com.50gramx.50.ethos.domains";
+          break;
         case "70.ethos.pods":
           _current = "com.50gramx.70.ethos.pods";
           break;
@@ -29,6 +32,9 @@ class Environment {
     } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS || Platform.isWindows) {
       print("Environment:current: it's devices");
       switch (packageInfo.packageName) {
+        case "com.fiftygramx.fifty.zero.ethos.domains":
+          _current = "com.50gramx.50.ethos.domains";
+          break;
         case "com.fiftygramx.seventy.zero.ethos.pods":
           _current = "com.50gramx.70.ethos.pods";
           break;
