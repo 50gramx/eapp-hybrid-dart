@@ -1,6 +1,7 @@
 - organisation: ethos
   apps:
     - identity
+    - domains
     - conversations
     - connections
     - knowledge_spaces
