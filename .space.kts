@@ -228,7 +228,7 @@ job("Build and publish bundle to web track") {
             # Retrieve commit messages using Git log command
             # Output commit messages to console
             echo "Commit Messages:"
-            git log -n 1 --format=%B
+            git log -n 3 --format=%B
           """
         }
 
@@ -246,7 +246,7 @@ job("Build and publish bundle to web track") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Web Open Track v$version")
+                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Web Open Track v$version https://www.50GRAMx.com")
             }
             println("$response")
         }
