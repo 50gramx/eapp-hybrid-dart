@@ -882,6 +882,8 @@ class _StartScreenState extends State<StartScreen> {
               onTap: () {
                 // Handle About action
                 Navigator.pop(context); // Close popup menu
+
+                Navigator.pushNamed(context, '/about');
               },
             ),
           ),
@@ -919,7 +921,11 @@ class _StartScreenState extends State<StartScreen> {
       builder: (context, sizingInformation) {
         return Scaffold(
             appBar: AppBar(
-              title: Text("50GRAMx"),
+              title: Text(
+                "50GRAMx",
+                style: AppTextStyle.appTextStyle(context,
+                    AppColors.contentPrimary(context), 24, FontWeight.w600),
+              ),
               actions: homeAppBarActions,
               backgroundColor: AppColors.backgroundPrimary(context),
             ),

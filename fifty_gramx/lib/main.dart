@@ -30,6 +30,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
+import 'package:fifty_gramx/community/onboarding/website/about_us_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -46,7 +47,8 @@ void main() async {
   print("App is starting...");
   // Firebase not available for windows, linux at the moment
   // Firebase is enabled for web at the moment
-  bool isFirebaseSupportedPlatform = kIsWeb || Platform.isAndroid || Platform.isIOS;
+  bool isFirebaseSupportedPlatform =
+      kIsWeb || Platform.isAndroid || Platform.isIOS;
   if (isFirebaseSupportedPlatform) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -123,6 +125,17 @@ class MyApp extends StatelessWidget {
         theme: lightThemeData,
         darkTheme: darkThemeData,
         themeMode: ThemeMode.system,
+        onGenerateRoute: (settings) {
+          if (settings.name == '/about') {
+            return MaterialPageRoute(
+              builder: (context) => WebsiteAboutUsPage(),
+            );
+          }
+          // Handle other routes as needed
+        },
+        routes: {
+          '/about': (context) => WebsiteAboutUsPage(),
+        },
         navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(
           future: initializeApp(),
