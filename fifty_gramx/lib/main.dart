@@ -41,6 +41,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'firebase_options.dart';
 
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
+
 /// Entry point of the 50gramx Flutter application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -79,6 +81,7 @@ void main() async {
     //   not doing anything
   }
 
+  configureApp();
   runApp(MyApp());
 }
 
