@@ -25,7 +25,7 @@ CustomScrollView buildSliverBody(bool signedIn) {
             } else if (position == 2) {
               return buildHomePageSocialProofSection(context);
             } else if (position == 3) {
-              return buildHomePagePricingSection();
+              return buildHomePagePricingSection(context);
             } else if (position == 4) {
               return buildHomePageBenefitSection();
             } else if (position == 5) {

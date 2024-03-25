@@ -67,14 +67,14 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
             PopupMenuItem(
               child: ListTile(
                 title: Text(
-                  'Pricing',
+                  'Licences',
                   textAlign: TextAlign.center,
                   style: AppTextStyle.appTextStyle(context),
                 ),
                 onTap: () {
                   // Handle Careers action
                   Navigator.pop(context); // Close popup menu
-                  Navigator.pushNamed(context, '/galaxy/pricing');
+                  Navigator.pushNamed(context, '/galaxy/licences');
                 },
               ),
             ),

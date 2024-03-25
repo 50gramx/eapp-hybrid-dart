@@ -32,7 +32,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/community/onboarding/website/about_us_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/pricing_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -133,7 +133,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
-          '/galaxy/pricing': (context) => GalaxyPricingPage(),
+          '/galaxy/licences': (context) => GalaxyLicensesPage(),
         },
         navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(

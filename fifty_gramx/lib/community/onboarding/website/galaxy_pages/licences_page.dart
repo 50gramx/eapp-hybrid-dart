@@ -20,21 +20,21 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/pricing_page_sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page_sliver_body.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class GalaxyPricingPage extends StatefulWidget {
-  const GalaxyPricingPage({Key? key}) : super(key: key);
+class GalaxyLicensesPage extends StatefulWidget {
+  const GalaxyLicensesPage({Key? key}) : super(key: key);
 
   @override
-  State<GalaxyPricingPage> createState() => _GalaxyPricingPageState();
+  State<GalaxyLicensesPage> createState() => _GalaxyLicensesPageState();
 }
 
-class _GalaxyPricingPageState extends State<GalaxyPricingPage> {
+class _GalaxyLicensesPageState extends State<GalaxyLicensesPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -67,7 +67,7 @@ class _GalaxyPricingPageState extends State<GalaxyPricingPage> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
-            body: buildGalaxyPricingPageSliverBody());
+            body: buildGalaxyLicencesPageSliverBody());
       },
     );
   }
