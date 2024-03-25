@@ -20,21 +20,21 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/home_page/sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/pricing_page_sliver_body.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class StartScreen extends StatefulWidget {
-  const StartScreen({Key? key}) : super(key: key);
+class GalaxyPricingPage extends StatefulWidget {
+  const GalaxyPricingPage({Key? key}) : super(key: key);
 
   @override
-  State<StartScreen> createState() => _StartScreenState();
+  State<GalaxyPricingPage> createState() => _GalaxyPricingPageState();
 }
 
-class _StartScreenState extends State<StartScreen> {
+class _GalaxyPricingPageState extends State<GalaxyPricingPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -67,7 +67,7 @@ class _StartScreenState extends State<StartScreen> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
-            body: buildSliverBody(signedIn));
+            body: buildGalaxyPricingPageSliverBody());
       },
     );
   }
