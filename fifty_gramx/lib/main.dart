@@ -31,6 +31,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/community/onboarding/website/about_us_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -134,6 +135,7 @@ class MyApp extends StatelessWidget {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
           '/galaxy/licences': (context) => GalaxyLicensesPage(),
+          '/ethosverse': (context) => EthosverseOverviewPage(),
         },
         navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(
