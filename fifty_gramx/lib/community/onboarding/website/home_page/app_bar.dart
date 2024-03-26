@@ -46,6 +46,49 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
         ));
 
     var actions = [
+      GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            '/ethosverse',
+          );
+        },
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+            child: Container(
+              padding: EdgeInsets.only(left: 6, right: 6),
+              alignment: Alignment.center,
+              child: NeumorphicText(
+                "Ethosverse",
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                      topRight: Radius.circular(24),
+                      bottomRight: Radius.circular(24))),
+                  color: AppColors.contentPrimary(context),
+                  depth: 2,
+                  disableDepth: false,
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundInverseTertiary(context),
+                    width: 0.3,
+                  ),
+                ),
+                textAlign: TextAlign.left,
+                textStyle: NeumorphicTextStyle(
+                    fontSize: 20,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w600,
+                    height: 1.25),
+              ),
+            )),
+      ),
       Padding(
         padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
         child: PopupMenuButton(
