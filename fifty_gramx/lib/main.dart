@@ -31,6 +31,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/community/onboarding/website/about_us_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
@@ -131,11 +132,27 @@ class MyApp extends StatelessWidget {
         theme: lightThemeData,
         darkTheme: darkThemeData,
         themeMode: ThemeMode.system,
+        builder: (context, child) {
+          return Banner(
+            message: 'Coming soon', // Change the banner message here
+            textStyle: TextStyle(
+              fontSize: 8,
+              fontFamily: "Montserrat",
+              fontWeight: FontWeight.w500,
+              color: AppColors.contentInversePrimary(context),
+            ),
+            location: BannerLocation.topEnd, // Set banner location
+            color: AppColors.backgroundInverseTertiary(
+                context), // Customize banner color if needed
+            child: child!,
+          );
+        },
         routes: {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
           '/galaxy/licences': (context) => GalaxyLicensesPage(),
           '/ethosverse': (context) => EthosverseOverviewPage(),
+          '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
         },
         navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(
