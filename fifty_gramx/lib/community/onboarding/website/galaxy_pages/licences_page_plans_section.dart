@@ -26,7 +26,7 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
                 'Starter',
-                '\$9.99/month',
+                '\₹0',
                 [
                   'Feature 1',
                   'Feature 2',
@@ -43,7 +43,7 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
                 'Basic',
-                '\$29.99/month',
+                '\₹0',
                 [
                   'Invite Upto 3 Accounts',
                   'Feature 2',
@@ -60,7 +60,7 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
                 'Standard',
-                '\$149/year',
+                '\₹16,000',
                 [
                   'Invite Upto 5 Accounts',
                   '1 Reserved Star Node',
@@ -77,7 +77,7 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
                 'Professional',
-                '\$999/year',
+                '\₹99,999',
                 [
                   'Invite Upto 10 Accounts',
                   '3 Reserved Accelerated Star Nodes',
