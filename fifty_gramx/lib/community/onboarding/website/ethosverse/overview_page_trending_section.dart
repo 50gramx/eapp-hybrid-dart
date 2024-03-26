@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildOverviewPageTrendingSection(BuildContext context) {
@@ -9,7 +8,11 @@ Widget buildOverviewPageTrendingSection(BuildContext context) {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            // Navigate to domain's grievances collection page
+            Navigator.pushNamed(
+              context,
+              '/ethosverse/domain',
+              arguments: {'domainName': trendingGrievances[index]['url']},
+            );
           },
           child: Neumorphic(
             style: NeumorphicStyle(
@@ -35,11 +38,13 @@ List<Map<String, dynamic>> trendingGrievances = [
   {
     'title': 'Grievance Title 1',
     'domain': 'Domain Name 1',
+    'url': "alpha",
     'numArticles': 3,
   },
   {
     'title': 'Grievance Title 2',
     'domain': 'Domain Name 2',
+    'url': "beta",
     'numArticles': 5,
   },
   // Add more grievances as needed
