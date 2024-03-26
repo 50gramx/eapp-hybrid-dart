@@ -1,18 +1,13 @@
-import 'dart:io';
-
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
-
 import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
 /// material's and cupertino's bottom navigation pattern.
 class AdaptiveLeftNavigationScaffold extends StatefulWidget {
-
   const AdaptiveLeftNavigationScaffold({
     Key? key,
-  })  : super(key: key);
+  }) : super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
 //  final List<LeftNavigationTab> navigationBarItems;
