@@ -35,6 +35,7 @@ import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_p
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -153,6 +154,8 @@ class MyApp extends StatelessWidget {
           '/galaxy/licences': (context) => GalaxyLicensesPage(),
           '/ethosverse': (context) => EthosverseOverviewPage(),
           '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
+          '/53gramx/satwa': (context) => SatwaOverviewPage(),
+          '/53gramx/satwa/pricing': (context) => SatwaOverviewPage(),
         },
         navigatorObservers: <NavigatorObserver>[observer],
         home: FutureBuilder<void>(

@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold_backup.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class HomePageSliverAppBar extends StatefulWidget {
@@ -45,7 +46,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
           child: tappableTitleText,
         ));
 
-    var actions = [
+    var leftNavigationActions = [
       GestureDetector(
         onTap: () {
           Navigator.pushNamed(
@@ -159,13 +160,14 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
             PopupMenuItem(
               child: ListTile(
                 title: Text(
-                  'Careers',
+                  'SATWA',
                   textAlign: TextAlign.center,
                   style: AppTextStyle.appTextStyle(context),
                 ),
                 onTap: () {
                   // Handle Careers action
                   Navigator.pop(context); // Close popup menu
+                  Navigator.pushNamed(context, '/53gramx/satwa');
                 },
               ),
             ),
@@ -187,12 +189,24 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       ),
     ];
 
+    List<Widget> bottomNavigationActions = [
+      IconButton(
+        icon: Icon(Icons.menu),
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
+      ),
+    ];
+
+    bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
+
     return SliverAppBar(
       title: title,
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundPrimary(context),
       pinned: widget.isPinned,
-      actions: actions,
+      actions:
+          isNavigatingLeft ? leftNavigationActions : bottomNavigationActions,
       stretch: true,
       onStretchTrigger: () async {
         print("OnStretchTrigger:start");
@@ -201,19 +215,6 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
     );
   }
 }
-
-/* 
-
-CustomSliverAppBar(
-          labelText: "50GRAMx",
-          actionLabelText: "Ethosai",
-          isActionEnabled: false,
-          isBackEnabled: false,
-          trailingButtonCallback: () {},
-          onStretchTriggerCallback: () {},
-        ),
-
-*/
 
 Widget buildAppBarTextButton(String title, BuildContext context) {
   return Container(
