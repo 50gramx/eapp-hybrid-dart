@@ -30,12 +30,13 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
-import 'package:fifty_gramx/community/onboarding/website/about_us_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/home_page/about_us_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/pricing_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -44,9 +45,12 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 import 'firebase_options.dart';
 
-import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
+bool isFirebaseSupportedPlatform() {
+  return kIsWeb || Platform.isAndroid || Platform.isIOS;
+}
 
 /// Entry point of the 50gramx Flutter application.
 void main() async {
@@ -54,9 +58,7 @@ void main() async {
   print("App is starting...");
   // Firebase not available for windows, linux at the moment
   // Firebase is enabled for web at the moment
-  bool isFirebaseSupportedPlatform =
-      kIsWeb || Platform.isAndroid || Platform.isIOS;
-  if (isFirebaseSupportedPlatform) {
+  if (isFirebaseSupportedPlatform()) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
@@ -115,10 +117,6 @@ class MyApp extends StatelessWidget {
     accentColor: AppColors.lightPrimaryA,
   );
 
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
-
   @override
   Widget build(BuildContext context) {
     Widget progress = Scaffold(
@@ -155,9 +153,9 @@ class MyApp extends StatelessWidget {
           '/ethosverse': (context) => EthosverseOverviewPage(),
           '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
           '/53gramx/satwa': (context) => SatwaOverviewPage(),
-          '/53gramx/satwa/pricing': (context) => SatwaOverviewPage(),
+          '/53gramx/satwa/pricing': (context) => SatwaPricingPage(),
         },
-        navigatorObservers: <NavigatorObserver>[observer],
+        navigatorObservers: getNavigatorObserver(),
         home: FutureBuilder<void>(
           future: initializeApp(),
           builder: (context, snapshot) {
@@ -194,6 +192,20 @@ class MyApp extends StatelessWidget {
             }
           },
         ));
+  }
+
+  List<NavigatorObserver> getNavigatorObserver() {
+    List<NavigatorObserver> listOfNavigatorObserver = [];
+
+    if (isFirebaseSupportedPlatform()) {
+      FirebaseAnalytics firebaseAnalytics = FirebaseAnalytics.instance;
+      FirebaseAnalyticsObserver firebaseAnalyticsobserver =
+          FirebaseAnalyticsObserver(analytics: firebaseAnalytics);
+
+      listOfNavigatorObserver.add(firebaseAnalyticsobserver);
+    }
+
+    return listOfNavigatorObserver;
   }
 
   /// Initializes the application.
