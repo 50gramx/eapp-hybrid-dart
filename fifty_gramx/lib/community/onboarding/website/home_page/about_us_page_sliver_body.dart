@@ -1,6 +1,4 @@
-import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/home_page/value_prop_section.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 CustomScrollView buildHomeAboutUsPageSliverBody() {
