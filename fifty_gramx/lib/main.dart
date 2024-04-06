@@ -30,6 +30,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
+import 'package:fifty_gramx/community/onboarding/website/domains_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
@@ -130,19 +131,19 @@ class MyApp extends StatelessWidget {
         title: Constants.appName,
         theme: lightThemeData,
         darkTheme: darkThemeData,
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         builder: (context, child) {
           return Banner(
-            message: 'Coming soon', // Change the banner message here
+            message: 'ALPHA', // Change the banner message here
             textStyle: TextStyle(
               fontSize: 8,
               fontFamily: "Montserrat",
               fontWeight: FontWeight.w500,
-              color: AppColors.contentInversePrimary(context),
+              color: AppColors.contentInversePrimary(context).withAlpha(150),
             ),
             location: BannerLocation.topEnd, // Set banner location
-            color: AppColors.backgroundInverseTertiary(
-                context), // Customize banner color if needed
+            color: AppColors.backgroundInverseTertiary(context)
+                .withAlpha(75), // Customize banner color if needed
             child: child!,
           );
         },
@@ -150,6 +151,7 @@ class MyApp extends StatelessWidget {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
           '/galaxy/licences': (context) => GalaxyLicensesPage(),
+          '/domains': (context) => DomainsOverviewPage(),
           '/ethosverse': (context) => EthosverseOverviewPage(),
           '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
           '/53gramx/satwa': (context) => SatwaOverviewPage(),
