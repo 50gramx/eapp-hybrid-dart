@@ -53,7 +53,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       child: NeumorphicButton(
           provideHapticFeedback: true,
           onPressed: () {
-            Navigator.pushNamed(context, '/domains');
+            Navigator.pushNamed(context, '/collars');
           },
           style: NeumorphicStyle(
             lightSource: NeumorphicTheme.isUsingDark(context)
@@ -74,7 +74,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           child: Text(
-            "Get Domains",
+            "Try Collars",
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: AppColors.contentInversePrimary(context),

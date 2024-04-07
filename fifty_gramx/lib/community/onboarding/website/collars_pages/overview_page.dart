@@ -20,21 +20,21 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/domains_pages/overview_page_sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/overview_page_sliver_body.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class DomainsOverviewPage extends StatefulWidget {
-  const DomainsOverviewPage({Key? key}) : super(key: key);
+class CollarsOverviewPage extends StatefulWidget {
+  const CollarsOverviewPage({Key? key}) : super(key: key);
 
   @override
-  State<DomainsOverviewPage> createState() => _DomainsOverviewPageState();
+  State<CollarsOverviewPage> createState() => _CollarsOverviewPageState();
 }
 
-class _DomainsOverviewPageState extends State<DomainsOverviewPage> {
+class _CollarsOverviewPageState extends State<CollarsOverviewPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -67,7 +67,7 @@ class _DomainsOverviewPageState extends State<DomainsOverviewPage> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
-            body: buildDomainsOverviewPageSliverBody());
+            body: buildCollarsOverviewPageSliverBody());
       },
     );
   }

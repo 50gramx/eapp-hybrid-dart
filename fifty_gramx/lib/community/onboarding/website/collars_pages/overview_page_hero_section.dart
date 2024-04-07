@@ -4,7 +4,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/ethos_domain_widget.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-Widget buildDomainsOverviewPageHeroSection(BuildContext context) {
+Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
   return Neumorphic(
     style: NeumorphicStyle(
         lightSource: NeumorphicTheme.isUsingDark(context)
@@ -60,31 +60,32 @@ Widget buildDomainsOverviewPageHeroSection(BuildContext context) {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "title",
+                            "Offer Letter",
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 10),
                           Text(
-                            "domainCollar.subtitle",
+                            "Closed Isolated Space Knowledge Domain Collar For Job Seekers & HR Professionals",
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 10),
                           Text(
-                            "domainCollar.paragraph",
+                            "Ability to analyze and interpret offer letters, provide insights on salary, benefits, and terms, and facilitate negotiation.",
                             style: TextStyle(fontSize: 16),
                           ),
                           SizedBox(height: 20),
                           NeumorphicButton(
                             onPressed: () {
+                              Navigator.pushNamed(context, '/53/offer-letter');
                               // Add button functionality
                             },
                             style: NeumorphicStyle(
                               boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(8)),
                             ),
-                            child: Text('Button'),
+                            child: Text('Checkout Collar'),
                           ),
                         ],
                       ),

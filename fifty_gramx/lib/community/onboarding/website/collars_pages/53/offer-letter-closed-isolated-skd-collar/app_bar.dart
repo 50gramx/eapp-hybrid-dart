@@ -1,8 +1,8 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class DomainsOverviewPageSliverAppBar extends StatefulWidget {
-  DomainsOverviewPageSliverAppBar({
+class OfferLetterCISKDCOverviewPageSliverAppBar extends StatefulWidget {
+  OfferLetterCISKDCOverviewPageSliverAppBar({
     Key? key,
   })  : preferredSize = Size.fromHeight(64.0),
         super(key: key);
@@ -11,16 +11,16 @@ class DomainsOverviewPageSliverAppBar extends StatefulWidget {
   final Size preferredSize;
 
   @override
-  _DomainsOverviewPageSliverAppBarState createState() =>
-      _DomainsOverviewPageSliverAppBarState();
+  _OfferLetterCISKDCOverviewPageSliverAppBarState createState() =>
+      _OfferLetterCISKDCOverviewPageSliverAppBarState();
 }
 
-class _DomainsOverviewPageSliverAppBarState
-    extends State<DomainsOverviewPageSliverAppBar> {
+class _OfferLetterCISKDCOverviewPageSliverAppBarState
+    extends State<OfferLetterCISKDCOverviewPageSliverAppBar> {
   @override
   Widget build(BuildContext context) {
     Widget titleText = Text(
-      "Domains",
+      "Vinayak from Staffing",
       maxLines: 1,
       textAlign: TextAlign.start,
       style: TextStyle(
@@ -31,7 +31,7 @@ class _DomainsOverviewPageSliverAppBarState
     );
     Widget tappableTitleText = GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/domains');
+        Navigator.pushNamed(context, '/collars');
       },
       child: titleText,
     );
