@@ -20,23 +20,23 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_hr_professionals_page_sliver_body.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class Vinayak53GRAMxGroupJobseekersPage extends StatefulWidget {
-  const Vinayak53GRAMxGroupJobseekersPage({Key? key}) : super(key: key);
+class Vinayak53GRAMxGroupHRProfessionalsPage extends StatefulWidget {
+  const Vinayak53GRAMxGroupHRProfessionalsPage({Key? key}) : super(key: key);
 
   @override
-  State<Vinayak53GRAMxGroupJobseekersPage> createState() =>
-      _Vinayak53GRAMxGroupJobseekersPageState();
+  State<Vinayak53GRAMxGroupHRProfessionalsPage> createState() =>
+      _Vinayak53GRAMxGroupHRProfessionalsPageState();
 }
 
-class _Vinayak53GRAMxGroupJobseekersPageState
-    extends State<Vinayak53GRAMxGroupJobseekersPage> {
+class _Vinayak53GRAMxGroupHRProfessionalsPageState
+    extends State<Vinayak53GRAMxGroupHRProfessionalsPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -69,7 +69,7 @@ class _Vinayak53GRAMxGroupJobseekersPageState
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
-            body: buildVinayak53GRAMxGroupJobseekersPageSliverBody());
+            body: buildVinayak53GRAMxGroupHRProfessionalsPageSliverBody());
       },
     );
   }
