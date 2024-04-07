@@ -60,7 +60,7 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Offer Letter",
+                            "Vianayak.53GRAMx",
                             style: TextStyle(
                                 fontSize: 24, fontWeight: FontWeight.bold),
                           ),
@@ -78,14 +78,14 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                           SizedBox(height: 20),
                           NeumorphicButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/53/offer-letter');
+                              Navigator.pushNamed(context, '/53/vinayak');
                               // Add button functionality
                             },
                             style: NeumorphicStyle(
                               boxShape: NeumorphicBoxShape.roundRect(
                                   BorderRadius.circular(8)),
                             ),
-                            child: Text('Checkout Collar'),
+                            child: Text('Licence Collar'),
                           ),
                         ],
                       ),
