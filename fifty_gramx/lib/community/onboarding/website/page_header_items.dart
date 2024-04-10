@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -80,6 +81,14 @@ class PageHeaderConfig {
             textAlign: TextAlign.center,
             style: AppTextStyle.appTextStyle(context),
           ),
+          trailing: item['route']!.startsWith('http://') ||
+                  item['route']!.startsWith('https://')
+              ? Icon(
+                  FeatherIcons.arrowUpRight,
+                  color: AppColors.contentPrimary(context),
+                  size: 18,
+                )
+              : null, // Show icon if the link opens in a new tab
           onTap: () {
             if (item['route']!.startsWith('http://') ||
                 item['route']!.startsWith('https://')) {
