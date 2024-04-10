@@ -19,12 +19,11 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
                 'Personal',
                 'For individuals just getting started with 50GRAMx Galaxies',
                 '\₹1,999',
-                'Start Free',
+                'Licence Now',
                 [
+                  'Pooled Processing Network',
+                  'Access Ethosverse Browser',
                   'Invite Upto 3 Accounts',
-                  'Feature 2',
-                  'Feature 3',
-                  'Feature 4',
                 ],
                 context,
               ),
@@ -40,10 +39,10 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
                 '\₹29,999',
                 'Licence Now',
                 [
-                  'Invite Upto 5 Accounts',
-                  '1 Reserved Star Node',
-                  'Reserve 1 Team Space',
-                  'Feature 4',
+                  'Private Processing Network',
+                  'Dedicated Star Nodes',
+                  'Access Regional Nodes',
+                  'Invite Upto 50 Accounts',
                 ],
                 context,
               ),
@@ -59,10 +58,10 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
                 '\₹149,999',
                 'Contact Sales',
                 [
-                  'Invite Upto 10 Accounts',
-                  '3 Reserved Accelerated Star Nodes',
-                  'Reserve Upto 3 Teams',
-                  'Feature 4',
+                  'Private Processing Network',
+                  'Invite Upto 50 Associates',
+                  'Invite Upto 10 Teams',
+                  'Dedicated GRAMx Passes',
                 ],
                 context,
               ),
@@ -141,14 +140,37 @@ Widget _buildPricingCard(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: features
                 .map(
-                  (feature) => Text(
-                    feature,
-                    style: TextStyle(
+                  (feature) => ListTile(
+                    leading: NeumorphicCheckbox(
+                      value: false, // Set checkbox value as needed
+                      onChanged: (value) {
+                        // Handle checkbox state change if needed
+                      },
+                      isEnabled: false,
+                      style: NeumorphicCheckboxStyle(
+                        lightSource: NeumorphicTheme.isUsingDark(context)
+                            ? LightSource.bottomRight
+                            : LightSource.topLeft,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(24)),
+                        selectedColor: AppColors.contentPrimary(context),
+                        border: NeumorphicBorder(
+                          isEnabled: true,
+                          color: AppColors.backgroundPrimary(context),
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      feature,
+                      style: TextStyle(
                         color: AppColors.contentPrimary(context),
                         fontSize: 16,
                         fontFamily: "Montserrat",
                         fontWeight: FontWeight.w600,
-                        height: 1.14285714),
+                        height: 1.14285714,
+                      ),
+                    ),
                   ),
                 )
                 .toList(),

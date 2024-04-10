@@ -24,7 +24,7 @@ CustomScrollView buildGalaxyLicencesPageSliverBody() {
             } else if (position == 2) {
               return buildGalaxyLicencesPageSalesSection(context);
             } else if (position == 3) {
-              return buildGalaxyLicencesPageCompareSection();
+              return buildGalaxyLicencesPageCompareSection(context);
             } else {
               return SizedBox();
             }
