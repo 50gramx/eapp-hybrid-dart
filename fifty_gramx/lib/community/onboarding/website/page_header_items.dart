@@ -1,6 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PageHeaderConfig {
   final String header;
@@ -61,6 +62,15 @@ class PageHeaderConfig {
     }).toList();
   }
 
+  _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   List<PopupMenuItem> buildMenu(BuildContext context) {
     return items.map((item) {
       return PopupMenuItem(
@@ -71,8 +81,13 @@ class PageHeaderConfig {
             style: AppTextStyle.appTextStyle(context),
           ),
           onTap: () {
-            Navigator.pop(context); // Close popup menu
-            Navigator.pushNamed(context, item['route']!);
+            if (item['route']!.startsWith('http://') ||
+                item['route']!.startsWith('https://')) {
+              _launchURL(item['route']!);
+            } else {
+              Navigator.pop(context); // Close popup menu
+              Navigator.pushNamed(context, item['route']!);
+            }
           },
         ),
       );
