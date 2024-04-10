@@ -17,6 +17,7 @@ import 'package:fifty_gramx/community/onboardingWidgets/addEthosCoinWidget.dart'
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -378,13 +379,13 @@ class _EthosCoinConfigurationPageState
                 }),
 
             Visibility(
-                visible: Platform.isAndroid || Platform.isIOS,
+                visible: kIsWeb || Platform.isAndroid || Platform.isIOS,
                 child: Container(
                     margin: EdgeInsets.only(
                         top: 32, bottom: 4, right: 16, left: 16),
                     child: FormInfoText("ADD ETHOSCOIN").build(context))),
             Visibility(
-                visible: Platform.isAndroid || Platform.isIOS,
+                visible: kIsWeb || Platform.isAndroid || Platform.isIOS,
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                     child: AddEthosCoinWidget(

@@ -6,20 +6,21 @@ Widget buildGalaxyLicencesPageHeroSection(BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       Align(
-          alignment: Alignment.center,
+          alignment: Alignment.centerLeft,
           child: Container(
-            width: 0.7 * MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             child: Padding(
-              padding: EdgeInsets.only(top: 32, left: 16, right: 16, bottom: 4),
+              padding:
+                  EdgeInsets.only(top: 128, left: 16, right: 16, bottom: 64),
               child: RichText(
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 text: TextSpan(
-                  text: "Pricing",
+                  text: "Licences",
                   style: TextStyle(
                       color: AppColors.contentPrimary(context),
-                      fontSize: 48,
+                      fontSize: 64,
                       fontFamily: "Montserrat",
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w600,
                       height: 1.14285714),
                 ),
               ),

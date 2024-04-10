@@ -54,7 +54,7 @@ class _AddEthosCoinWidgetState extends State<AddEthosCoinWidget> {
   ProductDetails _selectedCoinBalance = ProductDetails(
       currencyCode: "",
       description: "",
-      id: "",
+      id: "50gramx.add.ethoscoin.100",
       price: "0",
       rawPrice: 0.00,
       title: "");

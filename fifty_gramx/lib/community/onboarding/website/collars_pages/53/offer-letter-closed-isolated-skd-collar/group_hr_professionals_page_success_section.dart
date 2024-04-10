@@ -23,43 +23,28 @@ Widget buildVinayak53GRAMxGroupHRProfessionalsPageSuccessSection(
     child: Padding(
       padding: const EdgeInsets.all(0.0),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 16),
         color: Colors.grey[200], // Customize color as needed
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Customer Success',
+              'Efficient Candidate Management',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
+              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             Text(
-              'Here\'s what our users are saying about Vinayak:',
+              'Manage candidates efficiently with Vinayak\'s powerful candidate management tools. Organize resumes, track application statuses, and schedule interviews seamlessly to find the perfect fit for your organization.',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
+                color: Colors.black,
               ),
-            ),
-            SizedBox(height: 10),
-            // Testimonials
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    AssetImage('assets/user1.jpg'), // Add user image
-              ),
-              title: Text('John Doe'),
-              subtitle: Text('Vinayak helped me negotiate a better salary!'),
-            ),
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    AssetImage('assets/user2.jpg'), // Add user image
-              ),
-              title: Text('Jane Smith'),
-              subtitle: Text(
-                  'Thanks to Vinayak, I understood my job benefits better!'),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

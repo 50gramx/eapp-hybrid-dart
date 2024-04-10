@@ -1,49 +1,25 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Container/NeuContainer.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      // Licences Title
-      Padding(
-        padding: EdgeInsets.symmetric(vertical: 20),
-        child: Text(
-          'Licences',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
       // Four Cards Row
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Plan 1
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: _buildPricingCard(
-                'Starter',
-                '\₹0',
-                [
-                  'Feature 1',
-                  'Feature 2',
-                  'Feature 3',
-                  'Feature 4',
-                ],
-                context,
-              ),
-            ),
-          ),
           // Plan 2
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
-                'Basic',
-                '\₹0',
+                'Personal',
+                'For individuals just getting started with 50GRAMx Galaxies',
+                '\₹1,999',
+                'Start Free',
                 [
                   'Invite Upto 3 Accounts',
                   'Feature 2',
@@ -59,8 +35,10 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
             child: Padding(
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
-                'Standard',
-                '\₹16,000',
+                'Professional',
+                'For dynamic individuals looking to boost productivity',
+                '\₹29,999',
+                'Licence Now',
                 [
                   'Invite Upto 5 Accounts',
                   '1 Reserved Star Node',
@@ -76,8 +54,10 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
             child: Padding(
               padding: EdgeInsets.all(10),
               child: _buildPricingCard(
-                'Professional',
-                '\₹99,999',
+                'Organisation',
+                'For innovative companies looking to scale securely',
+                '\₹149,999',
+                'Contact Sales',
                 [
                   'Invite Upto 10 Accounts',
                   '3 Reserved Accelerated Star Nodes',
@@ -96,51 +76,66 @@ Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
 
 Widget _buildPricingCard(
   String planName,
+  String planDescription,
   String planPrice,
+  String buttonName,
   List<String> features,
   BuildContext context,
 ) {
-  return Card(
-    elevation: 3,
-    child: Padding(
+  return NeuContainer(
+    containerChild: Padding(
       padding: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Plan Name
+          SizedBox(height: 8),
+
           Text(
             planName,
             style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
+                color: AppColors.contentPrimary(context),
+                fontSize: 24,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w500,
+                height: 1.14285714),
+            textAlign: TextAlign.start,
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 16),
+          // Plan Price
+          Text(
+            planDescription,
+            style: TextStyle(
+                color: AppColors.contentPrimary(context),
+                fontSize: 18,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w400,
+                height: 1.14285714),
+            textAlign: TextAlign.start,
+          ),
+          SizedBox(height: 16),
           // Plan Price
           Text(
             planPrice,
             style: TextStyle(
-              fontSize: 16,
-              color: Colors.green,
-            ),
-            textAlign: TextAlign.center,
+                color: AppColors.contentPrimary(context),
+                fontSize: 48,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w600,
+                height: 1.14285714),
+            textAlign: TextAlign.start,
           ),
-          SizedBox(height: 20),
-          // Plan Start Button
-          ElevatedButton(
-            onPressed: () {
-              // Add onPressed logic
-            },
-            child: Text('Start Plan'),
-          ),
-          SizedBox(height: 20),
+          SizedBox(height: 32),
+          ActionNeuButton(
+              buttonTitle: buttonName, buttonActionOnPressed: () {}),
+
+          SizedBox(height: 16),
           // Line
           Divider(
             height: 1,
-            color: Colors.grey,
+            color: AppColors.backgroundTertiary(context),
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 16),
           // Features List
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -148,7 +143,12 @@ Widget _buildPricingCard(
                 .map(
                   (feature) => Text(
                     feature,
-                    style: TextStyle(fontSize: 14),
+                    style: TextStyle(
+                        color: AppColors.contentPrimary(context),
+                        fontSize: 16,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                        height: 1.14285714),
                   ),
                 )
                 .toList(),
