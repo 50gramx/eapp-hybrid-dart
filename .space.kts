@@ -214,6 +214,7 @@ job("Build and publish bundle to web track") {
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
                 req.channel("#product-dev").text("🚨️ Started 🌐 Web v$version Interactions Deployment 🙏")
+            }
         }
 
         requirements {
