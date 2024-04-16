@@ -76,7 +76,7 @@ job("Build Web Base Image") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building Web Base Image v$version")
+                req.channel("#product-dev").text("👋 Built 🌐 Web Base v$version Interactions Image 🙏")
             }
             println("$response")
         }
@@ -155,7 +155,7 @@ job("Build Android Base Image") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building Android Base Image v$version")
+                req.channel("#product-dev").text("👋 Built 📱 Android Base v$version Interactions OS 🙏")
             }
             println("$response")
         }
@@ -197,7 +197,9 @@ job("Build and publish bundle to web track") {
         }
     }
 
-    container("amazoncorretto:17-alpine") {
+    container("Start Deployment", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
         kotlinScript { api ->
             api.space().projects.automation.deployments.start(
                     project = api.projectIdentifier(),
@@ -206,6 +208,12 @@ job("Build and publish bundle to web track") {
                     // automatically update deployment status based on a status of a job
                     syncWithAutomationJob = true
             )
+
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("🚨️ Started 🌐 Web v$version Interactions Deployment 🙏")
         }
 
         requirements {
@@ -246,7 +254,7 @@ job("Build and publish bundle to web track") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Web Open Track v$version https://www.50GRAMx.com")
+                req.channel("#product-dev").text("👋 Deployed 🌐 Web v$version Interactions 🙏")
             }
             println("$response")
         }
@@ -353,7 +361,7 @@ job("Build and publish bundle to android internal track") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Android Internal Track v$version")
+                req.channel("#product-dev").text("👋 Deployed 📱 Android Internal v$version Interactions 🙏")
             }
             println("$response")
         }
@@ -431,7 +439,7 @@ job("Build and publish bundle to iOS internal track") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On iOS Internal Track v$version")
+                req.channel("#product-dev").text("👋 Deployed 📱 iOS Internal v$version Interactions 🙏")
             }
             println("$response")
         }
@@ -517,7 +525,7 @@ job("Build and publish bundle to windows desktop track") {
             val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
             val version = api.parameters["VERSION_NUMBER"]
             val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("Finished Building & Deploying Dart Implementations On Windows Desktop Track v$version")
+                req.channel("#product-dev").text("👋 Deployed 🖥️ Windows Desktop v$version Interactions 🙏")
             }
             println("$response")
         }

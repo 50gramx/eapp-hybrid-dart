@@ -92,7 +92,7 @@ dependencies:
   carousel_slider: ^4.0.0
   eapp_dart_domain:
     hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
-    version: ^24.1.102
+    version: ^24.1.107
 
 flutter_icons:
   android: "launcher_icon"
