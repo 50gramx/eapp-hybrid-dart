@@ -24,6 +24,7 @@ import 'dart:io';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/genesys/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
@@ -184,7 +185,7 @@ class MyApp extends StatelessWidget {
                               if (envSnap.connectionState ==
                                   ConnectionState.done) {
                                 if (envSnap.data == "com.50gramx") {
-                                  return StartScreen();
+                                  return BrowserTab();
                                 } else {
                                   return HomeScreen();
                                 }
