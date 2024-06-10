@@ -5,3 +5,6 @@
     - conversations
     - connections
     - knowledge_spaces
+- organisation: genesys
+  apps:
+    - browser

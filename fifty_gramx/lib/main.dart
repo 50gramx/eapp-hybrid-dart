@@ -185,7 +185,7 @@ class MyApp extends StatelessWidget {
                               if (envSnap.connectionState ==
                                   ConnectionState.done) {
                                 if (envSnap.data == "com.50gramx") {
-                                  return BrowserTab();
+                                  return BrowserTab(url:'https://www.50gramx.com');
                                 } else {
                                   return HomeScreen();
                                 }

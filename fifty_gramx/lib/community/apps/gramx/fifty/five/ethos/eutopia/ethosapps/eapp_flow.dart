@@ -6,6 +6,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_p
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/genesys/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
@@ -66,6 +67,11 @@ class EappFlow {
       appTitle = "Connections";
       iconData = FeatherIcons.users;
       firstPage = ConnectionsHomePage(index: index);
+    } else if (communityCode == 50 && title == 'browser') {
+      index = 5009;
+      appTitle = "browser";
+      iconData = FeatherIcons.users;
+      firstPage = BrowserTab(url:'https://www.50gramx.com');
     } else if (communityCode == 50 && title == 'knowledge_spaces') {
       index = 4;
       appTitle = "Knowledge";
