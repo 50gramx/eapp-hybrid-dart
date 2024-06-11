@@ -77,11 +77,19 @@ class _AccountAssistantConversationPageState
   @override
   void initState() {
     /// creating the list manger
+    print("_AccountAssistantConversationPageState: initState");
     listKeyManager = ConversationListKeyManager();
+    print("_AccountAssistantConversationPageState: list key manager defined");
+    print("_AccountAssistantConversationPageState: will add empty entity");
     LocalConversationsService.addEmptyEntityIdConversationMessageMap(
         widget.accountAssistant.accountAssistantId);
+    print(
+        "_AccountAssistantConversationPageState: will add text field listener");
     addMessageTextFieldListener();
+    print(
+        "_AccountAssistantConversationPageState: will load conversation messages");
     loadConversationsMessages();
+    print("_AccountAssistantConversationPageState: will super init");
     super.initState();
   }
 
@@ -229,11 +237,90 @@ class _AccountAssistantConversationPageState
   Map<SpaceKnowledgeDomain, List<RankedAnswer>>
       spaceKnowledgeDomainsActionAskQuestionMaps = {};
 
+  String buildAppBarLabelText() {
+    String trimmedAssistantName =
+        widget.accountAssistant.accountAssistantName.trim();
+    if (trimmedAssistantName.isNotEmpty) {
+      String assistantNameUC = trimmedAssistantName[0].toUpperCase();
+      String assistantNameNew = trimmedAssistantName.substring(
+          1, widget.accountAssistant.accountAssistantName.trim().length);
+      return "${assistantNameUC}${assistantNameNew}";
+    }
+    return widget.accountAssistant.accountAssistantName;
+  }
+
   @override
   Widget build(BuildContext context) {
-    String appBarLabelText =
-        "${widget.accountAssistant.accountAssistantName.trim()[0].toUpperCase()}${widget.accountAssistant.accountAssistantName.trim().substring(1, widget.accountAssistant.accountAssistantName.trim().length)}";
+    print("_AccountAssistantConversationPageState: will build");
+    String appBarLabelText = buildAppBarLabelText();
+    print("_AccountAssistantConversationPageState: will build Sliver List");
+    SliverAnimatedList sliverAnimatedList = SliverAnimatedList(
+        key: listKeyManager.getListKey(),
+        initialItemCount:
+            LocalConversationsService.getEntityIdConversationMessageMapLength(
+                widget.accountAssistant.accountAssistantId),
+        itemBuilder:
+            (BuildContext context, int index, Animation<double> animation) {
+          print(
+              "_AccountAssistantConversationPageState: will build animated list");
+          if (index >=
+              LocalConversationsService.getEntityIdConversationMessageMapLength(
+                  widget.accountAssistant.accountAssistantId)) {
+            return SizedBox();
+          }
+          var message =
+              LocalConversationsService.getEntityIdConversationMessageAt(
+                  widget.accountAssistant.accountAssistantId, index);
+          if (message.isMessageEntityAccountAssistant) {
+            if (message.isMessageSent) {
+              return AccountAssistantConversationsMessagesSentListItem(
+                      message.accountAssistantSentMessage)
+                  .buildAccountAssistantConversationsSentMessage(context);
+            } else {
+              return AccountAssistantConversationsMessagesReceivedListItem(
+                      message.accountAssistantReceivedMessage,
+                      widget.accountAssistant)
+                  .buildAccountAssistantConversationsReceivedMessage(context);
+            }
+          } else {
+            return SizedBox();
+          }
+        });
 
+    print(
+        "_AccountAssistantConversationPageState: will build messaging text field");
+    AccountAssistantMessageTextField accountAssistantMessageTextField =
+        AccountAssistantMessageTextField(
+            hintText: "Message ${widget.accountAssistant.accountAssistantName}",
+            messageTextFieldController:
+                accountAssistantMessageTextFieldController,
+            sendMessageButtonOnPressed: () {
+              print("Send Actionable message");
+              sendActionableMessage();
+            },
+            messageTextFieldReadOnly: messageTextFieldReadOnly,
+            isSendButtonEnabled: isSendButtonEnabled,
+            isSuggestedDomainsClosed: isSuggestedDomainsClosed,
+            suggestedKnowledgeDomains:
+                spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList(),
+            isMessagingInputClosed: isMessagingInputClosed,
+            messagingInputToggleOnPressed: () {
+              toggleMessagingInput();
+            },
+            suggestedDomainsToggleOnPressed: (spaceKnowledgeDomain) {
+              toggleSuggestedDomains(spaceKnowledgeDomain);
+            });
+
+    print(
+        "_AccountAssistantConversationPageState: will build text field aligned");
+    Widget textFieldAlign = Align(
+      alignment: FractionalOffset.bottomCenter,
+      child: Container(
+          child: Stack(
+        children: [accountAssistantMessageTextField],
+      )),
+    );
+    print("_AccountAssistantConversationPageState: will return Scaffold");
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary(context),
       body: Column(
@@ -252,40 +339,7 @@ class _AccountAssistantConversationPageState
                   onStretchTriggerCallback: () {},
                   isActionEnabled: true,
                 ),
-                SliverAnimatedList(
-                    key: listKeyManager.getListKey(),
-                    initialItemCount: LocalConversationsService
-                        .getEntityIdConversationMessageMapLength(
-                            widget.accountAssistant.accountAssistantId),
-                    itemBuilder: (BuildContext context, int index,
-                        Animation<double> animation) {
-                      if (index >=
-                          LocalConversationsService
-                              .getEntityIdConversationMessageMapLength(
-                                  widget.accountAssistant.accountAssistantId)) {
-                        return SizedBox();
-                      }
-                      var message = LocalConversationsService
-                          .getEntityIdConversationMessageAt(
-                              widget.accountAssistant.accountAssistantId,
-                              index);
-                      if (message.isMessageEntityAccountAssistant) {
-                        if (message.isMessageSent) {
-                          return AccountAssistantConversationsMessagesSentListItem(
-                                  message.accountAssistantSentMessage)
-                              .buildAccountAssistantConversationsSentMessage(
-                                  context);
-                        } else {
-                          return AccountAssistantConversationsMessagesReceivedListItem(
-                                  message.accountAssistantReceivedMessage,
-                                  widget.accountAssistant)
-                              .buildAccountAssistantConversationsReceivedMessage(
-                                  context);
-                        }
-                      } else {
-                        return SizedBox();
-                      }
-                    }),
+                sliverAnimatedList,
               ],
             ),
           ),
@@ -317,36 +371,7 @@ class _AccountAssistantConversationPageState
           //     ),
           //   ),
           // ),
-          Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: Container(
-                child: Stack(
-              children: [
-                AccountAssistantMessageTextField(
-                    hintText:
-                        "Message ${widget.accountAssistant.accountAssistantName}",
-                    messageTextFieldController:
-                        accountAssistantMessageTextFieldController,
-                    sendMessageButtonOnPressed: () {
-                      print("Send Actionable message");
-                      sendActionableMessage();
-                    },
-                    messageTextFieldReadOnly: messageTextFieldReadOnly,
-                    isSendButtonEnabled: isSendButtonEnabled,
-                    isSuggestedDomainsClosed: isSuggestedDomainsClosed,
-                    suggestedKnowledgeDomains:
-                        spaceKnowledgeDomainsActionAskQuestionMaps.keys
-                            .toList(),
-                    isMessagingInputClosed: isMessagingInputClosed,
-                    messagingInputToggleOnPressed: () {
-                      toggleMessagingInput();
-                    },
-                    suggestedDomainsToggleOnPressed: (spaceKnowledgeDomain) {
-                      toggleSuggestedDomains(spaceKnowledgeDomain);
-                    }),
-              ],
-            )),
-          ),
+          textFieldAlign,
         ],
       ),
     );

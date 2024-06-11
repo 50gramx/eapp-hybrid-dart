@@ -1,8 +1,10 @@
+import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold_backup.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_page_button.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class OpenTilesPane extends StatelessWidget {
@@ -44,7 +46,7 @@ class OpenTilesPane extends StatelessWidget {
                 'Domain Name: Patel',
                 style: TextStyle(fontSize: 16),
               ),
-               SizedBox(height: 5),
+              SizedBox(height: 5),
               Text(
                 'Updated At: 10/10/2024',
                 style: TextStyle(fontSize: 16),
@@ -90,7 +92,6 @@ class OpenTilesPane extends StatelessWidget {
                 'Space: Study India',
                 style: TextStyle(fontSize: 16),
               ),
-             
               SizedBox(height: 10),
               Text(
                 'Domain Licence Information:',
@@ -170,8 +171,7 @@ class OpenTilesPane extends StatelessWidget {
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          itemCount:
-              2,
+          itemCount: 2,
           itemBuilder: (BuildContext context, int subIndex) {
             if (subIndex == 0) {
               return Container(
@@ -232,7 +232,14 @@ class OpenTilesPane extends StatelessWidget {
                 ),
                 child: box,
               );
-              return buildCard();
+              return Container(
+                height: 400,
+                width: 100,
+                child: AccountAssistantConversationPage(
+                    accountAssistant: AccountAssistant(
+                        accountAssistantNameCode: 50,
+                        accountAssistantName: "My Assistant")),
+              );
               // return Text("${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex - 1].leftNavigationBarSectionalItem.label}");
               // return buildAppPageButton(
               //     context, subIndex - 1, selectPressedSectionItem);

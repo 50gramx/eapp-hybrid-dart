@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/BotPressConversationsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Container/NeuContainer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_page.dart';
@@ -10,6 +11,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/swiggy/instamart/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -87,20 +89,22 @@ class EappFlow {
       index = 7002;
       appTitle = "Weather";
       iconData = FeatherIcons.box;
-      firstPage = WeatherHomePage(
-          index: index, containingFlowTitle: appTitle);
+      firstPage = WeatherHomePage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'ai') {
       index = 7003;
       appTitle = "Self AI";
       iconData = FeatherIcons.box;
-      firstPage = BaibhavAIPage(
-          index: index, containingFlowTitle: appTitle);
+      firstPage = BaibhavAIPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'instamart') {
+      index = 7009;
+      appTitle = "Instamart";
+      iconData = FeatherIcons.shoppingCart;
+      firstPage = BrowsePage(index: index);
     } else if (communityCode == 70 && title == 'entities') {
       index = 7001;
       appTitle = "Entities";
       iconData = FeatherIcons.anchor;
-      firstPage = AddEntityPage(
-          index: index, containingFlowTitle: appTitle);
+      firstPage = AddEntityPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 88 && title == 'connect') {
       index = 7;
       appTitle = "Patel";

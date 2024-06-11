@@ -8,3 +8,6 @@
 - organisation: bp
   apps:
     - ai
+- organisation: swiggy
+  apps:
+    - instamart
