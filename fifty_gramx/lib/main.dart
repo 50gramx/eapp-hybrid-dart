@@ -184,7 +184,7 @@ class MyApp extends StatelessWidget {
                               if (envSnap.connectionState ==
                                   ConnectionState.done) {
                                 if (envSnap.data == "com.50gramx") {
-                                  return StartScreen();
+                                  return HomeScreen();
                                 } else {
                                   return HomeScreen();
                                 }
