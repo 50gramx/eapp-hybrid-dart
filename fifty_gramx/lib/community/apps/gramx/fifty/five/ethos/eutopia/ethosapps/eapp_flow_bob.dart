@@ -85,7 +85,59 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  static List<int> recognizedGramxCommunities = [50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
+  List<int> allCommunityCodes = [
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99
+  ];
+  static List<int> recognizedGramxCommunities = [50];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -765,14 +817,15 @@ class EthosAppFlowBob {
       print("Loading ${appName} app for organization: $orgName");
       if (currentEnv != "com.50gramx") {
         if (currentEnv != "com.50gramx.$communityCode.$orgName.$appName") {
-          print("_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load com.50gramx.$communityCode.$orgName.$appName...");
+          print(
+              "_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load com.50gramx.$communityCode.$orgName.$appName...");
           continue;
         }
       }
-      print("_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
+      print(
+          "_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
       // will skip if the flavor is not com.50gramx
       // will only build for the flavor org name, community code, and app name
-      
 
       final appAssetPath = '$orgAssetPath/$appName';
       AppFlow appFlow;
