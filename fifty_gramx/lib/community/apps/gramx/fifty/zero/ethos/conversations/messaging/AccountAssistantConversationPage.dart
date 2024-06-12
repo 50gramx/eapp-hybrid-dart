@@ -209,10 +209,11 @@ class _AccountAssistantConversationPageState
   }
 
   sendActionableMessage() {
-    print("sendActionableMessage");
+    print("_AccountAssistantConversationPageState: sendActionableMessage");
     var typedMessage = accountAssistantMessageTextFieldController.text;
     accountAssistantMessageTextFieldController.clear();
-    print("typedMessage: $typedMessage");
+    print(
+        "_AccountAssistantConversationPageState: typedMessage: $typedMessage");
     LocalConversationsService.sendActionableMessageToAccountAssistant(
         widget.accountAssistant,
         SpaceKnowledgeAction.ASK_QUESTION,
@@ -295,7 +296,8 @@ class _AccountAssistantConversationPageState
             messageTextFieldController:
                 accountAssistantMessageTextFieldController,
             sendMessageButtonOnPressed: () {
-              print("Send Actionable message");
+              print(
+                  "_AccountAssistantConversationPageState: Send Actionable message");
               sendActionableMessage();
             },
             messageTextFieldReadOnly: messageTextFieldReadOnly,
