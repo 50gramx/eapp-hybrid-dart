@@ -27,6 +27,7 @@ class AccountAssistantMessageTextField extends StatelessWidget {
     required this.isSuggestedDomainsClosed,
     required this.messagingInputToggleOnPressed,
     required this.suggestedDomainsToggleOnPressed,
+    required this.validateMessageText,
   }) : super(key: key);
 
   final hintText;
@@ -39,6 +40,7 @@ class AccountAssistantMessageTextField extends StatelessWidget {
   final bool isSuggestedDomainsClosed;
   final VoidCallback messagingInputToggleOnPressed;
   final Function(SpaceKnowledgeDomain) suggestedDomainsToggleOnPressed;
+  final Function(String) validateMessageText;
 
   Widget build(BuildContext context) {
     var profilePictureButton = Neumorphic(
@@ -165,6 +167,7 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                               onSubmitted: (value) {
                                 sendMessageButtonOnPressed();
                               },
+                              onChanged: validateMessageText,
                               readOnly: messageTextFieldReadOnly,
                               style: TextStyle(
                                   color:
@@ -236,7 +239,7 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                 child: Text(
-                                  "Ask",
+                                  "Browse",
                                   style: AppTextStyle.appTextStyle(
                                       context,
                                       AppColors.contentInversePrimary(context),

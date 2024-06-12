@@ -35,6 +35,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:validators/validators.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class AccountAssistantConversationPage extends StatefulWidget {
@@ -64,6 +65,7 @@ class _AccountAssistantConversationPageState
       NotificationsBloc.instance.notificationsStream;
 
   bool isSendButtonEnabled = false;
+  bool isMessageURL = false;
 
   // -----------
   // AccountAssistant accountAssistant = AccountAssistant.getDefault();
@@ -208,16 +210,29 @@ class _AccountAssistantConversationPageState
     });
   }
 
+  messageValidator(String message) {
+    print(
+        "_AccountAssistantConversationPageState: messageValidator: ${message} is ${isURL(message)}");
+    setState(() {
+      isMessageURL = isURL(message);
+    });
+  }
+
   sendActionableMessage() {
     print("_AccountAssistantConversationPageState: sendActionableMessage");
     var typedMessage = accountAssistantMessageTextFieldController.text;
     accountAssistantMessageTextFieldController.clear();
     print(
         "_AccountAssistantConversationPageState: typedMessage: $typedMessage");
-    LocalConversationsService.sendActionableMessageToAccountAssistant(
-        widget.accountAssistant,
-        SpaceKnowledgeAction.ASK_QUESTION,
-        typedMessage);
+    if (isMessageURL) {
+      // TODO(verma8@): send the url to browser tab
+      print("will do send the url to browser page: ${typedMessage}");
+    } else {
+      LocalConversationsService.sendActionableMessageToAccountAssistant(
+          widget.accountAssistant,
+          SpaceKnowledgeAction.ASK_QUESTION,
+          typedMessage);
+    }
   }
 
   final ScrollController _listScrollController = new ScrollController();
@@ -292,26 +307,27 @@ class _AccountAssistantConversationPageState
         "_AccountAssistantConversationPageState: will build messaging text field");
     AccountAssistantMessageTextField accountAssistantMessageTextField =
         AccountAssistantMessageTextField(
-            hintText: "Message ${widget.accountAssistant.accountAssistantName}",
-            messageTextFieldController:
-                accountAssistantMessageTextFieldController,
-            sendMessageButtonOnPressed: () {
-              print(
-                  "_AccountAssistantConversationPageState: Send Actionable message");
-              sendActionableMessage();
-            },
-            messageTextFieldReadOnly: messageTextFieldReadOnly,
-            isSendButtonEnabled: isSendButtonEnabled,
-            isSuggestedDomainsClosed: isSuggestedDomainsClosed,
-            suggestedKnowledgeDomains:
-                spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList(),
-            isMessagingInputClosed: isMessagingInputClosed,
-            messagingInputToggleOnPressed: () {
-              toggleMessagingInput();
-            },
-            suggestedDomainsToggleOnPressed: (spaceKnowledgeDomain) {
-              toggleSuggestedDomains(spaceKnowledgeDomain);
-            });
+      hintText: "Message ${widget.accountAssistant.accountAssistantName}",
+      messageTextFieldController: accountAssistantMessageTextFieldController,
+      sendMessageButtonOnPressed: () {
+        print(
+            "_AccountAssistantConversationPageState: Send Actionable message");
+        sendActionableMessage();
+      },
+      messageTextFieldReadOnly: messageTextFieldReadOnly,
+      isSendButtonEnabled: isSendButtonEnabled && isMessageURL,
+      isSuggestedDomainsClosed: isSuggestedDomainsClosed,
+      suggestedKnowledgeDomains:
+          spaceKnowledgeDomainsActionAskQuestionMaps.keys.toList(),
+      isMessagingInputClosed: isMessagingInputClosed,
+      messagingInputToggleOnPressed: () {
+        toggleMessagingInput();
+      },
+      suggestedDomainsToggleOnPressed: (spaceKnowledgeDomain) {
+        toggleSuggestedDomains(spaceKnowledgeDomain);
+      },
+      validateMessageText: messageValidator,
+    );
 
     print(
         "_AccountAssistantConversationPageState: will build text field aligned");

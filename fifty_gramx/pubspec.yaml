@@ -84,6 +84,8 @@ dependencies:
   yaml: ^3.1.2
   # A Flutter plugin for launching a URL.
   url_launcher: ^6.0.10
+  # String validation and sanitization for Dart. Dart 2-compatible version of validator
+  validators: ^3.0.0
   # This Flutter plugin provides an API for querying information about an application package.
   package_info_plus: ^4.2.0
   flutter_web_plugins:
