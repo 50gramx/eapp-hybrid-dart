@@ -7,7 +7,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_p
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/genesys/browser/tab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';

@@ -218,6 +218,12 @@ class _AccountAssistantConversationPageState
     });
   }
 
+  static notifyBrowserPageValidatedURL(String validatedURL) {
+    NotificationsBloc.instance.newNotification(LocalNotification(
+        "LocalAssistantConversation",
+        {"subType": "validatedURL", "url": validatedURL}));
+  }
+
   sendActionableMessage() {
     print("_AccountAssistantConversationPageState: sendActionableMessage");
     var typedMessage = accountAssistantMessageTextFieldController.text;
@@ -226,6 +232,7 @@ class _AccountAssistantConversationPageState
         "_AccountAssistantConversationPageState: typedMessage: $typedMessage");
     if (isMessageURL) {
       // TODO(verma8@): send the url to browser tab
+      notifyBrowserPageValidatedURL(typedMessage);
       print("will do send the url to browser page: ${typedMessage}");
     } else {
       LocalConversationsService.sendActionableMessageToAccountAssistant(
