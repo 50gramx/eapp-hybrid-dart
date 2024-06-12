@@ -106,16 +106,17 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Container(
-                      margin: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 4),
+                      margin:
+                          EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 4),
                       height: 48,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
                           NeuToggleButton(
                               toggleContainerButtonsList:
-                              domainToggleTextButtonsList,
+                                  domainToggleTextButtonsList,
                               toggleButtonsIsSelectedList:
-                              domainToggleTextButtonsSelectedList,
+                                  domainToggleTextButtonsSelectedList,
                               toggleContainerCustomerWidth: 36 * 2,
                               toggleButtonOnPressedFunction: (value) {
                                 suggestedDomainsToggleOnPressed(
@@ -159,8 +160,11 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                             fit: FlexFit.loose,
                             child: TextField(
                               controller: messageTextFieldController,
-                              keyboardType: TextInputType.multiline,
+                              keyboardType: TextInputType.text,
                               maxLines: null,
+                              onSubmitted: (value) {
+                                sendMessageButtonOnPressed();
+                              },
                               readOnly: messageTextFieldReadOnly,
                               style: TextStyle(
                                   color:
@@ -231,8 +235,14 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                               ),
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
-                                child: Text("Ask", style: AppTextStyle.appTextStyle(context, AppColors.contentInversePrimary(
-                                    context), 16, FontWeight.w600),),
+                                child: Text(
+                                  "Ask",
+                                  style: AppTextStyle.appTextStyle(
+                                      context,
+                                      AppColors.contentInversePrimary(context),
+                                      16,
+                                      FontWeight.w600),
+                                ),
                               )),
                         ),
                       ),
