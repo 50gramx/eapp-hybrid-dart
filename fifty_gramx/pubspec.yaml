@@ -136,6 +136,7 @@ flutter:
     - lib/community/apps/gramx/fifty/zero/ethos/spaces/
     - lib/community/apps/gramx/fifty/zero/ethos/conversations/
     - lib/community/apps/gramx/fifty/zero/ethos/connections/
+    - lib/community/apps/gramx/fifty/zero/genesys/browser/
     # 52GRAMx
     - lib/community/apps/gramx/fifty/two/ethosapps.yaml
     # 52GRAMx Ethos
