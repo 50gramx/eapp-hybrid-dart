@@ -32,7 +32,7 @@ class _BrowserTabState extends State<BrowserTab> {
         if (event.data["subType"] == "validatedURL") {
           print("Browser tab: ${event.data["url"]}");
           setState(() {
-            url = event.data["url"];
+            url = _validateAndProcessUrl(event.data["url"]);
             iframe = createIFrame(url);
             registerIFrameView(iframe, url);
           });
@@ -41,6 +41,18 @@ class _BrowserTabState extends State<BrowserTab> {
     });
 
     registerIFrameView(iframe, url);
+  }
+
+  //Method to validate url and search
+  String _validateAndProcessUrl(String input) {
+    final urlPattern = r'^(https?:\/\/)?([a-zA-Z0-9.-]+)?([a-zA-Z]{2,})(:\d+)?(\/[a-zA-Z0-9.-]*)*\/?$';
+    final isValidUrl = RegExp(urlPattern).hasMatch(input);
+
+    if (isValidUrl) {
+      return input.startsWith('http') ? input : 'http://$input';
+    } else {
+      return 'https://www.google.com/search?q=${Uri.encodeComponent(input)}';
+    }
   }
 
   void registerIFrameView(html.IFrameElement iframe, String url) {
