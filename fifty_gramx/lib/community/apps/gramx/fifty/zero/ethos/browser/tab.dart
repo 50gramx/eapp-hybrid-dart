@@ -74,8 +74,9 @@ class _BrowserTabState extends State<BrowserTab> {
 
   @override
   Widget build(BuildContext context) {
-    return kIsWeb
-        ? HtmlElementView(key: UniqueKey(), viewType: 'iframe-$url')
-        : Center(child: Text('This feature is only available on the web.'));
+    return Center(child: Text('Hello'),);
+    // return kIsWeb
+    //     ? HtmlElementView(key: UniqueKey(), viewType: 'iframe-$url')
+    //     : Center(child: Text('This feature is only available on the web.'));
   }
 }

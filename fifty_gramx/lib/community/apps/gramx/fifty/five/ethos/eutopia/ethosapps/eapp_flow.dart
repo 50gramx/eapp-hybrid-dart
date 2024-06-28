@@ -2,6 +2,9 @@ import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/BotP
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Container/NeuContainer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/GPUDetailsGrid.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/GPUTemplate.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/RegistrationForms.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
@@ -73,7 +76,7 @@ class EappFlow {
       index = 5009;
       appTitle = "browser";
       iconData = FeatherIcons.users;
-      firstPage = BrowserTab(url:'https://www.50gramx.com');
+      firstPage = RegistrationAndGPUDetails(); //GPUTemplate();//RegistrationAndGPUDetails();//GPUDetailsGrid();//BrowserTab(url:'https://www.50gramx.com');
     } else if (communityCode == 50 && title == 'knowledge_spaces') {
       index = 4;
       appTitle = "Knowledge";
