@@ -162,7 +162,7 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/ethos/entities/
     - lib/community/apps/gramx/seventy/zero/gs/weather/
     - lib/community/apps/gramx/seventy/zero/bp/ai/
-    - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-pricing
+    - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-pricing/
     # 88 community eapp common-assets
     - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
     # 88 ethos connect app assets
