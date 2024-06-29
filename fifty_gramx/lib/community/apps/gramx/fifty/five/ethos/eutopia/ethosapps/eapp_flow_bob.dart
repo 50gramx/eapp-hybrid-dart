@@ -137,7 +137,7 @@ class EthosAppFlowBob {
     98,
     99
   ];
-  static List<int> recognizedGramxCommunities = [50];
+  static List<int> recognizedGramxCommunities = [50, 70];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
