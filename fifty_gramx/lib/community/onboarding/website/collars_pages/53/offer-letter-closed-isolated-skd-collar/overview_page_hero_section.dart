@@ -82,7 +82,7 @@ Widget buildOfferLetterCISKDCOverviewPageHeroSection(BuildContext context) {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      backgroundColor: Colors.blue,
                       padding:
                           EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                     ),
