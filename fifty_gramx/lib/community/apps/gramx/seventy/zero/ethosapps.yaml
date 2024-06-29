@@ -2,6 +2,7 @@
   apps:
     - pods
     - entities
+    - pods-gpu-pricing
 - organisation: gs
   apps:
     - weather
