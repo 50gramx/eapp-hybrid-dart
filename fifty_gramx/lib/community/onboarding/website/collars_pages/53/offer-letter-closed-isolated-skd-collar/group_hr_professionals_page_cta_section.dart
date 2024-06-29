@@ -52,8 +52,8 @@ Widget buildVinayak53GRAMxGroupHRProfessionalsPageCTASection(
               ),
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                primary: Colors.white, // Button background color
-                onPrimary: Colors.blue, // Text color
+                backgroundColor: Colors.white, // Button background color
+                foregroundColor: Colors.blue, // Text color
               ),
             ),
           ],

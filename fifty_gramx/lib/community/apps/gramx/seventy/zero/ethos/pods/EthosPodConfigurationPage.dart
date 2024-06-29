@@ -158,8 +158,8 @@ Widget buildLandingPageFirstSection() {
             // Add your onPressed code here
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.deepPurple, // Background color of the button
-            onPrimary: Colors.white, // Text color of the button
+            backgroundColor: Colors.deepPurple, // Background color of the button
+            foregroundColor: Colors.white, // Text color of the button
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -303,7 +303,7 @@ Widget buildLandingPageThirdSection() {
                 // Handle button press
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.purple, // Button background color
+                backgroundColor: Colors.purple, // Button background color
               ),
               child: Text('See all GPUs'),
             ),
@@ -332,7 +332,7 @@ Widget buildLandingPageThirdSection() {
             // Handle button press
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.purple, // Button background color
+            backgroundColor: Colors.purple, // Button background color
           ),
           child: Text('Get Started'),
         ),
@@ -424,7 +424,7 @@ Widget buildLandingPageFourthSection() {
             // Handle "Get Started" button press
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.purple, // Button background color
+            backgroundColor: Colors.purple, // Button background color
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           ),
           child: Text('Get Started'),
