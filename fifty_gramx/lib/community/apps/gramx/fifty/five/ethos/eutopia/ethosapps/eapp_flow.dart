@@ -76,7 +76,8 @@ class EappFlow {
       index = 5009;
       appTitle = "browser";
       iconData = FeatherIcons.users;
-      firstPage = RegistrationAndGPUDetails(); //GPUTemplate();//RegistrationAndGPUDetails();//GPUDetailsGrid();//BrowserTab(url:'https://www.50gramx.com');
+      firstPage =
+          RegistrationAndGPUDetails(); //GPUTemplate();//RegistrationAndGPUDetails();//GPUDetailsGrid();//BrowserTab(url:'https://www.50gramx.com');
     } else if (communityCode == 50 && title == 'knowledge_spaces') {
       index = 4;
       appTitle = "Knowledge";
@@ -90,6 +91,13 @@ class EappFlow {
     } else if (communityCode == 70 && title == 'pods') {
       index = 6;
       appTitle = "Pods";
+      iconData = FeatherIcons.box;
+      firstPage = EthosPodConfigurationPage(
+          index: index, containingFlowTitle: appTitle);
+      // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'pods-gpu-pricing') {
+      index = 70091;
+      appTitle = "Ethos Pods GPU Pricing";
       iconData = FeatherIcons.box;
       firstPage = EthosPodConfigurationPage(
           index: index, containingFlowTitle: appTitle);
