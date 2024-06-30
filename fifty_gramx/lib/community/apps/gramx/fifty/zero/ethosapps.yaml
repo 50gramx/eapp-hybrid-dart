@@ -1,0 +1,4 @@
+- organisation: ethos
+  apps:
+    - identity
+    - get_started
