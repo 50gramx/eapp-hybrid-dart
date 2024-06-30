@@ -1,4 +1,3 @@
 - organisation: ethos
   apps:
-    - pods
     - pods-gpu-pricing
