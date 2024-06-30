@@ -165,60 +165,82 @@ class RegistrationCard extends StatelessWidget {
 }
 
 class GPUDetailsColumn extends StatelessWidget {
+  final List<Map<String, dynamic>> gpuDetails = [
+    {
+      'title': 'RTX 3060 Ti',
+      'price': '₹12/Hr',
+      'details': [
+        'NVIDIA CUDA Cores 4864',
+        'Boost Clock 1.67 GHz',
+        'Memory Size 8 GB',
+        'Memory Type GDDR6',
+        'Memory Bandwidth 448 GB/s',
+        'Tensor Cores 152',
+        'Single Precision Performance 16.2 TFLOPS',
+        'Raytracing Cores 38 RT',
+      ],
+    },
+    {
+      'title': 'RTX 3080 TI',
+      'price': '₹15/Hr',
+      'details': [
+        'NVIDIA CUDA Cores 10240',
+        'Boost Clock 1.67 GHz',
+        'Memory Size 12 GB',
+        'Memory Type GDDR6X',
+        'Memory Bandwidth 912GB/s',
+        'Tensor Cores 320',
+        'Single Precision Performance 34.1 TFLOPS',
+        'Raytracing Cores 80 RT',
+      ],
+    },
+    {
+      'title': 'RTX 3080 Ti / 6',
+      'price': '₹3/Hr',
+      'details': [
+        'NVIDIA CUDA Cores 1707',
+        'Boost Clock 1.67 GHz',
+        'Memory Size 2 GB',
+        'Memory Type GDDR6X',
+        'Memory Bandwidth 152 GB/s',
+        'Tensor Cores 53',
+        'Single Precision Performance 5.68 TFLOPS',
+        'Raytracing Cores 13 RT',
+      ],
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView(
-            children: [
-              GPUCard(
-                title: 'RTX 3080TI',
-                price: '\$12/HR',
-                details: [
-                  'NVIDIA CUDA Cores 10240',
-                  'Boost Clock 1.67 GHz',
-                  'Memory Size 12 GB',
-                  'Memory Type GDDR6X',
-                  'Memory Bandwidth 912GB/s',
-                  'Tensor Cores 320',
-                  'Single Precision Performance 34.1 TFLOPS',
-                  'Raytracing Cores 80 RT',
-                ],
-              ),
-              GPUCard(
-                title: 'RTX 3080TI / 6',
-                price: '\$24/HR',
-                details: [
-                  'NVIDIA CUDA Cores 17007',
-                  'Boost Clock 1.67 GHz',
-                  'Memory Size 10 GB',
-                  'Memory Type GDDR6X',
-                  'Memory Bandwidth 1526GB/s',
-                  'Tensor Cores 328',
-                  'Single Precision Performance 58.67 TFLOPS',
-                  'Raytracing Cores 80 RT',
-                ],
-              ),
-              GPUCard(
-                title: 'V100',
-                price: '\$30/HR',
-                details: [
-                  'NVIDIA CUDA Cores 5120',
-                  'GPU Architecture Volta',
-                  'Boost Clock 1.67 GHz',
-                  'Memory Size 16 GB',
-                  'Memory Type HBM2',
-                  'Memory Bandwidth 900GB/s',
-                  'Tensor Cores 640',
-                  'Single Precision Performance 15.7 TFLOPS',
-                  'Tensor Performance 125 TFLOPS',
-                ],
-              ),
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        int crossAxisCount = 1;
+        if (constraints.maxWidth > 600) {
+          crossAxisCount = 2;
+        }
+        if (constraints.maxWidth > 1200) {
+          crossAxisCount = 3;
+        }
+        return GridView.builder(
+          padding: EdgeInsets.all(10),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: 3 / 2,
           ),
-        ),
-      ],
+          itemCount: gpuDetails.length,
+          itemBuilder: (context, index) {
+            final gpu = gpuDetails[index];
+
+            return GPUCard(
+              title: gpu['title'],
+              price: gpu['price'],
+              details: gpu['details'],
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -228,41 +250,71 @@ class GPUCard extends StatelessWidget {
   final String price;
   final List<String> details;
 
-  GPUCard({required this.title, required this.price, required this.details});
+  GPUCard({
+    required this.title,
+    required this.price,
+    required this.details,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(color: Colors.purple, width: 2),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 8),
-            Text(
-              price,
-              style: TextStyle(fontSize: 16, color: Colors.blue),
-            ),
-            SizedBox(height: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: details.map((detail) => Text(detail)).toList(),
-            ),
-            SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  textStyle: TextStyle(fontSize: 16),
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                Spacer(),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text(
+                    price,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'NVIDIA CUDA Cores 10240',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 5),
+            for (var detail in details) Text(detail),
+            Spacer(),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Add your deployment logic here
+                },
                 child: Text('Sign in to Deploy'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[850],
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
               ),
             ),
           ],
