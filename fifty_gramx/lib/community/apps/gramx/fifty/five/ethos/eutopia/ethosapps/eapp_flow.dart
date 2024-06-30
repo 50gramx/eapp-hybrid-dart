@@ -17,6 +17,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPo
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/swiggy/instamart/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
@@ -59,6 +60,11 @@ class EappFlow {
         index: index,
         containingFlowTitle: appTitle,
       );
+    } else if (communityCode == 50 && title == 'get_started') {
+      index = 5002;
+      appTitle = "Get Started";
+      iconData = FeatherIcons.logIn;
+      firstPage = GetStartedWidget();
     } else if (communityCode == 50 && title == 'conversations') {
       index = 2;
       appTitle = "Conversations";
