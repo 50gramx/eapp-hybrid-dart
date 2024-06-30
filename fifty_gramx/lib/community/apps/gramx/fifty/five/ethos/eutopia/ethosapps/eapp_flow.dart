@@ -97,7 +97,7 @@ class EappFlow {
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'pods-gpu-pricing') {
       index = 70091;
-      appTitle = "Ethos Pods GPU Pricing";
+      appTitle = "GPU Cloud Pricing";
       iconData = FeatherIcons.box;
       firstPage = GPUDetailsColumn();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
