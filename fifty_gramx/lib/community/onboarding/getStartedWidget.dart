@@ -1,8 +1,11 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressHeadingListTile.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -33,7 +36,14 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
       isCountrySelected = true;
       isSelectingGalaxy = true;
     });
-    pushToHomeScreenWidget();
+    // pushToHomeScreenWidget();
+    EthosAppFlowBob().unloadAppOnTheGo(communityCode: 50, appIndex: 5002);
+    EthosAppFlowBob().loadAppOnTheGo(
+        appName: "identity", orgName: "ethos", communityCode: 50, appIndex: 1);
+    EthosAppFlowBob().loadAppOnTheGo(
+        appName: "pay", orgName: "ethos", communityCode: 52, appIndex: 5);
+    NotificationsBloc.instance.newNotification(LocalNotification(
+        "EthosAppFlowBob", {"subType": "Open eApp", "appSectionIndex": 2}));
   }
 
   bool isGalaxySelected = false;
@@ -48,12 +58,20 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
     // await LocalServices().loadLocalServices();
   }
 
+  checkLogin() async {
+    bool isAccountLoggedIn = await AccountData().accountPresent();
+    if (isAccountLoggedIn) {
+      completedSelectingUniverseCallback();
+    }
+  }
+
   @override
   void initState() {
     setState(() {
       isSelectingCountry = true;
     });
 
+    checkLogin();
     if (widget.isAccountLoggedIn) {
       completedSelectingUniverseCallback();
     }
