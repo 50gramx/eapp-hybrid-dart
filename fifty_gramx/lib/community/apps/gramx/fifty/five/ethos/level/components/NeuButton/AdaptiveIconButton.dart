@@ -115,22 +115,25 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
         margin: LayoutBreakpoint().isNavigatingLeft(context)
             ? const EdgeInsets.fromLTRB(0, 6, 0, 6)
             : const EdgeInsets.fromLTRB(6, 0, 6, 0),
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-        child: Container(child: Center(
-          child: neuIcon,
-        ),));
-
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        child: Container(
+          child: Center(
+            child: neuIcon,
+          ),
+        ));
 
     Widget leftExpanded = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [neuIcon, name],
+      children: [neuButton],
     );
 
     Widget bottomExpanded = Container(
-      child: Column(children: [Container(child: neuButton), name],),
+      child: Column(
+        children: [Container(child: neuButton), name],
+      ),
     );
 
     print("returning AdaptiveNeuButton");
-    return LayoutBreakpoint().isNavigatingLeft(context) ? leftExpanded : bottomExpanded;
+    return LayoutBreakpoint().isNavigatingLeft(context) ? neuButton : neuButton;
   }
 }
