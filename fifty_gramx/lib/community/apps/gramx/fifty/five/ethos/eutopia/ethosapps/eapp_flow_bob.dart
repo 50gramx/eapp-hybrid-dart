@@ -137,7 +137,7 @@ class EthosAppFlowBob {
     98,
     99
   ];
-  static List<int> recognizedGramxCommunities = [50, 70];
+  static List<int> recognizedGramxCommunities = [70];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
@@ -1263,5 +1263,72 @@ class EthosAppFlowBob {
     print("gramxAppsInteractionComponents: $gramxAppsInteractionComponents");
     print("gramxAppsInteractionTiles: $gramxAppsInteractionTiles");
     print("------------------------------------------------------------------");
+  }
+
+  /// Dynamically loads an app on-the-go based on provided app details.
+  ///
+  /// Params:
+  /// - [appName]: The name of the app to load.
+  /// - [orgName]: The organization name associated with the app.
+  /// - [communityCode]: The code representing the community.
+  /// - [appIndex]: The index of the app to load.
+  Future<void> loadAppOnTheGo({
+    required String appName,
+    required String orgName,
+    required int communityCode,
+    required int appIndex,
+  }) async {
+    String communityAssetsPath = _getCommunityAssetsPath(communityCode);
+    final orgAssetPath = "$communityAssetsPath/$orgName";
+    final appAssetPath = '$orgAssetPath/$appName';
+
+    // Check if communityCode exists in communityAppFlow, if not add it
+    if (!communityAppFlow.containsKey(communityCode)) {
+      communityAppFlow[communityCode] = [];
+    }
+
+    // Check if app flow already exists for the given appName and communityCode
+    bool appFlowExists = communityAppFlow[communityCode]!
+        .any((appFlow) => appFlow.index == appIndex);
+
+    if (appFlowExists) {
+      print("App flow already exists for $appName in community $communityCode");
+      return; // Exit early if app flow is already added
+    }
+
+    // Load app assets and setup app flow dynamically
+    try {
+      print("loading app assets");
+      await _loadAppAssets(
+        appAssetPath: appAssetPath,
+        appName: appName,
+        communityCode: communityCode,
+        orgName: orgName,
+      );
+      print("loaded app assets");
+
+      AppFlow appFlow = _createAppFlow(communityCode, appName);
+      print("created app flow");
+      communityAppFlow[communityCode]!.add(appFlow);
+      print("added app flow");
+
+      LeftNavigationTab leftNavigationTab = _createLeftNavigationTab(appFlow);
+      print("created app nav tab");
+      navigationBarItems.add(leftNavigationTab);
+      print("added app nav tab");
+
+      EutopiaLeftNavigationSectionalTab eutopiaTab =
+          _createEutopiaTab(leftNavigationTab);
+      print("created eutopia tab");
+      eutopiaNavigationBarSectionalItems.add(eutopiaTab);
+      print("added eutopia tab");
+
+      NotificationsBloc.instance.newNotification(
+          LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
+      print("sent notification");
+    } catch (e) {
+      print("Error loading app dynamically: $e");
+      // Handle error appropriately
+    }
   }
 }
