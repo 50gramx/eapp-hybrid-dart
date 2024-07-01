@@ -42,8 +42,13 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
         appName: "identity", orgName: "ethos", communityCode: 50, appIndex: 1);
     EthosAppFlowBob().loadAppOnTheGo(
         appName: "pay", orgName: "ethos", communityCode: 52, appIndex: 5);
+    EthosAppFlowBob().loadAppOnTheGo(
+        appName: "pods-gpu-template",
+        orgName: "ethos",
+        communityCode: 70,
+        appIndex: 70092);
     NotificationsBloc.instance.newNotification(LocalNotification(
-        "EthosAppFlowBob", {"subType": "Open eApp", "appSectionIndex": 2}));
+        "EthosAppFlowBob", {"subType": "Open eApp", "appSectionIndex": 3}));
   }
 
   bool isGalaxySelected = false;
