@@ -1331,4 +1331,62 @@ class EthosAppFlowBob {
       // Handle error appropriately
     }
   }
+
+  /// Dynamically unloads an app on-the-go based on provided app details.
+  ///
+  /// Params:
+  /// - [communityCode]: The code representing the community.
+  /// - [appIndex]: The index of the app to unload.
+  Future<void> unloadAppOnTheGo({
+    required int communityCode,
+    required int appIndex,
+  }) async {
+    print("unloadAppOnTheGo");
+    try {
+      // Check if the communityCode exists in communityAppFlow
+      if (!communityAppFlow.containsKey(communityCode)) {
+        print("Community code $communityCode does not exist");
+        return; // Exit early if community code does not exist
+      }
+
+      // Find the app flow by appIndex
+      final appFlowIndex = communityAppFlow[communityCode]!
+          .indexWhere((appFlow) => appFlow.index == appIndex);
+
+      if (appFlowIndex == -1) {
+        print(
+            "App flow with index $appIndex does not exist in community $communityCode");
+        return; // Exit early if app flow does not exist
+      }
+
+      // Remove the app flow
+      AppFlow appFlow = communityAppFlow[communityCode]!.removeAt(appFlowIndex);
+      print("Removed app flow with index $appIndex");
+
+      // Find and remove the corresponding left navigation tab
+      final leftNavigationTabIndex = navigationBarItems.indexWhere(
+          (tab) => tab.leftNavigationBarSectionalItem.code == appFlow.code);
+
+      if (leftNavigationTabIndex != -1) {
+        navigationBarItems.removeAt(leftNavigationTabIndex);
+        print("Removed left navigation tab for app index $appIndex");
+      }
+
+      // Find and remove the corresponding Eutopia tab
+      final eutopiaTabIndex = eutopiaNavigationBarSectionalItems.indexWhere(
+          (tab) => tab.leftNavigationBarSectionalItem.code == appFlow.code);
+
+      if (eutopiaTabIndex != -1) {
+        eutopiaNavigationBarSectionalItems.removeAt(eutopiaTabIndex);
+        print("Removed Eutopia tab for app index $appIndex");
+      }
+
+      NotificationsBloc.instance.newNotification(
+          LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
+      print("Sent notification for unloaded app");
+    } catch (e) {
+      print("Error unloading app dynamically: $e");
+      // Handle error appropriately
+    }
+  }
 }
