@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationAndGPUDetails extends StatelessWidget {
@@ -307,6 +308,9 @@ class GPUCard extends StatelessWidget {
                       orgName: "ethos",
                       communityCode: 50,
                       appIndex: 5002);
+                  NotificationsBloc.instance.newNotification(LocalNotification(
+                      "EthosAppFlowBob",
+                      {"subType": "Open eApp", "appSectionIndex": 1}));
                 },
                 child: Text('Sign in to Deploy'),
                 style: ElevatedButton.styleFrom(
