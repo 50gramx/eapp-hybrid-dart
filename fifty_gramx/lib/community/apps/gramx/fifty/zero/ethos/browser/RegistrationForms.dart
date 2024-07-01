@@ -1,3 +1,4 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationAndGPUDetails extends StatelessWidget {
@@ -294,11 +295,6 @@ class GPUCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Text(
-              'NVIDIA CUDA Cores 10240',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
             SizedBox(height: 5),
             for (var detail in details) Text(detail),
             Spacer(),
@@ -306,6 +302,11 @@ class GPUCard extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Add your deployment logic here
+                  EthosAppFlowBob().loadAppOnTheGo(
+                      appName: "get_started",
+                      orgName: "ethos",
+                      communityCode: 50,
+                      appIndex: 5002);
                 },
                 child: Text('Sign in to Deploy'),
                 style: ElevatedButton.styleFrom(
