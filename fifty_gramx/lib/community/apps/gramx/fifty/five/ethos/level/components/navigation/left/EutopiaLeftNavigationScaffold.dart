@@ -109,6 +109,9 @@ class _EutopiaLeftNavigationScaffoldState
         handleLoadedApp();
       } else if (message.data["subType"] == "Open Community Tiles") {
         print("Opening Community Tiles");
+      } else if (message.data["subType"] == "Open eApp") {
+        print("Opening eApp");
+        selectPressedSectionItem(message.data["appSectionIndex"]);
       }
     }
   }
