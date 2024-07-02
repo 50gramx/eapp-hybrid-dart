@@ -88,6 +88,8 @@ dependencies:
   validators: ^3.0.0
   # This Flutter plugin provides an API for querying information about an application package.
   package_info_plus: ^4.2.0
+  # xterm.dart is a fast and fully-featured terminal emulator for Flutter applications, with support for mobile and desktop platforms.
+  xterm: ^4.0.0
   flutter_web_plugins:
     sdk: flutter
   
@@ -165,6 +167,7 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/bp/ai/
     - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-pricing/
     - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/
+    - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-cli/
     # 88 community eapp common-assets
     - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
     # 88 ethos connect app assets
