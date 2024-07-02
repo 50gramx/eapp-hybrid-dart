@@ -30,6 +30,10 @@ job("Build Web Base Image") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     host("Build and push web base image") {
@@ -59,6 +63,9 @@ job("Build Web Base Image") {
             }
         }
 
+        requirements {
+            workerTags("windows-pool")
+        }    
     }
 
     container("Send Slack Update", image = "amazoncorretto:17-alpine") {
@@ -74,6 +81,9 @@ job("Build Web Base Image") {
             println("$response")
         }
 
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 }
 
@@ -98,6 +108,10 @@ job("Build Android Base Image") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
@@ -127,6 +141,10 @@ job("Build Android Base Image") {
                 +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest"
             }
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
     }
 
     container("Send Slack Update", image = "amazoncorretto:17-alpine") {
@@ -140,6 +158,10 @@ job("Build Android Base Image") {
                 req.channel("#product-dev").text("👋 Built 📱 Android Base v$version Interactions OS 🙏")
             }
             println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 }
@@ -169,6 +191,10 @@ job("Build and publish bundle to web track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     container("Start Deployment", image = "amazoncorretto:17-alpine") {
@@ -190,6 +216,10 @@ job("Build and publish bundle to web track") {
                 req.channel("#product-dev").text("🚨️ Started 🌐 Web v$version Interactions Deployment 🙏")
             }
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }
     }
 
     container(displayName = "Build Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
@@ -210,6 +240,11 @@ job("Build and publish bundle to web track") {
             git log -n 3 --format=%B
           """
         }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
+
     }
 
     container("Send Slack Update", image = "amazoncorretto:17-alpine") {
@@ -223,6 +258,10 @@ job("Build and publish bundle to web track") {
                 req.channel("#product-dev").text("👋 Deployed 🌐 Web v$version Interactions 🙏")
             }
             println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 }
@@ -251,6 +290,10 @@ job("Build and publish bundle to android internal track") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 
@@ -322,6 +365,10 @@ job("Build and publish bundle to android internal track") {
                 req.channel("#product-dev").text("👋 Deployed 📱 Android Internal v$version Interactions 🙏")
             }
             println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 }
@@ -396,6 +443,10 @@ job("Build and publish bundle to iOS internal track") {
                 req.channel("#product-dev").text("👋 Deployed 📱 iOS Internal v$version Interactions 🙏")
             }
             println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
         }
     }
 }
