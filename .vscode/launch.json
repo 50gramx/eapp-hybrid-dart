@@ -60,6 +60,16 @@
             ]
         },
         {
+            "name": "Debug - 50GRAMx - Windows",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "windows"
+            ]
+        },
+        {
             "name": "fifty_gramx (profile mode)",
             "cwd": "fifty_gramx",
             "request": "launch",
