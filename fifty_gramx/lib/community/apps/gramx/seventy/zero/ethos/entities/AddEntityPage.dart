@@ -1,5 +1,7 @@
-
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddContractParameterDialog.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/ContractParameterListItem.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/EntityContractParameter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/GetAllCoreEntity.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -14,29 +16,35 @@ class AddEntityPage extends StatefulWidget {
   final String containingFlowTitle;
 
   @override
-  State<AddEntityPage> createState() =>
-      _AddEntityPageState();
+  State<AddEntityPage> createState() => _AddEntityPageState();
 }
-
 
 class _AddEntityPageState extends State<AddEntityPage> {
   String entityName = '';
   String entityType = 'Message';
   String entityArt = '';
   String aboutEntity = '';
-  List<Map<String, String>> contractParameters = [];
+  List<EntityContractParameter> contractParameters = [];
 
   // Options for entity type
   final List<String> entityTypeOptions = ['Message', 'Enum'];
 
   // Method to handle submission of the entity creation form
   void submitEntity() {
+    getAllEntity();
     // Implement logic to send the entity data to backend or handle as required
     print('Entity Name: $entityName');
     print('Entity Type: $entityType');
     print('Entity Art: $entityArt');
     print('About Entity: $aboutEntity');
-    print('Contract Parameters: $contractParameters');
+    print("Contract Parameters:");
+    for (var param in contractParameters) {
+      print("  - Name: ${param.name}");
+      print("    Type: ${param.type}");
+
+      print("    Type: ${param.type}");
+      // ... print other details if needed
+    }
   }
 
   @override
@@ -67,7 +75,8 @@ class _AddEntityPageState extends State<AddEntityPage> {
                   entityType = value ?? "";
                 });
               },
-              items: entityTypeOptions.map<DropdownMenuItem<String>>((String value) {
+              items: entityTypeOptions
+                  .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -97,19 +106,28 @@ class _AddEntityPageState extends State<AddEntityPage> {
               'Contract Parameters:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+            ElevatedButton(
+              onPressed: () {
+                // Open a dialog to add a new ContractParameter
+                showDialog(
+                  context: context,
+                  builder: (context) => AddContractParameterDialog(
+                    onAdd: (newParameter) {
+                      setState(() {
+                        contractParameters.add(newParameter);
+                      });
+                    },
+                  ),
+                );
+              },
+              child: Text('Add Parameter'),
+            ),
             ListView.builder(
               shrinkWrap: true,
               itemCount: contractParameters.length,
               itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Parameter: ${contractParameters[index]['parameter']}'),
-                    Text('Types: ${contractParameters[index]['types']}'),
-                    Text('Description: ${contractParameters[index]['description']}'),
-                    SizedBox(height: 8.0),
-                  ],
-                );
+                return EntityContractParameterListItem(
+                    parameter: contractParameters[index]);
               },
             ),
             SizedBox(height: 16.0),
