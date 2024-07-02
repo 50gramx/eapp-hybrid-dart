@@ -35,6 +35,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorC
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -337,13 +338,18 @@ class _CreateSpaceKnowledgeDomainPageState
     required WidgetBuilder builder,
     bool fullscreenDialog = false,
   }) =>
-      Platform.isAndroid
+      kIsWeb
           ? MaterialPageRoute(
               builder: builder,
               fullscreenDialog: fullscreenDialog,
             )
-          : CupertinoPageRoute(
-              builder: builder,
-              fullscreenDialog: fullscreenDialog,
-            );
+          : (Platform.isAndroid
+              ? MaterialPageRoute(
+                  builder: builder,
+                  fullscreenDialog: fullscreenDialog,
+                )
+              : CupertinoPageRoute(
+                  builder: builder,
+                  fullscreenDialog: fullscreenDialog,
+                ));
 }
