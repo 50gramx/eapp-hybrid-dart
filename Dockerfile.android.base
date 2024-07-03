@@ -4,9 +4,9 @@ FROM ubuntu
 RUN apt update -y && \
 	apt install -y wget bash curl file git unzip xz-utils zip nodejs npm
 
-RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.5-stable.tar.xz && \
-	tar xf flutter_linux_3.13.5-stable.tar.xz && \
-	rm flutter_linux_3.13.5-stable.tar.xz
+RUN wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.2-stable.tar.xz && \
+	tar xf flutter_linux_3.22.2-stable.tar.xz && \
+	rm flutter_linux_3.22.2-stable.tar.xz
 
 ENV PATH="$PATH:/flutter/bin"
 
