@@ -98,10 +98,10 @@ class _GPUTemplatePageState extends State<GPUTemplatePage> {
               onPressed: () {
                 // Add your deployment logic here
                 EthosAppFlowBob().loadAppOnTheGo(
-                    appName: "pods-gpu-cli",
+                    appName: "pods-gpu-manage",
                     orgName: "ethos",
                     communityCode: 70,
-                    appIndex: 70093);
+                    appIndex: 70094);
                 NotificationsBloc.instance.newNotification(LocalNotification(
                     "EthosAppFlowBob",
                     {"subType": "Open eApp", "appSectionIndex": 4}));
