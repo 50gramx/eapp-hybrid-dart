@@ -118,7 +118,12 @@ class EappFlow {
       index = 70093;
       appTitle = "GPU CLI";
       iconData = FeatherIcons.terminal;
-      firstPage = GPUCLIPage();
+      firstPage = GPUCLIPage(
+        host: "13.202.148.49",
+        port: 32222,
+        username: "pod-user",
+        password: "123456789",
+      );
     } else if (communityCode == 70 && title == 'weather') {
       index = 7002;
       appTitle = "Weather";
@@ -133,7 +138,7 @@ class EappFlow {
       index = 7009;
       appTitle = "Instamart";
       iconData = FeatherIcons.shoppingCart;
-      firstPage = BrowsePage(index: index);
+      // firstPage = BrowsePage(index: index);
     } else if (communityCode == 70 && title == 'entities') {
       index = 7001;
       appTitle = "Entities";
