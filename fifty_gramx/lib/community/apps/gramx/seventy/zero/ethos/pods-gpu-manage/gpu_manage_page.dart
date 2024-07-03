@@ -1,105 +1,118 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-class GPUManagePage extends StatefulWidget {
-  @override
-  _GPUManagePageState createState() => _GPUManagePageState();
+class Pod {
+  final String name;
+  final String namespace;
+  final String nodeName;
+  final String sshCommand;
+  final String status;
+
+  Pod({
+    required this.name,
+    required this.namespace,
+    required this.nodeName,
+    required this.sshCommand,
+    required this.status,
+  });
+
+  factory Pod.fromJson(Map<String, dynamic> json) {
+    return Pod(
+      name: json['name'],
+      namespace: json['namespace'],
+      nodeName: json['node_name'],
+      sshCommand: json['ssh_command'],
+      status: json['status'],
+    );
+  }
 }
 
-class _GPUManagePageState extends State<GPUManagePage> {
-  String selectedGPU = 'RTX 3080Ti';
-  int selectedQuantity = 1;
-  String selectedImageTemplate = 'Alpine';
+class PodListPage extends StatefulWidget {
+  @override
+  _PodListPageState createState() => _PodListPageState();
+}
+
+class _PodListPageState extends State<PodListPage> {
+  late Future<List<Pod>> pods;
+
+  Future<List<Pod>> fetchPods() async {
+    print("PodListPage: fetchPods");
+    try {
+      final response =
+          await http.get(Uri.parse('http://localhost:8000/get_pods'));
+
+      print("PodListPage: response status code: ${response.statusCode}");
+      print("PodListPage: response body: ${response.body}");
+
+      if (response.statusCode == 200) {
+        // Parse the 'pods' array directly from the JSON response
+        List<dynamic> podsJson = json.decode(response.body)['pods'];
+        List<Pod> pods = podsJson.map((json) => Pod.fromJson(json)).toList();
+        return pods;
+      } else {
+        throw Exception('Failed to load pods: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print("PodListPage: error fetching pods: $e");
+      throw Exception('Failed to load pods: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    print("PodListPage: init");
+    super.initState();
+    pods = fetchPods();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('GPUs Details'),
+        title: Text('Pods'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: DropdownButtonFormField<String>(
-                    value: selectedGPU,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedGPU = newValue!;
-                      });
-                    },
-                    items: <String>['RTX 3080Ti', 'RTX 3060Ti']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    decoration: InputDecoration(
-                      labelText: 'GPU Type',
-                      border: OutlineInputBorder(),
+      body: FutureBuilder<List<Pod>>(
+        future: pods,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No pods available'));
+          } else {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                final pod = snapshot.data![index];
+                return Card(
+                  margin: EdgeInsets.all(10),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          pod.name,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text('Namespace: ${pod.namespace}'),
+                        Text('Node Name: ${pod.nodeName}'),
+                        Text('SSH Command: ${pod.sshCommand}'),
+                        Text('Status: ${pod.status}'),
+                      ],
                     ),
                   ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  flex: 1,
-                  child: DropdownButtonFormField<int>(
-                    value: selectedQuantity,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedQuantity = newValue!;
-                      });
-                    },
-                    items: <int>[1, 2].map<DropdownMenuItem<int>>((int value) {
-                      return DropdownMenuItem<int>(
-                        value: value,
-                        child: Text(value.toString()),
-                      );
-                    }).toList(),
-                    decoration: InputDecoration(
-                      labelText: 'Quantity',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  flex: 2,
-                  child: DropdownButtonFormField<String>(
-                    value: selectedImageTemplate,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedImageTemplate = newValue!;
-                      });
-                    },
-                    items: <String>['Alpine', 'Ubuntu']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    decoration: InputDecoration(
-                      labelText: 'Image Template',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                // Add your deployment logic here
+                );
               },
-              child: Text('Deploy Now'),
-            ),
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }
