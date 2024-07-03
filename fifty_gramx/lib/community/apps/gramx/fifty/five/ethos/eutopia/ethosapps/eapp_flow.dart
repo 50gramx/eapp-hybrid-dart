@@ -13,6 +13,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.da
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-manage/gpu_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/gpu_template_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
@@ -113,6 +114,12 @@ class EappFlow {
       appTitle = "GPU Cloud Template";
       iconData = FeatherIcons.cloud;
       firstPage = GPUTemplatePage();
+      // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'pods-gpu-manage') {
+      index = 70094;
+      appTitle = "Manage GPU Pods";
+      iconData = FeatherIcons.cloud;
+      firstPage = PodListPage();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'weather') {
       index = 7002;
