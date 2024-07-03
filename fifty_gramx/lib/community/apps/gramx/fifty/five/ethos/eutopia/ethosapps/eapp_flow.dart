@@ -13,6 +13,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.da
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-cli/gpu_cli_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-manage/gpu_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/gpu_template_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
@@ -114,7 +115,16 @@ class EappFlow {
       appTitle = "GPU Cloud Template";
       iconData = FeatherIcons.cloud;
       firstPage = GPUTemplatePage();
-      // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'pods-gpu-cli') {
+      index = 70093;
+      appTitle = "GPU CLI";
+      iconData = FeatherIcons.terminal;
+      firstPage = GPUCLIPage(
+        host: "13.202.148.49",
+        port: 32222,
+        username: "pod-user",
+        password: "123456789",
+      );
     } else if (communityCode == 70 && title == 'pods-gpu-manage') {
       index = 70094;
       appTitle = "Manage GPU Pods";
@@ -135,7 +145,7 @@ class EappFlow {
       index = 7009;
       appTitle = "Instamart";
       iconData = FeatherIcons.shoppingCart;
-      firstPage = BrowsePage(index: index);
+      // firstPage = BrowsePage(index: index);
     } else if (communityCode == 70 && title == 'entities') {
       index = 7001;
       appTitle = "Entities";

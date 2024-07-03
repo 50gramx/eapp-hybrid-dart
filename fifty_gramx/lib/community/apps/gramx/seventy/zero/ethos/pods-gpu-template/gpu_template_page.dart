@@ -1,3 +1,5 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 
 class GPUTemplatePage extends StatefulWidget {
@@ -95,6 +97,14 @@ class _GPUTemplatePageState extends State<GPUTemplatePage> {
             ElevatedButton(
               onPressed: () {
                 // Add your deployment logic here
+                EthosAppFlowBob().loadAppOnTheGo(
+                    appName: "pods-gpu-cli",
+                    orgName: "ethos",
+                    communityCode: 70,
+                    appIndex: 70093);
+                NotificationsBloc.instance.newNotification(LocalNotification(
+                    "EthosAppFlowBob",
+                    {"subType": "Open eApp", "appSectionIndex": 4}));
               },
               child: Text('Deploy Now'),
             ),
