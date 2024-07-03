@@ -36,7 +36,7 @@ dependencies:
   flutter_neumorphic:
     git:
       url: https://github.com/den0206/Flutter-Neumorphic.git
-      ref: feature/remoce_accentcolor
+      ref: 23af54ff4f92dca92f7deaab09338885568bca48
   flutter_launcher_icons: ^0.13.1
   desktop_window: ^0.4.0
   flutter_feather_icons: ^2.0.0+1
