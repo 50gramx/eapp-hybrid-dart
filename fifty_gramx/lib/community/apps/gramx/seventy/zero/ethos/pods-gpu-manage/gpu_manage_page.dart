@@ -42,7 +42,7 @@ class _PodListPageState extends State<PodListPage> {
     print("PodListPage: fetchPods");
     try {
       final response = await http.get(
-        Uri.parse('https://a976-122-179-17-86.ngrok-free.app/get_pods'),
+        Uri.parse('http://122.179.29.113:8000/get_pods'),
         headers: {'ngrok-skip-browser-warning': '69420'},
       );
 

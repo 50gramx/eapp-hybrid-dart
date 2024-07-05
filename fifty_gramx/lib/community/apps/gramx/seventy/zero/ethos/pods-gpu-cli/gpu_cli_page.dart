@@ -74,7 +74,7 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
   void connectWebSocket() {
     terminal.write('Connecting via WebSocket...\n');
     channel = WebSocketChannel.connect(
-      Uri.parse('ws://localhost:8080'),
+      Uri.parse('ws://122.179.29.113:8080'),
     );
 
     channel!.stream.listen(
@@ -111,6 +111,7 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
         });
       },
       onError: (error) {
+        print("ws,erro: $error");
         terminal.write('WebSocket error: $error\n');
         setState(() {
           isConnected = false;
