@@ -41,8 +41,8 @@ class _PodListPageState extends State<PodListPage> {
   Future<List<Pod>> fetchPods() async {
     print("PodListPage: fetchPods");
     try {
-      final response =
-          await http.get(Uri.parse('http://localhost:8000/get_pods'));
+      final response = await http
+          .get(Uri.parse('https://a976-122-179-17-86.ngrok-free.app/get_pods'));
 
       print("PodListPage: response status code: ${response.statusCode}");
       print("PodListPage: response body: ${response.body}");
