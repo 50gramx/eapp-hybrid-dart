@@ -26,10 +26,16 @@ class Environment {
         case "70.ethos.pods":
           _current = "com.50gramx.70.ethos.pods";
           break;
+        case "70.ethos.nodes":
+          _current = "com.50gramx.70.ethos.nodes";
+          break;
         default:
           _current = "com.50gramx";
       }
-    } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS || Platform.isWindows) {
+    } else if (Platform.isAndroid ||
+        Platform.isIOS ||
+        Platform.isMacOS ||
+        Platform.isWindows) {
       print("Environment:current: it's devices");
       switch (packageInfo.packageName) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
