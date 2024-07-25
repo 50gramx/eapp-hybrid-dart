@@ -27,6 +27,17 @@
             ]
         },
         {
+            "name": "Debug - 70.ethos.nodes - Web",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+                "--dart-define=flavor=70.ethos.nodes"
+            ]
+        },
+        {
             "name": "Debug - 70.gs.weather - Web",
             "cwd": "fifty_gramx",
             "request": "launch",
