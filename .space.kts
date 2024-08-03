@@ -233,7 +233,7 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
             # Retrieve commit messages using Git log command
             # Output commit messages to console
             echo "Commit Messages:"
@@ -258,7 +258,7 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release --dart-define=flavor=70.ethos.pods && firebase deploy --token ${"$"}FIREBASE_TOKEN
+            cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release --dart-define=flavor=70.ethos.pods && firebase deploy --only hosting:secondary --token ${"$"}FIREBASE_TOKEN
             # Retrieve commit messages using Git log command
             # Output commit messages to console
             echo "Commit Messages:"

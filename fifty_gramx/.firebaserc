@@ -1,5 +1,19 @@
 {
   "projects": {
     "default": "ethosverse-india"
-  }
+  },
+  "targets": {
+    "ethosverse-india": {
+      "hosting": {
+        "default": [
+          "ethosverse-india"
+        ],
+        "secondary": [
+          "seventy-zero-ethos-nodes"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
