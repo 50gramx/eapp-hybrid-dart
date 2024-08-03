@@ -173,6 +173,7 @@ flutter:
     - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/
     - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-cli/
     - lib/community/apps/gramx/seventy/zero/ethos/pods-gpu-manage/
+    - lib/community/apps/gramx/seventy/zero/ethos/nodes/
     # 88 community eapp common-assets
     - lib/community/apps/gramx/eighty/eight/ethosapps.yaml
     # 88 ethos connect app assets

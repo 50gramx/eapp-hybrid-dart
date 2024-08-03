@@ -1,3 +1,7 @@
 - organisation: ethos
   apps:
+    - pods
     - pods-gpu-pricing
+    - pods-gpu-manage
+    - pods-gpu-cli
+    - nodes

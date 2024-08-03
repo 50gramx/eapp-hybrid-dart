@@ -233,7 +233,32 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          	cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+            # Retrieve commit messages using Git log command
+            # Output commit messages to console
+            echo "Commit Messages:"
+            git log -n 3 --format=%B
+          """
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }    
+
+    }
+
+    container(displayName = "70.Ethos.Nodes Web Release", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
+        env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
+        env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
+
+        shellScript {
+            content = """
+          	pwd
+          	ls -l
+            npm -v
+           	npm install -g n 
+            n stable
+            cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release --dart-define=flavor=70.ethos.pods && firebase deploy --only hosting:secondary --token ${"$"}FIREBASE_TOKEN
             # Retrieve commit messages using Git log command
             # Output commit messages to console
             echo "Commit Messages:"

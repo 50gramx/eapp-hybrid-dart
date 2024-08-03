@@ -13,6 +13,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.da
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/entities/AddEntityPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/nodes/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-cli/gpu_cli_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-manage/gpu_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/gpu_template_page.dart';
@@ -103,6 +104,13 @@ class EappFlow {
       iconData = FeatherIcons.box;
       firstPage = EthosPodConfigurationPage(
           index: index, containingFlowTitle: appTitle);
+      // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 70 && title == 'nodes') {
+      index = 70101;
+      appTitle = "Nodes";
+      iconData = FeatherIcons.box;
+      firstPage =
+          EthosNodesComingSoonPage(index: index, containingFlowTitle: appTitle);
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'pods-gpu-pricing') {
       index = 70091;
