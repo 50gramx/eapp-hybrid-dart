@@ -1,4 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
+
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 

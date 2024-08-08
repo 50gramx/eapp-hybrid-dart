@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/ethos_domain_widget.dart';
