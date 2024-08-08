@@ -45,7 +45,8 @@
             "args": [
                 "-d",
                 "macos",
-                "--dart-define=flavor=70.ethos.nodes"
+                "--flavor",
+                "com.fiftygramx.seventy.zero.ethos.nodes",
             ]
         },
         {
