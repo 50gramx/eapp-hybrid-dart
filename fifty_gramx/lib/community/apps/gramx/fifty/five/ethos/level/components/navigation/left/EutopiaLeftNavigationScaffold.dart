@@ -285,6 +285,7 @@ class _EutopiaLeftNavigationScaffoldState
       setFutureStatusBarTheme();
       bool isOneEappLoaded =
           EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
+      print("isOneEappLoaded: $isOneEappLoaded");
       return Scaffold(
           backgroundColor: AppColors.backgroundInverseTertiary(context),
           key: _screenKey,
