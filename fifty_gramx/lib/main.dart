@@ -185,6 +185,8 @@ class MyApp extends StatelessWidget {
                                   ConnectionState.done) {
                                 if (envSnap.data == "com.50gramx") {
                                   return HomeScreen();
+                                } else if (envSnap.data == "com.50gramx.50.ethos.site") {
+                                  return StartScreen();
                                 } else {
                                   return HomeScreen();
                                 }
