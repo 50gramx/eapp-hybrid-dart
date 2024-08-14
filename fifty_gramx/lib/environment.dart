@@ -20,6 +20,9 @@ class Environment {
       flavor = const String.fromEnvironment("flavor");
       print("Environment:current: flavor:$flavor");
       switch (flavor) {
+        case "50.ethos.site":
+          _current = "com.50gramx.50.ethos.site";
+          break;
         case "50.ethos.domains":
           _current = "com.50gramx.50.ethos.domains";
           break;
