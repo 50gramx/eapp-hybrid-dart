@@ -85,7 +85,7 @@ class EthosAppFlowBob {
 
   // we need map of community code to org
   // we need map of org to app
-  List<int> allCommunityCodes = [
+  static List<int> recognizedGramxCommunities = [
     50,
     51,
     52,
@@ -137,7 +137,6 @@ class EthosAppFlowBob {
     98,
     99
   ];
-  static List<int> recognizedGramxCommunities = [70];
 
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
