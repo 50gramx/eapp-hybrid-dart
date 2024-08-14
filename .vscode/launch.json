@@ -38,6 +38,29 @@
             ]
         },
         {
+            "name": "Debug - 70.ethos.nodes - MacOS",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "macos",
+                "--flavor",
+                "com.fiftygramx.seventy.zero.ethos.nodes",
+            ]
+        },
+        {
+            "name": "Debug - 70.ethos.nodes - Windows",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "windows",
+                "--dart-define=flavor=70.ethos.nodes"
+            ]
+        },
+        {
             "name": "Debug - 70.gs.weather - Web",
             "cwd": "fifty_gramx",
             "request": "launch",

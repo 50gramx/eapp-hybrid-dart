@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 24.11.13
 
 environment:
-  sdk: ">=3.4.3"
+  sdk: ">=3.4.4"
 
 dependencies:
   flutter:
@@ -91,16 +91,26 @@ dependencies:
   # xterm.dart is a fast and fully-featured terminal emulator for Flutter applications, with support for mobile and desktop platforms.
   xterm: ^4.0.0
   # SSH and SFTP client written in pure Dart, aiming to be feature-rich as well as easy to use
-  dartssh2: ^2.8.2
+  # dartssh2: ^2.8.2 # TODO (khetana@): uncomment after this issue is fixed (https://github.com/TerminalStudio/dartssh2/issues/105)
   # provides cross-platform StreamChannel wrappers for WebSocket connections
   web_socket_channel: ^3.0.0
   flutter_web_plugins:
     sdk: flutter
-  
-  carousel_slider: ^4.0.0
+  carousel_slider_plus: ^6.0.0
   eapp_dart_domain:
     hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
     version: ^24.1.107
+  # win32 is a Dart package that provides access to the most common Win32 APIs 
+  # using FFI to make them accessible to Dart code without requiring a C compiler or the Windows SDK.
+  win32: ^5.5.3
+  # This package builds on top of the Dart win32 package, offering a high-level Dart wrapper 
+  # that avoids the need for users to understand FFI or write directly to the Win32 API.
+  win32_registry: ^1.1.4
+  # A Dart library to encode and decode various archive and compression formats.
+  archive: ^3.6.1
+  # PineNaCl is a Dart implementation of the TweetNaCl 
+  # the world's first auditable high-security cryptographic library.
+  pinenacl: ^0.6.0
 
 flutter_icons:
   android: "launcher_icon"

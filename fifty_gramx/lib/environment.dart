@@ -37,12 +37,16 @@ class Environment {
         Platform.isMacOS ||
         Platform.isWindows) {
       print("Environment:current: it's devices");
+      print("Environment:current: flavor:${packageInfo.packageName}");
       switch (packageInfo.packageName) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
           _current = "com.50gramx.50.ethos.domains";
           break;
         case "com.fiftygramx.seventy.zero.ethos.pods":
           _current = "com.50gramx.70.ethos.pods";
+          break;
+        case "com.fiftygramx.seventy.zero.ethos.nodes":
+          _current = "com.50gramx.70.ethos.nodes";
           break;
         default:
           _current = "com.50gramx";

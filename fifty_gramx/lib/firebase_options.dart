@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -72,10 +69,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBS2rqQHqw9dgedzB0zkRLlNcBbTMvKl6E',
-    appId: '1:1048555807763:ios:c49421f1468b3dc340cbe6',
+    appId: '1:1048555807763:ios:701fcc12bef6c05840cbe6',
     messagingSenderId: '1048555807763',
     projectId: 'ethosverse-india',
     storageBucket: 'ethosverse-india.appspot.com',
-    iosBundleId: 'com.fiftygramx.ethosai',
+    iosBundleId: 'com.example.fiftyGramx',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCIPrTkBIPNHqYYAFepgno_QA2Lq2MAuPg',
+    appId: '1:1048555807763:web:931d95f68df49c6d40cbe6',
+    messagingSenderId: '1048555807763',
+    projectId: 'ethosverse-india',
+    authDomain: 'ethosverse-india.firebaseapp.com',
+    storageBucket: 'ethosverse-india.appspot.com',
+    measurementId: 'G-TRGMJE77RF',
+  );
+
 }
