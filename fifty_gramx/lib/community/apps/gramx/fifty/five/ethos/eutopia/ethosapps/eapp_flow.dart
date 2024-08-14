@@ -24,6 +24,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 
 class EappFlow {
   /// Creates an [AppFlow] instance for a given community.
@@ -69,6 +70,11 @@ class EappFlow {
       appTitle = "Get Started";
       iconData = FeatherIcons.logIn;
       firstPage = GetStartedWidget();
+    } else if (communityCode == 50 && title == 'site') {
+      index = 5003;
+      appTitle = "Ethos Site";
+      iconData = FeatherIcons.logIn;
+      firstPage = StartScreen();
     } else if (communityCode == 50 && title == 'conversations') {
       index = 2;
       appTitle = "Conversations";
