@@ -233,7 +233,7 @@ job("Build and publish bundle to web track") {
             npm -v
            	npm install -g n 
             n stable
-          cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
+          cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --dart-define=flavor=50.ethos.site --release && firebase deploy --token ${"$"}FIREBASE_TOKEN
             # Retrieve commit messages using Git log command
             # Output commit messages to console
             echo "Commit Messages:"
