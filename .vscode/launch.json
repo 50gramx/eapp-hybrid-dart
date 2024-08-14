@@ -84,13 +84,14 @@
             ]
         },
         {
-            "name": "Debug - 50GRAMx - Web",
+            "name": "Debug - 50GRAMx - Web - Site",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
             "args": [
                 "-d",
-                "chrome"
+                "chrome",
+                "--dart-define=flavor=50.ethos.site"
             ]
         },
         {
