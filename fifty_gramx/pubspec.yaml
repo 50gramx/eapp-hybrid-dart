@@ -136,6 +136,7 @@ flutter:
     # 50GRAMx
     - lib/community/apps/gramx/fifty/zero/ethosapps.yaml
     # 50GRAMx Ethos
+    - lib/community/apps/gramx/fifty/zero/ethos/site/
     - lib/community/apps/gramx/fifty/zero/ethos/identity/
     - lib/community/apps/gramx/fifty/zero/ethos/get_started/
     - lib/community/apps/gramx/fifty/zero/ethos/domains/

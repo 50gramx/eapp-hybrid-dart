@@ -2,3 +2,4 @@
   apps:
     - identity
     - get_started
+    - site
