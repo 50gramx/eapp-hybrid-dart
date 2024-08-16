@@ -43,7 +43,29 @@ Widget buildHomePageHeroSection(BuildContext context, bool signedIn) {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
                     child: Text(
-                      'Get Started',
+                      'Rent GPUs',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                NeumorphicButton(
+                  onPressed: () {
+                    // Add your action here
+                  },
+                  style: NeumorphicStyle(
+                    color: Colors.blueAccent,
+                    shape: NeumorphicShape.convex,
+                    intensity: 0.5,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                    child: Text(
+                      'Earn with GPUs',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
