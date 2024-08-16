@@ -15,7 +15,7 @@ CustomScrollView buildSliverBody(bool signedIn) {
     slivers: <Widget>[
       HomePageSliverAppBar(),
       SliverAnimatedList(
-          initialItemCount: 9,
+          initialItemCount: 2,  // TODO: fix item count once all sections are done
           itemBuilder: (BuildContext context, int position,
               Animation<double> animation) {
             if (position == 0) {

@@ -4,110 +4,81 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildHomePageValuePropSection(BuildContext context) {
-  return Neumorphic(
-    style: NeumorphicStyle(
-        lightSource: NeumorphicTheme.isUsingDark(context)
-            ? LightSource.bottomRight
-            : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-            ? AppColors.gray600
-            : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.flat,
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(25)),
-        color: AppColors.backgroundPrimary(context),
-        border: NeumorphicBorder(
-          isEnabled: true,
-          color: AppColors.backgroundPrimary(context),
-          width: 2,
-        ),
-        disableDepth: true),
-    child: Padding(
-      padding: const EdgeInsets.all(0.0),
+  return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            alignment: Alignment.center,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Welcome to Your Personalized Cyber-Physical Universe',
-                    style: TextStyle(
-                        color: AppColors.contentPrimary(context),
-                        fontSize: 36,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w900,
-                        height: 1.14285714),
-                  ),
-                  SizedBox(height: 10),
-                ]),
+          Text(
+            'Compare GPU Pricing',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
-          CarouselSlider(
-            options: CarouselOptions(
-              height: MediaQuery.of(context).size.height * 0.7,
-              autoPlay: true,
-              autoPlayInterval: Duration(seconds: 5),
-              enlargeCenterPage: true,
-            ),
-            items: [
-              // Replace the placeholders with your actual objectives for each professional
-              'Legal Professionals: Access Legal Information Securely',
-              'Finance Professionals: Manage Financial Data Efficiently',
-              // Add more objectives as needed
-            ].map((objective) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Neumorphic(
-                        style: NeumorphicStyle(
-                          lightSource: NeumorphicTheme.isUsingDark(context)
-                              ? LightSource.bottomRight
-                              : LightSource.topLeft,
-                          shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                              ? AppColors.gray600
-                              : AppColors.backgroundSecondary(context),
-                          shape: NeumorphicShape.flat,
-                          boxShape: NeumorphicBoxShape.stadium(),
-                          color: AppColors.backgroundInverseTertiary(context),
-                          border: NeumorphicBorder(
-                            isEnabled: true,
-                            color: AppColors.backgroundPrimary(context),
-                            width: 2,
-                          ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 0.7 * MediaQuery.of(context).size.width,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, top: 4, bottom: 16),
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: objective,
-                                  style: TextStyle(
-                                      color: AppColors.contentInversePrimary(
-                                          context),
-                                      fontSize: 22,
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.14285714),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ));
-                },
-              );
-            }).toList(),
+          SizedBox(height: 20),
+          DataTable(
+            columns: [
+              DataColumn(label: Text('GPU Model')),
+              DataColumn(label: Text('Provider A')),
+              DataColumn(label: Text('Provider B')),
+              DataColumn(label: Text('Vast.ai')),
+            ],
+            rows: [
+              DataRow(cells: [
+                DataCell(Text('NVIDIA RTX 3080')),
+                DataCell(Text('\$0.50/hour')),
+                DataCell(Text('\$0.55/hour')),
+                DataCell(Text('\$0.45/hour')),
+              ]),
+              DataRow(cells: [
+                DataCell(Text('NVIDIA RTX 3090')),
+                DataCell(Text('\$0.80/hour')),
+                DataCell(Text('\$0.85/hour')),
+                DataCell(Text('\$0.75/hour')),
+              ]),
+              DataRow(cells: [
+                DataCell(Text('AMD Radeon RX 6900 XT')),
+                DataCell(Text('\$0.60/hour')),
+                DataCell(Text('\$0.65/hour')),
+                DataCell(Text('\$0.55/hour')),
+              ]),
+              DataRow(cells: [
+                DataCell(Text('NVIDIA A100')),
+                DataCell(Text('\$1.00/hour')),
+                DataCell(Text('\$1.05/hour')),
+                DataCell(Text('\$0.95/hour')),
+              ]),
+            ],
+          ),
+          SizedBox(height: 20),
+          Text(
+            'Note: Prices are subject to change based on availability and demand.',
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ],
       ),
+    );
+}
+
+
+Widget _buildValuePropCard(BuildContext context, {required IconData icon, required String title, required String description}) {
+  return Neumorphic(
+    margin: EdgeInsets.symmetric(vertical: 8),
+    padding: EdgeInsets.all(16),
+    style: NeumorphicStyle(
+      depth: 10,
+    ),
+    child: Row(
+      children: [
+        Icon(icon, size: 48),
+        SizedBox(width: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: Theme.of(context).textTheme.headlineLarge),
+            SizedBox(height: 4),
+            Text(description),
+          ],
+        ),
+      ],
     ),
   );
 }

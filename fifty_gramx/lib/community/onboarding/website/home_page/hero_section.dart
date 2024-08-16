@@ -4,95 +4,70 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildHomePageHeroSection(BuildContext context, bool signedIn) {
   return Container(
-    height: 0.7 * MediaQuery.of(context).size.height,
-    padding: EdgeInsets.only(bottom: 32),
-    child: Align(
-        alignment: Alignment.center,
-        child: Neumorphic(
-            style: NeumorphicStyle(
-              lightSource: NeumorphicTheme.isUsingDark(context)
-                  ? LightSource.bottomRight
-                  : LightSource.topLeft,
-              shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                  ? AppColors.gray600
-                  : AppColors.backgroundSecondary(context),
-              shape: NeumorphicShape.flat,
-              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                  bottomLeft: Radius.circular(300),
-                  bottomRight: Radius.circular(300))),
-              color: AppColors.backgroundPrimary(context),
-              border: NeumorphicBorder(
-                isEnabled: true,
-                color: AppColors.backgroundPrimary(context),
-                width: 2,
-              ),
-              depth: -8,
+      padding: EdgeInsets.symmetric(vertical: 60.0, horizontal: 20.0),
+      color: Colors.black, // Background color for the hero section
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          // Left side: Text and Call to Action
+          Expanded(
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Empowering Your Computing Experience',
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                  )
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'Harness the power of advanced GPUs, CPUs, and storage with Ethos Pods and Nodes. Experience unparalleled performance and flexibility in your computing needs.',
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: Colors.white70,
+                      ),
+                ),
+                SizedBox(height: 40.0),
+                NeumorphicButton(
+                  onPressed: () {
+                    // Add your action here
+                  },
+                  style: NeumorphicStyle(
+                    color: Colors.blueAccent,
+                    shape: NeumorphicShape.convex,
+                    intensity: 0.5,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
+                    child: Text(
+                      'Get Started',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              width: 0.7 * MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 32, left: 16, right: 16, bottom: 4),
-                                child: RichText(
-                                  textAlign: TextAlign.center,
-                                  text: TextSpan(
-                                    text:
-                                        "Unlock Professional Excellence with 50GRAMx Galaxy",
-                                    style: TextStyle(
-                                        color:
-                                            AppColors.contentPrimary(context),
-                                        fontSize: 48,
-                                        fontFamily: "Montserrat",
-                                        fontWeight: FontWeight.w900,
-                                        height: 1.14285714),
-                                  ),
-                                ),
-                              ),
-                            )),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 0.7 * MediaQuery.of(context).size.width,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, top: 4, bottom: 16),
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text:
-                                      "Welcome to Your Personalized Cyber-Physical Universe",
-                                  style: TextStyle(
-                                      color:
-                                          AppColors.contentSecondary(context),
-                                      fontSize: 22,
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.14285714),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    buildGetStartedButton(context, signedIn)
-                  ]),
-            ))),
-  );
+          ),
+          // Right side: Image
+          Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Image.asset(
+                'lib/community/onboarding/website/home_page/assets/Designer-2.jpeg', // Update with your image asset path
+                height: 400.0, // Adjust height as needed
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
 }
