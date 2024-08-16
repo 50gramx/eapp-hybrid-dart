@@ -135,21 +135,6 @@ class MyApp extends StatelessWidget {
         theme: lightThemeData,
         darkTheme: darkThemeData,
         themeMode: ThemeMode.light,
-        builder: (context, child) {
-          return Banner(
-            message: 'ALPHA', // Change the banner message here
-            textStyle: TextStyle(
-              fontSize: 8,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w500,
-              color: AppColors.contentInversePrimary(context).withAlpha(150),
-            ),
-            location: BannerLocation.topEnd, // Set banner location
-            color: AppColors.backgroundInverseTertiary(context)
-                .withAlpha(75), // Customize banner color if needed
-            child: child!,
-          );
-        },
         routes: {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
