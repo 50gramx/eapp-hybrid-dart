@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBS2rqQHqw9dgedzB0zkRLlNcBbTMvKl6E</string>
+	<string>AIzaSyAFCZkquDCG1QF8rHvY2pKdVZkWEZLDwxs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1048555807763</string>
+	<string>973163693894</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.fiftyGramx</string>
+	<string>com.fiftygramx.seventy.zero.ethos.nodes</string>
 	<key>PROJECT_ID</key>
-	<string>ethosverse-india</string>
+	<string>ethos-nodes</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ethosverse-india.appspot.com</string>
+	<string>ethos-nodes.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1048555807763:ios:701fcc12bef6c05840cbe6</string>
+	<string>1:973163693894:ios:7f65d4956251afd0194747</string>
 </dict>
 </plist>
