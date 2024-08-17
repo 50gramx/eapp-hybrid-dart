@@ -121,14 +121,97 @@ class MyApp extends StatelessWidget {
     accentColor: AppColors.lightPrimaryA,
   );
 
-  @override
-  Widget build(BuildContext context) {
-    Widget progress = Scaffold(
+  buildProgress() {
+    return Scaffold(
       body: Center(
         child: AppProgressIndeterminateWidget(),
       ),
     );
+  }
+
+  buildFutureBuider() {
+    return FutureBuilder<String>(
+        future: Environment.current(),
+        builder: (context, envSnap) {
+          if (envSnap.connectionState == ConnectionState.done) {
+            if (envSnap.data == "com.50gramx") {
+              return HomeScreen();
+            } else if (envSnap.data == "com.50gramx.50.ethos.site") {
+              return StartScreen();
+            } else {
+              return HomeScreen();
+            }
+          } else {
+            return buildProgress();
+          }
+        });
+  }
+
+  buildWOFutureBuider() {
+    return FutureBuilder<String>(
+        future: Environment.current(),
+        builder: (context, envSnap) {
+          if (envSnap.connectionState == ConnectionState.done) {
+            if (envSnap.data == "com.50gramx") {
+              return HomeScreen();
+            } else if (envSnap.data == "com.50gramx.50.ethos.site") {
+              return StartScreen();
+            } else {
+              return HomeScreen();
+            }
+          } else {
+            return StartScreen();
+          }
+        });
+  }
+
+  buildParentFutureBuilder() {
+    return FutureBuilder<bool>(
+        future: AccountData().accountPresent(),
+        builder: (context, presentData) {
+          if (presentData.connectionState == ConnectionState.done) {
+            if (presentData.data == true) {
+              return HomeScreen();
+            } else {
+              return buildFutureBuider();
+            }
+          } else {
+            return buildProgress();
+          }
+        });
+  }
+
+  buildParentWOFutureBuilder() {
+    return buildWOFutureBuider();
+  }
+
+  buildHomeFutureBuilder() {
+    return FutureBuilder<void>(
+      future: initializeApp(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          print("App initialization completed."); // Add a log statement
+          return buildParentFutureBuilder();
+        } else {
+          return buildProgress();
+        }
+      },
+    );
+  }
+
+  buildHomeWOFutureBuilder() {
+    return FutureBuilder<void>(
+      future: initializeApp(),
+      builder: (context, snapshot) {
+        return buildParentWOFutureBuilder();
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     LocalServices().notifications();
+
     return NeumorphicApp(
         debugShowCheckedModeBanner: false,
         title: Constants.appName,
@@ -151,44 +234,7 @@ class MyApp extends StatelessWidget {
           '/53gramx/satwa/pricing': (context) => SatwaPricingPage(),
         },
         navigatorObservers: getNavigatorObserver(),
-        home: FutureBuilder<void>(
-          future: initializeApp(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              print("App initialization completed."); // Add a log statement
-              return FutureBuilder<bool>(
-                  future: AccountData().accountPresent(),
-                  builder: (context, presentData) {
-                    if (presentData.connectionState == ConnectionState.done) {
-                      if (presentData.data == true) {
-                        return HomeScreen();
-                      } else {
-                        return FutureBuilder<String>(
-                            future: Environment.current(),
-                            builder: (context, envSnap) {
-                              if (envSnap.connectionState ==
-                                  ConnectionState.done) {
-                                if (envSnap.data == "com.50gramx") {
-                                  return HomeScreen();
-                                } else if (envSnap.data == "com.50gramx.50.ethos.site") {
-                                  return StartScreen();
-                                } else {
-                                  return HomeScreen();
-                                }
-                              } else {
-                                return progress;
-                              }
-                            });
-                      }
-                    } else {
-                      return progress;
-                    }
-                  });
-            } else {
-              return progress;
-            }
-          },
-        ));
+        home: buildHomeWOFutureBuilder());
   }
 
   List<NavigatorObserver> getNavigatorObserver() {
