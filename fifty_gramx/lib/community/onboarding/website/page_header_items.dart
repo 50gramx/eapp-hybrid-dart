@@ -161,4 +161,37 @@ class PageHeaderConfig {
       ),
     );
   }
+
+Widget buildCollapsibleMenu(BuildContext context) {
+    return ExpansionTile(
+      title: Text(
+        header,
+        style: AppTextStyle.appTextStyle(context).copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: AppColors.contentPrimary(context),
+        ),
+      ),
+      children: items.map((item) {
+        return ListTile(
+          contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          title: Text(
+            item['title']!,
+            style: AppTextStyle.appTextStyle(context).copyWith(
+              fontSize: 16,
+              color: AppColors.contentPrimary(context),
+            ),
+          ),
+          onTap: () {
+            Navigator.pop(context); // Close drawer before navigating
+            if (item['route']!.startsWith('http')) {
+              _launchURL(item['route']!);
+            } else {
+              Navigator.pushNamed(context, item['route']!);
+            }
+          },
+        );
+      }).toList(),
+    );
+  }
 }
