@@ -228,7 +228,7 @@ msix_config:
   publisher_display_name: Amit Khetan
   identity_name: 11781AppsHub.50GRAMX
   msix_version: 24.2.1.0
-  certificate_path: C:\Users\91963\CERTIFICATE.pfx
+  certificate_path: common-assets/certificate\CERTIFICATE.pfx
   certificate_password: AFAF
   
   #  logo_path: C:\<PathToIcon>\<Logo.png>
