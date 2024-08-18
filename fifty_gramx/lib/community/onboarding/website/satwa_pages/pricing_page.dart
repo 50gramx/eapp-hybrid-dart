@@ -20,6 +20,7 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page_sliver_body.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +60,7 @@ class _SatwaPricingPageState extends State<SatwaPricingPage> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundSecondary(context),
+            drawer: buildHomePageAppDrawer(context),
             body: buildSatwaOverviewPageSliverBody());
       },
     );
