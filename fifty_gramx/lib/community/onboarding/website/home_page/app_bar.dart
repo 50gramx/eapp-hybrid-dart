@@ -1,8 +1,9 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold_backup.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/space_pages/header_config.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class HomePageSliverAppBar extends StatefulWidget {
@@ -21,34 +22,41 @@ class HomePageSliverAppBar extends StatefulWidget {
   _HomePageSliverAppBarState createState() => _HomePageSliverAppBarState();
 }
 
-class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
-  @override
-  Widget build(BuildContext context) {
-    Widget titleText = Text(
-      "50GRAMx",
-      maxLines: 1,
-      textAlign: TextAlign.start,
-      style: TextStyle(
-          color: AppColors.contentPrimary(context),
-          fontSize: 24,
-          fontFamily: "Montserrat",
-          fontWeight: FontWeight.w500),
-    );
-    Widget tappableTitleText = GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/');
-      },
-      child: titleText,
-    );
-    var title = Hero(
-        tag: "50gramx-title-app-bar-hero",
-        transitionOnUserGestures: true,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: tappableTitleText,
-        ));
+Widget buildTitleText(BuildContext context) {
+  return Text(
+    "50GRAMx",
+    maxLines: 1,
+    textAlign: TextAlign.start,
+    style: TextStyle(
+        color: AppColors.contentPrimary(context),
+        fontSize: 24,
+        fontFamily: "Montserrat",
+        fontWeight: FontWeight.w500),
+  );
+}
 
-    Widget tappableHubTitleContainer = Padding(
+Widget buildTappableTitleText(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, '/');
+    },
+    child: buildTitleText(context),
+  );
+}
+
+Widget buildHerotitle(BuildContext context) {
+  return Hero(
+      tag: "50gramx-title-app-bar-hero",
+      transitionOnUserGestures: true,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: buildTappableTitleText(context),
+      ));
+}
+
+class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
+  Widget buildTappableHubTitleContainer() {
+    return Padding(
       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: NeumorphicButton(
           provideHapticFeedback: true,
@@ -74,7 +82,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           child: Text(
-            "Try Collars",
+            "Explore Collars",
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: AppColors.contentInversePrimary(context),
@@ -83,16 +91,21 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
                 fontWeight: FontWeight.w500),
           )),
     );
-    var hubTitle = Hero(
+  }
+
+  Widget buildHubTitle() {
+    return Hero(
       tag: "50gramx-hub-title-app-bar-hero",
       transitionOnUserGestures: true,
       child: Align(
         alignment: Alignment.centerLeft,
-        child: tappableHubTitleContainer,
+        child: buildTappableHubTitleContainer(),
       ),
     );
+  }
 
-    var tappableEthosverseTitle = GestureDetector(
+  Widget buildTappableEthosverseTitle() {
+    return GestureDetector(
       onTap: () {
         Navigator.pushNamed(
           context,
@@ -135,45 +148,89 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
             ),
           )),
     );
-    var galaxyPopupMenuButton =
-        GalaxyPageHeaderConfig().buildPopupMenuButton(context);
-    var spacePopupMenuButton =
-        SpacePageHeaderConfig().buildPopupMenuButton(context);
-    var companyPopuMenuButton =
-        HomePageHeaderConfig().buildPopupMenuButton(context);
+  }
 
-    var leftNavigationActions = [
-      hubTitle,
+  Widget buildGalaxyPopupMenuButton() {
+    return GalaxyPageHeaderConfig().buildPopupMenuButton(context);
+  }
+
+  Widget buildSpacePopupMenuButton() {
+    return SpacePageHeaderConfig().buildPopupMenuButton(context);
+  }
+
+  Widget buildCompanyPopuMenuButton() {
+    return HomePageHeaderConfig().buildPopupMenuButton(context);
+  }
+
+  buildLeftNavigationAppBarTitle() {
+    return Row(
+      children: [
+        // Add space to separate the title and other actions
+        buildHerotitle(context), // Your existing title widget
+        SizedBox(width: 16),
+        buildTappableEthosverseTitle(),
+        buildGalaxyPopupMenuButton(),
+        buildSpacePopupMenuButton(),
+        buildCompanyPopuMenuButton(),
+      ],
+    );
+  }
+
+  buildBottomNavigationAppBarTitle() {
+    return Row(
+      children: [
+        // Add space to separate the title and other actions
+        buildHerotitle(context), // Your existing title widget
+      ],
+    );
+  }
+
+  buildAppBarTitle() {
+    return LayoutBreakpoint().isNavigatingLeft(context)
+        ? buildLeftNavigationAppBarTitle()
+        : buildBottomNavigationAppBarTitle();
+  }
+
+  buildLeftNavigationActions() {
+    return [
+      buildHubTitle(),
     ];
+  }
 
-    List<Widget> bottomNavigationActions = [
+  buildBottomNavigationActions() {
+    return [
       IconButton(
-        icon: Icon(Icons.menu),
+        icon: Icon(FeatherIcons.search),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/ethosverse',
+          );
+        },
+      ),
+      IconButton(
+        icon: Icon(FeatherIcons.menu),
         onPressed: () {
           Scaffold.of(context).openDrawer();
         },
       ),
     ];
+  }
 
-    bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
+  buildAppBarActions() {
+    return LayoutBreakpoint().isNavigatingLeft(context)
+        ? buildLeftNavigationActions()
+        : buildBottomNavigationActions();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SliverAppBar(
-      title: Row(
-        children: [
-          // Add space to separate the title and other actions
-          title, // Your existing title widget
-          SizedBox(width: 16),
-          tappableEthosverseTitle,
-          galaxyPopupMenuButton,
-          spacePopupMenuButton,
-          companyPopuMenuButton,
-        ],
-      ),
+      title: buildAppBarTitle(),
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundPrimary(context),
       pinned: widget.isPinned,
-      actions:
-          isNavigatingLeft ? leftNavigationActions : bottomNavigationActions,
+      actions: buildAppBarActions(),
       stretch: true,
       onStretchTrigger: () async {
         print("OnStretchTrigger:start");
