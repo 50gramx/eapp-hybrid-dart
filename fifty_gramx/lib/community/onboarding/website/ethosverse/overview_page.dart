@@ -21,6 +21,7 @@
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page_sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -59,6 +60,7 @@ class _EthosverseOverviewPageState extends State<EthosverseOverviewPage> {
       builder: (context, sizingInformation) {
         return Scaffold(
             backgroundColor: AppColors.backgroundPrimary(context),
+            drawer: buildHomePageAppDrawer(context),
             body: buildEthosverseOverviewPageSliverBody());
       },
     );
