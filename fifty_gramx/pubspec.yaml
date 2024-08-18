@@ -228,11 +228,9 @@ msix_config:
   publisher_display_name: Amit Khetan
   identity_name: 11781AppsHub.50GRAMX
   msix_version: 24.2.1.0
-  certificate_path: C:\Users\amitk\Documents\CERTIFICATE.pfx
-  certificate_password: getethos
-  app_installer:
-    publish_folder_path: C:\Users\amitk\Documents
-  publisher: CN=D4AFB810-EF13-46E0-8839-A4A110696588
+  certificate_path: C:\Users\91963\CERTIFICATE.pfx
+  certificate_password: AFAF
+  
   #  logo_path: C:\<PathToIcon>\<Logo.png>
   #  start_menu_icon_path: C:\<PathToIcon>\<Icon.png>
   #  tile_icon_path: C:\<PathToIcon>\<Icon.png>
