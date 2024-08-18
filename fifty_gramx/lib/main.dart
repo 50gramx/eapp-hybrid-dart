@@ -56,12 +56,7 @@ bool isFirebaseSupportedPlatform() {
   return kIsWeb || Platform.isAndroid || Platform.isIOS;
 }
 
-/// Entry point of the 50gramx Flutter application.
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  print("App is starting...");
-  // Firebase not available for windows, linux at the moment
-  // Firebase is enabled for web at the moment
+ensureFirebaseSupport() async {
   if (isFirebaseSupportedPlatform()) {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -91,8 +86,46 @@ void main() async {
     print("Platform is not supported, not initialising Firebase");
     //   not doing anything
   }
+}
 
+/// Initializes platform-specific services.
+void initializeEthosAppsServices() {
+  PrivilegedCommandExecuter.initPrivileged();
+  if (Platform.isMacOS) {
+    BrewCommands.initBrew();
+  } else if (Platform.isWindows) {
+    print("initializePlatformServices failed for Windows");
+  } else if (Platform.isLinux) {
+    print("initializePlatformServices failed for Linux");
+  }
+  MultipassCommands();
+  print("Platform services initialized.");
+}
+
+/// Initializes the application.
+Future<void> initalizeEthosappsSupport() async => await (() async {
+      if (!kIsWeb &&
+          (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
+        print("will start platform services");
+        initializeEthosAppsServices();
+      }
+      EthosAppFlowBob();
+      print("EthosAppFlowBob initialized.");
+    })();
+
+ensureEthosappsSupport() {
+  initalizeEthosappsSupport();
+}
+
+/// Entry point of the 50gramx Flutter application.
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // print("App is starting...");
+  // Firebase not available for windows, linux at the moment
+  // Firebase is enabled for web at the moment
+  await ensureFirebaseSupport();
   configureApp();
+  ensureEthosappsSupport();
   runApp(MyApp());
 }
 
@@ -152,9 +185,7 @@ class MyApp extends StatelessWidget {
         future: Environment.current(),
         builder: (context, envSnap) {
           if (envSnap.connectionState == ConnectionState.done) {
-            if (envSnap.data == "com.50gramx") {
-              return HomeScreen();
-            } else if (envSnap.data == "com.50gramx.50.ethos.site") {
+            if (envSnap.data == "com.50gramx.50.ethos.site") {
               return StartScreen();
             } else {
               return HomeScreen();
@@ -187,7 +218,7 @@ class MyApp extends StatelessWidget {
 
   buildHomeFutureBuilder() {
     return FutureBuilder<void>(
-      future: initializeApp(),
+      future: initalizeEthosappsSupport(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           print("App initialization completed."); // Add a log statement
@@ -200,12 +231,7 @@ class MyApp extends StatelessWidget {
   }
 
   buildHomeWOFutureBuilder() {
-    return FutureBuilder<void>(
-      future: initializeApp(),
-      builder: (context, snapshot) {
-        return buildParentWOFutureBuilder();
-      },
-    );
+    return buildParentWOFutureBuilder();
   }
 
   @override
@@ -249,30 +275,5 @@ class MyApp extends StatelessWidget {
     }
 
     return listOfNavigatorObserver;
-  }
-
-  /// Initializes the application.
-  Future<void> initializeApp() async => await (() async {
-        if (!kIsWeb &&
-            (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
-          print("will start platform services");
-          initializePlatformServices();
-        }
-        EthosAppFlowBob();
-        print("EthosAppFlowBob initialized.");
-      })();
-
-  /// Initializes platform-specific services.
-  void initializePlatformServices() {
-    PrivilegedCommandExecuter.initPrivileged();
-    if (Platform.isMacOS) {
-      BrewCommands.initBrew();
-    } else if (Platform.isWindows) {
-      print("initializePlatformServices failed for Windows");
-    } else if (Platform.isLinux) {
-      print("initializePlatformServices failed for Linux");
-    }
-    MultipassCommands();
-    print("Platform services initialized.");
   }
 }
