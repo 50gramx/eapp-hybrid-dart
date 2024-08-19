@@ -1,5 +1,8 @@
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class CubeWidget extends StatefulWidget {
   @override
@@ -68,33 +71,6 @@ class _CubeWidgetState extends State<CubeWidget> with TickerProviderStateMixin {
             size: Size(400, 200),
             painter: GPUPainter(_fanController),
           ),
-          // GPU Name and Price
-          Positioned(
-            bottom: 20,
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: Column(
-                children: [
-                  Text(
-                    gpuNames[currentGPUIndex],
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10.0),
-                  Text(
-                    gpuPrices[currentGPUIndex],
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -108,74 +84,202 @@ class GPUPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Apply a slight rotation to give a 3D perspective
-    canvas.translate(size.width / 2, size.height / 2);
-    canvas.transform(Matrix4.rotationY(0.3).storage);
-    canvas.translate(-size.width / 2, -size.height / 2);
+    final baseColor = AppColors.gray800;
+    final contentColor = AppColors.gray200;
 
-    // Create a more complex GPU body shape
-    Path gpuBodyPath = Path()
-      ..moveTo(size.width * 0.1, size.height * 0.2)
-      ..lineTo(size.width * 0.9, size.height * 0.2)
-      ..lineTo(size.width * 0.95, size.height * 0.3)
-      ..lineTo(size.width * 0.95, size.height * 0.7)
-      ..lineTo(size.width * 0.9, size.height * 0.8)
-      ..lineTo(size.width * 0.1, size.height * 0.8)
-      ..lineTo(size.width * 0.05, size.height * 0.7)
-      ..lineTo(size.width * 0.05, size.height * 0.3)
-      ..close();
+    final lightSource = Offset(-size.width * 0.5, -size.height * 0.5);
 
-    // Create a gradient for metallic look
-    var gradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [Colors.grey[800]!, Colors.grey[600]!, Colors.grey[400]!],
-    );
+    // Draw main body
+    _drawNeumorphicBackground(canvas, size, baseColor, lightSource);
 
-    var paint = Paint()..shader = gradient.createShader(Offset.zero & size);
+    // Draw X shape
+    _drawNeumorphicXShape(canvas, size, contentColor, lightSource);
 
-    // Draw the GPU body
-    canvas.drawPath(gpuBodyPath, paint);
+    // Draw fan
+    _drawNeumorphicFan(canvas, size, baseColor, lightSource);
 
-    // Add metallic highlights
-    var highlightPaint = Paint()
-      ..color = Colors.white.withOpacity(0.3)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2;
-    canvas.drawPath(gpuBodyPath, highlightPaint);
-
-    // Draw a more realistic fan
-    _drawRealisticFan(
-        canvas, Offset(size.width * 0.5, size.height * 0.5), size.width * 0.2);
+    // Draw text
+    _drawText(canvas, size, 'RTX 30/40');
   }
 
-  void _drawRealisticFan(Canvas canvas, Offset center, double radius) {
-    final fanPaint = Paint()
-      ..color = Colors.grey[300]!
-      ..style = PaintingStyle.fill;
+  void _drawNeumorphicBackground(
+      Canvas canvas, Size size, Color baseColor, Offset lightSource) {
+    final rect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      Radius.circular(size.height * 0.1),
+    );
 
-    // Draw fan blades with a curved shape
-    for (int i = 0; i < 7; i++) {
-      final angle = (controller.value * 2.0 * pi) + (i * 2 * pi / 7);
-      final path = Path()
+    // Base
+    canvas.drawRRect(rect, Paint()..color = baseColor);
+
+    // Highlight
+    final highlightPaint = Paint()
+      ..shader = RadialGradient(
+        center: Alignment(
+            lightSource.dx / size.width, lightSource.dy / size.height),
+        radius: 1,
+        colors: [baseColor.brighten(0.1), baseColor],
+      ).createShader(rect.outerRect);
+    canvas.drawRRect(rect, highlightPaint);
+
+    // Shadow
+    final shadowPaint = Paint()
+      ..shader = RadialGradient(
+        center: Alignment(
+            -lightSource.dx / size.width, -lightSource.dy / size.height),
+        radius: 1,
+        colors: [baseColor.darken(0.1), baseColor],
+      ).createShader(rect.outerRect);
+    canvas.drawRRect(rect, shadowPaint);
+  }
+
+  void _drawNeumorphicXShape(
+      Canvas canvas, Size size, Color baseColor, Offset lightSource) {
+    final midX = size.width * 0.5;
+    final midY = size.height * 0.5;
+    final offset = size.width *
+        0.2; // Adjust this value to control the length of the arrows
+    final bandSize = size.width * 0.05; // Size of the band at the intersection
+
+    final xPath = Path()
+      ..moveTo(midX - offset, midY - offset)
+      ..lineTo(midX + offset, midY + offset)
+      ..moveTo(midX - offset, midY + offset)
+      ..lineTo(midX + offset, midY - offset);
+
+    final bandPath = Path()
+      ..addRect(Rect.fromCenter(
+        center: Offset(midX, midY),
+        width: bandSize,
+        height: bandSize,
+      ));
+
+    canvas.drawPath(
+      xPath,
+      Paint()
+        ..color = baseColor.brighten(0.05)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = size.width * 0.02,
+    );
+
+    canvas.drawPath(
+      xPath.shift(Offset(size.width * 0.005, size.height * 0.005)),
+      Paint()
+        ..color = baseColor.darken(0.05)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = size.width * 0.02,
+    );
+
+    canvas.drawPath(
+      bandPath,
+      Paint()
+        ..color = baseColor.brighten(0.05)
+        ..style = PaintingStyle.fill,
+    );
+
+    canvas.drawPath(
+      bandPath.shift(Offset(size.width * 0.005, size.height * 0.005)),
+      Paint()
+        ..color = baseColor.darken(0.05)
+        ..style = PaintingStyle.fill,
+    );
+  }
+
+  void _drawNeumorphicFan(
+      Canvas canvas, Size size, Color baseColor, Offset lightSource) {
+    final center = Offset(size.width * 0.8, size.height * 0.5);
+    final radius = size.height * 0.35;
+
+    // Fan background
+    canvas.drawCircle(
+      center,
+      radius,
+      Paint()..color = baseColor.darken(0.05),
+    );
+
+    // Fan blades
+    for (int i = 0; i < 9; i++) {
+      final angle = (controller.value * 2 * pi) + (i * 2 * pi / 9);
+      final bladePath = Path()
         ..moveTo(center.dx, center.dy)
-        ..cubicTo(
-          center.dx + radius * 0.3 * cos(angle),
-          center.dy + radius * 0.3 * sin(angle),
-          center.dx + radius * 0.7 * cos(angle - 0.2),
-          center.dy + radius * 0.7 * sin(angle - 0.2),
-          center.dx + radius * cos(angle),
-          center.dy + radius * sin(angle),
+        ..arcTo(
+          Rect.fromCircle(center: center, radius: radius),
+          angle,
+          pi / 9,
+          false,
         )
-        ..lineTo(center.dx, center.dy);
-      canvas.drawPath(path, fanPaint);
+        ..lineTo(center.dx, center.dy)
+        ..close();
+
+      canvas.drawPath(
+        bladePath,
+        Paint()..color = baseColor.brighten(0.02),
+      );
+
+      canvas.drawPath(
+        bladePath.shift(Offset(size.width * 0.005, size.height * 0.005)),
+        Paint()..color = baseColor.darken(0.02),
+      );
     }
 
-    // Draw fan center
+    // Fan center
     canvas.drawCircle(
-        center, radius * 0.15, Paint()..color = Colors.grey[600]!);
+      center,
+      radius * 0.15,
+      Paint()..color = baseColor.darken(0.1),
+    );
+  }
+
+  void _drawText(Canvas canvas, Size size, String text) {
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: text,
+        style: TextStyle(
+          color: Colors.white.withOpacity(0.9),
+          fontSize: size.height * 0.15,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    );
+    textPainter.layout();
+    textPainter.paint(canvas, Offset(size.width * 0.05, size.height * 0.4));
+  }
+
+  void _drawPCIEConnector(
+      Canvas canvas, Size size, Color baseColor, Offset lightSource) {
+    final rect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(0, size.height * 0.9, size.width * 0.7, size.height * 0.1),
+      Radius.circular(size.height * 0.02),
+    );
+
+    canvas.drawRRect(rect, Paint()..color = baseColor.brighten(0.1));
+    canvas.drawRRect(
+      rect.shift(Offset(size.width * 0.005, size.height * 0.005)),
+      Paint()..color = baseColor.darken(0.1),
+    );
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
+extension ColorExtension on Color {
+  Color brighten(double amount) {
+    return Color.fromARGB(
+      alpha,
+      (red + (255 - red) * amount).round(),
+      (green + (255 - green) * amount).round(),
+      (blue + (255 - blue) * amount).round(),
+    );
+  }
+
+  Color darken(double amount) {
+    return Color.fromARGB(
+      alpha,
+      (red * (1 - amount)).round(),
+      (green * (1 - amount)).round(),
+      (blue * (1 - amount)).round(),
+    );
+  }
 }
