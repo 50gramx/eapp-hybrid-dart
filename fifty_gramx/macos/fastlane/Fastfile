@@ -16,10 +16,39 @@
 default_platform(:mac)
 
 platform :mac do
-  desc "Push a new beta build to TestFlight"
+  desc "Build, notarize, and export a notarized app"
   lane :build do
     increment_build_number(xcodeproj: "Runner.xcodeproj")
-    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
-    upload_to_testflight
+    build_app(
+      workspace: "Runner.xcworkspace", 
+      scheme: "com.fiftygramx.seventy.zero.ethos.nodes",
+      export_method: "developer-id"
+    )
+
+    # Notarize the app
+    notarize(
+      package: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app",
+      username: "amitkumarkhetan15@gmail.com", # Your Apple ID
+      bundle_id: "com.fiftygramx.seventy.zero.ethos.nodes",
+    )
+    
+    # Staple the notarization ticket
+    sh("xcrun stapler staple #{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app")
+    
+    # Zip the notarized app (optional)
+    sh("zip -r YourAppName.zip #{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app")
+
+
+    # "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app",
+    # """
+    #     '/Users/mac/Library/Developer/Xcode/Archives/2024-08-19/50GRAMx 2024-08-19 00.31.34.xcarchive/dSYMs' && zip -r '/Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos/50GRAMx.app.dSYM.zip' *.dSYM
+    #     ./50GRAMx-eNodes.app
+    #     Successfully exported and signed the pkg file:
+    # [00:39:27]: /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos/50GRAMx.app
+    # [00:39:27]: Error setting value '/Users/mac/Library/Developer/Xcode/Archives/2024-08-19/50GRAMx 2024-08-19 00.31.34.xcarchive/Products/Applications/YourAppName.app' for option 'package'
+
+    #     """
+
+    UI.message("App successfully notarized and zipped!")
   end
 end
