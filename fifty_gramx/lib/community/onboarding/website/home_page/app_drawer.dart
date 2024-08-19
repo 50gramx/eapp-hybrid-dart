@@ -16,8 +16,8 @@ Widget buildHomePageAppDrawer(BuildContext context) {
         ListView(
           padding: EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 48),
           children: <Widget>[
-            GalaxyPageHeaderConfig().buildCollapsibleMenu(context),
-            SpacePageHeaderConfig().buildCollapsibleMenu(context),
+            // GalaxyPageHeaderConfig().buildCollapsibleMenu(context),
+            // SpacePageHeaderConfig().buildCollapsibleMenu(context),
             HomePageHeaderConfig().buildCollapsibleMenu(context),
             // Add more items here as needed
           ],
