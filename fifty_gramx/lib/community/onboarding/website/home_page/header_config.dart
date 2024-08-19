@@ -5,10 +5,10 @@ class HomePageHeaderConfig extends PageHeaderConfig {
       : super(
           header: 'Company',
           items: [
-            {
-              'title': 'Works',
-              'route': 'https://ethosfoundations.50gramx.com/xcommunities'
-            },
+            // {
+            //   'title': 'Works',
+            //   'route': 'https://ethosfoundations.50gramx.com/xcommunities'
+            // },
             {'title': 'About', 'route': '/about'},
           ],
         );
