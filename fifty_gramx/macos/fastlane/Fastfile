@@ -18,37 +18,48 @@ default_platform(:mac)
 platform :mac do
   desc "Build, notarize, and export a notarized app"
   lane :build do
-    increment_build_number(xcodeproj: "Runner.xcodeproj")
+    increment_version_number(version_number: ENV["VERSION_NUMBER"])
+    increment_build_number(xcodeproj: "Runner.xcodeproj", build_number: ENV["BUILD_NUMBER"])
+    # increment_build_number(xcodeproj: "Runner.xcodeproj")
+
+    # Build the app
     build_app(
       workspace: "Runner.xcworkspace", 
       scheme: "com.fiftygramx.seventy.zero.ethos.nodes",
-      export_method: "developer-id"
+      export_method: "developer-id",
+      skip_package_pkg: true, # A workaround for https://github.com/fastlane/fastlane/issues/15963
     )
+  
+    # Code signing
+    sh("codesign --verbose --force --sign 'Developer ID Application' --timestamp --deep --options runtime '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
 
     # Notarize the app
     notarize(
       package: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app",
       username: "amitkumarkhetan15@gmail.com", # Your Apple ID
+      asc_provider: "V9YYYP7GU9",
       bundle_id: "com.fiftygramx.seventy.zero.ethos.nodes",
+      print_log: true,
+      verbose: true,
     )
     
     # Staple the notarization ticket
-    sh("xcrun stapler staple #{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app")
+    sh("xcrun stapler staple '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
     
     # Zip the notarized app (optional)
-    sh("zip -r YourAppName.zip #{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app")
+    version_number = ENV["VERSION_NUMBER"]
+    build_number = ENV["BUILD_NUMBER"]
+    zip_file_name = "50GRAMx-eNodes-v#{version_number}-b#{build_number}.app.zip"
+    zip_file_path = "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/#{zip_file_name}"
+    sh("zip -r '#{zip_file_path}' '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
 
 
-    # "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/YourAppName.app",
-    # """
-    #     '/Users/mac/Library/Developer/Xcode/Archives/2024-08-19/50GRAMx 2024-08-19 00.31.34.xcarchive/dSYMs' && zip -r '/Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos/50GRAMx.app.dSYM.zip' *.dSYM
-    #     ./50GRAMx-eNodes.app
-    #     Successfully exported and signed the pkg file:
-    # [00:39:27]: /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos/50GRAMx.app
-    # [00:39:27]: Error setting value '/Users/mac/Library/Developer/Xcode/Archives/2024-08-19/50GRAMx 2024-08-19 00.31.34.xcarchive/Products/Applications/YourAppName.app' for option 'package'
+    # Upload the zipped app to the remote server
+    remote_folder = "development"
+    authorization_token = "Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJhdWQiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJvcmdEb21haW4iOiI1MGdyYW14IiwibmFtZSI6IkV0aG9zIEFwcHMgU2VydmljZSBDb250cmFjdHMiLCJpc3MiOiJodHRwczovLzUwZ3JhbXguamV0YnJhaW5zLnNwYWNlIiwicGVybV90b2tlbiI6IjRhdExheTNRaHUweSIsInByaW5jaXBhbF90eXBlIjoiU0VSVklDRSIsImlhdCI6MTcyNDExMzgyM30.Xrfm964rYsnQNTGR6DInNrWa-R4ZY9uT-NZAhVVC09PVCPBSmMR6OMkAIhZ56C88vuXbRcbLbXMch2zx5MyJJZTdZYotS2JOMIoB09tf0DdVBK3BjuVz86gfsbspaO-fAt8K6NKN-RKoB19LNtsSZeOSBt73KhlOMqc3Iwj4fwg"
+    
+    sh("""curl -i -H \"Authorization: #{authorization_token}\" https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/#{remote_folder}/ --upload-file '#{zip_file_path}'""")
 
-    #     """
-
-    UI.message("App successfully notarized and zipped!")
+    UI.message("App successfully notarized and zipped and uploaded to packages!")
   end
 end
