@@ -516,36 +516,52 @@ job("Build and publish EthosNodes MacOS Distributable App") {
 
         shellScript {
             content = """
-                echo Get amitkumarkhetan15 SSH key...
+                echo "Step 1: Installing xxd..."
                 apt-get install -y xxd
                 
                 # Debugging: Print current directory
-                echo "Current Directory: $(pwd)"
+                echo "Step 2: Current Directory: $(pwd)"
 
                 # Create the .ssh directory in the current working directory
+                echo "Step 3: Creating .ssh directory..."
                 mkdir -p ~/.ssh
+                ls -la ~/.ssh
 
                 # Save the SSH key hex data to a file
+                echo "Step 4: Saving SSH key hex data to id_rsa.hex..."
                 echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
                 
                 # Debugging: Check if id_rsa.hex was created
+                echo "Step 5: Checking id_rsa.hex file..."
                 ls -la id_rsa.hex
                 
                 # Convert the hex data to a binary SSH key and place it in ~/.ssh
+                echo "Step 6: Converting hex data to SSH key..."
                 xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
 
                 # Debugging: Check if the id_rsa file was created
+                echo "Step 7: Checking ~/.ssh/id_rsa file..."
                 ls -la ~/.ssh/id_rsa
 
                 # Set correct permissions for the SSH key
+                echo "Step 8: Setting permissions for SSH key..."
                 chmod 600 ~/.ssh/id_rsa
 
                 # Debugging: Verify permissions
+                echo "Step 9: Verifying ~/.ssh permissions..."
                 ls -la ~/.ssh
 
-                echo Build macos app...
+                # Testing SSH connection before running the command
+                echo "Step 10: Testing SSH connection..."
+                ssh -o BatchMode=yes mac@host.docker.internal 'echo "SSH connection successful!"' || { echo "SSH connection failed!"; exit 1; }
+
+                echo "Step 11: Building macos app..."
                 export BUILD_COMMAND="source ~/.zshrc; cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ BUILD_NUMBER }}; fastlane build;"
-                echo ${'$'}BUILD_COMMAND
+                
+                # Debugging: Output the command that will be run
+                echo "Step 12: SSH Build Command: ${'$'}BUILD_COMMAND"
+
+                # Run the build command via SSH
                 ssh -o BatchMode=yes mac@host.docker.internal ${'$'}BUILD_COMMAND
             """
         }
