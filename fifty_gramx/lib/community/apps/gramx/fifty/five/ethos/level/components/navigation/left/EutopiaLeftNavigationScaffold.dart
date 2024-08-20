@@ -339,7 +339,7 @@ class _EutopiaLeftNavigationScaffoldState
                         toggleNavigatingPages: toggleNavigatingPages,
                         isNavigatingPages: isNavigatingPages),
                     visible: isNavigatingLeft
-                        ? (isOneEappLoaded ? false : true)
+                        ? (isOneEappLoaded ? false : false)
                         : (isNavigatingPages ? false : true),
                   ),
                 ],
