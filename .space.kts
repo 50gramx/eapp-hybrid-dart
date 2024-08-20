@@ -546,7 +546,7 @@ job("Build and publish EthosNodes MacOS Distributable App") {
                 echo Build macos app...
                 export BUILD_COMMAND="source ~/.zshrc; cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ BUILD_NUMBER }}; fastlane build;"
                 echo ${'$'}BUILD_COMMAND
-                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
+                ssh -o BatchMode=yes mac@host.docker.internal ${'$'}BUILD_COMMAND
             """
         }
 
