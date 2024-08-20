@@ -518,15 +518,30 @@ job("Build and publish EthosNodes MacOS Distributable App") {
             content = """
                 echo Get amitkumarkhetan15 SSH key...
                 apt-get install -y xxd
-                pwd
-                ls -l
+                
+                # Debugging: Print current directory
+                echo "Current Directory: $(pwd)"
+
+                # Create the .ssh directory in the current working directory
+                mkdir -p ~/.ssh
+
+                # Save the SSH key hex data to a file
                 echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
-                pwd
-                ls -l
+                
+                # Debugging: Check if id_rsa.hex was created
+                ls -la id_rsa.hex
+                
+                # Convert the hex data to a binary SSH key and place it in ~/.ssh
                 xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
-                pwd
-                ls -l
+
+                # Debugging: Check if the id_rsa file was created
+                ls -la ~/.ssh/id_rsa
+
+                # Set correct permissions for the SSH key
                 chmod 600 ~/.ssh/id_rsa
+
+                # Debugging: Verify permissions
+                ls -la ~/.ssh
 
                 echo Build macos app...
                 export BUILD_COMMAND="source ~/.zshrc; cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ BUILD_NUMBER }}; fastlane build;"
