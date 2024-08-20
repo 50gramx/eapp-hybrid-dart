@@ -476,6 +476,84 @@ job("Build and publish bundle to iOS internal track") {
     }
 }
 
+job("Build and publish EthosNodes MacOS Distributable App") {
+    startOn {
+        gitPush {
+            enabled = true
+            anyBranchMatching {
+                +"release-*"
+                +"master"
+            }
+        }
+    }
+
+    // To check a condition, basically, you need a kotlinScript step
+    host(displayName = "Setup Version") {
+        kotlinScript { api ->
+            // Get the current year and month
+            val currentYear = (LocalDate.now().year % 100).toString().padStart(2, '0')
+            val currentMonth = LocalDate.now().monthValue.toString()
+
+            // Get the execution number from environment variables
+            val currentExecution = System.getenv("JB_SPACE_EXECUTION_NUMBER")
+
+            // Set the VERSION_NUMBER parameter
+            api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
+            api.parameters["BUILD_NUMBER"] = "$currentExecution"
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
+
+    host("Build and publish") {
+        env["SSH_CONNECT_AMITKUMARKHETAN15_KEY"] = Secrets("SSH_CONNECT_AMITKUMARKHETAN15_KEY")
+        env["SSH_CONNECT_AMITKUMARKHETAN15_SECURITY"] = Secrets("SSH_CONNECT_AMITKUMARKHETAN15_SECURITY")
+        env["FASTLANE_USER"] = Params("FASTLANE_USER")
+        env["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = Secrets("FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD")
+        
+
+        shellScript {
+            content = """
+                echo Get amitkumarkhetan15 SSH key...
+                apt-get install -y xxd
+                echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
+                xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+
+                echo Build macos app...
+                export BUILD_COMMAND="source ~/.zshrc; cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ BUILD_NUMBER }}; fastlane build;"
+                echo ${'$'}BUILD_COMMAND
+                ssh -o BatchMode=yes amitkumarkhetan15@host.docker.internal ${'$'}BUILD_COMMAND
+            """
+        }
+
+        requirements {
+            workerTags("macos-pool")
+            workerTags("amitkumarkhetan15-user")
+        }
+    }
+
+    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
+        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
+
+        kotlinScript { api ->
+            val slack = Slack.getInstance()
+            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
+            val version = api.parameters["VERSION_NUMBER"]
+            val response = slack.methods(token).chatPostMessage { req ->
+                req.channel("#product-dev").text("👋 Deployed 📱 MacOS Distributable v$version Interactions 🙏")
+            }
+            println("$response")
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
+}
+
 
 job("Build and publish bundle to windows desktop track") {
     startOn {
