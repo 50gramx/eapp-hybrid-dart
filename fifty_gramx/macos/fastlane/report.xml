@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000788">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: increment_version_number" time="2.456945">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: increment_build_number" time="1.498236">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: build_app" time="288.409692">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: codesign --verbose --force --sign &apos;Developer ID Application&apos; --timestamp --deep --options runtime &apos;/Users/mac/Library/Developer/Xcode/Archives/2024-08-20/50GRAMx 2024-08-20 06.27.30.xcarchive/Products/Applications/50GRAMx-eNodes.app&apos;" time="15.618353">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: notarize" time="60.777095">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: xcrun stapler staple &apos;/Users/mac/Library/Developer/Xcode/Archives/2024-08-20/50GRAMx 2024-08-20 06.27.30.xcarchive/Products/Applications/50GRAMx-eNodes.app&apos;" time="0.757087">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: zip -r &apos;/Users/mac/Library/Developer/Xcode/Archives/2024-08-20/50GRAMx 2024-08-20 06.27.30.xcarchive/Products/Applications/50GRAMx-eNodes-v24.08.82-b82.app.zip&apos; &apos;/Users/mac/Library/Developer/Xcode/Archives/2024-08-20/50GRAMx 2024-08-20 06.27.30.xcarchive/Products/Applications/50GRAMx-eNodes.app&apos;" time="12.650434">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="8: curl -i -H &quot;Authorization: Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJhdWQiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJvcmdEb21haW4iOiI1MGdyYW14IiwibmFtZSI6IkV0aG9zIEFwcHMgU2VydmljZSBDb250cmFjdHMiLCJpc3MiOiJodHRwczovLzUwZ3JhbXguamV0YnJhaW5zLnNwYWNlIiwicGVybV90b2tlbiI6IjRhdExheTNRaHUweSIsInByaW5jaXBhbF90eXBlIjoiU0VSVklDRSIsImlhdCI6MTcyNDExMzgyM30.Xrfm964rYsnQNTGR6DInNrWa-R4ZY9uT-NZAhVVC09PVCPBSmMR6OMkAIhZ56C88vuXbRcbLbXMch2zx5MyJJZTdZYotS2JOMIoB09tf0DdVBK3BjuVz86gfsbspaO-fAt8K6NKN-RKoB19LNtsSZeOSBt73KhlOMqc3Iwj4fwg&quot; https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/development/ --upload-file &apos;/Users/mac/Library/Developer/Xcode/Archives/2024-08-20/50GRAMx 2024-08-20 06.27.30.xcarchive/Products/Applications/50GRAMx-eNodes-v24.08.82-b82.app.zip&apos;" time="34.690174">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
