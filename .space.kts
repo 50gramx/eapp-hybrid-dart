@@ -482,8 +482,8 @@ job("Build and publish EthosNodes MacOS Distributable App") {
                     export BUILD_NUMBER={{ BUILD_NUMBER }};
 
                     echo 'Running Fastlane build...';
-                    which fastlane; # Check if fastlane is available
-                    fastlane --version; # Print Fastlane version to confirm it's installed
+                    which fastlane;
+                    fastlane --version;
                     printenv;
                     fastlane build;
                 "
