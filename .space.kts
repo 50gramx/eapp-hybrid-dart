@@ -457,7 +457,33 @@ job("Build and publish EthosNodes MacOS Distributable App") {
                 ssh -o BatchMode=yes mac@host.docker.internal 'echo "SSH connection successful!"' || { echo "SSH connection failed!"; exit 1; }
 
                 echo "Step 11: Building macos app..."
-                export BUILD_COMMAND="source ~/.zshrc; cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos; git checkout master; git pull; security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain; export FASTLANE_USER=${'$'}FASTLANE_USER; export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD; export VERSION_NUMBER={{ VERSION_NUMBER }}; export BUILD_NUMBER={{ BUILD_NUMBER }}; fastlane build;"
+                export BUILD_COMMAND="
+                    echo 'Starting build process...';
+
+                    echo 'Sourcing .zshrc...';
+                    source ~/.zshrc;
+
+                    echo 'Changing directory to macOS project...';
+                    cd /Users/mac/Documents/Projects/eapp-hybrid-dart/fifty_gramx/macos;
+
+                    echo 'Checking out master branch...';
+                    git checkout master;
+
+                    echo 'Pulling latest changes from origin...';
+                    git pull;
+
+                    echo 'Unlocking keychain...';
+                    security unlock-keychain -p ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_SECURITY login.keychain;
+
+                    echo 'Setting environment variables...';
+                    export FASTLANE_USER=${'$'}FASTLANE_USER;
+                    export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD;
+                    export VERSION_NUMBER={{ VERSION_NUMBER }};
+                    export BUILD_NUMBER={{ BUILD_NUMBER }};
+
+                    echo 'Running Fastlane build...';
+                    fastlane build;
+                "
                 
                 # Debugging: Output the command that will be run
                 echo "Step 12: SSH Build Command: ${'$'}BUILD_COMMAND"
