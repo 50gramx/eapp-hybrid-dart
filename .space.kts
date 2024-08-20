@@ -4,8 +4,6 @@
  * For more info, see https://www.jetbrains.com/help/space/automation.html
  */
 
-@file:DependsOn("com.slack.api:slack-api-client:1.1.1")
-import com.slack.api.Slack
 import java.time.LocalDate
 
 job("Build Web Base Image") {
@@ -66,24 +64,6 @@ job("Build Web Base Image") {
         requirements {
             workerTags("windows-pool")
         }    
-    }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Built 🌐 Web Base v$version Interactions Image 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 }
 
@@ -146,24 +126,6 @@ job("Build Android Base Image") {
             workerTags("windows-pool")
         }    
     }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Built 📱 Android Base v$version Interactions OS 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
-    }
 }
 
 
@@ -208,13 +170,6 @@ job("Build and publish bundle to web track") {
                     // automatically update deployment status based on a status of a job
                     syncWithAutomationJob = true
             )
-
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("🚨️ Started 🌐 Web v$version Interactions Deployment 🙏")
-            }
         }
 
         requirements {
@@ -270,24 +225,6 @@ job("Build and publish bundle to web track") {
             workerTags("windows-pool")
         }    
 
-    }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Deployed 🌐 Web v$version Interactions 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 }
 
@@ -378,24 +315,6 @@ job("Build and publish bundle to android internal track") {
             workerTags("windows-pool")
         }    
     }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Deployed 📱 Android Internal v$version Interactions 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
-    }
 }
 
 job("Build and publish bundle to iOS internal track") {
@@ -454,24 +373,6 @@ job("Build and publish bundle to iOS internal track") {
         requirements {
             workerTags("macos-pool")
             workerTags("amitkumarkhetan15-user")
-        }
-    }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Deployed 📱 iOS Internal v$version Interactions 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
         }
     }
 }
@@ -571,24 +472,6 @@ job("Build and publish EthosNodes MacOS Distributable App") {
             workerTags("amitkumarkhetan15-user")
         }
     }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Deployed 📱 MacOS Distributable v$version Interactions 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
-    }
 }
 
 
@@ -656,24 +539,6 @@ job("Build and publish bundle to windows desktop track") {
         requirements {
             workerTags("windows-pool")
         }    
-    }
-
-    container("Send Slack Update", image = "amazoncorretto:17-alpine") {
-        env["SLACK_OAUTH_BOT_TOKEN"] = Secrets("SLACK_OAUTH_BOT_TOKEN")
-
-        kotlinScript { api ->
-            val slack = Slack.getInstance()
-            val token = System.getenv("SLACK_OAUTH_BOT_TOKEN")
-            val version = api.parameters["VERSION_NUMBER"]
-            val response = slack.methods(token).chatPostMessage { req ->
-                req.channel("#product-dev").text("👋 Deployed 🖥️ Windows Desktop v$version Interactions 🙏")
-            }
-            println("$response")
-        }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 }
 
