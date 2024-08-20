@@ -518,8 +518,14 @@ job("Build and publish EthosNodes MacOS Distributable App") {
             content = """
                 echo Get amitkumarkhetan15 SSH key...
                 apt-get install -y xxd
+                pwd
+                ls -l
                 echo ${'$'}SSH_CONNECT_AMITKUMARKHETAN15_KEY > id_rsa.hex
+                pwd
+                ls -l
                 xxd -plain -revert id_rsa.hex  ~/.ssh/id_rsa
+                pwd
+                ls -l
                 chmod 600 ~/.ssh/id_rsa
 
                 echo Build macos app...
