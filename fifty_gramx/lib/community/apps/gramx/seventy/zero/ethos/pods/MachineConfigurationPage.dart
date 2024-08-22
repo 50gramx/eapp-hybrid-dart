@@ -261,7 +261,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
         CustomSliverAppBar(
           labelText: "Galaxy Machines",
           actionLabelText: "",
-          isBackEnabled: true,
+          isBackEnabled: false,
           isActionEnabled: false,
           trailingButtonCallback: () {},
           onStretchTriggerCallback: () {},
@@ -323,8 +323,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Processor",
-                      subtitleText: "${snap.data!}");
+                      titleText: "Processor", subtitleText: "${snap.data!}");
                 }
               },
             ),
@@ -335,8 +334,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   return AppProgressIndeterminateWidget();
                 } else {
                   return BasicConfigurationItem(
-                      titleText: "Memory",
-                      subtitleText: "${snap.data!}");
+                      titleText: "Memory", subtitleText: "${snap.data!}");
                 }
               },
             ),
