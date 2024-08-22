@@ -18,6 +18,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-cli
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-manage/gpu_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/gpu_template_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MachineConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/swiggy/instamart/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
@@ -115,8 +116,7 @@ class EappFlow {
       index = 70101;
       appTitle = "Nodes";
       iconData = FeatherIcons.box;
-      firstPage =
-          EthosNodesComingSoonPage(index: index, containingFlowTitle: appTitle);
+      firstPage = MachineConfigurationPage();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'pods-gpu-pricing') {
       index = 70091;
