@@ -123,7 +123,7 @@ dev_dependencies:
 
   # A fully featured Gherkin parser and test runner. Works with Flutter and Dart 2.
   flutter_gherkin: ^2.0.0
-  msix: ^3.16.7
+  msix: ^3.16.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -241,7 +241,7 @@ msix_config:
   publisher_display_name: Amit Khetan
   identity_name: 11781AppsHub.50GRAMX
   msix_version: 24.2.1.0
-  certificate_path: C:\Users\amitk\Documents\CERTIFICATE.pfx
+  certificate_path: C:\Users\shaun\Downloads\new jetbrain repo\eapp-hybrid-dart\fifty_gramx\windows\certificate\CERTIFICATE.pfx
   certificate_password: getethos
   app_installer:
     publish_folder_path: C:\Users\amitk\Documents
@@ -253,3 +253,6 @@ msix_config:
   #  icons_background_color: transparent
   architecture: x64
   capabilities: "internetClient,microphone"
+  logo_path: C:\Users\shaun\Downloads\new jetbrain repo\eapp-hybrid-dart\fifty_gramx\android\fastlane\metadata\android\en-US\images\icon.png
+  output_path: C:\Users\shaun\Downloads\new jetbrain repo\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\PRI
+  output_name: 50gramx
