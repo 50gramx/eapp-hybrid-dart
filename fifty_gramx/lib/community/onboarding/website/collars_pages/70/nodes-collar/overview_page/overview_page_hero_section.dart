@@ -59,7 +59,7 @@ Widget buildThings50DC500000000OverviewPageHeroSection(BuildContext context) {
     child: Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
