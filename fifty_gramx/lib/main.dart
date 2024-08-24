@@ -30,10 +30,10 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_hr_professionals_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_hr_professionals_page/group_hr_professionals_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
