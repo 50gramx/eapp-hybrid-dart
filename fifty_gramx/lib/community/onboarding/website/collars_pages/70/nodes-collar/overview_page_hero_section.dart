@@ -1,5 +1,32 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:dio/dio.dart';
+import 'dart:io';
+
+Future<void> downloadFile(String url, String fileName) async {
+  try {
+    // Get the directory to save the file
+    var dir = await getApplicationDocumentsDirectory();
+
+    // Define the full path for the file
+    String filePath = "${dir.path}/$fileName";
+
+    // Create Dio instance
+    Dio dio = Dio();
+
+    // Start the download
+    await dio.download(url, filePath, onReceiveProgress: (received, total) {
+      if (total != -1) {
+        print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
+      }
+    });
+
+    print("File downloaded to $filePath");
+  } catch (e) {
+    print("Download failed: $e");
+  }
+}
 
 Widget buildThings50DC500000000OverviewPageHeroSection(BuildContext context) {
   return Neumorphic(
@@ -43,8 +70,15 @@ Widget buildThings50DC500000000OverviewPageHeroSection(BuildContext context) {
           ),
           SizedBox(height: 20.0),
           NeumorphicButton(
-            onPressed: () {
+            onPressed: () async {
               // Insert logic to automatically download the 50GRAMx eNodes Desktop App
+              // Replace with your public URL and desired filename
+              String url =
+                  'https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.dmg';
+              String fileName = '50GRAMx-eNodes.dmg';
+
+              // Start downloading the file
+              await downloadFile(url, fileName);
             },
             style: NeumorphicStyle(
               color: AppColors.contentPrimary(context),
