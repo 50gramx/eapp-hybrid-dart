@@ -5,6 +5,44 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildHomePageAppDrawer(BuildContext context) {
+  Widget buildTappableHubTitleContainer() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: NeumorphicButton(
+          provideHapticFeedback: true,
+          onPressed: () {
+            Navigator.pushNamed(context, '/collars');
+          },
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+            color: AppColors.contentPrimary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.backgroundSecondary(context),
+              width: 2,
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          child: Text(
+            "Explore Collars",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: AppColors.contentInversePrimary(context),
+                fontSize: 16,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w500),
+          )),
+    );
+  }
+
   return Container(
     height: MediaQuery.of(context).size.height,
     width: MediaQuery.of(context).size.width,
@@ -17,6 +55,7 @@ Widget buildHomePageAppDrawer(BuildContext context) {
             // GalaxyPageHeaderConfig().buildCollapsibleMenu(context),
             // SpacePageHeaderConfig().buildCollapsibleMenu(context),
             HomePageHeaderConfig().buildCollapsibleMenu(context),
+            buildTappableHubTitleContainer(),
             // Add more items here as needed
           ],
         ),
