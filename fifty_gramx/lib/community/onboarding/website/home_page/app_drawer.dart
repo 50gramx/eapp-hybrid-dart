@@ -1,10 +1,8 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/header_config.dart';
-import 'package:fifty_gramx/community/onboarding/website/space_pages/header_config.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildHomePageAppDrawer(BuildContext context) {
   return Container(
@@ -31,7 +29,10 @@ Widget buildHomePageAppDrawer(BuildContext context) {
           top: 8,
           right: 4,
           child: IconButton(
-            icon: Icon(FeatherIcons.x),
+            icon: Icon(
+              FeatherIcons.x,
+              color: AppColors.contentPrimary(context),
+            ),
             onPressed: () {
               Navigator.pop(context); // Closes the drawer
             },
