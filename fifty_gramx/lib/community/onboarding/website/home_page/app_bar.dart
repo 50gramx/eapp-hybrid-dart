@@ -168,7 +168,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
         // Add space to separate the title and other actions
         buildHerotitle(context), // Your existing title widget
         SizedBox(width: 16),
-        // buildTappableEthosverseTitle(),
+        buildTappableEthosverseTitle(),
         // buildGalaxyPopupMenuButton(),
         // buildSpacePopupMenuButton(),
         buildCompanyPopuMenuButton(),
