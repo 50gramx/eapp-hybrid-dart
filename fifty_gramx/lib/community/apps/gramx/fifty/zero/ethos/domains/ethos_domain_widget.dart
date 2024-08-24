@@ -1,5 +1,6 @@
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class EthosDomainWidget extends StatelessWidget {
@@ -52,36 +53,32 @@ class EthosDomainWidget extends StatelessWidget {
             Text(
               knowledgeDomain.spaceKnowledgeDomainName,
               style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: NeumorphicTheme.isUsingDark(context)
-                    ? Colors.white
-                    : Colors.black,
-              ),
+                  color: AppColors.contentPrimary(context),
+                  fontSize: 20,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8.0),
             Text(
               knowledgeDomain.spaceKnowledgeDomainDescription,
               style: TextStyle(
-                fontSize: 14.0,
-                color: NeumorphicTheme.isUsingDark(context)
-                    ? Colors.grey[400]
-                    : Colors.grey[700],
-              ),
+                  color: AppColors.contentPrimary(context),
+                  fontSize: 16,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 12.0),
             Row(
               children: [
-                Icon(Icons.star, size: 16.0, color: Colors.amber[600]),
+                Icon(Icons.star, size: 16.0, color: AppColors.orange(context)),
                 const SizedBox(width: 4.0),
                 Text(
                   '4.6 / 5.0',
                   style: TextStyle(
-                    fontSize: 12.0,
-                    color: NeumorphicTheme.isUsingDark(context)
-                        ? Colors.grey[300]
-                        : Colors.grey[600],
-                  ),
+                      color: AppColors.contentPrimary(context),
+                      fontSize: 12,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w300),
                 ),
                 const SizedBox(width: 16.0),
                 Icon(Icons.date_range, size: 16.0, color: Colors.grey[600]),
@@ -89,32 +86,35 @@ class EthosDomainWidget extends StatelessWidget {
                 Text(
                   'Updated: ${knowledgeDomain.lastUpdatedAt.toDateTime().toLocal().month}/${knowledgeDomain.lastUpdatedAt.toDateTime().toLocal().year}',
                   style: TextStyle(
-                    fontSize: 12.0,
-                    color: NeumorphicTheme.isUsingDark(context)
-                        ? Colors.grey[300]
-                        : Colors.grey[600],
-                  ),
+                      fontSize: 12.0,
+                      fontFamily: "Montserrat",
+                      color: AppColors.contentPrimary(context),
+                      fontWeight: FontWeight.w300),
                 ),
               ],
             ),
             const SizedBox(height: 16.0),
             Row(
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context,
-                        "${knowledgeDomain.spaceKnowledgeDomainId}" + "/plans");
-                  },
-                  child: Text('Purchase'),
-                ),
+                ActionNeuButton(
+                    buttonTitle: "Purchase",
+                    isPrimaryButton: true,
+                    noBorder: false,
+                    buttonActionOnPressed: () {
+                      Navigator.pushNamed(
+                          context,
+                          "${knowledgeDomain.spaceKnowledgeDomainId}" +
+                              "/plans");
+                    }),
                 const SizedBox(width: 8.0),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, knowledgeDomain.spaceKnowledgeDomainId);
-                  },
-                  child: Text('View Details'),
-                ),
+                ActionNeuButton(
+                    buttonTitle: "View Details",
+                    isPrimaryButton: false,
+                    noBorder: true,
+                    buttonActionOnPressed: () {
+                      Navigator.pushNamed(
+                          context, knowledgeDomain.spaceKnowledgeDomainId);
+                    }),
               ],
             ),
             // const SizedBox(height: 8.0),
