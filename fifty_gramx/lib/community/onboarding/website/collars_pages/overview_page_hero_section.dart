@@ -1,5 +1,6 @@
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/ethos_domain_widget.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -32,120 +33,50 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Ethos Domain Collars',
-                    style: TextStyle(
-                        color: AppColors.contentPrimary(context),
-                        fontSize: 36,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w900,
-                        height: 1.14285714),
-                  ),
-                  SizedBox(height: 10),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.all(20),
-                    height: MediaQuery.of(context).size.height *
-                        0.7, // At least 70% of screen height
-                    width: MediaQuery.of(context).size.width,
-                    child: Neumorphic(
-                      style: NeumorphicStyle(
-                        depth: 8,
-                        intensity: 0.5,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(12)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Vianayak.53GRAMx",
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Closed Isolated Space Knowledge Domain Collar For Job Seekers & HR Professionals",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Ability to analyze and interpret offer letters, provide insights on salary, benefits, and terms, and facilitate negotiation.",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(height: 20),
-                          NeumorphicButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/53/vinayak');
-                              // Add button functionality
-                            },
-                            style: NeumorphicStyle(
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.circular(8)),
-                            ),
-                            child: Text('Licence Collar'),
-                          ),
-                        ],
-                      ),
+                    padding: LayoutBreakpoint().isNavigatingLeft(context)
+                        ? EdgeInsets.symmetric(
+                            vertical: 60.0,
+                            horizontal: 80.0) // More padding for desktop
+                        : EdgeInsets.symmetric(
+                            vertical: 40.0,
+                            horizontal: 20.0), // Less padding for mobile
+                    child: Text(
+                      "Trending Collars",
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: AppColors.contentPrimary(context),
+                          fontSize: 36,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w700),
                     ),
                   ),
                   SizedBox(height: 10),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    padding: EdgeInsets.all(20),
-                    height: MediaQuery.of(context).size.height *
-                        0.7, // At least 70% of screen height
-                    width: MediaQuery.of(context).size.width,
-                    child: Neumorphic(
-                      style: NeumorphicStyle(
-                        depth: 8,
-                        intensity: 0.5,
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            BorderRadius.circular(12)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Nodes.70GRAMx",
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Nodes Domain Collar For Gamers & ML Researchers",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            "Ability to analyze and interpret offer letters, provide insights on salary, benefits, and terms, and facilitate negotiation.",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(height: 20),
-                          NeumorphicButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/70/nodes');
-                              // Add button functionality
-                            },
-                            style: NeumorphicStyle(
-                              boxShape: NeumorphicBoxShape.roundRect(
-                                  BorderRadius.circular(8)),
-                            ),
-                            child: Text('Licence Collar'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // EthosDomainWidget(
+                  //     knowledgeDomain: SpaceKnowledgeDomain(
+                  //   spaceKnowledgeDomainId: "/53/vinayak",
+                  //   spaceKnowledgeDomainName:
+                  //       "Vianayak Domain Collar For Job Seekers & HR Professionals",
+                  //   spaceKnowledgeDomainDescription:
+                  //       "Ability to analyze and interpret offer letters, provide insights on salary, benefits, and terms, and facilitate negotiation.",
+                  // )),
                   EthosDomainWidget(
                       knowledgeDomain: SpaceKnowledgeDomain(
+                    spaceKnowledgeDomainId: "/70/nodes",
                     spaceKnowledgeDomainName:
-                        "Miscesselenous Information Discovery on Private Documents",
+                        "Nodes Domain Collar For Gamers & ML Researchers",
                     spaceKnowledgeDomainDescription:
-                        "gramx address, brief description and link to know more",
-                  ))
+                        "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
+                    lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
+                  )),
+                  // EthosDomainWidget(
+                  //     knowledgeDomain: SpaceKnowledgeDomain(
+                  //   spaceKnowledgeDomainId: "/66/offer",
+                  //   spaceKnowledgeDomainName:
+                  //       "Miscesselenous Information Discovery on Private Documents",
+                  //   spaceKnowledgeDomainDescription:
+                  //       "gramx address, brief description and link to know more",
+                  // ))
                 ]),
           ),
         ],
