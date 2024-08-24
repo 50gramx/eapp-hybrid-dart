@@ -23,6 +23,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Build, notarize, and export a notarized app
 
+### mac package_dmg
+
+```sh
+[bundle exec] fastlane mac package_dmg
+```
+
+Build dmg from app
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
