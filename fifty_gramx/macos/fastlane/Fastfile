@@ -60,6 +60,14 @@ platform :mac do
     
     sh("""curl -i -H \"Authorization: #{authorization_token}\" https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/#{remote_folder}/ --upload-file '#{zip_file_path}'""")
 
+    
+    dmg(
+      path: "'#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'",
+      output_path: "'#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg'",
+      )
+    
+    sh("""gsutil cp -r '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg' gs://packges/com.50gramx.seventy.zero.ethos.nodes.dev/""")
+
     UI.message("App successfully notarized and zipped and uploaded to packages!")
   end
 end
