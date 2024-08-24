@@ -53,7 +53,7 @@ Widget buildThings50DC500000000OverviewPageValuePropSection(
                   mainAxisSpacing: 20.0,
                   childAspectRatio: isMobile
                       ? 3
-                      : 1, // Adjust aspect ratio for better height management
+                      : 4, // Adjust aspect ratio for better height management
                 ),
                 itemCount: 3,
                 shrinkWrap: true,
