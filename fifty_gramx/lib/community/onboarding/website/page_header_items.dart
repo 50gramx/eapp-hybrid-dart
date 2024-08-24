@@ -63,6 +63,61 @@ class PageHeaderConfig {
     }).toList();
   }
 
+  Widget buildSubHeaderActions(BuildContext context) {
+    return Container(
+      height: 50, // Adjust the height as needed
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: items.map((item) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                item['route']!,
+              );
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                alignment: Alignment.center,
+                child: NeumorphicText(
+                  item['title']!,
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    shape: NeumorphicShape.flat,
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(16)),
+                    color: AppColors.contentPrimary(context),
+                    depth: 2,
+                    disableDepth: false,
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundInverseTertiary(context),
+                      width: 0.3,
+                    ),
+                  ),
+                  textAlign: TextAlign.center,
+                  textStyle: NeumorphicTextStyle(
+                    fontSize: 16,
+                    fontFamily: "Montserrat",
+                    fontWeight: FontWeight.w500,
+                    height: 1.25,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   _launchURL(String url) async {
     Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -162,7 +217,7 @@ class PageHeaderConfig {
     );
   }
 
-Widget buildCollapsibleMenu(BuildContext context) {
+  Widget buildCollapsibleMenu(BuildContext context) {
     return ExpansionTile(
       title: Text(
         header,
