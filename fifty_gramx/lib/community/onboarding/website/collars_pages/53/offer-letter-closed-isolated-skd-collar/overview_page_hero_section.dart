@@ -33,7 +33,7 @@ Widget buildOfferLetterCISKDCOverviewPageHeroSection(BuildContext context) {
                   Text(
                     'Welcome, Vinayak!',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
                     ),
@@ -42,7 +42,7 @@ Widget buildOfferLetterCISKDCOverviewPageHeroSection(BuildContext context) {
                   Text(
                     'Unlock the Power of AI Conversations',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 24,
                     ),
                   ),
