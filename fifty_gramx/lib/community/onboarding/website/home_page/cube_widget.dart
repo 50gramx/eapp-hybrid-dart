@@ -69,7 +69,14 @@ class _CubeWidgetState extends State<CubeWidget> with TickerProviderStateMixin {
           // GPU Body and Fans
           CustomPaint(
             size: Size(400, 200),
-            painter: GPUPainter(_fanController),
+            painter: GPUPainter(
+                _fanController,
+                AppColors.contentPrimary(context),
+                AppColors.backgroundPrimary(context),
+                AppColors.contentSecondary(context),
+                AppColors.backgroundSecondary(context),
+                AppColors.contentTertiary(context),
+                AppColors.backgroundTertiary(context)),
           ),
         ],
       ),
@@ -79,8 +86,22 @@ class _CubeWidgetState extends State<CubeWidget> with TickerProviderStateMixin {
 
 class GPUPainter extends CustomPainter {
   final AnimationController controller;
+  final Color contentPrimary;
+  final Color backgroundPrimary;
+  final Color contentSecondary;
+  final Color backgroundSecondary;
+  final Color contentTertiary;
+  final Color backgroundTertiary;
 
-  GPUPainter(this.controller) : super(repaint: controller);
+  GPUPainter(
+      this.controller,
+      this.contentPrimary,
+      this.backgroundPrimary,
+      this.contentSecondary,
+      this.backgroundSecondary,
+      this.contentTertiary,
+      this.backgroundTertiary)
+      : super(repaint: controller);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -90,16 +111,21 @@ class GPUPainter extends CustomPainter {
     final lightSource = Offset(-size.width * 0.5, -size.height * 0.5);
 
     // Draw main body
-    _drawNeumorphicBackground(canvas, size, baseColor, lightSource);
+    _drawNeumorphicBackground(canvas, size, backgroundTertiary, lightSource);
 
     // Draw X shape
-    _drawNeumorphicXShape(canvas, size, contentColor, lightSource);
+    _drawNeumorphicXShape(canvas, size, contentTertiary, lightSource);
 
     // Draw fan
-    _drawNeumorphicFan(canvas, size, baseColor, lightSource);
+    _drawNeumorphicFan(
+      canvas,
+      size,
+      contentTertiary,
+      lightSource,
+    );
 
     // Draw text
-    _drawText(canvas, size, 'RTX 30/40');
+    _drawText(canvas, contentTertiary, size, 'RTX 30/40');
   }
 
   void _drawNeumorphicBackground(
@@ -230,12 +256,12 @@ class GPUPainter extends CustomPainter {
     );
   }
 
-  void _drawText(Canvas canvas, Size size, String text) {
+  void _drawText(Canvas canvas, Color baseColor, Size size, String text) {
     final textPainter = TextPainter(
       text: TextSpan(
         text: text,
         style: TextStyle(
-          color: Colors.white.withOpacity(0.9),
+          color: baseColor.withOpacity(0.9),
           fontSize: size.height * 0.15,
           fontWeight: FontWeight.bold,
         ),
