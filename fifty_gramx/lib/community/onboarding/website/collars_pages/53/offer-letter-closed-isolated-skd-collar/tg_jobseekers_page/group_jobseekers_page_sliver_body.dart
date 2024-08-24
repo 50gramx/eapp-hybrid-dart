@@ -1,10 +1,10 @@
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_benefits_section.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_cta_section.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_hero_section.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_how_helps_section.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_problem_identification_section.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/group_jobseekers_page_success_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_benefits_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_cta_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_hero_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_how_helps_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_problem_identification_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page_success_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
