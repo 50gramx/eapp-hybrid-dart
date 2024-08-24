@@ -1,10 +1,10 @@
+import 'dart:html' as html;
+
+import 'package:dio/dio.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:dio/dio.dart';
-import 'dart:io';
-import 'dart:html' as html;
 
 Future<void> downloadFile(String url, String fileName) async {
   if (kIsWeb) {

@@ -20,7 +20,6 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page/overview_page_sliver_body.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page_sliver_body.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
 import 'package:fifty_gramx/data/accountData.dart';

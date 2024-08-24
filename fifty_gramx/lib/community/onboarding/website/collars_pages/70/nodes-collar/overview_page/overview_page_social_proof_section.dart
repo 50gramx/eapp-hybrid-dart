@@ -1,7 +1,6 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildThings50DC500000000COverviewPageSocialProofSection(
     BuildContext context) {
