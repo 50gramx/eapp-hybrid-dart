@@ -244,7 +244,7 @@ class MyApp extends StatelessWidget {
         title: Constants.appName,
         theme: lightThemeData,
         darkTheme: darkThemeData,
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.system,
         routes: {
           '/about': (context) => WebsiteAboutUsPage(),
           '/galaxy': (context) => GalaxyOverviewPage(),
