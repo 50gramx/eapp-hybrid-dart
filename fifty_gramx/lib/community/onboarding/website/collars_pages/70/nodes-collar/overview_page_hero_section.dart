@@ -1,30 +1,39 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
+import 'dart:html' as html;
 
 Future<void> downloadFile(String url, String fileName) async {
-  try {
-    // Get the directory to save the file
-    var dir = await getApplicationDocumentsDirectory();
+  if (kIsWeb) {
+    // Web platform: Use AnchorElement to download the file
+    html.AnchorElement anchorElement = html.AnchorElement(href: url);
+    anchorElement.download = fileName;
+    anchorElement.click();
+  } else {
+    try {
+      // Get the directory to save the file
+      var dir = await getApplicationDocumentsDirectory();
 
-    // Define the full path for the file
-    String filePath = "${dir.path}/$fileName";
+      // Define the full path for the file
+      String filePath = "${dir.path}/$fileName";
 
-    // Create Dio instance
-    Dio dio = Dio();
+      // Create Dio instance
+      Dio dio = Dio();
 
-    // Start the download
-    await dio.download(url, filePath, onReceiveProgress: (received, total) {
-      if (total != -1) {
-        print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
-      }
-    });
+      // Start the download
+      await dio.download(url, filePath, onReceiveProgress: (received, total) {
+        if (total != -1) {
+          print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
+        }
+      });
 
-    print("File downloaded to $filePath");
-  } catch (e) {
-    print("Download failed: $e");
+      print("File downloaded to $filePath");
+    } catch (e) {
+      print("Download failed: $e");
+    }
   }
 }
 
@@ -91,17 +100,6 @@ Widget buildThings50DC500000000OverviewPageHeroSection(BuildContext context) {
               style: TextStyle(
                 color: AppColors.contentInversePrimary(context),
                 fontSize: 16.0,
-              ),
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Container(
-            height: 200.0, // Adjust height as needed
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                    'assets/dynamic_graphic.png'), // Replace with your dynamic graphic asset path
-                fit: BoxFit.cover,
               ),
             ),
           ),
