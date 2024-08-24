@@ -9,6 +9,8 @@ import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page_value_prop_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page_hero_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page_value_prop_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page_social_proof_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/overview_page_hero_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -21,16 +23,16 @@ CustomScrollView buildThings50DC500000000OverviewPageSliverBody() {
       ),
       Things50DC500000000OverviewPageSliverAppBar(),
       SliverAnimatedList(
-          initialItemCount: 1,
+          initialItemCount: 3,
           itemBuilder: (BuildContext context, int position,
               Animation<double> animation) {
             if (position == 0) {
               return buildThings50DC500000000OverviewPageHeroSection(context);
             } else if (position == 1) {
-              return buildOfferLetterCISKDCOverviewPageValuePropSection(
+              return buildThings50DC500000000OverviewPageValuePropSection(
                   context);
             } else if (position == 2) {
-              return buildOfferLetterCISKDCOverviewPageSocialProofSection(
+              return buildThings50DC500000000COverviewPageSocialProofSection(
                   context);
             } else if (position == 3) {
               return buildOfferLetterCISKDCOverviewPagePricingSection(context);
