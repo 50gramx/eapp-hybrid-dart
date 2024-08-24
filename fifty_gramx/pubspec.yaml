@@ -70,7 +70,7 @@ dependencies:
   flutter_local_notifications: ^16.1.0
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS,
   # Linux, macOS and Windows. Not all methods are supported on all platforms.
-  path_provider: ^2.0.11
+  path_provider: ^2.1.4
   # manages all the device level permissions
   permission_handler: ^10.4.3
   # Process run helpers for Linux/Win/Mac.
@@ -111,6 +111,11 @@ dependencies:
   # PineNaCl is a Dart implementation of the TweetNaCl 
   # the world's first auditable high-security cryptographic library.
   pinenacl: ^0.6.0
+  # A powerful HTTP networking package for Dart/Flutter, 
+  # supports Global configuration, Interceptors, FormData, 
+  # Request cancellation, File uploading/downloading, Timeout, 
+  # Custom adapters, Transformers, etc.
+  dio: ^5.6.0
 
 flutter_icons:
   android: "launcher_icon"
