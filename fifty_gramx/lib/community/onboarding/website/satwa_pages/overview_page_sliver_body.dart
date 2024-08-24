@@ -1,4 +1,3 @@
-import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page_hero_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page_trending_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/value_prop_section.dart';
