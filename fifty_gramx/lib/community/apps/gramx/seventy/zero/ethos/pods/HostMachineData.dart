@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'dart:math';
 
@@ -9,7 +7,6 @@ import 'package:process_run/shell.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 
 class HostMachineData {
-
   Future<String> name() async {
     if (Platform.isMacOS) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -91,7 +88,8 @@ class HostMachineData {
     if (bytes <= 0) return [0, "B"];
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var i = (log(bytes) / log(1024)).floor();
-    var bytesPrecisionString = ((bytes / pow(1024, i)).toStringAsFixed(decimals));
+    var bytesPrecisionString =
+        ((bytes / pow(1024, i)).toStringAsFixed(decimals));
     return [double.parse(bytesPrecisionString), suffixes[i]];
   }
 
@@ -99,7 +97,9 @@ class HostMachineData {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var i = (log(bytes) / log(1024)).floor();
-    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
+    return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
+        ' ' +
+        suffixes[i];
   }
 
   Future<double> processorCount() async {
@@ -157,7 +157,8 @@ class HostMachineData {
     } else if (Platform.isWindows) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       var windowsInfo = await deviceInfo.windowsInfo;
-      return formatBytesAndSuffix((windowsInfo.systemMemoryInMegabytes * 1024 * 1024), 2)[0];
+      return formatBytesAndSuffix(
+          (windowsInfo.systemMemoryInMegabytes * 1024 * 1024), 2)[0];
     } else if (Platform.isLinux) {
       return 1.0;
     } else if (Platform.isAndroid) {
@@ -177,7 +178,8 @@ class HostMachineData {
     } else if (Platform.isWindows) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       var windowsInfo = await deviceInfo.windowsInfo;
-      return formatBytes((windowsInfo.systemMemoryInMegabytes * 1024 * 1024), 2);
+      return formatBytes(
+          (windowsInfo.systemMemoryInMegabytes * 1024 * 1024), 2);
     } else if (Platform.isLinux) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       var linuxInfo = await deviceInfo.linuxInfo;
@@ -240,6 +242,7 @@ class HostMachineData {
     try {
       var shell = Shell(runInShell: true);
       // return the host public ip address
+      (await shell.run("source ~/.bashrc")).outText;
       return (await shell.run("curl http://ifconfig.me/ip")).outText;
     } catch (e) {
       print("found exception --> $e");
@@ -254,13 +257,13 @@ class HostMachineData {
         var shell = Shell(runInShell: true);
         return (await shell.run("ipconfig getifaddr en0")).outText;
       } else if (Platform.isWindows) {
-        String command = 'Get-NetIPAddress -InterfaceAlias "Wi-Fi" -AddressFamily "IPv4" | Select-Object -ExpandProperty IPAddress';
+        String command =
+            'Get-NetIPAddress -InterfaceAlias "Wi-Fi" -AddressFamily "IPv4" | Select-Object -ExpandProperty IPAddress';
         List<ProcessResult> result = await SimpleCommandExecuter.run(command);
         return result.outText;
       } else {
         return "UNKNOWN IP";
       }
-
     } catch (e) {
       print("found exception --> $e");
       return "Not Supported";
