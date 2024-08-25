@@ -26,10 +26,12 @@ class MultipassStartCommands {
   ///
   /// returns the status codes
   orchestrator() async {
+    print("starting orchestrator");
     // build the command
     String command = "${_baseCommandSpace}"
         "${_vmName}";
     // run the command
     await PrivilegedCommandExecuter.run(command);
+    print("started orchestrator");
   }
 }
