@@ -253,17 +253,11 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
           content: Text(
               "Uninstalling Orchestrator, Please allow it sometime to delete")),
     );
-    final isStopped = await MultipassCommands.delete.vm();
-    if (isStopped) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Uninstalled Orchestrator")),
-      );
-      setState(() {});
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Uninstalling Orchestrator failed")),
-      );
-    }
+    await MultipassCommands.delete.vm();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Uninstalled Orchestrator")),
+    );
+    setState(() {});
   }
 
   stopAndUninstallMicrok8s() async {
@@ -548,13 +542,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                 isEnabled: true,
                                 switchValue: true,
                                 switchOnChanged: (value) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "Stopping Orchestrator, Please allow it sometime to stop")),
-                                  );
-                                  MultipassCommands.stop.orchestrator();
-                                  setState(() {});
+                                  stopMicrok8s();
                                 });
                           }
                         case ("RUNNING, INACTIVE"):
