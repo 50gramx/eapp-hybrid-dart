@@ -7,6 +7,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/start/multipassStartCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/stop/multipassStopCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/transfer/multipassTransferCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/multipassVersionCommands.dart';
 
 // operates the commands for multipass package
 //
@@ -44,6 +45,9 @@ class MultipassCommands {
   /// nested class for delete commands
   static late MultipassDeleteCommands delete;
 
+  /// nested class for version commands
+  static late MultipassVersionCommands version;
+
   // initialises the class
   MultipassCommands() {
     // package name is same in all base os, so no checks needed
@@ -79,6 +83,9 @@ class MultipassCommands {
 
     // instantiate the transfer commands
     delete = MultipassDeleteCommands(_packagePath, _vmName);
+
+    // instantiate the version commands
+    version = MultipassVersionCommands(_packagePath);
   }
 }
 
@@ -102,5 +109,4 @@ class MultipassCommands {
     suspend
     umount
     unalias
-    version
  * */
