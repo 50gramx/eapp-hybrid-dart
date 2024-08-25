@@ -75,6 +75,7 @@ class PrivilegedCommandExecuter {
       return (await _shell.run(command));
     } on ShellException catch (e) {
       print("ShellException, message: ${e.message}");
+      print("ShellException, exception: ${e}");
       print("ShellException, result?.stderr: ${e.result?.stderr}");
       print("ShellException, result?.errText: ${e.result?.errText}");
       return []; // returns an empty list
