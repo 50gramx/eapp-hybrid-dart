@@ -2,6 +2,7 @@
 //
 // needs [String] packagePath and [String] vmName as initializers
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 
 class MultipassDeleteCommands {
   MultipassDeleteCommands._();
@@ -27,6 +28,7 @@ class MultipassDeleteCommands {
   ///
   /// returns the status codes
   vm() async {
+    await MultipassCommands.stop.orchestrator();
     // build the command
     String command = "${_baseCommandSpace}"
         "-p ${_vmName}";
