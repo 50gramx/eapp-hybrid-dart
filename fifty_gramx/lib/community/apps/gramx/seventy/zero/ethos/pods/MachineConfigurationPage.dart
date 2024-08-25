@@ -190,6 +190,101 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
     );
   }
 
+  startMicrok8s() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content:
+              Text("Starting Orchestrator, Please allow it sometime to start")),
+    );
+    final isStarted = await Microk8sCommands.start.now();
+    if (isStarted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Started Orchestrator")),
+      );
+      setState(() {});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Starting Orchestrator failed")),
+      );
+    }
+  }
+
+  stopMicrok8s() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content:
+              Text("Stopping Orchestrator, Please allow it sometime to stop")),
+    );
+    final isStopped = await Microk8sCommands.stop.now();
+    if (isStopped) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopped Orchestrator")),
+      );
+      setState(() {});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopping Orchestrator failed")),
+      );
+    }
+  }
+
+  restartMicrok8s() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text(
+              "Restarting Orchestrator, Please allow it sometime to stop")),
+    );
+    final isStopped = await Microk8sCommands.stop.now();
+    if (isStopped) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopped Orchestrator")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopping Orchestrator failed")),
+      );
+    }
+    await startMicrok8s();
+  }
+
+  deleteMicrok8s() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content: Text(
+              "Uninstalling Orchestrator, Please allow it sometime to delete")),
+    );
+    final isStopped = await MultipassCommands.delete.vm();
+    if (isStopped) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Uninstalled Orchestrator")),
+      );
+      setState(() {});
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Uninstalling Orchestrator failed")),
+      );
+    }
+  }
+
+  stopAndUninstallMicrok8s() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+          content:
+              Text("Stopping Orchestrator, Please allow it sometime to stop")),
+    );
+    final isStopped = await Microk8sCommands.stop.now();
+    if (isStopped) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopped Orchestrator")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Stopping Orchestrator failed")),
+      );
+    }
+    deleteMicrok8s();
+  }
+
   @override
   Widget build(BuildContext context) {
     // we need add L4 level check to verify the status of the pod
@@ -423,11 +518,54 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   case ConnectionState.active:
                     return Text('Connection Active');
                   case ConnectionState.done:
+                    print("orchestratorStatus: $snapshot");
                     if (snapshot.hasData) {
                       switch (snapshot.data) {
                         case ("RUNNING, STOPPED"):
+                          {
+                            return SwitchConfigurationItem(
+                                titleText: "Orchestrator",
+                                isEnabled: true,
+                                switchValue: false,
+                                switchOnChanged: (value) {
+                                  startMicrok8s();
+                                });
+                          }
                         case ("RUNNING, RUNNING"):
+                          {
+                            return SwitchConfigurationItem(
+                                titleText: "Orchestrator",
+                                isEnabled: true,
+                                switchValue: true,
+                                switchOnChanged: (value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Stopping Orchestrator, Please allow it sometime to stop")),
+                                  );
+                                  MultipassCommands.stop.orchestrator();
+                                  setState(() {});
+                                });
+                          }
                         case ("RUNNING, INACTIVE"):
+                          {
+                            return Column(
+                              children: [
+                                SelectorConfigurationItem(
+                                    titleText: "Orchestrator",
+                                    subtitleText: "Inactive, Restart Now",
+                                    selectorCallback: () {
+                                      restartMicrok8s();
+                                    }),
+                                SelectorConfigurationItem(
+                                    titleText: "Orchestrator",
+                                    subtitleText: "Uninstall",
+                                    selectorCallback: () {
+                                      stopAndUninstallMicrok8s();
+                                    }),
+                              ],
+                            );
+                          }
                         case ("STOPPED, UNAVAILABLE"):
                           {
                             return SwitchConfigurationItem(
