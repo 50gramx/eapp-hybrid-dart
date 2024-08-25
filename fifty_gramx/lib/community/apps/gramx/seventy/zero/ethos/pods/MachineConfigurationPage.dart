@@ -523,13 +523,23 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                       switch (snapshot.data) {
                         case ("RUNNING, STOPPED"):
                           {
-                            return SwitchConfigurationItem(
-                                titleText: "Orchestrator",
-                                isEnabled: true,
-                                switchValue: false,
-                                switchOnChanged: (value) {
-                                  startMicrok8s();
-                                });
+                            return Column(
+                              children: [
+                                SwitchConfigurationItem(
+                                    titleText: "Orchestrator",
+                                    isEnabled: true,
+                                    switchValue: false,
+                                    switchOnChanged: (value) {
+                                      startMicrok8s();
+                                    }),
+                                SelectorConfigurationItem(
+                                    titleText: "Orchestrator",
+                                    subtitleText: "Uninstall",
+                                    selectorCallback: () {
+                                      stopAndUninstallMicrok8s();
+                                    }),
+                              ],
+                            );
                           }
                         case ("RUNNING, RUNNING"):
                           {
