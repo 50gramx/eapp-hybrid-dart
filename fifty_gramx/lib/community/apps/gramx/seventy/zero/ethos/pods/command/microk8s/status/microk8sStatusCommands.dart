@@ -36,6 +36,7 @@ class Microk8sStatusCommands {
     // get the orchestrator vm state
     String orchestratorState =
         await MultipassCommands.list.getOrchestratorVmState();
+    print("orchestratorState: $orchestratorState");
     // process based on vm state
     switch (orchestratorState) {
       case "RUNNING":
@@ -44,16 +45,25 @@ class Microk8sStatusCommands {
           // build the command
           String command = "$_baseCommandSpace"
               "--format=short";
+          print("microk8s RUNNING, will check status now");
           // run the command
           String output = (await SimpleCommandExecuter.run(command)).outText;
           // parse the first line
           var status = LineSplitter.split(output).first;
+          print("microk8s status: $status");
           // process the output based on the status
-          if (status ==
-              "MicroK8s is not running. Please run `microk8s start`.") {
+          String stoppedMsg1 =
+              "MicroK8s is not running. Please run `microk8s start`.";
+          String stoppedMsg2 = "microk8s is not running, try microk8s start";
+          String runningMsg1 = "microk8s is running";
+          String inactiveMsg1 =
+              "microk8s is not running. Use microk8s inspect for a deeper inspection.";
+          if (status == stoppedMsg1 || status == stoppedMsg2) {
             return "$orchestratorState, STOPPED";
-          } else if (status == "microk8s is running") {
+          } else if (status == runningMsg1) {
             return "$orchestratorState, RUNNING";
+          } else if (status == inactiveMsg1) {
+            return "$orchestratorState, INACTIVE";
           } else {
             return "$orchestratorState, INACTIVE";
           }
