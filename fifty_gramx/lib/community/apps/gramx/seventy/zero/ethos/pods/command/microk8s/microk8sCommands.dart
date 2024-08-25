@@ -37,14 +37,16 @@ class Microk8sCommands {
 
 /**
  * microk8s add-node
-    microk8s addons
+    microk8s cilium
     microk8s config
     microk8s ctr
     microk8s dashboard-proxy
     microk8s dbctl
     microk8s disable
     microk8s enable
-    microk8s images
+    microk8s helm
+	  microk8s helm3
+	  microk8s istioctl
     microk8s inspect
     microk8s join
     microk8s leave
@@ -52,6 +54,9 @@ class Microk8sCommands {
     microk8s remove-node
     microk8s reset
     microk8s start
+    microk8s linkerd
     microk8s stop
-    microk8s version
+    microk8s status
+    microk8s juju
+	  microk8s kubectl
  */
