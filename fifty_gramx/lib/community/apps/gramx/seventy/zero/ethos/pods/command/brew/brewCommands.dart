@@ -44,7 +44,7 @@ class BrewCommands {
     if (macOsInfo.arch == "arm64") {
       _packagePath = "/opt/homebrew/bin/$_packageName";
     } else {
-      _packagePath = "/opt/local/bin/$_packageName";
+      _packagePath = "/usr/local/bin/$_packageName";
     } // TODO(founder@): add a check for MacOS
 
     install = BrewInstallCommands(_packagePath);
