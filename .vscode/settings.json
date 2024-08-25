@@ -1,0 +1,5 @@
+{
+    "window.autoDetectColorScheme": true,
+    "terminal.integrated.shellIntegration.enabled": true,
+    "terminal.integrated.defaultProfile.osx": "bash"
+}

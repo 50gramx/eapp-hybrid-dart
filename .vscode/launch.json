@@ -38,7 +38,7 @@
             ]
         },
         {
-            "name": "Debug - 70.ethos.nodes - MacOS",
+            "name": "Amit Debug's - 70.ethos.nodes - MacOS",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
@@ -47,7 +47,20 @@
                 "macos",
                 "--flavor",
                 "com.fiftygramx.seventy.zero.ethos.nodes",
-            ]
+            ],
+            "env": {
+                "PATH": "/Users/mac/Downloads/google-cloud-sdk/bin:/Users/mac/.rvm/gems/ruby-3.2.0/bin:/usr/local/bin:/usr/local/bin:/Users/mac/.rvm/gems/ruby-3.2.0/bin:/Users/mac/.rvm/gems/ruby-3.2.0@global/bin:/Users/mac/.rvm/rubies/ruby-3.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/mac/.rvm/bin:/Users/mac/Documents/flutter-sdk/flutter/bin:/Users/mac/.rvm/bin:/usr/local/bin/fastlane",
+                "rvm_bin_path": "/Users/mac/.rvm/bin",
+                "GEM_HOME": "/Users/mac/.rvm/gems/ruby-3.2.0",
+                "MY_RUBY_HOME": "/Users/mac/.rvm/rubies/ruby-3.2.0",
+                "rvm_path": "/Users/mac/.rvm",
+                "rvm_prefix": "/Users/mac",
+                "GEM_PATH": "/Users/mac/.rvm/gems/ruby-3.2.0:/Users/mac/.rvm/gems/ruby-3.2.0@global",
+                "RUBY_VERSION": "ruby-3.2.0",
+                "SHELL": "/bin/bash",
+                "LANG": "en_US.UTF-8",
+                "HOME": "/Users/mac",
+            }
         },
         {
             "name": "Debug - 70.ethos.nodes - Windows",
@@ -79,7 +92,7 @@
             "args": [
                 "-d",
                 "00008110-000524293E01401E",
-                "--flavor", 
+                "--flavor",
                 "70.ethos.pods"
             ]
         },
