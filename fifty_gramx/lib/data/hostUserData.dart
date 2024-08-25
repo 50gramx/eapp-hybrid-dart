@@ -20,4 +20,12 @@ class HostUserData {
       return "";
     }
   }
+
+  Future<bool> isPasswordSet() async {
+    if (await readHostUserPassword() == "") {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
