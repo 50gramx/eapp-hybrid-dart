@@ -242,7 +242,6 @@ class HostMachineData {
     try {
       var shell = Shell(runInShell: true);
       // return the host public ip address
-      (await shell.run("source ~/.bashrc")).outText;
       return (await shell.run("curl http://ifconfig.me/ip")).outText;
     } catch (e) {
       print("found exception --> $e");
