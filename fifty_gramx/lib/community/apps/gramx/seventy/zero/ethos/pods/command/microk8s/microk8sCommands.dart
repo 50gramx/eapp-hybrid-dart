@@ -3,7 +3,9 @@
 // needs [String] package path with space
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/start/microk8sStartCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/status/microk8sStatusCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/stop/microk8sStopCommands.dart';
 
 class Microk8sCommands {
   Microk8sCommands._();
@@ -20,6 +22,12 @@ class Microk8sCommands {
   /// nested class for status commands
   static late Microk8sStatusCommands status;
 
+  /// nested class for start commands
+  static late Microk8sStartCommands start;
+
+  /// nested class for stop commands
+  static late Microk8sStopCommands stop;
+
   Microk8sCommands(String packagePath) {
     // package name is same in all base os, so no checks needed
     _packageName = "microk8s";
@@ -32,6 +40,12 @@ class Microk8sCommands {
 
     // instantiate the status commands
     status = Microk8sStatusCommands(_packagePath);
+
+    // instantiate the start commands
+    start = Microk8sStartCommands(_packagePath);
+
+    // instantiate the start commands
+    stop = Microk8sStopCommands(_packagePath);
   }
 }
 
