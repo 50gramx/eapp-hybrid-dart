@@ -15,7 +15,10 @@ import 'package:universal_disk_space/universal_disk_space.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MicroK8sInstallerPage extends StatefulWidget {
+  final VoidCallback onSuccessfullInstall;
+
   const MicroK8sInstallerPage({
+    required this.onSuccessfullInstall,
     Key? key,
   }) : super(key: key);
 
@@ -335,6 +338,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     setState(() {
       isInstalling = false;
     });
+    widget.onSuccessfullInstall();
     Navigator.of(context).pop();
   }
 

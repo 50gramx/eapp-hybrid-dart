@@ -279,6 +279,10 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
     deleteMicrok8s();
   }
 
+  void _onSuccessfullInstall() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     // we need add L4 level check to verify the status of the pod
@@ -593,7 +597,11 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                 subtitleText: "Install",
                                 selectorCallback: () {
                                   AppPushPage().pushHorizontalPage(
-                                      context, MicroK8sInstallerPage());
+                                      context,
+                                      MicroK8sInstallerPage(
+                                        onSuccessfullInstall:
+                                            _onSuccessfullInstall,
+                                      ));
                                 });
                           }
                         case ("UNKNOWN, UNAVAILABLE"):
@@ -620,7 +628,10 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                           subtitleText: "Install",
                           selectorCallback: () {
                             AppPushPage().pushHorizontalPage(
-                                context, MicroK8sInstallerPage());
+                                context,
+                                MicroK8sInstallerPage(
+                                  onSuccessfullInstall: _onSuccessfullInstall,
+                                ));
                           });
                     }
                   default:
