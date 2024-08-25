@@ -82,7 +82,7 @@ class MutlipassExecCommands {
   updateKubePermissions() async {
     // build the command
     String command = "${_baseCommandSpace}"
-        "sudo chown -f -R ubuntu ~/.kube";
+        "sudo chown -f -R ubuntu /home/ubuntu/.kube";
     // run the command
     await PrivilegedCommandExecuter.run(command);
   }
