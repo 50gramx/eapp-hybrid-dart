@@ -1,41 +1,9 @@
-import 'dart:html' as html;
-
-import 'package:dio/dio.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:path_provider/path_provider.dart';
 
-Future<void> downloadFile(String url, String fileName) async {
-  if (kIsWeb) {
-    // Web platform: Use AnchorElement to download the file
-    html.AnchorElement anchorElement = html.AnchorElement(href: url);
-    anchorElement.download = fileName;
-    anchorElement.click();
-  } else {
-    try {
-      // Get the directory to save the file
-      var dir = await getApplicationDocumentsDirectory();
-
-      // Define the full path for the file
-      String filePath = "${dir.path}/$fileName";
-
-      // Create Dio instance
-      Dio dio = Dio();
-
-      // Start the download
-      await dio.download(url, filePath, onReceiveProgress: (received, total) {
-        if (total != -1) {
-          print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
-        }
-      });
-
-      print("File downloaded to $filePath");
-    } catch (e) {
-      print("Download failed: $e");
-    }
-  }
-}
+// Conditional import for platform-specific implementations
+import 'download_helper_web.dart'
+    if (dart.library.io) 'download_helper_nonweb.dart';
 
 Widget buildThings50DC500000000OverviewPageHeroSection(BuildContext context) {
   return Neumorphic(
