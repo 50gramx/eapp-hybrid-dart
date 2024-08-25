@@ -215,10 +215,15 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
             content: Text(
                 "Setting up Orchestrator: 2/x: Starting to Launch VM, downloading may take some time")),
       );
-      await MultipassCommands.launch.vm(selectedMemory.toInt(),
-          selectedCpuCount.toInt(), selectedDiskSpace.toInt());
+      bool isVmLaunched = await MultipassCommands.launch.vm(
+          selectedMemory.toInt(),
+          selectedCpuCount.toInt(),
+          selectedDiskSpace.toInt());
+      print("isVmLaunched: $isVmLaunched");
+      Map<String, dynamic> vmMeta =
+          await MultipassCommands.list.getOrchestratorVmMeta();
 
-      if (await MultipassCommands.list.getOrchestratorVmMeta() != {}) {
+      if (vmMeta.isNotEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: Text(
