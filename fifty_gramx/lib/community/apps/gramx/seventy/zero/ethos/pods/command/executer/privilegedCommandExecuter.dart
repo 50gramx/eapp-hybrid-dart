@@ -98,7 +98,7 @@ class PrivilegedCommandExecuter {
     print("running smoke test");
     // warn: a fake sudo test to check the status of some random port
     if (Platform.isMacOS) {
-      await run("sudo lsof -i:50501 && printenv");
+      await run("sudo lsof -i:50501");
     } else if (Platform.isWindows) {
       await run("multipass version");
     } else if (Platform.isLinux) {
