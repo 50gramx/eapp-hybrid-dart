@@ -64,7 +64,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
       backgroundColor: AppColors.backgroundPrimary(context),
       body: CustomScrollView(slivers: <Widget>[
         CustomSliverAppBar(
-          labelText: "MicroK8s Installer",
+          labelText: "Orchestrator Installer",
           actionLabelText: "",
           isBackEnabled: true,
           isActionEnabled: false,
@@ -222,7 +222,6 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
       print("isVmLaunched: $isVmLaunched");
       Map<String, dynamic> vmMeta =
           await MultipassCommands.list.getOrchestratorVmMeta();
-
       if (vmMeta.isNotEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -297,17 +296,17 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   "Setting up Orchestrator: 8/x: Successfully Updated Service Permissions")),
         );
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 9/x: Starting to set Orchestrator Permissions")),
-        );
-        await MultipassCommands.exec.updateKubePermissions();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 9/x: Successfully Updated Orchestrator Permissions")),
-        );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //       content: Text(
+        //           "Setting up Orchestrator: 9/x: Starting to set Orchestrator Permissions")),
+        // );
+        // await MultipassCommands.exec.updateKubePermissions();
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //       content: Text(
+        //           "Setting up Orchestrator: 9/x: Successfully Updated Orchestrator Permissions")),
+        // );
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
