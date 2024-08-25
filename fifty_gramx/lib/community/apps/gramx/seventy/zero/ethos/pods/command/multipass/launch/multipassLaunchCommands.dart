@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 
 class MultipassLaunchCommands {
   MultipassLaunchCommands._();
@@ -45,8 +46,11 @@ class MultipassLaunchCommands {
       print("running launch vm on Windows");
       await SimpleCommandExecuter.run("multipass list");
       await SimpleCommandExecuter.run(command);
-    } else if (Platform.isMacOS || Platform.isLinux){
-      await PrivilegedCommandExecuter.run(command);
+    } else if (Platform.isMacOS || Platform.isLinux) {
+      final vmMeta = await MultipassCommands.list.getOrchestratorVmMeta();
+      if (vmMeta == {}) {
+        await PrivilegedCommandExecuter.run(command);
+      }
     }
   }
 }
