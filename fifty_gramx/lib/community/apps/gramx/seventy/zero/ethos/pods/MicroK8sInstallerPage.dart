@@ -338,6 +338,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     setState(() {
       isInstalling = false;
     });
+    await Future.delayed(Duration(seconds: 30));
     widget.onSuccessfullInstall();
     Navigator.of(context).pop();
   }
