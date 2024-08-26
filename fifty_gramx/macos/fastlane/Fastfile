@@ -66,7 +66,7 @@ platform :mac do
       output_path: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg",
       )
     
-    sh("""gsutil cp -r '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg' gs://packges/com.50gramx.seventy.zero.ethos.nodes.dev/""")
+    sh("""if [ -f '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc'; fi; export GOOGLE_APPLICATION_CREDENTIALS='/Users/mac/Downloads/ethosverse-india-07260ab02c72.json'; gsutil cp -r '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg' gs://packges/com.50gramx.seventy.zero.ethos.nodes.dev/""")
 
     UI.message("App successfully notarized and zipped and uploaded to packages!")
   end
