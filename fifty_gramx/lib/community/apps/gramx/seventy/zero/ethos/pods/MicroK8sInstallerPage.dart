@@ -335,10 +335,11 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     // todo: add script to create the "ethosverse" namespace
     // microk8s kubectl create namespace ethosverse
     // todo: add script to run the mvfs in "ethosverse" namespace
+    await Future.delayed(Duration(seconds: 30));
+    widget.onSuccessfullInstall();
     setState(() {
       isInstalling = false;
     });
-    await Future.delayed(Duration(seconds: 30));
     widget.onSuccessfullInstall();
     Navigator.of(context).pop();
   }
