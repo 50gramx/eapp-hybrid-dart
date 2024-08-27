@@ -205,6 +205,7 @@ class HostMachineData {
     var disks = diskSpace.disks;
 
     // Prints the device path, mount path, and total size of each disk in system.
+    // TODO(khetana): fix discrepencies about storage misinformation (add a warning atleast)
     for (final disk in disks) {
       print("disk: $disk");
       print("disk: ${disk.mountPath}");
