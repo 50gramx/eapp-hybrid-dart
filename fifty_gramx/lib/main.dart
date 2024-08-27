@@ -30,9 +30,9 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/startScreen.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_hr_professionals_page/group_hr_professionals_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
@@ -44,6 +44,8 @@ import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_pa
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/pricing_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
+import 'package:fifty_gramx/firebase_options.dart';
+import 'package:fifty_gramx/firebase_options_70_ethos_nodes.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -51,16 +53,47 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-import 'firebase_options.dart';
+
+/// Constants used in the application.
+class Constants {
+  static final Constants _instance = Constants._internal();
+
+  factory Constants() {
+    return _instance;
+  }
+
+  Constants._internal();
+
+  static const String appName = '50gramx';
+  String eAppEnv = "com.50gramx";
+  late FirebaseOptions eAppFirebaseOptions;
+}
+
+getCurrentFirebaseOptions() {
+  // Set the Firebase options based on the environment
+  if (Constants().eAppEnv == "com.50gramx") {
+    Constants().eAppFirebaseOptions = DefaultFirebaseOptions.currentPlatform;
+  } else if (Constants().eAppEnv == "com.50gramx.70.ethos.nodes") {
+    Constants().eAppFirebaseOptions =
+        FirebaseOptions70EthosNodes.currentPlatform;
+  } else {
+    Constants().eAppFirebaseOptions = DefaultFirebaseOptions.currentPlatform;
+  }
+}
+
+getCurrentEnvironment() async {
+  Constants().eAppEnv = await Environment.current();
+  getCurrentFirebaseOptions();
+}
 
 bool isFirebaseSupportedPlatform() {
-  return kIsWeb || Platform.isAndroid || Platform.isIOS;
+  return kIsWeb || Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
 }
 
 ensureFirebaseSupport() async {
   if (isFirebaseSupportedPlatform()) {
     await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
+      options: Constants().eAppFirebaseOptions,
     );
 
     // Firebase Crashlytics is enabled for web at the moment
@@ -124,15 +157,11 @@ void main() async {
   // print("App is starting...");
   // Firebase not available for windows, linux at the moment
   // Firebase is enabled for web at the moment
+  await getCurrentEnvironment();
   await ensureFirebaseSupport();
   configureApp();
   ensureEthosappsSupport();
   runApp(MyApp());
-}
-
-/// Constants used in the application.
-class Constants {
-  static const String appName = '50gramx';
 }
 
 /// The main application widget.
@@ -182,19 +211,11 @@ class MyApp extends StatelessWidget {
   }
 
   buildWOFutureBuider() {
-    return FutureBuilder<String>(
-        future: Environment.current(),
-        builder: (context, envSnap) {
-          if (envSnap.connectionState == ConnectionState.done) {
-            if (envSnap.data == "com.50gramx.50.ethos.site") {
-              return StartScreen();
-            } else {
-              return HomeScreen();
-            }
-          } else {
-            return StartScreen();
-          }
-        });
+    if (Constants().eAppEnv == "com.50gramx.50.ethos.site") {
+      return StartScreen();
+    } else {
+      return HomeScreen();
+    }
   }
 
   buildParentFutureBuilder() {
