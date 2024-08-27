@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-class DefaultFirebaseOptions {
+class FirebaseOptions70EthosNodes {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'ethos-nodes.appspot.com',
     measurementId: 'G-TJS0KGFD9J',
   );
-
 }
