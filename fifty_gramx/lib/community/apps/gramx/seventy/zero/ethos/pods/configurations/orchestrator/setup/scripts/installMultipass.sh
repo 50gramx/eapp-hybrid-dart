@@ -1,9 +1,17 @@
-#!/bin/bash
+#!/usr/bin/expect -f
 
-/usr/bin/expect <<EOD
-spawn ""
-expect "Password:"
-send ""
-send "\n"
-expect eof
-EOD
+set timeout -1
+set password "apple"
+
+spawn /usr/local/bin/brew install multipass
+
+expect {
+    "Password:" {
+        send "$password\r"
+        exp_continue
+    }
+    eof
+}
+
+# Ensure the script waits for the command to finish
+wait
