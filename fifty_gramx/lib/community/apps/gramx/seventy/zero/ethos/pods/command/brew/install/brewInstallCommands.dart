@@ -37,17 +37,25 @@ class BrewInstallCommands {
               assetPath);
       // Update the spawn command in install script
       print("Update the spawn command in install script");
+      // await SimpleCommandExecuter.run(
+      //     '''sed -e '4s#.*#spawn $command#' -i '' $installPath''');
       await SimpleCommandExecuter.run(
-          '''sed -e '4s#.*#spawn $command#' -i '' $installPath''');
+          '''sed -i '' 's/^spawn .*/spawn $command/' $installPath''');
       // Update password in install script
       print("Update password in install script");
+      // await SimpleCommandExecuter.run(
+      //     '''sed -e '6s/.*/send "$password"/' -i '' $installPath''');
+
       await SimpleCommandExecuter.run(
-          '''sed -e '6s/.*/send "$password"/' -i '' $installPath''');
+          '''sed -i '' 's/^set password .*/set password "$password"/' $installPath''');
+      await SimpleCommandExecuter.run('''cat $installPath''');
       // Run the install script
       print("will run installer");
-      await SimpleCommandExecuter.run("/bin/bash $installPath");
+      await SimpleCommandExecuter.run("chmod +x $installPath");
+      await SimpleCommandExecuter.run("$installPath");
       // Wait for the socket to up and running
       print("will start waiting for 10sec");
+      // 🍺  multipass was successfully installed!
       await Future.delayed(Duration(seconds: 20));
     }
   }
