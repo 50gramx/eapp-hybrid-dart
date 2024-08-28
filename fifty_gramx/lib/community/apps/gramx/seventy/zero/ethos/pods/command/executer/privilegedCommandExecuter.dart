@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fifty_gramx/data/hostUserData.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
@@ -73,11 +74,9 @@ class PrivilegedCommandExecuter {
   static Future<List<ProcessResult>> run(String command) async {
     try {
       return (await _shell.run(command));
-    } on ShellException catch (e) {
-      print("ShellException, message: ${e.message}");
-      print("ShellException, exception: ${e}");
-      print("ShellException, result?.stderr: ${e.result?.stderr}");
-      print("ShellException, result?.errText: ${e.result?.errText}");
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
+      print("ShellException, exception, stacktrace: ${e}, ${st}");
       return []; // returns an empty list
     }
   }

@@ -3,6 +3,7 @@
 // it is simple as it doesn't need privileged access
 import 'dart:io';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:process_run/shell.dart';
 
 class SimpleCommandExecuter {
@@ -23,8 +24,9 @@ class SimpleCommandExecuter {
         command = 'powershell -c ${shellArgument(command)}';
       }
       return (await _shell.run(command));
-    } catch (e) {
-      print("Found Exception: $e");
+    } catch (e, st) {
+      FirebaseCrashlytics.instance.recordError(e, st);
+      print("ShellException, exception, stacktrace: ${e}, ${st}");
       return []; // returns an empty list
     }
   }
