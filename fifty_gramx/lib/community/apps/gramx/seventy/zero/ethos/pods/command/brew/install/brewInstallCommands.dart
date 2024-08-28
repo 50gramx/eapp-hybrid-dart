@@ -39,8 +39,9 @@ class BrewInstallCommands {
       print("Update the spawn command in install script");
       // await SimpleCommandExecuter.run(
       //     '''sed -e '4s#.*#spawn $command#' -i '' $installPath''');
-      await SimpleCommandExecuter.run(
-          '''sed -i '' 's/^spawn .*/spawn $command/' $installPath''');
+      String spawnCommand =
+          '''sed -i '' '6s#.*#spawn $command#' $installPath''';
+      await SimpleCommandExecuter.run(spawnCommand);
       // Update password in install script
       print("Update password in install script");
       // await SimpleCommandExecuter.run(
