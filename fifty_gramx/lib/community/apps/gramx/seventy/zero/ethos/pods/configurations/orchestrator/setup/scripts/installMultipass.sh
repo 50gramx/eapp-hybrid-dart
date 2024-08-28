@@ -1,9 +1,9 @@
 #!/usr/bin/expect -f
 
 set timeout -1
-set password "apple"
+set password ""
 
-spawn /usr/local/bin/brew install multipass
+spawn 
 
 expect {
     "Password:" {
