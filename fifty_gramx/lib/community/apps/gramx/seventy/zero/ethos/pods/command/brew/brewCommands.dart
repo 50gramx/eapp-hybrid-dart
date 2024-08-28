@@ -45,11 +45,8 @@ class BrewCommands {
     var macOsInfo = await deviceInfo.macOsInfo;
     FirebaseCrashlytics.instance
         .recordFlutterError(FlutterErrorDetails(exception: macOsInfo));
-    if (macOsInfo.arch == "arm64") {
-      _packagePath = "/opt/homebrew/bin/$_packageName";
-    } else {
-      _packagePath = "/usr/local/bin/$_packageName";
-    } // TODO(founder@): add a check for MacOS
+    var brewExectutable = whichSync('brew');
+    _packagePath = brewExectutable!;
 
     install = BrewInstallCommands(_packagePath);
     uninstall = BrewUninstallCommands(_packagePath);
