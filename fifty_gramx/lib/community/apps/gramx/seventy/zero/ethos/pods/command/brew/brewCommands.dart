@@ -6,6 +6,8 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 
 // operates the commands for brew package
@@ -41,6 +43,8 @@ class BrewCommands {
     // we need to get the arch and set the package path respectively
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     var macOsInfo = await deviceInfo.macOsInfo;
+    FirebaseCrashlytics.instance
+        .recordFlutterError(FlutterErrorDetails(exception: macOsInfo));
     if (macOsInfo.arch == "arm64") {
       _packagePath = "/opt/homebrew/bin/$_packageName";
     } else {
