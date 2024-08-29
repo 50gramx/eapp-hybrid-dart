@@ -45,8 +45,12 @@ class BrewCommands {
     var macOsInfo = await deviceInfo.macOsInfo;
     FirebaseCrashlytics.instance
         .recordFlutterError(FlutterErrorDetails(exception: macOsInfo));
-    var brewExectutable = whichSync('brew');
-    _packagePath = brewExectutable!;
+
+    if (macOsInfo.arch == "arm64") {
+      _packagePath = "/opt/homebrew/bin/$_packageName";
+    } else {
+      _packagePath = "/usr/local/bin/$_packageName";
+    }
 
     install = BrewInstallCommands(_packagePath);
     uninstall = BrewUninstallCommands(_packagePath);
@@ -93,6 +97,8 @@ class BrewCommands {
     // returns the version of brew if available
     // else, returns NA
     var version = await SimpleCommandExecuter.run("$_packagePath -v");
+    FirebaseCrashlytics.instance.recordFlutterError(FlutterErrorDetails(
+        exception: "Homebrew, version, _packagePath: $_packagePath, $version"));
     if (version.outText.length > 0) {
       if (version.outText.contains("Homebrew")) {
         return LineSplitter.split(version.outText).first.substring(9);
