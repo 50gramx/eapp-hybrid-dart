@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/onboarding/website/page_header_items.dart';
+import 'package:fifty_gramx/community/onboarding/website/page_header_config.dart';
 
 class HomePageHeaderConfig extends PageHeaderConfig {
   HomePageHeaderConfig()
