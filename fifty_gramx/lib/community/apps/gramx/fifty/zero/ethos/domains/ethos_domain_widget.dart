@@ -2,6 +2,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EthosDomainWidget extends StatelessWidget {
   final SpaceKnowledgeDomain knowledgeDomain;
@@ -101,10 +102,8 @@ class EthosDomainWidget extends StatelessWidget {
                     isPrimaryButton: true,
                     noBorder: false,
                     buttonActionOnPressed: () {
-                      Navigator.pushNamed(
-                          context,
-                          "${knowledgeDomain.spaceKnowledgeDomainId}" +
-                              "/plans");
+                      _launchURL("${knowledgeDomain.spaceKnowledgeDomainId}" +
+                          "/plans");
                     }),
                 const SizedBox(width: 8.0),
                 ActionNeuButton(
@@ -112,8 +111,7 @@ class EthosDomainWidget extends StatelessWidget {
                     isPrimaryButton: false,
                     noBorder: true,
                     buttonActionOnPressed: () {
-                      Navigator.pushNamed(
-                          context, knowledgeDomain.spaceKnowledgeDomainId);
+                      _launchURL("${knowledgeDomain.spaceKnowledgeDomainId}");
                     }),
               ],
             ),
@@ -138,5 +136,22 @@ class EthosDomainWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class UrlBuilder {
+  static const String baseUrl = "https://50gramx.com/";
+
+  static String buildUrl(String path) {
+    return Uri.parse(baseUrl + path).toString();
+  }
+}
+
+void _launchURL(String path) async {
+  final fullUrl = UrlBuilder.buildUrl(path);
+  if (await canLaunch(fullUrl)) {
+    await launch(fullUrl);
+  } else {
+    throw 'Could not launch $fullUrl';
   }
 }
