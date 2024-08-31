@@ -6,8 +6,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EthosDomainWidget extends StatelessWidget {
   final SpaceKnowledgeDomain knowledgeDomain;
+  final String primaryCTAtitle;
+  final String secondaryCTAtitle;
 
-  const EthosDomainWidget({required this.knowledgeDomain});
+  const EthosDomainWidget(
+      {required this.knowledgeDomain,
+      required this.primaryCTAtitle,
+      required this.secondaryCTAtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -98,16 +103,18 @@ class EthosDomainWidget extends StatelessWidget {
             Row(
               children: [
                 ActionNeuButton(
-                    buttonTitle: "Purchase",
+                    buttonTitle: primaryCTAtitle,
                     isPrimaryButton: true,
                     noBorder: false,
                     buttonActionOnPressed: () {
-                      _launchURL("${knowledgeDomain.spaceKnowledgeDomainId}" +
-                          "/plans");
+                      Navigator.pushNamed(
+                          context,
+                          "${knowledgeDomain.spaceKnowledgeDomainId}" +
+                              "/plans");
                     }),
                 const SizedBox(width: 8.0),
                 ActionNeuButton(
-                    buttonTitle: "View Details",
+                    buttonTitle: secondaryCTAtitle,
                     isPrimaryButton: false,
                     noBorder: true,
                     buttonActionOnPressed: () {
