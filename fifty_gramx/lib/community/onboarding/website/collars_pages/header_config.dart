@@ -5,7 +5,7 @@ class CollarsPageHeaderConfig extends PageHeaderConfig {
       : super(
           header: 'Collars',
           items: [
-            {'title': 'Store', 'route': '/collars'},
+            {'title': 'Today', 'route': '/collars'},
           ],
         );
 }

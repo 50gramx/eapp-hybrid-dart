@@ -64,9 +64,18 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                       knowledgeDomain: SpaceKnowledgeDomain(
                     spaceKnowledgeDomainId: "/70/nodes",
                     spaceKnowledgeDomainName:
-                        "Nodes Domain Collar For Gamers & ML Researchers",
+                        "Ethos Nodes For Gamers & ML Researchers",
                     spaceKnowledgeDomainDescription:
                         "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
+                    lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
+                  )),
+                  EthosDomainWidget(
+                      knowledgeDomain: SpaceKnowledgeDomain(
+                    spaceKnowledgeDomainId: "/53/satwa",
+                    spaceKnowledgeDomainName:
+                        "SATWA - Next-Generation Staffing Solutions",
+                    spaceKnowledgeDomainDescription:
+                        "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
                     lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
                   )),
                   // EthosDomainWidget(
