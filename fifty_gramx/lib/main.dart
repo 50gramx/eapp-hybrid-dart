@@ -42,6 +42,8 @@ import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_p
 import 'package:fifty_gramx/community/onboarding/website/home_page/about_us_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/pricing_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_candidates_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_employers_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:fifty_gramx/firebase_options.dart';
@@ -279,8 +281,10 @@ class MyApp extends StatelessWidget {
               Vinayak53GRAMxGroupJobseekersPage(),
           '/53/vinayak/hr-professionals': (context) =>
               Vinayak53GRAMxGroupHRProfessionalsPage(),
-          '/53gramx/satwa': (context) => SatwaOverviewPage(),
-          '/53gramx/satwa/pricing': (context) => SatwaPricingPage(),
+          '/53/satwa': (context) => SatwaOverviewPage(),
+          '/53/satwa/candidates': (context) => SatwaTGCandidatesPage(),
+          '/53/satwa/employers': (context) => SatwaTGEmployersPage(),
+          '/53/satwa/plans': (context) => SatwaPricingPage(),
         },
         navigatorObservers: getNavigatorObserver(),
         home: buildHomeWOFutureBuilder());
