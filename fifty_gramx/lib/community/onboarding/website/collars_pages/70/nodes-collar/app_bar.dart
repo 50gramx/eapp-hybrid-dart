@@ -118,19 +118,6 @@ class _Things50DC500000000OverviewPageSliverAppBarState
 
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      title: buildAppBarTitle(context),
-      automaticallyImplyLeading: false,
-      backgroundColor: AppColors.backgroundPrimary(context),
-      centerTitle: false,
-      flexibleSpace: buildAppBarFlexibleSpaceBar(context),
-      pinned: true,
-      stretch: true,
-      actions: buildAppBarActions(context),
-      onStretchTrigger: () async {
-        print("OnStretchTrigger:start");
-        print("OnStretchTrigger:finish");
-      },
-    );
+    return Things50DC500000000PageHeaderConfig().buildSliverAppBar(context);
   }
 }
