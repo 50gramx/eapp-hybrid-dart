@@ -61,23 +61,29 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                   //       "Ability to analyze and interpret offer letters, provide insights on salary, benefits, and terms, and facilitate negotiation.",
                   // )),
                   EthosDomainWidget(
-                      knowledgeDomain: SpaceKnowledgeDomain(
-                    spaceKnowledgeDomainId: "/70/nodes",
-                    spaceKnowledgeDomainName:
-                        "Ethos Nodes For Gamers & ML Researchers",
-                    spaceKnowledgeDomainDescription:
-                        "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
-                    lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
-                  )),
+                    knowledgeDomain: SpaceKnowledgeDomain(
+                      spaceKnowledgeDomainId: "/70/nodes",
+                      spaceKnowledgeDomainName:
+                          "Start earning by running a slice of 50GRAMx network",
+                      spaceKnowledgeDomainDescription:
+                          "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
+                      lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
+                    ),
+                    primaryCTAtitle: "Join Now",
+                    secondaryCTAtitle: "Learn more",
+                  ),
                   EthosDomainWidget(
-                      knowledgeDomain: SpaceKnowledgeDomain(
-                    spaceKnowledgeDomainId: "/53/satwa",
-                    spaceKnowledgeDomainName:
-                        "SATWA - Next-Generation Staffing Solutions",
-                    spaceKnowledgeDomainDescription:
-                        "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
-                    lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
-                  )),
+                    knowledgeDomain: SpaceKnowledgeDomain(
+                      spaceKnowledgeDomainId: "/53/satwa",
+                      spaceKnowledgeDomainName:
+                          "SATWA - Next-Generation Staffing Solutions",
+                      spaceKnowledgeDomainDescription:
+                          "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
+                      lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
+                    ),
+                    primaryCTAtitle: "Contact Us",
+                    secondaryCTAtitle: "View Details",
+                  ),
                   // EthosDomainWidget(
                   //     knowledgeDomain: SpaceKnowledgeDomain(
                   //   spaceKnowledgeDomainId: "/66/offer",
