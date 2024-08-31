@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,6 +10,101 @@ class PageHeaderConfig {
   final List<Map<String, String>> items;
 
   PageHeaderConfig({required this.header, required this.items});
+
+  // New method to build SliverAppBar directly
+  SliverAppBar buildSliverAppBar(BuildContext context) {
+    return SliverAppBar(
+      title: buildAppBarTitle(context),
+      automaticallyImplyLeading: false,
+      backgroundColor: AppColors.backgroundPrimary(context),
+      centerTitle: false,
+      flexibleSpace: buildAppBarFlexibleSpaceBar(context),
+      pinned: true,
+      stretch: true,
+      actions: buildAppBarActions(context),
+      onStretchTrigger: () async {
+        print("OnStretchTrigger:start");
+        print("OnStretchTrigger:finish");
+      },
+    );
+  }
+
+  // Method to build the title based on the layout
+  Widget buildAppBarTitle(BuildContext context) {
+    if (LayoutBreakpoint().isNavigatingLeft(context)) {
+      return buildLeftNavigationAppBarTitle(context);
+    } else {
+      return buildBottomNavigationAppBarTitle(context);
+    }
+  }
+
+  Widget buildLeftNavigationAppBarTitle(BuildContext context) {
+    return Row(
+      children: [
+        buildTappableTitleText(context),
+      ],
+    );
+  }
+
+  Widget buildBottomNavigationAppBarTitle(BuildContext context) {
+    return buildTappableTitleText(context); // Existing title widget
+  }
+
+  Widget buildTappableTitleText(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, items.first['route']!);
+      },
+      child: buildTitleText(context),
+    );
+  }
+
+  Widget buildTitleText(BuildContext context) {
+    return Text(
+      header,
+      maxLines: 1,
+      textAlign: TextAlign.start,
+      style: TextStyle(
+          color: AppColors.contentPrimary(context),
+          fontSize: 24,
+          fontFamily: "Montserrat",
+          fontWeight: FontWeight.w500),
+    );
+  }
+
+  FlexibleSpaceBar buildAppBarFlexibleSpaceBar(BuildContext context) {
+    if (LayoutBreakpoint().isNavigatingLeft(context)) {
+      return FlexibleSpaceBar();
+    } else {
+      return FlexibleSpaceBar(
+          background: Stack(
+        children: [
+          // Your background widgets here
+          Positioned(
+            bottom: 0,
+            left: 98,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: buildSubHeaderActions(context),
+            ),
+          ),
+        ],
+      ));
+    }
+  }
+
+  List<Widget> buildAppBarActions(BuildContext context) {
+    if (LayoutBreakpoint().isNavigatingLeft(context)) {
+      return buildLeftNavigationActions(context);
+    } else {
+      return [];
+    }
+  }
+
+  List<Widget> buildLeftNavigationActions(BuildContext context) {
+    return buildActions(context);
+  }
 
   List<Widget> buildActions(BuildContext context) {
     return items.map((item) {
