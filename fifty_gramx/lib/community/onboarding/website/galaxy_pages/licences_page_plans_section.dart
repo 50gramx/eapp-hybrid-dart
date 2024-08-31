@@ -4,71 +4,116 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 Widget buildGalaxyLicencesPagePlansSection(BuildContext context) {
+  final bool isMobile = MediaQuery.of(context).size.width < 600;
+
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
       // Four Cards Row
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Plan 2
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: _buildPricingCard(
-                'Personal',
-                'For individuals just getting started with 50GRAMx Galaxies',
-                '\₹1,999',
-                'Licence Now',
-                [
-                  'Pooled Processing Network',
-                  'Access Ethosverse Browser',
-                  'Invite Upto 3 Accounts',
-                ],
-                context,
-              ),
+      isMobile
+          ? Column(
+              children: [
+                _buildPricingCard(
+                  'Personal',
+                  'For individuals just getting started with 50GRAMx Galaxies',
+                  '\₹1,999',
+                  'Licence Now',
+                  [
+                    'Pooled Processing Network',
+                    'Access Ethosverse Browser',
+                    'Invite Upto 3 Accounts',
+                  ],
+                  context,
+                ),
+                _buildPricingCard(
+                  'Professional',
+                  'For dynamic individuals looking to boost productivity',
+                  '\₹29,999',
+                  'Licence Now',
+                  [
+                    'Private Processing Network',
+                    'Dedicated Star Nodes',
+                    'Access Regional Nodes',
+                    'Invite Upto 50 Accounts',
+                  ],
+                  context,
+                ),
+                _buildPricingCard(
+                  'Organisation',
+                  'For innovative companies looking to scale securely',
+                  '\₹149,999',
+                  'Contact Sales',
+                  [
+                    'Private Processing Network',
+                    'Invite Upto 50 Associates',
+                    'Invite Upto 10 Teams',
+                    'Dedicated GRAMx Passes',
+                  ],
+                  context,
+                ),
+              ],
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Plan 2
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: _buildPricingCard(
+                      'Personal',
+                      'For individuals just getting started with 50GRAMx Galaxies',
+                      '\₹1,999',
+                      'Licence Now',
+                      [
+                        'Pooled Processing Network',
+                        'Access Ethosverse Browser',
+                        'Invite Upto 3 Accounts',
+                      ],
+                      context,
+                    ),
+                  ),
+                ),
+                // Plan 3
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: _buildPricingCard(
+                      'Professional',
+                      'For dynamic individuals looking to boost productivity',
+                      '\₹29,999',
+                      'Licence Now',
+                      [
+                        'Private Processing Network',
+                        'Dedicated Star Nodes',
+                        'Access Regional Nodes',
+                        'Invite Upto 50 Accounts',
+                      ],
+                      context,
+                    ),
+                  ),
+                ),
+                // Plan 4
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: _buildPricingCard(
+                      'Organisation',
+                      'For innovative companies looking to scale securely',
+                      '\₹149,999',
+                      'Contact Sales',
+                      [
+                        'Private Processing Network',
+                        'Invite Upto 50 Associates',
+                        'Invite Upto 10 Teams',
+                        'Dedicated GRAMx Passes',
+                      ],
+                      context,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          // Plan 3
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: _buildPricingCard(
-                'Professional',
-                'For dynamic individuals looking to boost productivity',
-                '\₹29,999',
-                'Licence Now',
-                [
-                  'Private Processing Network',
-                  'Dedicated Star Nodes',
-                  'Access Regional Nodes',
-                  'Invite Upto 50 Accounts',
-                ],
-                context,
-              ),
-            ),
-          ),
-          // Plan 4
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: _buildPricingCard(
-                'Organisation',
-                'For innovative companies looking to scale securely',
-                '\₹149,999',
-                'Contact Sales',
-                [
-                  'Private Processing Network',
-                  'Invite Upto 50 Associates',
-                  'Invite Upto 10 Teams',
-                  'Dedicated GRAMx Passes',
-                ],
-                context,
-              ),
-            ),
-          ),
-        ],
-      ),
     ],
   );
 }
@@ -89,7 +134,6 @@ Widget _buildPricingCard(
         children: [
           // Plan Name
           SizedBox(height: 8),
-
           Text(
             planName,
             style: TextStyle(
@@ -101,7 +145,7 @@ Widget _buildPricingCard(
             textAlign: TextAlign.start,
           ),
           SizedBox(height: 16),
-          // Plan Price
+          // Plan Description
           Text(
             planDescription,
             style: TextStyle(

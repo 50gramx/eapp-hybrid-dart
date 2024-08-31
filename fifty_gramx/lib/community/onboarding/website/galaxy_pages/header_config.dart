@@ -1,5 +1,4 @@
-import 'package:fifty_gramx/community/onboarding/website/page_header_items.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:fifty_gramx/community/onboarding/website/page_header_config.dart';
 
 class GalaxyPageHeaderConfig extends PageHeaderConfig {
   GalaxyPageHeaderConfig()
