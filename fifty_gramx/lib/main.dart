@@ -275,16 +275,16 @@ class MyApp extends StatelessWidget {
           '/collars': (context) => CollarsOverviewPage(),
           '/ethosverse': (context) => EthosverseOverviewPage(),
           '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
-          '/70/nodes': (context) => Things50DC500000000OverviewPage(),
+          '/70/ethos-nodes': (context) => Things50DC500000000OverviewPage(),
           '/53/vinayak': (context) => OfferLetterCISKDCOverviewPage(),
           '/53/vinayak/job-seekers': (context) =>
               Vinayak53GRAMxGroupJobseekersPage(),
           '/53/vinayak/hr-professionals': (context) =>
               Vinayak53GRAMxGroupHRProfessionalsPage(),
-          '/53/satwa': (context) => SatwaOverviewPage(),
-          '/53/satwa/candidates': (context) => SatwaTGCandidatesPage(),
-          '/53/satwa/employers': (context) => SatwaTGEmployersPage(),
-          '/53/satwa/plans': (context) => SatwaPricingPage(),
+          '/53/satwa-plus': (context) => SatwaOverviewPage(),
+          '/53/satwa-plus/candidates': (context) => SatwaTGCandidatesPage(),
+          '/53/satwa-plus/employers': (context) => SatwaTGEmployersPage(),
+          '/53/satwa-plus/plans': (context) => SatwaPricingPage(),
         },
         navigatorObservers: getNavigatorObserver(),
         home: buildHomeWOFutureBuilder());
