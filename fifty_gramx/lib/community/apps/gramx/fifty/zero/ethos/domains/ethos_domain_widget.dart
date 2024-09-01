@@ -118,7 +118,8 @@ class EthosDomainWidget extends StatelessWidget {
                     isPrimaryButton: false,
                     noBorder: true,
                     buttonActionOnPressed: () {
-                      _launchURL("${knowledgeDomain.spaceKnowledgeDomainId}");
+                      Navigator.pushNamed(
+                          context, "${knowledgeDomain.spaceKnowledgeDomainId}");
                     }),
               ],
             ),

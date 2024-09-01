@@ -62,7 +62,7 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                   // )),
                   EthosDomainWidget(
                     knowledgeDomain: SpaceKnowledgeDomain(
-                      spaceKnowledgeDomainId: "/70/nodes",
+                      spaceKnowledgeDomainId: "/70/ethos-nodes",
                       spaceKnowledgeDomainName:
                           "Start earning by running a slice of 50GRAMx network",
                       spaceKnowledgeDomainDescription:
@@ -74,7 +74,7 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                   ),
                   EthosDomainWidget(
                     knowledgeDomain: SpaceKnowledgeDomain(
-                      spaceKnowledgeDomainId: "/53/satwa",
+                      spaceKnowledgeDomainId: "/53/satwa-plus",
                       spaceKnowledgeDomainName:
                           "SATWA - Next-Generation Staffing Solutions",
                       spaceKnowledgeDomainDescription:
