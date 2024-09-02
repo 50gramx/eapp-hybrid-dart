@@ -69,7 +69,7 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                           "Transform Your Spare Computing Power into Income with 50GRAMx Ethos Nodes",
                       lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
                     ),
-                    primaryCTAtitle: "Join Now",
+                    primaryCTAtitle: "Earn Now",
                     secondaryCTAtitle: "Learn more",
                   ),
                   EthosDomainWidget(
@@ -81,18 +81,19 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                           "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
                       lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
                     ),
-                    primaryCTAtitle: "Contact Us",
+                    primaryCTAtitle: "Schedule Hire",
                     secondaryCTAtitle: "View Details",
                   ),
                   EthosDomainWidget(
                     knowledgeDomain: SpaceKnowledgeDomain(
                       spaceKnowledgeDomainId: "/66/podeage-llama-7b",
-                      spaceKnowledgeDomainName: "Fastest LLAMA ",
+                      spaceKnowledgeDomainName:
+                          "Fastest Inference - LLAMA 7B Openly AI Model",
                       spaceKnowledgeDomainDescription:
-                          "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
+                          "Fast AI Inference at Tokenized Prices",
                       lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
                     ),
-                    primaryCTAtitle: "Contact Us",
+                    primaryCTAtitle: "Start Free",
                     secondaryCTAtitle: "View Details",
                   ),
                   // EthosDomainWidget(

@@ -3,7 +3,7 @@ import 'package:fifty_gramx/community/onboarding/website/configs/page_header_con
 class CollarsPageHeaderConfig extends PageHeaderConfig {
   CollarsPageHeaderConfig()
       : super(
-          header: 'Collars',
+          header: 'GMx Collars',
           items: [
             {'title': 'Today', 'route': '/collars'},
           ],
