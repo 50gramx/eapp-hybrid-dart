@@ -1,10 +1,11 @@
+import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page_trending_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
+import 'package:fifty_gramx/community/onboarding/website/home_page/value_prop_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/plan_page_config.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/pricing_page_hero_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_one_pages/tg_candidates_page_hero_section.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-CustomScrollView buildSatwaPricingPageSliverBody() {
+CustomScrollView buildSatwaTGCandidatesPageSliverBody() {
   return CustomScrollView(
     slivers: <Widget>[
       HomePageSliverAppBar(
@@ -12,15 +13,15 @@ CustomScrollView buildSatwaPricingPageSliverBody() {
       ),
       SatwaOverviewPageSliverAppBar(),
       SliverAnimatedList(
-          initialItemCount: 3,
+          initialItemCount: 1,
           itemBuilder: (BuildContext context, int position,
               Animation<double> animation) {
             if (position == 0) {
-              return buildSatwaPricingPageHeroSection(context);
+              return buildSatwaTGCandidatesPageHeroSection(context);
             } else if (position == 1) {
-              return SatwaPlanPageConfig().buildPlansSection(context);
+              return buildOverviewPageTrendingSection(context);
             } else if (position == 2) {
-              return SatwaPlanPageConfig().buildComparisonSection(context);
+              return buildHomePageValuePropSection(context);
             } else {
               return SizedBox();
             }

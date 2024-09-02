@@ -33,17 +33,22 @@ import 'package:fifty_gramx/community/onboarding/startScreen.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/overview_page/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_hr_professionals_page/group_hr_professionals_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/53/offer-letter-closed-isolated-skd-collar/tg_jobseekers_page/group_jobseekers_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/66/llama-7b-collar/overview_page/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/66/llama-7b-collar/plan_page/plan_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/plan_page/plan_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/tg_gamers_page/tg_gamers_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/tg_ml_researchers_page/tg_ml_researchers_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/collection_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/licences_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/overview_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/about_us_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/pricing_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_candidates_page.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_employers_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page/overview_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/plans_page/pricing_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_one_pages/tg_candidates_page.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_two_pages/tg_employers_page.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:fifty_gramx/firebase_options.dart';
@@ -276,6 +281,11 @@ class MyApp extends StatelessWidget {
           '/ethosverse': (context) => EthosverseOverviewPage(),
           '/ethosverse/domain': (context) => EthosverseDomainCollectionPage(),
           '/70/ethos-nodes': (context) => Things50DC500000000OverviewPage(),
+          '/70/ethos-nodes/gamers': (context) =>
+              Things50DC500000000TGGamersPage(),
+          '/70/ethos-nodes/ml-researchers': (context) =>
+              Things50DC500000000TGMLResearchersPage(),
+          '/70/ethos-nodes/plans': (context) => Things50DC500000000PlanPage(),
           '/53/vinayak': (context) => OfferLetterCISKDCOverviewPage(),
           '/53/vinayak/job-seekers': (context) =>
               Vinayak53GRAMxGroupJobseekersPage(),
@@ -285,6 +295,8 @@ class MyApp extends StatelessWidget {
           '/53/satwa-plus/candidates': (context) => SatwaTGCandidatesPage(),
           '/53/satwa-plus/employers': (context) => SatwaTGEmployersPage(),
           '/53/satwa-plus/plans': (context) => SatwaPricingPage(),
+          '/66/podeage-llama-7b': (context) => PodeageLLAMA7BOverviewPage(),
+          '/66/podeage-llama-7b/plans': (context) => PodeageLLAMA7BPlanPage(),
         },
         navigatorObservers: getNavigatorObserver(),
         home: buildHomeWOFutureBuilder());

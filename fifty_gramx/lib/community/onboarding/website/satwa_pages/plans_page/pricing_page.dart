@@ -21,20 +21,20 @@
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page_sliver_body.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/plans_page/pricing_page_sliver_body.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class SatwaOverviewPage extends StatefulWidget {
-  const SatwaOverviewPage({Key? key}) : super(key: key);
+class SatwaPricingPage extends StatefulWidget {
+  const SatwaPricingPage({Key? key}) : super(key: key);
 
   @override
-  State<SatwaOverviewPage> createState() => _SatwaOverviewPageState();
+  State<SatwaPricingPage> createState() => _SatwaPricingPageState();
 }
 
-class _SatwaOverviewPageState extends State<SatwaOverviewPage> {
+class _SatwaPricingPageState extends State<SatwaPricingPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -61,7 +61,7 @@ class _SatwaOverviewPageState extends State<SatwaOverviewPage> {
         return Scaffold(
             backgroundColor: AppColors.backgroundSecondary(context),
             drawer: buildHomePageAppDrawer(context),
-            body: buildSatwaOverviewPageSliverBody());
+            body: buildSatwaPricingPageSliverBody());
       },
     );
   }

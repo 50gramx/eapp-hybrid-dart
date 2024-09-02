@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/onboarding/website/plan_page_config.dart';
+import 'package:fifty_gramx/community/onboarding/website/configs/plan_page_config.dart';
 
 class SatwaPlanPageConfig extends PlanPageConfig {
   SatwaPlanPageConfig()

@@ -2,10 +2,10 @@ import 'package:fifty_gramx/community/onboarding/website/ethosverse/overview_pag
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/value_prop_section.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_page_hero_section.dart';
+import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_two_pages/tg_employers_page_hero_section.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-CustomScrollView buildSatwaOverviewPageSliverBody() {
+CustomScrollView buildSatwaTGEmployersPageSliverBody() {
   return CustomScrollView(
     slivers: <Widget>[
       HomePageSliverAppBar(
@@ -17,7 +17,7 @@ CustomScrollView buildSatwaOverviewPageSliverBody() {
           itemBuilder: (BuildContext context, int position,
               Animation<double> animation) {
             if (position == 0) {
-              return buildSatwaOverviewPageHeroSection(context);
+              return buildSatwaTGEmployersPageHeroSection(context);
             } else if (position == 1) {
               return buildOverviewPageTrendingSection(context);
             } else if (position == 2) {
