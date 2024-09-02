@@ -15,7 +15,7 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(25)),
-        color: AppColors.backgroundPrimary(context),
+        color: AppColors.backgroundSecondary(context),
         border: NeumorphicBorder(
           isEnabled: true,
           color: AppColors.backgroundPrimary(context),

@@ -231,6 +231,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       title: buildAppBarTitle(),
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundPrimary(context),
+      shadowColor: AppColors.backgroundPrimary(context),
       pinned: widget.isPinned,
       actions: buildAppBarActions(),
       stretch: true,

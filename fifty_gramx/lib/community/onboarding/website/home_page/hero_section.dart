@@ -1,9 +1,8 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/home_page/cta_button.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/cube_widget.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void _launchURL(String url) async {
@@ -20,7 +19,8 @@ Widget buildCTAButton(BuildContext context, bool signedIn) {
     child: NeumorphicButton(
       provideHapticFeedback: true,
       onPressed: () {
-        _launchURL("https://forms.gle/myw9mJkh3NEJB4Je6");
+        Navigator.pushNamed(context, '/66/podeage-llama-7b');
+        // _launchURL("https://forms.gle/myw9mJkh3NEJB4Je6");
       },
       style: NeumorphicStyle(
         lightSource: NeumorphicTheme.isUsingDark(context)
@@ -73,7 +73,8 @@ Widget buildSubCTAButton(BuildContext context, bool signedIn) {
     child: NeumorphicButton(
       provideHapticFeedback: true,
       onPressed: () {
-        _launchURL("https://forms.gle/myw9mJkh3NEJB4Je6");
+        Navigator.pushNamed(context, '/70/ethos-nodes');
+        // _launchURL("https://forms.gle/myw9mJkh3NEJB4Je6");
       },
       style: NeumorphicStyle(
         lightSource: NeumorphicTheme.isUsingDark(context)
