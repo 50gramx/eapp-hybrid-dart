@@ -72,7 +72,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
                 : AppColors.backgroundSecondary(context),
             shape: NeumorphicShape.flat,
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-            color: AppColors.contentPrimary(context),
+            color: AppColors.backgroundPrimary(context),
             border: NeumorphicBorder(
               isEnabled: true,
               color: AppColors.backgroundSecondary(context),
@@ -82,13 +82,14 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
           child: Text(
-            "Explore Collars",
-            textAlign: TextAlign.center,
+            "Access eDomains",
+            maxLines: 1,
+            textAlign: TextAlign.end,
             style: TextStyle(
-                color: AppColors.contentInversePrimary(context),
-                fontSize: 16,
+                color: AppColors.contentPrimary(context),
+                fontSize: 18,
                 fontFamily: "Montserrat",
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.w400),
           )),
     );
   }
@@ -168,10 +169,10 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
         // Add space to separate the title and other actions
         buildHerotitle(context), // Your existing title widget
         SizedBox(width: 16),
-        buildTappableEthosverseTitle(),
+        // buildTappableEthosverseTitle(),
         // buildGalaxyPopupMenuButton(),
         // buildSpacePopupMenuButton(),
-        buildCompanyPopuMenuButton(),
+        // buildCompanyPopuMenuButton(),
       ],
     );
   }
@@ -193,7 +194,8 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
 
   buildLeftNavigationActions() {
     return [
-      buildHubTitle(),
+      buildTappableEthosverseTitle(),
+      // buildHubTitle(),
     ];
   }
 
