@@ -21,7 +21,7 @@
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page_config.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/tg_gamers_page/tg_gamers_page_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -30,16 +30,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class Things50DC500000000OverviewPage extends StatefulWidget {
-  const Things50DC500000000OverviewPage({Key? key}) : super(key: key);
+class Things50DC500000000TGGamersPage extends StatefulWidget {
+  const Things50DC500000000TGGamersPage({Key? key}) : super(key: key);
 
   @override
-  State<Things50DC500000000OverviewPage> createState() =>
-      _Things50DC500000000OverviewPageState();
+  State<Things50DC500000000TGGamersPage> createState() =>
+      _Things50DC500000000TGGamersPageState();
 }
 
-class _Things50DC500000000OverviewPageState
-    extends State<Things50DC500000000OverviewPage> {
+class _Things50DC500000000TGGamersPageState
+    extends State<Things50DC500000000TGGamersPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -79,7 +79,7 @@ class _Things50DC500000000OverviewPageState
                   isPinned: false,
                 ),
                 Things50DC500000000OverviewPageSliverAppBar(),
-                Things50DC500000000OverviewPageConfig().buildPage(context),
+                Things50DC500000000TGGamersPageConfig().buildPage(context),
               ],
             ));
       },

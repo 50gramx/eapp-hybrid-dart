@@ -84,6 +84,17 @@ Widget buildCollarsOverviewPageHeroSection(BuildContext context) {
                     primaryCTAtitle: "Contact Us",
                     secondaryCTAtitle: "View Details",
                   ),
+                  EthosDomainWidget(
+                    knowledgeDomain: SpaceKnowledgeDomain(
+                      spaceKnowledgeDomainId: "/66/podeage-llama-7b",
+                      spaceKnowledgeDomainName: "Fastest LLAMA ",
+                      spaceKnowledgeDomainDescription:
+                          "Empower your workforce with S.A.t.W.A. - A tailored staffing solution designed for your unique business needs",
+                      lastUpdatedAt: Timestamp.fromDateTime(DateTime.now()),
+                    ),
+                    primaryCTAtitle: "Contact Us",
+                    secondaryCTAtitle: "View Details",
+                  ),
                   // EthosDomainWidget(
                   //     knowledgeDomain: SpaceKnowledgeDomain(
                   //   spaceKnowledgeDomainId: "/66/offer",

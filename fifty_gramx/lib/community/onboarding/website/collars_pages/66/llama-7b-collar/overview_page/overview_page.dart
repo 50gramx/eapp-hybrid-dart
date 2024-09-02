@@ -20,8 +20,8 @@
  */
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/app_bar.dart';
-import 'package:fifty_gramx/community/onboarding/website/collars_pages/70/nodes-collar/overview_page/overview_page_config.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/66/llama-7b-collar/app_bar.dart';
+import 'package:fifty_gramx/community/onboarding/website/collars_pages/66/llama-7b-collar/overview_page/hero_section_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_drawer.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -30,16 +30,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class Things50DC500000000OverviewPage extends StatefulWidget {
-  const Things50DC500000000OverviewPage({Key? key}) : super(key: key);
+class PodeageLLAMA7BOverviewPage extends StatefulWidget {
+  const PodeageLLAMA7BOverviewPage({Key? key}) : super(key: key);
 
   @override
-  State<Things50DC500000000OverviewPage> createState() =>
-      _Things50DC500000000OverviewPageState();
+  State<PodeageLLAMA7BOverviewPage> createState() =>
+      _PodeageLLAMA7BOverviewPageState();
 }
 
-class _Things50DC500000000OverviewPageState
-    extends State<Things50DC500000000OverviewPage> {
+class _PodeageLLAMA7BOverviewPageState
+    extends State<PodeageLLAMA7BOverviewPage> {
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -78,8 +78,18 @@ class _Things50DC500000000OverviewPageState
                 HomePageSliverAppBar(
                   isPinned: false,
                 ),
-                Things50DC500000000OverviewPageSliverAppBar(),
-                Things50DC500000000OverviewPageConfig().buildPage(context),
+                PodeageLLAMA7BOverviewPageSliverAppBar(),
+                SliverAnimatedList(
+                    initialItemCount: 1,
+                    itemBuilder: (BuildContext context, int position,
+                        Animation<double> animation) {
+                      if (position == 0) {
+                        return OverviewPageHeroSectionConfig()
+                            .buildHeroSection(context);
+                      } else {
+                        return SizedBox();
+                      }
+                    })
               ],
             ));
       },
