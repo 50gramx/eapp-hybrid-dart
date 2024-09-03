@@ -1,8 +1,9 @@
-import 'dart:js' as js;
-
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+
+// Conditional imports
+import 'hero_section_js.dart' if (dart.library.js) 'hero_section_stub.dart';
 
 // Configuration class for the hero section
 class HeroSectionConfig {
@@ -233,18 +234,9 @@ class HeroSectionConfig {
       GlobalKey<PopupMenuButtonState<int>>();
 
   // Method to get the OS name using JavaScript interop
-  String _getOSName() {
-    final userAgent = js.context['navigator']['userAgent'] as String;
 
-    if (userAgent.contains('Mac OS')) {
-      return 'macOS';
-    } else if (userAgent.contains('Windows')) {
-      return 'Windows';
-    } else if (userAgent.contains('Linux')) {
-      return 'Linux';
-    } else {
-      return 'Unknown OS';
-    }
+  String _getOSName() {
+    return getOSName();
   }
 
   // Method to get the corresponding icon for the OS
