@@ -37,14 +37,14 @@ class TargetGroupPageConfig {
   Widget buildPage(BuildContext context) {
     final List<Widget Function(BuildContext)> _sections = [
       (context) => heroSectionConfig.buildHeroSection(context),
-      (context) => problemIdentificationSectionConfig
-          .buildProblemIdentificationSection(context),
-      (context) => howHelpsSectionConfig.buildHowHelpsSection(context),
-      (context) => successSectionConfig.buildSuccessSection(context),
-      (context) => benefitSectionConfig.buildBenefitSection(context),
-      (context) => getStartedSectionConfig.buildGetStartedSection(context),
-      (context) => highlightsSectionConfig.buildHighlightsSection(context),
-      (context) => experienceSectionConfig.buildExperienceSection(context),
+      // (context) => problemIdentificationSectionConfig
+      //     .buildProblemIdentificationSection(context),
+      // (context) => howHelpsSectionConfig.buildHowHelpsSection(context),
+      // (context) => successSectionConfig.buildSuccessSection(context),
+      // (context) => benefitSectionConfig.buildBenefitSection(context),
+      // (context) => getStartedSectionConfig.buildGetStartedSection(context),
+      // (context) => highlightsSectionConfig.buildHighlightsSection(context),
+      // (context) => experienceSectionConfig.buildExperienceSection(context),
     ];
 
     return SliverAnimatedList(

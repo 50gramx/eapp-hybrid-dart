@@ -129,89 +129,45 @@ class HeroSectionConfig {
     );
   }
 
-// Method to build the download button for desktop-download-cta variant
   Widget _buildDownloadButton(BuildContext context) {
     String osName = _getOSName();
     IconData osIcon = _getOSIcon(osName);
+    bool isMobile = !LayoutBreakpoint().isNavigatingLeft(context);
 
-    return GestureDetector(
-      onLongPress: () {
-        // This will trigger the popup menu
-        _popupButtonKey.currentState?.showButtonMenu();
-      },
-      onTap: () {
-        // This will trigger the popup menu
-        _popupButtonKey.currentState?.showButtonMenu();
-      },
-      child: PopupMenuButton<int>(
-        key: _popupButtonKey, // Unique key for accessing button state
-        offset: Offset(0, 50), // Adjust this to control where the menu appears
-        color: AppColors.contentPrimary(
-            context), // Match the menu background color
-        onSelected: (int result) {
-          // Handle OS-specific download action based on result
+    // If mobile, show learn more link instead of download buttons
+    if (isMobile) {
+      return NeumorphicButton(
+        onPressed: () {
+          // Navigate to learn more about plans
           buttonAction();
-          if (result == 1) {
-            buttonAction();
-          } else if (result == 2) {
-            buttonAction();
-          } else if (result == 3) {
-            buttonAction();
-          }
         },
-        itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
-          PopupMenuItem<int>(
-            value: 1,
-            child: Neumorphic(
-              style: NeumorphicStyle(
-                color: AppColors.contentPrimary(context),
-                depth: -5, // Slight inset look
-              ),
-              child: ListTile(
-                leading: Icon(Icons.apple,
-                    color: AppColors.contentInversePrimary(context)),
-                title: Text('Download for macOS',
-                    style: TextStyle(
-                        color: AppColors.contentInversePrimary(context))),
-              ),
-            ),
+        style: NeumorphicStyle(
+          color: AppColors.contentPrimary(context),
+          shape: NeumorphicShape.flat,
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+          depth: 5,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Text(
+          'Learn More About Plans',
+          style: TextStyle(
+            color: AppColors.contentInversePrimary(context),
+            fontSize: 18.0,
+            fontFamily: "Montserrat",
+            fontWeight: FontWeight.w500,
           ),
-          PopupMenuItem<int>(
-            value: 2,
-            child: Neumorphic(
-              style: NeumorphicStyle(
-                color: AppColors.contentPrimary(context),
-                depth: -5,
-              ),
-              child: ListTile(
-                leading: Icon(Icons.window,
-                    color: AppColors.contentInversePrimary(context)),
-                title: Text('Download for Windows',
-                    style: TextStyle(
-                        color: AppColors.contentInversePrimary(context))),
-              ),
-            ),
-          ),
-          PopupMenuItem<int>(
-            value: 3,
-            child: Neumorphic(
-              style: NeumorphicStyle(
-                color: AppColors.contentPrimary(context),
-                depth: -5,
-              ),
-              child: ListTile(
-                leading: Icon(Icons.laptop,
-                    color: AppColors.contentInversePrimary(context)),
-                title: Text('Download for Linux',
-                    style: TextStyle(
-                        color: AppColors.contentInversePrimary(context))),
-              ),
-            ),
-          ),
-        ],
+        ),
+      );
+    }
+
+    // Desktop: Show button for detected OS and icons for other OS
+    List<Widget> osButtons = [
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 8,
+        ),
         child: NeumorphicButton(
-          onPressed:
-              buttonAction, // No action needed here, tap handled by GestureDetector
+          onPressed: buttonAction,
           style: NeumorphicStyle(
             color: AppColors.contentPrimary(context),
             shape: NeumorphicShape.flat,
@@ -220,7 +176,6 @@ class HeroSectionConfig {
           ),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           child: Row(
-            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 osIcon,
@@ -236,15 +191,40 @@ class HeroSectionConfig {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(width: 8.0),
-              Icon(
-                Icons.arrow_drop_down,
-                color: AppColors.contentInversePrimary(context),
-              ),
             ],
           ),
         ),
       ),
+    ];
+
+    // Add icon buttons for the other two OS
+    for (String otherOS in ['macOS', 'Windows', 'Linux']) {
+      if (otherOS != osName) {
+        osButtons.add(Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 8,
+          ),
+          child: NeumorphicButton(
+            onPressed: buttonAction,
+            style: NeumorphicStyle(
+              color: AppColors.contentInversePrimary(context),
+              shape: NeumorphicShape.flat,
+              boxShape: NeumorphicBoxShape.stadium(),
+              depth: 5,
+            ),
+            padding: EdgeInsets.all(12),
+            child: Icon(
+              _getOSIcon(otherOS),
+              color: AppColors.contentPrimary(context),
+            ),
+          ),
+        ));
+      }
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: osButtons,
     );
   }
 

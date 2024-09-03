@@ -38,12 +38,12 @@ class OverviewPageConfig {
     final List<Widget Function(BuildContext)> _sections = [
       (context) => heroSectionConfig.buildHeroSection(context),
       (context) => valuePropSectionConfig.buildValuePropSection(context),
-      (context) => socialProofSectionConfig.buildSocialProofSection(context),
-      (context) => pricingSectionConfig.buildPricingSection(context),
-      (context) => benefitSectionConfig.buildBenefitSection(context),
-      (context) => getStartedSectionConfig.buildGetStartedSection(context),
-      (context) => highlightsSectionConfig.buildHighlightsSection(context),
-      (context) => experienceSectionConfig.buildExperienceSection(context),
+      // (context) => socialProofSectionConfig.buildSocialProofSection(context),
+      // (context) => pricingSectionConfig.buildPricingSection(context),
+      // (context) => benefitSectionConfig.buildBenefitSection(context),
+      // (context) => getStartedSectionConfig.buildGetStartedSection(context),
+      // (context) => highlightsSectionConfig.buildHighlightsSection(context),
+      // (context) => experienceSectionConfig.buildExperienceSection(context),
     ];
 
     return SliverAnimatedList(
