@@ -63,6 +63,17 @@
             }
         },
         {
+            "name": "Amit Debug's - 70.ethos.nodes - Windows",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "windows",
+                "--dart-define=flavor=com.fiftygramx.seventy.zero.ethos.nodes",
+            ],
+        },
+        {
             "name": "Debug - 70.ethos.nodes - Windows",
             "cwd": "fifty_gramx",
             "request": "launch",
