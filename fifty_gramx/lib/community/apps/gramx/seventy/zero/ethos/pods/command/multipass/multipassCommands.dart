@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/delete/multipassDeleteCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/exec/multipassExecCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/info/multipassInfoCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/launch/multipassLaunchCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/list/multipassListCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/start/multipassStartCommands.dart';
@@ -48,6 +49,9 @@ class MultipassCommands {
   /// nested class for version commands
   static late MultipassVersionCommands version;
 
+  /// nested class for info commands
+  static late MultipassInfoCommands info;
+
   // initialises the class
   MultipassCommands() {
     // package name is same in all base os, so no checks needed
@@ -86,6 +90,9 @@ class MultipassCommands {
 
     // instantiate the version commands
     version = MultipassVersionCommands(_packagePath);
+
+    // instantiate the info commands
+    info = MultipassInfoCommands(_packagePath, _vmName);
   }
 }
 

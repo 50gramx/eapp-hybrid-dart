@@ -79,6 +79,22 @@ class MutlipassExecCommands {
     await PrivilegedCommandExecuter.run(command);
   }
 
+  installOvpn() async {
+    // build the command
+    String command = "${_baseCommandSpace}"
+        "sudo apt install -y openvpn";
+    // run the command
+    await PrivilegedCommandExecuter.run(command);
+  }
+
+  registerClientOVPN() async {
+    // build the command
+    String command = "${_baseCommandSpace}"
+        "sudo apt install -y openvpn";
+    // run the command
+    await PrivilegedCommandExecuter.run(command);
+  }
+
   updateKubePermissions() async {
     // build the command
     String command = "${_baseCommandSpace}"

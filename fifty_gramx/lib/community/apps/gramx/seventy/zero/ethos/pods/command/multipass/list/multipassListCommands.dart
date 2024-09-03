@@ -87,9 +87,8 @@ class MultipassListCommands {
     Map<String, dynamic> orchestratorVmMeta = await getOrchestratorVmMeta();
     // return its state
     if (orchestratorVmMeta.isNotEmpty) {
-      print(
-          "orchestratorVmMeta.ipv4.runtimeType: ${orchestratorVmMeta["ipv4"]}");
-      return orchestratorVmMeta["ipv4"];
+      List<String> ipList = List<String>.from(orchestratorVmMeta["ipv4"]);
+      return ipList;
     } else {
       // empty map, reflects no vm with orchestrator name
       return vmIPv4List;

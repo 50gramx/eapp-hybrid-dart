@@ -468,15 +468,6 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
               },
             ),
 
-            // ------------------------------------------------
-            // ETHOS POD ORCHESTRATOR
-            // ------------------------------------------------
-
-            Container(
-                margin:
-                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("ETHOS POD ORCHESTRATOR").build(context)),
-
             Visibility(
               visible: Platform.isMacOS,
               child: FutureBuilder<String>(
@@ -496,7 +487,8 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     } else {
                       // Based on the understanding that user won't need this any
                       // longer, so removing this
-                      return SizedBox();
+                      return BasicConfigurationItem(
+                          titleText: "Homebrew", subtitleText: snap.data!);
                       // return BasicConfigurationItem(
                       //     titleText: "Homebrew", subtitleText: snap.data!);
                     }
@@ -504,6 +496,231 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                 },
               ),
             ),
+
+            FutureBuilder<bool>(
+              future: MultipassCommands.version.isPresent(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data! == false) {
+                    return BasicConfigurationItem(
+                        titleText: "Multipass", subtitleText: "Not Available");
+                  } else {
+                    return FutureBuilder<String>(
+                      future: MultipassCommands.version.getVersion(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data! == "") {
+                            return BasicConfigurationItem(
+                                titleText: "Multipass",
+                                subtitleText: "Not Available");
+                          } else {
+                            return BasicConfigurationItem(
+                                titleText: "Multipass",
+                                subtitleText: snap.data!);
+                          }
+                        }
+                      },
+                    );
+                  }
+                }
+              },
+            ),
+
+            // ------------------------------------------------
+            // ETHOS POD ORCHESTRATOR VIRTUAL MACHINE
+            // ------------------------------------------------
+
+            Container(
+                margin:
+                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                child: FormInfoText("ETHOS POD ORCHESTRATOR VIRTUAL MACHINE")
+                    .build(context)),
+
+            FutureBuilder<String>(
+              future: MultipassCommands.list.getOrchestratorVmState(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data == "UNAVAILABLE") {
+                    return BasicConfigurationItem(
+                        titleText: "VM State", subtitleText: "Not Available");
+                  } else {
+                    return BasicConfigurationItem(
+                        titleText: "VM State", subtitleText: snap.data!);
+                  }
+                }
+              },
+            ),
+
+            FutureBuilder<Map<String, dynamic>>(
+              future: MultipassCommands.list.getOrchestratorVmMeta(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data != null && snap.data!.isNotEmpty) {
+                    return FutureBuilder<String>(
+                      future: MultipassCommands.info.getOrchestratorVmRelease(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data != null && snap.data!.isNotEmpty) {
+                            return BasicConfigurationItem(
+                                titleText: "VM Release",
+                                subtitleText: "${snap.data!}");
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }
+              },
+            ),
+
+            FutureBuilder<Map<String, dynamic>>(
+              future: MultipassCommands.list.getOrchestratorVmMeta(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data != null && snap.data!.isNotEmpty) {
+                    return FutureBuilder<String>(
+                      future: MultipassCommands.info.getOrchestratorVmCPU(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data != null && snap.data!.isNotEmpty) {
+                            return BasicConfigurationItem(
+                                titleText: "VM Processor",
+                                subtitleText: "${snap.data!} CORE");
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }
+              },
+            ),
+
+            FutureBuilder<Map<String, dynamic>>(
+              future: MultipassCommands.list.getOrchestratorVmMeta(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data != null && snap.data!.isNotEmpty) {
+                    return FutureBuilder<String>(
+                      future: MultipassCommands.info.getOrchestratorVmMemory(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data != null && snap.data!.isNotEmpty) {
+                            return BasicConfigurationItem(
+                                titleText: "VM Memory",
+                                subtitleText: "${snap.data!}");
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }
+              },
+            ),
+
+            FutureBuilder<Map<String, dynamic>>(
+              future: MultipassCommands.list.getOrchestratorVmMeta(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data != null && snap.data!.isNotEmpty) {
+                    return FutureBuilder<String>(
+                      future: MultipassCommands.info.getOrchestratorVmStorage(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data != null && snap.data!.isNotEmpty) {
+                            return BasicConfigurationItem(
+                                titleText: "VM Storage",
+                                subtitleText: "${snap.data!}");
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }
+              },
+            ),
+
+            FutureBuilder<String>(
+              future: MultipassCommands.list.getOrchestratorVmState(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  if (snap.data != "UNAVAILABLE") {
+                    return FutureBuilder<List<String>>(
+                      future: MultipassCommands.info.getOrchestratorVmIPv4(),
+                      builder: (context, snap) {
+                        if (snap.connectionState == ConnectionState.waiting) {
+                          return SizedBox();
+                        } else {
+                          if (snap.data != null && snap.data!.isNotEmpty) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ...snap.data!
+                                    .map((ip) => BasicConfigurationItem(
+                                        titleText: "VM IPs", subtitleText: ip))
+                                    .toList(),
+                              ],
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        }
+                      },
+                    );
+                  } else {
+                    return SizedBox();
+                  }
+                }
+              },
+            ),
+
+            // ------------------------------------------------
+            // ETHOS POD ORCHESTRATOR
+            // ------------------------------------------------
+
+            Container(
+                margin:
+                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                child: FormInfoText("ETHOS POD ORCHESTRATOR").build(context)),
 
             FutureBuilder<String>(
               future: Microk8sCommands.status.orchestratorStatus(),
