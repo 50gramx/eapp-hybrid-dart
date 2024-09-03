@@ -3,7 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 // Conditional imports
-import 'hero_section_js.dart' if (dart.library.js) 'hero_section_stub.dart';
+import 'hero_section_stub.dart' if (dart.library.js) 'hero_section_js.dart';
 
 // Configuration class for the hero section
 class HeroSectionConfig {
