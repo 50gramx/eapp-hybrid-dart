@@ -34,13 +34,29 @@ class Environment {
         default:
           _current = "com.50gramx";
       }
-    } else if (Platform.isAndroid ||
-        Platform.isIOS ||
-        Platform.isMacOS ||
-        Platform.isWindows) {
-      print("Environment:current: it's devices");
+    } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
+      print("Environment:current: it's MacOS, Android or iOS devices");
       print("Environment:current: flavor:${packageInfo.packageName}");
+      flavor = const String.fromEnvironment("flavor");
+      print("Environment:current: flavor:$flavor");
       switch (packageInfo.packageName) {
+        case "com.fiftygramx.fifty.zero.ethos.domains":
+          _current = "com.50gramx.50.ethos.domains";
+          break;
+        case "com.fiftygramx.seventy.zero.ethos.pods":
+          _current = "com.50gramx.70.ethos.pods";
+          break;
+        case "com.fiftygramx.seventy.zero.ethos.nodes":
+          _current = "com.50gramx.70.ethos.nodes";
+          break;
+        default:
+          _current = "com.50gramx";
+      }
+    } else if (Platform.isWindows) {
+      print("Environment:current: it's windows device");
+      flavor = const String.fromEnvironment("flavor");
+      print("Environment:current: flavor:$flavor");
+      switch (flavor) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
           _current = "com.50gramx.50.ethos.domains";
           break;
