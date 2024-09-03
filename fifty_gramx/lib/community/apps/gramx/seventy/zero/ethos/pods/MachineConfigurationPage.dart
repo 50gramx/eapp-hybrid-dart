@@ -283,6 +283,16 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
     setState(() {});
   }
 
+  void _stopVM() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Stopping VM, Please allow it sometime to stop")),
+    );
+    await MultipassCommands.stop.orchestrator();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Stopped VM")),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // we need add L4 level check to verify the status of the pod
@@ -549,6 +559,14 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   if (snap.data == "UNAVAILABLE") {
                     return BasicConfigurationItem(
                         titleText: "VM State", subtitleText: "Not Available");
+                  } else if (snap.data == "RUNNING") {
+                    return SwitchConfigurationItem(
+                        titleText: "VM State",
+                        isEnabled: true,
+                        switchValue: true,
+                        switchOnChanged: (value) {
+                          _stopVM();
+                        });
                   } else {
                     return BasicConfigurationItem(
                         titleText: "VM State", subtitleText: snap.data!);
@@ -741,7 +759,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                             return Column(
                               children: [
                                 SwitchConfigurationItem(
-                                    titleText: "Orchestrator",
+                                    titleText: "Orchestrator State",
                                     isEnabled: true,
                                     switchValue: false,
                                     switchOnChanged: (value) {
@@ -759,7 +777,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                         case ("RUNNING, RUNNING"):
                           {
                             return SwitchConfigurationItem(
-                                titleText: "Orchestrator",
+                                titleText: "Orchestrator State",
                                 isEnabled: true,
                                 switchValue: true,
                                 switchOnChanged: (value) {
@@ -880,7 +898,7 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
 
             // L1 Check
             Visibility(
-                visible: true, // TODO: update this with L1 Check
+                visible: false, // TODO: update this with L1 Check
                 child: FutureBuilder<bool>(
                   future: Microk8sCommands.status.isOrchestratorRunning(),
                   builder: (context, snapshotOrchestratorStatus) {
@@ -987,34 +1005,48 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
             // ETHOS GALAXY POD
             // ------------------------------------------------
 
-            Container(
-                margin:
-                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("GALAXY IDENTITY POD DESCRIPTION")
-                    .build(context)),
-            SwitchConfigurationItem(
-                titleText: "Network Pod",
-                switchValue: isPodOn["nwk"]!,
-                switchOnChanged: (value) {
-                  switchPod("nwk");
-                }),
-            SwitchConfigurationItem(
-                titleText: "File System Pod",
-                isEnabled: isPodOn["nwk"]!,
-                switchValue: isPodOn["fs"]!,
-                switchOnChanged: (value) {
-                  if (isPodOn["fs"] == false) {
-                    deployGalaxyFS();
-                    switchPod("fs");
-                  }
-                }),
-            SwitchConfigurationItem(
-                titleText: "Chains Pod",
-                isEnabled: isPodOn["fs"]!,
-                switchValue: isPodOn["xc"]!,
-                switchOnChanged: (value) {
-                  switchPod("xc");
-                }),
+            Visibility(
+              child: Container(
+                  margin:
+                      EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                  child: FormInfoText("GALAXY IDENTITY POD DESCRIPTION")
+                      .build(context)),
+              visible: false,
+            ),
+
+            Visibility(
+              child: SwitchConfigurationItem(
+                  titleText: "Network Pod",
+                  switchValue: isPodOn["nwk"]!,
+                  switchOnChanged: (value) {
+                    switchPod("nwk");
+                  }),
+              visible: false,
+            ),
+            Visibility(
+              child: SwitchConfigurationItem(
+                  titleText: "File System Pod",
+                  isEnabled: isPodOn["nwk"]!,
+                  switchValue: isPodOn["fs"]!,
+                  switchOnChanged: (value) {
+                    if (isPodOn["fs"] == false) {
+                      deployGalaxyFS();
+                      switchPod("fs");
+                    }
+                  }),
+              visible: false,
+            ),
+
+            Visibility(
+              child: SwitchConfigurationItem(
+                  titleText: "Chains Pod",
+                  isEnabled: isPodOn["fs"]!,
+                  switchValue: isPodOn["xc"]!,
+                  switchOnChanged: (value) {
+                    switchPod("xc");
+                  }),
+              visible: false,
+            ),
 
 //            FutureBuilder<String>(
 //              future: checkKnowledgeSpaceChains(),

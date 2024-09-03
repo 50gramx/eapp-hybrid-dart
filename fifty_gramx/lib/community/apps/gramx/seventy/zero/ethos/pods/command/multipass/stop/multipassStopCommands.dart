@@ -2,6 +2,7 @@
 //
 // needs [String] packagePath and [String] vmName as initializers
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:process_run/utils/process_result_extension.dart';
 
 class MultipassStopCommands {
   MultipassStopCommands._();
@@ -30,6 +31,7 @@ class MultipassStopCommands {
     String command = "${_baseCommandSpace}"
         "${_vmName}";
     // run the command
-    await PrivilegedCommandExecuter.run(command);
+    String output = (await PrivilegedCommandExecuter.run(command)).outText;
+    print("orchestrator.stop: $output");
   }
 }

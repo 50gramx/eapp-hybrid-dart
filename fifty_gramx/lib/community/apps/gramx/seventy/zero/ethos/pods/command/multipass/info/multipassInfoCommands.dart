@@ -136,8 +136,6 @@ class MultipassInfoCommands {
     Map<String, dynamic> orchestratorVmMeta = await getOrchestratorVmMeta();
     // return its state
     if (orchestratorVmMeta.isNotEmpty) {
-      print("runtime: ${orchestratorVmMeta["release"]}");
-      print("runtime.runType: ${orchestratorVmMeta["release"].runtimeType}");
       String releaseDetails = orchestratorVmMeta["release"];
       return releaseDetails;
     } else {
