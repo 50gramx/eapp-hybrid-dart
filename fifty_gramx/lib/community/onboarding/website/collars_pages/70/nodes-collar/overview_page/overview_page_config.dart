@@ -69,30 +69,23 @@ buildSocialProofSectionConfig() {
 
 List<PricingPlan> examplePricingPlans = [
   PricingPlan(
-    title: 'Basic Plan',
-    description: 'Affordable plan for individuals and small teams.',
-    price: '\$9.99/month',
+    title: 'Host Plan',
+    description:
+        'Start hosting your resources and earn Ethos Coin with no cost.',
+    price: 'Free',
     onSelect: () {
       // Handle plan selection
       print('Basic Plan selected');
     },
   ),
   PricingPlan(
-    title: 'Standard Plan',
-    description: 'Includes additional features for growing teams.',
-    price: '\$19.99/month',
+    title: 'Star Node',
+    description:
+        "Enhance your node's performance and handle private workloads.",
+    price: '₹649 per node',
     onSelect: () {
       // Handle plan selection
       print('Standard Plan selected');
-    },
-  ),
-  PricingPlan(
-    title: 'Premium Plan',
-    description: 'Comprehensive plan with all features included.',
-    price: '\$29.99/month',
-    onSelect: () {
-      // Handle plan selection
-      print('Premium Plan selected');
     },
   ),
 ];

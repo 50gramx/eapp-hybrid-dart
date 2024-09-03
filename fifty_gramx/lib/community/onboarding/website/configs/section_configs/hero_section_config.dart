@@ -150,12 +150,13 @@ class HeroSectionConfig {
             context), // Match the menu background color
         onSelected: (int result) {
           // Handle OS-specific download action based on result
+          buttonAction();
           if (result == 1) {
-            // macOS download action
+            buttonAction();
           } else if (result == 2) {
-            // Windows download action
+            buttonAction();
           } else if (result == 3) {
-            // Linux download action
+            buttonAction();
           }
         },
         itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
@@ -210,7 +211,7 @@ class HeroSectionConfig {
         ],
         child: NeumorphicButton(
           onPressed:
-              () {}, // No action needed here, tap handled by GestureDetector
+              buttonAction, // No action needed here, tap handled by GestureDetector
           style: NeumorphicStyle(
             color: AppColors.contentPrimary(context),
             shape: NeumorphicShape.flat,

@@ -5,9 +5,36 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+typedef OnWidgetSizeChange = void Function(Size size);
+
+class MeasureSize extends StatefulWidget {
+  final Widget child;
+  final OnWidgetSizeChange onSizeChange;
+
+  MeasureSize({required this.child, required this.onSizeChange});
+
+  @override
+  _MeasureSizeState createState() => _MeasureSizeState();
+}
+
+class _MeasureSizeState extends State<MeasureSize> {
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    return widget.child;
+  }
+
+  void _afterLayout(_) {
+    final Size size = context.size ?? Size.zero;
+    if (widget.onSizeChange != null) {
+      widget.onSizeChange(size);
+    }
+  }
+}
+
 class PageHeaderConfig {
   final String header;
-  final List<Map<String, String>> items;
+  final List<Map<String, dynamic>> items;
 
   PageHeaderConfig({required this.header, required this.items});
 
@@ -39,6 +66,111 @@ class PageHeaderConfig {
     } else {
       return buildBottomNavigationAppBarTitle(context);
     }
+  }
+
+  List<PopupMenuItem> buildPopupMenuItems(
+      BuildContext context, List<Map<String, String>> items) {
+    return items.map((item) {
+      return PopupMenuItem(
+        child: ListTile(
+          title: Text(
+            item['title']!,
+            textAlign: TextAlign.center,
+            style: AppTextStyle.appTextStyle(context),
+          ),
+          trailing: item['route']!.startsWith('http://') ||
+                  item['route']!.startsWith('https://')
+              ? Icon(
+                  FeatherIcons.arrowUpRight,
+                  color: AppColors.contentPrimary(context),
+                  size: 18,
+                )
+              : null, // Show icon if the link opens in a new tab
+          onTap: () {
+            if (item['route']!.startsWith('http://') ||
+                item['route']!.startsWith('https://')) {
+              _launchURL(item['route']!);
+            } else {
+              Navigator.pop(context); // Close popup menu
+              Navigator.pushNamed(context, item['route']!);
+            }
+          },
+        ),
+      );
+    }).toList();
+  }
+
+  Widget buildDummyMenuOption(BuildContext context, Map<String, dynamic> item) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: PopupMenuButton(
+        itemBuilder: (BuildContext context) {
+          return buildPopupMenuItems(context, item['subItems']);
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    item['subItems'][0]['route']!,
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: NeumorphicText(
+                      item['subItems'][0]['title'],
+                      style: NeumorphicStyle(
+                        lightSource: NeumorphicTheme.isUsingDark(context)
+                            ? LightSource.bottomRight
+                            : LightSource.topLeft,
+                        shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                            ? AppColors.gray600
+                            : AppColors.backgroundSecondary(context),
+                        shape: NeumorphicShape.flat,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.only(
+                            topRight: Radius.circular(24),
+                            bottomRight: Radius.circular(24),
+                          ),
+                        ),
+                        color: AppColors.contentPrimary(context),
+                        depth: 2,
+                        disableDepth: false,
+                        border: NeumorphicBorder(
+                          isEnabled: true,
+                          color: AppColors.backgroundInverseTertiary(context),
+                          width: 0.3,
+                        ),
+                      ),
+                      textAlign: TextAlign.left,
+                      textStyle: NeumorphicTextStyle(
+                        fontSize: 20,
+                        fontFamily: "Montserrat",
+                        fontWeight: FontWeight.w600,
+                        height: 1.25,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Icon(Icons.arrow_drop_down,
+                color: AppColors.contentPrimary(context)),
+          ],
+        ),
+        padding: EdgeInsets.zero,
+        elevation: 6,
+        position: PopupMenuPosition.under,
+        color: AppColors.backgroundPrimary(context),
+        shape: BeveledRectangleBorder(),
+        tooltip: "",
+      ),
+    );
   }
 
   Widget buildLeftNavigationAppBarTitle(BuildContext context) {
@@ -113,65 +245,21 @@ class PageHeaderConfig {
   }
 
   List<Widget> buildActions(BuildContext context) {
-    return items.map((item) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            item['route']!,
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+    List<Widget> allActions = items.map((item) {
+      if (item.containsKey('subItems')) {
+        // Build a menu for items with subItems
+        return MeasureSize(
+          onSizeChange: (size) {
+            // You can store this size if needed to adjust other widgets
+          },
           child: Container(
-            padding: EdgeInsets.only(left: 6, right: 6),
-            alignment: Alignment.center,
-            child: NeumorphicText(
-              item['title']!,
-              style: NeumorphicStyle(
-                lightSource: NeumorphicTheme.isUsingDark(context)
-                    ? LightSource.bottomRight
-                    : LightSource.topLeft,
-                shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                    ? AppColors.gray600
-                    : AppColors.backgroundSecondary(context),
-                shape: NeumorphicShape.flat,
-                boxShape: NeumorphicBoxShape.roundRect(
-                  BorderRadius.only(
-                    topRight: Radius.circular(24),
-                    bottomRight: Radius.circular(24),
-                  ),
-                ),
-                color: AppColors.contentPrimary(context),
-                depth: 2,
-                disableDepth: false,
-                border: NeumorphicBorder(
-                  isEnabled: true,
-                  color: AppColors.backgroundInverseTertiary(context),
-                  width: 0.3,
-                ),
-              ),
-              textAlign: TextAlign.left,
-              textStyle: NeumorphicTextStyle(
-                fontSize: 20,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.w600,
-                height: 1.25,
-              ),
-            ),
+            child: buildDummyMenuOption(context, item),
           ),
-        ),
-      );
-    }).toList();
-  }
-
-  Widget buildSubHeaderActions(BuildContext context) {
-    return Container(
-      height: 50, // Adjust the height as needed
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: items.map((item) {
-          return GestureDetector(
+        );
+      } else {
+        // Build a regular action for items with title and route
+        return Container(
+          child: GestureDetector(
             onTap: () {
               Navigator.pushNamed(
                 context,
@@ -179,9 +267,9 @@ class PageHeaderConfig {
               );
             },
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: EdgeInsets.only(left: 6, right: 6),
                 alignment: Alignment.center,
                 child: NeumorphicText(
                   item['title']!,
@@ -193,8 +281,12 @@ class PageHeaderConfig {
                         ? AppColors.gray600
                         : AppColors.backgroundSecondary(context),
                     shape: NeumorphicShape.flat,
-                    boxShape:
-                        NeumorphicBoxShape.roundRect(BorderRadius.circular(16)),
+                    boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.only(
+                        topRight: Radius.circular(24),
+                        bottomRight: Radius.circular(24),
+                      ),
+                    ),
                     color: AppColors.contentPrimary(context),
                     depth: 2,
                     disableDepth: false,
@@ -204,20 +296,80 @@ class PageHeaderConfig {
                       width: 0.3,
                     ),
                   ),
-                  textAlign: TextAlign.center,
+                  textAlign: TextAlign.left,
                   textStyle: NeumorphicTextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontFamily: "Montserrat",
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w600,
                     height: 1.25,
                   ),
                 ),
               ),
             ),
+          ),
+        );
+      }
+    }).toList();
+
+    return allActions;
+  }
+
+  Widget buildSubHeaderActions(BuildContext context) {
+    List<Widget> subItems = items.map((item) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            item['route']!,
           );
-        }).toList(),
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            alignment: Alignment.center,
+            child: NeumorphicText(
+              item['title']!,
+              style: NeumorphicStyle(
+                lightSource: NeumorphicTheme.isUsingDark(context)
+                    ? LightSource.bottomRight
+                    : LightSource.topLeft,
+                shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                    ? AppColors.gray600
+                    : AppColors.backgroundSecondary(context),
+                shape: NeumorphicShape.flat,
+                boxShape:
+                    NeumorphicBoxShape.roundRect(BorderRadius.circular(16)),
+                color: AppColors.contentPrimary(context),
+                depth: 2,
+                disableDepth: false,
+                border: NeumorphicBorder(
+                  isEnabled: true,
+                  color: AppColors.backgroundInverseTertiary(context),
+                  width: 0.3,
+                ),
+              ),
+              textAlign: TextAlign.center,
+              textStyle: NeumorphicTextStyle(
+                fontSize: 16,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w300,
+                height: 1.25,
+              ),
+            ),
+          ),
+        ),
+      );
+    }).toList();
+
+    Widget subActions = Container(
+      height: 50, // Adjust the height as needed
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: buildActions(context),
       ),
     );
+    return subActions;
   }
 
   _launchURL(String url) async {
