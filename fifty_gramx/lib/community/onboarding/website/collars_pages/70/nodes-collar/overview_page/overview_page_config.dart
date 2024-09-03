@@ -11,7 +11,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 // Conditional import for platform-specific implementations
 import '../../../../helpers/download/download_helper_web.dart'
-    if (dart.library.io) 'download_helper_nonweb.dart';
+    if (dart.library.io) '../../../../helpers/download/download_helper_nonweb.dart';
 
 buildValuePropSectionConfig() {
   final icons = <IconData>[
