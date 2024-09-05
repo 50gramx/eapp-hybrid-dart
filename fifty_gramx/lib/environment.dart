@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Environment {
   static String? _current;
@@ -53,8 +54,10 @@ class Environment {
           _current = "com.50gramx";
       }
     } else if (Platform.isWindows) {
+      await dotenv.load(fileName: "ethosapps.env");
       print("Environment:current: it's windows device");
-      flavor = const String.fromEnvironment("flavor");
+      // flavor = const String.fromEnvironment("flavor");
+      flavor = dotenv.env['flavor'];
       print("Environment:current: flavor:$flavor");
       switch (flavor) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
