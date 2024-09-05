@@ -9,10 +9,6 @@ import 'package:fifty_gramx/community/onboarding/website/configs/section_configs
 import 'package:fifty_gramx/community/onboarding/website/configs/section_configs/value_prop_section_config.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-// Conditional import for platform-specific implementations
-import '../../../../helpers/download/download_helper_web.dart'
-    if (dart.library.io) '../../../../helpers/download/download_helper_nonweb.dart';
-
 buildValuePropSectionConfig() {
   final icons = <IconData>[
     Icons.monetization_on,
@@ -118,14 +114,14 @@ buildHeroSectionConfig() {
     backgroundImage: 'https://example.com/background-image.jpg',
     buttonText: 'Start Earning – Download Now',
     variant: 'desktop-download-cta',
-    buttonAction: () async {
-      String url =
-          'https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.dmg';
-      String fileName = '50GRAMx-eNodes.dmg';
-
-      // Start downloading the file
-      await downloadFile(url, fileName);
-    },
+    buttonAction: () async {},
+    downloadFileName: "50GRAMx-eNodes",
+    linuxDownloadUrl:
+        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.tar.gz",
+    macDownloadUrl:
+        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.dmg",
+    windowsDownloadUrl:
+        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.exe",
   );
 }
 
