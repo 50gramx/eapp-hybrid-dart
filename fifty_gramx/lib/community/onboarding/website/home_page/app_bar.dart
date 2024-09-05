@@ -110,7 +110,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/ethosverse',
+          '/collars',
         );
       },
       child: Padding(
@@ -119,7 +119,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
             padding: EdgeInsets.only(left: 6, right: 6),
             alignment: Alignment.center,
             child: NeumorphicText(
-              "Ethosverse",
+              "Collars",
               style: NeumorphicStyle(
                 lightSource: NeumorphicTheme.isUsingDark(context)
                     ? LightSource.bottomRight
