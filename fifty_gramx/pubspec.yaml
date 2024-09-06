@@ -116,6 +116,8 @@ dependencies:
   # Request cancellation, File uploading/downloading, Timeout, 
   # Custom adapters, Transformers, etc.
   dio: ^5.6.0
+  # This plugin allows Flutter desktop apps to defines system tray.
+  tray_manager: ^0.2.3
 
 flutter_icons:
   android: "launcher_icon"
@@ -142,6 +144,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - common-assets/icon/icon.png
     - lib/assets/certs/identityServer.crt
     - lib/assets/certs/conversationServer.crt
     - lib/assets/certs/knowledgeServer.crt
