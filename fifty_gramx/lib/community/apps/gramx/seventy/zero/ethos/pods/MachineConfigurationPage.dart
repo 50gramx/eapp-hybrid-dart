@@ -24,6 +24,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPag
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
+import 'package:tray_manager/tray_manager.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class MachineConfigurationPage extends StatefulWidget {
@@ -53,7 +54,8 @@ String formatBytes(int bytes, int decimals) {
   return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) + ' ' + suffixes[i];
 }
 
-class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
+class _MachineConfigurationPageState extends State<MachineConfigurationPage>
+    with TrayListener {
   Future<bool> _MultiversePodOperatorfsOpPodStatus =
       MultiversePodOperator.fsOp.checkPodStatus();
 
@@ -1140,5 +1142,45 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   @override
   void initState() {
     super.initState();
+    trayManager.addListener(this);
+    _initializeTray();
+  }
+
+  @override
+  void dispose() {
+    trayManager.removeListener(this);
+    super.dispose();
+  }
+
+  void _initializeTray() async {
+    print("tray: _initializeTray");
+    await trayManager.setIcon(
+      'common-assets/icon/icon.png',
+    );
+
+    Menu menu = Menu(items: [
+      MenuItem(key: 'show', label: 'Show'),
+      MenuItem(key: 'quit', label: 'Quit'),
+    ]);
+    await trayManager.setContextMenu(menu);
+  }
+
+  @override
+  void onTrayIconMouseDown() {
+    trayManager.popUpContextMenu();
+  }
+
+  @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    switch (menuItem.key) {
+      case 'show':
+        // Show the main window or perform any action
+        print("tray: clicked show");
+        break;
+      case 'quit':
+        print("tray: clicked quit");
+        // trayManager.destroy(); // Clean up tray icon
+        break;
+    }
   }
 }

@@ -299,6 +299,18 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
                   "Setting up Orchestrator: 8/x: Successfully Updated Service Permissions")),
         );
 
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  "Setting up Orchestrator: 9/x: Starting to setup private network")),
+        );
+        await MultipassCommands.exec.installOvpn();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  "Setting up Orchestrator: 9/x: Successfully installed private network")),
+        );
+
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
         //       content: Text(
