@@ -28,7 +28,7 @@ ArchitecturesAllowed=x64compatible
 ; the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64compatible
 DisableProgramGroupPage=yes
-LicenseFile=C:\Users\amitk\OneDrive\Documents\Ethos Nodes License Agreement.txt
+LicenseFile=C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\Ethos Nodes License Agreement.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers

@@ -1,0 +1,27 @@
+Ethos Nodes License Agreement
+Effective Date: 06-09-2024
+Owner: 50GRAMx, Inc. and FIFTY GRAMX NETWORKS Private Limited
+
+This software, Ethos Nodes, is the proprietary property of 50GRAMx, Inc. and FIFTY GRAMX NETWORKS Private Limited (referred to as “50GRAMx” in this agreement). It is protected by applicable U.S., Indian, and international copyright laws, patents, and trade secret regulations.
+
+By installing, copying, or otherwise using Ethos Nodes, you agree to the following terms:
+
+1. Ownership and Intellectual Property
+Ethos Nodes and all accompanying materials (including documentation) remain the exclusive property of 50GRAMx and its entities.
+The software is protected by copyrights, trademarks, and patents in the U.S., India, and other countries. Any dissemination, reverse engineering, decompiling, hacking, or tampering with the software is strictly prohibited.
+2. Licensing Terms
+You are granted a non-transferable, non-exclusive, limited license to use the software only if your account has been authorized and licensed by 50GRAMx.
+Each license is issued directly to the individual or entity that has received explicit permission and a valid license from 50GRAMx. Unauthorized use, distribution, or reproduction of the software is strictly prohibited.
+You may not sell, rent, lease, lend, sublicense, distribute, or transfer any part of the software without prior written consent from 50GRAMx.
+3. Use Restrictions
+Ethos Nodes is provided strictly for the purpose communicated by 50GRAMx and may only be used in compliance with the terms specified in the license agreement provided to your account.
+You are prohibited from attempting to hack, crack, or otherwise bypass any software protections, licensing mechanisms, or other restrictions.
+Unauthorized access or use of Ethos Nodes will result in termination of your license and may result in legal action.
+4. Termination of License
+50GRAMx reserves the right to terminate your license if you fail to comply with any terms of this agreement.
+Upon termination, you must cease all use of the software and delete all copies in your possession.
+5. Liability and Disclaimer
+Ethos Nodes is provided "as-is," and 50GRAMx makes no warranties or guarantees regarding the performance or security of the software.
+50GRAMx is not responsible for any damages, losses, or liabilities arising from unauthorized use or breach of this agreement.
+6. Jurisdiction
+This agreement shall be governed by and interpreted in accordance with the laws of the United States and India. Any disputes shall be resolved in the applicable courts in these jurisdictions.
