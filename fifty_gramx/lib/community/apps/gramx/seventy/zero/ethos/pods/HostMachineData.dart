@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 
@@ -207,8 +208,10 @@ class HostMachineData {
     // Prints the device path, mount path, and total size of each disk in system.
     // TODO(khetana): fix discrepencies about storage misinformation (add a warning atleast)
     for (final disk in disks) {
-      print("disk: $disk");
-      print("disk: ${disk.mountPath}");
+      if (kDebugMode) {
+        print("disk: $disk");
+        print("disk: ${disk.mountPath}");
+      }
       if (disk.mountPath == "/System/Volumes/Data") {
         return formatBytesAndSuffix(disk.availableSpace, 2)[0];
       } else if (disk.mountPath == 'C:') {
@@ -219,7 +222,9 @@ class HostMachineData {
   }
 
   Future<String> diskSpace() async {
-    print("diskSpace");
+    if (kDebugMode) {
+      print("diskSpace");
+    }
     final diskSpace = DiskSpace();
     // scan for disks in the system
     await diskSpace.scan();
@@ -228,8 +233,10 @@ class HostMachineData {
 
     // Prints the device path, mount path, and total size of each disk in system.
     for (final disk in disks) {
-      print("disk: $disk");
-      print("disk: ${disk.mountPath}");
+      if (kDebugMode) {
+        print("disk: $disk");
+        print("disk: ${disk.mountPath}");
+      }
       if (disk.mountPath == "/System/Volumes/Data") {
         return "${formatBytes(disk.availableSpace, 2)} of ${formatBytes(disk.totalSize, 2)}";
       } else if (disk.mountPath == 'C:') {
@@ -245,7 +252,9 @@ class HostMachineData {
       // return the host public ip address
       return (await shell.run("curl http://ifconfig.me/ip")).outText;
     } catch (e) {
-      print("found exception --> $e");
+      if (kDebugMode) {
+        print("found exception --> $e");
+      }
       return "Not Supported";
     }
   }
@@ -265,7 +274,9 @@ class HostMachineData {
         return "UNKNOWN IP";
       }
     } catch (e) {
-      print("found exception --> $e");
+      if (kDebugMode) {
+        print("found exception --> $e");
+      }
       return "Not Supported";
     }
   }

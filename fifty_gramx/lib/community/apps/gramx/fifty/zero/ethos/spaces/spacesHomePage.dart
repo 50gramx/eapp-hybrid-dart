@@ -29,6 +29,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorC
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -113,7 +114,9 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                   LocalSpacesService.mySpaceKnowledgeDomains.length + 1,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
-                print("position: $position");
+                if (kDebugMode) {
+                  print("position: $position");
+                }
                 if (position == 0) {
                   return Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

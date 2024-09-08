@@ -1,6 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuIconButton.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -41,22 +42,21 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
     var appBar;
 
     var title = Hero(
-      tag: "",
-      transitionOnUserGestures: true,
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-        widget.labelText,
-        maxLines: 1,
-        textAlign: TextAlign.start,
-        style: TextStyle(
-            color: AppColors.contentPrimary(context),
-            fontSize: 24,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w500),
-      ),
-      )
-    );
+        tag: "",
+        transitionOnUserGestures: true,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            widget.labelText,
+            maxLines: 1,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: AppColors.contentPrimary(context),
+                fontSize: 24,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w500),
+          ),
+        ));
 
     var actions = [
       widget.isActionEnabled
@@ -165,9 +165,13 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
         actions: actions,
         stretch: true,
         onStretchTrigger: () async {
-          print("OnStretchTrigger:start");
+          if (kDebugMode) {
+            print("OnStretchTrigger:start");
+          }
           widget.onStretchTriggerCallback();
-          print("OnStretchTrigger:finish");
+          if (kDebugMode) {
+            print("OnStretchTrigger:finish");
+          }
         },
       );
     }

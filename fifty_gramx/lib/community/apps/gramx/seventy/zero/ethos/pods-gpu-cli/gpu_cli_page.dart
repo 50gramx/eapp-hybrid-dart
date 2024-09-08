@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:xterm/xterm.dart';
 // import 'package:dartssh2/dartssh2.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -70,7 +70,9 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
           .write('Connection established. You can start typing commands.\n');
     } catch (e) {
       terminal.write('Error connecting to SSH: $e\n');
-      print('Error connecting to SSH: $e');
+      if (kDebugMode) {
+        print('Error connecting to SSH: $e');
+      }
     }
   }
 
@@ -114,7 +116,9 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
         });
       },
       onError: (error) {
-        print("ws,erro: $error");
+        if (kDebugMode) {
+          print("ws,erro: $error");
+        }
         terminal.write('WebSocket error: $error\n');
         setState(() {
           isConnected = false;

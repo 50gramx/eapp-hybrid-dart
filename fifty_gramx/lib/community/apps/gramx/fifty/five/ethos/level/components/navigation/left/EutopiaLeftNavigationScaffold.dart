@@ -88,7 +88,9 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   void initState() {
-    print("EutopiaLeftNavigationScaffoldState: initState called");
+    if (kDebugMode) {
+      print("EutopiaLeftNavigationScaffoldState: initState called");
+    }
     // Initialize animation controllers for tab transitions.
     _initAnimationControllers();
 
@@ -101,24 +103,33 @@ class _EutopiaLeftNavigationScaffoldState
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
   _handleListeningMessages(LocalNotification message) async {
-    print(
-        "EutopiaLeftNavigationScaffoldState: Received notification: $message");
+    if (kDebugMode) {
+      print(
+          "EutopiaLeftNavigationScaffoldState: Received notification: $message");
+    }
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {
-        print("Handling Loaded eApp");
+        if (kDebugMode) {
+          print("Handling Loaded eApp");
+        }
         handleLoadedApp();
       } else if (message.data["subType"] == "Open Community Tiles") {
-        print("Opening Community Tiles");
+        if (kDebugMode) {
+          print("Opening Community Tiles");
+        }
       } else if (message.data["subType"] == "Open eApp") {
-        print("Opening eApp");
+        if (kDebugMode) {
+          print("Opening eApp");
+        }
         selectPressedSectionItem(message.data["appSectionIndex"]);
       }
     }
   }
 
   handleLoadedApp() {
-    print("EutopiaLeftNavigationScaffoldState: Handling Loaded App");
-
+    if (kDebugMode) {
+      print("EutopiaLeftNavigationScaffoldState: Handling Loaded App");
+    }
     _shouldBuildTab.clear();
     // Initialize a list to track whether each tab's content should be built.
     _shouldBuildTab.addAll(List<bool>.filled(
@@ -130,8 +141,10 @@ class _EutopiaLeftNavigationScaffoldState
 
   /// Initializes animation controllers for tab transitions.
   void _initAnimationControllers() {
-    print(
-        "EutopiaLeftNavigationScaffoldState: Initializing animation controllers");
+    if (kDebugMode) {
+      print(
+          "EutopiaLeftNavigationScaffoldState: Initializing animation controllers");
+    }
     _animationControllers.clear();
     _animationControllers.addAll(
       EthosAppFlowBob.navigationBarItems.map<AnimationController>(
@@ -154,13 +167,15 @@ class _EutopiaLeftNavigationScaffoldState
   }
 
   toggleNavigatingPages() {
-    print("------------------------------------------------------------");
-    print("------------------------------------------------------------");
-    print("-----------------------TOGGLE-------------------------------");
-    print("---------------------NAVIGATING-----------------------------");
-    print("-----------------------PAGES--------------------------------");
-    print("------------------------------------------------------------");
-    print("------------------------------------------------------------");
+    if (kDebugMode) {
+      print("------------------------------------------------------------");
+      print("------------------------------------------------------------");
+      print("-----------------------TOGGLE-------------------------------");
+      print("---------------------NAVIGATING-----------------------------");
+      print("-----------------------PAGES--------------------------------");
+      print("------------------------------------------------------------");
+      print("------------------------------------------------------------");
+    }
     if (isNavigatingPages) {
       setState(() {
         isNavigatingPages = false;
@@ -183,20 +198,26 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) {
-    print("Building EutopiaLeftNavigationScaffold");
-
+    if (kDebugMode) {
+      print("Building EutopiaLeftNavigationScaffold");
+    }
     int viewPort = LayoutBreakpoint().getBreakpoint(context);
-    print("fetched viewPort");
+    if (kDebugMode) {
+      print("fetched viewPort");
+    }
     bool isNavigatingLeft = LayoutBreakpoint().isNavigatingLeft(context);
-    print("isNavigatingLeft: $isNavigatingLeft");
+    if (kDebugMode) {
+      print("isNavigatingLeft: $isNavigatingLeft");
+    }
 
     List<Widget> _buildStackChildrens = [];
 
     EthosAppFlowBob.eutopiaNavigationBarSectionalItems.forEach((barItem) {
-      print(
-          "Building page flow for ${barItem.leftNavigationBarSectionalItem.label}");
-      print("_animationControllers: ${_animationControllers}");
-
+      if (kDebugMode) {
+        print(
+            "Building page flow for ${barItem.leftNavigationBarSectionalItem.label}");
+        print("_animationControllers: ${_animationControllers}");
+      }
       Widget built_page_flow = SizedBox();
       try {
         built_page_flow = PageFlowBuilder.buildPageFlow(
@@ -215,9 +236,11 @@ class _EutopiaLeftNavigationScaffoldState
               "${barItem} w/ ${exception} w/ "
               "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
         } else {
-          print("PageFlowBuilder.buildPageFlow() Exception at "
-              "${barItem} w/ ${exception} w/ "
-              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+          if (kDebugMode) {
+            print("PageFlowBuilder.buildPageFlow() Exception at "
+                "${barItem} w/ ${exception} w/ "
+                "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+          }
         }
       } catch (error) {
         bool platformNotSupported =
@@ -228,9 +251,11 @@ class _EutopiaLeftNavigationScaffoldState
               "${barItem} w/ ${error} w/ "
               "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
         } else {
-          print("PageFlowBuilder.buildPageFlow() Error at "
-              "${barItem} w/ ${error} w/ "
-              "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+          if (kDebugMode) {
+            print("PageFlowBuilder.buildPageFlow() Error at "
+                "${barItem} w/ ${error} w/ "
+                "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+          }
         }
       }
 
@@ -281,11 +306,15 @@ class _EutopiaLeftNavigationScaffoldState
     /// This scaffold includes a background color, a key for state management,
     /// and a row with various child widgets.
     Widget buildMainContentScaffold() {
-      print("called buildMainContentScaffold");
+      if (kDebugMode) {
+        print("called buildMainContentScaffold");
+      }
       setFutureStatusBarTheme();
       bool isOneEappLoaded =
           EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
-      print("isOneEappLoaded: $isOneEappLoaded");
+      if (kDebugMode) {
+        print("isOneEappLoaded: $isOneEappLoaded");
+      }
       return Scaffold(
           backgroundColor: AppColors.backgroundInverseTertiary(context),
           key: _screenKey,

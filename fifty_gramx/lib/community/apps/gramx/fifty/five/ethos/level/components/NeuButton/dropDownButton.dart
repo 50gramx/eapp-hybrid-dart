@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -57,7 +58,9 @@ class _DropDownButtonState extends State<DropDownButton> {
                 style: AppTextStyle.themePrimaryButtonTextStyle(context),
                 onChanged: (String? newValue) {
                   setState(() {
-                    print("selected newValue: $newValue");
+                    if (kDebugMode) {
+                      print("selected newValue: $newValue");
+                    }
                     dropdownValue = newValue!;
                     widget.onChange(newValue);
                   });
@@ -67,12 +70,15 @@ class _DropDownButtonState extends State<DropDownButton> {
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value, style: TextStyle(
-                        color: value == "No Invitations" ? AppColors.contentTertiary(context) : AppColors.contentPrimary(context),
-                        fontSize: 16,
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w400,
-                        height: 1.25)),
+                    child: Text(value,
+                        style: TextStyle(
+                            color: value == "No Invitations"
+                                ? AppColors.contentTertiary(context)
+                                : AppColors.contentPrimary(context),
+                            fontSize: 16,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w400,
+                            height: 1.25)),
                   );
                 }).toList(),
               ),

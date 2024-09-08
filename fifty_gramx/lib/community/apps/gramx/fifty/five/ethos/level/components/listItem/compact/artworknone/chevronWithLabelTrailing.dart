@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -10,8 +11,7 @@ class ChevronWithLabelTrailing extends StatelessWidget {
       required this.labelText,
       this.isCustomColor = false,
       this.customColor = AppColors.white,
-        this.isTrailingActive = false
-      })
+      this.isTrailingActive = false})
       : super(key: key);
 
   final String labelText;
@@ -19,12 +19,15 @@ class ChevronWithLabelTrailing extends StatelessWidget {
   final Color customColor;
   final bool isTrailingActive;
 
-
   Widget build(BuildContext context) {
     Color boxColor = AppColors.backgroundPrimary(context);
-    print("boxColor is primary");
+    if (kDebugMode) {
+      print("boxColor is primary");
+    }
     if (isCustomColor) {
-      print("boxColor is custom");
+      if (kDebugMode) {
+        print("boxColor is custom");
+      }
       boxColor = customColor;
     }
     return Container(
@@ -42,25 +45,23 @@ class ChevronWithLabelTrailing extends StatelessWidget {
               title: NeumorphicText(
                 labelText,
                 style: NeumorphicStyle(
-                  color: isCustomColor ? AppColors.contentInversePrimary(context) : AppColors.contentPrimary(context),
+                  color: isCustomColor
+                      ? AppColors.contentInversePrimary(context)
+                      : AppColors.contentPrimary(context),
                   lightSource: NeumorphicTheme.isUsingDark(context)
                       ? LightSource.bottomRight
                       : LightSource.topLeft,
                   shadowLightColor: NeumorphicTheme.isUsingDark(context)
                       ? AppColors.gray600
                       : AppColors.backgroundSecondary(context),
-                  border: NeumorphicBorder(
-                      color: boxColor,
-                      width: 0.25
-                  ),
+                  border: NeumorphicBorder(color: boxColor, width: 0.25),
                 ),
                 textAlign: TextAlign.start,
                 textStyle: NeumorphicTextStyle(
-                  fontFamily: "Montserrat",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  height: 1.25
-                ),
+                    fontFamily: "Montserrat",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    height: 1.25),
               ),
               trailing: Visibility(
                 visible: isTrailingActive,

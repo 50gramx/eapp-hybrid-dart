@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 import 'package:yaml/yaml.dart';
 
@@ -70,7 +71,9 @@ class KubectlNamespacedDeploymentResources {
   /// when nested under kubectl delete commands
   Future<bool> deleteMultiverseFileSystem() async {
     String multiverseBaseCommandSpace = _multiverseBaseCommandSpace;
-    print("deleteMultiverseFileSystem");
+    if (kDebugMode) {
+      print("deleteMultiverseFileSystem");
+    }
     // build the command
     String command = "$multiverseBaseCommandSpace deployment filesystem";
     // run the command
@@ -175,7 +178,9 @@ class KubectlNamespacedDeploymentResources {
   /// when nested under kubectl apply commands
   Future<bool> multiverseIngressController() async {
     String tempBaseCommandSpace = _baseCommandSpace;
-    print("this.toString:" + this.toString());
+    if (kDebugMode) {
+      print("this.toString:" + this.toString());
+    }
     // fetch the temporary path for configuration file from the assets
     String assetPath =
         "lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/multiverse/resources/namespaced/ingress-nginx-controller-deployment.yaml";
@@ -215,9 +220,13 @@ class KubectlNamespacedDeploymentResources {
     String command =
         "$_multiverseIngressDeploymentBCS ingress-nginx-controller";
     // run the command
-    print("command: $command");
+    if (kDebugMode) {
+      print("command: $command");
+    }
     List<ProcessResult> output = await SimpleCommandExecuter.run(command);
-    print("output: $output");
+    if (kDebugMode) {
+      print("output: $output");
+    }
     dynamic parsedOutput = loadYaml(output.outText);
     return parsedOutput;
   }
@@ -227,7 +236,9 @@ class KubectlNamespacedDeploymentResources {
   /// warning, it is intended to work only
   /// when nested under kubectl get commands
   Future<bool> multiverseIngressControllerStatus() async {
-    print("this.toString:" + this.toString());
+    if (kDebugMode) {
+      print("this.toString:" + this.toString());
+    }
     dynamic parsedOutput = await getMultiverseIngressController();
     if (parsedOutput == null) {
       return false;

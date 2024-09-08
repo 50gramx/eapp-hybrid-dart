@@ -2,6 +2,7 @@
 //
 // needs [String] packagePath and [String] vmName as initializers
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:flutter/foundation.dart';
 
 class MultipassStartCommands {
   MultipassStartCommands._();
@@ -26,12 +27,16 @@ class MultipassStartCommands {
   ///
   /// returns the status codes
   orchestrator() async {
-    print("starting orchestrator");
+    if (kDebugMode) {
+      print("starting orchestrator");
+    }
     // build the command
     String command = "${_baseCommandSpace}"
         "${_vmName}";
     // run the command
     await PrivilegedCommandExecuter.run(command);
-    print("started orchestrator");
+    if (kDebugMode) {
+      print("started orchestrator");
+    }
   }
 }

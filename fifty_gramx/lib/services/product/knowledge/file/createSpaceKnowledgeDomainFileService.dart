@@ -21,6 +21,7 @@
 
 import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain_file/create_space_knowledge_domain_file.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
+import 'package:flutter/foundation.dart';
 
 class CreateSpaceKnowledgeDomainFileService {
   // Client declarations here
@@ -35,6 +36,8 @@ class CreateSpaceKnowledgeDomainFileService {
               await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("CreateSpaceKnowledgeDomainFileService:dispose");
+    if (kDebugMode) {
+      print("CreateSpaceKnowledgeDomainFileService:dispose");
+    }
   }
 }

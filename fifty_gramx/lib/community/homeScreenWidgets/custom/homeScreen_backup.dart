@@ -48,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
   handleListeningMessages(LocalNotification message) async {
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {
-        print("loaded new app: ${navigationBarItems.length}");
+        if (kDebugMode) {
+          print("loaded new app: ${navigationBarItems.length}");
+        }
         handleLoadedEApp();
       }
     }
@@ -125,7 +127,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<LeftNavigationTab> navigationBarItems = [];
 
   handleLoadedEApp() {
-    print("handleLoadedEApp");
+    if (kDebugMode) {
+      print("handleLoadedEApp");
+    }
     navigationBarItems = [];
     EthosAppFlowBob.communityAppFlow.keys.forEach((appFlow) {
       EthosAppFlowBob.communityAppFlow[appFlow]?.forEach((flow) {
@@ -144,20 +148,28 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
       });
     });
-    print("will set state: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("will set state: ${navigationBarItems.length}");
+    }
     setState(() {});
-    print("set state done: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("set state done: ${navigationBarItems.length}");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("HomeScree:build: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("HomeScree:build: ${navigationBarItems.length}");
+    }
     var leftNavigationScaffold = AdaptiveLeftNavigationScaffold();
 
     if (kIsWeb) {
       return leftNavigationScaffold;
     } else if (Platform.isAndroid || Platform.isIOS) {
-      print("HomeScreen found mobile platform");
+      if (kDebugMode) {
+        print("HomeScreen found mobile platform");
+      }
       return AdaptiveBottomNavigationScaffold(
         navigationBarItems: appFlows
             .map(
@@ -178,7 +190,9 @@ class _HomeScreenState extends State<HomeScreen> {
             .toList(),
       );
     } else if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-      print("HomeScreen found desktop platform");
+      if (kDebugMode) {
+        print("HomeScreen found desktop platform");
+      }
       return leftNavigationScaffold;
     } else {
       return SizedBox();

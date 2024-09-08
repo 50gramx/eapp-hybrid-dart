@@ -1,5 +1,6 @@
 // This file is used for non-web platforms like macOS, Windows, etc.
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> downloadFile(String url, String fileName) async {
@@ -16,12 +17,17 @@ Future<void> downloadFile(String url, String fileName) async {
     // Start the download
     await dio.download(url, filePath, onReceiveProgress: (received, total) {
       if (total != -1) {
-        print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
+        if (kDebugMode) {
+          print("Downloading: ${(received / total * 100).toStringAsFixed(0)}%");
+        }
       }
     });
-
-    print("File downloaded to $filePath");
+    if (kDebugMode) {
+      print("File downloaded to $filePath");
+    }
   } catch (e) {
-    print("Download failed: $e");
+    if (kDebugMode) {
+      print("Download failed: $e");
+    }
   }
 }

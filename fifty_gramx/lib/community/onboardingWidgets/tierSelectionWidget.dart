@@ -22,6 +22,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/freeTierBenefitsCardItem.dart';
 import 'package:fifty_gramx/community/onboardingWidgets/tierDropdownRichText.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
@@ -88,16 +89,17 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    var itemList = _tierDetails.map<DropdownMenuItem<String>>(
-            (ProductDetails _tierDetail) {
-          return DropdownMenuItem<String>(
-            value: _tierDetail.title
-                .substring(0, _tierDetail.title.length - 8),
-            child: _tierDetailsRichTexts[_tierDetail.title
-                .substring(0, _tierDetail.title.length - 8)]!,
-          );
-        }).toList();
-    print("itemList: $itemList");
+    var itemList = _tierDetails
+        .map<DropdownMenuItem<String>>((ProductDetails _tierDetail) {
+      return DropdownMenuItem<String>(
+        value: _tierDetail.title.substring(0, _tierDetail.title.length - 8),
+        child: _tierDetailsRichTexts[
+            _tierDetail.title.substring(0, _tierDetail.title.length - 8)]!,
+      );
+    }).toList();
+    if (kDebugMode) {
+      print("itemList: $itemList");
+    }
     return Column(
       children: [
         Neumorphic(
@@ -289,12 +291,16 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
   Future<ProductDetailsResponse> getProductDetails(String _kId) async {
     ProductDetailsResponse productDetails =
         await _inAppPurchase.queryProductDetails([_kId].toSet());
-    print("productDetails: ${productDetails.productDetails}");
+    if (kDebugMode) {
+      print("productDetails: ${productDetails.productDetails}");
+    }
     return productDetails;
   }
 
   loadTierDetails() async {
-    print("loadTierDetails");
+    if (kDebugMode) {
+      print("loadTierDetails");
+    }
     Set<String> _kIds = <String>{
       "50gramx.space.tier.starter",
       "50gramx.space.tier.basic",
@@ -302,7 +308,9 @@ class _TierSelectionWidgetState extends State<TierSelectionWidget> {
       "50gramx.space.tier.professional",
     }.toSet();
     for (var _kId in _kIds) {
-      print("for ${_kId}");
+      if (kDebugMode) {
+        print("for ${_kId}");
+      }
       _tierDetails.addAll((await getProductDetails(_kId)).productDetails);
     }
 

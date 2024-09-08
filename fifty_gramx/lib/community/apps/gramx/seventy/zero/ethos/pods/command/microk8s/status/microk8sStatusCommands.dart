@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 
 class Microk8sStatusCommands {
@@ -36,7 +37,9 @@ class Microk8sStatusCommands {
     // get the orchestrator vm state
     String orchestratorState =
         await MultipassCommands.list.getOrchestratorVmState();
-    print("orchestratorState: $orchestratorState");
+    if (kDebugMode) {
+      print("orchestratorState: $orchestratorState");
+    }
     // process based on vm state
     switch (orchestratorState) {
       case "RUNNING":
@@ -45,12 +48,16 @@ class Microk8sStatusCommands {
           // build the command
           String command = "$_baseCommandSpace"
               "--format=short";
-          print("microk8s RUNNING, will check status now");
+          if (kDebugMode) {
+            print("microk8s RUNNING, will check status now");
+          }
           // run the command
           String output = (await SimpleCommandExecuter.run(command)).outText;
           // parse the first line
           var status = LineSplitter.split(output).first;
-          print("microk8s status: $status");
+          if (kDebugMode) {
+            print("microk8s status: $status");
+          }
           // process the output based on the status
           String stoppedMsg1 =
               "MicroK8s is not running. Please run `microk8s start`.";

@@ -24,6 +24,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
+import 'package:flutter/foundation.dart';
 
 class PayInAccountService {
   // Client declarations here
@@ -37,7 +38,9 @@ class PayInAccountService {
           await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("PayInAccountService:dispose");
+    if (kDebugMode) {
+      print("PayInAccountService:dispose");
+    }
   }
 
   // Service declarations here

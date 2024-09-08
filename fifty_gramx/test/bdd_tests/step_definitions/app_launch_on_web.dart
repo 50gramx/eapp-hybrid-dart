@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_gherkin/flutter_gherkin.dart';
 import 'package:gherkin/gherkin.dart';
 
 StepDefinitionGeneric<FlutterWorld> givenUserHasAppInstalled() {
   return given(
     'the user has the 50gramx app installed',
-        (world) async {
-      print("givenUserHasAppInstalled");
+        (world) async {  if (kDebugMode) {
+      print("givenUserHasAppInstalled");}
       // Add code here to simulate the app installation if needed
     },
   );

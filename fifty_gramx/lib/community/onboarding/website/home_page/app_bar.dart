@@ -3,6 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/space_pages/header_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -236,8 +237,10 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       actions: buildAppBarActions(),
       stretch: true,
       onStretchTrigger: () async {
-        print("OnStretchTrigger:start");
-        print("OnStretchTrigger:finish");
+        if (kDebugMode) {
+          print("OnStretchTrigger:start");
+          print("OnStretchTrigger:finish");
+        }
       },
     );
   }

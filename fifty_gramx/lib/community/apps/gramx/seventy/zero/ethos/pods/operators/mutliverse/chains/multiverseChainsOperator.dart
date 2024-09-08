@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/kubectl/kubectlCommands.dart';
+import 'package:flutter/foundation.dart';
 
 class MultiverseChainsOperator {
   // operates the file system
@@ -44,9 +45,11 @@ class MultiverseChainsOperator {
       _multiverseChains[entity][chain]["podRunning"] = await KubectlCommands
           .get.namespaced.deployment
           .multiverseChainsIdentityStatus();
-      print("_multiverseChains: $_multiverseChains");
-      print(
-          "checkPodStatus: ${_multiverseChains[entity][chain]["podRunning"]}");
+      if (kDebugMode) {
+        print("_multiverseChains: $_multiverseChains");
+        print(
+            "checkPodStatus: ${_multiverseChains[entity][chain]["podRunning"]}");
+      }
       return _multiverseChains[entity][chain]["podRunning"];
     }
   }
@@ -58,7 +61,9 @@ class MultiverseChainsOperator {
     if (!isUp("universe", "identity") ||
         !isUp("community_collaborator", "identity")) {
       // some or all of containers in the pod are not running
-      print("calling multiverseChainsIdentity");
+      if (kDebugMode) {
+        print("calling multiverseChainsIdentity");
+      }
       await KubectlCommands.apply.namespaced.deployment
           .multiverseChainsIdentity();
       await KubectlCommands.apply.namespaced.service.multiverseChainsIdentity();

@@ -1,6 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class FileRow extends StatelessWidget {
@@ -47,10 +48,12 @@ class FileRow extends StatelessWidget {
       allowedExtensions: ['pdf'],
     );
     PlatformFile file = result!.files.first;
-    print(file.name);
-    print(file.bytes);
-    print(file.size);
-    print(file.extension);
-    print(file.path);
+    if (kDebugMode) {
+      print(file.name);
+      print(file.bytes);
+      print(file.size);
+      print(file.extension);
+      print(file.path);
+    }
   }
 }

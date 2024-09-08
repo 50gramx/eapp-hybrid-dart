@@ -1,5 +1,5 @@
-
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -14,10 +14,8 @@ class AddEntityPage extends StatefulWidget {
   final String containingFlowTitle;
 
   @override
-  State<AddEntityPage> createState() =>
-      _AddEntityPageState();
+  State<AddEntityPage> createState() => _AddEntityPageState();
 }
-
 
 class _AddEntityPageState extends State<AddEntityPage> {
   String entityName = '';
@@ -32,11 +30,13 @@ class _AddEntityPageState extends State<AddEntityPage> {
   // Method to handle submission of the entity creation form
   void submitEntity() {
     // Implement logic to send the entity data to backend or handle as required
-    print('Entity Name: $entityName');
-    print('Entity Type: $entityType');
-    print('Entity Art: $entityArt');
-    print('About Entity: $aboutEntity');
-    print('Contract Parameters: $contractParameters');
+    if (kDebugMode) {
+      print('Entity Name: $entityName');
+      print('Entity Type: $entityType');
+      print('Entity Art: $entityArt');
+      print('About Entity: $aboutEntity');
+      print('Contract Parameters: $contractParameters');
+    }
   }
 
   @override
@@ -67,7 +67,8 @@ class _AddEntityPageState extends State<AddEntityPage> {
                   entityType = value ?? "";
                 });
               },
-              items: entityTypeOptions.map<DropdownMenuItem<String>>((String value) {
+              items: entityTypeOptions
+                  .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -104,9 +105,11 @@ class _AddEntityPageState extends State<AddEntityPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Parameter: ${contractParameters[index]['parameter']}'),
+                    Text(
+                        'Parameter: ${contractParameters[index]['parameter']}'),
                     Text('Types: ${contractParameters[index]['types']}'),
-                    Text('Description: ${contractParameters[index]['description']}'),
+                    Text(
+                        'Description: ${contractParameters[index]['description']}'),
                     SizedBox(height: 8.0),
                   ],
                 );

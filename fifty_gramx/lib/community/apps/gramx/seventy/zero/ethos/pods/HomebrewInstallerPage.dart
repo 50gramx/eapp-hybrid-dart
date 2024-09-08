@@ -3,6 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Form/FormInfoText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -68,10 +69,14 @@ class _HomebrewInstallerPageState extends State<HomebrewInstallerPage> {
     });
 
     try {
-      print("${await BrewCommands.setupBrew()}");
+      if (kDebugMode) {
+        print("${await BrewCommands.setupBrew()}");
+      }
       Navigator.of(context).pop();
     } catch (e) {
-      print("exception:: \t $e");
+      if (kDebugMode) {
+        print("exception:: \t $e");
+      }
       // enabling the installer button
       setState(() {
         isInstalling = false;

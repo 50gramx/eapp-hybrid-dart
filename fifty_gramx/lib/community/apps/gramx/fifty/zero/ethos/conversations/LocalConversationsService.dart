@@ -32,6 +32,7 @@ import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
+import 'package:flutter/foundation.dart';
 
 /// Provides In-App Conversations Services
 class LocalConversationsService {
@@ -376,16 +377,22 @@ class LocalConversationsService {
       AccountAssistant accountAssistant,
       SpaceKnowledgeAction spaceKnowledgeAction,
       String message) async {
-    print("sendActionableMessageToAccountAssistant");
+    if (kDebugMode) {
+      print("sendActionableMessageToAccountAssistant");
+    }
     var accountAssistantMeta = AccountAssistantMeta(
         accountAssistantId: accountAssistant.accountAssistantId,
         accountAssistantName: accountAssistant.accountAssistantName,
         accountAssistantNameCode: accountAssistant.accountAssistantNameCode,
         accountId: accountAssistant.account.accountId);
-    print("build assistant meta: $accountAssistantMeta");
+    if (kDebugMode) {
+      print("build assistant meta: $accountAssistantMeta");
+    }
     var connectedAccountAssistant = LocalConnectionsService
         .inverseConnectedAccountAssistantMap[accountAssistantMeta]!;
-    print("connectedAccountAssistant: $connectedAccountAssistant");
+    if (kDebugMode) {
+      print("connectedAccountAssistant: $connectedAccountAssistant");
+    }
     var draftMessage = ConversationMessage(
         isMessageEntityAccountAssistant: true,
         isMessageSent: true,
@@ -398,12 +405,16 @@ class LocalConversationsService {
           message: message,
           sentAt: Timestamp.fromDateTime(DateTime.now()),
         ));
-    print("draftMessage: $draftMessage");
+    if (kDebugMode) {
+      print("draftMessage: $draftMessage");
+    }
     // warn: need to check if conversations doesn't exists
     var conversationsMessagesIndex = entityIdConversationMessageMap[
             connectedAccountAssistant.accountAssistantId]!
         .length;
-    print("conversationsMessagesIndex: $conversationsMessagesIndex");
+    if (kDebugMode) {
+      print("conversationsMessagesIndex: $conversationsMessagesIndex");
+    }
     entityIdConversationMessageMap[
             connectedAccountAssistant.accountAssistantId]!
         .insert(conversationsMessagesIndex, draftMessage);
@@ -416,7 +427,9 @@ class LocalConversationsService {
     var messageForAccountAssistantSent =
         await SendAccountMessageService.sendMessageToAccountAssistant(
             connectedAccountAssistant, spaceKnowledgeAction, message);
-    print("messageForAccountAssistantSent: $messageForAccountAssistantSent");
+    if (kDebugMode) {
+      print("messageForAccountAssistantSent: $messageForAccountAssistantSent");
+    }
     if (messageForAccountAssistantSent.isSent) {
       entityIdConversationMessageMap[connectedAccountAssistant
                   .accountAssistantId]![conversationsMessagesIndex]
@@ -436,7 +449,9 @@ class LocalConversationsService {
 
   static updateConversedAccountWithLastConversationSentMessages(
       String accountId, int messageIndex) async {
-    print("updateConversedAccountWithLastConversationSentMessages");
+    if (kDebugMode) {
+      print("updateConversedAccountWithLastConversationSentMessages");
+    }
     int accountIndex =
         findConversedAccountWithLastConversationMessagesUsingAccountId(
             accountId);
@@ -454,9 +469,13 @@ class LocalConversationsService {
         pushConversedEntityToStart(accountIndex);
       }
     } else {
-      print("accountIndex is negative!!");
+      if (kDebugMode) {
+        print("accountIndex is negative!!");
+      }
       int newAccountIndex = conversedEntityWithLastConversationMessages.length;
-      print("creating new conversed entity with last conversation messages");
+      if (kDebugMode) {
+        print("creating new conversed entity with last conversation messages");
+      }
       // Create new Conversed Entity With Last Conversation Messages
       ConversedEntityWithLastConversationMessage
           newConversedEntityWithLastConversationMessage =
@@ -470,8 +489,10 @@ class LocalConversationsService {
         ),
       );
       // add newConversedEntityWithLastConversationMessage at newAccountIndex
-      print(
-          "adding new conversed entity with last conversation messages at newAccountIndex");
+      if (kDebugMode) {
+        print(
+            "adding new conversed entity with last conversation messages at newAccountIndex");
+      }
       conversedEntityWithLastConversationMessages.insert(
           0, newConversedEntityWithLastConversationMessage);
       // notifyAddedConversedEntityWithLastConversationMessage(index);
@@ -480,7 +501,9 @@ class LocalConversationsService {
 
   static updateConversedAccountWithLastConversationReceivedMessages(
       String accountId, int messageIndex) {
-    print("updateConversedAccountWithLastConversationReceivedMessages");
+    if (kDebugMode) {
+      print("updateConversedAccountWithLastConversationReceivedMessages");
+    }
     int accountIndex =
         findConversedAccountWithLastConversationMessagesUsingAccountId(
             accountId);
@@ -502,14 +525,18 @@ class LocalConversationsService {
 
   static updateConversedAccountAssistantWithLastConversationSentMessages(
       String accountAssistantId, int messageIndex) {
-    print("updateConversedAccountAssistantWithLastConversationSentMessages");
+    if (kDebugMode) {
+      print("updateConversedAccountAssistantWithLastConversationSentMessages");
+    }
     int accountAssistantIndex =
         findConversedAccountAssistantWithLastConversationMessagesUsingAccountAssistantId(
             accountAssistantId);
-    print("messageIndex: $messageIndex");
-    print("accountAssistantIndex: $accountAssistantIndex");
-    print(
-        "entityIdConversationMessageMap[accountAssistantId]: ${entityIdConversationMessageMap[accountAssistantId]}");
+    if (kDebugMode) {
+      print("messageIndex: $messageIndex");
+      print("accountAssistantIndex: $accountAssistantIndex");
+      print(
+          "entityIdConversationMessageMap[accountAssistantId]: ${entityIdConversationMessageMap[accountAssistantId]}");
+    }
     if (accountAssistantIndex > -1) {
       AccountAssistantSentMessage lastSentMessage =
           entityIdConversationMessageMap[accountAssistantId]![messageIndex]

@@ -3,6 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/AdaptiveIconButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -18,9 +19,11 @@ class EAIT1006 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("building EAIT1006");
-    print(
-        "length: ${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+    if (kDebugMode) {
+      print("building EAIT1006");
+      print(
+          "length: ${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+    }
     Widget container = Container(
       margin: EdgeInsets.only(left: 8, right: 8),
       height: 48,
@@ -31,9 +34,9 @@ class EAIT1006 extends StatelessWidget {
           itemBuilder: (BuildContext context, int subIndex) {
             return Expanded(
               child: Container(
-                  child: buildAppButton(context, subIndex,
-                      selectPressedSectionItem, navigationWidget),
-                ),
+                child: buildAppButton(context, subIndex,
+                    selectPressedSectionItem, navigationWidget),
+              ),
             );
           }),
     );

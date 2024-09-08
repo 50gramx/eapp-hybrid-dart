@@ -15,9 +15,13 @@ class Environment {
 
     String? flavor = "";
     if (kIsWeb) {
-      print("Environment:current: it's web");
+      if (kDebugMode) {
+        print("Environment:current: it's web");
+      }
       flavor = const String.fromEnvironment("flavor");
-      print("Environment:current: flavor:$flavor");
+      if (kDebugMode) {
+        print("Environment:current: flavor:$flavor");
+      }
       switch (flavor) {
         case "50.ethos.site":
           _current = "com.50gramx.50.ethos.site";
@@ -35,10 +39,14 @@ class Environment {
           _current = "com.50gramx";
       }
     } else if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
-      print("Environment:current: it's MacOS, Android or iOS devices");
-      print("Environment:current: flavor:${packageInfo.packageName}");
+      if (kDebugMode) {
+        print("Environment:current: it's MacOS, Android or iOS devices");
+        print("Environment:current: flavor:${packageInfo.packageName}");
+      }
       flavor = const String.fromEnvironment("flavor");
-      print("Environment:current: flavor:$flavor");
+      if (kDebugMode) {
+        print("Environment:current: flavor:$flavor");
+      }
       switch (packageInfo.packageName) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
           _current = "com.50gramx.50.ethos.domains";
@@ -53,9 +61,13 @@ class Environment {
           _current = "com.50gramx";
       }
     } else if (Platform.isWindows) {
-      print("Environment:current: it's windows device");
+      if (kDebugMode) {
+        print("Environment:current: it's windows device");
+      }
       flavor = const String.fromEnvironment("flavor");
-      print("Environment:current: flavor:$flavor");
+      if (kDebugMode) {
+        print("Environment:current: flavor:$flavor");
+      }
       switch (flavor) {
         case "com.fiftygramx.fifty.zero.ethos.domains":
           _current = "com.50gramx.50.ethos.domains";

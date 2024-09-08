@@ -7,6 +7,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuToggleButton/neuToggleTextButtonContainer.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/messaging/domains/domainSelectionNeuChip.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +59,9 @@ class AccountAssistantMessageTextField extends StatelessWidget {
       child: NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
-          print("entity toggle pressed");
+          if (kDebugMode) {
+            print("entity toggle pressed");
+          }
         },
         style: NeumorphicStyle(
           lightSource: LightSource.right,
@@ -123,7 +126,9 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                               toggleButtonOnPressedFunction: (value) {
                                 suggestedDomainsToggleOnPressed(
                                     suggestedKnowledgeDomains[value]);
-                                print("toggle button $value on pressed");
+                                if (kDebugMode) {
+                                  print("toggle button $value on pressed");
+                                }
                               })
                         ],
                       ),
@@ -227,7 +232,9 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                               provideHapticFeedback: true,
                               onPressed: () {
                                 sendMessageButtonOnPressed();
-                                print("send button tapped");
+                                if (kDebugMode) {
+                                  print("send button tapped");
+                                }
                               },
                               style: NeumorphicStyle(
                                 shape: NeumorphicShape.flat,
@@ -301,7 +308,9 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                                 if (value == 1) {
                                   messagingInputToggleOnPressed();
                                 }
-                                print("toggle button $value on pressed");
+                                if (kDebugMode) {
+                                  print("toggle button $value on pressed");
+                                }
                               })
                           : NeuToggleButton(
                               toggleContainerButtonsList: [
@@ -340,7 +349,9 @@ class AccountAssistantMessageTextField extends StatelessWidget {
                                 if (value == 6) {
                                   messagingInputToggleOnPressed();
                                 }
-                                print("toggle button $value on pressed");
+                                if (kDebugMode) {
+                                  print("toggle button $value on pressed");
+                                }
                               }),
                     ),
                   ),

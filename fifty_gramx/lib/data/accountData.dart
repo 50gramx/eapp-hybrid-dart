@@ -25,6 +25,7 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/a
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/notifyAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountData {
@@ -54,7 +55,9 @@ class AccountData {
   }
 
   Future<Account> readAccount() async {
-    print("AccountData:readAccount");
+    if (kDebugMode) {
+      print("AccountData:readAccount");
+    }
     final prefs = await SharedPreferences.getInstance();
     var details = prefs.getString('account') ?? "";
     if (details == "") {
@@ -74,7 +77,10 @@ class AccountData {
     final stopwatch = Stopwatch()..start();
     bool accountPresent = (await AccountData().readAccount()).accountId != "";
     stopwatch.stop();
-    print('Time elapsed to accountPresent: ${stopwatch.elapsedMilliseconds} ms');
+    if (kDebugMode) {
+      print(
+          'Time elapsed to accountPresent: ${stopwatch.elapsedMilliseconds} ms');
+    }
     return accountPresent;
   }
 

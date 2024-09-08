@@ -2,6 +2,7 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/c
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/AccountConnectedAccountAssistantListItem.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -30,12 +31,16 @@ class _AllAssistantsConnectionsStreamingListViewWidgetState
   @override
   void initState() {
     super.initState();
-    print("_AllAssistantsConnectionsStreamingListViewWidgetState:initState");
+    if (kDebugMode) {
+      print("_AllAssistantsConnectionsStreamingListViewWidgetState:initState");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("_AllAssistantsConnectionsStreamingListViewWidgetState:build");
+    if (kDebugMode) {
+      print("_AllAssistantsConnectionsStreamingListViewWidgetState:build");
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
       child: Neumorphic(
@@ -75,8 +80,10 @@ class _AllAssistantsConnectionsStreamingListViewWidgetState
                         0) {
                       return AccountConnectedAccountAssistantListItem(
                           connectedAssistantWithBelongingEntity, () {
-                        print(
-                            "callback AllAssistantsConnectionsStreamingListViewWidget");
+                        if (kDebugMode) {
+                          print(
+                              "callback AllAssistantsConnectionsStreamingListViewWidget");
+                        }
                         widget.pushAccountAssistantConversationPage(
                             connectedAssistantWithBelongingEntity);
                       });

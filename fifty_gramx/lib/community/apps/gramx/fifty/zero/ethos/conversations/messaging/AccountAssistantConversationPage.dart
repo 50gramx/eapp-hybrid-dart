@@ -33,6 +33,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/ConversationListKeyManager.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:validators/validators.dart';
@@ -79,19 +80,30 @@ class _AccountAssistantConversationPageState
   @override
   void initState() {
     /// creating the list manger
-    print("_AccountAssistantConversationPageState: initState");
+    ///
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: initState");
+    }
     listKeyManager = ConversationListKeyManager();
-    print("_AccountAssistantConversationPageState: list key manager defined");
-    print("_AccountAssistantConversationPageState: will add empty entity");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: list key manager defined");
+      print("_AccountAssistantConversationPageState: will add empty entity");
+    }
     LocalConversationsService.addEmptyEntityIdConversationMessageMap(
         widget.accountAssistant.accountAssistantId);
-    print(
-        "_AccountAssistantConversationPageState: will add text field listener");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: will add text field listener");
+    }
     addMessageTextFieldListener();
-    print(
-        "_AccountAssistantConversationPageState: will load conversation messages");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: will load conversation messages");
+    }
     loadConversationsMessages();
-    print("_AccountAssistantConversationPageState: will super init");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: will super init");
+    }
     super.initState();
   }
 
@@ -198,11 +210,15 @@ class _AccountAssistantConversationPageState
                   widget.accountAssistant.accountAssistantId);
           index >= 0;
           index--) {
-        print("inserting for index $index");
+        if (kDebugMode) {
+          print("inserting for index $index");
+        }
         try {
           listKeyManager.insertItem(index);
         } catch (e) {
-          print("Exception while inserting: $e");
+          if (kDebugMode) {
+            print("Exception while inserting: $e");
+          }
         }
       }
       scrollToBottom();
@@ -211,8 +227,10 @@ class _AccountAssistantConversationPageState
   }
 
   messageValidator(String message) {
-    print(
-        "_AccountAssistantConversationPageState: messageValidator: ${message} is ${isURL(message)}");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: messageValidator: ${message} is ${isURL(message)}");
+    }
     setState(() {
       isMessageURL = isURL(message);
     });
@@ -225,15 +243,21 @@ class _AccountAssistantConversationPageState
   }
 
   sendActionableMessage() {
-    print("_AccountAssistantConversationPageState: sendActionableMessage");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: sendActionableMessage");
+    }
     var typedMessage = accountAssistantMessageTextFieldController.text;
     accountAssistantMessageTextFieldController.clear();
-    print(
-        "_AccountAssistantConversationPageState: typedMessage: $typedMessage");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: typedMessage: $typedMessage");
+    }
     if (isMessageURL) {
       // TODO(verma8@): send the url to browser tab
       notifyBrowserPageValidatedURL(typedMessage);
-      print("will do send the url to browser page: ${typedMessage}");
+      if (kDebugMode) {
+        print("will do send the url to browser page: ${typedMessage}");
+      }
     } else {
       LocalConversationsService.sendActionableMessageToAccountAssistant(
           widget.accountAssistant,
@@ -274,9 +298,13 @@ class _AccountAssistantConversationPageState
 
   @override
   Widget build(BuildContext context) {
-    print("_AccountAssistantConversationPageState: will build");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: will build");
+    }
     String appBarLabelText = buildAppBarLabelText();
-    print("_AccountAssistantConversationPageState: will build Sliver List");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: will build Sliver List");
+    }
     SliverAnimatedList sliverAnimatedList = SliverAnimatedList(
         key: listKeyManager.getListKey(),
         initialItemCount:
@@ -284,8 +312,10 @@ class _AccountAssistantConversationPageState
                 widget.accountAssistant.accountAssistantId),
         itemBuilder:
             (BuildContext context, int index, Animation<double> animation) {
-          print(
-              "_AccountAssistantConversationPageState: will build animated list");
+          if (kDebugMode) {
+            print(
+                "_AccountAssistantConversationPageState: will build animated list");
+          }
           if (index >=
               LocalConversationsService.getEntityIdConversationMessageMapLength(
                   widget.accountAssistant.accountAssistantId)) {
@@ -310,15 +340,19 @@ class _AccountAssistantConversationPageState
           }
         });
 
-    print(
-        "_AccountAssistantConversationPageState: will build messaging text field");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: will build messaging text field");
+    }
     AccountAssistantMessageTextField accountAssistantMessageTextField =
         AccountAssistantMessageTextField(
       hintText: "Message ${widget.accountAssistant.accountAssistantName}",
       messageTextFieldController: accountAssistantMessageTextFieldController,
       sendMessageButtonOnPressed: () {
-        print(
-            "_AccountAssistantConversationPageState: Send Actionable message");
+        if (kDebugMode) {
+          print(
+              "_AccountAssistantConversationPageState: Send Actionable message");
+        }
         sendActionableMessage();
       },
       messageTextFieldReadOnly: messageTextFieldReadOnly,
@@ -335,9 +369,10 @@ class _AccountAssistantConversationPageState
       },
       validateMessageText: messageValidator,
     );
-
-    print(
-        "_AccountAssistantConversationPageState: will build text field aligned");
+    if (kDebugMode) {
+      print(
+          "_AccountAssistantConversationPageState: will build text field aligned");
+    }
     Widget textFieldAlign = Align(
       alignment: FractionalOffset.bottomCenter,
       child: Container(
@@ -345,7 +380,9 @@ class _AccountAssistantConversationPageState
         children: [accountAssistantMessageTextField],
       )),
     );
-    print("_AccountAssistantConversationPageState: will return Scaffold");
+    if (kDebugMode) {
+      print("_AccountAssistantConversationPageState: will return Scaffold");
+    }
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary(context),
       body: Column(
@@ -417,7 +454,9 @@ class _AccountAssistantConversationPageState
   }
 
   toggleSuggestedDomains(spaceKnowledgeDomain) {
-    print("toggleSuggestedDomains");
+    if (kDebugMode) {
+      print("toggleSuggestedDomains");
+    }
     setState(() {
       conversationMessages[0].accountAssistantReceivedMessage.message =
           spaceKnowledgeDomainsActionAskQuestionMaps[spaceKnowledgeDomain]!

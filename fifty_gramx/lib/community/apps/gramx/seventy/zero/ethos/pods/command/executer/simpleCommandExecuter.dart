@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 
 class SimpleCommandExecuter {
@@ -26,7 +27,9 @@ class SimpleCommandExecuter {
       return (await _shell.run(command));
     } catch (e, st) {
       FirebaseCrashlytics.instance.recordError(e, st);
-      print("ShellException, exception, stacktrace: ${e}, ${st}");
+      if (kDebugMode) {
+        print("ShellException, exception, stacktrace: ${e}, ${st}");
+      }
       return []; // returns an empty list
     }
   }

@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/process_run.dart';
 
 class MultipassLaunchCommands {
@@ -42,10 +43,14 @@ class MultipassLaunchCommands {
         "--memory ${memoryInGB}G "
         "--cpus ${cpuCoreCount} "
         "--disk ${diskSpaceInGB}G";
-    print("command: $command");
+    if (kDebugMode) {
+      print("command: $command");
+    }
     // run the command
     if (Platform.isWindows) {
-      print("running launch vm on Windows");
+      if (kDebugMode) {
+        print("running launch vm on Windows");
+      }
       await SimpleCommandExecuter.run("multipass list");
       await SimpleCommandExecuter.run(command);
       return true;

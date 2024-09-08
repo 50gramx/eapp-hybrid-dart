@@ -11,6 +11,7 @@ import 'package:fifty_gramx/services/product/knowledge/domain/discoverSpaceKnowl
 import 'package:fifty_gramx/services/product/knowledge/file/createSpaceKnowledgeDomainFileService.dart';
 import 'package:fifty_gramx/services/product/knowledge/file/deleteSpaceKnowledgeDomainFileService.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -58,7 +59,9 @@ class _DiscoverSpaceKnowledgeDomainFilesPageState
               if (!snap.hasData) {
                 return SizedBox();
               } else {
-                print(snap.data);
+                if (kDebugMode) {
+                  print(snap.data);
+                }
                 if (snap.data!.files.length > 0) {
                   return Container(
                     height: snap.data!.files.length * 62,
@@ -105,7 +108,9 @@ class _DiscoverSpaceKnowledgeDomainFilesPageState
     if (result != null) {
       // result.files.map((path) => File(path!)).toList();
       List<PlatformFile> files = result.files;
-      print("files: $files");
+      if (kDebugMode) {
+        print("files: $files");
+      }
       if (files.length == 1) {
         await uploadSpaceKnowledgeDomainFile(files.first);
         setState(() {});
@@ -135,7 +140,9 @@ class _DiscoverSpaceKnowledgeDomainFilesPageState
     final call = (await CreateSpaceKnowledgeDomainFileService.serviceClient)
         .uploadSpaceKnowledgeDomainFile(outgoingResponse());
     await for (var note in call) {
-      print("${note.length}");
+      if (kDebugMode) {
+        print("${note.length}");
+      }
     }
   }
 }

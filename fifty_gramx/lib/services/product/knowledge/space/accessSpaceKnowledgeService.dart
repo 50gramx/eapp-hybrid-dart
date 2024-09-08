@@ -22,6 +22,7 @@
 import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge/access_space_knowledge.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/spaceData.dart';
+import 'package:flutter/foundation.dart';
 
 class AccessSpaceKnowledgeService {
   // Client declarations here
@@ -35,7 +36,9 @@ class AccessSpaceKnowledgeService {
           await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("AccessSpaceKnowledgeService:dispose");
+    if (kDebugMode) {
+      print("AccessSpaceKnowledgeService:dispose");
+    }
   }
 
   // Service declarations here

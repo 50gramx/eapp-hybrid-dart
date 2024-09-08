@@ -22,6 +22,7 @@
 import 'package:eapp_dart_domain/ethos/elint/services/product/identity/space/access_space.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
+import 'package:flutter/foundation.dart';
 
 class AccessSpaceService {
   // Client declarations here
@@ -35,7 +36,9 @@ class AccessSpaceService {
           await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("AccessSpaceService:dispose");
+    if (kDebugMode) {
+      print("AccessSpaceService:dispose");
+    }
   }
 
   // Service declarations here

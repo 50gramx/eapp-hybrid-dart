@@ -3,6 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
+import 'package:flutter/foundation.dart';
 
 class BrewInstallCommands {
   /// contains the package path
@@ -36,14 +37,18 @@ class BrewInstallCommands {
           await PrivilegedCommandExecuter.getTemporaryFilePathForAssetFile(
               assetPath);
       // Update the spawn command in install script
-      print("Update the spawn command in install script");
+      if (kDebugMode) {
+        print("Update the spawn command in install script");
+      }
       // await SimpleCommandExecuter.run(
       //     '''sed -e '4s#.*#spawn $command#' -i '' $installPath''');
       String spawnCommand =
           '''sed -i '' '6s#.*#spawn $command#' $installPath''';
       await SimpleCommandExecuter.run(spawnCommand);
       // Update password in install script
-      print("Update password in install script");
+      if (kDebugMode) {
+        print("Update password in install script");
+      }
       // await SimpleCommandExecuter.run(
       //     '''sed -e '6s/.*/send "$password"/' -i '' $installPath''');
 
@@ -51,11 +56,15 @@ class BrewInstallCommands {
           '''sed -i '' 's/^set password .*/set password "$password"/' $installPath''');
       await SimpleCommandExecuter.run('''cat $installPath''');
       // Run the install script
-      print("will run installer");
+      if (kDebugMode) {
+        print("will run installer");
+      }
       await SimpleCommandExecuter.run("chmod +x $installPath");
       await SimpleCommandExecuter.run("$installPath");
       // Wait for the socket to up and running
-      print("will start waiting for 10sec");
+      if (kDebugMode) {
+        print("will start waiting for 10sec");
+      }
       // 🍺  multipass was successfully installed!
       await Future.delayed(Duration(seconds: 20));
     }

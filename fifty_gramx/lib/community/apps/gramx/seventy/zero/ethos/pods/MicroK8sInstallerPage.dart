@@ -10,6 +10,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 
@@ -222,7 +223,9 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
           selectedMemory.toInt(),
           selectedCpuCount.toInt(),
           selectedDiskSpace.toInt());
-      print("isVmLaunched: $isVmLaunched");
+      if (kDebugMode) {
+        print("isVmLaunched: $isVmLaunched");
+      }
       Map<String, dynamic> vmMeta =
           await MultipassCommands.list.getOrchestratorVmMeta();
       if (vmMeta.isNotEmpty) {

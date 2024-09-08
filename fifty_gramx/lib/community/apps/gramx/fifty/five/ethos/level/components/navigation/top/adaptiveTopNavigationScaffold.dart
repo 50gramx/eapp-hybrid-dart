@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/top/eutopiaTopNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/top/tab/topNavigationTab.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
@@ -45,7 +46,9 @@ class _AdaptiveTopNavigationScaffoldState
 
   /// Called when a tab selection occurs.
   void onTabSelected(int newIndex) {
-    print("onTabSelected:$newIndex");
+    if (kDebugMode) {
+      print("onTabSelected:$newIndex");
+    }
     if (_currentlySelectedIndex == newIndex) {
       // If the user is re-selecting the tab, the common
       // behavior is to empty the stack.

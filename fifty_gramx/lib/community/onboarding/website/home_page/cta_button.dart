@@ -45,12 +45,16 @@ Widget buildGetStartedButton(BuildContext context, bool signedIn) {
 }
 
 getStartedButtonOnPressed(BuildContext context, bool signedIn) async {
-  print("getStartedButtonOnPressed");
+  if (kDebugMode) {
+    print("getStartedButtonOnPressed");
+  }
   if (kIsWeb) {
     pushToGetStartedWidget(context, signedIn);
   }
   if (Platform.isAndroid || Platform.isIOS) {
-    print("android or ios");
+    if (kDebugMode) {
+      print("android or ios");
+    }
     if (await Permission.contacts.request().isGranted) {
       print("android or ios");
       pushToGetStartedWidget(context, signedIn);
@@ -60,9 +64,13 @@ getStartedButtonOnPressed(BuildContext context, bool signedIn) async {
       // user manually enables it in the system settings.
       openAppSettings();
     } else {
-      print(await Permission.contacts.status);
+      if (kDebugMode) {
+        print(await Permission.contacts.status);
+      }
       await Permission.contacts.request();
-      print("contacts permissions not granted");
+      if (kDebugMode) {
+        print("contacts permissions not granted");
+      }
     }
   } else if (Platform.isWindows) {
     pushToGetStartedWidget(context, signedIn);

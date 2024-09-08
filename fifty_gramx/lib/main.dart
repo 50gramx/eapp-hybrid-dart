@@ -119,12 +119,16 @@ ensureFirebaseSupport() async {
       // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
       PlatformDispatcher.instance.onError = (error, stack) {
         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-        print("recordError: ${error}, ${stack}");
+        if (kDebugMode) {
+          print("recordError: ${error}, ${stack}");
+        }
         return true;
       };
     }
   } else {
-    print("Platform is not supported, not initialising Firebase");
+    if (kDebugMode) {
+      print("Platform is not supported, not initialising Firebase");
+    }
     //   not doing anything
   }
 }
@@ -135,23 +139,33 @@ void initializeEthosAppsServices() {
   if (Platform.isMacOS) {
     BrewCommands.initBrew();
   } else if (Platform.isWindows) {
-    print("initializePlatformServices failed for Windows");
+    if (kDebugMode) {
+      print("initializePlatformServices failed for Windows");
+    }
   } else if (Platform.isLinux) {
-    print("initializePlatformServices failed for Linux");
+    if (kDebugMode) {
+      print("initializePlatformServices failed for Linux");
+    }
   }
   MultipassCommands();
-  print("Platform services initialized.");
+  if (kDebugMode) {
+    print("Platform services initialized.");
+  }
 }
 
 /// Initializes the application.
 Future<void> initalizeEthosappsSupport() async => await (() async {
       if (!kIsWeb &&
           (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
-        print("will start platform services");
+        if (kDebugMode) {
+          print("will start platform services");
+        }
         initializeEthosAppsServices();
       }
       EthosAppFlowBob();
-      print("EthosAppFlowBob initialized.");
+      if (kDebugMode) {
+        print("EthosAppFlowBob initialized.");
+      }
     })();
 
 ensureEthosappsSupport() {
@@ -250,7 +264,9 @@ class MyApp extends StatelessWidget {
       future: initalizeEthosappsSupport(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          print("App initialization completed."); // Add a log statement
+          if (kDebugMode) {
+            print("App initialization completed."); // Add a log statement
+          }
           return buildParentFutureBuilder();
         } else {
           return buildProgress();

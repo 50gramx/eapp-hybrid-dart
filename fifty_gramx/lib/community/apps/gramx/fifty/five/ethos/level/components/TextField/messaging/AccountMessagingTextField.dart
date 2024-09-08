@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -33,20 +34,20 @@ class AccountMessagingTextField extends StatelessWidget {
         ),
         disableDepth: true,
         lightSource: LightSource.right,
-        boxShape: NeumorphicBoxShape.roundRect(
-            BorderRadius.circular(24)),
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
       ),
       padding: const EdgeInsets.all(2),
       child: NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
-          print("entity toggle pressed");
+          if (kDebugMode) {
+            print("entity toggle pressed");
+          }
         },
         style: NeumorphicStyle(
           lightSource: LightSource.right,
           shape: NeumorphicShape.flat,
-          boxShape: NeumorphicBoxShape.roundRect(
-              BorderRadius.circular(24)),
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: AppColors.contentPrimary(context),
         ),
         padding: const EdgeInsets.all(0),
@@ -84,8 +85,8 @@ class AccountMessagingTextField extends StatelessWidget {
                     shadowLightColor: NeumorphicTheme.isUsingDark(context)
                         ? AppColors.gray600
                         : AppColors.backgroundSecondary(context),
-                    boxShape: NeumorphicBoxShape.roundRect(
-                        BorderRadius.circular(24)),
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
                     color: AppColors.backgroundInverseSecondary(context),
                   ),
                   child: Row(
@@ -105,7 +106,7 @@ class AccountMessagingTextField extends StatelessWidget {
                               height: 1.55),
                           decoration: InputDecoration(
                             contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16),
+                                EdgeInsets.symmetric(horizontal: 16),
                             hintText: hintText,
                             hintStyle: TextStyle(
                                 color: AppColors.contentStateDisabled(context),
@@ -152,7 +153,9 @@ class AccountMessagingTextField extends StatelessWidget {
                           provideHapticFeedback: true,
                           onPressed: () {
                             sendMessageButtonOnPressed();
-                            print("send button tapped");
+                            if (kDebugMode) {
+                              print("send button tapped");
+                            }
                           },
                           style: NeumorphicStyle(
                             shape: NeumorphicShape.flat,
@@ -167,7 +170,7 @@ class AccountMessagingTextField extends StatelessWidget {
                               size: 24,
                               style: NeumorphicStyle(
                                   color:
-                                  AppColors.contentInversePrimary(context)),
+                                      AppColors.contentInversePrimary(context)),
                             ),
                           )),
                     ),

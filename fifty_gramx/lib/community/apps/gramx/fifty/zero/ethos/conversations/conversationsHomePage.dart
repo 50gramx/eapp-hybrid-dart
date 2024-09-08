@@ -34,6 +34,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPag
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -70,16 +71,20 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
   }
 
   loadMyConversations() async {
-    print("loadMyConversations");
-    print(
-        "loadMyConversations: total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
-    // Update list
+    if (kDebugMode) {
+      print("loadMyConversations");
+      print(
+          "loadMyConversations: total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
+      // Update list
+    }
     for (int index = 0;
         index <
             LocalConversationsService
                 .conversedEntityWithLastConversationMessages.length;
         index++) {
-      print("loadMyConversations: inserting at $index");
+      if (kDebugMode) {
+        print("loadMyConversations: inserting at $index");
+      }
       _conversedEntityListKey.currentState!.insertItem(index);
     }
   }
@@ -140,7 +145,9 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                   1,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
-                print("position: $position");
+                if (kDebugMode) {
+                  print("position: $position");
+                }
                 if (position == 0) {
                   return Padding(
                     padding: EdgeInsets.only(
@@ -175,9 +182,11 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                         .conversedEntityWithLastConversationMessages.length) {
                   var newPosition = position - 1;
                   var heroTag;
-                  print("newPosition: $newPosition");
-                  print(
-                      "LocalConversationsService:length ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
+                  if (kDebugMode) {
+                    print("newPosition: $newPosition");
+                    print(
+                        "LocalConversationsService:length ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
+                  }
                   ConversedEntityWithLastConversationMessage
                       conversedEntityWithLastConversationMessage =
                       LocalConversationsService
@@ -389,7 +398,9 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                     ),
                   );
                 } else {
-                  print("Why extra index was passed?");
+                  if (kDebugMode) {
+                    print("Why extra index was passed?");
+                  }
                   return SizedBox();
                 }
               },

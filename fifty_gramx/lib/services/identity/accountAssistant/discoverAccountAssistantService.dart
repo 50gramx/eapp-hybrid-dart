@@ -24,6 +24,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart'
 import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account_assistant/discover_account_assistant.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/data/accountData.dart';
+import 'package:flutter/foundation.dart';
 
 class DiscoverAccountAssistantService {
   // Client declarations here
@@ -38,7 +39,9 @@ class DiscoverAccountAssistantService {
               await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("DiscoverAccountService:dispose");
+    if (kDebugMode) {
+      print("DiscoverAccountService:dispose");
+    }
   }
 
   // Service declarations here

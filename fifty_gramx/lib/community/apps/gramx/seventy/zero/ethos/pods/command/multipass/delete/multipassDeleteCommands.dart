@@ -3,6 +3,7 @@
 // needs [String] packagePath and [String] vmName as initializers
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 
 class MultipassDeleteCommands {
   MultipassDeleteCommands._();
@@ -32,7 +33,9 @@ class MultipassDeleteCommands {
     // build the command
     String command = "${_baseCommandSpace}"
         "-p ${_vmName}";
-    print("command: $command");
+    if (kDebugMode) {
+      print("command: $command");
+    }
     // run the command
     await PrivilegedCommandExecuter.run(command);
   }

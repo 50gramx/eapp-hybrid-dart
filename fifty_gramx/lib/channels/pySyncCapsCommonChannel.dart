@@ -36,14 +36,18 @@ class PySyncCapsCommonChannel {
       _pySyncCapsCommonChannel ??= await buildGrpcChannel();
 
   static Future<dynamic> buildGrpcChannel() async {
-    print("buildGrpcChannel");
+    if (kDebugMode) {
+      print("buildGrpcChannel");
+    }
     // final web_channel = GrpcWebClientChannel.xhr(Uri.parse('http://122.166.150.115:50503'));
     //   final web_client = AccessAccountServiceClient(web_channel);
     var channel;
     var uri;
     var port = 443;
     if (kIsWeb) {
-      print('is web');
+      if (kDebugMode) {
+        print('is web');
+      }
       uri =
           "https://capabilities.atlas.starflare.bangalore.in.networks.50gramx.com";
     } else {
@@ -51,7 +55,9 @@ class PySyncCapsCommonChannel {
       port = 50501;
     }
     channel = await grpcChannelBuilder(uri, port);
-    print("returning ${channel.runtimeType}");
+    if (kDebugMode) {
+      print("returning ${channel.runtimeType}");
+    }
     return channel;
   }
 }

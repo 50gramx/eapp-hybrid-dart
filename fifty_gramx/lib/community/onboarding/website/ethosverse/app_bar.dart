@@ -1,4 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class EthosverseOverviewPageSliverAppBar extends StatefulWidget {
@@ -53,8 +54,10 @@ class _EthosverseOverviewPageSliverAppBarState
       actions: actions,
       stretch: true,
       onStretchTrigger: () async {
-        print("OnStretchTrigger:start");
-        print("OnStretchTrigger:finish");
+        if (kDebugMode) {
+          print("OnStretchTrigger:start");
+          print("OnStretchTrigger:finish");
+        }
       },
     );
   }

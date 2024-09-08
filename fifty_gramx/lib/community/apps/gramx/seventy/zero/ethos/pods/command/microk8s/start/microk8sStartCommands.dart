@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:process_run/shell.dart';
 
 class Microk8sStartCommands {
@@ -22,7 +23,9 @@ class Microk8sStartCommands {
 
   Future<bool> now() async {
     String command = "$_baseCommandSpace";
-    print("microk8s starting now");
+    if (kDebugMode) {
+      print("microk8s starting now");
+    }
     String output = (await SimpleCommandExecuter.run(command)).outText;
     var firstLineOP = LineSplitter.split(output).first;
     if (firstLineOP == "Started.") {

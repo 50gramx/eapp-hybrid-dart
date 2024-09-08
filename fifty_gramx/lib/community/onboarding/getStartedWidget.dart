@@ -7,6 +7,7 @@ import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWid
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -29,7 +30,9 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   final selectingUniverseHeadingKey = new GlobalKey();
 
   completedSelectingUniverseCallback() async {
-    print("completedSelectingUniverseCallback");
+    if (kDebugMode) {
+      print("completedSelectingUniverseCallback");
+    }
     setState(() {
       // update to select galaxy
       isSelectingCountry = false;
@@ -57,7 +60,9 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
 
   // Helper functions
   pushToHomeScreenWidget() async {
-    print("pushToHomeScreenWidget");
+    if (kDebugMode) {
+      print("pushToHomeScreenWidget");
+    }
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
     // await LocalServices().loadLocalServices();

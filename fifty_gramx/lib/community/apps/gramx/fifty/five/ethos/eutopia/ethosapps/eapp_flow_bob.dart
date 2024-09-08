@@ -10,6 +10,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/lo
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -25,9 +26,13 @@ class EthosAppFlowBob {
 
   factory EthosAppFlowBob() {
     if (_instance == null) {
-      print("EthosAppFlowBob:factory:no instance were found");
+      if (kDebugMode) {
+        print("EthosAppFlowBob:factory:no instance were found");
+      }
       _instance = EthosAppFlowBob._();
-      print("EthosAppFlowBob:factory:new instance assigned");
+      if (kDebugMode) {
+        print("EthosAppFlowBob:factory:new instance assigned");
+      }
       _instance!.start();
     }
     return _instance!;
@@ -151,12 +156,14 @@ class EthosAppFlowBob {
 
   /// constructor definition
   Future<void> start() async {
-    print("EthosAppFlowBob constructor started."); // Add a log statement
-
+    if (kDebugMode) {
+      print("EthosAppFlowBob constructor started."); // Add a log statement
+    }
     buildCommunityAssetsPath();
     fetchAllCommunityEthosapps();
-
-    print("EthosAppFlowBob constructor completed."); // Add a log statement
+    if (kDebugMode) {
+      print("EthosAppFlowBob constructor completed.");
+    } // Add a log statement
   }
 
   /// Retrieves the variable value associated with a specific application within
@@ -228,10 +235,12 @@ class EthosAppFlowBob {
       required String orgName,
       required String appName,
       required String componentNameCode}) {
-    print(
-        "getGramxAppsInteractionComponentValue - Components for App: ${gramxAppsInteractionComponents[communityCode]["$orgName-$appName"]}");
-    print(
-        "getGramxAppsInteractionComponentValue - will get component for $communityCode, $orgName, $appName, $componentNameCode");
+    if (kDebugMode) {
+      print(
+          "getGramxAppsInteractionComponentValue - Components for App: ${gramxAppsInteractionComponents[communityCode]["$orgName-$appName"]}");
+      print(
+          "getGramxAppsInteractionComponentValue - will get component for $communityCode, $orgName, $appName, $componentNameCode");
+    }
     dynamic component = gramxAppsInteractionComponents[communityCode]
         ["$orgName-$appName"][componentNameCode]['value'];
     return component;
@@ -257,7 +266,9 @@ class EthosAppFlowBob {
       required String orgName,
       required String appName,
       required String tileNameCode}) {
-    print("looking for tile $tileNameCode");
+    if (kDebugMode) {
+      print("looking for tile $tileNameCode");
+    }
     dynamic tile = gramxAppsInteractionTiles[communityCode]["$orgName-$appName"]
         [tileNameCode]['value'];
     return tile;
@@ -290,9 +301,10 @@ class EthosAppFlowBob {
       gramxCommunityAssetsPath[communityCode] = {
         'assetPath': namedCommunityCodedPath
       };
-
-      print(
-          "Community Assets Path for Code $communityCode: $namedCommunityCodedPath");
+      if (kDebugMode) {
+        print(
+            "Community Assets Path for Code $communityCode: $namedCommunityCodedPath");
+      }
     }
   }
 
@@ -322,16 +334,22 @@ class EthosAppFlowBob {
           // Handle the case where it's a YamlList
           return (appVariables as YamlList);
         } else {
-          print("Error loading contract list for path: $assetPath");
+          if (kDebugMode) {
+            print("Error loading contract list for path: $assetPath");
+          }
           throw Exception("Error data from asset is not list: $assetPath");
         }
       } else {
-        print("Error loading contracts data: Asset data is null");
+        if (kDebugMode) {
+          print("Error loading contracts data: Asset data is null");
+        }
         throw Exception("Error no data from asset: $assetPath");
       }
     } catch (e) {
       // Handle any errors that occur during loading or parsing
-      print("Error loading asset from path: $assetPath. Error: $e");
+      if (kDebugMode) {
+        print("Error loading asset from path: $assetPath. Error: $e");
+      }
       throw Exception("Error loading asset from path: $assetPath. Error: $e");
     }
   }
@@ -367,18 +385,23 @@ class EthosAppFlowBob {
     required String orgName,
     required String appName,
   }) async {
-    print("_loadAppLocalVariables - Start for app: $appName");
+    if (kDebugMode) {
+      print("_loadAppLocalVariables - Start for app: $appName");
+    }
     YamlList appVariables;
 
     try {
       final assetPath = '$appAssetPath/ethosapp_local_variables.yaml';
       appVariables = await _getContractListFromAssetPath(assetPath: assetPath);
-
-      print(
-          "Loaded ${appVariables.length} app local variables contracts for app: $appName");
+      if (kDebugMode) {
+        print(
+            "Loaded ${appVariables.length} app local variables contracts for app: $appName");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print("Error loading app local variables for app: $appName. Error: $e");
+      if (kDebugMode) {
+        print("Error loading app local variables for app: $appName. Error: $e");
+      }
       throw e;
     }
 
@@ -391,18 +414,25 @@ class EthosAppFlowBob {
               _extractAppVariableData(appVariableContract as YamlMap);
           final String nameCode = appVariableData['nameCode']!;
           appLocalVariablesMap[nameCode] = appVariableData;
-
-          print("Loaded local variable: $nameCode for app: $appName");
+          if (kDebugMode) {
+            print("Loaded local variable: $nameCode for app: $appName");
+          }
         } else {
-          print("Empty app variable contract data encountered.");
+          if (kDebugMode) {
+            print("Empty app variable contract data encountered.");
+          }
         }
       } catch (e) {
         if (e.toString() ==
             "Exception: Incomplete app variable contract data.") {
           // Handle the specific exception here
-          print("Incomplete app variable contract data encountered.");
+          if (kDebugMode) {
+            print("Incomplete app variable contract data encountered.");
+          }
         } else {
-          print("Error loading local variable for app: $appName - Error: $e");
+          if (kDebugMode) {
+            print("Error loading local variable for app: $appName - Error: $e");
+          }
           // Handle the exception here or rethrow it as needed
           throw Exception(
               "Error loading local variable for app: $appName - $e");
@@ -413,8 +443,9 @@ class EthosAppFlowBob {
     gramxAppsLocalVariables[communityCode] = {
       "$orgName-$appName": appLocalVariablesMap
     };
-
-    print("_loadAppLocalVariables - End for app: $appName");
+    if (kDebugMode) {
+      print("_loadAppLocalVariables - End for app: $appName");
+    }
   }
 
   /// Extracts and processes the necessary information from a given app variable contract.
@@ -444,18 +475,20 @@ class EthosAppFlowBob {
       final String name = appVariableContract['name'] ?? '';
       final String type = appVariableContract['type'] ?? '';
       final YamlMap defaultValues = appVariableContract['default'] ?? YamlMap();
-
-      print(
-          "_extractAppVariableData - Extracting data for variable: $nameCode, Name: $name, Type: $type");
-
+      if (kDebugMode) {
+        print(
+            "_extractAppVariableData - Extracting data for variable: $nameCode, Name: $name, Type: $type");
+      }
       if (nameCode.isEmpty || name.isEmpty || type.isEmpty) {
         throw Exception("Incomplete app variable contract data.");
       }
 
       final appVariable = LocalVariableComposer().fromVariableContract(
           variableTypeNameCode: type, defaultValues: defaultValues);
-
-      print("_extractAppVariableData - Extracted data for variable: $nameCode");
+      if (kDebugMode) {
+        print(
+            "_extractAppVariableData - Extracted data for variable: $nameCode");
+      }
 
       return {
         'value': appVariable,
@@ -464,8 +497,10 @@ class EthosAppFlowBob {
         'nameCode': nameCode,
       };
     } catch (e) {
-      print(
-          "_extractAppVariableData - Error extracting data from app variable contract: $e");
+      if (kDebugMode) {
+        print(
+            "_extractAppVariableData - Error extracting data from app variable contract: $e");
+      }
       // Handle the exception here or rethrow it as needed
       throw Exception("Error extracting app variable data: $e");
     }
@@ -507,20 +542,26 @@ class EthosAppFlowBob {
     required String orgName,
     required String appName,
   }) async {
-    print(
-        "_loadAppLocalCapabilities - Loading local capabilities for $orgName/$appName");
+    if (kDebugMode) {
+      print(
+          "_loadAppLocalCapabilities - Loading local capabilities for $orgName/$appName");
+    }
     YamlList appCapabilities;
 
     try {
       final assetPath = "$appAssetPath/ethosapp_local_capabilities.yaml";
       appCapabilities =
           await _getContractListFromAssetPath(assetPath: assetPath);
-      print(
-          "_loadAppLocalCapabilities - Found ${appCapabilities.length} capability contracts for app: $appName");
+      if (kDebugMode) {
+        print(
+            "_loadAppLocalCapabilities - Found ${appCapabilities.length} capability contracts for app: $appName");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "_loadAppLocalCapabilities - Error loading app local capability for app: $appName. Error: $e");
+      if (kDebugMode) {
+        print(
+            "_loadAppLocalCapabilities - Error loading app local capability for app: $appName. Error: $e");
+      }
       throw e;
     }
 
@@ -528,7 +569,9 @@ class EthosAppFlowBob {
 
     for (final appCapabilityContract in appCapabilities) {
       if (appCapabilityContract == null) {
-        print("Incomplete app capability contract data encountered.");
+        if (kDebugMode) {
+          print("Incomplete app capability contract data encountered.");
+        }
         break;
       }
       try {
@@ -539,9 +582,10 @@ class EthosAppFlowBob {
         final contextExpects = context['expects'] ?? YamlList();
         final contextReturns = context['returns'] ?? YamlMap();
         final contextSteps = context['steps'] ?? YamlList();
-
-        print(
-            "_loadAppLocalCapabilities - Processing capability contract: $nameCode, Name: $name");
+        if (kDebugMode) {
+          print(
+              "_loadAppLocalCapabilities - Processing capability contract: $nameCode, Name: $name");
+        }
 
         if (nameCode.isEmpty || name.isEmpty || context.isEmpty) {
           throw Exception("Incomplete app variable contract data.");
@@ -554,19 +598,24 @@ class EthosAppFlowBob {
             expects: contextExpects,
             returns: contextReturns,
             steps: contextSteps);
-
-        print(
-            "_loadAppLocalCapabilities - Extracted data for capability: $nameCode");
+        if (kDebugMode) {
+          print(
+              "_loadAppLocalCapabilities - Extracted data for capability: $nameCode");
+        }
 
         appLocalCapabilitiesMap[nameCode] = {
           'value': appCapability,
           'name': name
         };
-        print(
-            "_loadAppLocalCapabilities - Processed capability contract: $nameCode");
+        if (kDebugMode) {
+          print(
+              "_loadAppLocalCapabilities - Processed capability contract: $nameCode");
+        }
       } catch (e) {
-        print(
-            "_loadAppLocalCapabilities - Error extracting data from app capability contract: $e");
+        if (kDebugMode) {
+          print(
+              "_loadAppLocalCapabilities - Error extracting data from app capability contract: $e");
+        }
         // Handle the exception here or rethrow it as needed
         throw Exception("Error extracting app capability data: $e");
       }
@@ -575,9 +624,10 @@ class EthosAppFlowBob {
     gramxAppsLocalCapabilities[communityCode] = {
       "$orgName-$appName": appLocalCapabilitiesMap
     };
-
-    print(
-        "_loadAppLocalCapabilities - Local capabilities loaded for $orgName/$appName");
+    if (kDebugMode) {
+      print(
+          "_loadAppLocalCapabilities - Local capabilities loaded for $orgName/$appName");
+    }
   }
 
   /// Loads the interaction components of an application from the specified asset path,
@@ -612,22 +662,26 @@ class EthosAppFlowBob {
     required String orgName,
     required String appName,
   }) async {
-    print(
-        "_loadAppInteractionComponents - Loading interaction components for $orgName/$appName");
+    if (kDebugMode) {
+      print(
+          "_loadAppInteractionComponents - Loading interaction components for $orgName/$appName");
+    }
 
     try {
       final appComponents = await _getContractListFromAssetPath(
         assetPath: "$appAssetPath/ethosapp_interaction_components.yaml",
       );
-
-      print(
-          "_loadAppInteractionComponents - Found ${appComponents.length} component contracts");
-
+      if (kDebugMode) {
+        print(
+            "_loadAppInteractionComponents - Found ${appComponents.length} component contracts");
+      }
       final Map<String, Map<String, dynamic>> appInteractionComponentsMap = {};
 
       for (final appComponentContract in appComponents) {
         if (appComponentContract == null) {
-          print("Incomplete app component contract data encountered.");
+          if (kDebugMode) {
+            print("Incomplete app component contract data encountered.");
+          }
           break;
         }
         try {
@@ -636,10 +690,10 @@ class EthosAppFlowBob {
           final component = appComponentContract['component'];
 
           final componentNameCode = component['name-code'] ?? '';
-
-          print(
-              "_loadAppInteractionComponents - Processing component contract: $nameCode, Name: $name");
-
+          if (kDebugMode) {
+            print(
+                "_loadAppInteractionComponents - Processing component contract: $nameCode, Name: $name");
+          }
           final appComponent = ComponentComposer().fromComponentContract(
             communityCode: communityCode,
             orgName: orgName,
@@ -652,12 +706,15 @@ class EthosAppFlowBob {
             'value': appComponent,
             'name': name,
           };
-
-          print(
-              "_loadAppInteractionComponents - Processed component contract: $nameCode");
+          if (kDebugMode) {
+            print(
+                "_loadAppInteractionComponents - Processed component contract: $nameCode");
+          }
         } catch (e) {
-          print(
-              "_loadAppInteractionComponents - Error processing component contract: $e");
+          if (kDebugMode) {
+            print(
+                "_loadAppInteractionComponents - Error processing component contract: $e");
+          }
           // Handle the exception here or rethrow it as needed
           throw Exception("Error processing component contract: $e");
         }
@@ -666,13 +723,16 @@ class EthosAppFlowBob {
       gramxAppsInteractionComponents[communityCode] = {
         "$orgName-$appName": appInteractionComponentsMap,
       };
-
-      print(
-          "_loadAppInteractionComponents - Interaction components loaded for $orgName/$appName");
+      if (kDebugMode) {
+        print(
+            "_loadAppInteractionComponents - Interaction components loaded for $orgName/$appName");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "_loadAppInteractionComponents - Error loading interaction components for $orgName/$appName. Error: $e");
+      if (kDebugMode) {
+        print(
+            "_loadAppInteractionComponents - Error loading interaction components for $orgName/$appName. Error: $e");
+      }
       throw e;
     }
   }
@@ -709,20 +769,25 @@ class EthosAppFlowBob {
     required String orgName,
     required String appName,
   }) async {
-    print(
-        "_loadAppInteractionTiles - Loading interaction tiles for $orgName/$appName");
-
+    if (kDebugMode) {
+      print(
+          "_loadAppInteractionTiles - Loading interaction tiles for $orgName/$appName");
+    }
     final appTiles = await _getContractListFromAssetPath(
       assetPath: "$appAssetPath/ethosapp_interaction_tiles.yaml",
     );
-
-    print("_loadAppInteractionTiles - Found ${appTiles.length} tile contracts");
+    if (kDebugMode) {
+      print(
+          "_loadAppInteractionTiles - Found ${appTiles.length} tile contracts");
+    }
 
     final Map<String, Map<String, dynamic>> appInteractionTilesMap = {};
 
     for (final appTileContract in appTiles) {
       if (appTileContract == null) {
-        print("Incorrect data for app tile contract");
+        if (kDebugMode) {
+          print("Incorrect data for app tile contract");
+        }
         break;
       }
 
@@ -731,14 +796,15 @@ class EthosAppFlowBob {
       final about = appTileContract['about'];
       final composition = appTileContract['composition'];
       final conditions = appTileContract['conditions'] ?? YamlList();
-
-      print(
-          "_loadAppInteractionTiles - Processing tile contract: $nameCode, Name: $name");
-
+      if (kDebugMode) {
+        print(
+            "_loadAppInteractionTiles - Processing tile contract: $nameCode, Name: $name");
+      }
       final compositionNameCode = composition['name-code'] ?? '';
-
-      print(
-          "_loadAppInteractionTiles - will compose for ${compositionNameCode}, with properties ${composition}");
+      if (kDebugMode) {
+        print(
+            "_loadAppInteractionTiles - will compose for ${compositionNameCode}, with properties ${composition}");
+      }
       final composedComponent = ComponentComposer().fromComponentContract(
         communityCode: communityCode,
         orgName: orgName,
@@ -760,16 +826,17 @@ class EthosAppFlowBob {
         'name': name,
         'about': about,
       };
-
-      print("_loadAppInteractionTiles - Processed tile contract: $nameCode");
-
+      if (kDebugMode) {
+        print("_loadAppInteractionTiles - Processed tile contract: $nameCode");
+      }
       gramxAppsInteractionTiles[communityCode] = {
         "$orgName-$appName": appInteractionTilesMap,
       };
     }
-
-    print(
-        "_loadAppInteractionTiles - Interaction tiles loaded for $orgName/$appName");
+    if (kDebugMode) {
+      print(
+          "_loadAppInteractionTiles - Interaction tiles loaded for $orgName/$appName");
+    }
   }
 
   /// This method is responsible for loading assets and setting up app flow,
@@ -802,7 +869,9 @@ class EthosAppFlowBob {
     required String communityAssetsPath,
     required int communityCode,
   }) async {
-    print("_loadCommunityOrganisationEthosappContracts - Start");
+    if (kDebugMode) {
+      print("_loadCommunityOrganisationEthosappContracts - Start");
+    }
     final orgName = organisationEthosappContract['organisation'];
     final orgAssetPath = "$communityAssetsPath/$orgName";
     final orgApps = organisationEthosappContract['apps'] as YamlList;
@@ -810,19 +879,27 @@ class EthosAppFlowBob {
     final currentEnv = await Environment.current();
 
     // Log the number of apps being loaded for the organization
-    print("Loading ${orgApps.length} apps for organization: $orgName");
+    if (kDebugMode) {
+      print("Loading ${orgApps.length} apps for organization: $orgName");
+    }
 
     for (final appName in orgApps) {
-      print("Loading ${appName} app for organization: $orgName");
+      if (kDebugMode) {
+        print("Loading ${appName} app for organization: $orgName");
+      }
       if (currentEnv != "com.50gramx") {
         if (currentEnv != "com.50gramx.$communityCode.$orgName.$appName") {
-          print(
-              "_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load com.50gramx.$communityCode.$orgName.$appName...");
+          if (kDebugMode) {
+            print(
+                "_loadCommunityOrganisationEthosappContracts: expected flavor, skipping to load com.50gramx.$communityCode.$orgName.$appName...");
+          }
           continue;
         }
       }
-      print(
-          "_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
+      if (kDebugMode) {
+        print(
+            "_loadCommunityOrganisationEthosappContracts: is flavor, will load $appName...");
+      }
       // will skip if the flavor is not com.50gramx
       // will only build for the flavor org name, community code, and app name
 
@@ -831,16 +908,20 @@ class EthosAppFlowBob {
 
       try {
         // Load app assets sequentially
-        print(
-            "Start loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+        if (kDebugMode) {
+          print(
+              "Start loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+        }
         await _loadAppAssets(
           appAssetPath: appAssetPath,
           appName: appName,
           communityCode: communityCode,
           orgName: orgName,
         );
-        print(
-            "Assets loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+        if (kDebugMode) {
+          print(
+              "Assets loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+        }
 
         orgAppsPaths.add({
           'name': appName,
@@ -848,24 +929,33 @@ class EthosAppFlowBob {
         });
 
         appFlow = _createAppFlow(communityCode, appName);
-        print("App flow created for communityCode: $communityCode");
+        if (kDebugMode) {
+          print("App flow created for communityCode: $communityCode");
+        }
         communityAppFlow[communityCode]!.add(appFlow);
 
         final leftNavigationTab = _createLeftNavigationTab(appFlow);
-        print("Left navigation tab created for communityCode: $communityCode");
+        if (kDebugMode) {
+          print(
+              "Left navigation tab created for communityCode: $communityCode");
+        }
         navigationBarItems.add(leftNavigationTab);
 
         final eutopiaTab = _createEutopiaTab(leftNavigationTab);
-        print("Eutopia tab created for communityCode: $communityCode");
+        if (kDebugMode) {
+          print("Eutopia tab created for communityCode: $communityCode");
+        }
         eutopiaNavigationBarSectionalItems.add(eutopiaTab);
 
         NotificationsBloc.instance.newNotification(
             LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
       } catch (e) {
         // Handle any errors that occur during loading
-        print(
-            "Error loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
-        print("Will stop loading app contracts");
+        if (kDebugMode) {
+          print(
+              "Error loading assets for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+          print("Will stop loading app contracts");
+        }
         break;
       }
     }
@@ -874,24 +964,32 @@ class EthosAppFlowBob {
       // Attempt to access the nested properties
       final orgData = gramxCommunityAssetsPath[communityCode]?['organisations'];
       if (orgData != null) {
-        print('"organisations" is not null');
+        if (kDebugMode) {
+          print('"organisations" is not null');
+        }
         gramxCommunityAssetsPath[communityCode]!['organisations'].add(
             {'name': orgName, 'assetPath': orgAssetPath, 'apps': orgAppsPaths});
       } else {
         // Handle the case where 'organisations' is null
-        print('Error: The property "organisations" is null.');
+        if (kDebugMode) {
+          print('Error: The property "organisations" is null.');
+        }
         // TODO: handle this with notifications maybe
       }
     } catch (e) {
       // Handle any exceptions that might occur
-      print('An error occurred: $e');
+      if (kDebugMode) {
+        print('An error occurred: $e');
+      }
       // TODO: handle this with notifications maybe
     }
     //
     // // add the orgdata to assetsPath
     // gramxCommunityAssetsPath[communityCode]!['organisations'].add(
     //     {'name': orgName, 'assetPath': orgAssetPath, 'apps': orgAppsPaths});
-    print("_loadCommunityOrganisationEthosappContracts - End");
+    if (kDebugMode) {
+      print("_loadCommunityOrganisationEthosappContracts - End");
+    }
   }
 
   /// Loads assets for a given app within a specified organization and community.
@@ -923,10 +1021,12 @@ class EthosAppFlowBob {
     required int communityCode,
     required String orgName,
   }) async {
-    print("_loadAppAssets - Start for app: $appName");
+    if (kDebugMode) {
+      print("_loadAppAssets - Start for app: $appName");
 
-    print(
-        "Loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      print(
+          "Loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    }
     try {
       await _loadAppLocalVariables(
         appAssetPath: appAssetPath,
@@ -934,17 +1034,23 @@ class EthosAppFlowBob {
         communityCode: communityCode,
         orgName: orgName,
       );
-      print(
-          "App local variables loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      if (kDebugMode) {
+        print(
+            "App local variables loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "Error loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      if (kDebugMode) {
+        print(
+            "Error loading app local variables for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      }
       throw e;
     }
 
-    print(
-        "Loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    if (kDebugMode) {
+      print(
+          "Loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    }
     try {
       await _loadAppLocalCapabilities(
         appAssetPath: appAssetPath,
@@ -952,17 +1058,23 @@ class EthosAppFlowBob {
         communityCode: communityCode,
         orgName: orgName,
       );
-      print(
-          "App local capabilities loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      if (kDebugMode) {
+        print(
+            "App local capabilities loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "Error loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      if (kDebugMode) {
+        print(
+            "Error loading app local capabilities for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      }
       throw e;
     }
 
-    print(
-        "Loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    if (kDebugMode) {
+      print(
+          "Loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    }
     try {
       await _loadAppInteractionComponents(
         appAssetPath: appAssetPath,
@@ -970,17 +1082,22 @@ class EthosAppFlowBob {
         orgName: orgName,
         appName: appName,
       );
-      print(
-          "App interaction components loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      if (kDebugMode) {
+        print(
+            "App interaction components loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "Error loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      if (kDebugMode) {
+        print(
+            "Error loading app interaction components for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      }
       throw e;
     }
-
-    print(
-        "Loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    if (kDebugMode) {
+      print(
+          "Loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+    }
     try {
       await _loadAppInteractionTiles(
         appAssetPath: appAssetPath,
@@ -988,19 +1105,24 @@ class EthosAppFlowBob {
         orgName: orgName,
         appName: appName,
       );
-      print(
-          "App interaction tiles loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      if (kDebugMode) {
+        print(
+            "App interaction tiles loaded for app: $appName (Organization: $orgName, Community Code: $communityCode)");
+      }
     } catch (e) {
       // Handle any errors that occur during loading
-      print(
-          "Error loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      if (kDebugMode) {
+        print(
+            "Error loading app interaction tiles for app: $appName (Organization: $orgName, Community Code: $communityCode). Error: $e");
+      }
       throw e;
     }
 
     // Optionally, Load app interaction pages if necessary
     // Implementation depending on your application's requirements
-
-    print("_loadAppAssets - End for app: $appName");
+    if (kDebugMode) {
+      print("_loadAppAssets - End for app: $appName");
+    }
   }
 
   /// Creates an [AppFlow] instance for a given community.
@@ -1115,18 +1237,24 @@ class EthosAppFlowBob {
   /// ```
   Future<void> _loadCommunityEthosappContracts(
       {required int communityCode}) async {
-    print(
-        "_loadCommunityEthosappContracts - Start for communityCode: $communityCode");
+    if (kDebugMode) {
+      print(
+          "_loadCommunityEthosappContracts - Start for communityCode: $communityCode");
+    }
     communityAppFlow[communityCode] = [];
     String communityAssetsPath;
 
     try {
       communityAssetsPath = _getCommunityAssetsPath(communityCode);
-      print(
-          "_loadCommunityEthosappContracts - Assets fetched for communityCode: $communityCode");
+      if (kDebugMode) {
+        print(
+            "_loadCommunityEthosappContracts - Assets fetched for communityCode: $communityCode");
+      }
     } catch (e) {
-      print(
-          "_loadCommunityEthosappContracts - Couldn't start due to missing communityAssetsPath for communityCode: $communityCode");
+      if (kDebugMode) {
+        print(
+            "_loadCommunityEthosappContracts - Couldn't start due to missing communityAssetsPath for communityCode: $communityCode");
+      }
       return; // Exit the function if assets path is not found.
     }
 
@@ -1134,11 +1262,15 @@ class EthosAppFlowBob {
 
     try {
       ethosappContracts = await _fetchEthosappContracts(communityAssetsPath);
-      print(
-          "_loadCommunityEthosappContracts - Fetched ${ethosappContracts.length} contracts for communityCode: $communityCode with contract: ${ethosappContracts}");
+      if (kDebugMode) {
+        print(
+            "_loadCommunityEthosappContracts - Fetched ${ethosappContracts.length} contracts for communityCode: $communityCode with contract: ${ethosappContracts}");
+      }
     } catch (e) {
-      print(
-          "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode, error: $e");
+      if (kDebugMode) {
+        print(
+            "_loadCommunityEthosappContracts - Couldn't start due to error while fetching ethosappContracts for communityCode: $communityCode, error: $e");
+      }
       return; // Exit the function if ethosappContracts are not fetched.
     }
 
@@ -1151,9 +1283,10 @@ class EthosAppFlowBob {
         ),
       ),
     );
-
-    print(
-        "_loadCommunityEthosappContracts - End for communityCode: $communityCode");
+    if (kDebugMode) {
+      print(
+          "_loadCommunityEthosappContracts - End for communityCode: $communityCode");
+    }
   }
 
   /// Retrieves the assets path for a specified Gramx community.
@@ -1177,13 +1310,18 @@ class EthosAppFlowBob {
       if (assetsPath != null) {
         return assetsPath;
       } else {
-        print("Error: Assets path not found for communityCode: $communityCode");
+        if (kDebugMode) {
+          print(
+              "Error: Assets path not found for communityCode: $communityCode");
+        }
         // You can throw an exception here if needed or return a default value.
         return ''; // Return an empty string as a fallback.
       }
     } catch (e) {
-      print(
-          "Error: Failed to retrieve assets path for communityCode: $communityCode");
+      if (kDebugMode) {
+        print(
+            "Error: Failed to retrieve assets path for communityCode: $communityCode");
+      }
       // You can throw an exception here or handle it as per your requirement.
       return ''; // Return an empty string as a fallback.
     }
@@ -1215,8 +1353,10 @@ class EthosAppFlowBob {
           assetPath: "$communityAssetsPath/ethosapps.yaml");
       return contracts;
     } catch (e) {
-      print(
-          "Error: Failed to fetch ethos app contracts for assetsPath: $communityAssetsPath");
+      if (kDebugMode) {
+        print(
+            "Error: Failed to fetch ethos app contracts for assetsPath: $communityAssetsPath");
+      }
       // Handle the error as per your requirement. You can throw an exception here or return a default value.
       return []; // Return an empty list as a fallback.
     }
@@ -1244,24 +1384,34 @@ class EthosAppFlowBob {
   /// await manager.fetchAllCommunityEthosapps();
   /// ```
   Future<void> fetchAllCommunityEthosapps() async {
-    print("fetchAllCommunityEthosapps - Start");
+    if (kDebugMode) {
+      print("fetchAllCommunityEthosapps - Start");
+    }
 
     await Future.wait(recognizedGramxCommunities.map(
         (recognizedCommunityCode) => _loadCommunityEthosappContracts(
             communityCode: recognizedCommunityCode)));
-
-    print("fetchAllCommunityEthosapps - Contracts loaded for all communities");
+    if (kDebugMode) {
+      print(
+          "fetchAllCommunityEthosapps - Contracts loaded for all communities");
+    }
     _printDebugInfo();
-    print("fetchAllCommunityEthosapps - End");
+    if (kDebugMode) {
+      print("fetchAllCommunityEthosapps - End");
+    }
   }
 
   void _printDebugInfo() {
-    print("------------------------------------------------------------------");
-    print("gramxAppsLocalVariables: $gramxAppsLocalVariables");
-    print("gramxAppsLocalCapabilities: $gramxAppsLocalCapabilities");
-    print("gramxAppsInteractionComponents: $gramxAppsInteractionComponents");
-    print("gramxAppsInteractionTiles: $gramxAppsInteractionTiles");
-    print("------------------------------------------------------------------");
+    if (kDebugMode) {
+      print(
+          "------------------------------------------------------------------");
+      print("gramxAppsLocalVariables: $gramxAppsLocalVariables");
+      print("gramxAppsLocalCapabilities: $gramxAppsLocalCapabilities");
+      print("gramxAppsInteractionComponents: $gramxAppsInteractionComponents");
+      print("gramxAppsInteractionTiles: $gramxAppsInteractionTiles");
+      print(
+          "------------------------------------------------------------------");
+    }
   }
 
   /// Dynamically loads an app on-the-go based on provided app details.
@@ -1291,42 +1441,65 @@ class EthosAppFlowBob {
         .any((appFlow) => appFlow.index == appIndex);
 
     if (appFlowExists) {
-      print("App flow already exists for $appName in community $communityCode");
+      if (kDebugMode) {
+        print(
+            "App flow already exists for $appName in community $communityCode");
+      }
       return; // Exit early if app flow is already added
     }
 
     // Load app assets and setup app flow dynamically
     try {
-      print("loading app assets");
+      if (kDebugMode) {
+        print("loading app assets");
+      }
       await _loadAppAssets(
         appAssetPath: appAssetPath,
         appName: appName,
         communityCode: communityCode,
         orgName: orgName,
       );
-      print("loaded app assets");
+      if (kDebugMode) {
+        print("loaded app assets");
+      }
 
       AppFlow appFlow = _createAppFlow(communityCode, appName);
-      print("created app flow");
+      if (kDebugMode) {
+        print("created app flow");
+      }
       communityAppFlow[communityCode]!.add(appFlow);
-      print("added app flow");
+      if (kDebugMode) {
+        print("added app flow");
+      }
 
       LeftNavigationTab leftNavigationTab = _createLeftNavigationTab(appFlow);
-      print("created app nav tab");
+      if (kDebugMode) {
+        print("created app nav tab");
+      }
       navigationBarItems.add(leftNavigationTab);
-      print("added app nav tab");
+      if (kDebugMode) {
+        print("added app nav tab");
+      }
 
       EutopiaLeftNavigationSectionalTab eutopiaTab =
           _createEutopiaTab(leftNavigationTab);
-      print("created eutopia tab");
+      if (kDebugMode) {
+        print("created eutopia tab");
+      }
       eutopiaNavigationBarSectionalItems.add(eutopiaTab);
-      print("added eutopia tab");
+      if (kDebugMode) {
+        print("added eutopia tab");
+      }
 
       NotificationsBloc.instance.newNotification(
           LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
-      print("sent notification");
+      if (kDebugMode) {
+        print("sent notification");
+      }
     } catch (e) {
-      print("Error loading app dynamically: $e");
+      if (kDebugMode) {
+        print("Error loading app dynamically: $e");
+      }
       // Handle error appropriately
     }
   }
@@ -1340,11 +1513,15 @@ class EthosAppFlowBob {
     required int communityCode,
     required int appIndex,
   }) async {
-    print("unloadAppOnTheGo");
+    if (kDebugMode) {
+      print("unloadAppOnTheGo");
+    }
     try {
       // Check if the communityCode exists in communityAppFlow
       if (!communityAppFlow.containsKey(communityCode)) {
-        print("Community code $communityCode does not exist");
+        if (kDebugMode) {
+          print("Community code $communityCode does not exist");
+        }
         return; // Exit early if community code does not exist
       }
 
@@ -1353,14 +1530,18 @@ class EthosAppFlowBob {
           .indexWhere((appFlow) => appFlow.index == appIndex);
 
       if (appFlowIndex == -1) {
-        print(
-            "App flow with index $appIndex does not exist in community $communityCode");
+        if (kDebugMode) {
+          print(
+              "App flow with index $appIndex does not exist in community $communityCode");
+        }
         return; // Exit early if app flow does not exist
       }
 
       // Remove the app flow
       AppFlow appFlow = communityAppFlow[communityCode]!.removeAt(appFlowIndex);
-      print("Removed app flow with index $appIndex");
+      if (kDebugMode) {
+        print("Removed app flow with index $appIndex");
+      }
 
       // Find and remove the corresponding left navigation tab
       final leftNavigationTabIndex = navigationBarItems.indexWhere(
@@ -1368,7 +1549,9 @@ class EthosAppFlowBob {
 
       if (leftNavigationTabIndex != -1) {
         navigationBarItems.removeAt(leftNavigationTabIndex);
-        print("Removed left navigation tab for app index $appIndex");
+        if (kDebugMode) {
+          print("Removed left navigation tab for app index $appIndex");
+        }
       }
 
       // Find and remove the corresponding Eutopia tab
@@ -1377,14 +1560,20 @@ class EthosAppFlowBob {
 
       if (eutopiaTabIndex != -1) {
         eutopiaNavigationBarSectionalItems.removeAt(eutopiaTabIndex);
-        print("Removed Eutopia tab for app index $appIndex");
+        if (kDebugMode) {
+          print("Removed Eutopia tab for app index $appIndex");
+        }
       }
 
       NotificationsBloc.instance.newNotification(
           LocalNotification("EthosAppFlowBob", {"subType": "Loaded eApp"}));
-      print("Sent notification for unloaded app");
+      if (kDebugMode) {
+        print("Sent notification for unloaded app");
+      }
     } catch (e) {
-      print("Error unloading app dynamically: $e");
+      if (kDebugMode) {
+        print("Error unloading app dynamically: $e");
+      }
       // Handle error appropriately
     }
   }

@@ -24,6 +24,7 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/c
 import 'package:fifty_gramx/community/onboarding/account/verifyAccountWidget.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ValidateAccountData {
@@ -88,24 +89,34 @@ class _ValidateAccountStatefulWidgetState
   }
 
   onValidateAccountButtonPress() async {
-    print("onValidateAccountButtonPress");
+    if (kDebugMode) {
+      print("onValidateAccountButtonPress");
+    }
     if (_accountMobileNumberTextFieldController.text.length != 10) {
-      print("returning because of invalid mobile number");
+      if (kDebugMode) {
+        print("returning because of invalid mobile number");
+      }
       return null;
     }
-    print("calling validate account mobile");
+    if (kDebugMode) {
+      print("calling validate account mobile");
+    }
     var validateAccountResponse = await AccessAccountService.validateAccount(
         "+91", _accountMobileNumberTextFieldController.text);
 
     var validateAccountWithMobileResponse =
         ValidateAccountWithMobileResponse.getDefault();
     if (validateAccountResponse.accountExists == false) {
-      print("account doesn't exists");
+      if (kDebugMode) {
+        print("account doesn't exists");
+      }
       validateAccountWithMobileResponse =
           await CreateAccountService.validateAccountWithMobile(
               "+91", _accountMobileNumberTextFieldController.text);
     } else {
-      print("account exists");
+      if (kDebugMode) {
+        print("account exists");
+      }
     }
     final validateAccountData = ValidateAccountData(
         accountExists: validateAccountResponse.accountExists,

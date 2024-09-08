@@ -11,6 +11,7 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/c
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/createAccountService.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -31,7 +32,16 @@ class _AccountMobileNumberEditorPageState
   // TODO: Get this from an Ethos Core Services API
   String selectedCountry = 'India';
   String selectedCountryCode = '+91';
-  List<String> listCountries = <String>['Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland'];
+  List<String> listCountries = <String>[
+    'Honduras',
+    'Hungary',
+    'Iceland',
+    'India',
+    'Indonesia',
+    'Iran',
+    'Iraq',
+    'Ireland'
+  ];
   List<String> listCountryCodes = <String>['+91'];
 
   // Universe Widget Properties
@@ -317,11 +327,13 @@ class _AccountMobileNumberEditorPageState
     setState(() {
       selectedCountry = userSelectedCountry;
       try {
-        selectedCountryCode = listCountryCodes[listCountries.indexOf(userSelectedCountry)];
+        selectedCountryCode =
+            listCountryCodes[listCountries.indexOf(userSelectedCountry)];
       } catch (e) {
-        print("found exception during selecting country code");
+        if (kDebugMode) {
+          print("found exception during selecting country code");
+        }
       }
-
     });
   }
 }

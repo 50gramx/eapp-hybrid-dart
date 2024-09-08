@@ -1,6 +1,7 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,8 +54,10 @@ class PageHeaderConfig {
       stretch: true,
       actions: buildAppBarActions(context),
       onStretchTrigger: () async {
-        print("OnStretchTrigger:start");
-        print("OnStretchTrigger:finish");
+        if (kDebugMode) {
+          print("OnStretchTrigger:start");
+          print("OnStretchTrigger:finish");
+        }
       },
     );
   }

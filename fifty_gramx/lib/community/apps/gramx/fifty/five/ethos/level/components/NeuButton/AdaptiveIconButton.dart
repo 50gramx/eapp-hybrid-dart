@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -39,7 +40,9 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
 
   @override
   Widget build(BuildContext context) {
-    print("building AdaptiveNeuButton");
+    if (kDebugMode) {
+      print("building AdaptiveNeuButton");
+    }
 
     Widget neuIcon = NeumorphicIcon(
       widget.icon,
@@ -132,8 +135,9 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
         children: [Container(child: neuButton), name],
       ),
     );
-
-    print("returning AdaptiveNeuButton");
+    if (kDebugMode) {
+      print("returning AdaptiveNeuButton");
+    }
     return LayoutBreakpoint().isNavigatingLeft(context) ? neuButton : neuButton;
   }
 }

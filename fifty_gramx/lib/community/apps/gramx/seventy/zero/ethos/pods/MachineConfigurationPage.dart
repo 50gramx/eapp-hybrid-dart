@@ -21,6 +21,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConf
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/switchConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
@@ -310,10 +311,14 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   titleText: "File System",
                   switchValue: snapshotMultiverseFileSystemPodStatus.data!,
                   switchOnChanged: (value) {
-                    print("switchOnChanged: $value");
+                    if (kDebugMode) {
+                      print("switchOnChanged: $value");
+                    }
                     if (!value) {
                       // user requested to stop the pod
-                      print("MultiversePodOperator.fsOp.spinDown()");
+                      if (kDebugMode) {
+                        print("MultiversePodOperator.fsOp.spinDown()");
+                      }
                       MultiversePodOperator.fsOp.spinDown();
                       setState(() {});
                     } else {
@@ -751,7 +756,9 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                   case ConnectionState.active:
                     return Text('Connection Active');
                   case ConnectionState.done:
-                    print("orchestratorStatus: $snapshot");
+                    if (kDebugMode) {
+                      print("orchestratorStatus: $snapshot");
+                    }
                     if (snapshot.hasData) {
                       switch (snapshot.data) {
                         case ("RUNNING, STOPPED"):
@@ -1123,12 +1130,16 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   }
 
   deployGalaxyFS() async {
-    print("deployGalaxyFS");
+    if (kDebugMode) {
+      print("deployGalaxyFS");
+    }
     var shell = Shell();
     var statusText = (await shell.run(
             "microk8s kubectl apply -f /opt/ethos/wiki/eapp-wiki/config/devops/ethos-pod/orchestration-charts/eapp-pods-galaxy/basic/deployment.yaml"))
         .outText;
-    print(statusText);
+    if (kDebugMode) {
+      print(statusText);
+    }
   }
 
   checkKnowledgeSpaceChains() async {

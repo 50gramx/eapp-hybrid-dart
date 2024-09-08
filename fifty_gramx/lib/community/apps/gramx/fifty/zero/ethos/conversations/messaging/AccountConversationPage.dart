@@ -30,6 +30,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/ConversationListKeyManager.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -142,7 +143,9 @@ class _AccountConversationPageState extends State<AccountConversationPage> {
         try {
           listKeyManager.insertItem(index);
         } catch (e) {
-          print("Exception while inserting: $e");
+          if (kDebugMode) {
+            print("Exception while inserting: $e");
+          }
         }
       }
       scrollToBottom();

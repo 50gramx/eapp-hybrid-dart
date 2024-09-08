@@ -4,6 +4,7 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/c
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/compact/artworknone/chevronWithLabelTrailing.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/connections/listItem/ContactsListItem.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -21,7 +22,9 @@ class ContactsListViewWidget extends StatefulWidget {
 
   @override
   State<ContactsListViewWidget> createState() {
-    print("AllAssistantsConnectionsStreamingListViewWidget:createState");
+    if (kDebugMode) {
+      print("AllAssistantsConnectionsStreamingListViewWidget:createState");
+    }
     return _ContactsListViewWidgetState();
   }
 }
@@ -33,19 +36,27 @@ class _ContactsListViewWidgetState extends State<ContactsListViewWidget> {
   List<Contact> fetchedContacts = [];
 
   getAllContacts() async {
-    print("getAllContacts");
+    if (kDebugMode) {
+      print("getAllContacts");
+    }
     if (await Permission.contacts.request().isGranted) {
-      print("permissions granted");
+      if (kDebugMode) {
+        print("permissions granted");
+      }
       // Get all contacts without thumbnail (faster)
       contacts = await ContactsService.getContacts(withThumbnails: true);
-      print("${contacts.length}");
+      if (kDebugMode) {
+        print("${contacts.length}");
+      }
       for (var contact in contacts) {
         setState(() {
           fetchedContacts.add(contact);
         });
       }
     } else {
-      print("permissions not granted");
+      if (kDebugMode) {
+        print("permissions not granted");
+      }
     }
   }
 

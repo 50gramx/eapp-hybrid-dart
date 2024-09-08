@@ -450,7 +450,9 @@ class _GettingStartedUniverseColumnWidgetState
 
   // Universe : Horizontal Nav
   increaseUniverseHorizontalNav() {
-    print("increaseUniverseHorizontalNav: $universeHorizontalNavIndex");
+    if (kDebugMode) {
+      print("increaseUniverseHorizontalNav: $universeHorizontalNavIndex");
+    }
     setState(() {
       universeHorizontalNavIndex += 1;
     });
@@ -504,7 +506,9 @@ class _GettingStartedUniverseColumnWidgetState
           // }
           increaseUniverseHorizontalNav();
         } else {
-          print("account doesn't exists");
+          if (kDebugMode) {
+            print("account doesn't exists");
+          }
           if (kIsWeb) {
             await validateAccountWithMobile();
             if (validateAccountWithMobileResponse
@@ -512,7 +516,9 @@ class _GettingStartedUniverseColumnWidgetState
               increaseUniverseHorizontalNav();
             }
           } else {
-            print("platform is not web");
+            if (kDebugMode) {
+              print("platform is not web");
+            }
             await validateAccountWithMobile();
             if (validateAccountWithMobileResponse
                 .validateAccountWithMobileDone) {
@@ -544,11 +550,15 @@ class _GettingStartedUniverseColumnWidgetState
             if ((await AccountData().readAccount()).accountBillingActive) {
               // checking if the billing is not active
               // todo: load local services here
-              print("will pushToHomeScreenWidget");
-              // pushToHomeScreenWidget();
-              print("will set state");
+              if (kDebugMode) {
+                print("will pushToHomeScreenWidget");
+                // pushToHomeScreenWidget();
+                print("will set state");
+              }
               setState(() {});
-              print("done set state");
+              if (kDebugMode) {
+                print("done set state");
+              }
               widget.completedSelectingUniverseCallback();
             } else {
               // pushing the account to complete tier selection
@@ -581,32 +591,46 @@ class _GettingStartedUniverseColumnWidgetState
         increaseUniverseHorizontalNav();
       }
     } else if (universeHorizontalNavIndex == 5) {
-      print("will wait for capture");
+      if (kDebugMode) {
+        print("will wait for capture");
+      }
       var captureAccountMetaDetailsResponse = await captureAccountMetaDetails();
-      print("captured: ${captureAccountMetaDetailsResponse}");
+      if (kDebugMode) {
+        print("captured: ${captureAccountMetaDetailsResponse}");
+      }
       if (captureAccountMetaDetailsResponse.accountCreationDone) {
-        print("created account");
+        if (kDebugMode) {
+          print("created account");
+        }
         saveAccessAuth(
             captureAccountMetaDetailsResponse.accountServiceAccessAuthDetails);
-        print("saved access auth");
+        if (kDebugMode) {
+          print("saved access auth");
+        }
         final snackBar = SnackBar(
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // start update billing
-        print("will update billing");
+        if (kDebugMode) {
+          print("will update billing");
+        }
         await AccountData().saveIsAccountBillingActive(true);
         // end  update billing
         LocalServices().contacts();
         // widget.completedSelectingUniverseCallback();
       } else {
-        print("couldn't create account");
+        if (kDebugMode) {
+          print("couldn't create account");
+        }
         final snackBar = SnackBar(
             content:
                 Text(captureAccountMetaDetailsResponse.accountCreationMessage));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
-      print("will push");
+      if (kDebugMode) {
+        print("will push");
+      }
       widget.completedSelectingUniverseCallback();
       // pushToHomeScreenWidget();
       // setState(() {});
@@ -615,18 +639,27 @@ class _GettingStartedUniverseColumnWidgetState
 
   // Universe Helper functions
   validateAccount() async {
-    print("validateAccount");
+    if (kDebugMode) {
+      print("validateAccount");
+    }
     validateAccountResponse = await AccessAccountService.validateAccount(
         selectedCountryCode, mobileNumberTextFieldController.text);
-    print("validateAccount.validateAccountResponse: $validateAccountResponse");
+    if (kDebugMode) {
+      print(
+          "validateAccount.validateAccountResponse: $validateAccountResponse");
+    }
   }
 
   validateAccountWithMobile() async {
-    print("validateAccountWithMobile");
+    if (kDebugMode) {
+      print("validateAccountWithMobile");
+    }
     validateAccountWithMobileResponse =
         await CreateAccountService.validateAccountWithMobile(
             selectedCountryCode, mobileNumberTextFieldController.text);
-    print("validateAccountWithMobile: $validateAccountWithMobileResponse");
+    if (kDebugMode) {
+      print("validateAccountWithMobile: $validateAccountWithMobileResponse");
+    }
   }
 
   verifyAccount() async {
@@ -719,7 +752,9 @@ class _GettingStartedUniverseColumnWidgetState
   }
 
   pushToHomeScreenWidget() async {
-    print("pushToHomeScreenWidget");
+    if (kDebugMode) {
+      print("pushToHomeScreenWidget");
+    }
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
     // await LocalServices().loadLocalServices();

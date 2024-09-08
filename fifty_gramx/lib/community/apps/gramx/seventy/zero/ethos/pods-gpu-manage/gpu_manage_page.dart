@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -39,16 +40,18 @@ class _PodListPageState extends State<PodListPage> {
   late Future<List<Pod>> pods;
 
   Future<List<Pod>> fetchPods() async {
-    print("PodListPage: fetchPods");
+    if (kDebugMode) {
+      print("PodListPage: fetchPods");
+    }
     try {
       final response = await http.get(
         Uri.parse('http://122.179.29.113:8000/get_pods'),
         headers: {'ngrok-skip-browser-warning': '69420'},
       );
-
-      print("PodListPage: response status code: ${response.statusCode}");
-      print("PodListPage: response body: ${response.body}");
-
+      if (kDebugMode) {
+        print("PodListPage: response status code: ${response.statusCode}");
+        print("PodListPage: response body: ${response.body}");
+      }
       if (response.statusCode == 200) {
         List<dynamic> podsJson = json.decode(response.body)['pods'];
         List<Pod> pods = podsJson.map((json) => Pod.fromJson(json)).toList();
@@ -57,14 +60,18 @@ class _PodListPageState extends State<PodListPage> {
         throw Exception('Failed to load pods: ${response.reasonPhrase}');
       }
     } catch (e) {
-      print("PodListPage: error fetching pods: $e");
+      if (kDebugMode) {
+        print("PodListPage: error fetching pods: $e");
+      }
       throw Exception('Failed to load pods: $e');
     }
   }
 
   @override
   void initState() {
-    print("PodListPage: init");
+    if (kDebugMode) {
+      print("PodListPage: init");
+    }
     super.initState();
     pods = fetchPods();
   }

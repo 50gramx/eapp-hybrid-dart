@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class OpenPagesPane extends StatelessWidget {
@@ -13,21 +14,25 @@ class OpenPagesPane extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("building OpenPagesPane");
-    bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
+    if (kDebugMode) {
+      print("building OpenPagesPane");
+    }
+    bool isOneEappLoaded =
+        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
     Widget primaryPageContainer = Neumorphic(
       style: NeumorphicStyle(
-        lightSource:
-        NeumorphicTheme.isUsingDark(context)
+        lightSource: NeumorphicTheme.isUsingDark(context)
             ? LightSource.bottomRight
             : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(
-            context)
+        shadowLightColor: NeumorphicTheme.isUsingDark(context)
             ? AppColors.gray600
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
-        boxShape: isOneEappLoaded ? NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))) : NeumorphicBoxShape.roundRect(
-            BorderRadius.all(Radius.circular(24))),
+        boxShape: isOneEappLoaded
+            ? NeumorphicBoxShape.roundRect(
+                BorderRadius.all(Radius.circular(24)))
+            : NeumorphicBoxShape.roundRect(
+                BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundPrimary(context),
         depth: NeumorphicTheme.isUsingDark(context) ? 6 : 3,
         border: NeumorphicBorder(
@@ -36,8 +41,9 @@ class OpenPagesPane extends StatelessWidget {
           width: 1,
         ),
       ),
-      margin: isOneEappLoaded ? EdgeInsets.zero : EdgeInsets.only(
-          top: 16, bottom: 8, right: 8, left: 8),
+      margin: isOneEappLoaded
+          ? EdgeInsets.zero
+          : EdgeInsets.only(top: 16, bottom: 8, right: 8, left: 8),
       child: Container(
         child: Stack(
           children: pagesStack,
@@ -52,98 +58,83 @@ class OpenPagesPane extends StatelessWidget {
             children: [
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  )),
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              )),
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  )),
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              )),
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  )),
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              )),
             ],
           )),
     );
-    Widget thirdColumn =  Visibility(
+    Widget thirdColumn = Visibility(
       visible: false,
       child: Expanded(
           flex: 0,
@@ -151,104 +142,85 @@ class OpenPagesPane extends StatelessWidget {
             children: [
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  )),
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              )),
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  )),
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              )),
               Expanded(
                   child: Neumorphic(
-                    style: NeumorphicStyle(
-                      lightSource:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? LightSource.bottomRight
-                          : LightSource.topLeft,
-                      shadowLightColor:
-                      NeumorphicTheme.isUsingDark(context)
-                          ? AppColors.gray600
-                          : AppColors.backgroundSecondary(
-                          context),
-                      shape: NeumorphicShape.flat,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.all(Radius.circular(24))),
-                      color: AppColors.backgroundPrimary(context),
-                      border: NeumorphicBorder(
-                        isEnabled: true,
-                        color:
-                        AppColors.backgroundPrimary(context),
-                        width: 2,
-                      ),
-                    ),
-                    margin: EdgeInsets.only(
-                        top: 8, bottom: 8, right: 8, left: 8),
-                    child: Container(
-                      color: AppColors.backgroundPrimary(context),
-                      child: SizedBox(),
-                    ),
-                  ))
+                style: NeumorphicStyle(
+                  lightSource: NeumorphicTheme.isUsingDark(context)
+                      ? LightSource.bottomRight
+                      : LightSource.topLeft,
+                  shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                      ? AppColors.gray600
+                      : AppColors.backgroundSecondary(context),
+                  shape: NeumorphicShape.flat,
+                  boxShape: NeumorphicBoxShape.roundRect(
+                      BorderRadius.all(Radius.circular(24))),
+                  color: AppColors.backgroundPrimary(context),
+                  border: NeumorphicBorder(
+                    isEnabled: true,
+                    color: AppColors.backgroundPrimary(context),
+                    width: 2,
+                  ),
+                ),
+                margin: EdgeInsets.only(top: 8, bottom: 8, right: 8, left: 8),
+                child: Container(
+                  color: AppColors.backgroundPrimary(context),
+                  child: SizedBox(),
+                ),
+              ))
             ],
           )),
     );
     Widget superRow = Row(
       children: [
-        Expanded(
-            flex: 12,
-            child: Flexible(
-              child: primaryPageContainer
-            )),
+        Expanded(flex: 12, child: Flexible(child: primaryPageContainer)),
       ],
     );
     Widget superColumn = Column(
@@ -257,11 +229,12 @@ class OpenPagesPane extends StatelessWidget {
             visible: focusMode,
             child: Flexible(
                 flex: 12, //35
-                child: superRow
-            )), // todo: gayab mode
+                child: superRow)), // todo: gayab mode
       ],
     );
-    print("Building OpenPagesPane");
+    if (kDebugMode) {
+      print("Building OpenPagesPane");
+    }
     return Expanded(
       flex: 8,
       child: Container(

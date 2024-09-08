@@ -25,6 +25,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain_fil
 import 'package:eapp_dart_domain/ethos/elint/services/product/knowledge/space_knowledge_domain_file/delete_space_knowledge_domain_file.pbgrpc.dart';
 import 'package:fifty_gramx/channels/pySyncCapsCommonChannel.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/accessSpaceKnowledgeDomainService.dart';
+import 'package:flutter/foundation.dart';
 
 class DeleteSpaceKnowledgeDomainFileService {
   // Client declarations here
@@ -39,7 +40,9 @@ class DeleteSpaceKnowledgeDomainFileService {
               await PySyncCapsCommonChannel.pySyncCapsCommonChannel);
 
   void dispose() {
-    print("DeleteSpaceKnowledgeDomainFileService:dispose");
+    if (kDebugMode) {
+      print("DeleteSpaceKnowledgeDomainFileService:dispose");
+    }
   }
 
   // Service declarations here

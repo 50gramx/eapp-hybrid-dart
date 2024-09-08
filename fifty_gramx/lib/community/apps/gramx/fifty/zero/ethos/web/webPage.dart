@@ -33,6 +33,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -170,23 +171,33 @@ class _WebViewPageState extends State<WebViewPage> {
                       future: AccountData().readAccountId(),
                       builder: (context, snap) {
                         if (snap.connectionState == ConnectionState.waiting) {
-                          print("reading account id");
+                          if (kDebugMode) {
+                            print("reading account id");
+                          }
                           return AppProgressIndeterminateWidget();
                         } else {
-                          print("read account id");
+                          if (kDebugMode) {
+                            print("read account id");
+                          }
                           if (snap.data == "") {
-                            print("no account id");
+                            if (kDebugMode) {
+                              print("no account id");
+                            }
                             return FutureBuilder<Account>(
                                 future: AccountData().readAccount(),
                                 builder: (context, snap) {
                                   if (snap.connectionState ==
                                       ConnectionState.waiting) {
-                                    print("waiting for connection");
+                                    if (kDebugMode) {
+                                      print("waiting for connection");
+                                    }
                                     return AppProgressIndeterminateWidget();
                                   } else if (snap.connectionState ==
                                           ConnectionState.done &&
                                       snap.hasData) {
-                                    print("connection done, has data");
+                                    if (kDebugMode) {
+                                      print("connection done, has data");
+                                    }
                                     return FutureBuilder<AccountAssistant>(
                                         future: DiscoverAccountAssistantService
                                             .getAccountAssistantByAccount(
@@ -213,7 +224,9 @@ class _WebViewPageState extends State<WebViewPage> {
                                           }
                                         });
                                   } else {
-                                    print("no data");
+                                    if (kDebugMode) {
+                                      print("no data");
+                                    }
                                     return BasicConfigurationItem(
                                       titleText: "Ethos Name",
                                       subtitleText: "Ethos Code",
@@ -221,18 +234,24 @@ class _WebViewPageState extends State<WebViewPage> {
                                   }
                                 });
                           } else {
-                            print("found account id");
+                            if (kDebugMode) {
+                              print("found account id");
+                            }
                             return FutureBuilder<Account>(
                                 future: AccountData().readAccount(),
                                 builder: (context, snap) {
                                   if (snap.connectionState ==
                                       ConnectionState.waiting) {
-                                    print("waiting for connection");
+                                    if (kDebugMode) {
+                                      print("waiting for connection");
+                                    }
                                     return AppProgressIndeterminateWidget();
                                   } else if (snap.connectionState ==
                                           ConnectionState.done &&
                                       snap.hasData) {
-                                    print("connection done, has data");
+                                    if (kDebugMode) {
+                                      print("connection done, has data");
+                                    }
                                     return FutureBuilder<AccountAssistant>(
                                         future: DiscoverAccountAssistantService
                                             .getAccountAssistantByAccount(
@@ -259,7 +278,9 @@ class _WebViewPageState extends State<WebViewPage> {
                                           }
                                         });
                                   } else {
-                                    print("no data");
+                                    if (kDebugMode) {
+                                      print("no data");
+                                    }
                                     return BasicConfigurationItem(
                                       titleText: "Ethos Name",
                                       subtitleText: "Ethos Code",
@@ -274,12 +295,16 @@ class _WebViewPageState extends State<WebViewPage> {
                         future: AccountData().readAccount(),
                         builder: (context, snap) {
                           if (snap.connectionState == ConnectionState.waiting) {
-                            print("waiting for connection");
+                            if (kDebugMode) {
+                              print("waiting for connection");
+                            }
                             return AppProgressIndeterminateWidget();
                           } else if (snap.connectionState ==
                                   ConnectionState.done &&
                               snap.hasData) {
-                            print("connection done, has data");
+                            if (kDebugMode) {
+                              print("connection done, has data");
+                            }
                             return BasicConfigurationItem(
                               titleText: "Ethos Pay",
                               subtitleText: snap.data!.accountBillingActive
@@ -287,7 +312,9 @@ class _WebViewPageState extends State<WebViewPage> {
                                   : "Inactive",
                             );
                           } else {
-                            print("no data");
+                            if (kDebugMode) {
+                              print("no data");
+                            }
                             return BasicConfigurationItem(
                               titleText: "Ethos Pay",
                               subtitleText: "Unknown",
@@ -302,18 +329,24 @@ class _WebViewPageState extends State<WebViewPage> {
                         future: AccountData().readAccount(),
                         builder: (context, snap) {
                           if (snap.connectionState == ConnectionState.waiting) {
-                            print("waiting for connection");
+                            if (kDebugMode) {
+                              print("waiting for connection");
+                            }
                             return AppProgressIndeterminateWidget();
                           } else if (snap.connectionState ==
                                   ConnectionState.done &&
                               snap.hasData) {
-                            print("connection done, has data");
+                            if (kDebugMode) {
+                              print("connection done, has data");
+                            }
                             return BasicConfigurationItem(
                               titleText: "India",
                               subtitleText: "Ethosverse INDIA",
                             );
                           } else {
-                            print("no data");
+                            if (kDebugMode) {
+                              print("no data");
+                            }
                             return BasicConfigurationItem(
                               titleText: "Unidentified",
                               subtitleText: "Unknown",
@@ -336,23 +369,33 @@ class _WebViewPageState extends State<WebViewPage> {
                       future: AccountData().readAccountId(),
                       builder: (context, snap) {
                         if (snap.connectionState == ConnectionState.waiting) {
-                          print("reading account id");
+                          if (kDebugMode) {
+                            print("reading account id");
+                          }
                           return AppProgressIndeterminateWidget();
                         } else {
-                          print("read account id");
+                          if (kDebugMode) {
+                            print("read account id");
+                          }
                           if (snap.data == "") {
-                            print("no account id");
+                            if (kDebugMode) {
+                              print("no account id");
+                            }
                             return FutureBuilder<Account>(
                                 future: AccountData().readAccount(),
                                 builder: (context, snap) {
                                   if (snap.connectionState ==
                                       ConnectionState.waiting) {
-                                    print("waiting for connection");
+                                    if (kDebugMode) {
+                                      print("waiting for connection");
+                                    }
                                     return AppProgressIndeterminateWidget();
                                   } else if (snap.connectionState ==
                                           ConnectionState.done &&
                                       snap.hasData) {
-                                    print("connection done, has data");
+                                    if (kDebugMode) {
+                                      print("connection done, has data");
+                                    }
                                     return FutureBuilder<AccountAssistant>(
                                         future: DiscoverAccountAssistantService
                                             .getAccountAssistantByAccount(
@@ -378,7 +421,9 @@ class _WebViewPageState extends State<WebViewPage> {
                                           }
                                         });
                                   } else {
-                                    print("no data");
+                                    if (kDebugMode) {
+                                      print("no data");
+                                    }
                                     return BasicConfigurationItem(
                                       titleText: "Personal Space",
                                       subtitleText: "Unidentified",
@@ -386,18 +431,24 @@ class _WebViewPageState extends State<WebViewPage> {
                                   }
                                 });
                           } else {
-                            print("found account id");
+                            if (kDebugMode) {
+                              print("found account id");
+                            }
                             return FutureBuilder<Account>(
                                 future: AccountData().readAccount(),
                                 builder: (context, snap) {
                                   if (snap.connectionState ==
                                       ConnectionState.waiting) {
-                                    print("waiting for connection");
+                                    if (kDebugMode) {
+                                      print("waiting for connection");
+                                    }
                                     return AppProgressIndeterminateWidget();
                                   } else if (snap.connectionState ==
                                           ConnectionState.done &&
                                       snap.hasData) {
-                                    print("connection done, has data");
+                                    if (kDebugMode) {
+                                      print("connection done, has data");
+                                    }
                                     return FutureBuilder<AccountAssistant>(
                                         future: DiscoverAccountAssistantService
                                             .getAccountAssistantByAccount(
@@ -423,7 +474,9 @@ class _WebViewPageState extends State<WebViewPage> {
                                           }
                                         });
                                   } else {
-                                    print("no data");
+                                    if (kDebugMode) {
+                                      print("no data");
+                                    }
                                     return BasicConfigurationItem(
                                       titleText: "Personal Space",
                                       subtitleText: "Unidentified",
@@ -439,7 +492,9 @@ class _WebViewPageState extends State<WebViewPage> {
                         subtitleText: "EMPTY",
                         selectorCallback: () {
                           AccountData().emptyAccount();
-                          print('pressed');
+                          if (kDebugMode) {
+                            print('pressed');
+                          }
                         }),
                   ],
                 );

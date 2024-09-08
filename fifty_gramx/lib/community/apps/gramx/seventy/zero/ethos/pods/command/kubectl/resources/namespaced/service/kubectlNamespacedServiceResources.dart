@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:flutter/foundation.dart';
 
 class KubectlNamespacedServiceResources {
   /// contains the base command for resource management commands
@@ -13,8 +14,10 @@ class KubectlNamespacedServiceResources {
 
   // initialises the class
   KubectlNamespacedServiceResources(String baseCommandSpace) {
-    print(
-        "KubectlNamespacedServiceResources:baseCommandSpace: $baseCommandSpace");
+    if (kDebugMode) {
+      print(
+          "KubectlNamespacedServiceResources:baseCommandSpace: $baseCommandSpace");
+    }
     // initialisation of base command
     _baseCommandSpace = baseCommandSpace;
 

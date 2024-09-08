@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:flutter/foundation.dart';
 
 class MultipassVersionCommands {
   MultipassVersionCommands._();
@@ -26,7 +27,9 @@ class MultipassVersionCommands {
   Future<bool> isPresent() async {
     // build the command
     String command = "${_baseCommandSpace}";
-    print("command: $command");
+    if (kDebugMode) {
+      print("command: $command");
+    }
     // run the command
     final results = await SimpleCommandExecuter.run(command);
 
@@ -50,8 +53,9 @@ class MultipassVersionCommands {
   Future<String> getVersion() async {
     // Build the command
     String command = "${_baseCommandSpace}";
-    print("command: $command");
-
+    if (kDebugMode) {
+      print("command: $command");
+    }
     // Run the command and get the results
     List<ProcessResult> results = await SimpleCommandExecuter.run(command);
 

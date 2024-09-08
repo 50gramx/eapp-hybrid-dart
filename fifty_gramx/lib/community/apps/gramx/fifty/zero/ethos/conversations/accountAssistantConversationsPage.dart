@@ -25,6 +25,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/receiveAccountMessageService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/account/sendAccountMessageService.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Page that displays its index, flow's title and color.
@@ -74,8 +75,9 @@ class AccountAssistantConversationsPage extends StatelessWidget {
 
   getAccountConnectedAccountAssistantReceivedMessages(
       AccountConnectedAccountAssistant accountConnectedAccountAssistant) async {
-    print("getAccountConnectedAccountAssistantReceivedMessages");
-
+    if (kDebugMode) {
+      print("getAccountConnectedAccountAssistantReceivedMessages");
+    }
     ReceiveAccountMessageService
         .syncAccountConnectedAccountAssistantReceivedMessages(
             accountConnectedAccountAssistant);
@@ -83,8 +85,9 @@ class AccountAssistantConversationsPage extends StatelessWidget {
 
   getAccountConnectedAccountAssistantSentMessages(
       accountConnectedAccountAssistant) async {
-    print("getAccountConnectedAccountAssistantReceivedMessages");
-
+    if (kDebugMode) {
+      print("getAccountConnectedAccountAssistantReceivedMessages");
+    }
     SendAccountMessageService.syncAccountConnectedAccountAssistantSentMessages(
         accountConnectedAccountAssistant);
   }

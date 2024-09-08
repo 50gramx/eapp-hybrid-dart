@@ -7,6 +7,7 @@ import 'package:fifty_gramx/community/onboarding/website/configs/section_configs
 import 'package:fifty_gramx/community/onboarding/website/configs/section_configs/pricing_section_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/configs/section_configs/social_proof_section_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/configs/section_configs/value_prop_section_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 buildValuePropSectionConfig() {
@@ -71,7 +72,9 @@ List<PricingPlan> examplePricingPlans = [
     price: 'Free',
     onSelect: () {
       // Handle plan selection
-      print('Basic Plan selected');
+      if (kDebugMode) {
+        print('Basic Plan selected');
+      }
     },
   ),
   PricingPlan(
@@ -81,7 +84,9 @@ List<PricingPlan> examplePricingPlans = [
     price: '₹649 per node',
     onSelect: () {
       // Handle plan selection
-      print('Standard Plan selected');
+      if (kDebugMode) {
+        print('Standard Plan selected');
+      }
     },
   ),
 ];

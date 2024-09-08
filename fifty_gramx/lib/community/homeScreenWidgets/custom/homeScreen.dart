@@ -4,6 +4,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// Contains our different pages flows and bottom navigation menu for
@@ -36,7 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
   handleListeningMessages(LocalNotification message) async {
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {
-        print("loaded new app: ${navigationBarItems.length}");
+        if (kDebugMode) {
+          print("loaded new app: ${navigationBarItems.length}");
+        }
         handleLoadedEApp();
       }
     }
@@ -45,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<LeftNavigationTab> navigationBarItems = [];
 
   handleLoadedEApp() {
-    print("homeScreen: handleLoadedEApp");
+    if (kDebugMode) {
+      print("homeScreen: handleLoadedEApp");
+    }
     navigationBarItems = [];
     EthosAppFlowBob.communityAppFlow.keys.forEach((appFlow) {
       EthosAppFlowBob.communityAppFlow[appFlow]?.forEach((flow) {
@@ -62,14 +67,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
       });
     });
-    print("will set state: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("will set state: ${navigationBarItems.length}");
+    }
     setState(() {});
-    print("set state done: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("set state done: ${navigationBarItems.length}");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print("HomeScree:build: ${navigationBarItems.length}");
+    if (kDebugMode) {
+      print("HomeScree:build: ${navigationBarItems.length}");
+    }
     return AdaptiveLeftNavigationScaffold();
   }
 }

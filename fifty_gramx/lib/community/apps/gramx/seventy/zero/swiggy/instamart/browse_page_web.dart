@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 import 'dart:ui_web' as ui;
@@ -44,7 +45,9 @@ class _BrowsePageState extends State<BrowsePage> {
   }
 
   void _loadUrl(String url) {
-    print("_loadUrl clicked for url: " + url);
+    if (kDebugMode) {
+      print("_loadUrl clicked for url: " + url);
+    }
     final iframe = html.IFrameElement()
       ..src = url
       ..style.border = 'none'

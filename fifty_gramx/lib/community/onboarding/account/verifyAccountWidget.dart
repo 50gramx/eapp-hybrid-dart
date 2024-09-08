@@ -26,6 +26,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets//homeStatefulWidget.dart';
 import 'package:fifty_gramx/community/onboarding/account/validateAccountWidget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.
@@ -45,7 +46,7 @@ class VerifyAccountStatefulWidget extends StatefulWidget {
 class _VerifyAccountStatefulWidgetState
     extends State<VerifyAccountStatefulWidget> {
   final TextEditingController _accountVerificationCodeTextFieldController =
-  TextEditingController();
+      TextEditingController();
 
   @override
   void dispose() {
@@ -87,9 +88,9 @@ class _VerifyAccountStatefulWidgetState
     } else if (Platform.isIOS) {
       deviceOs = AccountDeviceOS.IOS;
     }
-
-
-    print(AccountData().readAccountServicesAccessAuthDetails().toString());
+    if (kDebugMode) {
+      print(AccountData().readAccountServicesAccessAuthDetails().toString());
+    }
     var accountDeviceDetails = AccountDeviceDetails()
       ..accountDeviceOs = deviceOs
       ..deviceToken = "adfiasdof31943029rfdsaf9023rfd9sfwdfsdfsa";
@@ -104,7 +105,8 @@ class _VerifyAccountStatefulWidgetState
           _accountVerificationCodeTextFieldController.text,
           accountDeviceDetails);
       if (verifyAccountResponse.verificationDone) {
-        AccountData().saveAccountServicesAccessAuthDetails(verifyAccountResponse.accountServiceAccessAuthDetails);
+        AccountData().saveAccountServicesAccessAuthDetails(
+            verifyAccountResponse.accountServiceAccessAuthDetails);
         pushToHomeStatefulWidget();
       }
     }
@@ -112,8 +114,6 @@ class _VerifyAccountStatefulWidgetState
 
   pushToHomeStatefulWidget() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomeStatefulWidget()));
+        context, MaterialPageRoute(builder: (context) => HomeStatefulWidget()));
   }
 }

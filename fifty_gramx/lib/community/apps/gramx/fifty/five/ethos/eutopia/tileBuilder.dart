@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// Ethos Apps Interactions Components Contractor
 class TileBuilder {
   Widget composeComponent(String number) {
     if (number.startsWith("eic")) {
-      print(number);
+      if (kDebugMode) {
+        print(number);
+      }
     }
     return SizedBox();
   }
@@ -14,11 +17,6 @@ class TileBuilder {
   }
 }
 
+class InteractionComponentsMap {}
 
-class InteractionComponentsMap {
-
-}
-
-class PageBuilder {
-
-}
+class PageBuilder {}

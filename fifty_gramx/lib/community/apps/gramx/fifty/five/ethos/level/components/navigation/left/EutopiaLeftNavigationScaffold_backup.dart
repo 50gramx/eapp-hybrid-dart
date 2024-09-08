@@ -6,6 +6,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -171,8 +172,10 @@ class _EutopiaLeftNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "EutopiaLeftNavigation:build:${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+    if (kDebugMode) {
+      print(
+          "EutopiaLeftNavigation:build:${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+    }
     _buildAppButton(context, subIndex) {
       return AdaptiveNeuButton(
         buttonTitle: EthosAppFlowBob
@@ -777,9 +780,9 @@ class _EutopiaLeftNavigationScaffoldState
         ],
       ),
     );
-
-    print("Layout Breakpoint: ${LayoutBreakpoint().getBreakpoint(context)}");
-
+    if (kDebugMode) {
+      print("Layout Breakpoint: ${LayoutBreakpoint().getBreakpoint(context)}");
+    }
     return Scaffold(
         backgroundColor: AppColors.backgroundInverseTertiary(context),
         key: _screenKey,
@@ -813,10 +816,10 @@ class _EutopiaLeftNavigationScaffoldState
     EutopiaLeftNavigationSectionalTab item,
   ) {
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
-
-    print("tabIndex: $tabIndex");
-    print("_shouldBuildTab: ${_shouldBuildTab.isEmpty}");
-
+    if (kDebugMode) {
+      print("tabIndex: $tabIndex");
+      print("_shouldBuildTab: ${_shouldBuildTab.isEmpty}");
+    }
     if (_shouldBuildTab.isEmpty) {
       _shouldBuildTab.add(false);
     }

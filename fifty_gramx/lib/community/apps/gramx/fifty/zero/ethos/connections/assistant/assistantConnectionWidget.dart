@@ -10,6 +10,7 @@ import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/identity/account/connectAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
 import 'package:fifty_gramx/services/product/conversation/message/messageConversationService.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AssistantConnectionWidget extends StatefulWidget {
@@ -141,7 +142,9 @@ class _AssistantConnectionWidgetState extends State<AssistantConnectionWidget> {
                             AccountAssistantConversationPage(
                               accountAssistant: accountAssistant,
                             ));
-                        print("onTapped");
+                        if (kDebugMode) {
+                          print("onTapped");
+                        }
                       },
                       title: centerTitleText,
                       subtitle: centerSubtitleText,

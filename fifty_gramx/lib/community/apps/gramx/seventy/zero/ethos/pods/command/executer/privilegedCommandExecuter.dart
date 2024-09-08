@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fifty_gramx/data/hostUserData.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
@@ -34,7 +35,9 @@ class PrivilegedCommandExecuter {
   PrivilegedCommandExecuter() {}
 
   static initPrivileged() async {
-    print("initPrivileged");
+    if (kDebugMode) {
+      print("initPrivileged");
+    }
     String hostUserPassword = await HostUserData().readHostUserPassword();
 
     // creates the environment with 'sudo' access
@@ -61,7 +64,9 @@ class PrivilegedCommandExecuter {
       // todo: make these events visible somewhere in the UI
       // ...
       // If needed kill the shell
-      print(event);
+      if (kDebugMode) {
+        print(event);
+      }
     });
 
     // runs the smoke test to avoid unexpected results from the next run
@@ -76,7 +81,9 @@ class PrivilegedCommandExecuter {
       return (await _shell.run(command));
     } catch (e, st) {
       FirebaseCrashlytics.instance.recordError(e, st);
-      print("ShellException, exception, stacktrace: ${e}, ${st}");
+      if (kDebugMode) {
+        print("ShellException, exception, stacktrace: ${e}, ${st}");
+      }
       return []; // returns an empty list
     }
   }
@@ -95,7 +102,9 @@ class PrivilegedCommandExecuter {
 
   /// a fake sudo command test, used internally
   static _runSmokeTest() async {
-    print("running smoke test");
+    if (kDebugMode) {
+      print("running smoke test");
+    }
     // warn: a fake sudo test to check the status of some random port
     if (Platform.isMacOS) {
       await run("sudo lsof -i:50501");

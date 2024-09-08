@@ -22,6 +22,7 @@
 import 'package:contacts_service/contacts_service.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/IconButton/ConnectedEntityIconButton.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -94,7 +95,9 @@ class AccountContactIconButton implements ConnectedEntityIconButton {
       child: NeumorphicButton(
         provideHapticFeedback: true,
         onPressed: () {
-          print("entity toggle pressed");
+          if (kDebugMode) {
+            print("entity toggle pressed");
+          }
         },
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
