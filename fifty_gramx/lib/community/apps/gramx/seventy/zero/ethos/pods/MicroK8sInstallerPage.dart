@@ -12,6 +12,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMac
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_log_viewer.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/neumorphic_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 
@@ -206,21 +207,14 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
   bool isInstalling = false;
 
   installHomebrew() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(
-              "Setting up Orchestrator, Sometimes it may take more than 10 minutes for the Orchestrator Setup")),
-    );
-
+    showNeumorphicSnackBar(context,
+        "Setting up Orchestrator, Sometimes it may take more than 10 minutes for the Orchestrator Setup");
     setState(() {
       isInstalling = true;
     });
+    showNeumorphicSnackBar(context,
+        "Setting up Orchestrator: 1/x: Starting to Install Multipass, downloading may take some time");
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(
-              "Setting up Orchestrator: 1/x: Starting to Install Multipass, downloading may take some time")),
-    );
     if (Platform.isMacOS) {
       await BrewCommands.install.multipass();
     } else if (Platform.isWindows) {
@@ -228,91 +222,52 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
     }
 
     if (await MultipassCommands.version.isPresent()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(
-                "Setting up Orchestrator: 2/x: Starting to Launch VM, downloading may take some time")),
-      );
+      showNeumorphicSnackBar(context,
+          "Setting up Orchestrator: 2/x: Starting to Launch VM, downloading may take some time");
       bool isVmLaunched = await MultipassCommands.launch.vm(
           selectedMemory.toInt(),
           selectedCpuCount.toInt(),
           selectedDiskSpace.toInt());
-      print("isVmLaunched: $isVmLaunched");
+
       Map<String, dynamic> vmMeta =
           await MultipassCommands.list.getOrchestratorVmMeta();
       if (vmMeta.isNotEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 2/x: Successfully Launched VM")),
-        );
+        showNeumorphicSnackBar(
+            context, "Setting up Orchestrator: 2/x: Successfully Launched VM");
 
         await MultipassCommands.exec.updateDNS();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 3/x: Successfully Updated DNS")),
-        );
+        showNeumorphicSnackBar(
+            context, "Setting up Orchestrator: 3/x: Successfully Updated DNS");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 4/x: Starting to update VM, downloading may take some time")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 4/x: Starting to update VM, downloading may take some time");
         await MultipassCommands.exec.update();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 4/x: Successfully Updated VM")),
-        );
+        showNeumorphicSnackBar(
+            context, "Setting up Orchestrator: 4/x: Successfully Updated VM");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 5/x: Starting to upgrade VM, downloading may take some time")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 5/x: Starting to upgrade VM, downloading may take some time");
         await MultipassCommands.exec.upgrade();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 5/x: Successfully Upgraded VM")),
-        );
+        showNeumorphicSnackBar(
+            context, "Setting up Orchestrator: 5/x: Successfully Upgraded VM");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 6/x: Starting to Install Orchestrator, downloading may take some time")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 6/x: Starting to Install Orchestrator, downloading may take some time");
         await MultipassCommands.exec.installMicrok8s();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 6/x: Successfully Installed Orchestrator")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 6/x: Successfully Installed Orchestrator");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 7/x: Starting to Update IP Tables, updating records may take some time")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 7/x: Starting to Update IP Tables, updating records may take some time");
         await MultipassCommands.exec.updateIPTables();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 7/x: Successfully Updated IP Tables")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 7/x: Successfully Updated IP Tables");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 8/x: Starting to set Service Permissions")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 8/x: Starting to set Service Permissions");
         await MultipassCommands.exec.addMicrok8sToUserGroup();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 8/x: Successfully Updated Service Permissions")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 8/x: Successfully Updated Service Permissions");
 
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
@@ -326,17 +281,11 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
         //           "Setting up Orchestrator: 9/x: Successfully Updated Orchestrator Permissions")),
         // );
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content:
-                  Text("Congratulations, Orchestrator Successfully Started!")),
-        );
+        showNeumorphicSnackBar(
+            context, "Congratulations, Orchestrator Successfully Started!");
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 2/x: Could not Launch VM, Something went wrong, please try again later")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 2/x: Could not Launch VM, Something went wrong, please try again later");
         setState(() {
           isInstalling = false;
         });
