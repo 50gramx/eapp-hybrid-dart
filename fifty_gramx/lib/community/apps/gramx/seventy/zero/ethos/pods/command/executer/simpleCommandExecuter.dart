@@ -2,8 +2,11 @@
 //
 // it is simple as it doesn't need privileged access
 import 'dart:io';
+import 'dart:async';
+import 'dart:convert';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_logger.dart';
+import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:process_run/shell.dart';
 
 class SimpleCommandExecuter {
@@ -13,7 +16,28 @@ class SimpleCommandExecuter {
   SimpleCommandExecuter() {}
 
   /// contains the shell executer
-  static Shell _shell = Shell(runInShell: true);
+  static late Shell _shell;
+
+  static late ShellLinesController _controller;
+
+  static Future<void> init() async {
+    // Initialize ShellLinesController
+    _controller = ShellLinesController();
+
+    // Create a new Shell instance with the controller
+    _shell = Shell(
+      stdout: _controller.sink,
+      stderr: _controller.sink,
+      runInShell: true,
+    );
+
+    // Listen for controller events
+    _controller.stream.listen((event) {
+      // Handle output
+      // Log or process the output as needed
+      ExecutorLogger().logOut(event);
+    });
+  }
 
   /// Run one or multiple plain text command(s).
   ///
@@ -23,11 +47,33 @@ class SimpleCommandExecuter {
       if (Platform.isWindows) {
         command = 'powershell -c ${shellArgument(command)}';
       }
-      return (await _shell.run(command));
+      final result = await _shell.run(command);
+      print("ShellResult: $result");
+      return result;
     } catch (e, st) {
-      FirebaseCrashlytics.instance.recordError(e, st);
       print("ShellException, exception, stacktrace: ${e}, ${st}");
-      return []; // returns an empty list
+      crashlyticsRecordError(e, st);
+      return [];
+    }
+  }
+
+  /// Run one or multiple plain text command(s).
+  ///
+  /// Returns a list of executed command line results.
+  static Future<List<ProcessResult>> file(String filePath) async {
+    try {
+      String command = "./${filePath}";
+      if (Platform.isWindows) {
+        command = "powershell -executionpolicy bypass -c ${filePath}";
+      }
+      print("MultipassVersionCommands: file, command: $command");
+      final result = (await _shell.run(command));
+      print("MultipassVersionCommands: file, result: $result");
+      return result;
+    } catch (e, st) {
+      print("ShellException, exception, stacktrace: ${e}, ${st}");
+      crashlyticsRecordError(e, st);
+      Error.throwWithStackTrace(e, st);
     }
   }
 }

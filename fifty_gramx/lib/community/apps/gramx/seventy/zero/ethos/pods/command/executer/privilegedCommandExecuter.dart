@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_logger.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
+import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
@@ -61,7 +63,7 @@ class PrivilegedCommandExecuter {
       // todo: make these events visible somewhere in the UI
       // ...
       // If needed kill the shell
-      print(event);
+      ExecutorLogger().logOut(event);
     });
 
     // runs the smoke test to avoid unexpected results from the next run
@@ -75,7 +77,7 @@ class PrivilegedCommandExecuter {
     try {
       return (await _shell.run(command));
     } catch (e, st) {
-      FirebaseCrashlytics.instance.recordError(e, st);
+      crashlyticsRecordError(e, st);
       print("ShellException, exception, stacktrace: ${e}, ${st}");
       return []; // returns an empty list
     }
