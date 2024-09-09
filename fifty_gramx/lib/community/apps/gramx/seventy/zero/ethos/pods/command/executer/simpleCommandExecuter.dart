@@ -1,9 +1,8 @@
 // executes the commands in shell
 //
 // it is simple as it doesn't need privileged access
-import 'dart:io';
 import 'dart:async';
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_logger.dart';
 import 'package:fifty_gramx/firebase_configurations.dart';
@@ -48,10 +47,8 @@ class SimpleCommandExecuter {
         command = 'powershell -c ${shellArgument(command)}';
       }
       final result = await _shell.run(command);
-      print("ShellResult: $result");
       return result;
     } catch (e, st) {
-      print("ShellException, exception, stacktrace: ${e}, ${st}");
       crashlyticsRecordError(e, st);
       return [];
     }
@@ -66,12 +63,9 @@ class SimpleCommandExecuter {
       if (Platform.isWindows) {
         command = "powershell -executionpolicy bypass -c ${filePath}";
       }
-      print("MultipassVersionCommands: file, command: $command");
       final result = (await _shell.run(command));
-      print("MultipassVersionCommands: file, result: $result");
       return result;
     } catch (e, st) {
-      print("ShellException, exception, stacktrace: ${e}, ${st}");
       crashlyticsRecordError(e, st);
       Error.throwWithStackTrace(e, st);
     }
