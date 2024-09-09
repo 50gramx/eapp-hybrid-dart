@@ -3,6 +3,7 @@
 // needs [String] packagePath and [String] vmName as initializers
 import 'dart:io';
 
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:process_run/shell.dart';
@@ -24,8 +25,10 @@ class MultipassVersionCommands {
 
   Future<bool> isInstalledInWindows() async {
     // PowerShell command that checks if Multipass is installed
-    String scriptPath =
-        "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellIsPresentMultipass.ps1";
+
+    var scriptPath =
+        await PrivilegedCommandExecuter.getTemporaryFilePathForAssetFile(
+            "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellIsPresentMultipass.ps1");
 
     try {
       final result = await SimpleCommandExecuter.file(scriptPath);
@@ -51,7 +54,8 @@ class MultipassVersionCommands {
     if (!await MultipassCommands.version.isPresent()) {
       // PowerShell command that checks if Multipass is installed
       String scriptPath =
-          "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellInstallMultipass.ps1";
+          await PrivilegedCommandExecuter.getTemporaryFilePathForAssetFile(
+              "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellInstallMultipass.ps1");
 
       try {
         final result = await SimpleCommandExecuter.file(scriptPath);
@@ -80,7 +84,8 @@ class MultipassVersionCommands {
     if (await MultipassCommands.version.isPresent()) {
       // PowerShell command that checks if Multipass is installed
       String scriptPath =
-          "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellUninstallMultipass.ps1";
+          await PrivilegedCommandExecuter.getTemporaryFilePathForAssetFile(
+              "lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellUninstallMultipass.ps1");
 
       try {
         final result = await SimpleCommandExecuter.file(scriptPath);
