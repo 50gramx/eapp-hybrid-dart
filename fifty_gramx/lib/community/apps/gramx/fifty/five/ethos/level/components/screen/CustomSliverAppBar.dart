@@ -41,22 +41,21 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
     var appBar;
 
     var title = Hero(
-      tag: "",
-      transitionOnUserGestures: true,
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-        widget.labelText,
-        maxLines: 1,
-        textAlign: TextAlign.start,
-        style: TextStyle(
-            color: AppColors.contentPrimary(context),
-            fontSize: 24,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w500),
-      ),
-      )
-    );
+        tag: "",
+        transitionOnUserGestures: true,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            widget.labelText,
+            maxLines: 1,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: AppColors.contentPrimary(context),
+                fontSize: 24,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w500),
+          ),
+        ));
 
     var actions = [
       widget.isActionEnabled
@@ -86,7 +85,7 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: Text(
                     widget.actionLabelText,
                     textAlign: TextAlign.center,
