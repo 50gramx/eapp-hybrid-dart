@@ -28,6 +28,11 @@ bool isFirebaseCrashlyticsSupportedPlatform() {
   return Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
 }
 
+bool isFirebaseMessagingSupportedPlatform() {
+  // refer to https://github.com/firebase/flutterfire
+  return kIsWeb || Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
+}
+
 ensureFirebaseSupport() async {
   if (isFirebaseSupportedPlatform()) {
     await Firebase.initializeApp(
@@ -35,7 +40,7 @@ ensureFirebaseSupport() async {
     );
 
     // Firebase Crashlytics is enabled for limited platform at the moment
-    if (isFirebaseCrashlyticsSupportedPlatform()) {
+    if (!kIsWeb && isFirebaseCrashlyticsSupportedPlatform()) {
       FlutterError.onError = (errorDetails) {
         FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
       };
