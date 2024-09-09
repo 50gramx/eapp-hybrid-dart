@@ -172,6 +172,9 @@ flutter:
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     # 70GRAMx
     # 70GRAMx Ethos
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellIsPresentMultipass.ps1
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellInstallMultipass.ps1
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellUninstallMultipass.ps1
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/
     #     multiverse resources
     #       cluster resources
