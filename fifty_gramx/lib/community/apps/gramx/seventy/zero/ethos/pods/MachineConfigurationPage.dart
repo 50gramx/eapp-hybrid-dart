@@ -588,24 +588,34 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                     },
                   ),
 
-                  SwitchConfigurationItem(
-                      titleText: "Beta Support",
-                      isEnabled: true,
-                      switchValue: isDebuggingBeta,
-                      switchOnChanged: (value) {
-                        print("onchangeValue: $value, is: $isDebuggingBeta");
-                        if (value) {
-                          setState(() {
-                            isDebuggingBeta = true;
-                          });
-                        } else {
-                          setState(() {
-                            isDebuggingBeta = false;
-                          });
-                        }
-                        print(
-                            "afterOnchangeValue: $value, is: $isDebuggingBeta");
-                      }),
+                  FutureBuilder<String>(
+                    future: HostMachineData().name(),
+                    builder: (context, snap) {
+                      if (snap.connectionState == ConnectionState.waiting) {
+                        return SizedBox();
+                      } else {
+                        return SwitchConfigurationItem(
+                            titleText: "${snap.data!.trim()} Logs",
+                            isEnabled: true,
+                            switchValue: isDebuggingBeta,
+                            switchOnChanged: (value) {
+                              print(
+                                  "onchangeValue: $value, is: $isDebuggingBeta");
+                              if (value) {
+                                setState(() {
+                                  isDebuggingBeta = true;
+                                });
+                              } else {
+                                setState(() {
+                                  isDebuggingBeta = false;
+                                });
+                              }
+                              print(
+                                  "afterOnchangeValue: $value, is: $isDebuggingBeta");
+                            });
+                      }
+                    },
+                  ),
 
                   // ------------------------------------------------
                   // ETHOS POD ORCHESTRATOR VIRTUAL MACHINE
