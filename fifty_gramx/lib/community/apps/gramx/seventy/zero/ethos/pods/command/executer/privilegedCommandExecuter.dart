@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_logger.dart';
 import 'package:fifty_gramx/data/hostUserData.dart';
 import 'package:fifty_gramx/firebase_configurations.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
@@ -78,7 +77,6 @@ class PrivilegedCommandExecuter {
       return (await _shell.run(command));
     } catch (e, st) {
       crashlyticsRecordError(e, st);
-      print("ShellException, exception, stacktrace: ${e}, ${st}");
       return []; // returns an empty list
     }
   }
