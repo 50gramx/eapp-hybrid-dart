@@ -18,6 +18,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/chains/multiverseChainsOperator.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/operators/mutliverse/multiversePodOperator.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/neumorphic_snackbar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/switchConfigurationItem.dart';
@@ -192,120 +193,87 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   }
 
   startMicrok8s() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content:
-              Text("Starting Orchestrator, Please allow it sometime to start")),
-    );
+    var msg = "Starting Orchestrator, Please allow it sometime to start";
+    showNeumorphicSnackBar(context, msg);
     final isStarted = await Microk8sCommands.start.now();
     if (isStarted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Started Orchestrator")),
-      );
+      var msg = "Started Orchestrator";
+      showNeumorphicSnackBar(context, msg);
       setState(() {});
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Starting Orchestrator failed")),
-      );
+      var msg = "Starting Orchestrator failed";
+      showNeumorphicSnackBar(context, msg);
     }
   }
 
   stopMicrok8s() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content:
-              Text("Stopping Orchestrator, Please allow it sometime to stop")),
-    );
+    var msg = "Stopping Orchestrator, Please allow it sometime to stop";
+    showNeumorphicSnackBar(context, msg);
+
     final isStopped = await Microk8sCommands.stop.now();
     if (isStopped) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopped Orchestrator")),
-      );
+      var msg = "Stopped Orchestrator";
+      showNeumorphicSnackBar(context, msg);
       setState(() {});
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopping Orchestrator failed")),
-      );
+      var msg = "Stopping Orchestrator failed";
+      showNeumorphicSnackBar(context, msg);
     }
   }
 
   restartMicrok8s() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(
-              "Restarting Orchestrator, Please allow it sometime to stop")),
-    );
+    var msg = "Restarting Orchestrator, Please allow it sometime to stop";
+    showNeumorphicSnackBar(context, msg);
     final isStopped = await Microk8sCommands.stop.now();
     if (isStopped) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopped Orchestrator")),
-      );
+      var msg = "Stopped Orchestrator";
+      showNeumorphicSnackBar(context, msg);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopping Orchestrator failed")),
-      );
+      var msg = "Stopping Orchestrator failed";
+      showNeumorphicSnackBar(context, msg);
     }
     await startMicrok8s();
   }
 
   deleteMicrok8s() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(
-              "Uninstalling Orchestrator, Please allow it sometime to delete")),
-    );
+    var msg = "Uninstalling Orchestrator, Please allow it sometime to delete";
+    showNeumorphicSnackBar(context, msg);
+
     await MultipassCommands.delete.vm();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Uninstalled Orchestrator")),
-    );
+    msg = "Uninstalled Orchestrator";
+    showNeumorphicSnackBar(context, msg);
     setState(() {});
   }
 
   uninstallMultipass() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content: Text(
-              "Uninstalling Multipass, Please allow it sometime to delete")),
-    );
+    var msg = "Uninstalling Multipass, Please allow it sometime to delete";
+    showNeumorphicSnackBar(context, msg);
+
     if (Platform.isMacOS) {
       await BrewCommands.uninstall.multipass();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text("Successfully Uninstalled Multipass in MacOS System")),
-      );
+      var msg = "Successfully Uninstalled Multipass in MacOS System";
+      showNeumorphicSnackBar(context, msg);
     } else if (Platform.isWindows) {
       bool result = await MultipassCommands.version.uninstallWindows();
       if (result) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content:
-                  Text("Successfully Uninstalled Multipass in Windows System")),
-        );
+        var msg = "Successfully Uninstalled Multipass in Windows System";
+        showNeumorphicSnackBar(context, msg);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Couldn't Uninstalled Multipass in Windows")),
-        );
+        var msg = "Couldn't Uninstalled Multipass in Windows";
+        showNeumorphicSnackBar(context, msg);
       }
     }
     setState(() {});
   }
 
   stopAndUninstallMicrok8s() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-          content:
-              Text("Stopping Orchestrator, Please allow it sometime to stop")),
-    );
+    showNeumorphicSnackBar(
+        context, "Stopping Orchestrator, Please allow it sometime to stop");
     final isStopped = await Microk8sCommands.stop.now();
     if (isStopped) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopped Orchestrator")),
-      );
+      showNeumorphicSnackBar(context, "Stopped Orchestrator");
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Stopping Orchestrator failed")),
-      );
+      showNeumorphicSnackBar(context, "Stopping Orchestrator failed");
     }
     deleteMicrok8s();
     uninstallMultipass();
@@ -316,13 +284,10 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
   }
 
   void _stopVM() async {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Stopping VM, Please allow it sometime to stop")),
-    );
+    showNeumorphicSnackBar(
+        context, "Stopping VM, Please allow it sometime to stop");
     await MultipassCommands.stop.orchestrator();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Stopped VM")),
-    );
+    showNeumorphicSnackBar(context, "Stopped VM");
   }
 
   bool isDebuggingBeta = false;
@@ -1030,27 +995,38 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage> {
                                 }
                               case ("STOPPED, UNAVAILABLE"):
                                 {
-                                  return SwitchConfigurationItem(
-                                      titleText: "Orchestrator",
-                                      isEnabled: true,
-                                      switchValue:
-                                          snapshot.data == "RUNNING, RUNNING"
+                                  return Column(
+                                    children: [
+                                      SwitchConfigurationItem(
+                                          titleText: "Orchestrator",
+                                          isEnabled: true,
+                                          switchValue: snapshot.data ==
+                                                  "RUNNING, RUNNING"
                                               ? true
                                               : false,
-                                      switchOnChanged: (value) {
-                                        if (value) {
-                                          MultipassCommands.start
-                                              .orchestrator();
-                                          // TODO: Add notification so that the correct
-                                          // switch values are reflected
-                                          setState(() {});
-                                        } else {
-                                          MultipassCommands.stop.orchestrator();
-                                          // TODO: Add notification so that the correct
-                                          // switch values are reflected
-                                          setState(() {});
-                                        }
-                                      });
+                                          switchOnChanged: (value) {
+                                            if (value) {
+                                              MultipassCommands.start
+                                                  .orchestrator();
+                                              // TODO: Add notification so that the correct
+                                              // switch values are reflected
+                                              setState(() {});
+                                            } else {
+                                              MultipassCommands.stop
+                                                  .orchestrator();
+                                              // TODO: Add notification so that the correct
+                                              // switch values are reflected
+                                              setState(() {});
+                                            }
+                                          }),
+                                      SelectorConfigurationItem(
+                                          titleText: "Orchestrator",
+                                          subtitleText: "Uninstall",
+                                          selectorCallback: () {
+                                            stopAndUninstallMicrok8s();
+                                          }),
+                                    ],
+                                  );
                                 }
                               case ("UNAVAILABLE, UNAVAILABLE"):
                                 {
