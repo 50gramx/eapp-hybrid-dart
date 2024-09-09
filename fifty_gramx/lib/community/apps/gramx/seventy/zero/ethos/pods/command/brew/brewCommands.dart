@@ -97,8 +97,6 @@ class BrewCommands {
     // returns the version of brew if available
     // else, returns NA
     var version = await SimpleCommandExecuter.run("$_packagePath -v");
-    FirebaseCrashlytics.instance.recordFlutterError(FlutterErrorDetails(
-        exception: "Homebrew, version, _packagePath: $_packagePath, $version"));
     if (version.outText.length > 0) {
       if (version.outText.contains("Homebrew")) {
         return LineSplitter.split(version.outText).first.substring(9);

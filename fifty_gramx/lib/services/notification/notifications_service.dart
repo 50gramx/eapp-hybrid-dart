@@ -22,6 +22,7 @@
 import 'dart:io';
 
 import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
+import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -51,18 +52,10 @@ class PushNotificationService {
   // YOU HAVE TO CALL THIS FROM SOMEWHERE (May be main widget)
   // ********************************************************* //
   Future<void> start() async {
-    // Verify this isSupported (Safari doesn't support PUSH API's)
-    print("PushNotificationService:start");
-
-    if (!kIsWeb) {
-      platformNotSupported = Platform.isWindows || Platform.isLinux;
-    } else {
-      platformNotSupported = false;
-    }
-    print("PushNotificationService:$platformNotSupported");
-
     bool messagingSupported = await ((await firebaseMessaging).isSupported());
-    if (!_started && messagingSupported && !platformNotSupported) {
+    if (!_started &&
+        messagingSupported &&
+        isFirebaseMessagingSupportedPlatform()) {
       await _start();
       _started = true;
       _refreshToken();

@@ -26,6 +26,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/A
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Progress/AppProgressIndeterminateWidget.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/brew/brewCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
@@ -49,88 +50,24 @@ import 'package:fifty_gramx/community/onboarding/website/satwa_pages/overview_pa
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/plans_page/pricing_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_one_pages/tg_candidates_page.dart';
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_two_pages/tg_employers_page.dart';
+import 'package:fifty_gramx/constants.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/environment.dart';
-import 'package:fifty_gramx/firebase_options.dart';
-import 'package:fifty_gramx/firebase_options_70_ethos_nodes.dart';
+import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-
-/// Constants used in the application.
-class Constants {
-  static final Constants _instance = Constants._internal();
-
-  factory Constants() {
-    return _instance;
-  }
-
-  Constants._internal();
-
-  static const String appName = '50gramx';
-  String eAppEnv = "com.50gramx";
-  late FirebaseOptions eAppFirebaseOptions;
-}
-
-getCurrentFirebaseOptions() {
-  // Set the Firebase options based on the environment
-  if (Constants().eAppEnv == "com.50gramx") {
-    Constants().eAppFirebaseOptions = DefaultFirebaseOptions.currentPlatform;
-  } else if (Constants().eAppEnv == "com.50gramx.70.ethos.nodes") {
-    Constants().eAppFirebaseOptions =
-        FirebaseOptions70EthosNodes.currentPlatform;
-  } else {
-    Constants().eAppFirebaseOptions = DefaultFirebaseOptions.currentPlatform;
-  }
-}
 
 getCurrentEnvironment() async {
   Constants().eAppEnv = await Environment.current();
   getCurrentFirebaseOptions();
 }
 
-bool isFirebaseSupportedPlatform() {
-  return kIsWeb || Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
-}
-
-ensureFirebaseSupport() async {
-  if (isFirebaseSupportedPlatform()) {
-    await Firebase.initializeApp(
-      options: Constants().eAppFirebaseOptions,
-    );
-
-    // Firebase Crashlytics is enabled for web at the moment
-    if (!kIsWeb) {
-      bool isPlatformDesktop =
-          Platform.isWindows || Platform.isMacOS || Platform.isLinux;
-      bool weWantFatalErrorRecording = isPlatformDesktop;
-      FlutterError.onError = (errorDetails) {
-        if (weWantFatalErrorRecording) {
-          FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-        } else {
-          FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-        }
-      };
-
-      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-      PlatformDispatcher.instance.onError = (error, stack) {
-        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-        print("recordError: ${error}, ${stack}");
-        return true;
-      };
-    }
-  } else {
-    print("Platform is not supported, not initialising Firebase");
-    //   not doing anything
-  }
-}
-
 /// Initializes platform-specific services.
 void initializeEthosAppsServices() {
+  SimpleCommandExecuter.init();
   PrivilegedCommandExecuter.initPrivileged();
   if (Platform.isMacOS) {
     BrewCommands.initBrew();
