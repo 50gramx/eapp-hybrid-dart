@@ -116,6 +116,9 @@ dependencies:
   # Request cancellation, File uploading/downloading, Timeout, 
   # Custom adapters, Transformers, etc.
   dio: ^5.6.0
+  # Load configuration at runtime from a .env file which can be used
+  # throughout the application.
+  flutter_dotenv: ^5.1.0
 
 flutter_icons:
   android: "launcher_icon"
@@ -128,7 +131,7 @@ dev_dependencies:
 
   # A fully featured Gherkin parser and test runner. Works with Flutter and Dart 2.
   flutter_gherkin: ^2.0.0
-  msix: ^3.16.7
+  msix: ^3.16.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -142,6 +145,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - ethosapps.env
     - lib/assets/certs/identityServer.crt
     - lib/assets/certs/conversationServer.crt
     - lib/assets/certs/knowledgeServer.crt
@@ -172,6 +176,9 @@ flutter:
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     # 70GRAMx
     # 70GRAMx Ethos
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellIsPresentMultipass.ps1
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellInstallMultipass.ps1
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellUninstallMultipass.ps1
     - lib/community/apps/gramx/seventy/zero/ethos/pods/configurations/orchestrator/setup/scripts/
     #     multiverse resources
     #       cluster resources
@@ -242,9 +249,10 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 msix_config:
-  display_name: 50GRAMX
+  display_name: 50GRAMx Ethos Nodes
   publisher_display_name: Amit Khetan
-  identity_name: 11781AppsHub.50GRAMX
+  identity_name:  11781AppsHub.50GRAMxEthosNodes
+  family_name: 11781AppsHub.50GRAMxEthosNodes_q0s66045s37ha
   msix_version: 24.2.1.0
   certificate_path: C:\Users\amitk\Documents\CERTIFICATE.pfx
   certificate_password: getethos

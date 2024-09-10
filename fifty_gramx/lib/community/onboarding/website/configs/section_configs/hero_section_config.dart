@@ -7,7 +7,7 @@ import 'hero_section_stub.dart' if (dart.library.js) 'hero_section_js.dart';
 
 // Conditional import for platform-specific implementations
 import '../../helpers/download/download_helper_web.dart'
-    if (dart.library.io) '../../../../helpers/download/download_helper_nonweb.dart';
+    if (dart.library.io) '../../helpers/download/download_helper_nonweb.dart';
 
 class HeroSectionConfig {
   final String title;

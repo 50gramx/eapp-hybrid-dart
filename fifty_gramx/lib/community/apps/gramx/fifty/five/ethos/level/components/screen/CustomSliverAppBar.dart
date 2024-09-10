@@ -86,7 +86,7 @@ class _CustomAppBarState extends State<CustomSliverAppBar> {
                   ),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+                  margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: Text(
                     widget.actionLabelText,
                     textAlign: TextAlign.center,
