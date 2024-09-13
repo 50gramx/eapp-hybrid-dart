@@ -269,17 +269,32 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
         showNeumorphicSnackBar(context,
             "Setting up Orchestrator: 8/x: Successfully Updated Service Permissions");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 9/x: Starting to setup private network")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 9/x: Starting to setup private network");
         await MultipassCommands.exec.installOvpn();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-                  "Setting up Orchestrator: 9/x: Successfully installed private network")),
-        );
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 9/x: Successfully installed private network");
+
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 10/x: Starting to register this node");
+
+        await MultipassCommands.exec.generate();
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 10/x: Successfully registered this node");
+
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 11/x: Starting to connect this node");
+
+        await MultipassCommands.exec.registerClientOVPN();
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 11/x: Successfully connected this node");
+
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 12/x: Starting to join as worker node");
+
+        await MultipassCommands.exec.joinMicrok8sWorkerNode();
+        showNeumorphicSnackBar(context,
+            "Setting up Orchestrator: 12/x: Successfully joined as a node");
 
         // ScaffoldMessenger.of(context).showSnackBar(
         //   SnackBar(
