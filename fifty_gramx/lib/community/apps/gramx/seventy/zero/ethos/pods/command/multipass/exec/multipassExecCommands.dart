@@ -214,6 +214,8 @@ class MutlipassExecCommands {
     // sudo `$JOIN_COMMAND
   }
 
+  leaveMicrok8sWorkerNode() {}
+
   updateKubePermissions() async {
     // build the command
     String command = "${_baseCommandSpace}"
