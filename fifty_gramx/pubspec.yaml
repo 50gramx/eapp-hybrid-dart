@@ -121,6 +121,10 @@ dependencies:
   flutter_dotenv: ^5.1.0
   # This plugin allows Flutter desktop apps to defines system tray.
   tray_manager: ^0.2.3
+  # A Flutter geolocation plugin which provides easy access to 
+  # platform specific location services
+  # warn: fix dependencies when using in platforms on-the-go.
+  geolocator: ^13.0.1
 
 flutter_icons:
   android: "launcher_icon"
@@ -179,6 +183,7 @@ flutter:
     - lib/community/apps/gramx/fifty/five/ethos/eutopia/
     # 70GRAMx
     # 70GRAMx Ethos
+    - lib/community/apps/gramx/seventy/zero/ethos/pods/command/openvpn/openvpnSSH.key
     - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellIsPresentMultipass.ps1
     - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellInstallMultipass.ps1
     - lib/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/version/powershellUninstallMultipass.ps1
