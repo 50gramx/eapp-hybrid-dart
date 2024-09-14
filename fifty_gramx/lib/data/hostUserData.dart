@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HostUserData {
@@ -19,6 +22,76 @@ class HostUserData {
     } else {
       return "";
     }
+  }
+
+  Future<String> readHostUserNodeClient() async {
+    final prefs = await SharedPreferences.getInstance();
+    final base64StrPassword = prefs.getString('hostUserNodeClient');
+    if (base64StrPassword != "" && base64StrPassword != null) {
+      final bytesPassword = base64.decode(base64StrPassword);
+      return utf8.decode(bytesPassword);
+    } else {
+      String clientName = await _generateEthosNodeClientName();
+      final bytesClientName = utf8.encode(clientName);
+      final base64StrPassword = base64.encode(bytesClientName);
+      prefs.setString('hostUserNodeClient', base64StrPassword);
+      return clientName;
+    }
+  }
+
+  Future<String> readHostUserNodeVMName() async {
+    String clientName = await readHostUserNodeClient();
+    return sanitizeUnderscore(clientName);
+  }
+
+  String sanitize(String input) {
+    // Remove special characters and convert to lowercase
+    return input
+        .replaceAll(RegExp(r'[^\w\s]'), '') // Remove special characters
+        .replaceAll(RegExp(r'\s+'), '_'); // Replace spaces with underscores
+  }
+
+  String sanitizeUnderscore(String input) {
+    return input.replaceAll(
+        RegExp(r'_+'), '-'); // Replace underscores with hypen
+  }
+
+  String formatDate(DateTime date) {
+    final DateFormat monthFormat =
+        DateFormat('MMM'); // Three-character month representation
+    final String month = monthFormat.format(date);
+
+    final String day = DateFormat('dd').format(date);
+    final String year = DateFormat('yyyy').format(date);
+
+    final String hours = date.hour.toString().padLeft(2, '0') + "h";
+    final String minutes = date.minute.toString().padLeft(2, '0') + "m";
+    final String seconds = date.second.toString().padLeft(2, '0') + "s";
+
+    return "${year}${month}${day}_${hours}${minutes}${seconds}";
+  }
+
+  Future<String> _generateEthosNodeClientName() async {
+    String _hostName = await HostMachineData().hostName();
+    String _publicIPUniverse =
+        (await SimpleCommandExecuter.run("curl http://ipinfo.io/country"))
+            .last
+            .stdout
+            .toString()
+            .trim();
+    String _publicIPRegion =
+        (await SimpleCommandExecuter.run("curl http://ipinfo.io/postal"))
+            .last
+            .stdout
+            .toString()
+            .trim();
+    var _now = DateTime.now();
+
+    // Create a formatted client name
+    String _clientName =
+        "eNode_${sanitize(_publicIPUniverse)}_${sanitize(_publicIPRegion)}_${sanitize(_hostName)}_${formatDate(_now)}";
+
+    return _clientName;
   }
 
   Future<bool> isPasswordSet() async {
