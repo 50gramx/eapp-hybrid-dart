@@ -56,11 +56,13 @@ class Microk8sStatusCommands {
               "MicroK8s is not running. Please run `microk8s start`.";
           String stoppedMsg2 = "microk8s is not running, try microk8s start";
           String runningMsg1 = "microk8s is running";
+          String runningMsg2 =
+              "This MicroK8s deployment is acting as a node in a cluster.";
           String inactiveMsg1 =
               "microk8s is not running. Use microk8s inspect for a deeper inspection.";
           if (status == stoppedMsg1 || status == stoppedMsg2) {
             return "$orchestratorState, STOPPED";
-          } else if (status == runningMsg1) {
+          } else if (status == runningMsg1 || status == runningMsg2) {
             return "$orchestratorState, RUNNING";
           } else if (status == inactiveMsg1) {
             return "$orchestratorState, INACTIVE";
