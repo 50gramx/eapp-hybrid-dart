@@ -2,7 +2,6 @@
 //
 // needs [String] packagePath and [String] vmName as initializers
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
-import 'package:process_run/utils/process_result_extension.dart';
 
 class OpenVPNConfigCommands {
   OpenVPNConfigCommands._();
@@ -16,7 +15,7 @@ class OpenVPNConfigCommands {
   // initialises the class
   OpenVPNConfigCommands(String packagePath) {
     _packagePath = packagePath;
-    _baseCommandSpace = "${_packagePath} --config ";
+    _baseCommandSpace = "${_packagePath} --daemon --config ";
   }
 
   /// starts the orchestrator
@@ -26,9 +25,8 @@ class OpenVPNConfigCommands {
     // build the command
 
     String command = "${_baseCommandSpace}"
-        "/etc/openvpn/client.conf &";
+        "/etc/openvpn/client.conf";
     // run the command
-    String output = (await PrivilegedCommandExecuter.run(command)).outText;
-    print("output: $output");
+    var output = (await PrivilegedCommandExecuter.runBg(command));
   }
 }
