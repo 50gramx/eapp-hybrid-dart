@@ -1,10 +1,11 @@
-import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
+import 'dart:convert';
+
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/microk8s/microk8sCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/openvpn/openvpnCommands.dart';
-import 'package:intl/intl.dart';
+import 'package:fifty_gramx/data/hostUserData.dart';
 
 class MutlipassExecCommands {
   /// contains the package path
@@ -66,7 +67,7 @@ class MutlipassExecCommands {
   installMicrok8s() async {
     // build the command
     String command = "${_baseCommandSpace}"
-        "sudo snap install microk8s --classic --channel=1.28/stable";
+        "sudo snap install microk8s --classic --channel=1.30/stable";
     // run the command
     await PrivilegedCommandExecuter.run(command);
   }
@@ -95,57 +96,6 @@ class MutlipassExecCommands {
     await PrivilegedCommandExecuter.run(command);
   }
 
-  String sanitize(String input) {
-    // Remove special characters and convert to lowercase
-    return input
-        .replaceAll(RegExp(r'[^\w\s]'), '') // Remove special characters
-        .replaceAll(RegExp(r'\s+'), '_'); // Replace spaces with underscores
-  }
-
-  String formatDate(DateTime date) {
-    final DateFormat monthFormat =
-        DateFormat('MMM'); // Three-character month representation
-    final String month = monthFormat.format(date);
-
-    final String day = DateFormat('dd').format(date);
-    final String year = DateFormat('yyyy').format(date);
-
-    final String hours = date.hour.toString().padLeft(2, '0') + "h";
-    final String minutes = date.minute.toString().padLeft(2, '0') + "m";
-    final String seconds = date.second.toString().padLeft(2, '0') + "s";
-
-    return "${year}${month}${day}_${hours}${minutes}${seconds}";
-  }
-
-  Future<String> generateClientName() async {
-    String _hostName = await HostMachineData().hostName();
-    String _publicIPCountry =
-        (await SimpleCommandExecuter.run("curl http://ipinfo.io/country"))
-            .last
-            .stdout
-            .toString()
-            .trim();
-    String _publicIPRegion =
-        (await SimpleCommandExecuter.run("curl http://ipinfo.io/region"))
-            .last
-            .stdout
-            .toString()
-            .trim();
-    String _publicIPCity =
-        (await SimpleCommandExecuter.run("curl http://ipinfo.io/city"))
-            .last
-            .stdout
-            .toString()
-            .trim();
-    var _now = DateTime.now();
-
-    // Create a formatted client name
-    String _clientName =
-        "Ethos_Node_${sanitize(_publicIPCountry)}_${sanitize(_publicIPRegion)}_${sanitize(_publicIPCity)}_${sanitize(_hostName)}_${formatDate(_now)}";
-
-    return _clientName;
-  }
-
   /// generates a new openvpn config
   ///
   /// stores the original in the control plane
@@ -159,7 +109,7 @@ class MutlipassExecCommands {
     String _controlPlaneUser = "ec2-user";
     String _controlPlaneIP = "13.200.238.161";
 
-    String _clientName = await generateClientName();
+    String _clientName = await HostUserData().readHostUserNodeClient();
 
     String _chmodCommand = "${_baseCommandSpace} chmod 400 ${_sshKeyPath}";
     await SimpleCommandExecuter.run(_chmodCommand);
@@ -189,11 +139,7 @@ class MutlipassExecCommands {
     print("finished connecting");
   }
 
-  joinMicrok8sWorkerNode() async {
-    // Step - 5
-    // # Get the join command from the control plane
-    // JOIN_COMMAND=`$(ssh -i `$SSH_KEY ec2-user@`$CONTROL_PLANE_IP 'sudo microk8s add-node --format short')
-
+  Future<String> _getMasterSSHCommand(String masterCommand) async {
     String _sshKeyAssetPath =
         "lib/community/apps/gramx/seventy/zero/ethos/pods/command/openvpn/openvpnSSH.key";
     String _sshKeyPath =
@@ -202,19 +148,39 @@ class MutlipassExecCommands {
     String _controlPlaneUser = "ec2-user";
     String _controlPlaneIP = "13.200.238.161";
 
-    String _joinCommand =
-        "${_baseCommandSpace} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${_sshKeyPath} ${_controlPlaneUser}@${_controlPlaneIP} \'microk8s add-node --format short\'";
-    var joinCommands = await SimpleCommandExecuter.run(_joinCommand);
-    _joinCommand =
-        "${_baseCommandSpace} ${joinCommands.first.stdout.toString()}";
-    var joinResults = await SimpleCommandExecuter.run(_joinCommand);
-    print("joinResults: $joinResults");
-    // Step - 6
-    // # Join the cluster
-    // sudo `$JOIN_COMMAND
+    return "${_baseCommandSpace} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${_sshKeyPath} ${_controlPlaneUser}@${_controlPlaneIP} \'${masterCommand}\'";
   }
 
-  leaveMicrok8sWorkerNode() {}
+  joinMicrok8sWorkerNode() async {
+    // Step - 5
+    // # Get the join command from the control plane
+    // JOIN_COMMAND=`$(ssh -i `$SSH_KEY ec2-user@`$CONTROL_PLANE_IP 'sudo microk8s add-node --format short')
+
+    String _addNodeCommand =
+        await _getMasterSSHCommand("microk8s add-node --format short");
+
+    var joinCommands = await SimpleCommandExecuter.run(_addNodeCommand);
+
+    String firstJoinCommand =
+        LineSplitter.split(joinCommands.last.stdout.toString()).first;
+
+    String cleanedJoinCommand = firstJoinCommand
+        .replaceAll(
+            RegExp(r'[\n\r]'), '') // Remove newlines and carriage returns
+        .trim();
+    String _joinCommand = "${_baseCommandSpace} ${cleanedJoinCommand} --worker";
+
+    var joinResults = await SimpleCommandExecuter.run(_joinCommand);
+  }
+
+  leaveMicrok8sWorkerNode() async {
+    var leaveResults =
+        await SimpleCommandExecuter.run("${_baseCommandSpace} microk8s leave");
+    var removeNodeFromMasterCommand = await _getMasterSSHCommand(
+        "microk8s remove-node ${_vmName.toLowerCase()}");
+    var removeNodeResults =
+        await SimpleCommandExecuter.run(removeNodeFromMasterCommand);
+  }
 
   updateKubePermissions() async {
     // build the command
