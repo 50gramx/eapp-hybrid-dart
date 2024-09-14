@@ -53,7 +53,7 @@ class MultipassCommands {
   static late MultipassInfoCommands info;
 
   // initialises the class
-  MultipassCommands() {
+  MultipassCommands(String hostClientName) {
     // package name is same in all base os, so no checks needed
     _packageName = "multipass";
 
@@ -65,7 +65,8 @@ class MultipassCommands {
     } // todo: add packagePath for windows, linux flavours
 
     // vmName is same in all base os, so no checks needed
-    _vmName = "ethos-pods-orchestrator-vm";
+    // warn: dynamic instead of "ethos-pods-orchestrator-vm"
+    _vmName = hostClientName;
 
     // instantiate the exec commands
     exec = MutlipassExecCommands(_packagePath, _vmName);
