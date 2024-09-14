@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:process_run/shell.dart';
 
 class Microk8sStopCommands {
@@ -22,6 +23,8 @@ class Microk8sStopCommands {
 
   Future<bool> now() async {
     String command = "$_baseCommandSpace";
+    print("leaving the network");
+    await MultipassCommands.exec.leaveMicrok8sWorkerNode();
     print("microk8s stopping now");
     String output = (await SimpleCommandExecuter.run(command)).outText;
     var firstLineOP = LineSplitter.split(output).last;
