@@ -81,6 +81,18 @@ class PrivilegedCommandExecuter {
     }
   }
 
+  /// Run one or multiple plain text command(s) in background.
+  ///
+  /// Returns a list of executed command line results.
+  static runBg(String command) async {
+    try {
+      return (_shell.run(command));
+    } catch (e, st) {
+      crashlyticsRecordError(e, st);
+      return []; // returns an empty list
+    }
+  }
+
   /// Run bash script from asset file
   ///
   /// Returns a list of executed command line results.
