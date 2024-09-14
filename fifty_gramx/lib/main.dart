@@ -52,6 +52,7 @@ import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_one_page
 import 'package:fifty_gramx/community/onboarding/website/satwa_pages/tg_two_pages/tg_employers_page.dart';
 import 'package:fifty_gramx/constants.dart';
 import 'package:fifty_gramx/data/accountData.dart';
+import 'package:fifty_gramx/data/hostUserData.dart';
 import 'package:fifty_gramx/environment.dart';
 import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -76,7 +77,6 @@ void initializeEthosAppsServices() {
   } else if (Platform.isLinux) {
     print("initializePlatformServices failed for Linux");
   }
-  MultipassCommands();
   print("Platform services initialized.");
 }
 
@@ -86,6 +86,8 @@ Future<void> initalizeEthosappsSupport() async => await (() async {
           (Platform.isMacOS || Platform.isWindows || Platform.isLinux)) {
         print("will start platform services");
         initializeEthosAppsServices();
+        String vmName = await HostUserData().readHostUserNodeVMName();
+        MultipassCommands(vmName);
       }
       EthosAppFlowBob();
       print("EthosAppFlowBob initialized.");
