@@ -1,8 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -50,7 +48,7 @@ class MobileNumberTextField extends StatelessWidget {
             Expanded(
               child: TextField(
                 controller: mobileNumberTextFieldController,
-                scrollPadding: EdgeInsets.only(bottom:64),
+                scrollPadding: EdgeInsets.only(bottom: 64),
                 keyboardType: TextInputType.phone,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(10),

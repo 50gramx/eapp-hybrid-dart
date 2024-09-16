@@ -1,11 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/invertedActionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/primaryActionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/secondaryActionNeuButton.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ProgressContentListTile extends StatelessWidget {
@@ -22,7 +17,9 @@ class ProgressContentListTile extends StatelessWidget {
     required this.secondaryButtonOnPressed,
     this.isPrimaryButtonActive = true,
     this.isPrimaryButtonDisabled = false,
-    this.tertiaryButtonWidget = const SizedBox(width: 1,),
+    this.tertiaryButtonWidget = const SizedBox(
+      width: 1,
+    ),
   }) : super(key: key);
 
   final Widget contentWidget;
@@ -36,7 +33,6 @@ class ProgressContentListTile extends StatelessWidget {
   final bool isPrimaryButtonActive;
   final bool isPrimaryButtonDisabled;
   final Widget tertiaryButtonWidget;
-
 
   Widget build(BuildContext context) {
     return Visibility(
@@ -87,23 +83,25 @@ class ProgressContentListTile extends StatelessWidget {
                 ),
                 isSecondaryButtonActive
                     ? ActionNeuButton(
-                  buttonTitle: secondaryButtonTitle,
-                  buttonActionOnPressed: () =>
-                  {secondaryButtonOnPressed()},
-                )
+                        buttonTitle: secondaryButtonTitle,
+                        buttonActionOnPressed: () =>
+                            {secondaryButtonOnPressed()},
+                      )
                     : SizedBox(),
                 isSecondaryButtonActive
                     ? SizedBox(
-                  width: 12,
-                )
+                        width: 12,
+                      )
                     : SizedBox(),
                 tertiaryButtonWidget,
-                isPrimaryButtonActive ? ActionNeuButton(
-                  buttonTitle: contentActionButtonTitle,
-                  buttonActionOnPressed: () => {primaryButtonOnPressed()},
-                  isPrimaryButton: true,
-                  isPrimaryButtonDisabled: isPrimaryButtonDisabled,
-                ) : SizedBox(),
+                isPrimaryButtonActive
+                    ? ActionNeuButton(
+                        buttonTitle: contentActionButtonTitle,
+                        buttonActionOnPressed: () => {primaryButtonOnPressed()},
+                        isPrimaryButton: true,
+                        isPrimaryButtonDisabled: isPrimaryButtonDisabled,
+                      )
+                    : SizedBox(),
               ],
             ),
           ),
