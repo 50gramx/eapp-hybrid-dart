@@ -76,7 +76,6 @@ class _GPUDetailsColumnState extends State<GPUDetailsColumn> {
           itemCount: gpuDetails.length,
           itemBuilder: (context, index) {
             final gpu = gpuDetails[index];
-            print("nodeDetails: ${gpu}");
             return NodeCard(nodeData: gpu, isSignedIn: signedIn);
           },
         );
@@ -93,8 +92,8 @@ class NodeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!nodeData['name'].toString().contains("enode") ||
-        !nodeData['name'].toString().contains("ethos")) {
+    print("NodeCard: building for node ${nodeData['name']}");
+    if (!nodeData['name'].toString().contains("enode")) {
       return SizedBox();
     }
     return LayoutBuilder(
