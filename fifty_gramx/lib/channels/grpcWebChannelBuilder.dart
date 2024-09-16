@@ -21,6 +21,7 @@
 
 import 'package:grpc/grpc_web.dart';
 
+// TODO(@khetana): fix this builder without port and certificate auth
 Future<dynamic> grpcChannelBuilder(String authority, int port,
     {String certPath = ""}) async {
   return GrpcWebClientChannel.xhr(Uri.parse(authority));
