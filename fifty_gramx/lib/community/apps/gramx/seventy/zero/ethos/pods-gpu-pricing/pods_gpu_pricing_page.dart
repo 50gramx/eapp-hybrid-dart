@@ -93,7 +93,8 @@ class NodeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!nodeData['name'].toString().contains("enode")) {
+    if (!nodeData['name'].toString().contains("enode") ||
+        !nodeData['name'].toString().contains("ethos")) {
       return SizedBox();
     }
     return LayoutBuilder(
