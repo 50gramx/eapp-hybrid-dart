@@ -56,6 +56,37 @@ class HostUserData {
         RegExp(r'_+'), '-'); // Replace underscores with hypen
   }
 
+  String sanitizeName(String input, int maxLength) {
+    // Remove special characters and convert to lowercase
+    String cleanedInput = input
+        .replaceAll(
+            RegExp(r'[^\w\s-]'), '') // Remove special characters except hyphen
+        .toLowerCase();
+
+    // Split the input by hyphen
+    List<String> words = cleanedInput.split('-');
+
+    // Initialize the sanitized output
+    String sanitized = '';
+
+    for (String word in words) {
+      // If adding the current word doesn't exceed the max length, add it
+      if (sanitized.length + word.length <= maxLength) {
+        if (sanitized.isEmpty) {
+          sanitized = word;
+        } else {
+          sanitized = '$sanitized-$word';
+        }
+      } else {
+        // If the current word exceeds the remaining allowed length, stop processing
+        break;
+      }
+    }
+
+    // Return the final sanitized string
+    return sanitized;
+  }
+
   String formatDate(DateTime date) {
     final DateFormat monthFormat =
         DateFormat('MMM'); // Three-character month representation
@@ -73,6 +104,7 @@ class HostUserData {
 
   Future<String> _generateEthosNodeClientName() async {
     String _hostName = await HostMachineData().hostName();
+
     String _publicIPUniverse =
         (await SimpleCommandExecuter.run("curl http://ipinfo.io/country"))
             .last
@@ -89,7 +121,7 @@ class HostUserData {
 
     // Create a formatted client name
     String _clientName =
-        "eNode_${sanitize(_publicIPUniverse)}_${sanitize(_publicIPRegion)}_${sanitize(_hostName)}_${formatDate(_now)}";
+        "eNode_${sanitize(_publicIPUniverse)}_${sanitize(_publicIPRegion)}_${sanitizeName(_hostName, 12)}_${formatDate(_now)}";
 
     return _clientName;
   }
