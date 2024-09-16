@@ -160,9 +160,12 @@ class NodeCard extends StatelessWidget {
     final countryCode = nameParts[
         1]; // Adjusted index based on format 'enode-in-<countryCode>-<region>-<userName>-<date>-<time>'
     final region = nameParts[2];
-    final userName = nameParts[3];
-    final dateString = nameParts[4];
-    final timeString = nameParts[5];
+
+    final userName = nameParts.sublist(3, nameParts.length - 2).join('-');
+
+    // The last two parts are the date and time strings
+    final dateString = nameParts[nameParts.length - 2];
+    final timeString = nameParts[nameParts.length - 1];
 
     // Reformat date and time
     final formattedDateTimeString = _reformatDateTime(dateString, timeString);
@@ -170,8 +173,12 @@ class NodeCard extends StatelessWidget {
     try {
       dateTime = DateTime.parse(formattedDateTimeString);
     } catch (e) {
-      return Text('Invalid date format',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
+      return Text('',
+          style: TextStyle(
+              fontSize: 16,
+              color: AppColors.contentPrimary(context),
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Montserrat'));
     }
 
     final now = DateTime.now();
