@@ -8,8 +8,11 @@
         "default": [
           "ethosverse-india"
         ],
-        "secondary": [
+        "seventy-zero-ethos-nodes": [
           "seventy-zero-ethos-nodes"
+        ],
+        "seventy-zero-ethos-pods": [
+          "seventy-zero-ethos-pods"
         ]
       }
     }

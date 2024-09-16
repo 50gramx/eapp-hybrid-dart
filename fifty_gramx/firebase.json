@@ -16,7 +16,22 @@
             ]
         },
         {
-            "target": "secondary",
+            "target": "seventy-zero-ethos-nodes",
+            "public": "build/web",
+            "ignore": [
+                "firebase.json",
+                "**/.*",
+                "**/node_modules/**"
+            ],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "target": "seventy-zero-ethos-pods",
             "public": "build/web",
             "ignore": [
                 "firebase.json",
