@@ -2,7 +2,6 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosa
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressHeadingListTile.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
-import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
@@ -25,6 +24,10 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   // Universe : Data Attributes
   bool isCountrySelected = false;
   bool isSelectingCountry = true;
+
+  /// An internal instance of LocalNotifications.
+  static Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
 
   final selectingUniverseHeadingKey = new GlobalKey();
 
@@ -70,11 +73,29 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
     }
   }
 
+  /// handler invoked inside localNotifications, which listens to new messages
+  /// when the device receives a push notification based on metadata
+  _handleListeningMessages(LocalNotification message) async {
+    print(
+        "EutopiaLeftNavigationScaffoldState: Received notification: $message");
+    if (message.type == "EthosAppFlowBob") {
+      if (message.data["subType"] == "AccountSign") {
+        print("AccountSign");
+        if (message.data['status'] == true) {
+          completedSelectingUniverseCallback();
+        }
+      }
+    }
+  }
+
   @override
   void initState() {
     setState(() {
       isSelectingCountry = true;
     });
+
+    // Listen to notifications and handle them.
+    _notificationsStream.listen(_handleListeningMessages);
 
     checkLogin();
     if (widget.isAccountLoggedIn) {
