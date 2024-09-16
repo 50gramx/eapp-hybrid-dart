@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Pod {
@@ -42,7 +43,7 @@ class _PodListPageState extends State<PodListPage> {
     print("PodListPage: fetchPods");
     try {
       final response = await http.get(
-        Uri.parse('http://122.179.29.113:8000/get_pods'),
+        Uri.parse('https://causal-regular-ladybug.ngrok-free.app/get_pods'),
         headers: {'ngrok-skip-browser-warning': '69420'},
       );
 
