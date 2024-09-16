@@ -58,7 +58,7 @@ platform :mac do
     remote_folder = "development"
     authorization_token = "Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJhdWQiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJvcmdEb21haW4iOiI1MGdyYW14IiwibmFtZSI6IkV0aG9zIEFwcHMgU2VydmljZSBDb250cmFjdHMiLCJpc3MiOiJodHRwczovLzUwZ3JhbXguamV0YnJhaW5zLnNwYWNlIiwicGVybV90b2tlbiI6IjRhdExheTNRaHUweSIsInByaW5jaXBhbF90eXBlIjoiU0VSVklDRSIsImlhdCI6MTcyNDExMzgyM30.Xrfm964rYsnQNTGR6DInNrWa-R4ZY9uT-NZAhVVC09PVCPBSmMR6OMkAIhZ56C88vuXbRcbLbXMch2zx5MyJJZTdZYotS2JOMIoB09tf0DdVBK3BjuVz86gfsbspaO-fAt8K6NKN-RKoB19LNtsSZeOSBt73KhlOMqc3Iwj4fwg"
     
-    sh("""curl -i -H \"Authorization: #{authorization_token}\" https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/#{remote_folder}/ --upload-file '#{zip_file_path}'""")
+    # sh("""curl -i -H \"Authorization: #{authorization_token}\" https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/#{remote_folder}/ --upload-file '#{zip_file_path}'""")
 
     
     dmg(
