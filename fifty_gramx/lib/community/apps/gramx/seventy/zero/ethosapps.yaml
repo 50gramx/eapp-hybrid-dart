@@ -4,4 +4,5 @@
     - pods-gpu-pricing
     - pods-gpu-manage
     - pods-gpu-cli
+    - pods-gpu-template
     - nodes
