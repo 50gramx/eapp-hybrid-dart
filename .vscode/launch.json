@@ -130,6 +130,16 @@
             ]
         },
         {
+            "name": "Debug - 50GRAMx - Web - App",
+            "cwd": "fifty_gramx",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "-d",
+                "chrome",
+            ]
+        },
+        {
             "name": "Debug - 50GRAMx - Windows",
             "cwd": "fifty_gramx",
             "request": "launch",
