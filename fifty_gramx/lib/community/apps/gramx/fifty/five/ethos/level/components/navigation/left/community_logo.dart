@@ -9,7 +9,7 @@ class CommunityLogo extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: EdgeInsets.only(top: 8),
         child: NeumorphicText(
-          "50GRAMx",
+          "Atlas 50GRAMx",
           style: NeumorphicStyle(
             lightSource: NeumorphicTheme.isUsingDark(context)
                 ? LightSource.bottomRight
@@ -19,7 +19,8 @@ class CommunityLogo extends StatelessWidget {
                 : AppColors.backgroundSecondary(context),
             shape: NeumorphicShape.flat,
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                topRight: Radius.circular(24), bottomRight: Radius.circular(24))),
+                topRight: Radius.circular(24),
+                bottomRight: Radius.circular(24))),
             color: AppColors.backgroundSecondary(context),
             depth: 2,
             disableDepth: false,
@@ -34,7 +35,7 @@ class CommunityLogo extends StatelessWidget {
               fontSize: 18,
               fontFamily: "Montserrat",
               fontWeight: FontWeight.w800,
-          height: 1.25),
+              height: 1.25),
         ),
       ),
     );
