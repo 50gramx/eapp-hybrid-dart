@@ -20,7 +20,8 @@ class EAIT1008 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("building EAIT1008");
-    bool isOneEappLoaded = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
+    bool isOneEappLoaded =
+        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
     return Visibility(
       visible: isNavigatingLeft ? false : (isOneEappLoaded ? false : true),
       child: Row(
