@@ -1,10 +1,10 @@
 import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/BotPressConversationsPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/eutopia_home_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/RegistrationForms.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/connectionsHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/conversationsHomePage.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/home_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/spacesHomePage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/web/webPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/bp/ai/coming_soon.dart';
@@ -53,14 +53,14 @@ class EappFlow {
       appTitle = "Identity";
       iconData = FeatherIcons.user;
       firstPage = WebViewPage(index: 1, containingFlowTitle: appTitle);
-    } else if (communityCode == 50 && title == 'domains') {
-      index = 5001;
-      appTitle = "Domains";
-      iconData = FeatherIcons.globe;
-      firstPage = HomePage(
-        index: index,
-        containingFlowTitle: appTitle,
-      );
+      // } else if (communityCode == 50 && title == 'domains') {
+      //   index = 5001;
+      //   appTitle = "Domains";
+      //   iconData = FeatherIcons.globe;
+      //   firstPage = HomePage(
+      //     index: index,
+      //     containingFlowTitle: appTitle,
+      //   );
     } else if (communityCode == 50 && title == 'get_started') {
       index = 5002;
       appTitle = "Get Started";
@@ -106,6 +106,12 @@ class EappFlow {
       iconData = FeatherIcons.box;
       firstPage = EthosPodConfigurationPage(
           index: index, containingFlowTitle: appTitle);
+      // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
+    } else if (communityCode == 55 && title == 'eutopia') {
+      index = 55101;
+      appTitle = "eUtopia";
+      iconData = FeatherIcons.box;
+      firstPage = CarbonApp();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'nodes') {
       index = 70101;
