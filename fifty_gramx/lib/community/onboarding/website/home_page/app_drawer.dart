@@ -1,6 +1,8 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/onboarding/website/galaxy_pages/header_config.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/app_bar.dart';
 import 'package:fifty_gramx/community/onboarding/website/home_page/header_config.dart';
+import 'package:fifty_gramx/community/onboarding/website/space_pages/header_config.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -52,8 +54,8 @@ Widget buildHomePageAppDrawer(BuildContext context) {
         ListView(
           padding: EdgeInsets.only(top: 48, left: 16, right: 16, bottom: 48),
           children: <Widget>[
-            // GalaxyPageHeaderConfig().buildCollapsibleMenu(context),
-            // SpacePageHeaderConfig().buildCollapsibleMenu(context),
+            GalaxyPageHeaderConfig().buildCollapsibleMenu(context),
+            SpacePageHeaderConfig().buildCollapsibleMenu(context),
             HomePageHeaderConfig().buildCollapsibleMenu(context),
             buildTappableHubTitleContainer(),
             // Add more items here as needed
