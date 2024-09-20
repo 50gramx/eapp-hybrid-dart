@@ -158,7 +158,7 @@ class MyApp extends StatelessWidget {
 
   buildWOFutureBuider() {
     if (Constants().eAppEnv == "com.50gramx.50.ethos.site") {
-      return Things50DC500000000OverviewPage();
+      return CollarsOverviewPage();
     } else {
       return HomeScreen();
     }
