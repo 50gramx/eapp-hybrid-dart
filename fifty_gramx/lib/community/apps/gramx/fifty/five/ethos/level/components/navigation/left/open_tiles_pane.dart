@@ -1,24 +1,65 @@
-import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold_backup.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_page_button.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/messaging/AccountAssistantConversationPage.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class OpenTilesPane extends StatelessWidget {
-  final Function(int) selectPressedSectionItem;
-  final VoidCallback toggleNavigatingPages;
-  final bool isNavigatingLeft;
-  final bool isNavigatingPages;
-
-  OpenTilesPane({
+class OpenTilesPane extends StatefulWidget {
+  const OpenTilesPane({
     required this.selectPressedSectionItem,
     required this.isNavigatingLeft,
-    required this.toggleNavigatingPages,
-    required this.isNavigatingPages,
+    Key? key,
   });
+  final Function(int) selectPressedSectionItem;
+
+  final bool isNavigatingLeft;
+
+  @override
+  _OpenTilesPaneState createState() => _OpenTilesPaneState();
+}
+
+class _OpenTilesPaneState extends State<OpenTilesPane> {
+  /// internal instance of LocalNotifications
+  static Stream<LocalNotification> _notificationsStream =
+      NotificationsBloc.instance.notificationsStream;
+
+  late bool isVisible;
+
+  /// handler invoked inside localNotifications, which listens to new messages
+  /// when the device receives a push notification based on metadata
+  handleListeningMessages(LocalNotification message) async {
+    if (message.type == "OpenTilesPane") {
+      if (message.data.containsKey("state")) {
+        _handleVisualStates(message);
+      }
+    }
+  }
+
+  _handleVisualStates(LocalNotification message) {
+    if (message.data["state"] == "toggle") {
+      if (isVisible) {
+        setState(() {
+          isVisible = false;
+        });
+        NotificationsBloc.instance.newNotification(
+            LocalNotification("OpenTilesPane", {"isVisible": false}));
+      } else {
+        setState(() {
+          isVisible = true;
+        });
+        NotificationsBloc.instance.newNotification(
+            LocalNotification("OpenTilesPane", {"isVisible": true}));
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    isVisible = true;
+    _notificationsStream.listen((notification) {
+      handleListeningMessages(notification);
+    });
+    super.initState();
+  }
 
   Widget buildCard() {
     return Center(
@@ -232,14 +273,7 @@ class OpenTilesPane extends StatelessWidget {
                 ),
                 child: box,
               );
-              return Container(
-                height: 400,
-                width: 100,
-                child: AccountAssistantConversationPage(
-                    accountAssistant: AccountAssistant(
-                        accountAssistantNameCode: 50,
-                        accountAssistantName: "My Assistant")),
-              );
+              return build(context);
               // return Text("${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex - 1].leftNavigationBarSectionalItem.label}");
               // return buildAppPageButton(
               //     context, subIndex - 1, selectPressedSectionItem);
@@ -249,30 +283,16 @@ class OpenTilesPane extends StatelessWidget {
       ),
     );
 
-    Widget topRow = Visibility(
-      visible: !isNavigatingLeft,
-      child: Container(
-        height: 32,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CommunityLogo(),
-            ElevatedButton(
-                onPressed: () {
-                  toggleNavigatingPages();
-                },
-                child: Text("TILES")),
-          ],
-        ),
-      ),
-    );
     Widget expandedTiles = Expanded(
         flex: LayoutBreakpoint().getBreakpoint(context) <= 4 ? 6 : 4,
         child: Container(
           child: ListView(
-            children: [topRow, tiles],
+            children: [tiles],
           ),
         ));
-    return expandedTiles;
+    return Visibility(
+      child: expandedTiles,
+      visible: isVisible,
+    );
   }
 }
