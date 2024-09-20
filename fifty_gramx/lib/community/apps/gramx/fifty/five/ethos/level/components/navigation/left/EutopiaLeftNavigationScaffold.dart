@@ -80,8 +80,6 @@ class _EutopiaLeftNavigationScaffoldState
 
   /// Indicates whether the app is in focus mode.
   bool focusMode = false;
-  bool isNavigatingPages = true;
-  bool isNavigatingSinglePage = true;
 
   /// Controller for the text field used for searching.
   TextEditingController nameTextFieldController = TextEditingController();
@@ -153,31 +151,11 @@ class _EutopiaLeftNavigationScaffoldState
     FirebaseAnalytics.instance.logScreenView(screenName: "Page #$sectionIndex");
   }
 
-  toggleNavigatingPages() {
-    print("------------------------------------------------------------");
-    print("------------------------------------------------------------");
-    print("-----------------------TOGGLE-------------------------------");
-    print("---------------------NAVIGATING-----------------------------");
-    print("-----------------------PAGES--------------------------------");
-    print("------------------------------------------------------------");
-    print("------------------------------------------------------------");
-    if (isNavigatingPages) {
-      setState(() {
-        isNavigatingPages = false;
-      });
-    } else {
-      setState(() {
-        isNavigatingPages = true;
-      });
-    }
-  }
-
   @override
   void dispose() {
     _animationControllers.forEach(
       (controller) => controller.dispose(),
     );
-
     super.dispose();
   }
 
@@ -300,7 +278,7 @@ class _EutopiaLeftNavigationScaffoldState
                         ? (isOneEappLoaded ? false : true)
                         : false,
                     child: Container(
-                      width: 86,
+                      width: 102,
                       child: EAIT1001(
                         navigationViewPort: viewPort,
                         isNavigatingLeft: isNavigatingLeft,
@@ -314,13 +292,12 @@ class _EutopiaLeftNavigationScaffoldState
                   Visibility(
                     visible: true,
                     child: Expanded(
-                      flex: (LayoutBreakpoint().getBreakpoint(context) <= 4
-                          ? 7
-                          : 11),
+                      flex: (LayoutBreakpoint().isNavigatingLeft(context)
+                          ? 11
+                          : 7),
                       child: EAIT1002(
                         isNavigatingLeft: isNavigatingLeft,
                         selectPressedSectionItem: selectPressedSectionItem,
-                        toggleNavigatingPages: toggleNavigatingPages,
                         navigationWidget: widget,
                         navigationViewPort: viewPort,
                         focusMode: focusMode,
@@ -335,12 +312,12 @@ class _EutopiaLeftNavigationScaffoldState
                   Visibility(
                     child: OpenTilesPane(
                         selectPressedSectionItem: selectPressedSectionItem,
-                        isNavigatingLeft: isNavigatingLeft,
-                        toggleNavigatingPages: toggleNavigatingPages,
-                        isNavigatingPages: isNavigatingPages),
+                        isNavigatingLeft: isNavigatingLeft),
                     visible: isNavigatingLeft
-                        ? (isOneEappLoaded ? false : false)
-                        : (isNavigatingPages ? false : true),
+                        ? isOneEappLoaded
+                            ? false
+                            : true
+                        : false,
                   ),
                 ],
               ),
