@@ -79,28 +79,78 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
               width: 2,
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          margin: const EdgeInsets.fromLTRB(8, 2, 16, 2),
           child: Text(
-            "Access eDomains",
+            "Access In",
             maxLines: 1,
             textAlign: TextAlign.end,
             style: TextStyle(
                 color: AppColors.contentPrimary(context),
                 fontSize: 18,
                 fontFamily: "Montserrat",
-                fontWeight: FontWeight.w400),
+                fontWeight: FontWeight.w700),
+          )),
+    );
+  }
+
+  Widget buildTappableHubSignUpTitleContainer() {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: NeumorphicButton(
+          provideHapticFeedback: true,
+          onPressed: () {
+            Navigator.pushNamed(context, '/collars');
+          },
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.flat,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+            color: AppColors.backgroundInversePrimary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.backgroundSecondary(context),
+              width: 2,
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          margin: const EdgeInsets.fromLTRB(8, 2, 8, 2),
+          child: Text(
+            "Join Now",
+            maxLines: 1,
+            textAlign: TextAlign.end,
+            style: TextStyle(
+                color: AppColors.contentInversePrimary(context),
+                fontSize: 18,
+                fontFamily: "Montserrat",
+                fontWeight: FontWeight.w700),
           )),
     );
   }
 
   Widget buildHubTitle() {
     return Hero(
-      tag: "50gramx-hub-title-app-bar-hero",
+      tag: "50gramx-hub-title-app-bar-sign-in",
       transitionOnUserGestures: true,
       child: Align(
         alignment: Alignment.centerLeft,
         child: buildTappableHubTitleContainer(),
+      ),
+    );
+  }
+
+  Widget buildHubSignUpTitle() {
+    return Hero(
+      tag: "50gramx-hub-title-app-bar-sign-up",
+      transitionOnUserGestures: true,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: buildTappableHubSignUpTitleContainer(),
       ),
     );
   }
@@ -110,7 +160,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/collars',
+          '/ethosverse',
         );
       },
       child: Padding(
@@ -119,7 +169,7 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
             padding: EdgeInsets.only(left: 6, right: 6),
             alignment: Alignment.center,
             child: NeumorphicText(
-              "Collars",
+              "Ethosverse",
               style: NeumorphicStyle(
                 lightSource: NeumorphicTheme.isUsingDark(context)
                     ? LightSource.bottomRight
@@ -169,10 +219,10 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
         // Add space to separate the title and other actions
         buildHerotitle(context), // Your existing title widget
         SizedBox(width: 16),
-        // buildTappableEthosverseTitle(),
-        // buildGalaxyPopupMenuButton(),
-        // buildSpacePopupMenuButton(),
-        // buildCompanyPopuMenuButton(),
+        buildTappableEthosverseTitle(),
+        buildGalaxyPopupMenuButton(),
+        buildSpacePopupMenuButton(),
+        buildCompanyPopuMenuButton(),
       ],
     );
   }
@@ -194,8 +244,9 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
 
   buildLeftNavigationActions() {
     return [
-      buildTappableEthosverseTitle(),
-      // buildHubTitle(),
+      // buildTappableEthosverseTitle(),
+      buildHubSignUpTitle(),
+      buildHubTitle(),
     ];
   }
 
