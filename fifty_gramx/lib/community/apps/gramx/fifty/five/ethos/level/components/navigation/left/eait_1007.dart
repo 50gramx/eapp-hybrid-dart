@@ -17,15 +17,11 @@ class EAIT1007 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-        visible: isNavigatingLeft,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            EAIT1005(
-                navigationViewPort: navigationViewPort,
-                selectPressedSectionItem: selectPressedSectionItem,
-                navigationWidget: navigationWidget)
-          ],
-        ));
+      visible: isNavigatingLeft,
+      child: EAIT1005(
+          navigationViewPort: navigationViewPort,
+          selectPressedSectionItem: selectPressedSectionItem,
+          navigationWidget: navigationWidget),
+    );
   }
 }
