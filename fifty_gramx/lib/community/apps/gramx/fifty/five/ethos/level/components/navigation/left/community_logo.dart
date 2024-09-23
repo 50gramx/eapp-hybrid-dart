@@ -9,7 +9,7 @@ class CommunityLogo extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: EdgeInsets.only(top: 8),
         child: NeumorphicText(
-          "Atlas 50GRAMx",
+          "50GRAMx Ethosverse",
           style: NeumorphicStyle(
             lightSource: NeumorphicTheme.isUsingDark(context)
                 ? LightSource.bottomRight
