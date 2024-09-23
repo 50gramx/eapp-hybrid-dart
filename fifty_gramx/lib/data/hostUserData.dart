@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/HostMachineData.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
 import 'package:intl/intl.dart';
+import 'package:process_run/shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HostUserData {
@@ -102,21 +104,26 @@ class HostUserData {
     return "${year}${month}${day}_${hours}${minutes}${seconds}";
   }
 
+  Future<String> getCurlOut(String url) async {
+    if (Platform.isWindows) {
+      var shell = Shell(runInShell: true);
+      return (await shell.run("curl $url")).outText;
+    } else {
+      return (await SimpleCommandExecuter.run("curl $url"))
+          .last
+          .stdout
+          .toString()
+          .trim();
+    }
+  }
+
   Future<String> _generateEthosNodeClientName() async {
     String _hostName = await HostMachineData().hostName();
+    print("_hostName: $_hostName");
 
-    String _publicIPUniverse =
-        (await SimpleCommandExecuter.run("curl http://ipinfo.io/country"))
-            .last
-            .stdout
-            .toString()
-            .trim();
-    String _publicIPRegion =
-        (await SimpleCommandExecuter.run("curl http://ipinfo.io/postal"))
-            .last
-            .stdout
-            .toString()
-            .trim();
+    String _publicIPUniverse = await getCurlOut("http://ipinfo.io/country");
+    String _publicIPRegion = await getCurlOut("http://ipinfo.io/postal");
+
     var _now = DateTime.now();
 
     // Create a formatted client name
