@@ -23,6 +23,7 @@ import 'package:fifty_gramx/community/homeScreenWidgets/configurations/basicConf
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/switchConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/data/hostUserData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:process_run/shell.dart';
@@ -589,6 +590,18 @@ class _MachineConfigurationPageState extends State<MachineConfigurationPage>
                         print(
                             "afterOnchangeValue: $value, is: $isDebuggingBeta");
                       });
+                }
+              },
+            ),
+
+            FutureBuilder<String>(
+              future: HostUserData().readHostUserNodeClient(),
+              builder: (context, snap) {
+                if (snap.connectionState == ConnectionState.waiting) {
+                  return SizedBox();
+                } else {
+                  return BasicConfigurationItem(
+                      titleText: "Client", subtitleText: snap.data!.trim());
                 }
               },
             ),
