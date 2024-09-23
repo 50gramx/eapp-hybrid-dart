@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -13,6 +14,7 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/executor_log_viewer.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/multipass/multipassCommands.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/neumorphic_snackbar.dart';
+import 'package:fifty_gramx/firebase_configurations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
@@ -342,10 +344,18 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
       if (await MultipassCommands.version.isPresent()) {
         await updateProgress(
             1, "Starting to Launch VM, downloading may take some time");
-        bool isVmLaunched = await MultipassCommands.launch.vm(
-            selectedMemory.toInt(),
-            selectedCpuCount.toInt(),
-            selectedDiskSpace.toInt());
+
+        try {
+          bool isVmLaunched = await MultipassCommands.launch.vm(
+              selectedMemory.toInt(),
+              selectedCpuCount.toInt(),
+              selectedDiskSpace.toInt());
+        } catch (e, st) {
+          print("error: $e, stacktrace: $st");
+          Future.delayed(Duration(seconds: 150), () {});
+
+          crashlyticsRecordError(e, st);
+        }
 
         Map<String, dynamic> vmMeta =
             await MultipassCommands.list.getOrchestratorVmMeta();
@@ -386,6 +396,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
               context, "Congratulations, Orchestrator Successfully Started!");
         } else {
           await updateProgress(1, "Could not Launch VM, Something went wrong");
+          await Future.delayed(Duration(seconds: 10), () {});
           setState(() {
             isInstalling = false;
           });
@@ -393,6 +404,7 @@ class _MicroK8sInstallerPageState extends State<MicroK8sInstallerPage> {
       } else {
         await updateProgress(
             0, "Could not Install VM Manager, Something went wrong");
+        await Future.delayed(Duration(seconds: 30));
         setState(() {
           isInstalling = false;
         });
