@@ -66,7 +66,7 @@ class HostMachineData {
     } else if (Platform.isWindows) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       var windowsInfo = await deviceInfo.windowsInfo;
-      return windowsInfo.registeredOwner;
+      return windowsInfo.userName;
     } else if (Platform.isLinux) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       var linuxInfo = await deviceInfo.linuxInfo;
