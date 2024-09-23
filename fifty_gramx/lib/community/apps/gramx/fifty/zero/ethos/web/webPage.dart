@@ -436,10 +436,10 @@ class _WebViewPageState extends State<WebViewPage> {
                     ),
                     SelectorConfigurationItem(
                         titleText: "Account",
-                        subtitleText: "EMPTY",
+                        subtitleText: "Sign Out",
                         selectorCallback: () {
                           AccountData().emptyAccount();
-                          print('pressed');
+                          setState(() {});
                         }),
                   ],
                 );
