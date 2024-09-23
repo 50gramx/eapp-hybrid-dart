@@ -21,12 +21,23 @@ class Pod {
   });
 
   factory Pod.fromJson(Map<String, dynamic> json) {
+    var name = json.containsKey('name') ? json['name'] : "";
+    if (name == null) name = "";
+    var namespace = json.containsKey('namespace') ? json['namespace'] : "";
+    if (namespace == null) namespace = "";
+    var node_name = json.containsKey('node_name') ? json['node_name'] : "";
+    if (node_name == null) node_name = "";
+    var ssh_command =
+        json.containsKey('ssh_command') ? json['ssh_command'] : "";
+    if (ssh_command == null) ssh_command = "";
+    var status = json.containsKey('status') ? json['status'] : "";
+    if (status == null) status = "";
     return Pod(
-      name: json['name'],
-      namespace: json['namespace'],
-      nodeName: json['node_name'],
-      sshCommand: json['ssh_command'],
-      status: json['status'],
+      name: name,
+      namespace: namespace,
+      nodeName: node_name,
+      sshCommand: ssh_command,
+      status: status,
     );
   }
 }
@@ -40,32 +51,27 @@ class _PodListPageState extends State<PodListPage> {
   late Future<List<Pod>> pods;
 
   Future<List<Pod>> fetchPods() async {
-    print("PodListPage: fetchPods");
     try {
       final response = await http.get(
         Uri.parse('https://causal-regular-ladybug.ngrok-free.app/get_pods'),
         headers: {'ngrok-skip-browser-warning': '69420'},
       );
 
-      print("PodListPage: response status code: ${response.statusCode}");
-      print("PodListPage: response body: ${response.body}");
-
       if (response.statusCode == 200) {
-        List<dynamic> podsJson = json.decode(response.body)['pods'];
-        List<Pod> pods = podsJson.map((json) => Pod.fromJson(json)).toList();
+        Map<String, dynamic> jsonBody = json.decode(response.body);
+        List<dynamic> podsInJson = jsonBody['pods'];
+        List<Pod> pods = podsInJson.map((json) => Pod.fromJson(json)).toList();
         return pods;
       } else {
         throw Exception('Failed to load pods: ${response.reasonPhrase}');
       }
     } catch (e) {
-      print("PodListPage: error fetching pods: $e");
       throw Exception('Failed to load pods: $e');
     }
   }
 
   @override
   void initState() {
-    print("PodListPage: init");
     super.initState();
     pods = fetchPods();
   }
@@ -141,29 +147,32 @@ class _PodListPageState extends State<PodListPage> {
                           ],
                         ),
                         SizedBox(height: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                // Add your deployment logic here
-                                EthosAppFlowBob().loadAppOnTheGo(
-                                    appName: "pods-gpu-cli",
-                                    orgName: "ethos",
-                                    communityCode: 70,
-                                    appIndex: 70093);
-                                NotificationsBloc.instance.newNotification(
-                                    LocalNotification("EthosAppFlowBob", {
-                                  "subType": "Open eApp",
-                                  "appSectionIndex": 5
-                                }));
-                              },
-                              child: Text(
-                                pod.sshCommand,
-                                style: TextStyle(color: Colors.blue),
+                        Visibility(
+                          visible: pod.status == 'Running',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  // Add your deployment logic here
+                                  EthosAppFlowBob().loadAppOnTheGo(
+                                      appName: "pods-gpu-cli",
+                                      orgName: "ethos",
+                                      communityCode: 70,
+                                      appIndex: 70093);
+                                  NotificationsBloc.instance.newNotification(
+                                      LocalNotification("EthosAppFlowBob", {
+                                    "subType": "Open eApp",
+                                    "appSectionIndex": 5
+                                  }));
+                                },
+                                child: Text(
+                                  pod.sshCommand,
+                                  style: TextStyle(color: Colors.blue),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
