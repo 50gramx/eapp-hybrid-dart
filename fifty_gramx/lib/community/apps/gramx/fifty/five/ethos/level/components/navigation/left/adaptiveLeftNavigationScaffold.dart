@@ -24,7 +24,8 @@ class AdaptiveLeftNavigationScaffold extends StatefulWidget {
 class _AdaptiveLeftNavigationScaffoldState
     extends State<AdaptiveLeftNavigationScaffold> {
   int _currentlySelectedIndex = 0;
-  bool _isAccountAvailable = true; // Initially assuming account is available
+  bool _isAccountAvailable =
+      false; // Initially assuming account is not available
 
   @override
   void initState() {
