@@ -5,6 +5,7 @@ import 'package:fifty_gramx/community/onboarding/website/home_page/header_config
 import 'package:fifty_gramx/community/onboarding/website/space_pages/header_config.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePageSliverAppBar extends StatefulWidget {
   HomePageSliverAppBar({
@@ -155,47 +156,67 @@ class _HomePageSliverAppBarState extends State<HomePageSliverAppBar> {
     );
   }
 
+  _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   Widget buildTappableEthosverseTitle() {
+    Widget arrowUpRightIconWidget = Icon(
+      FeatherIcons.arrowUpRight,
+      color: AppColors.contentPrimary(context),
+      size: 18,
+    );
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          '/ethosverse',
-        );
+        _launchURL("https://ethosverse.50gramx.com");
       },
       child: Padding(
           padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
           child: Container(
             padding: EdgeInsets.only(left: 6, right: 6),
             alignment: Alignment.center,
-            child: NeumorphicText(
-              "Ethosverse",
-              style: NeumorphicStyle(
-                lightSource: NeumorphicTheme.isUsingDark(context)
-                    ? LightSource.bottomRight
-                    : LightSource.topLeft,
-                shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                    ? AppColors.gray600
-                    : AppColors.backgroundSecondary(context),
-                shape: NeumorphicShape.flat,
-                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                    topRight: Radius.circular(24),
-                    bottomRight: Radius.circular(24))),
-                color: AppColors.contentPrimary(context),
-                depth: 2,
-                disableDepth: false,
-                border: NeumorphicBorder(
-                  isEnabled: true,
-                  color: AppColors.backgroundInverseTertiary(context),
-                  width: 0.3,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                NeumorphicText(
+                  "Ethosverse",
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    shape: NeumorphicShape.flat,
+                    boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                        topRight: Radius.circular(24),
+                        bottomRight: Radius.circular(24))),
+                    color: AppColors.contentPrimary(context),
+                    depth: 2,
+                    disableDepth: false,
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundInverseTertiary(context),
+                      width: 0.3,
+                    ),
+                  ),
+                  textAlign: TextAlign.left,
+                  textStyle: NeumorphicTextStyle(
+                      fontSize: 20,
+                      fontFamily: "Montserrat",
+                      fontWeight: FontWeight.w600,
+                      height: 1.25),
                 ),
-              ),
-              textAlign: TextAlign.left,
-              textStyle: NeumorphicTextStyle(
-                  fontSize: 20,
-                  fontFamily: "Montserrat",
-                  fontWeight: FontWeight.w600,
-                  height: 1.25),
+                SizedBox(
+                  width: 6,
+                ),
+                arrowUpRightIconWidget,
+              ],
             ),
           )),
     );

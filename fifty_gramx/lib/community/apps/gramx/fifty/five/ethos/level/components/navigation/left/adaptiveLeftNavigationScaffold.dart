@@ -1,5 +1,9 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
+import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/data/accountData.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
@@ -20,6 +24,21 @@ class AdaptiveLeftNavigationScaffold extends StatefulWidget {
 class _AdaptiveLeftNavigationScaffoldState
     extends State<AdaptiveLeftNavigationScaffold> {
   int _currentlySelectedIndex = 0;
+  bool _isAccountAvailable = true; // Initially assuming account is available
+
+  @override
+  void initState() {
+    super.initState();
+    _checkAccountStatus();
+  }
+
+  Future<void> _checkAccountStatus() async {
+    // Simulating an async account status check
+    bool isAvailable = await AccountData().accountAvailable();
+    setState(() {
+      _isAccountAvailable = isAvailable;
+    });
+  }
 
   @override
   Widget build(BuildContext context) => WillPopScope(
@@ -32,7 +51,31 @@ class _AdaptiveLeftNavigationScaffoldState
             .navigatorKey
             .currentState!
             .maybePop(),
-        child: _buildEutopia(context),
+        child: Stack(
+          children: [
+            // Main Navigation Scaffold
+            _buildEutopia(context),
+
+            // Overlay GetStartedWidget if account is not available
+            if (!_isAccountAvailable)
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withOpacity(0.6), // Dim background
+                  child: Center(
+                    child: GetStartedWidget(
+                      completedSuccessfulSignIn: () {
+                        setState(() {
+                          _isAccountAvailable = true;
+                        });
+                        setState(() {});
+                        LocalServices().user();
+                      },
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       );
 
   Widget _buildEutopia(BuildContext context) => EutopiaLeftNavigationScaffold(

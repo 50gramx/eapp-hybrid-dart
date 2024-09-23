@@ -1,8 +1,10 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressHeadingListTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/adaptiveLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
+import 'package:fifty_gramx/constants.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/ui/base_widget.dart';
@@ -11,13 +13,18 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class GetStartedWidget extends StatefulWidget {
-  const GetStartedWidget({Key? key, this.isAccountLoggedIn = false})
+  const GetStartedWidget(
+      {Key? key,
+      this.isAccountLoggedIn = false,
+      this.completedSuccessfulSignIn})
       : super(key: key);
 
   final bool isAccountLoggedIn;
 
   @override
   State<GetStartedWidget> createState() => _GetStartedWidgetState();
+
+  final VoidCallback? completedSuccessfulSignIn;
 }
 
 class _GetStartedWidgetState extends State<GetStartedWidget> {
@@ -33,25 +40,34 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
 
   completedSelectingUniverseCallback() async {
     print("completedSelectingUniverseCallback");
-    setState(() {
-      // update to select galaxy
-      isSelectingCountry = false;
-      isCountrySelected = true;
-      isSelectingGalaxy = true;
-    });
-    // pushToHomeScreenWidget();
-    EthosAppFlowBob().unloadAppOnTheGo(communityCode: 50, appIndex: 5002);
-    EthosAppFlowBob().loadAppOnTheGo(
-        appName: "identity", orgName: "ethos", communityCode: 50, appIndex: 1);
-    EthosAppFlowBob().loadAppOnTheGo(
-        appName: "pay", orgName: "ethos", communityCode: 52, appIndex: 5);
-    EthosAppFlowBob().loadAppOnTheGo(
-        appName: "pods-gpu-template",
-        orgName: "ethos",
-        communityCode: 70,
-        appIndex: 70092);
-    NotificationsBloc.instance.newNotification(LocalNotification(
-        "EthosAppFlowBob", {"subType": "Open eApp", "appSectionIndex": 3}));
+    if (Constants().eAppEnv == "com.50gramx") {
+      if (widget.completedSuccessfulSignIn != null) {
+        widget.completedSuccessfulSignIn!();
+      }
+    } else {
+      setState(() {
+        // update to select galaxy
+        isSelectingCountry = false;
+        isCountrySelected = true;
+        isSelectingGalaxy = true;
+      });
+      // pushToHomeScreenWidget();
+      EthosAppFlowBob().unloadAppOnTheGo(communityCode: 50, appIndex: 5002);
+      EthosAppFlowBob().loadAppOnTheGo(
+          appName: "identity",
+          orgName: "ethos",
+          communityCode: 50,
+          appIndex: 1);
+      EthosAppFlowBob().loadAppOnTheGo(
+          appName: "pay", orgName: "ethos", communityCode: 52, appIndex: 5);
+      EthosAppFlowBob().loadAppOnTheGo(
+          appName: "pods-gpu-template",
+          orgName: "ethos",
+          communityCode: 70,
+          appIndex: 70092);
+      NotificationsBloc.instance.newNotification(LocalNotification(
+          "EthosAppFlowBob", {"subType": "Open eApp", "appSectionIndex": 3}));
+    }
   }
 
   bool isGalaxySelected = false;

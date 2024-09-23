@@ -31,6 +31,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/SecurePinTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressContentListTile.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/neumorphic_snackbar.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -536,10 +537,9 @@ class _GettingStartedUniverseColumnWidgetState
           if (verifyAccountResponse.verificationDone) {
             saveAccessAuth(
                 verifyAccountResponse.accountServiceAccessAuthDetails);
+            showNeumorphicSnackBar(
+                context, verifyAccountResponse.verificationMessage);
 
-            final snackBar = SnackBar(
-                content: Text(verifyAccountResponse.verificationMessage));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             LocalServices().contacts();
             if ((await AccountData().readAccount()).accountBillingActive) {
               // checking if the billing is not active
@@ -589,10 +589,9 @@ class _GettingStartedUniverseColumnWidgetState
         saveAccessAuth(
             captureAccountMetaDetailsResponse.accountServiceAccessAuthDetails);
         print("saved access auth");
-        final snackBar = SnackBar(
-            content:
-                Text(captureAccountMetaDetailsResponse.accountCreationMessage));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        showNeumorphicSnackBar(
+            context, captureAccountMetaDetailsResponse.accountCreationMessage);
+
         // start update billing
         print("will update billing");
         await AccountData().saveIsAccountBillingActive(true);
@@ -600,11 +599,8 @@ class _GettingStartedUniverseColumnWidgetState
         LocalServices().contacts();
         // widget.completedSelectingUniverseCallback();
       } else {
-        print("couldn't create account");
-        final snackBar = SnackBar(
-            content:
-                Text(captureAccountMetaDetailsResponse.accountCreationMessage));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        showNeumorphicSnackBar(
+            context, captureAccountMetaDetailsResponse.accountCreationMessage);
       }
       print("will push");
       widget.completedSelectingUniverseCallback();
