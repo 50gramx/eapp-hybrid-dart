@@ -4,7 +4,6 @@ import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
 /// material's and cupertino's bottom navigation pattern.
