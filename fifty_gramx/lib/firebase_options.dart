@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1048555807763',
     projectId: 'ethosverse-india',
     storageBucket: 'ethosverse-india.appspot.com',
-    iosBundleId: 'com.example.fiftyGramx',
+    iosBundleId: 'com.fiftygramx.ethosai',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'ethosverse-india.appspot.com',
     measurementId: 'G-TRGMJE77RF',
   );
-
 }
