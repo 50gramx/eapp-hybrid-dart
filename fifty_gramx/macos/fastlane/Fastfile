@@ -25,7 +25,7 @@ platform :mac do
     # Build the app
     build_app(
       workspace: "Runner.xcworkspace", 
-      scheme: "com.fiftygramx.seventy.zero.ethos.nodes",
+      scheme: "com.fiftygramx.ethosai",
       export_method: "developer-id",
       skip_package_pkg: true, # A workaround for https://github.com/fastlane/fastlane/issues/15963
     )
@@ -38,7 +38,7 @@ platform :mac do
       package: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app",
       username: "amitkumarkhetan15@gmail.com", # Your Apple ID
       asc_provider: "V9YYYP7GU9",
-      bundle_id: "com.fiftygramx.seventy.zero.ethos.nodes",
+      bundle_id: "com.fiftygramx.ethosai",
       print_log: true,
       verbose: true,
     )
