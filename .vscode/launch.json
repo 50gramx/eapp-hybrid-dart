@@ -5,59 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug - 50.ethos.domains - Web",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--dart-define=flavor=50.ethos.domains"
-            ]
-        },
-        {
-            "name": "Debug - 70.ethos.pods - Web",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--dart-define=flavor=70.ethos.pods"
-            ]
-        },
-        {
-            "name": "Debug - 70.ethos.pods-gpu-pricing - Web",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--dart-define=flavor=70.ethos.pods-gpu-pricing"
-            ]
-        },
-        {
-            "name": "Debug - 70.ethos.nodes - Web",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--dart-define=flavor=70.ethos.nodes"
-            ]
-        },
-        {
-            "name": "Amit Debug's - 70.ethos.nodes - MacOS",
+            "name": "MacOS - App - @khetana",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
             "args": [
                 "-d",
                 "macos",
-                "--flavor",
-                "com.fiftygramx.seventy.zero.ethos.nodes",
             ],
             "env": {
                 "PATH": "/Users/mac/Downloads/google-cloud-sdk/bin:/Users/mac/.rvm/gems/ruby-3.2.0/bin:/usr/local/bin:/usr/local/bin:/Users/mac/.rvm/gems/ruby-3.2.0/bin:/Users/mac/.rvm/gems/ruby-3.2.0@global/bin:/Users/mac/.rvm/rubies/ruby-3.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/mac/.rvm/bin:/Users/mac/Documents/flutter-sdk/flutter/bin:/Users/mac/.rvm/bin:/usr/local/bin/fastlane",
@@ -74,7 +28,7 @@
             }
         },
         {
-            "name": "Amit Debug's - 70.ethos.nodes - Windows",
+            "name": "Windows - App",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
@@ -85,41 +39,7 @@
             ],
         },
         {
-            "name": "Debug - 70.ethos.nodes - Windows",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "windows",
-                "--dart-define=flavor=70.ethos.nodes"
-            ]
-        },
-        {
-            "name": "Debug - 70.gs.weather - Web",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "chrome",
-                "--dart-define=flavor=70.gs.weather"
-            ]
-        },
-        {
-            "name": "Debug - 70.ethos.pods - iOS",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "00008110-000524293E01401E",
-                "--flavor",
-                "70.ethos.pods"
-            ]
-        },
-        {
-            "name": "Debug - 50GRAMx - Web - Site",
+            "name": "Web - Site",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
@@ -130,7 +50,7 @@
             ]
         },
         {
-            "name": "Debug - 50GRAMx - Web - App",
+            "name": "Web - App",
             "cwd": "fifty_gramx",
             "request": "launch",
             "type": "dart",
@@ -139,49 +59,5 @@
                 "chrome",
             ]
         },
-        {
-            "name": "Debug - 50GRAMx - Windows",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "args": [
-                "-d",
-                "windows"
-            ]
-        },
-        {
-            "name": "fifty_gramx (profile mode)",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "fifty_gramx (release mode)",
-            "cwd": "fifty_gramx",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "epod_nwk_xk",
-            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "epod_nwk_xk (profile mode)",
-            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "epod_nwk_xk (release mode)",
-            "cwd": "fifty_gramx/plugins/pnp/epod_nwk_xk",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
     ]
 }
