@@ -28,10 +28,6 @@ job("Build Web Base Image") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 
     host("Build and push web base image") {
@@ -60,10 +56,6 @@ job("Build Web Base Image") {
                 +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest"
             }
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }    
     }
 }
 
@@ -88,10 +80,6 @@ job("Build Android Base Image") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
-        }
-
-        requirements {
-            workerTags("windows-pool")
         }
     }
 
@@ -121,10 +109,6 @@ job("Build Android Base Image") {
                 +"50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest"
             }
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }    
     }
 }
 
@@ -153,10 +137,6 @@ job("Build and publish bundle to web track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 
     container("Start Deployment", image = "amazoncorretto:17-alpine") {
@@ -171,13 +151,9 @@ job("Build and publish bundle to web track") {
                     syncWithAutomationJob = true
             )
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 
-    container(displayName = "Release - 50GRAMx Web Site", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
+    container(displayName = "Release - Web - Site", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
         env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
 
@@ -195,14 +171,9 @@ job("Build and publish bundle to web track") {
             git log -n 3 --format=%B
           """
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }    
-
     }
 
-    container(displayName = "Release - 50GRAMx Web App", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
+    container(displayName = "Release - Web - App", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
         env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
 
@@ -220,11 +191,6 @@ job("Build and publish bundle to web track") {
             git log -n 3 --format=%B
           """
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }    
-
     }
 
 }
@@ -253,10 +219,6 @@ job("Build and publish bundle to android internal track") {
 
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
-        }
-
-        requirements {
-            workerTags("windows-pool")
         }
     }
 
@@ -311,10 +273,6 @@ job("Build and publish bundle to android internal track") {
                 
             """
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }    
     }
 }
 
@@ -342,10 +300,6 @@ job("Build and publish bundle to iOS internal track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
             api.parameters["BUILD_NUMBER"] = "$currentExecution"
-        }
-
-        requirements {
-            workerTags("windows-pool")
         }
     }
 
@@ -402,10 +356,6 @@ job("Build and publish EthosNodes MacOS Distributable App") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
             api.parameters["BUILD_NUMBER"] = "$currentExecution"
-        }
-
-        requirements {
-            workerTags("windows-pool")
         }
     }
 
@@ -529,10 +479,6 @@ job("Build and publish bundle to windows desktop track") {
             // Set the VERSION_NUMBER parameter
             api.parameters["VERSION_NUMBER"] = "$currentYear.$currentMonth.$currentExecution"
         }
-
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 
     container("Build and publish", "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
@@ -569,32 +515,5 @@ job("Build and publish bundle to windows desktop track") {
         requirements {
             workerTags("windows-pool")
         }    
-    }
-}
-
-job("Test deployment") {
-    startOn {
-        gitPush {
-            enabled = false
-            anyBranchMatching {
-                +"release-*"
-                +"master"
-            }
-        }
-    }
-
-    host("Deploy test container") {
-        shellScript {
-            content = """
-                echo "Test Container"
-            """
-        }
-
-        // run this job only on
-        // a Windows worker
-        // that is tagged as 'pool-1'
-        requirements {
-            workerTags("windows-pool")
-        }
     }
 }
