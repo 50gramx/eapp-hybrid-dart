@@ -115,13 +115,13 @@ buildHeroSectionConfig() {
     buttonText: 'Start Earning – Download Now',
     variant: 'desktop-download-cta',
     buttonAction: () async {},
-    downloadFileName: "50GRAMx-eNodes",
+    downloadFileName: "50GRAMx",
     linuxDownloadUrl:
-        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.tar.gz",
+        "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx.tar.gz",
     macDownloadUrl:
-        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.dmg",
+        "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx.dmg",
     windowsDownloadUrl:
-        "https://storage.googleapis.com/packges/com.50gramx.seventy.zero.ethos.nodes.dev/50GRAMx-eNodes.exe",
+        "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx.exe",
   );
 }
 
