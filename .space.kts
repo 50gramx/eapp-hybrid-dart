@@ -463,7 +463,7 @@ job("Build and publish bundle to windows desktop track") {
             anyBranchMatching {
                 +"release-*"
                 +"master"
-                +"features/*"
+                +"features*"
             }
         }
     }
