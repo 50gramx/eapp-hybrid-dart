@@ -67,7 +67,7 @@ dependencies:
   # Get current device information from within the Flutter application.
   device_info_plus: ^9.1.1
   # A cross platform plugin for displaying local notifications.
-  flutter_local_notifications: ^16.1.0
+  flutter_local_notifications: ^17.2.3
   # A Flutter plugin for finding commonly used locations on the filesystem. Supports Android, iOS,
   # Linux, macOS and Windows. Not all methods are supported on all platforms.
   path_provider: ^2.1.4
