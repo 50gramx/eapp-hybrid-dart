@@ -91,7 +91,7 @@ dependencies:
   # xterm.dart is a fast and fully-featured terminal emulator for Flutter applications, with support for mobile and desktop platforms.
   xterm: ^4.0.0
   # SSH and SFTP client written in pure Dart, aiming to be feature-rich as well as easy to use
-  # dartssh2: ^2.8.2 # TODO (khetana@): uncomment after this issue is fixed (https://github.com/TerminalStudio/dartssh2/issues/105)
+  dartssh2: ^2.8.2 # TODO (khetana@): uncomment after this issue is fixed (https://github.com/TerminalStudio/dartssh2/issues/105)
   # provides cross-platform StreamChannel wrappers for WebSocket connections
   web_socket_channel: ^3.0.0
   flutter_web_plugins:
@@ -130,6 +130,10 @@ dependencies:
   fl_chart: ^0.69.0
   # A wrapper around InheritedWidget to make them easier to use and more reusable.
   provider: ^6.1.2
+  # Simple and reactive DropdownSearch with item search feature, 
+  # making it possible to use an offline item list or filtering URL 
+  # for easy customization.
+  dropdown_search: ^6.0.1
 
 flutter_icons:
   android: "launcher_icon"
