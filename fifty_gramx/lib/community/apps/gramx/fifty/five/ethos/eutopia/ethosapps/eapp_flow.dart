@@ -116,20 +116,20 @@ class EappFlow {
     } else if (communityCode == 70 && title == 'nodes') {
       index = 70101;
       appTitle = "Nodes";
-      iconData = FeatherIcons.box;
+      iconData = FeatherIcons.monitor;
       firstPage = MachineConfigurationPage();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'pods-gpu-pricing') {
       index = 70091;
       appTitle = "GPU Cloud Pricing";
-      iconData = FeatherIcons.box;
+      iconData = FeatherIcons.cpu;
       firstPage = GPUDetailsColumn();
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 70 && title == 'pods-gpu-template') {
       index = 70092;
       appTitle = "GPU Cloud Template";
-      iconData = FeatherIcons.cloud;
-      firstPage = GPUTemplatePage();
+      iconData = FeatherIcons.hexagon;
+      firstPage = PodCreationPage();
     } else if (communityCode == 70 && title == 'pods-gpu-cli') {
       index = 70093;
       appTitle = "GPU CLI";
