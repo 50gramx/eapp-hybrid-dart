@@ -25,7 +25,7 @@ platform :mac do
     # Build the app
     build_app(
       workspace: "Runner.xcworkspace", 
-      scheme: "com.fiftygramx.ethosai",
+      scheme: "Runner",
       export_method: "developer-id",
       skip_package_pkg: true, # A workaround for https://github.com/fastlane/fastlane/issues/15963
     )
