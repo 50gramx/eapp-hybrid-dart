@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -81,6 +82,15 @@ class _PodListPageState extends State<PodListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pods'),
+        actions: [
+          ActionNeuButton(
+              buttonTitle: "Fetch",
+              buttonActionOnPressed: () {
+                setState(() {
+                  pods = fetchPods();
+                });
+              })
+        ],
       ),
       body: FutureBuilder<List<Pod>>(
         future: pods,
