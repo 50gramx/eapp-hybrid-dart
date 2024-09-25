@@ -1,8 +1,5 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AdaptiveNeuButton extends StatefulWidget {
@@ -54,7 +51,7 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
         shape: NeumorphicShape.concave,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
         color: widget.isSelected
-            ? AppColors.contentInversePrimary(context)
+            ? AppColors.contentSecondary(context)
             : AppColors.contentInverseSecondary(context),
         border: NeumorphicBorder(
           isEnabled: false,
@@ -102,7 +99,7 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
           depth: widget.isSelected ? -3 : 0,
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
           color: widget.isSelected
-              ? AppColors.backgroundInverseSecondary(context)
+              ? AppColors.backgroundTertiary(context)
               : AppColors.backgroundInverseTertiary(context),
           border: NeumorphicBorder(
             isEnabled: false,
