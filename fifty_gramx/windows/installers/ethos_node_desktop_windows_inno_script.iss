@@ -5,7 +5,7 @@
 #define MyAppVersion "2024.09.08"
 #define MyAppPublisher "FIFTY GRAMX NETWORKS PRIVATE LIMITED"
 #define MyAppURL "https://www.50gramx.com"
-#define MyAppExeName "50GRAMx.exe"
+#define MyAppExeName "50GRAMx Ethosverse.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -32,7 +32,7 @@ LicenseFile=C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\i
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers
-OutputBaseFilename=50GRAMx
+OutputBaseFilename=50GRAMx Ethosverse
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
