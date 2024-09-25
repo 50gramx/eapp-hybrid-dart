@@ -459,7 +459,7 @@ job("Build and publish EthosNodes MacOS Distributable App") {
 job("Build and publish bundle to windows desktop track") {
     startOn {
         gitPush {
-            enabled = false
+            enabled = true
             anyBranchMatching {
                 +"release-*"
                 +"master"
