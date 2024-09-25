@@ -255,6 +255,7 @@ job("Build and publish bundle to android internal track") {
                 flutter pub get && flutter pub cache repair
                 dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN
                 
+
                 echo "Build the app bundle"
                 flutter build appbundle
                 
@@ -462,6 +463,7 @@ job("Build and publish bundle to windows desktop track") {
             anyBranchMatching {
                 +"release-*"
                 +"master"
+                +"features/*"
             }
         }
     }
@@ -481,39 +483,42 @@ job("Build and publish bundle to windows desktop track") {
         }
     }
 
-    container("Build and publish", "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/android-base:latest") {
+    host("Build and publish") {
         env["MSIX_CERTIFICATE"] = Secrets("MSIX_CERTIFICATE")
         env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
 
         shellScript {
             content = """
-                echo Get MSIX Certificate...
-                echo ${'$'}MSIX_CERTIFICATE > msix_certificate.hex
-                xxd -plain -revert msix_certificate.hex  msix_certificate.pfx
-               
-                echo Build and publish AAB...
-                flutter doctor -v
-                ls -l -h
-                
-                echo ${'$'}VERSION_NUMBER
-                echo "breaker"
-                echo {{ VERSION_NUMBER }}
-                export VERSION_NUMBER={{ VERSION_NUMBER }}
-                echo "Switch to 50GRAMx Directory"
-                cd fifty_gramx
-                
-                echo "fix dependencies"
-                flutter pub get && flutter pub cache repair
-                
-                echo "Build the windows"
-                flutter build windows
-                dart run msix:create
+
+                echo "warning: if new packages are installed, they might create their seperate dll files"
+                echo "these new generated dll files must be added to the inno script manually, or the installation will fail"
+                echo "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
+
+                echo "1. delete the release folder data"
+                echo "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
+                rm -rf C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release
+
+                echo "2. build windows release "
+                echo "flutter build windows --release"
+
+                echo "3. rename the generated app name to 50GRAMx Ethosverse.exe"
+                echo ""
+
+                echo "4. Update the app version number"
+                echo "version number for every build is stored in env VERSION_NUMBER"
+
+                echo "5. Execute the inno script to create the build"
+                echo " & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
+                echo "generates at C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\50GRAMx Ethosverse.exe"
+
+                echo "6. Upload the exe to gcloud packges"
                 
             """
         }
 
         requirements {
             workerTags("windows-pool")
+            workerTags("amitkumarkhetan15-user")
         }    
     }
 }
