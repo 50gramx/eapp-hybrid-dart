@@ -31,11 +31,11 @@ platform :mac do
     )
   
     # Code signing
-    sh("codesign --verbose --force --sign 'Developer ID Application' --timestamp --deep --options runtime '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
+    sh("codesign --verbose --force --sign 'Developer ID Application' --timestamp --deep --options runtime '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.app'")
 
     # Notarize the app
     notarize(
-      package: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app",
+      package: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.app",
       username: "amitkumarkhetan15@gmail.com", # Your Apple ID
       asc_provider: "V9YYYP7GU9",
       bundle_id: "com.fiftygramx.ethosai",
@@ -44,29 +44,15 @@ platform :mac do
     )
     
     # Staple the notarization ticket
-    sh("xcrun stapler staple '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
-    
-    # Zip the notarized app (optional)
-    version_number = ENV["VERSION_NUMBER"]
-    build_number = ENV["BUILD_NUMBER"]
-    zip_file_name = "50GRAMx-eNodes-v#{version_number}-b#{build_number}.app.zip"
-    zip_file_path = "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/#{zip_file_name}"
-    sh("zip -r '#{zip_file_path}' '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app'")
-
-
-    # Upload the zipped app to the remote server
-    remote_folder = "development"
-    authorization_token = "Bearer eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJhdWQiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJvcmdEb21haW4iOiI1MGdyYW14IiwibmFtZSI6IkV0aG9zIEFwcHMgU2VydmljZSBDb250cmFjdHMiLCJpc3MiOiJodHRwczovLzUwZ3JhbXguamV0YnJhaW5zLnNwYWNlIiwicGVybV90b2tlbiI6IjRhdExheTNRaHUweSIsInByaW5jaXBhbF90eXBlIjoiU0VSVklDRSIsImlhdCI6MTcyNDExMzgyM30.Xrfm964rYsnQNTGR6DInNrWa-R4ZY9uT-NZAhVVC09PVCPBSmMR6OMkAIhZ56C88vuXbRcbLbXMch2zx5MyJJZTdZYotS2JOMIoB09tf0DdVBK3BjuVz86gfsbspaO-fAt8K6NKN-RKoB19LNtsSZeOSBt73KhlOMqc3Iwj4fwg"
-    
-    # sh("""curl -i -H \"Authorization: #{authorization_token}\" https://files.pkg.jetbrains.space/50gramx/p/main/macos-app-delivery/#{remote_folder}/ --upload-file '#{zip_file_path}'""")
+    sh("xcrun stapler staple '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.app'")
 
     
     dmg(
-      path: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.app",
-      output_path: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg",
+      path: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.app",
+      output_path: "#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.dmg",
       )
     
-    sh("""if [ -f '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc'; fi; export GOOGLE_APPLICATION_CREDENTIALS='/Users/mac/Downloads/ethosverse-india-07260ab02c72.json'; gsutil cp -r '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx-eNodes.dmg' gs://packges/com.50gramx.seventy.zero.ethos.nodes.dev/""")
+    sh("""if [ -f '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/mac/Downloads/google-cloud-sdk/path.bash.inc'; fi; export GOOGLE_APPLICATION_CREDENTIALS='/Users/mac/Downloads/ethosverse-india-07260ab02c72.json'; gsutil cp -r '#{lane_context[:XCODEBUILD_ARCHIVE]}/Products/Applications/50GRAMx.dmg' gs://packges/com.50gramx.dev/""")
 
     UI.message("App successfully notarized and zipped and uploaded to packages!")
   end
