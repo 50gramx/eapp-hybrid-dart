@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/connections/LocalConnectionsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/conversations/LocalConversationsService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/LocalSpacesService.dart';
@@ -29,8 +31,11 @@ class LocalServices {
   }
 
   contacts() async {
-    if (await Permission.contacts.request().isGranted) {
-      ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+    // only performing in mobile devices
+    if (Platform.isAndroid || Platform.isIOS) {
+      if (await Permission.contacts.request().isGranted) {
+        ContactService.syncAccountConnectionsWithExistingAccountMobiles();
+      }
     }
   }
 
