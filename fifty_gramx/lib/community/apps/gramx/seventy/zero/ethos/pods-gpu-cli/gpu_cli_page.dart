@@ -1,11 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
+
+import 'package:dartssh2/dartssh2.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:xterm/xterm.dart';
+import 'package:flutter/material.dart';
 // import 'package:dartssh2/dartssh2.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'dart:convert';
+import 'package:xterm/xterm.dart';
 
 class GPUCLIPage extends StatefulWidget {
   final String host;
@@ -25,8 +27,8 @@ class GPUCLIPage extends StatefulWidget {
 
 class _GPUCLIPageState extends State<GPUCLIPage> {
   final terminal = Terminal(maxLines: 10000);
-  // SSHClient? client;   // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-  // SSHSession? session;    // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
+  SSHClient? client;
+  SSHSession? session;
   WebSocketChannel? channel;
   bool isConnected = false;
 
@@ -43,26 +45,23 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
   Future<void> connectSSH() async {
     try {
       terminal.write('Connecting to ${widget.host}:${widget.port}...\n');
-      // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-      // client = SSHClient(
-      //   await SSHSocket.connect(widget.host, widget.port),
-      //   username: widget.username,
-      //   onPasswordRequest: () => widget.password,
-      // );
+      client = SSHClient(
+        await SSHSocket.connect(widget.host, widget.port),
+        username: widget.username,
+        onPasswordRequest: () => widget.password,
+      );
       terminal.write('SSH client connected. Starting bash session...\n');
-      // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-      // session = await client!.execute('bash');
+      session = await client!.execute('bash');
       terminal.write('Bash session started.\n');
-      // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-      // session!.stdout.listen((data) {
-      //   terminal.write(String.fromCharCodes(data));
-      // });
-      // session!.stderr.listen((data) {
-      //   terminal.write('Error: ${String.fromCharCodes(data)}\n');
-      // });
-      // terminal.onOutput = (data) {
-      //   session!.stdin.add(Uint8List.fromList(data.codeUnits));
-      // };
+      session!.stdout.listen((data) {
+        terminal.write(String.fromCharCodes(data));
+      });
+      session!.stderr.listen((data) {
+        terminal.write('Error: ${String.fromCharCodes(data)}\n');
+      });
+      terminal.onOutput = (data) {
+        session!.stdin.add(Uint8List.fromList(data.codeUnits));
+      };
       setState(() {
         isConnected = true;
       });
@@ -145,8 +144,8 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
       channel?.sink.close();
     } else {
       // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-      // session?.close();
-      // client?.close();
+      session?.close();
+      client?.close();
     }
     super.dispose();
   }
@@ -197,10 +196,10 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
       }
     } else {
       // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-      // if (session != null) {
-      //   session!.stdin.add(
-      //       Uint8List.fromList('echo "Test command executed"\n'.codeUnits));
-      // }
+      if (session != null) {
+        session!.stdin.add(
+            Uint8List.fromList('echo "Test command executed"\n'.codeUnits));
+      }
     }
   }
 
@@ -209,12 +208,10 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
       channel!.sink.add(jsonEncode({
         'type': 'disconnect',
       }));
+    } else if (session != null) {
+      session!.close();
+      client?.close();
     }
-    // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
-    // } else if (session != null) {
-    //   session!.close();
-    //   client?.close();
-    // }
     setState(() {
       isConnected = false;
     });
