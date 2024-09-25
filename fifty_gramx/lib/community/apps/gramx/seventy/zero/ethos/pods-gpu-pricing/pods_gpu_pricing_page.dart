@@ -69,9 +69,9 @@ class _GPUDetailsColumnState extends State<GPUDetailsColumn> {
           padding: EdgeInsets.all(10),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
-            childAspectRatio: 0.8,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
+            childAspectRatio: 1.3,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
           ),
           itemCount: gpuDetails.length,
           itemBuilder: (context, index) {
@@ -132,9 +132,6 @@ class NodeCard extends StatelessWidget {
                         SizedBox(height: 10),
                         _buildUsageStats(context),
                         SizedBox(height: 10),
-                        _buildNodeInfo(context),
-                        SizedBox(height: 10),
-                        _buildCustomLabels(context),
                       ],
                     ),
                   ),
@@ -189,7 +186,7 @@ class NodeCard extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            '$countryCode - $region\nUser: $userName\nJoined: $timeAgo',
+            '${countryCode.toString().toUpperCase()} - $region\nJoined: $timeAgo',
             style: TextStyle(
                 fontSize: 16,
                 color: AppColors.contentPrimary(context),
@@ -239,24 +236,67 @@ class NodeCard extends StatelessWidget {
 
   Widget _buildSpecs(BuildContext context) {
     final allocatable = nodeData['allocatable'] as Map<String, dynamic>? ?? {};
+    final cpu = allocatable['cpu'] ?? 'N/A';
+    final memory = _formatMemory(allocatable['memory']);
+    final storage = _formatStorage(allocatable['ephemeral-storage']);
+
+    final totalPods =
+        allocatable['pods'] ?? 'N/A'; // Replace with your total pods count
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("🚀 Specs",
-            style: TextStyle(
+        Text(
+          "🖥️ Specs",
+          style: TextStyle(
+            fontSize: 22,
+            color: AppColors.contentSecondary(context),
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildSpecItem(Icons.memory_rounded, "$cpu vCPU", context),
+            _buildSpecItem(Icons.sd_storage_rounded, "$memory RAM", context),
+            _buildSpecItem(Icons.storage_rounded, "$storage Storage", context),
+          ],
+        ),
+        SizedBox(height: 15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "$totalPods Pods Allocatable",
+              style: TextStyle(
                 fontSize: 16,
-                color: AppColors.contentSecondary(context),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Montserrat')),
-        SizedBox(height: 5),
-        _buildResourceInfo(
-            Icons.memory, "CPU", "${allocatable['cpu'] ?? 'N/A'}", context),
-        _buildResourceInfo(Icons.sd_storage, "RAM",
-            _formatMemory(allocatable['memory']), context),
-        _buildResourceInfo(Icons.storage, "Storage",
-            _formatStorage(allocatable['ephemeral-storage']), context),
-        _buildResourceInfo(Icons.bug_report, "Pods",
-            "${allocatable['pods'] ?? 'N/A'}", context),
+                color: AppColors.contentPrimary(context),
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Montserrat',
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSpecItem(IconData icon, String value, BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, size: 20, color: AppColors.contentPrimary(context)),
+        SizedBox(width: 5),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 16,
+            color: AppColors.contentPrimary(context),
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Montserrat',
+          ),
+        ),
       ],
     );
   }
@@ -285,63 +325,6 @@ class NodeCard extends StatelessWidget {
             _calculateUsage(allocatable['ephemeral-storage'],
                 capacity['ephemeral-storage']),
             context),
-      ],
-    );
-  }
-
-  Widget _buildNodeInfo(BuildContext context) {
-    final nodeInfo = nodeData['node_info'] as Map<String, dynamic>? ?? {};
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("🖥️ Details",
-            style: TextStyle(
-                fontSize: 16,
-                color: AppColors.contentPrimary(context),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Montserrat')),
-        SizedBox(height: 5),
-        _buildInfoItem(
-            "OS",
-            "${nodeInfo['osImage'] ?? 'Unknown'} (${nodeInfo['architecture'] ?? 'Unknown'})",
-            context),
-        _buildInfoItem(
-            "Kernel", nodeInfo['kernelVersion'] ?? 'Unknown', context),
-        _buildInfoItem("Runtime",
-            nodeInfo['containerRuntimeVersion'] ?? 'Unknown', context),
-        _buildInfoItem(
-            "Kubelet", nodeInfo['kubeletVersion'] ?? 'Unknown', context),
-      ],
-    );
-  }
-
-  Widget _buildCustomLabels(BuildContext context) {
-    final labels = nodeData['labels'] as Map<String, dynamic>? ?? {};
-    final customLabels = labels.entries
-        .where((entry) =>
-            !entry.key.startsWith('kubernetes.io/') &&
-            !entry.key.startsWith('beta.kubernetes.io/') &&
-            !entry.key.startsWith('node.kubernetes.io/'))
-        .toList();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("🏷️ Labels",
-            style: TextStyle(
-                fontSize: 16,
-                color: AppColors.contentPrimary(context),
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Montserrat')),
-        SizedBox(height: 5),
-        Wrap(
-          spacing: 4,
-          runSpacing: 4,
-          children: customLabels
-              .map((entry) =>
-                  _buildLabelChip(entry.key, entry.value.toString(), context))
-              .toList(),
-        ),
       ],
     );
   }
@@ -438,25 +421,6 @@ class NodeCard extends StatelessWidget {
                   fontFamily: 'Montserrat')),
           Expanded(child: Text(value, style: TextStyle(fontSize: 12))),
         ],
-      ),
-    );
-  }
-
-  Widget _buildLabelChip(String key, String value, BuildContext context) {
-    return Neumorphic(
-      style: NeumorphicStyle(
-        depth: 2,
-        intensity: 0.5,
-        boxShape: NeumorphicBoxShape.stadium(),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      child: Text(
-        "$key: $value",
-        style: TextStyle(
-            fontSize: 10,
-            color: AppColors.contentPrimary(context),
-            fontWeight: FontWeight.w300,
-            fontFamily: 'Montserrat'),
       ),
     );
   }
