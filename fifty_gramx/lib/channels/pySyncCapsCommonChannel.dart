@@ -47,8 +47,8 @@ class PySyncCapsCommonChannel {
       uri =
           "https://capabilities.atlas.starflare.bangalore.in.networks.50gramx.com";
     } else {
-      uri = '122.166.150.115';
-      port = 50501;
+      uri = '1.tcp.in.ngrok.io';
+      port = 20240;
     }
     channel = await grpcChannelBuilder(uri, port);
     print("returning ${channel.runtimeType}");
