@@ -40,10 +40,16 @@ ensureFirebaseSupport() async {
     print("ensureFirebaseSupport: initalising now");
     print("ensureFirebaseSupport: ${Constants().eAppEnv}");
     print("ensureFirebaseSupport: ${Constants().eAppFirebaseOptions}");
-    await Firebase.initializeApp(
-      name: "${Constants().eAppEnv}".replaceAll('.', '_'),
-      options: Constants().eAppFirebaseOptions,
-    );
+    if (kIsWeb) {
+      await Firebase.initializeApp(
+        options: Constants().eAppFirebaseOptions,
+      );
+    } else {
+      await Firebase.initializeApp(
+        name: "${Constants().eAppEnv}".replaceAll('.', '_'),
+        options: Constants().eAppFirebaseOptions,
+      );
+    }
     print("ensureFirebaseSupport: initalising done");
 
     // Firebase Crashlytics is enabled for limited platform at the moment
