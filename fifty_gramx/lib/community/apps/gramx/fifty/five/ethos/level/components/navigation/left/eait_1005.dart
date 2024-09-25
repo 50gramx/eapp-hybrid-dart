@@ -50,12 +50,12 @@ class _EAIT1005State extends State<EAIT1005> {
     _updateUsageCount();
 
     double screenHeight = MediaQuery.of(context).size.height;
-    double itemHeight = 54; // Adjust as necessary
-    int maxVisibleItems = ((screenHeight * 0.7) / itemHeight).floor();
+    double itemHeight = 51; // Adjust as necessary
+    int maxVisibleItems = ((screenHeight * 0.9) / itemHeight).floor();
     int itemCount = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length;
     int visibleItemCount =
         itemCount < maxVisibleItems ? itemCount : maxVisibleItems;
-    print("visibleItemCount: $visibleItemCount");
+    print("itemCount: ${itemCount}, visibleItemCount: $visibleItemCount");
 
     List<int> topUsedItems = getTopUsedItems(visibleItemCount);
     print("topUsedItems: $topUsedItems");
