@@ -489,6 +489,29 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             content = """
+                echo "\n\ndelete the release folder data"
+
+                # Correct path for Windows with backslashes
+                release_folder="C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release"
+
+                # Check if the release folder exists before attempting to list or delete
+                if [ -d "$release_folder" ]; then
+                    echo "Release folder exists, listing contents:"
+                    ls "$release_folder"
+                    
+                    echo "Deleting now..."
+                    rm -rf "$release_folder"
+                    
+                    if [ ! -d "$release_folder" ]; then
+                        echo "Release folder successfully deleted."
+                    else
+                        echo "Failed to delete release folder."
+                    fi
+                else
+                    echo "Release folder does not exist, nothing to delete."
+                fi
+
+                echo "finished deleting the release folder data\n\n"
 
                 echo "\n\ndelete the release folder data"
                 ls C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
