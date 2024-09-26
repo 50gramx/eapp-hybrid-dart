@@ -496,22 +496,62 @@ job("Build and publish bundle to windows desktop track") {
 
                 echo "1. delete the release folder data"
                 echo "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
-                rm -rf C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release
+                Remove-Item -Recurse -Force "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
+
+                echo 'Changing directory to project...';
+                cd C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx;
+
+                echo 'Checking out master branch...';
+                git checkout master;
+
+                echo 'Pulling latest changes from origin...';
+                git pull;
+
 
                 echo "2. build windows release "
-                echo "flutter build windows --release"
+                flutter build windows --release
 
                 echo "3. rename the generated app name to 50GRAMx Ethosverse.exe"
-                echo ""
+                Rename-Item -Path "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\fifty_gramx.exe" -NewName "50GRAMx Ethosverse.exe"
 
                 echo "4. Update the app version number"
-                echo "version number for every build is stored in env VERSION_NUMBER"
+                # Read the contents of the Inno Setup script
+                $innoScriptPath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
+                $innoScript = Get-Content $innoScriptPath
+
+                # Get the version number from the environment variable
+                $versionNumber = $env:VERSION_NUMBER
+
+                # Use regex to find and replace the version definition
+                $updatedInnoScript = foreach ($line in $innoScript) {
+                    if ($line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
+                        # Replace the version number with the new one
+                        $line -replace $matches[1], $versionNumber
+                    } else {
+                        $line
+                    }
+                }
+
+                # Write the updated contents back to the script file
+                $updatedInnoScript | Set-Content $innoScriptPath
+
+                # Confirm the changes
+                Write-Host "Updated MyAppVersion to $versionNumber in the Inno Setup script."
+
 
                 echo "5. Execute the inno script to create the build"
-                echo " & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
+                & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss
                 echo "generates at C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\50GRAMx Ethosverse.exe"
 
                 echo "6. Upload the exe to gcloud packges"
+
+                # Path to your .exe file
+                $exeFilePath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\50GRAMx Ethosverse.exe"
+
+                # Destination in the GCS bucket
+                $gcsDestination = "gs://packges/com.50gramx.dev/50GRAMx Ethosverse.exe"
+                cd C:\Users\amitk\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\
+                .\gsutil cp $exeFilePath $gcsDestination
                 
             """
         }
