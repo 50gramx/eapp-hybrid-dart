@@ -492,9 +492,12 @@ job("Build and publish bundle to windows desktop track") {
 
                 echo "\n\ndelete the release folder data"
                 ls C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
+                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
                 echo "deleting now"
                 rm -rf C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
+                rm -rf C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
                 ls C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
+                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
                 echo "finished deleting the release folder data\n\n"
 
                 echo 'Changing directory to project...'
