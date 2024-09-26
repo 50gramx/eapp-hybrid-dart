@@ -523,7 +523,7 @@ job("Build and publish bundle to windows desktop track") {
                 setx updatedInnoScript = foreach (${'$'}line in {{ innoScript }}) {
                     if (${'$'}line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
                         # Replace the version number with the new one
-                        ${'$'}line -replace $matches[1], {{ VERSION_NUMBER }}
+                        ${'$'}line -replace ${'$'}matches[1], {{ VERSION_NUMBER }}
                     } else {
                         ${'$'}line
                     }
