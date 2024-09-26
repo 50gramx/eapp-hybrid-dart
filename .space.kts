@@ -491,6 +491,7 @@ job("Build and publish bundle to windows desktop track") {
             content = """
 
                 echo "1. delete the release folder data"
+                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
                 rm -rf "C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release"
 
                 echo 'Changing directory to project...'
