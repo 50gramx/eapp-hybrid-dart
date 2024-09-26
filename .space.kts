@@ -490,9 +490,12 @@ job("Build and publish bundle to windows desktop track") {
         shellScript {
             content = """
 
-                echo "1. delete the release folder data"
+                echo "delete the release folder data"
                 ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
+                echo "deleting now"
                 rm -rf "C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release"
+                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
+                echo "finished delete the release folder data"
 
                 echo 'Changing directory to project...'
                 cd C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx
