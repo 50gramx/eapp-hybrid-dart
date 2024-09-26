@@ -520,20 +520,20 @@ job("Build and publish bundle to windows desktop track") {
                 setx innoScript = Get-Content {{ innoScriptPath }}
 
                 # Use regex to find and replace the version definition
-                setx updatedInnoScript = foreach ($line in $innoScript) {
-                    if ($line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
+                setx updatedInnoScript = foreach (${'$'}line in {{ innoScript }}) {
+                    if (${'$'}line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
                         # Replace the version number with the new one
-                        $line -replace $matches[1], {{ VERSION_NUMBER }}
+                        ${'$'}line -replace $matches[1], {{ VERSION_NUMBER }}
                     } else {
-                        $line
+                        ${'$'}line
                     }
                 }
 
                 # Write the updated contents back to the script file
-                $updatedInnoScript | Set-Content $innoScriptPath
+                ${'$'}updatedInnoScript | Set-Content ${'$'}innoScriptPath
 
                 # Confirm the changes
-                Write-Host "Updated MyAppVersion to $versionNumber in the Inno Setup script."
+                Write-Host "Updated MyAppVersion to ${'$'}VERSION_NUMBER in the Inno Setup script."
 
 
                 echo "5. Execute the inno script to create the build"
@@ -543,12 +543,12 @@ job("Build and publish bundle to windows desktop track") {
                 echo "6. Upload the exe to gcloud packges"
 
                 # Path to your .exe file
-                $exeFilePath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\50GRAMx Ethosverse.exe"
+                setx exeFilePath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\50GRAMx Ethosverse.exe"
 
                 # Destination in the GCS bucket
-                $gcsDestination = "gs://packges/com.50gramx.dev/50GRAMx Ethosverse.exe"
+                setx gcsDestination = "gs://packges/com.50gramx.dev/50GRAMx Ethosverse.exe"
                 cd C:\Users\amitk\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\
-                .\gsutil cp $exeFilePath $gcsDestination
+                .\gsutil cp ${'$'}exeFilePath ${'$'}gcsDestination
                 
             """
         }
