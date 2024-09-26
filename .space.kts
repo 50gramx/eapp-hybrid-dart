@@ -492,17 +492,17 @@ job("Build and publish bundle to windows desktop track") {
                 echo "\n\ndelete the release folder data"
 
                 # Correct path for Windows with backslashes
-                release_folder="C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release"
+                ${'$'}release_folder="C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release"
 
                 # Check if the release folder exists before attempting to list or delete
-                if [ -d "$release_folder" ]; then
+                if [ -d "${'$'}release_folder" ]; then
                     echo "Release folder exists, listing contents:"
-                    ls "$release_folder"
+                    ls "${'$'}release_folder"
                     
                     echo "Deleting now..."
-                    rm -rf "$release_folder"
+                    rm -rf "${'$'}release_folder"
                     
-                    if [ ! -d "$release_folder" ]; then
+                    if [ ! -d "${'$'}release_folder" ]; then
                         echo "Release folder successfully deleted."
                     else
                         echo "Failed to delete release folder."
