@@ -517,10 +517,10 @@ job("Build and publish bundle to windows desktop track") {
                 echo "4. Update the app version number"
                 # Read the contents of the Inno Setup script
                 ${'$'}innoScriptPath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
-                ${'$'}innoScript = Get-Content {{ innoScriptPath }}
+                ${'$'}innoScript = Get-Content ${'$'}innoScriptPath
 
                 # Use regex to find and replace the version definition
-                setx updatedInnoScript = foreach (${'$'}line in {{ innoScript }}) {
+                setx updatedInnoScript = foreach (${'$'}line in ${'$'}innoScript) {
                     if (${'$'}line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
                         # Replace the version number with the new one
                         ${'$'}line -replace ${'$'}matches[1], {{ VERSION_NUMBER }}
