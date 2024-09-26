@@ -490,25 +490,19 @@ job("Build and publish bundle to windows desktop track") {
         shellScript {
             content = """
 
-                echo "warning: if new packages are installed, they might create their seperate dll files"
-                echo "these new generated dll files must be added to the inno script manually, or the installation will fail"
-                echo "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
-
                 echo "1. delete the release folder data"
-                echo "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
-                Remove-Item -Recurse -Force "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
+                rm -rf "C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release"
 
-                echo 'Changing directory to project...';
-                cd C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx;
+                echo 'Changing directory to project...'
+                cd C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx
 
-                echo 'Checking out master branch...';
+                echo 'Checking out master branch...'
                 git checkout master;
 
-                echo 'Pulling latest changes from origin...';
+                echo 'Pulling latest changes from origin...'
                 git pull;
 
-
-                echo "2. build windows release "
+                echo "build windows release "
                 flutter build windows --release
 
                 echo "3. rename the generated app name to 50GRAMx Ethosverse.exe"
