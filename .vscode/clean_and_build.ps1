@@ -26,6 +26,8 @@ Write-Host "finished deleting the release folder data`n`n"
 
 # Example: Building the app using Flutter
 Write-Host "Building Windows release..."
+$projectPath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx"
+cd $projectPath
 flutter build windows --release
 
 # Example: Renaming the executable
