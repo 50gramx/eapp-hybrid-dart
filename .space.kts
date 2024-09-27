@@ -490,9 +490,8 @@ job("Build and publish bundle to windows desktop track") {
         shellScript {
             interpreter = "cmd"
             content = """
-                # Run the PowerShell script
                 echo "will Run the PowerShell script"
-                powershell.exe -executionpolicy bypass -File "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\.vscode\clean_and_build.ps1"
+                C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.bat
                 echo "done Run the PowerShell script"
 
                 echo "\n\ndelete the release folder data"
