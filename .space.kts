@@ -488,7 +488,6 @@ job("Build and publish bundle to windows desktop track") {
         env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
 
         shellScript {
-            interpreter = "cmd"
             content = """
                 echo "will Run the PowerShell script"
                 C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.bat
