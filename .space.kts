@@ -489,6 +489,11 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             content = """
+                # Run the PowerShell script
+                echo "will Run the PowerShell script"
+                pwsh -File "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\.vscode\clean_and_build.ps1"
+                echo "done Run the PowerShell script"
+
                 echo "\n\ndelete the release folder data"
 
                 # Correct path for Windows with backslashes
