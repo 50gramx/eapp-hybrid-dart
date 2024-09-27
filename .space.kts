@@ -486,11 +486,10 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             content = """
-                clean_and_build.bat
+                ls
                 ./clean_and_build.bat
-                .\\clean_and_build.bat
-                ./C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\clean_and_build.bat
-                .\\C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\clean_and_build.bat
+                ls C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart 
+                ./C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\clean_and_build.bat
             """
             
         }
