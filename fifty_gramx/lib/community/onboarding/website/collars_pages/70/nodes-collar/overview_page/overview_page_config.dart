@@ -121,7 +121,7 @@ buildHeroSectionConfig() {
     macDownloadUrl:
         "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx.dmg",
     windowsDownloadUrl:
-        "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx.exe",
+        "https://storage.googleapis.com/packges/com.50gramx.dev/50GRAMx Ethosverse.exe",
   );
 }
 
