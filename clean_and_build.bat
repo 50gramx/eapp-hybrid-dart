@@ -1,26 +1,22 @@
-@echo off
-echo.
-echo delete the release folder data
+#!/bin/bash
+echo "delete the release folder data"
 
-:: Set the release folder path
-set release_folder=C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
+release_folder="C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release"
 
-:: Check if the folder exists
-if exist "%release_folder%" (
-    echo Release folder exists, listing contents:
-    dir "%release_folder%"
+if [ -d "$release_folder" ]; then
+    echo "Release folder exists, listing contents:"
+    ls "$release_folder"
+    echo "Deleting now..."
+    rm -rf "$release_folder"
+    if [ ! -d "$release_folder" ]; then
+        echo "Release folder successfully deleted."
+    else
+        echo "Failed to delete release folder."
+    fi
+else
+    echo "Release folder does not exist, nothing to delete."
+fi
 
-    echo Deleting now...
-    rmdir /s /q "%release_folder%"
-
-    if not exist "%release_folder%" (
-        echo Release folder successfully deleted.
-    ) else (
-        echo Failed to delete release folder.
-    )
-) else (
-    echo Release folder does not exist, nothing to delete.
-)
 
 echo finished deleting the release folder data
 echo.
