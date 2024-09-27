@@ -489,6 +489,7 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             content = """
+                ls
                 echo "will Run the PowerShell script"
                 clean_and_build.bat
                 C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\clean_and_build.bat
