@@ -486,10 +486,7 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             interpreter = "cmd"
-            content = """
-                C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.bat
-            """
-            
+            location = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.bat"
         }
 
         requirements {
