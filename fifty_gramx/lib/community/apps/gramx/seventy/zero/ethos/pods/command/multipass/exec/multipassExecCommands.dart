@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/simpleCommandExecuter.dart';
@@ -106,6 +107,10 @@ class MutlipassExecCommands {
     String _sshKeyPath =
         await MultipassCommands.transfer.asset(_sshKeyAssetPath);
 
+    if (Platform.isWindows) {
+      MultipassCommands.exec.fixKeyFormatForUnix(_sshKeyPath);
+    }
+
     String _controlPlaneUser = "ec2-user";
     String _controlPlaneIP = "13.200.238.161";
 
@@ -127,6 +132,13 @@ class MutlipassExecCommands {
     String _scpCommand =
         "${_baseCommandSpace} sudo scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${_sshKeyPath} ${_controlPlaneUser}@${_controlPlaneIP}:/home/${_controlPlaneUser}/${_clientName}.ovpn /etc/openvpn/client.conf";
     await SimpleCommandExecuter.run(_scpCommand);
+  }
+
+  fixKeyFormatForUnix(String vmAssetPath) async {
+    await SimpleCommandExecuter.run(
+        "${_baseCommandSpace} sudo apt-get install dos2unix");
+    await SimpleCommandExecuter.run(
+        "${_baseCommandSpace} dos2unix $vmAssetPath");
   }
 
   registerClientOVPN() async {

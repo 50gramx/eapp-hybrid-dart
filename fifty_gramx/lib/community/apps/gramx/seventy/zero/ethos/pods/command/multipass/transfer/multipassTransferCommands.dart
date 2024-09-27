@@ -1,6 +1,8 @@
 // operates the transfer commands for multipass package
 //
 // needs [String] packagePath and [String] vmName as initializers
+import 'dart:io';
+
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/command/executer/privilegedCommandExecuter.dart';
 
 class MultipassTransferCommands {
@@ -40,7 +42,12 @@ class MultipassTransferCommands {
     // run the command
     await PrivilegedCommandExecuter.run(command);
     // build the asset path in vm
-    String vmAssetPath = "${_vmBasePath}/${temporaryAssetPath.split("/").last}";
+    String fileSeperator = "/";
+    if (Platform.isWindows) {
+      fileSeperator = "\\";
+    }
+    String vmAssetPath =
+        "${_vmBasePath}/${temporaryAssetPath.split(fileSeperator).last}";
     // return the vm asset path
     return vmAssetPath;
   }

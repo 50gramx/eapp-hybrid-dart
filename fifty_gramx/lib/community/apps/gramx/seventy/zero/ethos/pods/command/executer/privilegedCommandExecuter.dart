@@ -133,7 +133,11 @@ class PrivilegedCommandExecuter {
     final tempDirPath = (await getTemporaryDirectory()).path;
     // get the filename from the asset file path
     final fileName = applicationAssetPath.split("/").last;
-    final tempFilePath = "$tempDirPath/$fileName";
+    String fileSeperator = "/";
+    if (Platform.isWindows) {
+      fileSeperator = "\\";
+    }
+    final tempFilePath = "$tempDirPath$fileSeperator$fileName";
     // write the assetData to the fileName in tempDirPath
     await writeToFile(assetData, tempFilePath);
     return tempFilePath;
