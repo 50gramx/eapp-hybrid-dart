@@ -490,7 +490,7 @@ job("Build and publish bundle to windows desktop track") {
         shellScript {
             content = """
                 echo "will Run the PowerShell script"
-                C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.bat
+                C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\clean_and_build.bat
                 echo "done Run the PowerShell script"
 
                 echo "\n\ndelete the release folder data"
