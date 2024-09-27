@@ -35,7 +35,6 @@
             "args": [
                 "-d",
                 "windows",
-                "--dart-define=flavor=com.fiftygramx.seventy.zero.ethos.nodes",
             ],
         },
         {

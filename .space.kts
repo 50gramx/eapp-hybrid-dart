@@ -486,6 +486,7 @@ job("Build and publish bundle to windows desktop track") {
 
         shellScript {
             location = "clean_and_build.bat"
+            // powershell -executionpolicy bypass -File "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\clean_and_build.ps1"
         }
 
         requirements {
