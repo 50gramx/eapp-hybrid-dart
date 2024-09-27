@@ -487,8 +487,8 @@ job("Build and publish bundle to windows desktop track") {
         env["MSIX_CERTIFICATE"] = Secrets("MSIX_CERTIFICATE")
         env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
 
-        shellScript {
-            content = """
+        script {
+            scriptContent  = """
                 # Run the PowerShell script
                 echo "will Run the PowerShell script"
                 powershell.exe -executionpolicy bypass -File "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\.vscode\clean_and_build.ps1"
