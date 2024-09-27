@@ -199,7 +199,7 @@ job("Build and publish bundle to web track") {
 job("Build and publish bundle to android internal track") {
     startOn {
         gitPush {
-            enabled = true
+            enabled = false
             anyBranchMatching {
                 +"release-*"
                 +"master"
