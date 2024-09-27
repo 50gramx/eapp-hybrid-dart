@@ -463,7 +463,6 @@ job("Build and publish bundle to windows desktop track") {
             anyBranchMatching {
                 +"release-*"
                 +"master"
-                +"features*"
             }
         }
     }
@@ -484,103 +483,13 @@ job("Build and publish bundle to windows desktop track") {
     }
 
     host("Build and publish") {
-        env["MSIX_CERTIFICATE"] = Secrets("MSIX_CERTIFICATE")
-        env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
 
         shellScript {
             content = """
-                ls
-                echo "will Run the PowerShell script"
                 clean_and_build.bat
-                C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\clean_and_build.bat
-                echo "done Run the PowerShell script"
-
-                echo "\n\ndelete the release folder data"
-
-                # Correct path for Windows with backslashes
-                ${'$'}release_folder="C:\\Users\\amitk\\StudioProjects\\eapp-hybrid-dart\\fifty_gramx\\build\\windows\\x64\\runner\\Release"
-
-                # Check if the release folder exists before attempting to list or delete
-                if [ -d "${'$'}release_folder" ]; then
-                    echo "Release folder exists, listing contents:"
-                    ls "${'$'}release_folder"
-                    
-                    echo "Deleting now..."
-                    rm -rf "${'$'}release_folder"
-                    
-                    if [ ! -d "${'$'}release_folder" ]; then
-                        echo "Release folder successfully deleted."
-                    else
-                        echo "Failed to delete release folder."
-                    fi
-                else
-                    echo "Release folder does not exist, nothing to delete."
-                fi
-
-                echo "finished deleting the release folder data\n\n"
-
-                echo "\n\ndelete the release folder data"
-                ls C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
-                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
-                echo "deleting now"
-                rm -rf C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
-                rm -rf C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
-                ls C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx/build/windows/x64/runner/Release
-                ls C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release
-                echo "finished deleting the release folder data\n\n"
-
-                echo 'Changing directory to project...'
-                cd C:/Users/amitk/StudioProjects/eapp-hybrid-dart/fifty_gramx
-
-                echo 'Checking out master branch...'
-                git checkout master;
-
-                echo 'Pulling latest changes from origin...'
-                git pull;
-
-                echo "build windows release "
-                flutter build windows --release
-
-                echo "3. rename the generated app name to 50GRAMx Ethosverse.exe"
-                Rename-Item -Path "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\fifty_gramx.exe" -NewName "50GRAMx Ethosverse.exe"
-
-                echo "4. Update the app version number"
-                # Read the contents of the Inno Setup script
-                ${'$'}innoScriptPath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss"
-                ${'$'}innoScript = Get-Content ${'$'}innoScriptPath
-
-                # Use regex to find and replace the version definition
-                setx updatedInnoScript = foreach (${'$'}line in ${'$'}innoScript) {
-                    if (${'$'}line -match '#define MyAppVersion\s+"(\d{4}\.\d{2}\.\d{2})"') {
-                        # Replace the version number with the new one
-                        ${'$'}line -replace ${'$'}matches[1], {{ VERSION_NUMBER }}
-                    } else {
-                        ${'$'}line
-                    }
-                }
-
-                # Write the updated contents back to the script file
-                ${'$'}updatedInnoScript | Set-Content ${'$'}innoScriptPath
-
-                # Confirm the changes
-                Write-Host "Updated MyAppVersion to ${'$'}VERSION_NUMBER in the Inno Setup script."
-
-
-                echo "5. Execute the inno script to create the build"
-                & 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\ethos_node_desktop_windows_inno_script.iss
-                echo "generates at C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\windows\installers\50GRAMx Ethosverse.exe"
-
-                echo "6. Upload the exe to gcloud packges"
-
-                # Path to your .exe file
-                setx exeFilePath = "C:\Users\amitk\StudioProjects\eapp-hybrid-dart\fifty_gramx\build\windows\x64\runner\Release\50GRAMx Ethosverse.exe"
-
-                # Destination in the GCS bucket
-                setx gcsDestination = "gs://packges/com.50gramx.dev/50GRAMx Ethosverse.exe"
-                cd C:\Users\amitk\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\
-                .\gsutil cp ${'$'}exeFilePath ${'$'}gcsDestination
-                
+                ./clean_and_build.bat
             """
+            
         }
 
         requirements {
