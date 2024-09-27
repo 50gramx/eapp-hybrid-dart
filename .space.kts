@@ -488,7 +488,7 @@ job("Build and publish bundle to windows desktop track") {
         env["MSIX_CERTIFICATE_PASSWORD"] = Secrets("MSIX_CERTIFICATE_PASSWORD")
 
         shellScript {
-            interpreter = "powershell"
+            interpreter = "cmd"
             content = """
                 # Run the PowerShell script
                 echo "will Run the PowerShell script"
