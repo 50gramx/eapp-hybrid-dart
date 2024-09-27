@@ -135,10 +135,10 @@ class EappFlow {
       appTitle = "GPU CLI";
       iconData = FeatherIcons.terminal;
       firstPage = GPUCLIPage(
-        host: "13.202.148.49",
-        port: 32222,
-        username: "pod-user",
-        password: "123456789",
+        host: "13.200.238.161",
+        port: 30022,
+        username: "root",
+        password: "root",
       );
     } else if (communityCode == 70 && title == 'pods-gpu-manage') {
       index = 70094;
