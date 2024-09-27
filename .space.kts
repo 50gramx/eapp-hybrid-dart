@@ -432,6 +432,7 @@ job("Build and publish EthosNodes MacOS Distributable App") {
                     export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${'$'}FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD;
                     export VERSION_NUMBER={{ VERSION_NUMBER }};
                     export BUILD_NUMBER={{ BUILD_NUMBER }};
+                    export FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT=120
 
                     echo 'Running Fastlane build...';
                     which fastlane;
