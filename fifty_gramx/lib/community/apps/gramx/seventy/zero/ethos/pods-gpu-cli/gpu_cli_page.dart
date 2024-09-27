@@ -51,17 +51,34 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
         onPasswordRequest: () => widget.password,
       );
       terminal.write('SSH client connected. Starting bash session...\n');
-      session = await client!.execute('bash');
-      terminal.write('Bash session started.\n');
-      session!.stdout.listen((data) {
-        terminal.write(String.fromCharCodes(data));
-      });
-      session!.stderr.listen((data) {
-        terminal.write('Error: ${String.fromCharCodes(data)}\n');
-      });
-      terminal.onOutput = (data) {
-        session!.stdin.add(Uint8List.fromList(data.codeUnits));
+
+      session = await client!.shell(
+        pty: SSHPtyConfig(
+            width: terminal.viewWidth, height: terminal.viewHeight),
+      );
+
+// Clear terminal and set cursor
+      terminal.buffer.clear();
+      terminal.buffer.setCursor(0, 0);
+
+      terminal.onResize = (width, height, pixelWidth, pixelHeight) {
+        session!.resizeTerminal(width, height, pixelWidth, pixelHeight);
       };
+
+      terminal.onOutput = (data) {
+        session!
+            .write(utf8.encode(data)); // Properly send user input to session
+      };
+
+      session!.stdout
+          .cast<List<int>>()
+          .transform(Utf8Decoder())
+          .listen(terminal.write);
+      session!.stderr
+          .cast<List<int>>()
+          .transform(Utf8Decoder())
+          .listen(terminal.write);
+
       setState(() {
         isConnected = true;
       });
@@ -143,7 +160,6 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
     if (kIsWeb) {
       channel?.sink.close();
     } else {
-      // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
       session?.close();
       client?.close();
     }
@@ -154,7 +170,7 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('SSH Terminal'),
+        title: Text('Command Line Interface'),
       ),
       body: Column(
         children: [
@@ -195,7 +211,6 @@ class _GPUCLIPageState extends State<GPUCLIPage> {
         }));
       }
     } else {
-      // TODO (khetana@): fix after https://github.com/TerminalStudio/dartssh2/issues/105 resolved
       if (session != null) {
         session!.stdin.add(
             Uint8List.fromList('echo "Test command executed"\n'.codeUnits));
