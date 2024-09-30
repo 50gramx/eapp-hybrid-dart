@@ -153,6 +153,34 @@ job("Build and publish bundle to web track") {
         }
     }
 
+
+    host("Build - Web - Site - Image") {
+
+        shellScript {
+            content = """
+                docker login -u ethosindia -p dckr_pat_4S0EcsM5lO5Z1gxDT-q5NUkKf4U
+            """
+        }
+
+
+        dockerBuildPush {
+            file = "Dockerfile.web.release"
+
+            extraArgsForBuildCommand = listOf("--build-arg", "CACHEBUST=${System.currentTimeMillis()}")
+
+           // image tags
+            val dockerHubRepo = "docker.io/ethosindia/eapp-hybrid-web-site"
+            tags {
+                +"$dockerHubRepo:{{ VERSION_NUMBER }}"
+                +"$dockerHubRepo:latest"
+            }
+        }
+
+        requirements {
+            workerTags("windows-pool")
+        }
+    }
+
     container(displayName = "Release - Web - Site", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
         env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
