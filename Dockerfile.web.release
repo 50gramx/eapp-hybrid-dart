@@ -1,4 +1,20 @@
 FROM nginx:stable-alpine
 COPY . /usr/share/nginx/html
+# TODO: we need to execute this somehow
+# in this image (50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest)
+# pwd
+# ls -l
+# npm -v
+# npm install -g n 
+# n stable
+# cd fifty_gramx && flutter clean && dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && flutter pub get && flutter pub cache repair && flutter build web --dart-define=flavor=50.ethos.site --release && firebase deploy --only hosting:default --token ${"$"}FIREBASE_TOKEN
+# # Retrieve commit messages using Git log command
+# # Output commit messages to console
+# echo "Commit Messages:"
+# git log -n 3 --format=%B
+
+# TODO: then we need to copy the content from fifty_gramx/build/web
+# to the image of nginx for which this image/Dockerfile is being configured
+# and build the image
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
