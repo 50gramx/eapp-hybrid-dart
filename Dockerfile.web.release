@@ -1,47 +1,36 @@
+# Use the base image with necessary tools for building Flutter web
+FROM web-base:latest AS build
 
-FROM web-base:latest AS builder
+# Set the working directory to /app
+WORKDIR /app
 
-# Install necessary packages and Flutter SDK
-RUN apt-get update && \
-    apt-get install -y git curl unzip && \
-    rm -rf /var/lib/apt/lists/*
+ARG PACKAGES_READ_TOKEN
 
-# Clone the Flutter repository
-RUN git clone https://github.com/flutter/flutter.git /flutter
+ENV PACKAGES_READ_TOKEN=${PACKAGES_READ_TOKEN}
 
-# Set the Flutter home and add it to PATH
-ENV FLUTTER_HOME=/flutter
-ENV PATH="$FLUTTER_HOME/bin:$PATH"
+# Copy the fifty_gramx directory into the image
+COPY ./fifty_gramx /app/fifty_gramx
 
-# Ensure that the flutter directory is safe for git
-RUN git config --global --add safe.directory /flutter
+# Install the latest version of Node.js
+RUN npm install -g n && n stable
 
-# Create a user for building the application
-RUN useradd -m flutteruser
+# Set the working directory to the project directory
+WORKDIR /app/fifty_gramx
 
-# Copy the application source code
-COPY --chown=flutteruser:flutteruser . /fifty_gramx
-
-# Set the working directory
-WORKDIR /fifty_gramx
-
-# Switch to the flutteruser for building
-USER flutteruser
-
-# Run the build steps
+# Run Flutter commands to build the web application
 RUN flutter clean && \
-    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN && \
+    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKAGES_READ_TOKEN && \
     flutter pub get && \
     flutter pub cache repair && \
-    flutter build web --release
+    flutter build web --dart-define=flavor=50.ethos.site --release
 
-# Stage 2: Create a lightweight Nginx image to serve the built web app
-FROM nginx:latest
+# Start a new stage for the production image
+FROM nginx:latest AS production
 
-# Copy the build output from the builder stage to the Nginx HTML directory
-COPY --from=builder /fifty_gramx/build/web /usr/share/nginx/html
+# Copy the built Flutter web application from the previous stage
+COPY --from=build /app/fifty_gramx/build/web /usr/share/nginx/html
 
-# Expose port 80 for Nginx
+# Expose the port that Nginx runs on
 EXPOSE 80
 
 # Command to run Nginx in the foreground
