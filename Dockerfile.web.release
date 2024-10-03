@@ -1,5 +1,5 @@
 # Use the base image with necessary tools for building Flutter web
-FROM web-base:latest AS build
+FROM 50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest AS build
 
 # Set the working directory to /app
 WORKDIR /app
