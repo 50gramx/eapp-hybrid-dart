@@ -180,6 +180,7 @@ job("Build and publish bundle to web track") {
             # Copy the build output to the file share
             cp -r build/web/* ${'$'}JB_SPACE_FILE_SHARE_PATH/
             ls -l ${'$'}JB_SPACE_FILE_SHARE_PATH/
+            echo ${'$'}JB_SPACE_FILE_SHARE_PATH/
             """
         }
     }
@@ -195,7 +196,6 @@ job("Build and publish bundle to web track") {
 
         dockerBuildPush {
             file = "Dockerfile.web.release"
-            args["JB_SPACE_FILE_SHARE_PATH"] = ${JB_SPACE_FILE_SHARE_PATH}
 
             extraArgsForBuildCommand = listOf("--build-arg", "CACHEBUST=${System.currentTimeMillis()}")
 
