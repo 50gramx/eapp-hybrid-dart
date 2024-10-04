@@ -156,7 +156,6 @@ job("Build and publish bundle to web track") {
     container(displayName = "Release - Web - Site", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
         env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
-        env["JB_SPACE_FILE_SHARE_PATH"] = "/eapp-hybrid-dart/tmp"
     
         shellScript {
             content = """
@@ -189,6 +188,7 @@ job("Build and publish bundle to web track") {
 
             # Copy the build output to the file share
             cp -r build/web/* ${'$'}JB_SPACE_FILE_SHARE_PATH/
+            ls -l ${'$'}JB_SPACE_FILE_SHARE_PATH/
             """
         }
     }
