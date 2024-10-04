@@ -2,6 +2,7 @@
 FROM nginx:alpine
 
 # Copy the built web application files into the Nginx content directory
+RUN echo ${JB_SPACE_FILE_SHARE_PATH}
 COPY /tmp/nginx-web /usr/share/nginx/html
 
 # Expose the port on which Nginx will run
