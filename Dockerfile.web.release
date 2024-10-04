@@ -18,7 +18,7 @@ WORKDIR /app/fifty_gramx
 
 # Run Flutter commands to build the web application
 RUN flutter clean && \
-    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKAGES_READ_TOKEN && \
+    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ ${PACKAGES_READ_TOKEN} && \
     flutter pub get && \
     flutter pub cache repair && \
     flutter build web --dart-define=flavor=50.ethos.site --release
