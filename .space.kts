@@ -195,7 +195,7 @@ job("Build and publish bundle to web track") {
 
         dockerBuildPush {
             file = "Dockerfile.web.release"
-            args["JB_SPACE_FILE_SHARE_PATH"] = ${'$'}JB_SPACE_FILE_SHARE_PATH
+            args["JB_SPACE_FILE_SHARE_PATH"] = $JB_SPACE_FILE_SHARE_PATH
 
             extraArgsForBuildCommand = listOf("--build-arg", "CACHEBUST=${System.currentTimeMillis()}")
 
