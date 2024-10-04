@@ -3,9 +3,9 @@ FROM 50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:lates
 # Set the working directory to /app
 WORKDIR /app
 
-#ARG PACKAGES_READ_TOKEN
-#
-#ENV PACKAGES_READ_TOKEN=${PACKAGES_READ_TOKEN}
+ARG PACKAGES_READ_TOKEN
+
+ENV PACKAGES_READ_TOKEN=${PACKAGES_READ_TOKEN}
 
 # Copy the fifty_gramx directory into the image
 COPY ./fifty_gramx /app/fifty_gramx
@@ -18,7 +18,7 @@ WORKDIR /app/fifty_gramx
 
 # Run Flutter commands to build the web application
 RUN flutter clean && \
-    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var="eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJhdWQiOiI4NTMwMWZiOS1mODU3LTRjYmQtYjkxOS1kMDMwYmY2NDIzY2UiLCJvcmdEb21haW4iOiI1MGdyYW14IiwibmFtZSI6IkV0aG9zIEFwcHMgU2VydmljZSBDb250cmFjdHMiLCJpc3MiOiJodHRwczovLzUwZ3JhbXguamV0YnJhaW5zLnNwYWNlIiwicGVybV90b2tlbiI6IjFwN0t6QTBPS2pOQSIsInByaW5jaXBhbF90eXBlIjoiU0VSVklDRSIsImlhdCI6MTcyODAzNTcwMX0.Y6yDlqnJMioe5UgbmlBl6YnlgKptkYR8WnEHrTBKAtoPFfhGXMFOs6UGmI7eKqsCxpZesfPj454nCwv3WAxvXBlQCdX8YKmhBJqPEVqpLerShfQL6kkilWZA7VC-RdCxFeabreZsBrQoKJiFsmthPnD-Z6Ur0PcTdcAlg_ktsbM" && \
+    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=${PACKAGES_READ_TOKEN} && \
     flutter pub get && \
     flutter pub cache repair && \
     flutter build web --dart-define=flavor=50.ethos.site --release
