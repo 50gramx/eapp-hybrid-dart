@@ -188,15 +188,6 @@ job("Build and publish bundle to web track") {
 
         shellScript {
             content = """
-                # Create a temporary directory to hold the content
-                mkdir -p /tmp/nginx-web
-                
-                # Copy web files from the shared file path to the Nginx content directory
-                cp -r ${'$'}JB_SPACE_FILE_SHARE_PATH/* /tmp/nginx-web/
-
-                # Build the Nginx Docker image with the copied files
-                docker build -t web-release -f eapp-hybrid-dart/Dockerfile.web.release /tmp/nginx-web
-
                 docker login -u ethosindia -p dckr_pat_4S0EcsM5lO5Z1gxDT-q5NUkKf4U
             """
         }
