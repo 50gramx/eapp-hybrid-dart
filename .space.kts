@@ -169,7 +169,7 @@ job("Build and publish bundle to web track") {
             # Build the Flutter web application
             cd fifty_gramx
             flutter clean
-            dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKGAGES_READ_TOKEN
+            dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKAGES_READ_TOKEN
             flutter pub get
             flutter pub cache repair
             flutter build web --dart-define=flavor=50.ethos.site --release
