@@ -120,6 +120,7 @@ job("Build and publish bundle to web track") {
             anyBranchMatching {
                 +"release-*"
                 +"master"
+                +"features*"
             }
         }
     }
