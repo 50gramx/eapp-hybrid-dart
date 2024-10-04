@@ -198,7 +198,7 @@ job("Build and publish bundle to web track") {
         dockerBuildPush {
             file = "Dockerfile.web.release"
             args["JB_SPACE_FILE_SHARE_PATH"] = "/mnt/space/share/"
-            extraArgsForBuildCommand = listOf("--build-arg", "CACHEBUST=${System.currentTimeMillis()}")
+            extraArgsForBuildCommand = listOf("--no-cache")
 
            // image tags
             val dockerHubRepo = "docker.io/ethosindia/eapp-hybrid-web-site"
