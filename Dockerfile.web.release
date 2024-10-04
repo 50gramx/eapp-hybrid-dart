@@ -1,9 +1,10 @@
 # Use the official Nginx image as the base
-FROM nginx:alpine
+FROM nginx:latest
 
 # Copy the built web application files into the Nginx content directory
 RUN echo ${JB_SPACE_FILE_SHARE_PATH}
-COPY /tmp/nginx-web /usr/share/nginx/html
+RUN ls ${JB_SPACE_FILE_SHARE_PATH}
+COPY ${JB_SPACE_FILE_SHARE_PATH} /usr/share/nginx/html
 
 # Expose the port on which Nginx will run
 EXPOSE 80
