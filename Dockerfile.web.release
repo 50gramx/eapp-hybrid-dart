@@ -1,37 +1,11 @@
-# Use the base image with necessary tools for building Flutter web
-FROM 50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest AS build
+# Use the official Nginx image as the base
+FROM nginx:alpine
 
-# Set the working directory to /app
-WORKDIR /app
+# Copy the built web application files into the Nginx content directory
+COPY /tmp/nginx-web /usr/share/nginx/html
 
-ARG PACKAGES_READ_TOKEN
-
-ENV PACKAGES_READ_TOKEN=${PACKAGES_READ_TOKEN}
-
-# Copy the fifty_gramx directory into the image
-COPY ./fifty_gramx /app/fifty_gramx
-
-# Install the latest version of Node.js
-RUN npm install -g n && n stable
-
-# Set the working directory to the project directory
-WORKDIR /app/fifty_gramx
-
-# Run Flutter commands to build the web application
-RUN flutter clean && \
-    dart pub token add https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/ --env-var=PACKAGES_READ_TOKEN && \
-    flutter pub get && \
-    flutter pub cache repair && \
-    flutter build web --dart-define=flavor=50.ethos.site --release
-
-# Start a new stage for the production image
-FROM nginx:latest AS production
-
-# Copy the built Flutter web application from the previous stage
-COPY --from=build /app/fifty_gramx/build/web /usr/share/nginx/html
-
-# Expose the port that Nginx runs on
+# Expose the port on which Nginx will run
 EXPOSE 80
 
-# Command to run Nginx in the foreground
+# Start Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]

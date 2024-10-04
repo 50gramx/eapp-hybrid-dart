@@ -156,6 +156,7 @@ job("Build and publish bundle to web track") {
     container(displayName = "Release - Web - Site", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
         env["PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
+        env["JB_SPACE_FILE_SHARE_PATH"] = "/eapp-hybrid-dart/tmp"
     
         shellScript {
             content = """
@@ -185,6 +186,9 @@ job("Build and publish bundle to web track") {
             # Retrieve commit messages using Git log command
             echo "Commit Messages:"
             git log -n 3 --format=%B
+
+            # Copy the build output to the file share
+            cp -r build/web/* ${'$'}JB_SPACE_FILE_SHARE_PATH/
             """
         }
     }
@@ -193,6 +197,15 @@ job("Build and publish bundle to web track") {
 
         shellScript {
             content = """
+                # Create a temporary directory to hold the content
+                mkdir -p /tmp/nginx-web
+                
+                # Copy web files from the shared file path to the Nginx content directory
+                cp -r ${'$'}JB_SPACE_FILE_SHARE_PATH/* /tmp/nginx-web/
+
+                # Build the Nginx Docker image with the copied files
+                docker build -t web-release -f eapp-hybrid-dart/Dockerfile.web.release /tmp/nginx-web
+
                 docker login -u ethosindia -p dckr_pat_4S0EcsM5lO5Z1gxDT-q5NUkKf4U
             """
         }
