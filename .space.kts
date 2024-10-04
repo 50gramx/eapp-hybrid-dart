@@ -173,15 +173,6 @@ job("Build and publish bundle to web track") {
             flutter pub cache repair
             flutter build web --dart-define=flavor=50.ethos.site --release
     
-            # Build the Docker image
-            docker build -t ${"$"}DOCKER_IMAGE -f /fifty_gramx/Dockerfile .
-            
-            # Log in to the Docker registry
-            echo ${"$"}DOCKER_PASSWORD | docker login -u ${"$"}DOCKER_USERNAME --password-stdin
-    
-            # Push the Docker image
-            docker push ${"$"}DOCKER_IMAGE
-    
             # Retrieve commit messages using Git log command
             echo "Commit Messages:"
             git log -n 3 --format=%B
