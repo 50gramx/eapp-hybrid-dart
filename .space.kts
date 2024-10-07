@@ -177,11 +177,6 @@ job("Build and publish bundle to web track") {
             # Retrieve commit messages using Git log command
             echo "Commit Messages:"
             git log -n 3 --format=%B
-
-            # Copy the build output to the file share
-            cp -r build/web/* ${'$'}JB_SPACE_FILE_SHARE_PATH/
-            ls -l ${'$'}JB_SPACE_FILE_SHARE_PATH/
-            echo ${'$'}JB_SPACE_FILE_SHARE_PATH/
             """
         }
     }
