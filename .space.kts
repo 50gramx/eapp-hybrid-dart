@@ -185,6 +185,8 @@ job("Build and publish bundle to web track") {
 
         shellScript {
             content = """
+                # Print packages read token
+                echo "PACKAGES_READ_TOKEN: $PACKAGES_READ_TOKEN"
                 docker login -u ethosindia -p dckr_pat_4S0EcsM5lO5Z1gxDT-q5NUkKf4U
             """
         }
@@ -192,7 +194,6 @@ job("Build and publish bundle to web track") {
 
         dockerBuildPush {
             file = "Dockerfile.web.release"
-            args["JB_SPACE_FILE_SHARE_PATH"] = "/mnt/space/share/"
             extraArgsForBuildCommand = listOf("--build-arg=PACKAGES_READ_TOKEN")
 
            // image tags
