@@ -183,10 +183,13 @@ job("Build and publish bundle to web track") {
 
     host("Build - Web - Site - Image") {
 
+        env["ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
+
+
         shellScript {
             content = """
-                # Print packages read token
-                echo "PACKAGES_READ_TOKEN: $PACKAGES_READ_TOKEN"
+                # Print the packages read token for verification
+                echo ${'$'}ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN
                 docker login -u ethosindia -p dckr_pat_4S0EcsM5lO5Z1gxDT-q5NUkKf4U
             """
         }
@@ -194,7 +197,7 @@ job("Build and publish bundle to web track") {
 
         dockerBuildPush {
             file = "Dockerfile.web.release"
-            args["PACKAGES_READ_TOKEN"] = Secrets("ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
+            args["PACKAGES_READ_TOKEN"] = ${'$'}ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN
             extraArgsForBuildCommand = listOf("--build-arg=PACKAGES_READ_TOKEN=$PACKAGES_READ_TOKEN")
 
            // image tags
