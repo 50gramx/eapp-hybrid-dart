@@ -197,8 +197,7 @@ job("Build and publish bundle to web track") {
 
         dockerBuildPush {
             file = "Dockerfile.web.release"
-            args["PACKAGES_READ_TOKEN"] = ${'$'}ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN
-            extraArgsForBuildCommand = listOf("--build-arg=PACKAGES_READ_TOKEN=$PACKAGES_READ_TOKEN")
+            extraArgsForBuildCommand = listOf("--build-arg=PACKAGES_READ_TOKEN=${'$'}ETHOS_APP_SERVICE_CONTRACTS_PACKGAGES_READ_TOKEN")
 
            // image tags
             val dockerHubRepo = "docker.io/ethosindia/eapp-hybrid-web-site"
