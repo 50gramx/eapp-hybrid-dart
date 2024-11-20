@@ -63,9 +63,21 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
                 return Card(
                   margin: const EdgeInsets.all(8.0),
                   child: InkWell(
-                    onTap: () {
+                    onTap: () async {
                       // Navigate to a detailed page for the deployment
-                      AppFlowManager.instance.loadAppOnTheGo(
+                      await AppFlowManager.instance.loadAppOnTheGo(
+                          appName: "pods",
+                          orgName: "ethos",
+                          communityCode: 70,
+                          appIndex: 0,
+                          collarNameCode: "DC499999999",
+                          pageNameCode: "EAIP1002",
+                          domainIdentifier: widget.domainId,
+                          pageIdentifiers: {
+                            "collar_id": "${deployment.id}",
+                            "deployment_id": "${deployment.deployment.id}",
+                          });
+                      AppFlowManager.instance.sendOpenDynamicAppNotification(
                           appName: "pods",
                           orgName: "ethos",
                           communityCode: 70,

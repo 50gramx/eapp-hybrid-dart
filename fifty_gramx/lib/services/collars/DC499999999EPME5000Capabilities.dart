@@ -54,7 +54,7 @@ class DC499999999EPME5000Capabilities {
     print("DC499999999EPME5000Capabilities:list, got auth");
     var response = await (await capsClient).list(auth);
     var c = response.collars;
-    print("DC499999999EPME5000Capabilities:list, got collars, ${c}");
+    // print("DC499999999EPME5000Capabilities:list, got collars, ${c}");
     return c;
   }
 

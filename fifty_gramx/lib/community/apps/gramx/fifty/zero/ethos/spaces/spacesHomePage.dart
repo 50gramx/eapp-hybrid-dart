@@ -193,11 +193,13 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                   //    domain id of deployments collar
 
                   return SelectorConfigurationItem(
-                    titleText: "Personal Deployments",
+                    titleText: spaceServiceDomain.name.isEmpty
+                        ? "Personal Deployments"
+                        : spaceServiceDomain.name,
                     subtitleText:
                         "${DateTimeService().getFormattedTimeOrDate(spaceServiceDomain.createdAt)}",
-                    selectorCallback: () {
-                      AppFlowManager.instance.loadAppOnTheGo(
+                    selectorCallback: () async {
+                      await AppFlowManager.instance.loadAppOnTheGo(
                           appName: "pods",
                           orgName: "ethos",
                           communityCode: 70,
@@ -206,6 +208,14 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                           pageNameCode: "EAIP1001",
                           domainIdentifier: spaceServiceDomain.id);
                       widget.focusPaneShift("Open Pages");
+                      AppFlowManager.instance.sendOpenDynamicAppNotification(
+                          appName: "pods",
+                          orgName: "ethos",
+                          communityCode: 70,
+                          appIndex: 0,
+                          collarNameCode: "DC499999999",
+                          pageNameCode: "EAIP1001",
+                          domainIdentifier: spaceServiceDomain.id);
                     },
                   );
                 } else {
