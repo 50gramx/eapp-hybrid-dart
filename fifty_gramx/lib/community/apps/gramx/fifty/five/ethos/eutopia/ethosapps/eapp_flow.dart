@@ -117,6 +117,7 @@ class EappFlow {
         if (pageNameCode == "EAIP1001") {
           appTitle = "Deployments ${domainIdentifier.substring(0, 5)}";
           appName = "Deployments ${domainIdentifier.substring(0, 5)}";
+          iconData = FeatherIcons.heart;
           index = AppFlowManager.instance.reservePageIndex();
           firstPage = DC499999999EAIP1001(
             domainId: domainIdentifier,
@@ -124,6 +125,7 @@ class EappFlow {
         } else if (pageNameCode == "EAIP1002") {
           appTitle = "Deployment Pods ${domainIdentifier.substring(0, 5)}";
           appName = "Deployments Pods ${domainIdentifier.substring(0, 5)}";
+          iconData = FeatherIcons.box;
           index = AppFlowManager.instance.reservePageIndex();
           firstPage = DC499999999EAIP1002(
             domainId: domainIdentifier,

@@ -95,7 +95,7 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
             case 3:
               return _buildConversationsTile(context);
             case 4:
-              return _buildSpacesTile(context);
+              return SizedBox(); // _buildSpacesTile(context);
             case 5:
               return _buildPodsTile(context);
             case 6:

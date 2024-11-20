@@ -1,10 +1,10 @@
+import 'dart:async';
+
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
-import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
-import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/data/accountData.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// A platform-aware Scaffold which encapsulates the common behaviour between
 /// material's and cupertino's bottom navigation pattern.
@@ -41,6 +41,7 @@ class _AdaptiveLeftNavigationScaffoldState
   @override
   void initState() {
     super.initState();
+
     _checkAccountStatus();
   }
 
@@ -69,24 +70,19 @@ class _AdaptiveLeftNavigationScaffoldState
             // Main Navigation Scaffold
             _buildEutopia(context),
 
-            // Overlay GetStartedWidget if account is not available
-            if (!_isAccountAvailable)
-              Positioned.fill(
-                child: Container(
-                  color: Colors.black.withOpacity(0.6), // Dim background
-                  child: Center(
-                    child: GetStartedWidget(
-                      completedSuccessfulSignIn: () {
-                        setState(() {
-                          _isAccountAvailable = true;
-                        });
-                        setState(() {});
-                        LocalServices().user();
-                      },
-                    ),
-                  ),
-                ),
-              ),
+            // // Overlay GetStartedWidget if account is not available
+            // if (!_isAccountAvailable)
+            //   Positioned.fill(
+            //     child: GetStartedWidget(
+            //       completedSuccessfulSignIn: () {
+            //         setState(() {
+            //           _isAccountAvailable = true;
+            //         });
+            //         setState(() {});
+            //         LocalServices().user();
+            //       },
+            //     ),
+            //   ),
           ],
         ),
       );

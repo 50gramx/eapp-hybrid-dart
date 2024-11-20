@@ -147,11 +147,13 @@ class AppFlowManager {
   LeftNavigationTab createLeftNavigationTab(AppFlow appFlow) {
     return LeftNavigationTab(
       leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
+        appFlowIndex: appFlow.index,
         orgName: appFlow.orgName,
         appName: appFlow.appName,
         collarNameCode: appFlow.collarNameCode,
         pageNameCode: appFlow.pageNameCode,
         identifier: appFlow.identifier,
+        pageIdentifiers: appFlow.pageIdentifiers,
         label: appFlow.title,
         code: appFlow.code,
         icon: appFlow.iconData,
@@ -511,6 +513,57 @@ class AppFlowManager {
         ),
       ),
     );
+  }
+
+  bool sendOpenDynamicAppNotification({
+    required String appName,
+    required String orgName,
+    required int communityCode,
+    required int appIndex,
+    String collarNameCode = "DC5000000000",
+    String pageNameCode = "EAIP1001",
+    String domainIdentifier = "",
+    Map<String, String> pageIdentifiers = const {},
+  }) {
+    print("openApp, start");
+    final List<AppFlow>? appFlows = getAppFlow(communityCode);
+
+    if (appFlows == null) {
+      return false; // No app flows for this community code
+    }
+
+    return appFlows.any((appFlow) {
+      // Check for static attribute matches
+      if (appFlow.collarNameCode != collarNameCode ||
+          appFlow.pageNameCode != pageNameCode ||
+          appFlow.identifier != domainIdentifier) {
+        return false;
+      }
+
+      // Check for dynamic pageIdentifiers matches (keys and values)
+      if (appFlow.pageIdentifiers.length != pageIdentifiers.length) {
+        return false; // Mismatch in number of keys
+      }
+
+      for (var key in pageIdentifiers.keys) {
+        if (!appFlow.pageIdentifiers.containsKey(key) ||
+            appFlow.pageIdentifiers[key] != pageIdentifiers[key]) {
+          return false; // Key-value pair mismatch
+        }
+      }
+
+      print("openApp, found, ${appFlow.index}");
+
+      final index = navigationBarItems.indexWhere((tab) {
+        final item = tab.leftNavigationBarSectionalItem;
+        return item.appFlowIndex == appFlow.index;
+      });
+      NotificationsBloc.instance.newNotification(LocalNotification(
+          "EthosAppFlowBob",
+          {"subType": "Open eApp", "appSectionIndex": index}));
+
+      return true; // All keys and values match
+    });
   }
 
   bool isAppFlowExists(

@@ -92,7 +92,7 @@ class _EutopiaLeftNavigationScaffoldState
   final List<bool> _shouldBuildParentsTab = <bool>[];
 
   /// Indicates whether the app is in focus mode.
-  String focusPaneKey = "Launch Pod";
+  String focusPaneKey = "Top Picks";
   bool _isEthosStackPagesVisible = false;
   bool isAnyChildAppLoaded = false;
   bool isSearchVisible = true;
@@ -136,6 +136,8 @@ class _EutopiaLeftNavigationScaffoldState
         handleLoadedApp();
       } else if (message.data["subType"] == "Open Community Tiles") {
       } else if (message.data["subType"] == "Open eApp") {
+        print(
+            "openApp, _handleListeningMessages, ${message.data["appSectionIndex"]}");
         selectChildrenItem(message.data["appSectionIndex"]);
       }
     } else if (message.type == "OpenTilesPane") {
@@ -183,11 +185,17 @@ class _EutopiaLeftNavigationScaffoldState
   }
 
   selectChildrenItem(sectionIndex) {
+    print("openApp, selectChildrenItem, ${sectionIndex}");
     String indexAppName = AppFlowManager.instance
         .getNavigationBarItems()![sectionIndex]
         .leftNavigationBarSectionalItem
         .appName;
-    bool isParentApp = widget.parentStackAppNames.contains(indexAppName);
+    bool isParentApp = false;
+    if (sectionIndex < 500000000) {
+      isParentApp = widget.parentStackAppNames.contains(indexAppName);
+    }
+
+    print("openApp, isParentApp, ${isParentApp}");
 
     if (isParentApp) {
       showEthosStackPages();

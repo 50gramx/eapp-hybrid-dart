@@ -6,6 +6,8 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1008.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/focus_pane_tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
+import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -49,6 +51,15 @@ class _EAIT1002State extends State<EAIT1002> {
   static Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
 
+  bool _isAccountAvailable = false;
+
+  checkAccountStatus() async {
+    bool isAvailable = await AccountData().isValid();
+    setState(() {
+      _isAccountAvailable = isAvailable;
+    });
+  }
+
   _handleSearchCollapseView(LocalNotification message) {
     if (message.data["searchCollapsed"] == true) {
       if (!widget.isSearchVisible) {
@@ -73,6 +84,7 @@ class _EAIT1002State extends State<EAIT1002> {
 
   @override
   void initState() {
+    checkAccountStatus();
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
@@ -81,9 +93,11 @@ class _EAIT1002State extends State<EAIT1002> {
 
   buildCommunityCardIcon() {
     return NeumorphicIcon(
-      widget.isOpenTilePaneVisible
-          ? Icons.panorama_horizontal_rounded
-          : Icons.panorama_photosphere_outlined,
+      _isAccountAvailable
+          ? (widget.isOpenTilePaneVisible
+              ? Icons.panorama_horizontal_rounded
+              : Icons.panorama_photosphere_outlined)
+          : Icons.login_rounded,
       size: 24,
       style: NeumorphicStyle(
         lightSource: NeumorphicTheme.isUsingDark(context)
@@ -94,7 +108,9 @@ class _EAIT1002State extends State<EAIT1002> {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.concave,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: AppColors.contentSecondary(context),
+        color: _isAccountAvailable
+            ? AppColors.contentSecondary(context)
+            : AppColors.contentInversePrimary(context),
       ),
     );
   }
@@ -104,7 +120,23 @@ class _EAIT1002State extends State<EAIT1002> {
       child: NeumorphicButton(
           provideHapticFeedback: true,
           onPressed: () {
-            handleOpenTilePaneStateToggle(widget.isOpenTilePaneVisible);
+            if (_isAccountAvailable) {
+              handleOpenTilePaneStateToggle(widget.isOpenTilePaneVisible);
+            } else {
+              showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return GetStartedWidget(
+                      isAccountLoggedIn: _isAccountAvailable,
+                      completedSuccessfulSignIn: () {
+                        setState(() {
+                          _isAccountAvailable = true;
+                        });
+                      },
+                    );
+                  });
+            }
           },
           style: NeumorphicStyle(
             lightSource: NeumorphicTheme.isUsingDark(context)
@@ -116,7 +148,9 @@ class _EAIT1002State extends State<EAIT1002> {
             shape: NeumorphicShape.flat,
             disableDepth: true,
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-            color: AppColors.backgroundPrimary(context),
+            color: _isAccountAvailable
+                ? AppColors.backgroundPrimary(context)
+                : AppColors.backgroundInversePrimary(context),
             border: NeumorphicBorder(
               isEnabled: true,
               color: AppColors.backgroundSecondary(context),

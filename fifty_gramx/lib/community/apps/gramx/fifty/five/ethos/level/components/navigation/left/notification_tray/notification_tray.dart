@@ -102,7 +102,7 @@ abstract class NotificationTrayState<T extends NotificationTray>
             ? AppColors.gray700
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.flat,
-        depth: 6,
+        depth: 0,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
         color: AppColors.backgroundPrimary(context),
         border: NeumorphicBorder(
@@ -160,7 +160,8 @@ abstract class NotificationTrayState<T extends NotificationTray>
           physics: NeverScrollableScrollPhysics(),
           itemCount: widget.notifications.length,
           itemBuilder: (context, index) {
-            final notification = widget.notifications[index];
+            var revIndex = widget.notifications.length - 1 - index;
+            final notification = widget.notifications[revIndex];
             return Slidable(
               child: _buildNotificationTile(notification),
               startActionPane: ActionPane(
@@ -169,7 +170,7 @@ abstract class NotificationTrayState<T extends NotificationTray>
                   SlidableAction(
                     onPressed: (context) {
                       setState(() {
-                        widget.notifications.removeAt(index);
+                        widget.notifications.removeAt(revIndex);
                       });
                     },
                     backgroundColor:
@@ -205,7 +206,7 @@ abstract class NotificationTrayState<T extends NotificationTray>
           child: Column(
             children: [
               if (!_isExpanded && widget.notifications.isNotEmpty)
-                _buildNotificationTile(widget.notifications.first),
+                _buildNotificationTile(widget.notifications.last),
               if (_isExpanded) _buildNotificationList(),
               if (widget.notifications.length > 1)
                 Padding(
