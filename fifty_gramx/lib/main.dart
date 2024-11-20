@@ -166,7 +166,7 @@ class MyApp extends StatelessWidget {
 
   buildParentFutureBuilder() {
     return FutureBuilder<bool>(
-        future: AccountData().accountPresent(),
+        future: AccountData().isValid(),
         builder: (context, presentData) {
           if (presentData.connectionState == ConnectionState.done) {
             if (presentData.data == true) {
