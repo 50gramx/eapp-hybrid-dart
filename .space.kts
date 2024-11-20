@@ -185,7 +185,7 @@ job("Build and publish bundle to web track") {
         }
     }
 
-    host("Build - Web - Site - Image") {
+    /** host("Build - Web - Site - Image") {
 
         shellScript {
             content = """
@@ -210,7 +210,7 @@ job("Build and publish bundle to web track") {
         requirements {
             workerTags("windows-pool")
         }
-    }
+    } **/
 
     container(displayName = "Release - Web - App", image = "50gramx.registry.jetbrains.space/p/main/ethosindiacontainers/web-base:latest") {
         env["FIREBASE_TOKEN"] = Secrets("FIREBASE_TOKEN")
