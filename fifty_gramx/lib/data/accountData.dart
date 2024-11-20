@@ -24,6 +24,7 @@ import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/access_account.pb.dart';
 import 'package:fifty_gramx/services/identity/account/accessAccountService.dart';
 import 'package:fifty_gramx/services/identity/account/notifyAccountService.dart';
+import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/notification/notifications_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -54,7 +55,6 @@ class AccountData {
   }
 
   Future<Account> readAccount() async {
-    print("AccountData:readAccount");
     final prefs = await SharedPreferences.getInstance();
     var details = prefs.getString('account') ?? "";
     if (details == "") {
@@ -69,20 +69,28 @@ class AccountData {
     prefs.setString('account', Account.getDefault().writeToJson());
   }
 
-  Future<bool> accountPresent() async {
+  Future<bool> isValid() async {
     // Create a stopwatch and start it
     final stopwatch = Stopwatch()..start();
-    bool accountPresent = (await AccountData().readAccount()).accountId != "";
-    stopwatch.stop();
-    print('Time elapsed to accountPresent: ${stopwatch.elapsedMilliseconds} ms');
-    return accountPresent;
-  }
+    await AccountData().readAccountServicesAccessAuthDetails();
+    var accountServicesAccessAuthDetails = AccountServicesAccessAuthDetails(
+        account: await readAccount(),
+        accountServicesAccessSessionTokenDetails:
+            await readAccountServicesAccessSessionTokenDetails(),
+        requestedAt: Timestamp.fromDateTime(DateTime.now()));
 
-  Future<bool> accountAvailable() async {
-    return (await AccountData().readAccountServicesAccessAuthDetails())
-            .account
-            .accountId !=
-        "";
+    var validateAccountServicesResponse =
+        await AccessAccountService.validateAccountServices(
+            accountServicesAccessAuthDetails);
+    stopwatch.stop();
+    NotificationsBloc.instance.newEAppNotification(
+        "50",
+        "ethos",
+        "identity",
+        "EAIP-1001",
+        "50DC5000000000000",
+        "${stopwatch.elapsedMilliseconds} ms to discover account access.");
+    return validateAccountServicesResponse.accountServiceAccessValidationDone;
   }
 
   saveAccountServicesAccessSessionTokenDetails(
@@ -124,6 +132,8 @@ class AccountData {
 
   Future<AccountServicesAccessAuthDetails>
       readAccountServicesAccessAuthDetails() async {
+    final stopwatch = Stopwatch()..start();
+
     var accountServicesAccessAuthDetails = AccountServicesAccessAuthDetails(
         account: await readAccount(),
         accountServicesAccessSessionTokenDetails:
@@ -147,14 +157,46 @@ class AccountData {
               reAccountAccessTokenResponse.accountServiceAccessAuthDetails);
           NotifyAccountService.updateAccountDeviceDetails(
               await PushNotificationService.instance.getAccountDeviceDetails());
+          stopwatch.stop();
+          NotificationsBloc.instance.newEAppNotification(
+              "50",
+              "ethos",
+              "identity",
+              "EAIP-1001",
+              "50DC5000000000000",
+              "Services re-authorised in ${stopwatch.elapsedMilliseconds}ms.");
           return reAccountAccessTokenResponse.accountServiceAccessAuthDetails;
         } else {
+          stopwatch.stop();
+          NotificationsBloc.instance.newEAppNotification(
+              "50",
+              "ethos",
+              "identity",
+              "EAIP-1001",
+              "50DC5000000000000",
+              "Account services session has expired.");
           return AccountServicesAccessAuthDetails.getDefault();
         }
       } else {
+        stopwatch.stop();
+        NotificationsBloc.instance.newEAppNotification(
+            "50",
+            "ethos",
+            "identity",
+            "EAIP-1001",
+            "50DC5000000000000",
+            "Invalid account services session.");
         return AccountServicesAccessAuthDetails.getDefault();
       }
     } else {
+      stopwatch.stop();
+      NotificationsBloc.instance.newEAppNotification(
+          "50",
+          "ethos",
+          "identity",
+          "EAIP-1001",
+          "50DC5000000000000",
+          "Services validated in ${stopwatch.elapsedMilliseconds}ms.");
       return accountServicesAccessAuthDetails;
     }
   }
