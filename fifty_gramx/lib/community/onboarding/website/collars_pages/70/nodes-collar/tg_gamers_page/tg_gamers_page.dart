@@ -58,7 +58,7 @@ class _Things50DC500000000TGGamersPageState
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override

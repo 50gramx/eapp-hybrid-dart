@@ -54,7 +54,7 @@ class _CollarsOverviewPageState extends State<CollarsOverviewPage> {
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override

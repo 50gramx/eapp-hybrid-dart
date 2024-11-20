@@ -56,7 +56,7 @@ class _Vinayak53GRAMxGroupJobseekersPageState
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override

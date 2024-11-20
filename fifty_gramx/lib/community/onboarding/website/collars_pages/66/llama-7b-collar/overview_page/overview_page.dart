@@ -58,7 +58,7 @@ class _PodeageLLAMA7BOverviewPageState
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override
