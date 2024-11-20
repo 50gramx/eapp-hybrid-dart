@@ -19,11 +19,11 @@
  * /
  */
 
-import 'package:in_app_purchase/in_app_purchase.dart';
+// import 'package:in_app_purchase/in_app_purchase.dart';
 
-class EthosCoinPayments {
+// class EthosCoinPayments {
 
-  PurchaseParam getEthosCoinPurchaseParam(ProductDetails productDetails) {
-    return PurchaseParam(productDetails: productDetails);
-  }
-}
+//   PurchaseParam getEthosCoinPurchaseParam(ProductDetails productDetails) {
+//     return PurchaseParam(productDetails: productDetails);
+//   }
+// }
