@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/eighty/eight/ethos/connect/BotPressConversationsPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/eutopia_home_page.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/two/ethos/pay/EthosCoinConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/browser/RegistrationForms.dart';
@@ -15,6 +16,8 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-pri
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/gpu_template_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPodConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MachineConfigurationPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/deployment_manage_page.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/deployments_home_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
@@ -41,26 +44,26 @@ class EappFlow {
   /// ```
   ///
   /// This method can be used whenever an [AppFlow] instance is needed for a community, ensuring a consistent setup for the app flow across different parts of the application.
-  AppFlow getAppFlow(int communityCode, String title) {
+  AppFlow getAppFlow(int communityCode, String title,
+      {String orgName = "ethos",
+      String collarNameCode = "DC5000000000",
+      String pageNameCode = "EAIP-1001",
+      String domainIdentifier = "",
+      Widget firstPage = const SizedBox(),
+      Map<String, String> pageIdentifiers = const {}}) {
+    print("getAppFlow: $communityCode, $title");
     int index = 99;
     String appTitle;
+    String appName = title;
+
     IconData iconData = FeatherIcons.activity;
     Color defaultMainColor = AppColors.lightNeuPrimaryBackground;
-    Widget firstPage = SizedBox();
 
     if (communityCode == 50 && title == 'identity') {
       index = 1;
       appTitle = "Identity";
       iconData = FeatherIcons.user;
       firstPage = WebViewPage(index: 1, containingFlowTitle: appTitle);
-      // } else if (communityCode == 50 && title == 'domains') {
-      //   index = 5001;
-      //   appTitle = "Domains";
-      //   iconData = FeatherIcons.globe;
-      //   firstPage = HomePage(
-      //     index: index,
-      //     containingFlowTitle: appTitle,
-      //   );
     } else if (communityCode == 50 && title == 'get_started') {
       index = 5002;
       appTitle = "Get Started";
@@ -94,7 +97,11 @@ class EappFlow {
       index = 4;
       appTitle = "Knowledge";
       iconData = FeatherIcons.shield;
-      firstPage = SpacesHomePage(index: index, containingFlowTitle: appTitle);
+      firstPage = SpacesHomePage(
+        index: index,
+        containingFlowTitle: appTitle,
+        focusPaneShift: (t) {},
+      );
     } else if (communityCode == 52 && title == 'pay') {
       index = 5;
       appTitle = "Pay";
@@ -106,6 +113,25 @@ class EappFlow {
       iconData = FeatherIcons.box;
       firstPage = EthosPodConfigurationPage(
           index: index, containingFlowTitle: appTitle);
+      if (collarNameCode == "DC499999999") {
+        if (pageNameCode == "EAIP1001") {
+          appTitle = "Deployments ${domainIdentifier.substring(0, 5)}";
+          appName = "Deployments ${domainIdentifier.substring(0, 5)}";
+          index = AppFlowManager.instance.reservePageIndex();
+          firstPage = DC499999999EAIP1001(
+            domainId: domainIdentifier,
+          );
+        } else if (pageNameCode == "EAIP1002") {
+          appTitle = "Deployment Pods ${domainIdentifier.substring(0, 5)}";
+          appName = "Deployments Pods ${domainIdentifier.substring(0, 5)}";
+          index = AppFlowManager.instance.reservePageIndex();
+          firstPage = DC499999999EAIP1002(
+            domainId: domainIdentifier,
+            pageIdentifiers: pageIdentifiers,
+          );
+        }
+      }
+
       // firstPage = EthosPodsLandingPage(index: index, containingFlowTitle: appTitle);
     } else if (communityCode == 55 && title == 'eutopia') {
       index = 55101;
@@ -181,7 +207,14 @@ class EappFlow {
     return AppFlow(
       index: index,
       title: appTitle == '' ? title : appTitle,
+      communityCode: communityCode,
+      orgName: orgName,
+      appName: appName,
       code: communityCode,
+      collarNameCode: collarNameCode,
+      pageNameCode: pageNameCode,
+      identifier: domainIdentifier,
+      pageIdentifiers: pageIdentifiers,
       iconData: iconData,
       mainColor: defaultMainColor,
       navigatorKey: GlobalKey<NavigatorState>(),
