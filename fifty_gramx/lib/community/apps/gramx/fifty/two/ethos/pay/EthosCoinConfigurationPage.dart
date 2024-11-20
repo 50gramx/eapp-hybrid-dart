@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
@@ -17,8 +15,7 @@ import 'package:fifty_gramx/community/onboardingWidgets/addEthosCoinWidget.dart'
 import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAssistantService.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class EthosCoinConfigurationPage extends StatefulWidget {
@@ -59,6 +56,22 @@ class _EthosCoinConfigurationPageState
     }
   }
 
+  String? selectedPaymentOption;
+
+  // Categorized payment options
+  final Map<String, List<Map<String, dynamic>>> paymentSections = {
+    "Bank Transfer": [
+      {
+        'title': "Partner Collect",
+        'avgTime': "Credits within 24h",
+        'fees': "0.7%",
+        'description':
+            "Bank Transfer with IMPS in real time and partner collects within two banking days for credits with multi-bank support for a seamless experience.",
+        'entities': [Icons.account_balance],
+      },
+    ],
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +79,7 @@ class _EthosCoinConfigurationPageState
       body: CustomScrollView(
         slivers: <Widget>[
           CustomSliverAppBar(
-            labelText: "Ethos Pay",
+            labelText: "Pulse",
             actionLabelText: "",
             isBackEnabled: false,
             isActionEnabled: false,
@@ -75,6 +88,228 @@ class _EthosCoinConfigurationPageState
           ),
           SliverList(
               delegate: SliverChildListDelegate([
+            // Dynamically generate sections
+            for (var section in paymentSections.keys)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: EdgeInsets.only(
+                          top: 32, bottom: 4, right: 16, left: 16),
+                      child: FormInfoText(
+                              "ADD CREDITS VIA ${section}".toUpperCase())
+                          .build(context)),
+                  SizedBox(height: 12),
+                  Container(
+                    margin:
+                        EdgeInsets.only(top: 4, bottom: 4, right: 16, left: 16),
+                    child: Wrap(
+                      spacing: 16,
+                      runSpacing: 16,
+                      children: paymentSections[section]!.map((option) {
+                        final isSelected =
+                            selectedPaymentOption == option['title'];
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedPaymentOption = option['title'];
+                            });
+                          },
+                          child: Neumorphic(
+                            style: NeumorphicStyle(
+                              lightSource: NeumorphicTheme.isUsingDark(context)
+                                  ? LightSource.bottomRight
+                                  : LightSource.topLeft,
+                              shadowLightColor:
+                                  NeumorphicTheme.isUsingDark(context)
+                                      ? AppColors.gray600
+                                      : AppColors.backgroundSecondary(context),
+                              shape: NeumorphicShape.flat,
+                              depth: 2,
+                              disableDepth: false,
+                              boxShape: NeumorphicBoxShape.roundRect(
+                                  BorderRadius.all(Radius.circular(24))),
+                              border: NeumorphicBorder(
+                                isEnabled: true,
+                                color: isSelected
+                                    ? AppColors.backgroundInversePrimary(
+                                        context)
+                                    : AppColors.backgroundSecondary(context),
+                                width: 2,
+                              ),
+                              color: AppColors.backgroundPrimary(context),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Top Row: Title and Fees
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    // Title
+
+                                    Row(
+                                      children: [
+                                        Text(
+                                          option['title'],
+                                          style: TextStyle(
+                                            fontSize: isSelected ? 16 : 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.bold,
+                                            color: isSelected
+                                                ? AppColors.contentPrimary(
+                                                    context)
+                                                : AppColors.contentSecondary(
+                                                    context),
+                                          ),
+                                        ),
+                                        SizedBox(width: 8),
+                                        Icon(
+                                          Icons.access_time,
+                                          size: 12,
+                                          color: AppColors.contentTertiary(
+                                              context),
+                                        ),
+                                        SizedBox(width: 4),
+                                        Text(
+                                          option['avgTime'],
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.w500,
+                                            color: AppColors.contentTertiary(
+                                                context),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // Fees
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? AppColors.backgroundTertiary(
+                                                context)
+                                            : AppColors
+                                                .backgroundInverseTertiary(
+                                                    context),
+                                        borderRadius: BorderRadius.circular(24),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            option['fees']
+                                                .toString()
+                                                .toUpperCase(),
+                                            style: TextStyle(
+                                              fontFamily: "Montserrat",
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color: isSelected
+                                                  ? AppColors.contentPrimary(
+                                                      context)
+                                                  : AppColors
+                                                      .contentInversePrimary(
+                                                          context),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 6),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.only(right: 6),
+                                        child: Text(
+                                          option['description'],
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.contentSecondary(
+                                                context),
+                                          ),
+                                          maxLines: 3,
+                                        ),
+                                      ),
+                                    ),
+                                    // Entity Icons/Logos
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: option['entities']
+                                          .map<Widget>((icon) => Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 2),
+                                                child: Icon(
+                                                  icon,
+                                                  size: 18,
+                                                  color: AppColors
+                                                      .contentSecondary(
+                                                          context),
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ],
+              ),
+            SizedBox(height: 24),
+            Visibility(
+              visible: selectedPaymentOption != null,
+              child: AddEthosCoinWidget(),
+            ),
+            // -----------------------------------------
+            // BALANCE
+            // -----------------------------------------
+            Container(
+                margin:
+                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+                child: FormInfoText("BALANCE").build(context)),
+            FutureBuilder<AccountEthosCoinBalanceResponse>(
+                future: PayInAccountService.accountEthosCoinBalance(),
+                builder: (context, snapshot) {
+                  var titleText = "Credits INR";
+                  var errorText = "Currently Unavailable";
+                  var authText = "Access Issue";
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return BasicConfigurationItem(
+                        titleText: titleText, subtitleText: "Loading");
+                  } else if (snapshot.hasError) {
+                    return BasicConfigurationItem(
+                        titleText: titleText, subtitleText: errorText);
+                  } else {
+                    if (snapshot.data!.responseMeta.metaDone == false) {
+                      return BasicConfigurationItem(
+                          titleText: titleText, subtitleText: authText);
+                    } else {
+                      return BasicConfigurationItem(
+                          titleText: titleText,
+                          subtitleText:
+                              "${(snapshot.data!.balance).toStringAsFixed(2)}");
+                    }
+                  }
+                }),
+
             // -----------------------------------------
             // ABOUT First Name Last Name
             // -----------------------------------------
@@ -302,98 +537,15 @@ class _EthosCoinConfigurationPageState
                 }
               },
             ),
-
-            // -----------------------------------------
-            // BALANCE
-            // -----------------------------------------
-            Container(
-                margin:
-                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("BALANCE").build(context)),
-            BasicConfigurationItem(titleText: "Wallet", subtitleText: "0.00"),
-            FutureBuilder<AccountEthosCoinBalanceResponse>(
-                future: PayInAccountService.accountEthosCoinBalance(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return BasicConfigurationItem(
-                        titleText: "Ethos Coin", subtitleText: "0.00");
-                  } else if (snapshot.hasError) {
-                    return BasicConfigurationItem(
-                        titleText: "Ethos Coin", subtitleText: "0.00");
-                  } else {
-                    if (snapshot.data!.responseMeta.metaDone == false) {
-                      return BasicConfigurationItem(
-                          titleText: "Ethos Coin", subtitleText: "0.00");
-                    } else {
-                      return BasicConfigurationItem(
-                          titleText: "Ethos Coin",
-                          subtitleText:
-                              "${(snapshot.data!.balance).toStringAsFixed(2)}");
-                    }
-                  }
-                }),
-
-            Container(
-                margin:
-                    EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-                child: FormInfoText("CREDIT HOURS").build(context)),
-            FutureBuilder<AccountEthosCoinBalanceResponse>(
-                future: PayInAccountService.accountEthosCoinBalance(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    // TODO: Change this service
-                    return BasicConfigurationItem(
-                        titleText: "X1 Containers", subtitleText: "NA");
-                  } else if (snapshot.hasError) {
-                    return BasicConfigurationItem(
-                        titleText: "X1 Containers", subtitleText: "NA");
-                  } else {
-                    if (snapshot.data!.responseMeta.metaDone == false) {
-                      return BasicConfigurationItem(
-                          titleText: "X1 Containers", subtitleText: "750");
-                    } else {
-                      return BasicConfigurationItem(
-                          titleText: "X1 Containers", subtitleText: "750");
-                    }
-                  }
-                }),
-            FutureBuilder<AccountEthosCoinBalanceResponse>(
-                future: PayInAccountService.accountEthosCoinBalance(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    // TODO: Change this service
-                    return BasicConfigurationItem(
-                        titleText: "K1 Containers", subtitleText: "NA");
-                  } else if (snapshot.hasError) {
-                    return BasicConfigurationItem(
-                        titleText: "K1 Containers", subtitleText: "NA");
-                  } else {
-                    if (snapshot.data!.responseMeta.metaDone == false) {
-                      return BasicConfigurationItem(
-                          titleText: "K1 Containers", subtitleText: "0");
-                    } else {
-                      return BasicConfigurationItem(
-                          titleText: "K1 Containers", subtitleText: "0");
-                    }
-                  }
-                }),
-
-            Visibility(
-                visible: kIsWeb || Platform.isAndroid || Platform.isIOS,
-                child: Container(
-                    margin: EdgeInsets.only(
-                        top: 32, bottom: 4, right: 16, left: 16),
-                    child: FormInfoText("ADD ETHOSCOIN").build(context))),
-            Visibility(
-                visible: kIsWeb || Platform.isAndroid || Platform.isIOS,
-                child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                    child: AddEthosCoinWidget(
-                        updateSelectedCoinBalance: (productDetails) {}))),
           ]))
         ],
       ),
     );
+  }
+
+  void _openAddEthosCoinWidget() {
+    // Trigger any additional logic if needed
+    print("Opening AddEthosCoinWidget for $selectedPaymentOption");
   }
 
   bool learnMoreOTGValue = false;
