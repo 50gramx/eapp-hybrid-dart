@@ -70,16 +70,12 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
   }
 
   loadMyConversations() async {
-    print("loadMyConversations");
-    print(
-        "loadMyConversations: total length: ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
     // Update list
     for (int index = 0;
         index <
             LocalConversationsService
                 .conversedEntityWithLastConversationMessages.length;
         index++) {
-      print("loadMyConversations: inserting at $index");
       _conversedEntityListKey.currentState!.insertItem(index);
     }
   }
@@ -140,7 +136,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                   1,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
-                print("position: $position");
                 if (position == 0) {
                   return Padding(
                     padding: EdgeInsets.only(
@@ -175,9 +170,7 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                         .conversedEntityWithLastConversationMessages.length) {
                   var newPosition = position - 1;
                   var heroTag;
-                  print("newPosition: $newPosition");
-                  print(
-                      "LocalConversationsService:length ${LocalConversationsService.conversedEntityWithLastConversationMessages.length}");
+
                   ConversedEntityWithLastConversationMessage
                       conversedEntityWithLastConversationMessage =
                       LocalConversationsService
@@ -389,7 +382,6 @@ class _ConversationsHomePageState extends State<ConversationsHomePage> {
                     ),
                   );
                 } else {
-                  print("Why extra index was passed?");
                   return SizedBox();
                 }
               },

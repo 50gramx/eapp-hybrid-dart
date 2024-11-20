@@ -27,7 +27,6 @@ import 'package:fifty_gramx/services/identity/accountAssistant/discoverAccountAs
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 
 class LocalConnectionsService {
-
   /// singleton definition
   static LocalConnectionsService? _instance;
 
@@ -55,6 +54,10 @@ class LocalConnectionsService {
   static Map<String, AccountAssistant> mappedAccountAssistant = {};
 
   void dispose() {}
+
+  int countAccounts() {
+    return onlyConnectedAccounts.length;
+  }
 
   Future<void> getMyConnections() async {
     var connectedAccountAssistants =

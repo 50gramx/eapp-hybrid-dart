@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/variable_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
 import 'package:yaml/yaml.dart';
 
@@ -27,7 +27,7 @@ class LocalCapabilityComposer {
       // check if contains return
       if (step.containsKey('return')) {
         String returnValueNameCode = step['return'];
-        returnValue = EthosAppFlowBob.getGramxAppsLocalVariableValue(
+        returnValue = VariableManager.instance.getGramxAppsLocalVariableValue(
             communityCode: communityCode,
             orgName: orgName,
             appName: appName,
