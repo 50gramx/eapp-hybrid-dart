@@ -21,16 +21,15 @@
 
 import 'dart:async';
 
+import 'package:eapp_dart_domain/ethos/elint/entities/space_service_domain.pb.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/CustomSliverAppBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/LocalSpacesService.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/DiscoverSpaceKnowledgeDomainFilesPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/pushHorizontalPage.dart';
+import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// Page that displays its index, flow's title and color.
@@ -43,11 +42,13 @@ class SpacesHomePage extends StatefulWidget {
   const SpacesHomePage({
     required this.index,
     required this.containingFlowTitle,
+    required this.focusPaneShift,
     Key? key,
   }) : super(key: key);
 
   final int index;
   final String containingFlowTitle;
+  final Function(String) focusPaneShift;
 
   @override
   State<SpacesHomePage> createState() {
@@ -78,6 +79,11 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
         index++) {
       _spacesEntityListKey.currentState!.insertItem(index);
     }
+    for (int index = 0;
+        index < LocalSpacesService.mySpaceServiceDomains.length;
+        index++) {
+      _spacesServiceListKey.currentState?.insertItem(index);
+    }
   }
 
   listenForLocalNotifications() {
@@ -86,6 +92,9 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
         if (notification.data["subType"] == "AddedSpaceKnowledgeDomain") {
           _spacesEntityListKey.currentState!
               .insertItem(notification.data["at"]);
+        } else if (notification.data["subType"] == "AddedSpaceServiceDomain") {
+          _spacesServiceListKey.currentState!
+              .insertItem(notification.data["at"]);
         }
       }
     });
@@ -93,64 +102,56 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
 
   final GlobalKey<SliverAnimatedListState> _spacesEntityListKey =
       GlobalKey<SliverAnimatedListState>();
+  final GlobalKey<SliverAnimatedListState> _spacesServiceListKey =
+      GlobalKey<SliverAnimatedListState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backgroundPrimary(context),
         body: CustomScrollView(slivers: <Widget>[
-          CustomSliverAppBar(
-            labelText: "Ethos Spaces",
-            actionLabelText: "EthosPod",
-            isBackEnabled: false,
-            trailingButtonCallback: () {},
-            isActionEnabled: false,
-            onStretchTriggerCallback: () {},
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: NeumorphicText(
+                    "MY SPACE DOMAINS",
+                    style: NeumorphicStyle(
+                      color: AppColors.contentTertiary(context),
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      border: NeumorphicBorder(
+                          color: AppColors.backgroundPrimary(context),
+                          width: 0.25),
+                    ),
+                    textAlign: TextAlign.start,
+                    textStyle: NeumorphicTextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        height: 1.25),
+                  ),
+                ),
+              ),
+            ),
           ),
           SliverAnimatedList(
               key: _spacesEntityListKey,
               initialItemCount:
-                  LocalSpacesService.mySpaceKnowledgeDomains.length + 1,
+                  LocalSpacesService.mySpaceKnowledgeDomains.length,
               itemBuilder: (BuildContext context, int position,
                   Animation<double> animation) {
-                print("position: $position");
-                if (position == 0) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: NeumorphicText(
-                          "MY SPACE DOMAINS",
-                          style: NeumorphicStyle(
-                            color: AppColors.contentTertiary(context),
-                            lightSource: NeumorphicTheme.isUsingDark(context)
-                                ? LightSource.bottomRight
-                                : LightSource.topLeft,
-                            shadowLightColor:
-                                NeumorphicTheme.isUsingDark(context)
-                                    ? AppColors.gray600
-                                    : AppColors.backgroundSecondary(context),
-                            border: NeumorphicBorder(
-                                color: AppColors.backgroundPrimary(context),
-                                width: 0.25),
-                          ),
-                          textAlign: TextAlign.start,
-                          textStyle: NeumorphicTextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              height: 1.25),
-                        ),
-                      ),
-                    ),
-                  );
-                } else {
-                  var newPosition = position - 1;
+                if (position <
+                    LocalSpacesService.mySpaceKnowledgeDomains.length) {
                   var spaceKnowledgeDomain =
-                      LocalSpacesService.mySpaceKnowledgeDomains[newPosition];
+                      LocalSpacesService.mySpaceKnowledgeDomains[position];
                   return SelectorConfigurationItem(
                     titleText: spaceKnowledgeDomain.spaceKnowledgeDomainName,
                     subtitleText:
@@ -163,8 +164,61 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                           ));
                     },
                   );
+                } else {
+                  return SizedBox.shrink();
+                }
+              }),
+          SliverAnimatedList(
+              key: _spacesServiceListKey,
+              initialItemCount: LocalSpacesService.mySpaceServiceDomains.length,
+              itemBuilder: (BuildContext context, int position,
+                  Animation<double> animation) {
+                if (position <
+                    LocalSpacesService.mySpaceServiceDomains.length) {
+                  SpaceServiceDomain spaceServiceDomain =
+                      LocalSpacesService.mySpaceServiceDomains[position];
+                  String collarCode = resolveSvcCC(spaceServiceDomain);
+
+                  // DC499999999EAIP1001
+
+                  //  pageNameCode for ex,
+                  //    home page, manage deployment page,
+                  //    use jupyter notebook page, ubuntu cli page
+                  //    of deployments collar
+
+                  //  collarNameCode for ex,
+                  //    collar code of deployments collar
+
+                  //  identifier for ex,
+                  //    domain id of deployments collar
+
+                  return SelectorConfigurationItem(
+                    titleText: "Personal Deployments",
+                    subtitleText:
+                        "${DateTimeService().getFormattedTimeOrDate(spaceServiceDomain.createdAt)}",
+                    selectorCallback: () {
+                      AppFlowManager.instance.loadAppOnTheGo(
+                          appName: "pods",
+                          orgName: "ethos",
+                          communityCode: 70,
+                          appIndex: 0,
+                          collarNameCode: "DC499999999",
+                          pageNameCode: "EAIP1001",
+                          domainIdentifier: spaceServiceDomain.id);
+                      widget.focusPaneShift("Open Pages");
+                    },
+                  );
+                } else {
+                  return SizedBox.shrink();
                 }
               }),
         ]));
+  }
+
+  String resolveSvcCC(SpaceServiceDomain svcd) {
+    if (svcd.hasDc500000000()) return "DC500000000";
+    if (svcd.hasDc499999999()) return "DC499999999";
+    if (svcd.hasDc499999998()) return "DC499999998";
+    return "";
   }
 }

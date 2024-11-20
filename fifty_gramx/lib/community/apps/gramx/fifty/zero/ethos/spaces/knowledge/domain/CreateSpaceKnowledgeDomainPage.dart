@@ -29,7 +29,6 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/p
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/SelectSpaceKnowledgeDomainCollarPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
@@ -43,9 +42,11 @@ class CreateSpaceKnowledgeDomainPage extends StatefulWidget {
   const CreateSpaceKnowledgeDomainPage({
     Key? key,
     this.createIsolatedDomain = true,
+    this.spaceKind = SpaceKind.KNOWLEDGE,
   }) : super(key: key);
 
   final bool createIsolatedDomain;
+  final SpaceKind spaceKind;
 
   @override
   State<CreateSpaceKnowledgeDomainPage> createState() =>
@@ -70,13 +71,7 @@ class _CreateSpaceKnowledgeDomainPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundSecondary(context),
-      appBar: CustomAppBar(
-          labelText: "Launch domain",
-          actionLabelText: "",
-          isBackEnabled: false,
-          trailingButtonCallback: () {},
-          isActionEnabled: false),
+      backgroundColor: AppColors.backgroundPrimary(context),
       body: SingleChildScrollView(
         child: Column(
           children: [

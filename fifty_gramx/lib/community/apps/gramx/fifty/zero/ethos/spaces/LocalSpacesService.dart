@@ -20,13 +20,16 @@
  */
 
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_service_domain.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
+import 'package:fifty_gramx/services/product/service/space/discoverSpaceServiceService.dart';
 
 class LocalSpacesService {
   LocalSpacesService._();
 
   static List<SpaceKnowledgeDomain> mySpaceKnowledgeDomains = [];
+  static List<SpaceServiceDomain> mySpaceServiceDomains = [];
 
   void dispose() {}
 
@@ -40,9 +43,24 @@ class LocalSpacesService {
     }
   }
 
+  static getMySpaceServiceDomains() async {
+    var getSpaceServiceDomainsResponse =
+        await DiscoverSpaceServiceService.getSpaceServiceDomains();
+    mySpaceServiceDomains = getSpaceServiceDomainsResponse.spaceServiceDomains;
+    for (int index = 0; index < mySpaceServiceDomains.length; index++) {
+      notifyAddedSpaceServiceDomain(index);
+    }
+  }
+
   static notifyAddedSpaceKnowledgeDomain(int index) {
     NotificationsBloc.instance.newNotification(LocalNotification(
         "LocalSpacesService",
         {"subType": "AddedSpaceKnowledgeDomain", "at": index}));
+  }
+
+  static notifyAddedSpaceServiceDomain(int index) {
+    NotificationsBloc.instance.newNotification(LocalNotification(
+        "LocalSpacesService",
+        {"subType": "AddedSpaceServiceDomain", "at": index}));
   }
 }
