@@ -54,7 +54,7 @@ class _StartScreenState extends State<StartScreen> {
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override

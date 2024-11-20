@@ -53,7 +53,7 @@ class _GalaxyLicensesPageState extends State<GalaxyLicensesPage> {
   bool signedIn = false;
 
   checkIfUserSigned() async {
-    signedIn = await AccountData().accountAvailable();
+    signedIn = await AccountData().isValid();
   }
 
   @override

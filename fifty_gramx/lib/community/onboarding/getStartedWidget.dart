@@ -1,7 +1,6 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/listItem/progress/progressHeadingListTile.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/adaptiveLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/custom/homeScreen.dart';
 import 'package:fifty_gramx/community/onboarding/gettingStartedUniverseColumnWidget.dart';
 import 'package:fifty_gramx/constants.dart';
@@ -39,7 +38,6 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   final selectingUniverseHeadingKey = new GlobalKey();
 
   completedSelectingUniverseCallback() async {
-    print("completedSelectingUniverseCallback");
     if (Constants().eAppEnv == "com.50gramx") {
       if (widget.completedSuccessfulSignIn != null) {
         widget.completedSuccessfulSignIn!();
@@ -52,15 +50,16 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
         isSelectingGalaxy = true;
       });
       // pushToHomeScreenWidget();
-      EthosAppFlowBob().unloadAppOnTheGo(communityCode: 50, appIndex: 5002);
-      EthosAppFlowBob().loadAppOnTheGo(
+      AppFlowManager.instance
+          .unloadAppOnTheGo(communityCode: 50, appIndex: 5002);
+      AppFlowManager.instance.loadAppOnTheGo(
           appName: "identity",
           orgName: "ethos",
           communityCode: 50,
           appIndex: 1);
-      EthosAppFlowBob().loadAppOnTheGo(
+      AppFlowManager.instance.loadAppOnTheGo(
           appName: "pay", orgName: "ethos", communityCode: 52, appIndex: 5);
-      EthosAppFlowBob().loadAppOnTheGo(
+      AppFlowManager.instance.loadAppOnTheGo(
           appName: "pods-gpu-template",
           orgName: "ethos",
           communityCode: 70,
@@ -76,14 +75,13 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
 
   // Helper functions
   pushToHomeScreenWidget() async {
-    print("pushToHomeScreenWidget");
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => HomeScreen()));
     // await LocalServices().loadLocalServices();
   }
 
   checkLogin() async {
-    bool isAccountLoggedIn = await AccountData().accountPresent();
+    bool isAccountLoggedIn = await AccountData().isValid();
     if (isAccountLoggedIn) {
       completedSelectingUniverseCallback();
     }
@@ -92,11 +90,8 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
   _handleListeningMessages(LocalNotification message) async {
-    print(
-        "EutopiaLeftNavigationScaffoldState: Received notification: $message");
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "AccountSign") {
-        print("AccountSign");
         if (message.data['status'] == true) {
           completedSelectingUniverseCallback();
         }
