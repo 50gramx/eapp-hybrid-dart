@@ -1,5 +1,5 @@
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold_backup.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/domains/ethos_domain_widget.dart';
 import 'package:flutter/material.dart';
 
