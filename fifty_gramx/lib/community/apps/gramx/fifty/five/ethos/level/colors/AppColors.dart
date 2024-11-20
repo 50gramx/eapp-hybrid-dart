@@ -118,9 +118,9 @@ class AppColors {
 
   static Color platinum2(BuildContext context) {
     if (NeumorphicTheme.isUsingDark(context)) {
-      return AppColors.darkPlatinum2;
-    } else {
       return AppColors.lightPlatinum2;
+    } else {
+      return AppColors.lightPlatinum;
     }
   }
 
@@ -353,6 +353,14 @@ class AppColors {
     }
   }
 
+  static Color contentInversePositive(BuildContext context) {
+    if (NeumorphicTheme.isUsingDark(context)) {
+      return AppColors.green400;
+    } else {
+      return AppColors.green300;
+    }
+  }
+
   // TODO: Add Content Extensions
 
   static Color themeNeuContentStateDisabledColor(BuildContext context) {
@@ -394,4 +402,7 @@ class AppColors {
       return AppColors.primaryColor;
     }
   }
+
+  static Color gradientStart = Colors.blue; // Start color of the gradient
+  static Color gradientEnd = Colors.purple; // End color of the gradient
 }
