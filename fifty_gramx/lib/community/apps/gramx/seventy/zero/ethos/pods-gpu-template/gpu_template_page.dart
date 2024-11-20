@@ -1,8 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/material.dart';
+import 'package:eapp_dart_domain/ethos/elint/collars/DC499999999.pb.dart'
+    as DC499999999_pb;
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/deployment_configuration_widget.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/deployment_summary_widget.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/instance_selection_widget.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/instance_type_widget.dart';
+import 'package:fifty_gramx/services/product/service/domain/createSpaceServiceDomainService.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:http/http.dart' as http;
 
 class PodCreationPage extends StatefulWidget {
@@ -20,11 +27,22 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
   String? selectedImage;
   bool isLoading = false;
   String searchQuery = '';
+  InstanceOption selectedInstance = InstanceOption(
+      price: "0",
+      ram: "0",
+      vcpus: "0",
+      storage: "0",
+      resourceLimits: DC499999999_pb.ResourceLimits(
+          cpu: "", memory: "")); // New variable to track instance selection
 
   List<Map<String, dynamic>> containerPorts = [
     {'name': 'user-defined', 'port': 80}
   ];
   List<Map<String, dynamic>> envVariables = [];
+
+  DC499999999_pb.Deployment selectedDeployment = DC499999999_pb.Deployment();
+
+  String enteredPublisherName = '';
 
   String generateRandomPodName() {
     final random = Random();
@@ -47,12 +65,13 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
         'Official',
         'NVIDIA',
         'OpenAI',
-        'linuxserver'
+        'linuxserver',
       ]; // Sample publishers
     });
   }
 
   Future<void> fetchAvailableImages(String publisher) async {
+    print("fetchAvailableImages called");
     setState(() {
       isLoading = true;
     });
@@ -87,6 +106,42 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
           isLoading = false;
         });
       }
+    } else if (publisher == 'Others') {
+      print("publisher is Other");
+      List<String> allImages = [];
+      String? nextUrl =
+          'https://hub.docker.com/v2/repositories/$enteredPublisherName/';
+      // Fetch images from the custom publisher
+
+      try {
+        print("will try fetch");
+        while (nextUrl != null) {
+          final response = await http.get(Uri.parse(nextUrl));
+
+          if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            allImages.addAll((data['results'] as List)
+                .map<String>((image) => image['name'] as String));
+            nextUrl = data['next'];
+          } else {
+            break;
+          }
+        }
+        if (allImages.isEmpty) {
+          _showSnackBar('No images found for $enteredPublisherName.');
+        } else {
+          setState(() {
+            availableImages = allImages;
+            filteredImages = allImages;
+          });
+        }
+      } catch (e) {
+        _showSnackBar('Error: Could not connect to the server.');
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
     } else {
       setState(() {
         if (publisher == 'NVIDIA') {
@@ -102,15 +157,40 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
     }
   }
 
+  startDeployment() async {
+    setState(() {
+      selectedDeployment
+        ..podTemplate.containers.first.resourceLimits =
+            selectedInstance.resourceLimits;
+      selectedDeployment..metadata.name = podName;
+    });
+    print("startDeployment: ${selectedDeployment}");
+    var response = await CreateSpaceServiceDomainService
+        .createDC499999999SpaceServiceDomain(
+            "name", "description", false, selectedDeployment);
+    print("callCreateService: $response");
+  }
+
   Future<void> deployPod() async {
     final apiUrl = 'https://causal-regular-ladybug.ngrok-free.app/create_pod';
 
+// Use the publisher only if it's provided; otherwise, use the image name directly
+    String image = '';
+
+    if (selectedPublisher != null && enteredPublisherName != '') {
+      image = "${enteredPublisherName}/${selectedImage}";
+    } else {
+      image = selectedImage ?? "alpine:latest";
+    }
+
     final Map<String, dynamic> podData = {
       'name': podName,
-      'image': selectedImage ?? 'alpine:latest',
+      'image': image,
       'container_ports': containerPorts.map((port) => port['port']).toList(),
       'env': envVariables
     };
+
+    print("podData: $podData");
 
     try {
       print("requestBody: ${json.encode(podData)}");
@@ -163,190 +243,92 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
     });
   }
 
+  // Function to handle instance selection callback
+  void onInstanceSelected(InstanceOption selected) {
+    setState(() {
+      selectedInstance = selected;
+    });
+  }
+
+  changeTemplate(DC499999999_pb.Deployment deployment) {
+    print("changeTemplate: ${deployment}");
+    setState(() {
+      selectedDeployment = deployment;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Launch Pod'),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Pod Name:'),
-              TextFormField(
-                initialValue: podName,
-                onChanged: (value) {
-                  podName = value;
-                },
-              ),
               SizedBox(height: 16),
-              Text('Image Template:'),
-              DropdownButtonFormField<String>(
-                value: selectedImageTemplate,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedImageTemplate = newValue!;
-                    selectedPublisher = null;
-                    selectedImage = null;
-                    availableImages.clear();
-                    filteredImages.clear();
-                  });
-                  fetchAvailableImages(selectedImageTemplate);
-                },
-                items: <String>['Docker Hub', 'Other']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+              InstanceSelectionWidget(
+                onInstanceSelected: onInstanceSelected,
               ),
-              if (selectedImageTemplate == 'Docker Hub') ...[
-                DropdownButtonFormField<String>(
-                  hint: Text('Select Publisher'),
-                  value: selectedPublisher,
-                  onChanged: (newValue) {
-                    setState(() {
-                      selectedPublisher = newValue;
-                      fetchAvailableImages(newValue!);
-                      selectedImage = null; // Reset image selection
-                    });
-                  },
-                  items: imagePublishers
-                      .map<DropdownMenuItem<String>>((String publisher) {
-                    return DropdownMenuItem<String>(
-                      value: publisher,
-                      child: Text(publisher),
-                    );
-                  }).toList(),
+              SizedBox(height: 32),
+              if (selectedInstance.price !=
+                  "0") // Show only if instance is selected
+                DeploymentConfigurationWidget(
+                  podName: podName,
+                  changeTemplate: changeTemplate,
                 ),
-                if (isLoading)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                else ...[
-                  DropdownSearch<String>(
-                    items: (f, s) async {
-                      // Fetch images asynchronously
-                      // Replace this with your API call
-                      return filteredImages;
-                    },
-                    onChanged: (value) {
-                      setState(() {
-                        selectedImage = value;
-                      });
-                    },
-                    popupProps: PopupProps.menu(
-                      showSearchBox: true,
-                      itemBuilder: (context, item, isDisabled, isSelected) {
-                        return ListTile(title: Text(item));
-                      },
+              SizedBox(height: 32),
+              if (selectedInstance.price != "0")
+                DeploymentSummaryRow(
+                  pricingCpuCost: selectedInstance.price,
+                  pricingDiskCost:
+                      "₹${((int.parse(selectedInstance.storage) * 10) / 720).toStringAsFixed(2)}",
+                  podName: podName,
+                  podRamCpu:
+                      "${selectedInstance.ram} GB RAM • ${selectedInstance.vcpus} vCPU",
+                  podDisk: "${selectedInstance.storage} GB",
+                ),
+              SizedBox(height: 32),
+              if (selectedInstance.price != "0")
+                Center(
+                  child: NeumorphicButton(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      depth: 2,
+                      disableDepth: false,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.all(Radius.circular(24))),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundPrimary(context),
+                        width: 2,
+                      ),
+                      color: AppColors.backgroundInversePrimary(context),
                     ),
-                    selectedItem: selectedImage,
-                    dropdownBuilder: (context, selectedItem) {
-                      return ListTile(
-                        title: Text(selectedItem ?? 'Select an image'),
-                      );
-                    },
+                    onPressed: startDeployment,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Text(
+                          "Launch Pod",
+                          style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.contentInversePrimary(context),
+                              fontSize: 16),
+                        ),
+                      ),
+                    ),
                   ),
-                ],
-              ],
+                ),
               SizedBox(height: 32),
-              Text('Container Ports:'),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: containerPorts.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Port Name'),
-                          initialValue: containerPorts[index]['name'],
-                          onChanged: (value) {
-                            containerPorts[index]['name'] = value;
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Port Number'),
-                          initialValue:
-                              containerPorts[index]['port'].toString(),
-                          onChanged: (value) {
-                            containerPorts[index]['port'] =
-                                int.tryParse(value) ?? 0;
-                          },
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.remove_circle),
-                        onPressed: () => removeContainerPort(index),
-                      ),
-                    ],
-                  );
-                },
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: addContainerPort,
-                child: Text('Add Port'),
-              ),
-              SizedBox(height: 32),
-              Text('Environment Variables:'),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: envVariables.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Name'),
-                          initialValue: envVariables[index]['name'],
-                          onChanged: (value) {
-                            envVariables[index]['name'] = value;
-                          },
-                        ),
-                      ),
-                      SizedBox(width: 16),
-                      Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(labelText: 'Value'),
-                          initialValue: envVariables[index]['value'],
-                          onChanged: (value) {
-                            envVariables[index]['value'] = value;
-                          },
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.remove_circle),
-                        onPressed: () => removeEnvVariable(index),
-                      ),
-                    ],
-                  );
-                },
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  print("envVariables: $envVariables");
-                  addEnvVariable();
-                },
-                child: Text('Add Environment Variable'),
-              ),
-              SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: deployPod,
-                child: Text('Deploy Pod'),
-              ),
             ],
           ),
         ),
