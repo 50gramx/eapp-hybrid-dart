@@ -49,6 +49,7 @@ class SimpleCommandExecuter {
       final result = await _shell.run(command);
       return result;
     } catch (e, st) {
+      print("error: $e, $st");
       crashlyticsRecordError(e, st);
       return [];
     }

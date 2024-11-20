@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter/material.dart';
@@ -165,7 +165,7 @@ class _PodListPageState extends State<PodListPage> {
                               TextButton(
                                 onPressed: () {
                                   // Add your deployment logic here
-                                  EthosAppFlowBob().loadAppOnTheGo(
+                                  AppFlowManager.instance.loadAppOnTheGo(
                                       appName: "pods-gpu-cli",
                                       orgName: "ethos",
                                       communityCode: 70,

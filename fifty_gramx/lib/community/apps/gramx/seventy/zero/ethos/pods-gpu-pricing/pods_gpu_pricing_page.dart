@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/data/accountData.dart';
@@ -25,7 +25,7 @@ class _GPUDetailsColumnState extends State<GPUDetailsColumn> {
   }
 
   Future<void> _checkSignInStatus() async {
-    bool status = await AccountData().accountAvailable();
+    bool status = await AccountData().isValid();
     // if (status) {
     //   NotificationsBloc.instance.newNotification(LocalNotification(
     //       "EthosAppFlowBob", {"subType": "AccountSign", "status": true}));
@@ -92,7 +92,6 @@ class NodeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("NodeCard: building for node ${nodeData['name']}");
     if (!nodeData['name'].toString().contains("enode")) {
       return SizedBox();
     }
@@ -334,7 +333,7 @@ class NodeCard extends StatelessWidget {
       width: double.infinity,
       child: ActionNeuButton(
         buttonActionOnPressed: () {
-          EthosAppFlowBob().loadAppOnTheGo(
+          AppFlowManager.instance.loadAppOnTheGo(
               appName: "get_started",
               orgName: "ethos",
               communityCode: 50,

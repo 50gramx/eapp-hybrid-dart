@@ -47,7 +47,10 @@ class Microk8sStatusCommands {
               "--format=short";
           print("microk8s RUNNING, will check status now");
           // run the command
-          String output = (await SimpleCommandExecuter.run(command)).outText;
+          var commandOutput = await SimpleCommandExecuter.run(command);
+          print("commandOutput: $commandOutput");
+          String output = (commandOutput).outText;
+          print("output: $output");
           // parse the first line
           var status = LineSplitter.split(output).first;
           print("microk8s status: $status");

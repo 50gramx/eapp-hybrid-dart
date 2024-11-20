@@ -158,7 +158,8 @@ Widget buildLandingPageFirstSection() {
             // Add your onPressed code here
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple, // Background color of the button
+            backgroundColor:
+                Colors.deepPurple, // Background color of the button
             foregroundColor: Colors.white, // Text color of the button
           ),
           child: Padding(
@@ -607,7 +608,6 @@ Widget landingPage(BuildContext context) {
           buildLandingSubPage(),
           buildCallToInvestSubPage(context),
           // Footer Section
-          
         ],
       ));
 }
@@ -732,16 +732,15 @@ Widget buildConsolePage(BuildContext context, String containingFlowTitle) {
           // ------------------------------------------------
           Container(
               margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-              child: FormInfoText("MY SPACE CONTAINERS").build(context)),
+              child: FormInfoText("MY SPACE PODS").build(context)),
           BasicConfigurationItem(titleText: "Identity", subtitleText: "X1"),
           BasicConfigurationItem(
               titleText: "Conversations", subtitleText: "X1"),
           Container(
               margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
-              child:
-                  FormInfoText("MY SPACE KNOWLEDGE CONTAINERS").build(context)),
+              child: FormInfoText("MY SPACE KNOWLEDGE PODS").build(context)),
           SelectorConfigurationItem(
-            titleText: "Launch Domain",
+            titleText: "Launch Knowledge Domain",
             subtitleText: "Isolated",
             selectorCallback: () {
               AppPushPage().pushHorizontalPage(
@@ -749,7 +748,7 @@ Widget buildConsolePage(BuildContext context, String containingFlowTitle) {
             },
           ),
           SelectorConfigurationItem(
-            titleText: "Launch Domain",
+            titleText: "Launch Knowledge Domain",
             subtitleText: "Shared",
             selectorCallback: () {
               AppPushPage().pushHorizontalPage(
@@ -799,6 +798,32 @@ Widget buildConsolePage(BuildContext context, String containingFlowTitle) {
                     }
                   }
                 }),
+          ),
+          Container(
+              margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+              child: FormInfoText("MY SPACE SERVICE PODS").build(context)),
+          SelectorConfigurationItem(
+            titleText: "Launch Service Domain",
+            subtitleText: "Isolated",
+            selectorCallback: () {
+              AppPushPage().pushHorizontalPage(
+                  context,
+                  CreateSpaceKnowledgeDomainPage(
+                    spaceKind: SpaceKind.SERVICE,
+                  ));
+            },
+          ),
+          SelectorConfigurationItem(
+            titleText: "Launch Service Domain",
+            subtitleText: "Shared",
+            selectorCallback: () {
+              AppPushPage().pushHorizontalPage(
+                  context,
+                  CreateSpaceKnowledgeDomainPage(
+                    createIsolatedDomain: false,
+                    spaceKind: SpaceKind.SERVICE,
+                  ));
+            },
           ),
           Container(
               margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
@@ -991,7 +1016,7 @@ class _EthosPodConfigurationPageState extends State<EthosPodConfigurationPage> {
       ),
     );
     return FutureBuilder<bool>(
-        future: AccountData().accountPresent(),
+        future: AccountData().isValid(),
         builder: (context, snap) {
           if (snap.connectionState == ConnectionState.done) {
             if (snap.data == true) {
