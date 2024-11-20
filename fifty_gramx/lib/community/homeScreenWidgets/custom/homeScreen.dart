@@ -1,5 +1,3 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/LeftNavigationBarSectionalItem.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/adaptiveLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/localServices.dart';
@@ -36,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
   handleListeningMessages(LocalNotification message) async {
     if (message.type == "EthosAppFlowBob") {
       if (message.data["subType"] == "Loaded eApp") {
-        print("loaded new app: ${navigationBarItems.length}");
         handleLoadedEApp();
       }
     }
@@ -45,31 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
   List<LeftNavigationTab> navigationBarItems = [];
 
   handleLoadedEApp() {
-    print("homeScreen: handleLoadedEApp");
-    navigationBarItems = [];
-    EthosAppFlowBob.communityAppFlow.keys.forEach((appFlow) {
-      EthosAppFlowBob.communityAppFlow[appFlow]?.forEach((flow) {
-        navigationBarItems.add(LeftNavigationTab(
-          leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
-            label: flow.title,
-            code: flow.code,
-            icon: flow.iconData,
-          ),
-          navigatorKey: flow.navigatorKey,
-          initialPageBuilder: (context) {
-            return flow.firstPage;
-          },
-        ));
-      });
-    });
-    print("will set state: ${navigationBarItems.length}");
+    // navigationBarItems = [];
+    // AppFlowManager.communityAppFlow.keys.forEach((communityAppFlow) {
+    //   AppFlowManager.communityAppFlow[communityAppFlow]?.forEach((appFlow) {
+    //     navigationBarItems.add(LeftNavigationTab(
+    //       leftNavigationBarSectionalItem: LeftNavigationBarSectionalItem(
+    //         label: appFlow.title,
+    //         code: appFlow.code,
+    //         icon: appFlow.iconData,
+    //       ),
+    //       navigatorKey: appFlow.navigatorKey,
+    //       initialPageBuilder: (context) {
+    //         return appFlow.firstPage;
+    //       },
+    //     ));
+    //   });
+    // });
     setState(() {});
-    print("set state done: ${navigationBarItems.length}");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("HomeScree:build: ${navigationBarItems.length}");
     return AdaptiveLeftNavigationScaffold();
   }
 }

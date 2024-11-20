@@ -26,6 +26,13 @@ class AppFlow {
   const AppFlow({
     required this.index,
     required this.title,
+    required this.communityCode,
+    required this.orgName,
+    required this.appName,
+    required this.collarNameCode,
+    required this.pageNameCode,
+    required this.identifier,
+    required this.pageIdentifiers,
     required this.code,
     required this.mainColor,
     required this.iconData,
@@ -35,6 +42,13 @@ class AppFlow {
 
   final int index;
   final String title;
+  final int communityCode;
+  final String orgName;
+  final String appName;
+  final String collarNameCode;
+  final String pageNameCode;
+  final String? identifier;
+  final Map<String, String> pageIdentifiers;
   final int code;
   final Color mainColor;
   final IconData iconData;
