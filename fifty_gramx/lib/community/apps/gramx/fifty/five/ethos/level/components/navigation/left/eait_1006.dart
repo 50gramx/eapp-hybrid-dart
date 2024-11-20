@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_button.dart';
@@ -22,7 +22,7 @@ class EAIT1006 extends StatelessWidget {
   Widget build(BuildContext context) {
     print("building EAIT1006");
     print(
-        "length: ${EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length}");
+        "length: ${AppFlowManager.instance.getEutopiaNavigationBarSectionalItems()!.length}");
 
     // Calculate the width of the screen
     double screenWidth = MediaQuery.of(context).size.width;
@@ -34,7 +34,8 @@ class EAIT1006 extends StatelessWidget {
     int maxVisibleItems = (screenWidth / itemWidth).floor();
 
     // Ensure we don't exceed the total number of items available
-    int itemCount = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length;
+    int itemCount =
+        AppFlowManager.instance.getEutopiaNavigationBarSectionalItems()!.length;
     int visibleItemCount =
         itemCount < maxVisibleItems ? itemCount : maxVisibleItems;
 
@@ -107,7 +108,10 @@ class EAIT1006 extends StatelessWidget {
     // If usageCount is empty, initialize it with zero values for all items
     if (usageCount.isEmpty) {
       for (int i = 0;
-          i < EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length;
+          i <
+              AppFlowManager.instance
+                  .getEutopiaNavigationBarSectionalItems()!
+                  .length;
           i++) {
         usageCount[i] = 0;
       }

@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_page_button.dart';
@@ -34,6 +34,21 @@ class _PageTabPaneState extends State<PageTabPane> {
     super.dispose();
   }
 
+  List<int> getParentAppIndexes() {
+    List<int> parentAppIndexes = [];
+    AppFlowManager.instance
+        .getEutopiaNavigationBarSectionalItems()!
+        .forEach((barItem) {
+      if (widget.parentWidget.parentStackAppNames
+          .contains(barItem.leftNavigationBarSectionalItem.appName)) {
+        parentAppIndexes.add(AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .indexOf(barItem));
+      }
+    });
+    return parentAppIndexes;
+  }
+
   void _updateButtonVisibility() {
     setState(() {
       _showLeftButton = _scrollController.position.pixels > 0;
@@ -65,11 +80,12 @@ class _PageTabPaneState extends State<PageTabPane> {
 
   @override
   Widget build(BuildContext context) {
+    List<int> parentAppIndexes = getParentAppIndexes();
     return Row(
       children: [
         if (_showLeftButton)
           Container(
-            margin: EdgeInsets.only(bottom: 8, right: 0, left: 8, top: 16),
+            margin: EdgeInsets.only(bottom: 8, right: 0, left: 8, top: 0),
             child: NeumorphicButton(
                 provideHapticFeedback: true,
                 onPressed: _scrollLeft,
@@ -121,10 +137,12 @@ class _PageTabPaneState extends State<PageTabPane> {
               shape: NeumorphicShape.flat,
               boxShape: NeumorphicBoxShape.roundRect(
                   BorderRadius.all(Radius.circular(24))),
-              color: AppColors.backgroundInverseSecondary(context),
+              color: AppColors.backgroundPrimary(context),
+              depth: -2,
+              disableDepth: true,
               border: NeumorphicBorder(
                 isEnabled: true,
-                color: AppColors.backgroundInverseTertiary(context),
+                color: AppColors.backgroundPrimary(context),
                 width: 2,
               ),
             ),
@@ -138,13 +156,21 @@ class _PageTabPaneState extends State<PageTabPane> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: List.generate(
-                  EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length,
-                  (subIndex) => buildAppPageButton(
-                    context,
-                    subIndex,
-                    widget.selectPressedSectionItem,
-                    widget.parentWidget,
-                  ),
+                  AppFlowManager.instance
+                      .getEutopiaNavigationBarSectionalItems()!
+                      .length,
+                  (subIndex) {
+                    if (!parentAppIndexes.contains(subIndex)) {
+                      return buildAppPageButton(
+                        context,
+                        subIndex,
+                        widget.selectPressedSectionItem,
+                        widget.parentWidget,
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
+                  },
                 ),
               ),
             ),
@@ -152,7 +178,7 @@ class _PageTabPaneState extends State<PageTabPane> {
         ),
         if (_showRightButton)
           Container(
-            margin: EdgeInsets.only(bottom: 8, right: 16, left: 0, top: 16),
+            margin: EdgeInsets.only(bottom: 0, right: 16, left: 0, top: 0),
             child: NeumorphicButton(
                 provideHapticFeedback: true,
                 onPressed: _scrollRight,

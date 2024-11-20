@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1006.dart';
 import 'package:flutter/widgets.dart';
@@ -19,9 +19,10 @@ class EAIT1008 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("building EAIT1008");
-    bool isOneEappLoaded =
-        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
+    bool isOneEappLoaded = AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .length ==
+        1;
     return Visibility(
       visible: isNavigatingLeft ? false : (isOneEappLoaded ? false : true),
       child: Row(

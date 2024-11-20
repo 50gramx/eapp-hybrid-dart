@@ -36,8 +36,6 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
 
   @override
   Widget build(BuildContext context) {
-    print("building AdaptiveNeuButton");
-
     Widget neuIcon = NeumorphicIcon(
       widget.icon,
       size: 24,
@@ -129,8 +127,6 @@ class _AdaptiveNeuButtonState extends State<AdaptiveNeuButton> {
         children: [Container(child: neuButton), name],
       ),
     );
-
-    print("returning AdaptiveNeuButton");
     return LayoutBreakpoint().isNavigatingLeft(context) ? neuButton : neuButton;
   }
 }

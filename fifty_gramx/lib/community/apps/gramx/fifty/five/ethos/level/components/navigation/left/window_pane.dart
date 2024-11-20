@@ -2,16 +2,46 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:flutter/material.dart';
 
 class WindowPane extends StatelessWidget {
-  final bool focusMode;
+  final String focusPaneKey;
   final List<Widget> pagesStack;
+  final List<Widget> ethosStack;
+  final bool isEthosStackPagesVisible;
+  final bool isCommunityStackPagesVisible;
+  final Widget tilesPane;
+  final Function() hideEthosStackPages;
+  final Function() toggleSearchOnTop;
+  final Widget openPagesTabs;
+  final Function(String) focusPaneShift;
 
-  WindowPane({required this.focusMode, required this.pagesStack});
+  WindowPane({
+    required this.focusPaneKey,
+    required this.pagesStack,
+    required this.ethosStack,
+    required this.isEthosStackPagesVisible,
+    required this.isCommunityStackPagesVisible,
+    required this.tilesPane,
+    required this.hideEthosStackPages,
+    required this.toggleSearchOnTop,
+    required this.openPagesTabs,
+    required this.focusPaneShift,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        OpenPagesPane(focusMode: focusMode, pagesStack: pagesStack),
+        OpenPagesPane(
+          focusPaneKey: focusPaneKey,
+          pagesStack: pagesStack,
+          ethosStack: ethosStack,
+          isEthosStackPagesVisible: isEthosStackPagesVisible,
+          isCommunityStackPagesVisible: isCommunityStackPagesVisible,
+          hideEthosStackPages: hideEthosStackPages,
+          toggleSearchOnTop: toggleSearchOnTop,
+          openPagesTabs: openPagesTabs,
+          focusPaneShift: focusPaneShift,
+        ),
+        tilesPane,
       ],
     );
   }

@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/variable_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/local/local_variable_composer.dart';
 import 'package:flutter/material.dart';
 import 'package:yaml/yaml.dart';
@@ -18,11 +18,12 @@ class TileComposer {
       String nameCode = condition['name-code'];
       if (nameCode.startsWith("EAIV")) {
         // app local variable
-        var localVariableValue = EthosAppFlowBob.getGramxAppsLocalVariableValue(
-            communityCode: communityCode,
-            orgName: orgName,
-            appName: appName,
-            variableNameCode: nameCode);
+        var localVariableValue = VariableManager.instance
+            .getGramxAppsLocalVariableValue(
+                communityCode: communityCode,
+                orgName: orgName,
+                appName: appName,
+                variableNameCode: nameCode);
         // resolve condition for this variable based on it's type
         String variableTypeCodeName = localVariableValue['type'];
         var resolvedCondition = LocalVariableComposer().resolveConditionFor(
@@ -30,9 +31,7 @@ class TileComposer {
             condition: condition,
             localVariableValue: localVariableValue);
         visible = visible && resolvedCondition;
-      } else {
-        print("unhandled condition");
-      }
+      } else {}
       // check the kind of code name
 
       // EthosAppFlowBob

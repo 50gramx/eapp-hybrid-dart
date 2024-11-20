@@ -1,5 +1,6 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/EutopiaLeftNavigationSectionalTab.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/tab/LeftNavigationTab.dart';
 import 'package:flutter/material.dart';
 
 class PageFlowBuilder {
@@ -10,34 +11,50 @@ class PageFlowBuilder {
     List<AnimationController> animationControllers,
     List<bool> shouldBuildTab,
     EutopiaLeftNavigationScaffold widget,
+    bool isBuildingParentsPage,
   ) {
-    print(
-        "_buildPageFlow for page label ${item.leftNavigationBarSectionalItem.label}");
-    final isCurrentlySelected = tabIndex == widget.selectedIndex;
-
-    print("tabIndex: $tabIndex");
-    print("isCurrentlySelected: $isCurrentlySelected");
-    print("_shouldBuildTab.isEmpty: ${shouldBuildTab.isEmpty}");
-    print("_shouldBuildTab: ${shouldBuildTab}");
-    // print("_shouldBuildTab[tabIndex]: ${shouldBuildTab[tabIndex]}");
+    final isCurrentlySelected = isBuildingParentsPage
+        ? tabIndex == widget.selectedParentIndex
+        : tabIndex == widget.selectedChildrenIndex;
 
     if (shouldBuildTab.isEmpty) {
-      print("PageFlowBuilder:buildPageFlow: shouldBuildTab.isEmpty");
       shouldBuildTab.add(false);
+    }
+
+    // Separate lists based on the 'type' property
+    final List<LeftNavigationTab> parentItems = widget.navigationBarItems
+        .where((item) => widget.parentStackAppNames
+            .contains(item.leftNavigationBarSectionalItem.appName))
+        .toList();
+    final List<LeftNavigationTab> childItems = widget.navigationBarItems
+        .where((item) => !widget.parentStackAppNames
+            .contains(item.leftNavigationBarSectionalItem.appName))
+        .toList();
+
+    int resolvedIndex = 0;
+    // Find the index in the appropriate filtered list based on the type
+    if (isBuildingParentsPage) {
+      resolvedIndex = parentItems.indexWhere((parentItem) =>
+          parentItem.leftNavigationBarSectionalItem.appName ==
+          item.leftNavigationBarSectionalItem.appName);
+    } else {
+      resolvedIndex = childItems.indexWhere((childItem) =>
+          childItem.leftNavigationBarSectionalItem.appName ==
+          item.leftNavigationBarSectionalItem.appName);
     }
 
     // We should build the tab content only if it was already built or
     // if it is currently selected.
-    shouldBuildTab[tabIndex] = isCurrentlySelected || shouldBuildTab[tabIndex];
+    shouldBuildTab[resolvedIndex] =
+        isCurrentlySelected || shouldBuildTab[resolvedIndex];
 
     final viewOpacity;
-    print("_animationControllers.length: ${animationControllers.length}");
+
     try {
       viewOpacity = animationControllers[tabIndex].drive(
         CurveTween(curve: Curves.fastOutSlowIn),
       );
     } catch (e) {
-      print("Error while creating viewOpacity: $e");
       throw e;
     }
 
@@ -45,7 +62,7 @@ class PageFlowBuilder {
       opacity: viewOpacity,
       child: KeyedSubtree(
         key: item.subtreeKey,
-        child: shouldBuildTab[tabIndex]
+        child: shouldBuildTab[resolvedIndex]
             ? Navigator(
                 // The key enables us to access the Navigator's state inside the
                 // onWillPop callback and for emptying its stack when a tab is
@@ -65,17 +82,19 @@ class PageFlowBuilder {
       ),
     );
 
-    if (tabIndex == widget.selectedIndex) {
+    if (!isBuildingParentsPage && tabIndex == widget.selectedChildrenIndex) {
       animationControllers[tabIndex].forward();
-      print("Tab Index $tabIndex is currently selected. Forward animation.");
+
+      return view;
+    } else if (isBuildingParentsPage &&
+        tabIndex == widget.selectedParentIndex) {
+      animationControllers[tabIndex].forward();
+
       return view;
     } else {
       animationControllers[tabIndex].reverse();
-      print(
-          "Tab Index $tabIndex is not currently selected. Reverse animation.");
 
       if (animationControllers[tabIndex].isAnimating) {
-        print("Ignoring pointer for Tab Index $tabIndex.");
         return IgnorePointer(child: view);
       }
       return Offstage(child: view);

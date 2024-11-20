@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/app_button.dart';
@@ -30,40 +30,61 @@ class _EAIT1005State extends State<EAIT1005> {
 
   void _updateUsageCount() {
     // Update usage count for current items
+    List<int> parentIndexes = getParentAppIndexes();
     for (int i = 0;
-        i < EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length;
+        i <
+            AppFlowManager.instance
+                .getEutopiaNavigationBarSectionalItems()!
+                .length;
         i++) {
-      if (!usageCount.containsKey(i)) {
+      if (!usageCount.containsKey(i) && !parentIndexes.contains(i)) {
         usageCount[i] = 0;
       }
     }
     // Remove counts for items that no longer exist
     usageCount.removeWhere((key, value) =>
-        key >= EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length);
+        key >=
+        AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .length);
+  }
+
+  List<int> getParentAppIndexes() {
+    List<int> parentAppIndexes = [];
+    AppFlowManager.instance
+        .getEutopiaNavigationBarSectionalItems()!
+        .forEach((barItem) {
+      if (widget.navigationWidget.parentStackAppNames
+          .contains(barItem.leftNavigationBarSectionalItem.appName)) {
+        parentAppIndexes.add(AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .indexOf(barItem));
+      }
+    });
+    return parentAppIndexes;
   }
 
   @override
   Widget build(BuildContext context) {
-    print("building EAIT1005");
-
     // Update the usage count to reflect any changes in the items
     _updateUsageCount();
-
+    List<int> parentAppIndexes = getParentAppIndexes();
     double screenHeight = MediaQuery.of(context).size.height;
-    double itemHeight = 51; // Adjust as necessary
+    double itemHeight = 56; // Adjust as necessary
     int maxVisibleItems = ((screenHeight * 0.9) / itemHeight).floor();
-    int itemCount = EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length;
+    int itemCount = AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .length -
+        parentAppIndexes.length;
     int visibleItemCount =
         itemCount < maxVisibleItems ? itemCount : maxVisibleItems;
-    print("itemCount: ${itemCount}, visibleItemCount: $visibleItemCount");
 
     List<int> topUsedItems = getTopUsedItems(visibleItemCount);
-    print("topUsedItems: $topUsedItems");
 
     Widget container = Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      height: visibleItemCount * itemHeight,
+      height: 24 + (visibleItemCount * itemHeight),
       child: Neumorphic(
         style: NeumorphicStyle(
           lightSource: NeumorphicTheme.isUsingDark(context)
@@ -86,12 +107,18 @@ class _EAIT1005State extends State<EAIT1005> {
         padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Column(
           children: topUsedItems.map((int subIndex) {
-            return buildAppButton(
-              context,
-              subIndex,
-              _interceptedSelectPressedSectionItem,
-              widget.navigationWidget,
-            );
+            if (!parentAppIndexes.contains(subIndex)) {
+              return buildAppButton(
+                context,
+                subIndex,
+                _interceptedSelectPressedSectionItem,
+                widget.navigationWidget,
+              );
+            } else {
+              return SizedBox(
+                height: 0,
+              );
+            }
           }).toList(),
         ),
       ),

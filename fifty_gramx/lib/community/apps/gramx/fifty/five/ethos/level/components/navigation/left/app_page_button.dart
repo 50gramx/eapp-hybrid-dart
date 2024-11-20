@@ -1,4 +1,4 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -8,57 +8,73 @@ Widget buildAppPageButton(
     int subIndex,
     Function(int) selectPressedSectionItem,
     EutopiaLeftNavigationScaffold parentWidget) {
-  bool isSelected = (subIndex == parentWidget.selectedIndex);
+  bool isSelected = (subIndex == parentWidget.selectedChildrenIndex);
 
-  return Neumorphic(
-    style: NeumorphicStyle(
-      border: NeumorphicBorder(
-        isEnabled: true,
+  var selectedItem = AppFlowManager.instance
+      .getEutopiaNavigationBarSectionalItems()![subIndex]
+      .leftNavigationBarSectionalItem;
+
+  return NeumorphicButton(
+      provideHapticFeedback: true,
+      onPressed: () {
+        selectPressedSectionItem(subIndex);
+      },
+      style: NeumorphicStyle(
+        lightSource: NeumorphicTheme.isUsingDark(context)
+            ? LightSource.bottomRight
+            : LightSource.topLeft,
+        shadowLightColor: NeumorphicTheme.isUsingDark(context)
+            ? AppColors.gray600
+            : AppColors.backgroundSecondary(context),
+        shape: NeumorphicShape.flat,
+        boxShape:
+            NeumorphicBoxShape.roundRect(BorderRadius.all(Radius.circular(24))),
         color: AppColors.backgroundPrimary(context),
-        width: 1,
-      ),
-      boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-    ),
-    padding: const EdgeInsets.all(2),
-    margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
-    child: NeumorphicButton(
-        provideHapticFeedback: true,
-        onPressed: () {
-          selectPressedSectionItem(subIndex);
-        },
-        style: NeumorphicStyle(
-          shape: NeumorphicShape.convex,
-          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+        depth: -2,
+        disableDepth: true,
+        border: NeumorphicBorder(
+          isEnabled: true,
           color: isSelected
-              ? AppColors.backgroundInverseTertiary(context)
-              : AppColors.backgroundTertiary(context),
+              ? AppColors.backgroundPrimary(context)
+              : AppColors.backgroundPrimary(context),
+          width: 1,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 8),
-              child: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                    text:
-                        "${EthosAppFlowBob.eutopiaNavigationBarSectionalItems[subIndex].leftNavigationBarSectionalItem.label}",
-                    style: TextStyle(
-                        color: isSelected
-                            ? AppColors.contentInversePrimary(context)
-                            : AppColors.contentSecondary(context),
-                        fontSize: isSelected ? 16 : 14,
-                        fontFamily: "Montserrat",
-                        fontWeight:
-                            isSelected ? FontWeight.w700 : FontWeight.w500),
-                  )
-                ]),
-              ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 2, right: 2),
+            child: Icon(
+              selectedItem.icon,
+              size: isSelected ? 12 : 10,
+              color: isSelected
+                  ? AppColors.contentPrimary(context)
+                  : AppColors.contentTertiary(context),
             ),
-            SizedBox(
-              width: 8,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 2),
+            child: RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                  text: "${selectedItem.label}",
+                  style: TextStyle(
+                      color: isSelected
+                          ? AppColors.contentPrimary(context)
+                          : AppColors.contentTertiary(context),
+                      fontSize: isSelected ? 12 : 12,
+                      fontFamily: "Montserrat",
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.w500),
+                )
+              ]),
             ),
-          ],
-        )),
-  );
+          ),
+          SizedBox(
+            width: 8,
+          ),
+        ],
+      ));
 }

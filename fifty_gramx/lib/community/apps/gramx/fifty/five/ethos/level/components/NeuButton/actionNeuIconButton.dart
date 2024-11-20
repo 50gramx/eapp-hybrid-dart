@@ -1,7 +1,4 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class ActionNeuIconButton extends StatefulWidget {
@@ -83,9 +80,9 @@ class _ActionNeuIconButtonState extends State<ActionNeuIconButton> {
                             : (widget.isSecondaryButton
                                 ? AppColors.contentInversePrimary(context)
                                 : AppColors.contentPrimary(context)),
-                        fontSize: 12,
+                        fontSize: 16,
                         fontFamily: "Montserrat",
-                        fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w600),
                   ),
                 ]),
               ),

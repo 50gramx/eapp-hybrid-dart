@@ -1,4 +1,5 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/ui_component_manager.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/variable_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/eic-1004.dart';
@@ -32,17 +33,13 @@ class ComponentComposer {
     // get the variable type code
     int componentCode = _getComponentCode(componentNameCode: componentNameCode);
 
-    print("Building component with code $componentCode for app: $appName");
-
     // maps the component code to it's case,
     // returns SizedBox if no mapping found
     switch (componentCode) {
       case 1001:
-        print("fromComponentContract - requested 1001");
         return SizedBox();
       // builds TileHeader Widget
       case 1004:
-        print("Building TileHeader component for app: $appName");
         return _build1004(
             communityCode: communityCode,
             orgName: orgName,
@@ -50,7 +47,6 @@ class ComponentComposer {
             properties: componentProperties);
       // builds Column Widget
       case 1005:
-        print("Building Column component for app: $appName");
         return _build1005(
             communityCode: communityCode,
             orgName: orgName,
@@ -58,7 +54,6 @@ class ComponentComposer {
             properties: componentProperties);
       // builds Primary Button Widget
       case 1006:
-        print("Building Primary Button component for app: $appName");
         return _build1006(
             communityCode: communityCode,
             orgName: orgName,
@@ -66,7 +61,6 @@ class ComponentComposer {
             properties: componentProperties);
       // builds Secondary Button Widget
       case 1008:
-        print("Building Secondary Button component for app: $appName");
         return _build1008(
             communityCode: communityCode,
             orgName: orgName,
@@ -74,7 +68,6 @@ class ComponentComposer {
             properties: componentProperties);
       // builds NameTextField Widget
       case 1009:
-        print("Building NameTextField component for app: $appName");
         return _build1009(
             communityCode: communityCode,
             orgName: orgName,
@@ -82,17 +75,14 @@ class ComponentComposer {
             properties: componentProperties);
       // builds Column Widget
       case 1012:
-        print("Building Column component for app: $appName");
         return _build1012(
             communityCode: communityCode,
             orgName: orgName,
             appName: appName,
             properties: componentProperties);
       case 1013:
-        print("Building EIC1013 component for app: $appName");
         return _build1013(properties: componentProperties);
       case 1016:
-        print("Building EIC1016 component for app: $appName");
         return _build1016(
             communityCode: communityCode,
             orgName: orgName,
@@ -100,7 +90,6 @@ class ComponentComposer {
             properties: componentProperties);
       // default case, returns a SizedBox
       default:
-        print("Building default component (SizedBox) for app: $appName");
         return _build1014();
     }
   }
@@ -140,8 +129,6 @@ class ComponentComposer {
     // to store the mapping of children widgets
     List<Widget> childrenList = [];
 
-    print("Building Column component for app: $appName");
-
     // loop through the children components
     for (int childIndex = 0;
         childIndex < childrenComponents.length;
@@ -149,31 +136,26 @@ class ComponentComposer {
       // get the child component name code
       String childNameCode = childrenComponents[childIndex];
 
-      print(
-          "Building child component with name code $childNameCode for app: $appName");
-
       // to store the value of component widget based on composure
       Widget childComponent = _build1014();
 
       // check whether the child component is a composed component or a composed tile
       if (childNameCode.startsWith("EAIC")) {
         // child is a composed component
-        childComponent = EthosAppFlowBob.getGramxAppsInteractionComponentValue(
-            communityCode: communityCode,
-            orgName: orgName,
-            appName: appName,
-            componentNameCode: childNameCode);
-
-        print("Child component is a composed component for app: $appName");
+        childComponent = UIComponentManager.instance
+            .getGramxAppsInteractionComponentValue(
+                communityCode: communityCode,
+                orgName: orgName,
+                appName: appName,
+                componentNameCode: childNameCode);
       } else {
         // child is a composed tile
-        childComponent = EthosAppFlowBob.getGramxAppsInteractionTileValue(
-            communityCode: communityCode,
-            orgName: orgName,
-            appName: appName,
-            tileNameCode: childNameCode);
-
-        print("Child component is a composed tile for app: $appName");
+        childComponent = UIComponentManager.instance
+            .getGramxAppsInteractionTileValue(
+                communityCode: communityCode,
+                orgName: orgName,
+                appName: appName,
+                tileNameCode: childNameCode);
       }
 
       // add the child component to the list
@@ -239,11 +221,12 @@ class ComponentComposer {
     String capabilityNameCode = properties['text-controller'];
 
     // build the text-controller from capability
-    dynamic capability = EthosAppFlowBob.getGramxAppsLocalCapabilityValue(
-        communityCode: communityCode,
-        orgName: orgName,
-        appName: appName,
-        capabilityNameCode: capabilityNameCode);
+    dynamic capability = VariableManager.instance
+        .getGramxAppsLocalCapabilityValue(
+            communityCode: communityCode,
+            orgName: orgName,
+            appName: appName,
+            capabilityNameCode: capabilityNameCode);
     TextEditingController textEditingController = capability()['value'];
 
     // return the component
@@ -281,18 +264,20 @@ class ComponentComposer {
       // check whether the child component is a composed component or a composed tile
       if (childNameCode.startsWith("EAIC")) {
         // child is a composed component
-        childComponent = EthosAppFlowBob.getGramxAppsInteractionComponentValue(
-            communityCode: communityCode,
-            orgName: orgName,
-            appName: appName,
-            componentNameCode: childNameCode);
+        childComponent = UIComponentManager.instance
+            .getGramxAppsInteractionComponentValue(
+                communityCode: communityCode,
+                orgName: orgName,
+                appName: appName,
+                componentNameCode: childNameCode);
       } else {
         // child is a composed tile
-        childComponent = EthosAppFlowBob.getGramxAppsInteractionTileValue(
-            communityCode: communityCode,
-            orgName: orgName,
-            appName: appName,
-            tileNameCode: childNameCode);
+        childComponent = UIComponentManager.instance
+            .getGramxAppsInteractionTileValue(
+                communityCode: communityCode,
+                orgName: orgName,
+                appName: appName,
+                tileNameCode: childNameCode);
       }
 
       // add the child component to the list
@@ -344,11 +329,12 @@ class ComponentComposer {
     String capabilityNameCode = properties['text-controller'];
 
     // build the text-controller from capability
-    dynamic capability = EthosAppFlowBob.getGramxAppsLocalCapabilityValue(
-        communityCode: communityCode,
-        orgName: orgName,
-        appName: appName,
-        capabilityNameCode: capabilityNameCode);
+    dynamic capability = VariableManager.instance
+        .getGramxAppsLocalCapabilityValue(
+            communityCode: communityCode,
+            orgName: orgName,
+            appName: appName,
+            capabilityNameCode: capabilityNameCode);
     TextEditingController textEditingController = capability()['value'];
 
     // return the component

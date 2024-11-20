@@ -1,31 +1,44 @@
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/ethosapps/eapp_flow_bob.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/EutopiaLeftNavigationScaffold.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/eait_1008.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/focus_pane_tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/page_tab_pane.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class EAIT1002 extends StatefulWidget {
   const EAIT1002({
-    required this.focusMode,
+    required this.focusPaneKey,
     required this.isNavigatingLeft,
+    required this.isCommunityStackPagesVisible,
     required this.navigationViewPort,
     required this.selectPressedSectionItem,
     required this.windowPane,
     required this.navigationWidget,
+    required this.isSearchVisible,
+    required this.isOpenTilePaneVisible,
+    required this.openPagesTabs,
+    required this.toggleSearchOnTop,
+    required this.focusPaneShift,
     Key? key,
   });
 
-  final bool focusMode;
+  final String focusPaneKey;
   final bool isNavigatingLeft;
+  final bool isCommunityStackPagesVisible;
   final int navigationViewPort;
   final Function(int) selectPressedSectionItem;
   final Widget windowPane;
   final EutopiaLeftNavigationScaffold navigationWidget;
+  final bool isSearchVisible;
+  final bool isOpenTilePaneVisible;
+  final Widget openPagesTabs;
+  final Function() toggleSearchOnTop;
+  final Function(String) focusPaneShift;
 
   @override
   _EAIT1002State createState() => _EAIT1002State();
@@ -36,20 +49,14 @@ class _EAIT1002State extends State<EAIT1002> {
   static Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
 
-  late bool isOpenTilePaneVisible;
-
-  _handleOpenTilesPaneState(LocalNotification message) {
-    if (message.data["isVisible"] == true) {
-      if (!isOpenTilePaneVisible) {
-        setState(() {
-          isOpenTilePaneVisible = true;
-        });
+  _handleSearchCollapseView(LocalNotification message) {
+    if (message.data["searchCollapsed"] == true) {
+      if (!widget.isSearchVisible) {
+        widget.toggleSearchOnTop();
       }
-    } else {
-      if (isOpenTilePaneVisible) {
-        setState(() {
-          isOpenTilePaneVisible = false;
-        });
+    } else if (message.data["searchCollapsed"] == false) {
+      if (widget.isSearchVisible) {
+        widget.toggleSearchOnTop();
       }
     }
   }
@@ -57,34 +64,203 @@ class _EAIT1002State extends State<EAIT1002> {
   /// handler invoked inside localNotifications, which listens to new messages
   /// when the device receives a push notification based on metadata
   handleListeningMessages(LocalNotification message) async {
-    if (message.type == "OpenTilesPane") {
-      if (message.data.containsKey("isVisible")) {
-        _handleOpenTilesPaneState(message);
+    if (message.type == "OpenPagesPane") {
+      if (message.data.containsKey("searchCollapsed")) {
+        _handleSearchCollapseView(message);
       }
     }
   }
 
   @override
   void initState() {
-    isOpenTilePaneVisible = true;
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
     super.initState();
   }
 
+  buildCommunityCardIcon() {
+    return NeumorphicIcon(
+      widget.isOpenTilePaneVisible
+          ? Icons.panorama_horizontal_rounded
+          : Icons.panorama_photosphere_outlined,
+      size: 24,
+      style: NeumorphicStyle(
+        lightSource: NeumorphicTheme.isUsingDark(context)
+            ? LightSource.bottomRight
+            : LightSource.topLeft,
+        shadowLightColor: NeumorphicTheme.isUsingDark(context)
+            ? AppColors.gray600
+            : AppColors.backgroundSecondary(context),
+        shape: NeumorphicShape.concave,
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+        color: AppColors.contentSecondary(context),
+      ),
+    );
+  }
+
+  buildCommunityCardIconButton() {
+    return Container(
+      child: NeumorphicButton(
+          provideHapticFeedback: true,
+          onPressed: () {
+            handleOpenTilePaneStateToggle(widget.isOpenTilePaneVisible);
+          },
+          style: NeumorphicStyle(
+            lightSource: NeumorphicTheme.isUsingDark(context)
+                ? LightSource.bottomRight
+                : LightSource.topLeft,
+            shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                ? AppColors.gray600
+                : AppColors.backgroundSecondary(context),
+            shape: NeumorphicShape.flat,
+            disableDepth: true,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+            color: AppColors.backgroundPrimary(context),
+            border: NeumorphicBorder(
+              isEnabled: true,
+              color: AppColors.backgroundSecondary(context),
+              width: 2,
+            ),
+          ),
+          child: Center(
+            child: buildCommunityCardIcon(),
+          )),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: EdgeInsets.only(top: 21, bottom: 2, right: 16),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool isOneEappLoaded =
-        EthosAppFlowBob.eutopiaNavigationBarSectionalItems.length == 1;
-    Widget pageTabPane = Visibility(
-      visible: widget.isNavigatingLeft,
-      child: Expanded(
-        child: PageTabPane(
-          selectPressedSectionItem: widget.selectPressedSectionItem,
-          parentWidget: widget.navigationWidget,
+    bool isOneEappLoaded = AppFlowManager.instance
+            .getEutopiaNavigationBarSectionalItems()!
+            .length ==
+        1;
+
+    Widget customScrollView = CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          collapsedHeight: 120.0,
+          backgroundColor: AppColors.backgroundPrimary(context),
+          flexibleSpace: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              var collapseRatio = (constraints.maxHeight - kToolbarHeight) /
+                  (200 - kToolbarHeight);
+              return Padding(
+                padding: EdgeInsets.only(
+                    right: widget.isOpenTilePaneVisible ? 322 : 0),
+                child: Column(children: [
+                  FlexibleSpaceBar(
+                    title: widget.isSearchVisible
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              // Add "50GRAMX" text next to the search bar
+                              CommunityLogo(),
+                              SizedBox(
+                                  width:
+                                      8), // Spacing between title and search bar
+
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 16,
+                                      top: 24,
+                                      right: widget.isOpenTilePaneVisible
+                                          ? 120
+                                          : 260),
+                                  child: Neumorphic(
+                                    child: TextField(
+                                      style: AppTextStyle.themeTitleTextStyle(
+                                          context),
+                                      cursorColor:
+                                          AppColors.contentPrimary(context),
+                                      decoration: InputDecoration(
+                                        hintText: "Search Ethosverse",
+                                        hintStyle: TextStyle(
+                                            color: AppColors.contentSecondary(
+                                                context),
+                                            fontSize: 16,
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.5),
+                                        contentPadding:
+                                            EdgeInsets.fromLTRB(8, 12, 16, 0),
+                                        prefixIcon: Padding(
+                                          padding: EdgeInsets.only(left: 8),
+                                          child: Icon(
+                                            Icons.search,
+                                            color: AppColors.contentTertiary(
+                                                context),
+                                          ),
+                                        ),
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        disabledBorder: InputBorder.none,
+                                      ),
+                                    ),
+                                    style: NeumorphicStyle(
+                                      lightSource:
+                                          NeumorphicTheme.isUsingDark(context)
+                                              ? LightSource.bottomRight
+                                              : LightSource.topLeft,
+                                      shadowLightColor:
+                                          NeumorphicTheme.isUsingDark(context)
+                                              ? AppColors.gray600
+                                              : AppColors.backgroundSecondary(
+                                                  context),
+                                      border: NeumorphicBorder(
+                                        isEnabled: true,
+                                        color: AppColors.backgroundSecondary(
+                                            context),
+                                        width: 2,
+                                      ),
+                                      boxShape: NeumorphicBoxShape.roundRect(
+                                          BorderRadius.circular(24)),
+                                      color:
+                                          AppColors.backgroundPrimary(context),
+                                      shape: NeumorphicShape.flat,
+                                      disableDepth: true,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
+                  widget.isSearchVisible
+                      ? SizedBox(height: 6)
+                      : SizedBox.shrink(),
+                  widget.isSearchVisible
+                      ? FocusPaneTab(
+                          focusPaneKey: widget.focusPaneKey,
+                          focusPaneShift: widget.focusPaneShift)
+                      : SizedBox.shrink(),
+                ]),
+              );
+            },
+          ),
+          actions: [
+            buildCommunityCardIconButton(),
+          ],
+          toolbarHeight: 82,
         ),
-      ),
+      ],
+    );
+
+    Widget cont = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CommunityLogo(),
+        widget.isCommunityStackPagesVisible
+            ? widget.openPagesTabs
+            : SizedBox.shrink(),
+        buildCommunityCardIconButton(),
+      ],
     );
 
     return Container(
@@ -95,16 +271,8 @@ class _EAIT1002State extends State<EAIT1002> {
                 ? (isOneEappLoaded ? false : true)
                 : true,
             child: Container(
-              height: widget.isNavigatingLeft ? 64 : 48,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CommunityLogo(),
-                  pageTabPane,
-                  buildCommunityCardIconButton(),
-                ],
-              ),
-            ),
+                height: widget.isNavigatingLeft ? 120 : 48,
+                child: customScrollView),
           ),
           Expanded(
             flex: widget.isNavigatingLeft ? 11 : 8,
@@ -120,65 +288,17 @@ class _EAIT1002State extends State<EAIT1002> {
       ),
     );
   }
-
-  buildCommunityCardIconButton() {
-    return Container(
-      child: NeumorphicButton(
-          provideHapticFeedback: true,
-          onPressed: handleOpenTilePaneStateToggle,
-          style: NeumorphicStyle(
-            lightSource: NeumorphicTheme.isUsingDark(context)
-                ? LightSource.bottomRight
-                : LightSource.topLeft,
-            shadowLightColor: NeumorphicTheme.isUsingDark(context)
-                ? AppColors.gray600
-                : AppColors.backgroundSecondary(context),
-            shape: NeumorphicShape.flat,
-            disableDepth: true,
-            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-            color: AppColors.backgroundInverseTertiary(context),
-            border: NeumorphicBorder(
-              isEnabled: true,
-              color: AppColors.backgroundInverseTertiary(context),
-              width: 2,
-            ),
-          ),
-          child: Center(
-            child: buildCommunityCardIcon(),
-          )),
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-      padding: EdgeInsets.only(top: 8),
-    );
-  }
-
-  buildCommunityCardIcon() {
-    return NeumorphicIcon(
-      isOpenTilePaneVisible ? FeatherIcons.bell : FeatherIcons.bellOff,
-      size: 20,
-      style: NeumorphicStyle(
-        lightSource: NeumorphicTheme.isUsingDark(context)
-            ? LightSource.bottomRight
-            : LightSource.topLeft,
-        shadowLightColor: NeumorphicTheme.isUsingDark(context)
-            ? AppColors.gray600
-            : AppColors.backgroundSecondary(context),
-        shape: NeumorphicShape.concave,
-        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: AppColors.contentInverseSecondary(context),
-        border: NeumorphicBorder(
-          isEnabled: true,
-          color: AppColors.contentInverseSecondary(context),
-          width: 1,
-        ),
-      ),
-    );
-  }
 }
 
-handleOpenTilePaneStateToggle() {
+handleOpenTilePaneStateToggle(bool isOpenTilePaneVisible) {
   print("onclicked toggle");
-  NotificationsBloc.instance
-      .newNotification(LocalNotification("OpenTilesPane", {"state": "toggle"}));
+  if (isOpenTilePaneVisible == true) {
+    NotificationsBloc.instance.newNotification(
+        LocalNotification("OpenTilesPane", {"isVisible": false}));
+  } else {
+    NotificationsBloc.instance.newNotification(
+        LocalNotification("OpenTilesPane", {"isVisible": true}));
+  }
 }
 
 buildCommunityCardJustIcon(context) {
