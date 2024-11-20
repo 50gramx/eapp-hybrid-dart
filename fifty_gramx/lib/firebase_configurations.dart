@@ -34,12 +34,7 @@ bool isFirebaseMessagingSupportedPlatform() {
 }
 
 ensureFirebaseSupport() async {
-  print("ensureFirebaseSupport: invoked");
   if (isFirebaseSupportedPlatform()) {
-    print("ensureFirebaseSupport: isFirebaseSupportedPlatform");
-    print("ensureFirebaseSupport: initalising now");
-    print("ensureFirebaseSupport: ${Constants().eAppEnv}");
-    print("ensureFirebaseSupport: ${Constants().eAppFirebaseOptions}");
     if (kIsWeb) {
       await Firebase.initializeApp(
         options: Constants().eAppFirebaseOptions,
@@ -50,11 +45,9 @@ ensureFirebaseSupport() async {
         options: Constants().eAppFirebaseOptions,
       );
     }
-    print("ensureFirebaseSupport: initalising done");
 
     // Firebase Crashlytics is enabled for limited platform at the moment
     if (!kIsWeb && isFirebaseCrashlyticsSupportedPlatform()) {
-      print("ensureFirebaseSupport: isFirebaseCrashlyticsSupportedPlatform");
       FlutterError.onError = (errorDetails) {
         FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
       };

@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: eapp_dart_domain
-      sha256: "74531380cd8f697fec4e54b3eff18e1634927c74f7362e8becfac91b2aa73a05"
+      sha256: "3019618f3df9ba4653d72958ab2bdf1cc4bf41ed94a8839db8bd7a574bfce0be"
       url: "https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/"
     source: hosted
-    version: "24.7.145"
+    version: "24.11.214"
   equatable:
     dependency: transitive
     description:
@@ -516,6 +516,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      sha256: "2c5611c0b44e20d180e4342318e1bbc28b0a44ad2c442f5df16962606fd3e8e3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   flutter_switch:
     dependency: "direct main"
     description:
@@ -667,38 +675,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.4"
-  in_app_purchase:
-    dependency: "direct main"
-    description:
-      name: in_app_purchase
-      sha256: def70fbaa2a274f4d835677459f6f7afc5469de912438f86076e51cbd4cbd5b4
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.13"
-  in_app_purchase_android:
-    dependency: transitive
-    description:
-      name: in_app_purchase_android
-      sha256: "28164faac635a6cc357c96f47813e675eec7622a8f41e829b501573dbbce2cce"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0+17"
-  in_app_purchase_platform_interface:
-    dependency: transitive
-    description:
-      name: in_app_purchase_platform_interface
-      sha256: "412efce2b9238c5ace4f057acad43f793ed06880e366d26ae322e796cadb051a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.7"
-  in_app_purchase_storekit:
-    dependency: transitive
-    description:
-      name: in_app_purchase_storekit
-      sha256: c4b17a7f2ca8ddc7fd7996a8c32a3af6beddf91d651997c8675a5f23c103c9bc
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.8+1"
   intl:
     dependency: "direct main"
     description:
@@ -1268,10 +1244,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: c512655380d241a337521703af62d2c122bf7b77a46ff7dd750092aa9433499c
+      sha256: "9d06212b1362abc2f0f0d78e6f09f726608c74e3b9462e8368bb03314aa8d603"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.4"
+    version: "6.3.1"
   url_launcher_android:
     dependency: transitive
     description:
@@ -1356,10 +1332,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: "5c5f338a667b4c644744b661f309fb8080bb94b18a7e91ef1dbd343bed00ed6d"
+      sha256: f652077d0bdf60abe4c1f6377448e8655008eef28f128bc023f7b5e8dfeb48fc
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.5"
+    version: "14.2.4"
   watcher:
     dependency: transitive
     description:
