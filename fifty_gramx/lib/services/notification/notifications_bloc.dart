@@ -44,6 +44,19 @@ class NotificationsBloc {
     _notificationsStreamController.sink.add(notification);
   }
 
+  void newEAppNotification(String communityCode, String orgName, String appName,
+      String pageNameCode, String collarNameCode, String title) {
+    LocalNotification notification = LocalNotification("EthosAppFlowBob", {
+      "communityCode": communityCode,
+      "orgName": orgName,
+      "appName": appName,
+      "pageNameCode": pageNameCode,
+      "collarNameCode": collarNameCode,
+      "title": title,
+    });
+    _notificationsStreamController.sink.add(notification);
+  }
+
   void dispose() {
     _notificationsStreamController.close();
   }

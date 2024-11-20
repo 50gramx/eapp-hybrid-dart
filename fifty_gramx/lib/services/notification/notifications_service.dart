@@ -90,15 +90,11 @@ class PushNotificationService {
     // TODO: change the strategy to grab device tokens
     // We cannot request firebase way for Push Notifications
     if (platformNotSupported) {
-      print(
-          "PushNotificationService:updateLastCheckedDeviceToken: platformNotSupported");
       isNotificationFailure = true;
       final now = DateTime.now();
       _lastCheckedDeviceToken = now.microsecondsSinceEpoch.toString();
       return _lastCheckedDeviceToken;
     } else {
-      print(
-          "PushNotificationService:updateLastCheckedDeviceToken: platformSupported");
       NotificationSettings settings = await getSettings();
       if (settings.authorizationStatus == AuthorizationStatus.authorized) {
         isNotificationFailure = false;
@@ -123,7 +119,6 @@ class PushNotificationService {
   }
 
   void _tokenRefresh(String newToken) {
-    print("_tokenRefresh: $newToken");
     _lastCheckedDeviceToken = newToken;
   }
 
@@ -138,7 +133,7 @@ class PushNotificationService {
       NotificationsBloc.instance.newNotification(notification);
       return null;
     }
-    print("_onMessage");
+
     if (message['data'] != null) {
       final notification = LocalNotification("data", message['data'] as Map);
       NotificationsBloc.instance.newNotification(notification);
