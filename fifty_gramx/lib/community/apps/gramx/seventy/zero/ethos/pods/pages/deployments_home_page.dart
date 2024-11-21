@@ -3,7 +3,7 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/manage
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/services/collars/DC499999999EPME5000Capabilities.dart';
 import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class DC499999999EAIP1001 extends StatefulWidget {
   const DC499999999EAIP1001({
@@ -33,13 +33,44 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
     super.initState();
   }
 
+  loadDeploymentManagePage(deployment) async {
+    await AppFlowManager.instance.loadAppOnTheGo(
+      appName: "pods",
+      orgName: "ethos",
+      communityCode: 70,
+      appIndex: 0,
+      collarNameCode: "DC499999999",
+      pageNameCode: "EAIP1002",
+      domainIdentifier: widget.domainId,
+      pageIdentifiers: {
+        "collar_id": "${deployment.id}",
+        "deployment_id": "${deployment.deployment.id}",
+      },
+    );
+    AppFlowManager.instance.sendOpenDynamicAppNotification(
+      appName: "pods",
+      orgName: "ethos",
+      communityCode: 70,
+      appIndex: 0,
+      collarNameCode: "DC499999999",
+      pageNameCode: "EAIP1002",
+      domainIdentifier: widget.domainId,
+      pageIdentifiers: {
+        "collar_id": "${deployment.id}",
+        "deployment_id": "${deployment.deployment.id}",
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.backgroundPrimary(context),
-        title: Text('Deployments in Domain: ${widget.domainId}'),
-        actions: [],
+      appBar: NeumorphicAppBar(
+        color: AppColors.backgroundPrimary(context),
+        title: Text(
+          'Deployments in Domain: ${widget.domainId}',
+          style: const TextStyle(fontFamily: "Montserrat"),
+        ),
       ),
       body: FutureBuilder<List<DC499999999>>(
         future: updateCollars(),
@@ -50,45 +81,47 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
             return Center(
               child: Text(
                 'Error: ${snapshot.error}',
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontFamily: "Montserrat",
+                ),
               ),
             );
           } else if (!snapshot.hasData || deployment_collars.isEmpty) {
-            return const Center(child: Text('No deployments found.'));
+            return const Center(
+              child: Text(
+                'No deployments found.',
+                style: TextStyle(fontFamily: "Montserrat"),
+              ),
+            );
           } else {
             return ListView.builder(
               itemCount: deployment_collars.length,
               itemBuilder: (context, index) {
                 final deployment = deployment_collars[index];
-                return Card(
+                return Neumorphic(
                   margin: const EdgeInsets.all(8.0),
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    shape: NeumorphicShape.flat,
+                    disableDepth: true,
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+                    color: AppColors.backgroundPrimary(context),
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundSecondary(context),
+                      width: 2,
+                    ),
+                  ),
                   child: InkWell(
-                    onTap: () async {
-                      // Navigate to a detailed page for the deployment
-                      await AppFlowManager.instance.loadAppOnTheGo(
-                          appName: "pods",
-                          orgName: "ethos",
-                          communityCode: 70,
-                          appIndex: 0,
-                          collarNameCode: "DC499999999",
-                          pageNameCode: "EAIP1002",
-                          domainIdentifier: widget.domainId,
-                          pageIdentifiers: {
-                            "collar_id": "${deployment.id}",
-                            "deployment_id": "${deployment.deployment.id}",
-                          });
-                      AppFlowManager.instance.sendOpenDynamicAppNotification(
-                          appName: "pods",
-                          orgName: "ethos",
-                          communityCode: 70,
-                          appIndex: 0,
-                          collarNameCode: "DC499999999",
-                          pageNameCode: "EAIP1002",
-                          domainIdentifier: widget.domainId,
-                          pageIdentifiers: {
-                            "collar_id": "${deployment.id}",
-                            "deployment_id": "${deployment.deployment.id}",
-                          });
+                    onTap: () {
+                      loadDeploymentManagePage(deployment);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
@@ -99,7 +132,10 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
                           Text(
                             deployment.name,
                             style: const TextStyle(
-                                fontSize: 18.0, fontWeight: FontWeight.bold),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat",
+                            ),
                           ),
                           const SizedBox(height: 8.0),
 
@@ -108,16 +144,26 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                  'Name: ${deployment.deployment.metadata.name}'),
+                                '${deployment.deployment.metadata.name}',
+                                style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600),
+                              ),
                               Text(
-                                  'Status: ${DateTimeService().getFormattedTimeOrDate(deployment.updatedAt)}'),
+                                'Last Updated: ${DateTimeService().getFormattedTimeOrDate(deployment.updatedAt)}',
+                                style:
+                                    const TextStyle(fontFamily: "Montserrat"),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 8.0),
 
                           // Replica Information
                           Text(
-                              'Replicas: ${deployment.deployment.replicaConfig.replicas}'),
+                            '${deployment.deployment.replicaConfig.replicas} Replicas',
+                            style: const TextStyle(fontFamily: "Montserrat"),
+                          ),
                           const SizedBox(height: 8.0),
 
                           // Resource Requests Summary
@@ -130,13 +176,21 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
                                 Text(
                                   'Resources:',
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Montserrat",
+                                  ),
                                 ),
                                 const SizedBox(height: 4.0),
                                 Text(
-                                    'CPU: ${deployment.deployment.podTemplate.containers[0].resourceRequests.cpu}'),
+                                  'CPU: ${deployment.deployment.podTemplate.containers[0].resourceRequests.cpu}',
+                                  style:
+                                      const TextStyle(fontFamily: "Montserrat"),
+                                ),
                                 Text(
-                                    'Memory: ${deployment.deployment.podTemplate.containers[0].resourceRequests.memory}'),
+                                  'Memory: ${deployment.deployment.podTemplate.containers[0].resourceRequests.memory}',
+                                  style:
+                                      const TextStyle(fontFamily: "Montserrat"),
+                                ),
                               ],
                             ),
 
@@ -146,10 +200,42 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
                           // Button to View More Details
                           Align(
                             alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: const Text('View Details'),
-                            ),
+                            child: NeumorphicButton(
+                                provideHapticFeedback: true,
+                                onPressed: () {
+                                  loadDeploymentManagePage(deployment);
+                                },
+                                style: NeumorphicStyle(
+                                  lightSource:
+                                      NeumorphicTheme.isUsingDark(context)
+                                          ? LightSource.bottomRight
+                                          : LightSource.topLeft,
+                                  shadowLightColor: NeumorphicTheme.isUsingDark(
+                                          context)
+                                      ? AppColors.gray600
+                                      : AppColors.backgroundSecondary(context),
+                                  shape: NeumorphicShape.flat,
+                                  boxShape: NeumorphicBoxShape.roundRect(
+                                      BorderRadius.circular(24)),
+                                  color: AppColors.backgroundSecondary(context),
+                                  border: NeumorphicBorder(
+                                    isEnabled: true,
+                                    color: AppColors.backgroundPrimary(context),
+                                    width: 2,
+                                  ),
+                                  disableDepth: true,
+                                ),
+                                padding: const EdgeInsets.all(12.0),
+                                margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
+                                child: Text(
+                                  "View Details",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: AppColors.contentPrimary(context),
+                                      fontSize: 14,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w500),
+                                )),
                           ),
                         ],
                       ),
