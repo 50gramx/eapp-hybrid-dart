@@ -99,7 +99,7 @@ dependencies:
   carousel_slider_plus: ^6.0.0
   eapp_dart_domain:
     hosted: https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/
-    version: ^24.11.214
+    version: ^24.11.219
   # win32 is a Dart package that provides access to the most common Win32 APIs 
   # using FFI to make them accessible to Dart code without requiring a C compiler or the Windows SDK.
   win32: ^5.5.3
