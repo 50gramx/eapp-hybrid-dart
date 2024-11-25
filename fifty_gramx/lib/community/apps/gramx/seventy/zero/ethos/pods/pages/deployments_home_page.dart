@@ -68,19 +68,22 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
       appBar: NeumorphicAppBar(
         color: AppColors.backgroundPrimary(context),
         title: Text(
-          'Deployments in Domain: ${widget.domainId}',
+          'DC499999999EAIP1001: Domain ID: ${widget.domainId}',
           style: const TextStyle(fontFamily: "Montserrat"),
         ),
       ),
       body: FutureBuilder<List<DC499999999>>(
         future: updateCollars(),
         builder: (context, snapshot) {
+          print("updateCollars: inside the builder");
           if (snapshot.connectionState == ConnectionState.waiting) {
+            print("updateCollars: waiting");
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
+            print("updateCollars: hasError");
             return Center(
               child: Text(
-                'Error: ${snapshot.error}',
+                'updateCollars: Error: ${snapshot.error}',
                 style: const TextStyle(
                   color: Colors.red,
                   fontFamily: "Montserrat",
@@ -88,17 +91,22 @@ class _DC499999999EAIP1001State extends State<DC499999999EAIP1001> {
               ),
             );
           } else if (!snapshot.hasData || deployment_collars.isEmpty) {
+            print("updateCollars: doesn't have Data or empty");
             return const Center(
               child: Text(
-                'No deployments found.',
+                'updateCollars: No deployments found.',
                 style: TextStyle(fontFamily: "Montserrat"),
               ),
             );
           } else {
+            print("updateCollars: hasData");
+            print(
+                "updateCollars: deployment_collars: ${deployment_collars.first}");
             return ListView.builder(
               itemCount: deployment_collars.length,
               itemBuilder: (context, index) {
                 final deployment = deployment_collars[index];
+                print("updateCollars: deployment: ${deployment}");
                 return Neumorphic(
                   margin: const EdgeInsets.all(8.0),
                   style: NeumorphicStyle(

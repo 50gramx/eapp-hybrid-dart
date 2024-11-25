@@ -2,7 +2,9 @@ import 'package:eapp_dart_domain/ethos/elint/collars/DC499999999.pb.dart'
     as cpb2;
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/services/collars/DC499999999EPME5000Capabilities.dart';
+import 'package:fifty_gramx/services/datetime/DateTimeService.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DC499999999EAIP1002 extends StatefulWidget {
   const DC499999999EAIP1002({
@@ -24,13 +26,13 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
   cpb2.Deployment deployment = cpb2.Deployment();
 
   updateDeployment() async {
-    print("updateDeployment");
+    // print("updateDeployment");
     var d =
         await DC499999999EPME5000Capabilities.get(widget.domainId, collar_id);
     setState(() {
       deployment = d;
     });
-    print("updateDeployment: deployment, ${deployment.metadata}");
+    // print("updateDeployment: deployment, ${deployment}");
   }
 
   @override
@@ -43,10 +45,11 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
 
   @override
   Widget build(BuildContext context) {
+    // print("build: deployment: ${deployment}");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundPrimary(context),
-        title: Text('Deployments in Domain: ${widget.domainId}'),
+        title: Text('DC499999999EAIP1002: Deployment ID: ${deployment_id}'),
         actions: [],
       ),
       body: Padding(
@@ -56,6 +59,10 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
             // Deployment Metadata Section
             _buildSectionHeader('Deployment Metadata'),
             _buildMetadataCard(deployment.metadata),
+
+            // Status Section
+            _buildSectionHeader('Deployment Status'),
+            _buildStatusCard(deployment.status),
 
             // Pod Template Section
             _buildSectionHeader('Pod Template & Containers'),
@@ -84,7 +91,185 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
     );
   }
 
+  Widget _buildStatusCard(cpb2.DeploymentStatus deploymentStatus) {
+    print("_buildStatusCard: ${deploymentStatus}");
+    return Neumorphic(
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
+      style: NeumorphicStyle(
+        lightSource: NeumorphicTheme.isUsingDark(context)
+            ? LightSource.bottomRight
+            : LightSource.topLeft,
+        shadowLightColor: NeumorphicTheme.isUsingDark(context)
+            ? AppColors.gray600
+            : AppColors.backgroundSecondary(context),
+        shape: NeumorphicShape.flat,
+        disableDepth: true,
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+        color: AppColors.backgroundPrimary(context),
+        border: NeumorphicBorder(
+          isEnabled: true,
+          color: AppColors.backgroundSecondary(context),
+          width: 2,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Deployment ID: ${deploymentStatus.deploymentId}',
+              style: TextStyle(
+                fontFamily: "Montserrat",
+              ),
+            ),
+            SizedBox(height: 8),
+            Text('Replicas: ${deploymentStatus.replicas}',
+                style: TextStyle(
+                  fontFamily: "Montserrat",
+                )),
+            Text('Updated Replicas: ${deploymentStatus.updatedReplicas}',
+                style: TextStyle(
+                  fontFamily: "Montserrat",
+                )),
+            Text('Available Replicas: ${deploymentStatus.availableReplicas}',
+                style: TextStyle(
+                  fontFamily: "Montserrat",
+                )),
+            Text(
+                'Unavailable Replicas: ${deploymentStatus.unavailableReplicas}',
+                style: TextStyle(
+                  fontFamily: "Montserrat",
+                )),
+            SizedBox(height: 16),
+            Text(
+              'Conditions:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 80, // Constrain height of ListView.builder
+              child: ListView.builder(
+                itemCount: deploymentStatus.conditions.length,
+                itemBuilder: (context, index) {
+                  final condition = deploymentStatus.conditions[index];
+                  return Neumorphic(
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      shape: NeumorphicShape.flat,
+                      disableDepth: true,
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(24)),
+                      color: AppColors.backgroundPrimary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundSecondary(context),
+                        width: 2,
+                      ),
+                    ),
+                    padding: EdgeInsets.all(8),
+                    margin: EdgeInsets.all(8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // Type on the left
+                        Container(
+                          width: 120,
+                          padding: EdgeInsets.only(left: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(condition.type,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Montserrat",
+                                    color: AppColors.contentPrimary(context),
+                                  )),
+                              Text(
+                                  "${DateTimeService().getHourMinuteWithMarker(condition.lastUpdateTime)}",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "Montserrat",
+                                      color:
+                                          AppColors.contentSecondary(context))),
+                            ],
+                          ),
+                        ),
+
+                        // Message on the right
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(condition.message,
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "Montserrat",
+                                      color:
+                                          AppColors.contentPrimary(context))),
+
+                              // Labels for Last Update and Transition Times
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 4),
+                                      Text(condition.reason,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "Montserrat",
+                                              color: AppColors.contentPrimary(
+                                                  context))),
+                                      SizedBox(height: 8),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 4),
+                                      Text(
+                                          "${DateTimeService().getHourMinuteWithMarker(condition.lastTransitionTime)}",
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "Montserrat",
+                                              color: AppColors.contentSecondary(
+                                                  context))),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildMetadataCard(cpb2.DeploymentMetadata metadata) {
+    // print("_buildMetadataCard: metadata: ${metadata}");
     return Neumorphic(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       style: NeumorphicStyle(
@@ -132,6 +317,15 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
     );
   }
 
+  _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   List<Widget> _buildPodTemplate(cpb2.PodTemplate podTemplate) {
     return podTemplate.containers.map((container) {
       return Neumorphic(
@@ -170,11 +364,20 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Text('Endpoints:',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Galaxy: 13.200.238.161'),
+                  const SizedBox(height: 8.0),
                   const Text('Ports:',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   ...container.ports.map((port) {
-                    return Text(
-                      'Name: ${port.name}, Port: ${port.containerPort}, Protocol: ${port.protocol}',
+                    return GestureDetector(
+                      onTap: () {
+                        _launchURL("http://13.200.238.161:${port.nodePort}");
+                      },
+                      child: Text(
+                        'Name: ${port.name}, Port: ${port.containerPort}, Protocol: ${port.protocol}, Node Port: ${port.nodePort}',
+                      ),
                     );
                   }).toList(),
                   const SizedBox(height: 8.0),
