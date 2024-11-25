@@ -103,7 +103,7 @@ class _ConversationsNotificationTrayState
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontFamily: "Montserrat",
-                        color: AppColors.contentTertiary(context),
+                        color: AppColors.contentSecondary(context),
                       ),
                     ),
                     subtitle: Text(
@@ -112,7 +112,7 @@ class _ConversationsNotificationTrayState
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontFamily: "Montserrat",
-                        color: AppColors.contentSecondary(context),
+                        color: AppColors.contentTertiary(context),
                       ),
                     ),
                     trailing: conversation.unreadCount > 0

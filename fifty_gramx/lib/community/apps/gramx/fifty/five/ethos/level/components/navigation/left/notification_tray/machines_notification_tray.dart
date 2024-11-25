@@ -4,29 +4,10 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class MachinesNotificationTray extends NotificationTray {
-  final double aggregatedCpu;
-  final double aggregatedMemory;
-  final double aggregatedSsdStorage;
-  final double aggregatedHddStorage;
-  final double aggregatedGpuMemory;
-  final int aggregatedGpuCores;
-  final double aggregatedGpuFlops;
-  final int numberOfRegions;
-  final int numberOfNodes;
-
   final List<Map<String, dynamic>> nodeData;
 
   const MachinesNotificationTray({
     required this.nodeData,
-    required this.aggregatedCpu,
-    required this.aggregatedMemory,
-    required this.aggregatedSsdStorage,
-    required this.aggregatedHddStorage,
-    required this.aggregatedGpuMemory,
-    required this.aggregatedGpuCores,
-    required this.aggregatedGpuFlops,
-    required this.numberOfRegions,
-    required this.numberOfNodes,
     required List<AppNotification> notifications,
     required VoidCallback onViewDetails,
     required VoidCallback onClearAppNotifications,
@@ -122,8 +103,6 @@ class _MachinesNotificationTrayState
   }
 
   Widget buildTrayRow() {
-    final Map<String, dynamic> nodeData = widget.nodeData.first;
-
     final aggregatedData = _aggregateNodeData(widget.nodeData);
 
     return GestureDetector(
@@ -144,7 +123,7 @@ class _MachinesNotificationTrayState
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       fontFamily: "Montserrat",
-                      color: AppColors.contentInverseSecondary(context),
+                      color: AppColors.contentTertiary(context),
                     ),
                   ),
                   Text(
@@ -152,8 +131,8 @@ class _MachinesNotificationTrayState
                     style: TextStyle(
                       fontSize: 28,
                       fontFamily: "Montserrat",
-                      color: AppColors.contentInverseSecondary(context),
-                      fontWeight: FontWeight.w500,
+                      color: AppColors.contentSecondary(context),
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
@@ -166,14 +145,14 @@ class _MachinesNotificationTrayState
                   Icon(
                     Icons.cloud, // Replace with custom icon if needed
                     size: 16,
-                    color: AppColors.contentInversePrimary(context),
+                    color: AppColors.contentSecondary(context),
                   ),
 
                   Text(
                     "Mostly Available",
                     style: TextStyle(
                         fontSize: 12,
-                        color: AppColors.contentInverseSecondary(context),
+                        color: AppColors.contentSecondary(context),
                         fontFamily: "Montserrat",
                         fontWeight: FontWeight.w300),
                   ),
@@ -181,7 +160,7 @@ class _MachinesNotificationTrayState
                     "H:550P L:240P",
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.contentInverseSecondary(context),
+                      color: AppColors.contentTertiary(context),
                       fontFamily: "Montserrat",
                     ),
                   ),
@@ -220,13 +199,13 @@ class _MachinesNotificationTrayState
               fontSize: 12,
               fontWeight: FontWeight.w300,
               fontFamily: "Montserrat",
-              color: AppColors.contentInverseTertiary(context)),
+              color: AppColors.contentTertiary(context)),
         ),
         SizedBox(height: 8),
         Icon(
           icon,
           size: 24,
-          color: AppColors.contentInversePrimary(context),
+          color: AppColors.contentTertiary(context),
         ),
         SizedBox(height: 8),
         Text(
@@ -235,7 +214,7 @@ class _MachinesNotificationTrayState
             fontSize: 12,
             fontWeight: FontWeight.w600,
             fontFamily: "Montserrat",
-            color: AppColors.contentInverseSecondary(context),
+            color: AppColors.contentSecondary(context),
           ),
         ),
       ],

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/account_assistant.pb.dart';
-import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/pay_in_account.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/eapp_flow_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/eutopia/managers/notification_manager.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
@@ -35,12 +34,16 @@ class OpenTilesPane extends StatefulWidget {
   /// Determines if the pane is navigating left.
   final bool isNavigatingLeft;
   final bool isVisible;
+  final String focusPaneKey;
+  final ValueChanged<String> focusPaneShift;
 
   /// Creates an [OpenTilesPane] widget.
   const OpenTilesPane({
     required this.selectPressedSectionItem,
     required this.isNavigatingLeft,
     required this.isVisible,
+    required this.focusPaneKey,
+    required this.focusPaneShift,
     Key? key,
   }) : super(key: key);
 
@@ -52,9 +55,19 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
   @override
   void initState() {
     super.initState();
+    getTilesData();
   }
 
+  Account account = Account();
+  double walletBalance = 0.0;
+  Map<String, int> podNPageDeployed = {};
+  List<Map<String, dynamic>> nodeData = [];
+  List<Conversation> conversationsData = [];
+
   void openIdentityApp() {
+    if (widget.focusPaneKey != "Open Pages") {
+      widget.focusPaneShift("Open Pages");
+    }
     AppFlowManager.instance.sendOpenAppNotification(
         communityCode: 50, orgName: "ethos", appName: "identity");
   }
@@ -80,7 +93,6 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
           width: 2,
         ),
       ),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: 7,
@@ -95,7 +107,7 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
             case 3:
               return _buildConversationsTile(context);
             case 4:
-              return SizedBox(); // _buildSpacesTile(context);
+              return SizedBox.shrink(); // _buildSpacesTile(context);
             case 5:
               return _buildPodsTile(context);
             case 6:
@@ -201,106 +213,76 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
     );
   }
 
+  getTilesData() async {
+    Account ac = await AccountData().readAccount();
+    setState(() {
+      account = ac;
+    });
+    var balResponse = await PayInAccountService.accountEthosCoinBalance();
+    setState(() {
+      walletBalance = balResponse.balance;
+    });
+    var pnpd = await _fetchTotalPodsNPagesDeployed();
+    setState(() {
+      podNPageDeployed = pnpd;
+    });
+    var nd = await _fetchNodeDetails();
+    setState(() {
+      nodeData = nd;
+    });
+    var cd = _buildRecentConversationsData();
+    setState(() {
+      conversationsData = cd;
+    });
+  }
+
   /// Builds an account tile to be displayed as a tile.
   Widget _buildAccountTile(BuildContext context) {
-    return FutureBuilder<Account>(
-      future: AccountData().readAccount(), // Fetch account data
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          // Show a loading spinner while the data is being fetched
-          return _buildColoredBox(context, Colors.orange.shade100);
-        } else if (snapshot.hasError) {
-          // Handle errors if the data fetching failed
-          return _buildColoredBox(
-            context,
-            Colors.red.shade100,
-          );
-        } else if (!snapshot.hasData || snapshot.data == Account.getDefault()) {
-          // Show a default tile if no account data is available
-          return _buildColoredBox(
-            context,
-            Colors.grey.shade200,
-          );
-        } else {
-          // Display account information in a tile
-          Account account = snapshot.data!;
-          return IdentityNotificationTray(
-            '${account.accountFirstName} ${account.accountLastName}',
-            'https://example.com/profile.jpg',
-            account.accountBillingActive,
-            'Milky Way',
-            'Andromeda',
-            'Open Galaxy',
-            notifications: NotificationManager.instance.getPageNotifications(
-                communityCode: "50",
-                orgName: "ethos",
-                appName: "identity",
-                pageNameCode: "EAIP-1001"),
-            onViewDetails: () {
-              openIdentityApp();
-            },
-            onClearAppNotifications: () => NotificationManager.instance
-                .clearPageNotifications(
-                    communityCode: "50",
-                    orgName: "ethos",
-                    appName: "identity",
-                    pageNameCode: "EAIP-1001"),
-          );
-        }
+    return IdentityNotificationTray(
+      '${account.accountFirstName} ${account.accountLastName}',
+      'https://example.com/profile.jpg',
+      account.accountBillingActive,
+      'Milky Way',
+      'Andromeda',
+      'Open Galaxy',
+      notifications: NotificationManager.instance.getPageNotifications(
+          communityCode: "50",
+          orgName: "ethos",
+          appName: "identity",
+          pageNameCode: "EAIP-1001"),
+      onViewDetails: () {
+        openIdentityApp();
       },
+      onClearAppNotifications: () => NotificationManager.instance
+          .clearPageNotifications(
+              communityCode: "50",
+              orgName: "ethos",
+              appName: "identity",
+              pageNameCode: "EAIP-1001"),
     );
   }
 
   _buildPayTile(BuildContext context) {
-    return FutureBuilder<AccountEthosCoinBalanceResponse>(
-      future: PayInAccountService.accountEthosCoinBalance(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text(
-            "Loading...",
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Text(
-            "Error",
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.red,
-            ),
-          );
-        } else if (snapshot.data == null ||
-            snapshot.data!.responseMeta.metaDone == false) {
-          return Text(
-            "0.00",
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.contentPrimary(context),
-            ),
-          );
-        } else {
-          return PayNotificationTray(
-              notifications: NotificationManager.instance.getPageNotifications(
-                  communityCode: "50",
-                  orgName: "ethos",
-                  appName: "pay",
-                  pageNameCode: "EAIP-1001"),
-              onViewDetails: () {
-                AppFlowManager.instance.sendOpenAppNotification(
-                    communityCode: 52, orgName: "ethos", appName: "pay");
-              },
-              onClearAppNotifications: () => NotificationManager.instance
-                  .clearPageNotifications(
-                      communityCode: "52",
-                      orgName: "ethos",
-                      appName: "pay",
-                      pageNameCode: "EAIP-1001"),
-              walletBalance: snapshot.data!.balance);
-        }
-      },
-    );
+    return PayNotificationTray(
+        notifications: NotificationManager.instance.getPageNotifications(
+            communityCode: "50",
+            orgName: "ethos",
+            appName: "pay",
+            pageNameCode: "EAIP-1001"),
+        onViewDetails: () {
+          if (widget.focusPaneKey != "Open Pages") {
+            widget.focusPaneShift("Open Pages");
+          }
+          AppFlowManager.instance.sendOpenAppNotification(
+              communityCode: 52, orgName: "ethos", appName: "pay");
+        },
+        onClearAppNotifications: () => NotificationManager.instance
+            .clearPageNotifications(
+                communityCode: "52",
+                orgName: "ethos",
+                appName: "pay",
+                pageNameCode: "EAIP-1001"),
+        walletBalance: walletBalance);
   }
 
   _buildConnectionsTile(BuildContext context) {
@@ -311,6 +293,9 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
           appName: "connections",
           pageNameCode: "EAIP-1001"),
       onViewDetails: () {
+        if (widget.focusPaneKey != "Open Pages") {
+          widget.focusPaneShift("Open Pages");
+        }
         AppFlowManager.instance.sendOpenAppNotification(
             communityCode: 50, orgName: "ethos", appName: "connections");
       },
@@ -345,7 +330,7 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
     );
   }
 
-  _buildConversationsTile(BuildContext context) {
+  List<Conversation> _buildRecentConversationsData() {
     // Get the list of the three most recent conversations
     final recentConversations =
         LocalConversationsService.conversedEntityWithLastConversationMessages
@@ -403,75 +388,31 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
       // buildConversationRow(
       //     heroTag, centerTitleText, centerSubtitleText, animation);
     });
-    return FutureBuilder<Account>(
-      future: AccountData().readAccount(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text(
-            "Loading...",
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Text(
-            "Error",
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.red,
-            ),
-          );
-        } else {
-          return FutureBuilder<AccountAssistant>(
-              future:
-                  DiscoverAccountAssistantService.getAccountAssistantByAccount(
-                      snapshot.data!),
-              builder: (context, assistantSnap) {
-                if (assistantSnap.connectionState == ConnectionState.waiting) {
-                  return Text(
-                    "Loading...",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                  );
-                } else if (assistantSnap.connectionState ==
-                        ConnectionState.done &&
-                    assistantSnap.hasData) {
-                  return ConversationsNotificationTray(
-                    recentConvo,
-                    notifications: NotificationManager.instance
-                        .getPageNotifications(
-                            communityCode: "50",
-                            orgName: "ethos",
-                            appName: "conversations",
-                            pageNameCode: "EAIP-1001"),
-                    onViewDetails: () {
-                      AppFlowManager.instance.sendOpenAppNotification(
-                          communityCode: 50,
-                          orgName: "ethos",
-                          appName: "conversations");
-                    },
-                    onClearAppNotifications: () => NotificationManager.instance
-                        .clearPageNotifications(
-                            communityCode: "50",
-                            orgName: "ethos",
-                            appName: "conversations",
-                            pageNameCode: "EAIP-1001"),
-                  );
-                } else {
-                  return Text(
-                    "Error",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.red,
-                    ),
-                  );
-                }
-              });
+
+    return recentConvo;
+  }
+
+  _buildConversationsTile(BuildContext context) {
+    return ConversationsNotificationTray(
+      conversationsData,
+      notifications: NotificationManager.instance.getPageNotifications(
+          communityCode: "50",
+          orgName: "ethos",
+          appName: "conversations",
+          pageNameCode: "EAIP-1001"),
+      onViewDetails: () {
+        if (widget.focusPaneKey != "Open Pages") {
+          widget.focusPaneShift("Open Pages");
         }
+        AppFlowManager.instance.sendOpenAppNotification(
+            communityCode: 50, orgName: "ethos", appName: "conversations");
       },
+      onClearAppNotifications: () => NotificationManager.instance
+          .clearPageNotifications(
+              communityCode: "50",
+              orgName: "ethos",
+              appName: "conversations",
+              pageNameCode: "EAIP-1001"),
     );
   }
 
@@ -520,10 +461,13 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
                             appName: "knowledge_spaces",
                             pageNameCode: "EAIP-1001"),
                     onViewDetails: () {
-                      AppFlowManager.instance.sendOpenAppNotification(
-                          communityCode: 50,
-                          orgName: "ethos",
-                          appName: "knowledge_spaces");
+                      if (widget.focusPaneKey != "Space Domains") {
+                        widget.focusPaneShift("Space Domains");
+                      }
+                      // AppFlowManager.instance.sendOpenAppNotification(
+                      //     communityCode: 50,
+                      //     orgName: "ethos",
+                      //     appName: "knowledge_spaces");
                     },
                     onClearAppNotifications: () => NotificationManager.instance
                         .clearPageNotifications(
@@ -615,68 +559,27 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
   }
 
   _buildMachinesTile(BuildContext context) {
-    return FutureBuilder<List<Map<String, dynamic>>>(
-        future: _fetchNodeDetails(),
-        builder: (context, machineSnapshot) {
-          if (machineSnapshot.connectionState == ConnectionState.waiting) {
-            return Text(
-              "Loading...",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            );
-          } else if (machineSnapshot.connectionState == ConnectionState.done &&
-              machineSnapshot.hasData) {
-            MachinesTileData data = MachinesTileData(
-                aggregatedCpu: 1.0,
-                aggregatedMemory: 1.0,
-                aggregatedSsdStorage: 1.0,
-                aggregatedHddStorage: 1.0,
-                aggregatedGpuMemory: 1.0,
-                aggregatedGpuCores: 1,
-                aggregatedGpuFlops: 1.0,
-                numberOfRegions: 1,
-                numberOfNodes: 1);
-            return MachinesNotificationTray(
-              nodeData: machineSnapshot.data!,
-              aggregatedCpu: data.aggregatedCpu,
-              aggregatedMemory: data.aggregatedMemory,
-              aggregatedSsdStorage: data.aggregatedSsdStorage,
-              aggregatedHddStorage: data.aggregatedHddStorage,
-              aggregatedGpuMemory: data.aggregatedGpuMemory,
-              aggregatedGpuCores: data.aggregatedGpuCores,
-              aggregatedGpuFlops: data.aggregatedGpuFlops,
-              numberOfRegions: data.numberOfRegions,
-              numberOfNodes: data.numberOfNodes,
-              notifications: NotificationManager.instance.getPageNotifications(
-                  communityCode: "70",
-                  orgName: "ethos",
-                  appName: "pods-gpu-pricing",
-                  pageNameCode: "EAIP-1001"),
-              onViewDetails: () {
-                AppFlowManager.instance.sendOpenAppNotification(
-                    communityCode: 70,
-                    orgName: "ethos",
-                    appName: "pods-gpu-pricing");
-              },
-              onClearAppNotifications: () => NotificationManager.instance
-                  .clearPageNotifications(
-                      communityCode: "70",
-                      orgName: "ethos",
-                      appName: "pods-gpu-pricing",
-                      pageNameCode: "EAIP-1001"),
-            );
-          } else {
-            return Text(
-              "Error",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.red,
-              ),
-            );
-          }
-        });
+    return MachinesNotificationTray(
+      nodeData: nodeData,
+      notifications: NotificationManager.instance.getPageNotifications(
+          communityCode: "70",
+          orgName: "ethos",
+          appName: "pods-gpu-pricing",
+          pageNameCode: "EAIP-1001"),
+      onViewDetails: () {
+        if (widget.focusPaneKey != "Open Pages") {
+          widget.focusPaneShift("Open Pages");
+        }
+        AppFlowManager.instance.sendOpenAppNotification(
+            communityCode: 70, orgName: "ethos", appName: "pods-gpu-pricing");
+      },
+      onClearAppNotifications: () => NotificationManager.instance
+          .clearPageNotifications(
+              communityCode: "70",
+              orgName: "ethos",
+              appName: "pods-gpu-pricing",
+              pageNameCode: "EAIP-1001"),
+    );
   }
 
   Future<Map<String, int>> _fetchTotalPodsNPagesDeployed() async {
@@ -710,55 +613,38 @@ class _OpenTilesPaneState extends State<OpenTilesPane> {
   }
 
   _buildPodsTile(BuildContext context) {
-    return FutureBuilder<Map<String, int>>(
-        future: _fetchTotalPodsNPagesDeployed(),
-        builder: (context, podNPageDeployed) {
-          if (podNPageDeployed.connectionState == ConnectionState.waiting) {
-            return Text(
-              "Loading...",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            );
-          } else if (podNPageDeployed.connectionState == ConnectionState.done &&
-              podNPageDeployed.hasData) {
-            return PodsNotificationTray(
-              podNPageDeployed.data!["pods"]!,
-              podNPageDeployed.data!["pages"]!,
-              notifications: NotificationManager.instance.getPageNotifications(
-                  communityCode: "70",
-                  orgName: "ethos",
-                  appName: "pods",
-                  pageNameCode: "EAIP-1001"),
-              onViewDetails: () {
-                AppFlowManager.instance.sendOpenAppNotification(
-                    communityCode: 70, orgName: "ethos", appName: "pods");
-              },
-              onClearAppNotifications: () => NotificationManager.instance
-                  .clearPageNotifications(
-                      communityCode: "70",
-                      orgName: "ethos",
-                      appName: "pods",
-                      pageNameCode: "EAIP-1001"),
-            );
-          } else {
-            return Text(
-              "Error",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.red,
-              ),
-            );
-          }
-        });
+    return PodsNotificationTray(
+      podNPageDeployed["pods"] ?? 0,
+      podNPageDeployed["pages"] ?? 0,
+      notifications: NotificationManager.instance.getPageNotifications(
+          communityCode: "70",
+          orgName: "ethos",
+          appName: "pods",
+          pageNameCode: "EAIP-1001"),
+      onViewDetails: () {
+        if (widget.focusPaneKey != "Open Pages") {
+          widget.focusPaneShift("Open Pages");
+        }
+        AppFlowManager.instance.sendOpenAppNotification(
+            communityCode: 70, orgName: "ethos", appName: "pods");
+      },
+      onClearAppNotifications: () => NotificationManager.instance
+          .clearPageNotifications(
+              communityCode: "70",
+              orgName: "ethos",
+              appName: "pods",
+              pageNameCode: "EAIP-1001"),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.isVisible,
-      child: Container(width: 322, child: _buildTiles(context)),
+      child: Container(
+        width: 322,
+        child: _buildTiles(context),
+      ),
     );
   }
 }
