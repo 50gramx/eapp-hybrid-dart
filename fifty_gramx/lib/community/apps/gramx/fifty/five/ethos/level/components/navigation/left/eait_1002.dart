@@ -7,7 +7,6 @@ import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/componen
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/focus_pane_tab.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/layout_breakpoint.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
-import 'package:fifty_gramx/data/accountData.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -26,6 +25,8 @@ class EAIT1002 extends StatefulWidget {
     required this.openPagesTabs,
     required this.toggleSearchOnTop,
     required this.focusPaneShift,
+    required this.isAccountAvailable,
+    required this.onAccountAvailability,
     Key? key,
   });
 
@@ -41,6 +42,8 @@ class EAIT1002 extends StatefulWidget {
   final Widget openPagesTabs;
   final Function() toggleSearchOnTop;
   final Function(String) focusPaneShift;
+  final bool isAccountAvailable;
+  final ValueChanged<bool> onAccountAvailability;
 
   @override
   _EAIT1002State createState() => _EAIT1002State();
@@ -50,15 +53,6 @@ class _EAIT1002State extends State<EAIT1002> {
   /// internal instance of LocalNotifications
   static Stream<LocalNotification> _notificationsStream =
       NotificationsBloc.instance.notificationsStream;
-
-  bool _isAccountAvailable = false;
-
-  checkAccountStatus() async {
-    bool isAvailable = await AccountData().isValid();
-    setState(() {
-      _isAccountAvailable = isAvailable;
-    });
-  }
 
   _handleSearchCollapseView(LocalNotification message) {
     if (message.data["searchCollapsed"] == true) {
@@ -84,7 +78,6 @@ class _EAIT1002State extends State<EAIT1002> {
 
   @override
   void initState() {
-    checkAccountStatus();
     _notificationsStream.listen((notification) {
       handleListeningMessages(notification);
     });
@@ -93,7 +86,7 @@ class _EAIT1002State extends State<EAIT1002> {
 
   buildCommunityCardIcon() {
     return NeumorphicIcon(
-      _isAccountAvailable
+      widget.isAccountAvailable
           ? (widget.isOpenTilePaneVisible
               ? Icons.panorama_horizontal_rounded
               : Icons.panorama_photosphere_outlined)
@@ -108,7 +101,7 @@ class _EAIT1002State extends State<EAIT1002> {
             : AppColors.backgroundSecondary(context),
         shape: NeumorphicShape.concave,
         boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-        color: _isAccountAvailable
+        color: widget.isAccountAvailable
             ? AppColors.contentSecondary(context)
             : AppColors.contentInversePrimary(context),
       ),
@@ -120,7 +113,7 @@ class _EAIT1002State extends State<EAIT1002> {
       child: NeumorphicButton(
           provideHapticFeedback: true,
           onPressed: () {
-            if (_isAccountAvailable) {
+            if (widget.isAccountAvailable) {
               handleOpenTilePaneStateToggle(widget.isOpenTilePaneVisible);
             } else {
               showDialog(
@@ -128,12 +121,8 @@ class _EAIT1002State extends State<EAIT1002> {
                   barrierDismissible: true,
                   builder: (BuildContext context) {
                     return GetStartedWidget(
-                      isAccountLoggedIn: _isAccountAvailable,
-                      completedSuccessfulSignIn: () {
-                        setState(() {
-                          _isAccountAvailable = true;
-                        });
-                      },
+                      isAccountAvailable: widget.isAccountAvailable,
+                      onAccountAvailability: widget.onAccountAvailability,
                     );
                   });
             }
@@ -148,7 +137,7 @@ class _EAIT1002State extends State<EAIT1002> {
             shape: NeumorphicShape.flat,
             disableDepth: true,
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
-            color: _isAccountAvailable
+            color: widget.isAccountAvailable
                 ? AppColors.backgroundPrimary(context)
                 : AppColors.backgroundInversePrimary(context),
             border: NeumorphicBorder(
@@ -272,7 +261,10 @@ class _EAIT1002State extends State<EAIT1002> {
                   widget.isSearchVisible
                       ? FocusPaneTab(
                           focusPaneKey: widget.focusPaneKey,
-                          focusPaneShift: widget.focusPaneShift)
+                          focusPaneShift: widget.focusPaneShift,
+                          isAccountAvailable: widget.isAccountAvailable,
+                          isNavigatingLeft: widget.isNavigatingLeft,
+                        )
                       : SizedBox.shrink(),
                 ]),
               );
@@ -302,10 +294,12 @@ class _EAIT1002State extends State<EAIT1002> {
         children: [
           Visibility(
             visible: LayoutBreakpoint().isNavigatingLeft(context)
-                ? (isOneEappLoaded ? false : true)
+                ? (isOneEappLoaded
+                    ? false
+                    : (widget.focusPaneKey == "Top Picks" ? false : true))
                 : true,
             child: Container(
-                height: widget.isNavigatingLeft ? 120 : 48,
+                height: widget.isNavigatingLeft ? 120 : 120,
                 child: customScrollView),
           ),
           Expanded(

@@ -49,6 +49,10 @@ class _AdaptiveLeftNavigationScaffoldState
     print("_checkAccountStatus");
     // Simulating an async account status check
     bool isAvailable = await AccountData().isValid();
+    onAccountAvailability(isAvailable);
+  }
+
+  void onAccountAvailability(bool isAvailable) {
     setState(() {
       _isAccountAvailable = isAvailable;
     });
@@ -94,6 +98,8 @@ class _AdaptiveLeftNavigationScaffoldState
         selectedChildrenIndex: _currentlySelectedChildrenIndex,
         selectedParentIndex: _currentlySelectedParentIndex,
         parentStackAppNames: parentStackAppNames,
+        isAccountAvailable: _isAccountAvailable,
+        onAccountAvailability: onAccountAvailability,
       );
 
   /// Called when a tab selection occurs.

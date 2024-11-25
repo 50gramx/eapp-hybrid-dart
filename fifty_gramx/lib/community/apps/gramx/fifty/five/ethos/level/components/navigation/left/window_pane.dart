@@ -12,6 +12,8 @@ class WindowPane extends StatelessWidget {
   final Function() toggleSearchOnTop;
   final Widget openPagesTabs;
   final Function(String) focusPaneShift;
+  final bool isAccountAvailable;
+  final ValueChanged<bool> onAccountAvailability;
 
   WindowPane({
     required this.focusPaneKey,
@@ -24,6 +26,8 @@ class WindowPane extends StatelessWidget {
     required this.toggleSearchOnTop,
     required this.openPagesTabs,
     required this.focusPaneShift,
+    required this.isAccountAvailable,
+    required this.onAccountAvailability,
   });
 
   @override
@@ -40,6 +44,8 @@ class WindowPane extends StatelessWidget {
           toggleSearchOnTop: toggleSearchOnTop,
           openPagesTabs: openPagesTabs,
           focusPaneShift: focusPaneShift,
+          isAccountAvailable: isAccountAvailable,
+          onAccountAvailability: onAccountAvailability,
         ),
         tilesPane,
       ],

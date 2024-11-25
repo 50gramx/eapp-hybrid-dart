@@ -32,10 +32,14 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
   /// index of the selected tab as a parameter.
   final ValueChanged<int> onParentItemSelected;
 
+  final ValueChanged<bool> onAccountAvailability;
+
   /// The index of the currently selected tab.
   final int selectedParentIndex;
   final int selectedChildrenIndex;
   final List<String> parentStackAppNames;
+
+  final bool isAccountAvailable;
 
   /// Creates a new instance of [EutopiaLeftNavigationScaffold].
   ///
@@ -52,6 +56,8 @@ class EutopiaLeftNavigationScaffold extends StatefulWidget {
     required this.selectedChildrenIndex,
     required this.selectedParentIndex,
     required this.parentStackAppNames,
+    required this.isAccountAvailable,
+    required this.onAccountAvailability,
     Key? key,
   });
 
@@ -92,7 +98,7 @@ class _EutopiaLeftNavigationScaffoldState
   final List<bool> _shouldBuildParentsTab = <bool>[];
 
   /// Indicates whether the app is in focus mode.
-  String focusPaneKey = "Top Picks";
+  String focusPaneKey = "Launch Pod";
   bool _isEthosStackPagesVisible = false;
   bool isAnyChildAppLoaded = false;
   bool isSearchVisible = true;
@@ -361,7 +367,7 @@ class _EutopiaLeftNavigationScaffoldState
       return Row(
         children: [
           Visibility(
-            visible: isNavigatingLeft,
+            visible: true, // todo: fix this with isNavigating left
             child: Expanded(
               child: PageTabPane(
                 selectPressedSectionItem: selectChildrenItem,
@@ -456,6 +462,10 @@ class _EutopiaLeftNavigationScaffoldState
                               selectPressedSectionItem: selectChildrenItem,
                               isNavigatingLeft: isNavigatingLeft,
                               isVisible: isOpenTilePaneVisible,
+                              focusPaneKey: focusPaneKey,
+                              focusPaneShift: (shiftedFocus) {
+                                focusPaneShift(shiftedFocus);
+                              },
                             ),
                             visible: isNavigatingLeft
                                 ? isOneEappLoaded
@@ -469,12 +479,16 @@ class _EutopiaLeftNavigationScaffoldState
                           focusPaneShift: (shiftedFocus) {
                             focusPaneShift(shiftedFocus);
                           },
+                          isAccountAvailable: widget.isAccountAvailable,
+                          onAccountAvailability: widget.onAccountAvailability,
                         ),
                         isOpenTilePaneVisible: isOpenTilePaneVisible,
                         openPagesTabs: buildOpenPagesTab(),
                         focusPaneShift: (shiftedFocus) {
                           focusPaneShift(shiftedFocus);
                         },
+                        isAccountAvailable: widget.isAccountAvailable,
+                        onAccountAvailability: widget.onAccountAvailability,
                       ),
                     ),
                   ),

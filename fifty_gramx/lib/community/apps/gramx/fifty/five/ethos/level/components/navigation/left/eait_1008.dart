@@ -24,7 +24,9 @@ class EAIT1008 extends StatelessWidget {
             .length ==
         1;
     return Visibility(
-      visible: isNavigatingLeft ? false : (isOneEappLoaded ? false : true),
+      visible: isNavigatingLeft
+          ? false
+          : (isOneEappLoaded ? false : false), // todo: make it true when fixed
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
