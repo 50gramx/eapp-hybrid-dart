@@ -269,10 +269,10 @@ packages:
     dependency: "direct main"
     description:
       name: eapp_dart_domain
-      sha256: "3019618f3df9ba4653d72958ab2bdf1cc4bf41ed94a8839db8bd7a574bfce0be"
+      sha256: "3cfcd31ff580b62b329a01116d4f3cb87051f6c8ad3bb89288f4abd49ca47d4b"
       url: "https://dart.pkg.jetbrains.space/50gramx/p/main/dart-delivery/"
     source: hosted
-    version: "24.11.214"
+    version: "24.11.219"
   equatable:
     dependency: transitive
     description:
