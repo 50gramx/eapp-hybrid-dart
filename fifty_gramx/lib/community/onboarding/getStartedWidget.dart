@@ -17,16 +17,15 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 class GetStartedWidget extends StatefulWidget {
   const GetStartedWidget(
       {Key? key,
-      this.isAccountLoggedIn = false,
-      this.completedSuccessfulSignIn})
+      this.isAccountAvailable = false,
+      required this.onAccountAvailability})
       : super(key: key);
 
-  final bool isAccountLoggedIn;
+  final bool isAccountAvailable;
+  final ValueChanged<bool> onAccountAvailability;
 
   @override
   State<GetStartedWidget> createState() => _GetStartedWidgetState();
-
-  final VoidCallback? completedSuccessfulSignIn;
 }
 
 class _GetStartedWidgetState extends State<GetStartedWidget> {
@@ -42,11 +41,9 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
 
   completedSelectingUniverseCallback() async {
     if (Constants().eAppEnv == "com.50gramx") {
-      if (widget.completedSuccessfulSignIn != null) {
-        LocalServices().user();
-        widget.completedSuccessfulSignIn!();
-        Navigator.pop(context);
-      }
+      LocalServices().user();
+      widget.onAccountAvailability(true);
+      Navigator.pop(context);
     } else {
       setState(() {
         // update to select galaxy
@@ -146,7 +143,7 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
     _notificationsStream.listen(_handleListeningMessages);
 
     checkLogin();
-    if (widget.isAccountLoggedIn) {
+    if (widget.isAccountAvailable) {
       completedSelectingUniverseCallback();
     }
 
@@ -212,12 +209,11 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                                       left: 32, right: 32, top: 16, bottom: 4),
                                   child: RichText(
                                     text: TextSpan(
-                                      text:
-                                          "Ethos Identity - One Account. Unlimited Access.",
+                                      text: "One Account. Unlimited Access.",
                                       style: TextStyle(
                                           color:
                                               AppColors.contentPrimary(context),
-                                          fontSize: 18,
+                                          fontSize: 24,
                                           fontFamily: "Montserrat",
                                           fontWeight: FontWeight.w600,
                                           height: 1.14285714),
@@ -225,10 +221,30 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                                   ),
                                 ),
                               )),
+                          SizedBox(
+                            height: 32,
+                          ),
+                          ProgressHeadingListTile(
+                              // key: selectingUniverseHeadingKey,
+                              isTopMostTile: true,
+                              isHeadingActive: isSelectingCountry,
+                              isProgressed: isCountrySelected,
+                              isLastMostTile: true,
+                              headingTitle: "Getting Started"),
+                          GettingStartedUniverseColumnWidget(
+                            isSelectingCountry: isSelectingCountry,
+                            selectingUniverseHeadingKey:
+                                selectingUniverseHeadingKey,
+                            completedSelectingUniverseCallback: () async {
+                              await completedSelectingUniverseCallback();
+                            },
+                          ),
+                          SizedBox(
+                            height: 64,
+                          ),
                           Align(
-                              alignment: Alignment.centerLeft,
+                              alignment: Alignment.bottomLeft,
                               child: Container(
-                                height: 120,
                                 child: Padding(
                                   padding: EdgeInsets.only(
                                       left: 32, right: 32, top: 4, bottom: 16),
@@ -270,21 +286,6 @@ class _GetStartedWidgetState extends State<GetStartedWidget> {
                                   ),
                                 ),
                               )),
-                          ProgressHeadingListTile(
-                              // key: selectingUniverseHeadingKey,
-                              isTopMostTile: true,
-                              isHeadingActive: isSelectingCountry,
-                              isProgressed: isCountrySelected,
-                              isLastMostTile: true,
-                              headingTitle: "Getting Started"),
-                          GettingStartedUniverseColumnWidget(
-                            isSelectingCountry: isSelectingCountry,
-                            selectingUniverseHeadingKey:
-                                selectingUniverseHeadingKey,
-                            completedSelectingUniverseCallback: () async {
-                              await completedSelectingUniverseCallback();
-                            },
-                          ),
                           // ProgressHeadingListTile(
                           //   key: selectingGalaxyHeadingKey,
                           //   isHeadingActive: isSelectingGalaxy,
