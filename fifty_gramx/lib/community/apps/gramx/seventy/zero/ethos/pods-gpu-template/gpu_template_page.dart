@@ -8,11 +8,21 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-tem
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/deployment_summary_widget.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/instance_selection_widget.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods-gpu-template/instance_type_widget.dart';
+import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
 import 'package:fifty_gramx/services/product/service/domain/createSpaceServiceDomainService.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:http/http.dart' as http;
 
 class PodCreationPage extends StatefulWidget {
+  const PodCreationPage({
+    required this.isAccountAvailable,
+    required this.onAccountAvailability,
+    Key? key,
+  });
+
+  final bool isAccountAvailable;
+  final ValueChanged<bool> onAccountAvailability;
+
   @override
   _GPUTemplatePageState createState() => _GPUTemplatePageState();
 }
@@ -158,17 +168,29 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
   }
 
   startDeployment() async {
-    setState(() {
-      selectedDeployment
-        ..podTemplate.containers.first.resourceLimits =
-            selectedInstance.resourceLimits;
-      selectedDeployment..metadata.name = podName;
-    });
-    print("startDeployment: ${selectedDeployment}");
-    var response = await CreateSpaceServiceDomainService
-        .createDC499999999SpaceServiceDomain(
-            "name", "description", false, selectedDeployment);
-    print("callCreateService: $response");
+    if (widget.isAccountAvailable) {
+      setState(() {
+        selectedDeployment
+          ..podTemplate.containers.first.resourceLimits =
+              selectedInstance.resourceLimits;
+        selectedDeployment..metadata.name = podName;
+      });
+      print("startDeployment: ${selectedDeployment}");
+      var response = await CreateSpaceServiceDomainService
+          .createDC499999999SpaceServiceDomain(
+              "name", "description", false, selectedDeployment);
+      print("callCreateService: $response");
+    } else {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return GetStartedWidget(
+              isAccountAvailable: widget.isAccountAvailable,
+              onAccountAvailability: widget.onAccountAvailability,
+            );
+          });
+    }
   }
 
   Future<void> deployPod() async {
@@ -310,18 +332,24 @@ class _GPUTemplatePageState extends State<PodCreationPage> {
                         color: AppColors.backgroundPrimary(context),
                         width: 2,
                       ),
-                      color: AppColors.backgroundInversePrimary(context),
+                      color: widget.isAccountAvailable
+                          ? AppColors.backgroundInversePrimary(context)
+                          : AppColors.contentStateDisabled(context),
                     ),
                     onPressed: startDeployment,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: Text(
-                          "Launch Pod",
+                          widget.isAccountAvailable
+                              ? "Launch Pod"
+                              : "Sign-in to launch",
                           style: TextStyle(
                               fontFamily: "Montserrat",
                               fontWeight: FontWeight.w500,
-                              color: AppColors.contentInversePrimary(context),
+                              color: widget.isAccountAvailable
+                                  ? AppColors.contentInversePrimary(context)
+                                  : AppColors.backgroundStateDisabled(context),
                               fontSize: 16),
                         ),
                       ),
