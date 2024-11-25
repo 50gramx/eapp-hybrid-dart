@@ -68,7 +68,10 @@ class EappFlow {
       index = 5002;
       appTitle = "Get Started";
       iconData = FeatherIcons.logIn;
-      firstPage = GetStartedWidget();
+      firstPage = GetStartedWidget(
+        onAccountAvailability: (a) {},
+        isAccountAvailable: false,
+      );
     } else if (communityCode == 50 && title == 'site') {
       index = 5003;
       appTitle = "Ethos Site";
@@ -157,7 +160,10 @@ class EappFlow {
       index = 70092;
       appTitle = "GPU Cloud Template";
       iconData = FeatherIcons.hexagon;
-      firstPage = PodCreationPage();
+      firstPage = PodCreationPage(
+        isAccountAvailable: false,
+        onAccountAvailability: (t) {},
+      );
     } else if (communityCode == 70 && title == 'pods-gpu-cli') {
       index = 70093;
       appTitle = "GPU CLI";
