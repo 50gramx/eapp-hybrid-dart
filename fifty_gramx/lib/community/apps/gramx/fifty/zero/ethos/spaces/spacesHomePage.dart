@@ -197,7 +197,7 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                         ? "Personal Deployments"
                         : spaceServiceDomain.name,
                     subtitleText:
-                        "${DateTimeService().getFormattedTimeOrDate(spaceServiceDomain.createdAt)}",
+                        "${DateTimeService().getFormattedTimeOrDate(spaceServiceDomain.createdAt)} ${DateTimeService().getHourMinuteWithMarker(spaceServiceDomain.createdAt)}",
                     selectorCallback: () async {
                       await AppFlowManager.instance.loadAppOnTheGo(
                           appName: "pods",
