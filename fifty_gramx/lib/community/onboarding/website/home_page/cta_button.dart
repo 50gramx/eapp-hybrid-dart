@@ -76,6 +76,7 @@ pushToGetStartedWidget(BuildContext context, bool signedIn) {
       context,
       MaterialPageRoute(
           builder: (context) => GetStartedWidget(
-                isAccountLoggedIn: signedIn,
+                isAccountAvailable: signedIn,
+                onAccountAvailability: (a) {},
               )));
 }
