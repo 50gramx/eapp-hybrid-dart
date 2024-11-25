@@ -111,7 +111,8 @@ AppBar buildLandingPageAppBar(context) {
               context,
               MaterialPageRoute(
                   builder: (context) => GetStartedWidget(
-                        isAccountLoggedIn: false,
+                        isAccountAvailable: false,
+                        onAccountAvailability: (a) {},
                       )));
         },
         child: Text('Start free', style: TextStyle(color: Colors.white)),
