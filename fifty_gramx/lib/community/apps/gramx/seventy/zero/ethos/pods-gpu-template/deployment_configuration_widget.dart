@@ -19,52 +19,6 @@ class Template {
 // Define a list of available templates
 final List<Template> availableTemplates = [
   Template(
-      name: "Podeage Ubuntu",
-      description: "podeage/ubuntu:latest",
-      deployment: DC499999999_pb.Deployment(
-        metadata: DC499999999_pb.DeploymentMetadata(
-          name: "jupyter-notebook-2",
-          namespace: "default",
-          labels: {"app": "jupyter"},
-          annotations: {"description": "Jupyter Notebook Deployment"},
-        ),
-        replicaConfig: DC499999999_pb.ReplicaConfig(
-          replicas: 1,
-          strategy: "RollingUpdate",
-          minReadySeconds: 10,
-        ),
-        networkingConfig: DC499999999_pb.NetworkingConfig(
-          hostNetwork: false,
-          dnsPolicy: "ClusterFirst",
-          serviceAccountName: "default",
-        ),
-        selector: DC499999999_pb.LabelSelector(
-          matchLabels: {"app": "jupyter"},
-        ),
-        podTemplate: DC499999999_pb.PodTemplate(
-          labels: {"app": "jupyter"},
-          annotations: {"description": "Jupyter Notebook Pod Template"},
-          containers: [
-            DC499999999_pb.Container(
-              name: "jupyter-container",
-              image: "jupyter/minimal-notebook",
-              resourceRequests:
-                  DC499999999_pb.ResourceRequests(cpu: "500m", memory: "512Mi"),
-              resourceLimits:
-                  DC499999999_pb.ResourceLimits(cpu: "500m", memory: "512Mi"),
-              ports: [
-                DC499999999_pb.ContainerPort(
-                    name: "http", containerPort: 8888, protocol: "TCP"),
-              ],
-              envVars: [
-                DC499999999_pb.EnvVar(
-                    name: "JUPYTER_TOKEN", value: "your_token_here"),
-              ],
-            ),
-          ],
-        ),
-      )),
-  Template(
       name: "Jupyter Notebook",
       description: "jupyter/minimal-notebook",
       deployment: DC499999999_pb.Deployment(
@@ -92,67 +46,20 @@ final List<Template> availableTemplates = [
           annotations: {"description": "Jupyter Notebook Pod Template"},
           containers: [
             DC499999999_pb.Container(
-              name: "jupyter-container",
-              image: "jupyter/minimal-notebook",
-              resourceRequests:
-                  DC499999999_pb.ResourceRequests(cpu: "125m", memory: "256Mi"),
-              resourceLimits:
-                  DC499999999_pb.ResourceLimits(cpu: "500m", memory: "512Mi"),
-              ports: [
-                DC499999999_pb.ContainerPort(
-                    name: "http", containerPort: 8888, protocol: "TCP"),
-              ],
-              envVars: [
-                DC499999999_pb.EnvVar(
-                    name: "JUPYTER_TOKEN", value: "your_token_here"),
-              ],
-            ),
-          ],
-        ),
-      )),
-  Template(
-      name: "CentOS",
-      description: "centos:latest",
-      deployment: DC499999999_pb.Deployment(
-        metadata: DC499999999_pb.DeploymentMetadata(
-          name: "jupyter-notebook-2",
-          namespace: "default",
-          labels: {"app": "jupyter"},
-          annotations: {"description": "Jupyter Notebook Deployment"},
-        ),
-        replicaConfig: DC499999999_pb.ReplicaConfig(
-          replicas: 1,
-          strategy: "RollingUpdate",
-          minReadySeconds: 10,
-        ),
-        networkingConfig: DC499999999_pb.NetworkingConfig(
-          hostNetwork: false,
-          dnsPolicy: "ClusterFirst",
-          serviceAccountName: "default",
-        ),
-        selector: DC499999999_pb.LabelSelector(
-          matchLabels: {"app": "jupyter"},
-        ),
-        podTemplate: DC499999999_pb.PodTemplate(
-          labels: {"app": "jupyter"},
-          annotations: {"description": "Jupyter Notebook Pod Template"},
-          containers: [
-            DC499999999_pb.Container(
-              name: "jupyter-container",
-              image: "jupyter/minimal-notebook",
-              resourceRequests:
-                  DC499999999_pb.ResourceRequests(cpu: "500m", memory: "512Mi"),
-              resourceLimits:
-                  DC499999999_pb.ResourceLimits(cpu: "500m", memory: "512Mi"),
-              ports: [
-                DC499999999_pb.ContainerPort(
-                    name: "http", containerPort: 8888, protocol: "TCP"),
-              ],
-              envVars: [
-                DC499999999_pb.EnvVar(
-                    name: "JUPYTER_TOKEN", value: "your_token_here"),
-              ],
-            ),
+                name: "jupyter-container",
+                image: "jupyter/minimal-notebook",
+                resourceRequests: DC499999999_pb.ResourceRequests(
+                    cpu: "125m", memory: "256Mi"),
+                resourceLimits:
+                    DC499999999_pb.ResourceLimits(cpu: "500m", memory: "512Mi"),
+                ports: [
+                  DC499999999_pb.ContainerPort(
+                      name: "http", containerPort: 8888, protocol: "TCP"),
+                ],
+                args: [
+                  "start-notebook.py",
+                  "--IdentityProvider.token=''"
+                ]),
           ],
         ),
       )),
