@@ -16,6 +16,8 @@ class OpenPagesPane extends StatelessWidget {
   final Function() toggleSearchOnTop;
   final Widget openPagesTabs;
   final Function(String) focusPaneShift;
+  final bool isAccountAvailable;
+  final ValueChanged<bool> onAccountAvailability;
 
   OpenPagesPane({
     required this.focusPaneKey,
@@ -27,6 +29,8 @@ class OpenPagesPane extends StatelessWidget {
     required this.toggleSearchOnTop,
     required this.openPagesTabs,
     required this.focusPaneShift,
+    required this.isAccountAvailable,
+    required this.onAccountAvailability,
   });
 
   Widget buildSecondColumn(BuildContext context) {
@@ -261,6 +265,7 @@ class OpenPagesPane extends StatelessWidget {
                       containingFlowTitle: "Spaces",
                       focusPaneKey: focusPaneKey,
                       focusPaneShift: focusPaneShift,
+                      isAccountAvailable: isAccountAvailable,
                     ),
                   )
                 : SizedBox.shrink(),
@@ -275,7 +280,10 @@ class OpenPagesPane extends StatelessWidget {
                 : SizedBox.shrink(),
             focusPaneKey == "Launch Pod"
                 ? Flexible(
-                    child: PodCreationPage(),
+                    child: PodCreationPage(
+                      isAccountAvailable: isAccountAvailable,
+                      onAccountAvailability: onAccountAvailability,
+                    ),
                   )
                 : SizedBox.shrink(),
             focusPaneKey == "Space Domains"

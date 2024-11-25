@@ -1,13 +1,18 @@
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:fifty_gramx/data/accountData.dart';
 import 'package:flutter/material.dart';
 
 class FocusPaneTab extends StatefulWidget {
   final String focusPaneKey;
   final Function(String) focusPaneShift;
+  final bool isAccountAvailable;
+  final bool isNavigatingLeft;
 
   const FocusPaneTab(
-      {super.key, required this.focusPaneKey, required this.focusPaneShift});
+      {super.key,
+      required this.focusPaneKey,
+      required this.focusPaneShift,
+      required this.isAccountAvailable,
+      required this.isNavigatingLeft});
 
   @override
   _FocusPaneTabState createState() => _FocusPaneTabState();
@@ -16,31 +21,24 @@ class FocusPaneTab extends StatefulWidget {
 class _FocusPaneTabState extends State<FocusPaneTab> {
   // Dictionary to store tab names and their rank
   final Map<String, int> _tabs = {
-    "Top Picks": 1,
-    "Podeage": 2,
-    "Space Domains": 4,
-    "Launch Pod": 3,
-    "Open Pages": 5,
+    // "Top Picks": 1,
+    // "Podeage": 2,
+    "Space Domains": 2,
+    "Launch Pod": 1,
+    "Open Pages": 3,
     "Extra Tab 1": 6,
     "Extra Tab 2": 7
   };
 
-  // Variable to keep track of the selected tab key
-  String _selectedTabKey = "Launch Pod";
-
-  bool _isAccountAvailable = false;
-
-  checkAccountStatus() async {
-    bool isAvailable = await AccountData().isValid();
-    setState(() {
-      _isAccountAvailable = isAvailable;
-    });
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
-  void initState() {
-    checkAccountStatus();
-    super.initState();
+  void dispose() {
+    // Cancel timers, streams, or listeners here
+    super.dispose();
   }
 
   @override
@@ -48,7 +46,7 @@ class _FocusPaneTabState extends State<FocusPaneTab> {
     // Sort the tabs by rank and take the top 5
     final sortedTabs = _tabs.entries.toList()
       ..sort((a, b) => a.value.compareTo(b.value));
-    final topTabs = sortedTabs.take(_isAccountAvailable ? 5 : 3).toList();
+    final topTabs = sortedTabs.take(widget.isAccountAvailable ? 3 : 1).toList();
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,7 +70,7 @@ class _FocusPaneTabState extends State<FocusPaneTab> {
                     color: isSelected
                         ? AppColors.contentPrimary(context)
                         : AppColors.contentSecondary(context),
-                    fontSize: 14,
+                    fontSize: widget.isNavigatingLeft ? 14 : 12,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w500,
                   ),
