@@ -24,6 +24,7 @@ import 'dart:ui';
 
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Style/AppTextStyle.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/community_logo.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/navigation/left/focus_pane_tab.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/service/domain/createSpaceServiceDomainService.dart';
@@ -41,6 +42,7 @@ class TopPicksPage extends StatefulWidget {
     required this.containingFlowTitle,
     required this.focusPaneKey,
     required this.focusPaneShift,
+    required this.isAccountAvailable,
     Key? key,
   }) : super(key: key);
 
@@ -48,6 +50,7 @@ class TopPicksPage extends StatefulWidget {
   final String containingFlowTitle;
   final String focusPaneKey;
   final Function(String) focusPaneShift;
+  final bool isAccountAvailable;
 
   @override
   State<TopPicksPage> createState() {
@@ -69,19 +72,180 @@ class _TopPicksPageState extends State<TopPicksPage> {
     super.dispose();
   }
 
+  Widget buildExpandedSearch() {
+    return FlexibleSpaceBar(
+      background: Stack(
+        children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            SizedBox(
+                height: MediaQuery.of(context).padding.top), // Padding to top
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "evo",
+                style: TextStyle(
+                  fontSize: 64,
+                  fontFamily: "Montserrat",
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.contentPrimary(context),
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            FractionallySizedBox(
+              widthFactor: 0.7, // Adjusted width to 70% of the screen
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Neumorphic(
+                  child: TextField(
+                    style: AppTextStyle.themeTitleTextStyle(context),
+                    cursorColor: AppColors.contentPrimary(context),
+                    decoration: InputDecoration(
+                      hintText: "Search ethosverse",
+                      hintStyle: TextStyle(
+                          color: AppColors.contentSecondary(context),
+                          fontSize: 16,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.w400,
+                          height: 1.5),
+                      contentPadding: EdgeInsets.fromLTRB(8, 12, 16, 0),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: AppColors.contentSecondary(context),
+                      ),
+                      border: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      disabledBorder: InputBorder.none,
+                    ),
+                  ),
+                  style: NeumorphicStyle(
+                    lightSource: NeumorphicTheme.isUsingDark(context)
+                        ? LightSource.bottomRight
+                        : LightSource.topLeft,
+                    shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                        ? AppColors.gray600
+                        : AppColors.backgroundSecondary(context),
+                    border: NeumorphicBorder(
+                      isEnabled: true,
+                      color: AppColors.backgroundSecondary(context),
+                      width: 2,
+                    ),
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(BorderRadius.circular(24)),
+                    color: AppColors.backgroundPrimary(context),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 64),
+            FocusPaneTab(
+              focusPaneKey: widget.focusPaneKey,
+              focusPaneShift: widget.focusPaneShift,
+              isAccountAvailable: widget.isAccountAvailable,
+              isNavigatingLeft: false,
+            ),
+            SizedBox(height: 10),
+          ]),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCollapsedSearch() {
+    print("buildCollapsedSearch");
+    return Padding(
+      padding: EdgeInsets.only(right: 0),
+      child: Column(children: [
+        FlexibleSpaceBar(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // Add "50GRAMX" text next to the search bar
+              CommunityLogo(),
+              SizedBox(width: 8), // Spacing between title and search bar
+
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, top: 24, right: 260),
+                  child: Neumorphic(
+                    child: TextField(
+                      style: AppTextStyle.themeTitleTextStyle(context),
+                      cursorColor: AppColors.contentPrimary(context),
+                      decoration: InputDecoration(
+                        hintText: "Search Ethosverse",
+                        hintStyle: TextStyle(
+                            color: AppColors.contentSecondary(context),
+                            fontSize: 16,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w400,
+                            height: 1.5),
+                        contentPadding: EdgeInsets.fromLTRB(8, 12, 16, 0),
+                        prefixIcon: Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: Icon(
+                            Icons.search,
+                            color: AppColors.contentTertiary(context),
+                          ),
+                        ),
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                      ),
+                    ),
+                    style: NeumorphicStyle(
+                      lightSource: NeumorphicTheme.isUsingDark(context)
+                          ? LightSource.bottomRight
+                          : LightSource.topLeft,
+                      shadowLightColor: NeumorphicTheme.isUsingDark(context)
+                          ? AppColors.gray600
+                          : AppColors.backgroundSecondary(context),
+                      border: NeumorphicBorder(
+                        isEnabled: true,
+                        color: AppColors.backgroundSecondary(context),
+                        width: 2,
+                      ),
+                      boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(24)),
+                      color: AppColors.backgroundPrimary(context),
+                      shape: NeumorphicShape.flat,
+                      disableDepth: true,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 6),
+        FocusPaneTab(
+          focusPaneKey: widget.focusPaneKey,
+          focusPaneShift: widget.focusPaneShift,
+          isAccountAvailable: widget.isAccountAvailable,
+          isNavigatingLeft: false,
+        ),
+      ]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.backgroundPrimary(context),
         body: CustomScrollView(slivers: <Widget>[
           SliverAppBar(
-            pinned: false,
+            pinned: true,
             expandedHeight: 260.0,
+            collapsedHeight: 120.0,
             backgroundColor: AppColors.backgroundPrimary(context),
+            surfaceTintColor: AppColors.backgroundPrimary(context),
             flexibleSpace: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 var collapseRatio = (constraints.maxHeight - kToolbarHeight) /
-                    (200 - kToolbarHeight);
+                    (260 - kToolbarHeight);
+                print(
+                    "kToolbarHeight: ${kToolbarHeight}, collapseRatio: ${collapseRatio}");
                 if (collapseRatio < 0.6) {
                   NotificationsBloc.instance.newNotification(LocalNotification(
                     "OpenPagesPane",
@@ -102,101 +266,9 @@ class _TopPicksPageState extends State<TopPicksPage> {
                   // toggleSearchOnTop();
                 }
 
-                return FlexibleSpaceBar(
-                  background: Stack(
-                    children: [
-                      // Background content (50GRAMx title and search bar)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (collapseRatio >= 0.6) ...[
-                            SizedBox(
-                                height: MediaQuery.of(context)
-                                    .padding
-                                    .top), // Padding to top
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Text(
-                                "evo",
-                                style: TextStyle(
-                                  fontSize: 64,
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.contentPrimary(context),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            FractionallySizedBox(
-                              widthFactor:
-                                  0.7, // Adjusted width to 70% of the screen
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Neumorphic(
-                                  child: TextField(
-                                    style: AppTextStyle.themeTitleTextStyle(
-                                        context),
-                                    cursorColor:
-                                        AppColors.contentPrimary(context),
-                                    decoration: InputDecoration(
-                                      hintText: "Search ethosverse",
-                                      hintStyle: TextStyle(
-                                          color: AppColors.contentSecondary(
-                                              context),
-                                          fontSize: 16,
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.w400,
-                                          height: 1.5),
-                                      contentPadding:
-                                          EdgeInsets.fromLTRB(8, 12, 16, 0),
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                        color:
-                                            AppColors.contentSecondary(context),
-                                      ),
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: InputBorder.none,
-                                      disabledBorder: InputBorder.none,
-                                    ),
-                                  ),
-                                  style: NeumorphicStyle(
-                                    lightSource:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? LightSource.bottomRight
-                                            : LightSource.topLeft,
-                                    shadowLightColor:
-                                        NeumorphicTheme.isUsingDark(context)
-                                            ? AppColors.gray600
-                                            : AppColors.backgroundSecondary(
-                                                context),
-                                    border: NeumorphicBorder(
-                                      isEnabled: true,
-                                      color: AppColors.backgroundSecondary(
-                                          context),
-                                      width: 2,
-                                    ),
-                                    boxShape: NeumorphicBoxShape.roundRect(
-                                        BorderRadius.circular(24)),
-                                    color: AppColors.backgroundPrimary(context),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 64),
-                            FocusPaneTab(
-                              focusPaneKey: widget.focusPaneKey,
-                              focusPaneShift: widget.focusPaneShift,
-                            ),
-                            SizedBox(height: 10),
-                          ],
-                        ],
-                      ),
-                    ],
-                  ),
-                );
+                return (collapseRatio >= 0.6)
+                    ? buildExpandedSearch()
+                    : buildCollapsedSearch();
               },
             ),
           ),
