@@ -15,6 +15,7 @@ class LocalServices {
     LocalNotificationService();
     LocalSpacesService.getMySpaceKnowledgeDomains();
     LocalSpacesService.getMySpaceServiceDomains();
+    LocalSpacesService.getMySpaceProductDomains();
   }
 
   conversations() async {
@@ -26,6 +27,7 @@ class LocalServices {
     LocalConversationsService().getMyConversations();
     LocalSpacesService.getMySpaceKnowledgeDomains();
     LocalSpacesService.getMySpaceServiceDomains();
+    LocalSpacesService.getMySpaceProductDomains();
   }
 
   notifications() async {

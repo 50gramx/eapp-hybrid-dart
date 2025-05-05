@@ -68,7 +68,7 @@ class DC499999999EPME5000Capabilities {
         (await AccessSpaceServiceDomainService.spaceServiceDomainAccessToken(
                 spaceServiceDomain))
             .spaceServiceDomainServicesAccessAuthDetails;
-    var req = AuthWithCollarID(auth: auth, collarId: collarId);
+    var req = SSDAuthWithCollarID(auth: auth, collarId: collarId);
     var response = await (await capsClient).get(req);
     var d = response;
     print("DC499999999EPME5000Capabilities:get, got deployment, ${d}");

@@ -21,6 +21,10 @@
 
 import 'dart:io';
 
+import 'package:eapp_dart_domain/ethos/elint/collars/DC499999994.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/collars/DC499999998.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/collars/DC499999999.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/collars/DC500000000.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/account.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/generic.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/space.pb.dart';
@@ -29,10 +33,11 @@ import 'package:eapp_dart_domain/ethos/elint/services/product/identity/account/p
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/NeuButton/actionNeuButton.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/TextField/NameTextField.dart';
-import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/SelectSpaceKnowledgeDomainCollarPage.dart';
+import 'package:fifty_gramx/community/apps/gramx/fifty/zero/ethos/spaces/knowledge/domain/SelectSpaceKindDomainCollarLabelPage.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/configurations/selectorConfigurationItem.dart';
 import 'package:fifty_gramx/services/identity/account/payInAccountService.dart';
 import 'package:fifty_gramx/services/product/knowledge/domain/createSpaceKnowledgeDomainService.dart';
+import 'package:fifty_gramx/services/product/product/domain/createSpaceProductDomainService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -64,9 +69,23 @@ class _CreateSpaceKnowledgeDomainPageState
       TextEditingController();
   bool domainNameValidated = false;
   bool domainDescriptionValidated = false;
-  SpaceKnowledgeDomainCollarEnum selectedDomainCollarEnum =
-      SpaceKnowledgeDomainCollarEnum.BLUE_COLLAR;
+  late String selectedDomainCollarLabel;
+  late dynamic selectedDomainCollar;
   bool noTierBenefitsRemainingForClosedDomainLaunchThisMonth = false;
+
+  final knowledgeCollarOptions = [
+    {'label': 'WHITE', 'value': SpaceKnowledgeDomainCollarEnum.WHITE_COLLAR},
+  ];
+
+  final serviceCollarOptions = [
+    {'label': 'DC500000000', 'value': DC500000000()},
+    {'label': 'DC499999999', 'value': DC499999999()},
+    {'label': 'DC499999998', 'value': DC499999998()},
+  ];
+
+  final productCollarOptions = [
+    {'label': 'DC499999994', 'value': DC499999994()},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -172,21 +191,21 @@ class _CreateSpaceKnowledgeDomainPageState
                 padding:
                     EdgeInsets.only(top: 0, bottom: 0, right: 16, left: 16),
                 child: NameTextField(
-                    hintText: "Type knowledge domain name",
+                    hintText:
+                        "Type ${widget.spaceKind.name.toLowerCase()} domain name",
                     nameTextFieldController: domainNameTextFieldController)),
             Padding(
                 padding:
                     EdgeInsets.only(top: 0, bottom: 0, right: 16, left: 16),
                 child: NameTextField(
                   hintText:
-                      "Type ${widget.createIsolatedDomain ? "isolated" : "shared"} knowledge domain short description",
+                      "Type ${widget.createIsolatedDomain ? "isolated" : "shared"} ${widget.spaceKind.name.toLowerCase()} domain short description",
                   nameTextFieldController: domainDescriptionTextFieldController,
                   isTwoLines: true,
                 )),
             SelectorConfigurationItem(
               titleText: "Domain Collar",
-              subtitleText: selectedDomainCollarEnum.name
-                  .substring(0, selectedDomainCollarEnum.name.length - 7),
+              subtitleText: selectedDomainCollarLabel,
               selectorCallback: () {
                 _pushSelectSpaceKnowledgeDomainCollarPage();
               },
@@ -222,7 +241,13 @@ class _CreateSpaceKnowledgeDomainPageState
                         child: ActionNeuButton(
                           buttonTitle: "Launch",
                           buttonActionOnPressed: () {
-                            createSpaceKnowledgeDomain();
+                            if (widget.spaceKind == SpaceKind.KNOWLEDGE) {
+                              createSpaceKnowledgeDomain();
+                            } else if (widget.spaceKind == SpaceKind.SERVICE) {
+                              createSpaceProductDomain();
+                            } else if (widget.spaceKind == SpaceKind.PRODUCT) {
+                              createSpaceProductDomain();
+                            }
                           },
                           isPrimaryButton: true,
                           isPrimaryButtonDisabled:
@@ -242,8 +267,50 @@ class _CreateSpaceKnowledgeDomainPageState
     );
   }
 
+  onSelectCollarLabel({String domainCollarLabel = ""}) {
+    dynamic sdc = "";
+    if (widget.spaceKind == SpaceKind.KNOWLEDGE) {
+      if (domainCollarLabel == "") {
+        selectedDomainCollarLabel =
+            knowledgeCollarOptions.first["label"]!.toString();
+        sdc = knowledgeCollarOptions.first["value"]!;
+      } else {
+        var collarOption = knowledgeCollarOptions
+            .firstWhere((co) => co["label"] == domainCollarLabel);
+        sdc = collarOption["value"]!;
+      }
+    } else if (widget.spaceKind == SpaceKind.SERVICE) {
+      if (domainCollarLabel == "") {
+        selectedDomainCollarLabel =
+            serviceCollarOptions.first["label"]!.toString();
+        sdc = serviceCollarOptions.first["value"]!;
+      } else {
+        var collarOption = serviceCollarOptions
+            .firstWhere((co) => co["label"] == domainCollarLabel);
+        sdc = collarOption["value"]!;
+      }
+    } else if (widget.spaceKind == SpaceKind.PRODUCT) {
+      if (domainCollarLabel == "") {
+        selectedDomainCollarLabel =
+            productCollarOptions.first["label"]!.toString();
+        sdc = productCollarOptions.first["value"]!;
+      } else {
+        var collarOption = productCollarOptions
+            .firstWhere((co) => co["label"] == domainCollarLabel);
+        sdc = collarOption["value"]!;
+      }
+    } else {
+      selectedDomainCollarLabel = "";
+      selectedDomainCollar = "";
+    }
+    setState(() {
+      selectedDomainCollar = sdc;
+    });
+  }
+
   @override
   void initState() {
+    onSelectCollarLabel();
     domainNameTextFieldController.addListener(() {
       validateDomainName();
     });
@@ -289,7 +356,7 @@ class _CreateSpaceKnowledgeDomainPageState
         await CreateSpaceKnowledgeDomainService.createSpaceKnowledgeDomain(
             domainNameTextFieldController.text.trim(),
             domainDescriptionTextFieldController.text.trim(),
-            selectedDomainCollarEnum,
+            selectedDomainCollar,
             widget.createIsolatedDomain);
 
     if (createSpaceKnowledgeDomainResponse.responseMeta.metaDone) {
@@ -309,19 +376,42 @@ class _CreateSpaceKnowledgeDomainPageState
     }
   }
 
+  createSpaceProductDomain() async {
+    var createSpaceProductDomainResponse =
+        await CreateSpaceProductDomainService.createDC499999994SPD(
+            domainNameTextFieldController.text.trim(),
+            domainDescriptionTextFieldController.text.trim(),
+            widget.createIsolatedDomain);
+
+    if (createSpaceProductDomainResponse.metaDone) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(
+                "Successfully Launched Domain. Taking you to your spaces page")),
+      );
+      await Future.delayed(Duration(seconds: 1));
+      Navigator.of(context).pop();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(createSpaceProductDomainResponse.metaMessage)),
+      );
+    }
+  }
+
   void _pushSelectSpaceKnowledgeDomainCollarPage() {
     var isHorizontalNavigation = true;
     // If it's not horizontal navigation,
     // we should use the rootNavigator.
     Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
       _buildAdaptivePageRoute(
-        builder: (context) => SelectSpaceKnowledgeDomainCollarPage(
-            selectedCollarEnum: selectedDomainCollarEnum,
-            selectedSpaceKnowledgeDomainCollarEnum: (value) {
-              setState(() {
-                selectedDomainCollarEnum = value;
-              });
-            }),
+        builder: (context) => SelectSpaceKindDomainCollarLabelPage(
+          selectedCollarLabel: selectedDomainCollarLabel,
+          onSelectCollarLabel: (selectedLabel) {
+            print("selectedLabelCollar: ${selectedLabel}");
+            onSelectCollarLabel(domainCollarLabel: selectedLabel);
+          },
+          spaceKind: widget.spaceKind,
+        ),
         fullscreenDialog: !isHorizontalNavigation,
       ),
     );

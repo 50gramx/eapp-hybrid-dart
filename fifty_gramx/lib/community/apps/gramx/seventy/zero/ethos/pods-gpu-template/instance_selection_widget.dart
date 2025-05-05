@@ -36,7 +36,7 @@ class InstanceSelectionWidget extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(16),
       child: InstanceType(
-        title: 'Compute Optimised Instances',
+        title: 'Compute',
         clockSpeed: '3.2 GHz',
         memoryType: 'DDR4 RAM',
         storage: 'NVMe',

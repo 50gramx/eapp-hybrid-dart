@@ -1,38 +1,51 @@
+import 'package:eapp_dart_domain/ethos/elint/entities/space.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/colors/AppColors.dart';
-import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/Text/Title/listItemTitleText.dart';
 import 'package:fifty_gramx/community/apps/gramx/fifty/five/ethos/level/components/screen/appTabBar.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 /// This is the stateful widget that the main application instantiates.
-class SelectSpaceKnowledgeDomainCollarPage extends StatefulWidget {
-  const SelectSpaceKnowledgeDomainCollarPage({
+class SelectSpaceKindDomainCollarLabelPage extends StatefulWidget {
+  const SelectSpaceKindDomainCollarLabelPage({
     Key? key,
-    required this.selectedCollarEnum,
-    required this.selectedSpaceKnowledgeDomainCollarEnum,
+    required this.selectedCollarLabel,
+    required this.onSelectCollarLabel,
+    required this.spaceKind,
   }) : super(key: key);
 
-  final SpaceKnowledgeDomainCollarEnum selectedCollarEnum;
-  final Function(SpaceKnowledgeDomainCollarEnum)
-      selectedSpaceKnowledgeDomainCollarEnum;
+  final String selectedCollarLabel;
+  final Function(String) onSelectCollarLabel;
+  final SpaceKind spaceKind;
 
   @override
-  State<SelectSpaceKnowledgeDomainCollarPage> createState() =>
-      _SelectSpaceKnowledgeDomainCollarPageState();
+  State<SelectSpaceKindDomainCollarLabelPage> createState() =>
+      _SelectSpaceKindDomainCollarLabelPageState();
 }
 
-class _SelectSpaceKnowledgeDomainCollarPageState
-    extends State<SelectSpaceKnowledgeDomainCollarPage> {
-  updateSelectedCollarEnum(updatedEnum) {
-    widget.selectedSpaceKnowledgeDomainCollarEnum(updatedEnum);
-  }
+class _SelectSpaceKindDomainCollarLabelPageState
+    extends State<SelectSpaceKindDomainCollarLabelPage> {
+  final knowledgeCollarOptions = [
+    {'label': 'DC4999999XX', 'value': "Files"},
+  ];
+
+  final serviceCollarOptions = [
+    {'label': 'DC500000000', 'value': "AI Personality"},
+    {'label': 'DC499999999', 'value': "Pod Deployement"},
+    {'label': 'DC499999998', 'value': "VM Instance"},
+  ];
+
+  final productCollarOptions = [
+    {'label': 'DC499999994', 'value': "Skincare Products"},
+  ];
 
   @override
   Widget build(BuildContext context) {
+    var collarOptions = widget.spaceKind == SpaceKind.KNOWLEDGE
+        ? knowledgeCollarOptions
+        : (widget.spaceKind == SpaceKind.SERVICE
+            ? serviceCollarOptions
+            : productCollarOptions);
     return Scaffold(
       backgroundColor: AppColors.backgroundSecondary(context),
       appBar: CustomAppBar(
@@ -42,13 +55,11 @@ class _SelectSpaceKnowledgeDomainCollarPageState
           isActionEnabled: false,
           trailingButtonCallback: () {}),
       body: ListView.builder(
-          itemCount: SpaceKnowledgeDomainCollarEnum.values.length,
+          itemCount: collarOptions.length,
           itemBuilder: (context, position) {
-            var positionEnum = SpaceKnowledgeDomainCollarEnum.valueOf(position);
-            String titleText =
-                positionEnum!.name.substring(0, positionEnum.name.length - 7);
+            String collarLabel = collarOptions[position]["label"].toString();
             String formattedText =
-                "${titleText[0]}${titleText.substring(1, titleText.length).toLowerCase()} Collar";
+                "${collarLabel} Collar - ${collarOptions[position]["value"].toString()}";
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Neumorphic(
@@ -67,7 +78,7 @@ class _SelectSpaceKnowledgeDomainCollarPageState
                       ? AppColors.gray600
                       : AppColors.backgroundSecondary(context),
                 ),
-                child: NeumorphicRadio<SpaceKnowledgeDomainCollarEnum>(
+                child: NeumorphicRadio<String>(
                   child: ListTile(
                     dense: true,
                     title: ListItemTitleTextWidget(
@@ -75,7 +86,7 @@ class _SelectSpaceKnowledgeDomainCollarPageState
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                     ),
-                    trailing: positionEnum == widget.selectedCollarEnum
+                    trailing: collarLabel == widget.selectedCollarLabel
                         ? CircleAvatar(
                             radius: 12,
                             backgroundColor:
@@ -87,10 +98,10 @@ class _SelectSpaceKnowledgeDomainCollarPageState
                           )
                         : SizedBox(),
                   ),
-                  value: positionEnum,
-                  groupValue: widget.selectedCollarEnum,
-                  onChanged: (SpaceKnowledgeDomainCollarEnum? updatedValue) {
-                    updateSelectedCollarEnum(updatedValue);
+                  value: collarLabel,
+                  groupValue: widget.selectedCollarLabel,
+                  onChanged: (updatedCollarLabel) {
+                    widget.onSelectCollarLabel(updatedCollarLabel!);
                     Navigator.of(context).pop();
                   },
                   style: NeumorphicRadioStyle(

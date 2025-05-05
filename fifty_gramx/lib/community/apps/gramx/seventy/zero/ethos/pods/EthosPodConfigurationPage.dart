@@ -826,6 +826,34 @@ Widget buildConsolePage(BuildContext context, String containingFlowTitle) {
                   ));
             },
           ),
+
+          Container(
+              margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
+              child: FormInfoText("MY SPACE PRODUCT PODS").build(context)),
+          SelectorConfigurationItem(
+            titleText: "Launch Product Domain",
+            subtitleText: "Isolated",
+            selectorCallback: () {
+              AppPushPage().pushHorizontalPage(
+                  context,
+                  CreateSpaceKnowledgeDomainPage(
+                    spaceKind: SpaceKind.PRODUCT,
+                  ));
+            },
+          ),
+          SelectorConfigurationItem(
+            titleText: "Launch Product Domain",
+            subtitleText: "Shared",
+            selectorCallback: () {
+              AppPushPage().pushHorizontalPage(
+                  context,
+                  CreateSpaceKnowledgeDomainPage(
+                    createIsolatedDomain: false,
+                    spaceKind: SpaceKind.PRODUCT,
+                  ));
+            },
+          ),
+
           Container(
               margin: EdgeInsets.only(top: 32, bottom: 4, right: 16, left: 16),
               child: FormInfoText("MY SPACE ISOLATED PAGES").build(context)),

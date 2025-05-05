@@ -77,12 +77,17 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
     for (int index = 0;
         index < LocalSpacesService.mySpaceKnowledgeDomains.length;
         index++) {
-      _spacesEntityListKey.currentState!.insertItem(index);
+      _spacesEntityListKey.currentState?.insertItem(index);
     }
     for (int index = 0;
         index < LocalSpacesService.mySpaceServiceDomains.length;
         index++) {
       _spacesServiceListKey.currentState?.insertItem(index);
+    }
+    for (int index = 0;
+        index < LocalSpacesService.mySpaceProductDomains.length;
+        index++) {
+      _spacesProductListKey.currentState?.insertItem(index);
     }
   }
 
@@ -95,6 +100,9 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
         } else if (notification.data["subType"] == "AddedSpaceServiceDomain") {
           _spacesServiceListKey.currentState!
               .insertItem(notification.data["at"]);
+        } else if (notification.data["subType"] == "AddedSpaceProductDomain") {
+          _spacesProductListKey.currentState!
+              .insertItem(notification.data["at"]);
         }
       }
     });
@@ -103,6 +111,8 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
   final GlobalKey<SliverAnimatedListState> _spacesEntityListKey =
       GlobalKey<SliverAnimatedListState>();
   final GlobalKey<SliverAnimatedListState> _spacesServiceListKey =
+      GlobalKey<SliverAnimatedListState>();
+  final GlobalKey<SliverAnimatedListState> _spacesProductListKey =
       GlobalKey<SliverAnimatedListState>();
 
   @override
@@ -216,6 +226,42 @@ class _SpacesHomePageState extends State<SpacesHomePage> {
                           collarNameCode: "DC499999999",
                           pageNameCode: "EAIP1001",
                           domainIdentifier: spaceServiceDomain.id);
+                    },
+                  );
+                } else {
+                  return SizedBox.shrink();
+                }
+              }),
+          SliverAnimatedList(
+              key: _spacesProductListKey,
+              initialItemCount: LocalSpacesService.mySpaceProductDomains.length,
+              itemBuilder: (BuildContext context, int position,
+                  Animation<double> animation) {
+                if (position <
+                    LocalSpacesService.mySpaceProductDomains.length) {
+                  var spaceProductDomain =
+                      LocalSpacesService.mySpaceProductDomains[position];
+                  return SelectorConfigurationItem(
+                    titleText: spaceProductDomain.name,
+                    subtitleText: "${spaceProductDomain.description}",
+                    selectorCallback: () async {
+                      await AppFlowManager.instance.loadAppOnTheGo(
+                          appName: "pods",
+                          orgName: "ethos",
+                          communityCode: 70,
+                          appIndex: 0,
+                          collarNameCode: "DC499999994",
+                          pageNameCode: "EAIP1001",
+                          domainIdentifier: spaceProductDomain.id);
+                      widget.focusPaneShift("Open Pages");
+                      AppFlowManager.instance.sendOpenDynamicAppNotification(
+                          appName: "pods",
+                          orgName: "ethos",
+                          communityCode: 70,
+                          appIndex: 0,
+                          collarNameCode: "DC499999994",
+                          pageNameCode: "EAIP1001",
+                          domainIdentifier: spaceProductDomain.id);
                     },
                   );
                 } else {

@@ -18,6 +18,9 @@ import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/EthosPo
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/MachineConfigurationPage.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/deployment_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/deployments_home_page.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/skincare_create_page.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/skincare_home_page.dart';
+import 'package:fifty_gramx/community/apps/gramx/seventy/zero/ethos/pods/pages/skincare_manage_page.dart';
 import 'package:fifty_gramx/community/apps/gramx/seventy/zero/gs/weather/coming_soon.dart';
 import 'package:fifty_gramx/community/homeScreenWidgets/appFlow.dart';
 import 'package:fifty_gramx/community/onboarding/getStartedWidget.dart';
@@ -131,6 +134,38 @@ class EappFlow {
           iconData = FeatherIcons.box;
           index = AppFlowManager.instance.reservePageIndex();
           firstPage = DC499999999EAIP1002(
+            domainId: domainIdentifier,
+            pageIdentifiers: pageIdentifiers,
+          );
+        }
+      }
+      if (collarNameCode == "DC499999994") {
+        if (pageNameCode == "EAIP1001") {
+          appTitle =
+              "Skincare Products Domain ${domainIdentifier.substring(0, 5)}";
+          appName =
+              "Skincare Products Domain ${domainIdentifier.substring(0, 5)}";
+          iconData = FeatherIcons.shoppingCart;
+          index = AppFlowManager.instance.reservePageIndex();
+          firstPage = DC499999994EAIP1001(
+            domainId: domainIdentifier,
+          );
+        } else if (pageNameCode == "EAIP1002") {
+          appTitle = "Skincare Product ${domainIdentifier.substring(0, 5)}";
+          appName = "Skincare Product ${domainIdentifier.substring(0, 5)}";
+          iconData = FeatherIcons.plusCircle;
+          index = AppFlowManager.instance.reservePageIndex();
+          firstPage = DC499999994EAIP1002(
+            domainId: domainIdentifier,
+          );
+        } else if (pageNameCode == "EAIP1003") {
+          appTitle =
+              "Manage Skincare Product ${domainIdentifier.substring(0, 5)}";
+          appName =
+              "Manage Skincare Product ${domainIdentifier.substring(0, 5)}";
+          iconData = FeatherIcons.settings;
+          index = AppFlowManager.instance.reservePageIndex();
+          firstPage = DC499999994EAIP1003(
             domainId: domainIdentifier,
             pageIdentifiers: pageIdentifiers,
           );

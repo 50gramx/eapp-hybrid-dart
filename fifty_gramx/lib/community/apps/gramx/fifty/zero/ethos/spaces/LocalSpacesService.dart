@@ -20,9 +20,11 @@
  */
 
 import 'package:eapp_dart_domain/ethos/elint/entities/space_knowledge_domain.pb.dart';
+import 'package:eapp_dart_domain/ethos/elint/entities/space_product_domain.pb.dart';
 import 'package:eapp_dart_domain/ethos/elint/entities/space_service_domain.pb.dart';
 import 'package:fifty_gramx/services/notification/notifications_bloc.dart';
 import 'package:fifty_gramx/services/product/knowledge/space/discoverSpaceKnowledgeService.dart';
+import 'package:fifty_gramx/services/product/product/space/discoverSpaceProductService.dart';
 import 'package:fifty_gramx/services/product/service/space/discoverSpaceServiceService.dart';
 
 class LocalSpacesService {
@@ -30,6 +32,7 @@ class LocalSpacesService {
 
   static List<SpaceKnowledgeDomain> mySpaceKnowledgeDomains = [];
   static List<SpaceServiceDomain> mySpaceServiceDomains = [];
+  static List<SpaceProductDomain> mySpaceProductDomains = [];
 
   void dispose() {}
 
@@ -52,6 +55,16 @@ class LocalSpacesService {
     }
   }
 
+  static getMySpaceProductDomains() async {
+    var getSpaceProductDomainsResponse =
+        await DiscoverSpaceProductService.getSpaceProductDomains();
+    mySpaceProductDomains = getSpaceProductDomainsResponse.spaceProductDomains;
+    print("mySpaceProductDomains: ${mySpaceProductDomains}");
+    for (int index = 0; index < mySpaceProductDomains.length; index++) {
+      notifyAddedSpaceProductDomain(index);
+    }
+  }
+
   static notifyAddedSpaceKnowledgeDomain(int index) {
     NotificationsBloc.instance.newNotification(LocalNotification(
         "LocalSpacesService",
@@ -62,5 +75,11 @@ class LocalSpacesService {
     NotificationsBloc.instance.newNotification(LocalNotification(
         "LocalSpacesService",
         {"subType": "AddedSpaceServiceDomain", "at": index}));
+  }
+
+  static notifyAddedSpaceProductDomain(int index) {
+    NotificationsBloc.instance.newNotification(LocalNotification(
+        "LocalSpacesService",
+        {"subType": "AddedSpaceProductDomain", "at": index}));
   }
 }

@@ -26,13 +26,11 @@ class _DC499999999EAIP1002State extends State<DC499999999EAIP1002> {
   cpb2.Deployment deployment = cpb2.Deployment();
 
   updateDeployment() async {
-    // print("updateDeployment");
     var d =
         await DC499999999EPME5000Capabilities.get(widget.domainId, collar_id);
     setState(() {
       deployment = d;
     });
-    // print("updateDeployment: deployment, ${deployment}");
   }
 
   @override

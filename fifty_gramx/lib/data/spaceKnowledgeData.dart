@@ -89,8 +89,11 @@ class SpaceKnowledgeData {
             spaceKnowledgeServicesAccessAuthDetails);
 
     if (validateSpaceKnowledgeServicesResponse
-            .spaceKnowledgeServicesAccessValidationDone ==
-        false) {
+                .spaceKnowledgeServicesAccessValidationDone ==
+            false ||
+        validateSpaceKnowledgeServicesResponse
+                .spaceKnowledgeServicesAccessValidationDone ==
+            true) {
       var spaceKnowledgeAccessTokenResponse =
           await AccessSpaceKnowledgeService.spaceKnowledgeAccessToken();
       if (spaceKnowledgeAccessTokenResponse.spaceKnowledgeServicesAccessDone) {
